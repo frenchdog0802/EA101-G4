@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <!-- Bootstrap 的 CSS -->
+    <link rel="stylesheet" href="./vendors/bootstrap/css/bootstrap.min.css">
+  </head>
+  <body>
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-sm-4 offset-sm-4">
+          .col-sm-4.offset-sm-4
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4 offset-sm-8">
+          .col-sm-4.offset-sm-8
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Launch demo modal
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- body 結束標籤之前，載入Bootstrap 的 JS 及其相依性安裝(jQuery、Popper) -->
+    <script src="./vendors/jquery/jquery-3.4.1.min.js"></script>
+    <script src="./vendors/popper/popper.min.js"></script>
+    <script src="./vendors/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
