@@ -6,7 +6,7 @@ public interface BikeStoreDAO_interface {
 	
 	public void insert(BikeStoreVO BikeStoreVO);
 	public void update(BikeStoreVO BikeStoreVO);
-	public void delete(String sqBikeStoreId);
-	public BikeStoreVO findByPrimaryKey(String sqBikeStoreId);
+	public void delete(String sq_bike_store_id);
+	public BikeStoreVO findByPrimaryKey(String sq_bike_store_id);
 	public List<BikeStoreVO> getAll();
 }

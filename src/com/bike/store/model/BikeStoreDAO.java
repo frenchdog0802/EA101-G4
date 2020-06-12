@@ -39,13 +39,13 @@ public class BikeStoreDAO implements BikeStoreDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userId, userPwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setString(1, BikeStoreVO.getBikeStoreName());
+			pstmt.setString(1, BikeStoreVO.getBike_store_name());
 			pstmt.setString(2, BikeStoreVO.getLocation());
 			pstmt.setString(3, BikeStoreVO.getPhone());
-			pstmt.setDouble(4, BikeStoreVO.getStoreLongitute());
-			pstmt.setDouble(5, BikeStoreVO.getStoreLatitute());
-			pstmt.setString(6, BikeStoreVO.getStoreOpentime());
-			pstmt.setInt(7, BikeStoreVO.getStoreStatus());
+			pstmt.setDouble(4, BikeStoreVO.getStore_longitute());
+			pstmt.setDouble(5, BikeStoreVO.getStore_latitute());
+			pstmt.setString(6, BikeStoreVO.getStore_opentime());
+			pstmt.setInt(7, BikeStoreVO.getStore_status());
 
 			pstmt.executeUpdate();
 
@@ -82,15 +82,15 @@ public class BikeStoreDAO implements BikeStoreDAO_interface {
 			con = DriverManager.getConnection(url, userId, userPwd);
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
-			pstmt.setString(1, BikeStoreVO.getBikeStoreName());
+			pstmt.setString(1, BikeStoreVO.getBike_store_name());
 			pstmt.setString(2, BikeStoreVO.getLocation());
 			pstmt.setString(3, BikeStoreVO.getPhone());
-			pstmt.setDouble(4, BikeStoreVO.getStoreLongitute());
-			pstmt.setDouble(5, BikeStoreVO.getStoreLongitute());
+			pstmt.setDouble(4, BikeStoreVO.getStore_longitute());
+			pstmt.setDouble(5, BikeStoreVO.getStore_latitute());
 
-			pstmt.setString(6, BikeStoreVO.getStoreOpentime());
-			pstmt.setInt(7, BikeStoreVO.getStoreStatus());
-			pstmt.setString(8, BikeStoreVO.getSqBikeStoreId());
+			pstmt.setString(6, BikeStoreVO.getStore_opentime());
+			pstmt.setInt(7, BikeStoreVO.getStore_status());
+			pstmt.setString(8, BikeStoreVO.getSq_bike_store_id());
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -166,14 +166,14 @@ public class BikeStoreDAO implements BikeStoreDAO_interface {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BikeStoreVO = new BikeStoreVO();
-				BikeStoreVO.setSqBikeStoreId(rs.getString(1));
-				BikeStoreVO.setBikeStoreName(rs.getString(2));
+				BikeStoreVO.setSq_bike_store_id(rs.getString(1));
+				BikeStoreVO.setBike_store_name(rs.getString(2));
 				BikeStoreVO.setLocation(rs.getString(3));
 				BikeStoreVO.setPhone(rs.getString(4));
-				BikeStoreVO.setStoreLongitute(rs.getDouble(5));
-				BikeStoreVO.setStoreLatitute(rs.getDouble(6));
-				BikeStoreVO.setStoreOpentime(rs.getString(7));
-				BikeStoreVO.setStoreStatus(rs.getInt(8));
+				BikeStoreVO.setStore_longitute(rs.getDouble(5));
+				BikeStoreVO.setStore_latitute(rs.getDouble(6));
+				BikeStoreVO.setStore_opentime(rs.getString(7));
+				BikeStoreVO.setStore_status(rs.getInt(8));
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -215,14 +215,14 @@ public class BikeStoreDAO implements BikeStoreDAO_interface {
 			
 			while(rs.next()) {
 				BikeStoreVO bikeVo = new BikeStoreVO();
-				bikeVo.setSqBikeStoreId(rs.getString(1));
-				bikeVo.setBikeStoreName(rs.getString(2));
+				bikeVo.setSq_bike_store_id(rs.getString(1));
+				bikeVo.setBike_store_name(rs.getString(2));
 				bikeVo.setLocation(rs.getString(3));
 				bikeVo.setPhone(rs.getString(4));
-				bikeVo.setStoreLongitute(rs.getDouble(5));
-				bikeVo.setStoreLatitute(rs.getDouble(6));
-				bikeVo.setStoreOpentime(rs.getString(7));
-				bikeVo.setStoreStatus(rs.getInt(8));
+				bikeVo.setStore_longitute(rs.getDouble(5));
+				bikeVo.setStore_latitute(rs.getDouble(6));
+				bikeVo.setStore_opentime(rs.getString(7));
+				bikeVo.setStore_status(rs.getInt(8));
 				list.add(bikeVo);
 			}
 			

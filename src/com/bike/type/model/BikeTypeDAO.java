@@ -43,16 +43,16 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 			con = DriverManager.getConnection(url, userId, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			// set typeName
-			pstmt.setString(1, BikeTypeVO.getBikeTypeName());
+			pstmt.setString(1, BikeTypeVO.getBike_type_name());
 			// set title
-			pstmt.setString(2, BikeTypeVO.getBikeTitle());
+			pstmt.setString(2, BikeTypeVO.getBike_title());
 			// set bikeDescription CLOB
 			Clob clob = con.createClob();
-			clob.setString(1, BikeTypeVO.getBikeDescription());
+			clob.setString(1, BikeTypeVO.getBike_description());
 			pstmt.setClob(3, clob);
 			// set bikePhoto BLOB
 			Blob blob = con.createBlob();
-			blob.setBytes(1, BikeTypeVO.getBikePhoto());
+			blob.setBytes(1, BikeTypeVO.getBike_photo());
 			pstmt.setBlob(4, blob);
 			// set price
 			pstmt.setDouble(5, BikeTypeVO.getPrice());
@@ -86,33 +86,27 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-//			System.out.println(BikeTypeVO.getBikeTypeName());
-//			System.out.println(BikeTypeVO.getBikeTitle());
-//			System.out.println(BikeTypeVO.getBikeDescription());
-//			System.out.println(BikeTypeVO.getBikePhoto());
-//			System.out.println(BikeTypeVO.getPrice());
-//			System.out.println(BikeTypeVO.getSqBikeTypeId());
 
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userId, passwd);
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
 			// set bikeTypeName
-			pstmt.setString(1, BikeTypeVO.getBikeTypeName());
+			pstmt.setString(1, BikeTypeVO.getBike_type_name());
 			// set bikeTitle
-			pstmt.setString(2, BikeTypeVO.getBikeTitle());
+			pstmt.setString(2, BikeTypeVO.getBike_title());
 			// set bikeDescription CLOB
 			Clob clob = con.createClob();
-			clob.setString(1, BikeTypeVO.getBikeDescription());
+			clob.setString(1, BikeTypeVO.getBike_description());
 			pstmt.setClob(3, clob);
 			// set bikePhoto BLOB
 			Blob blob = con.createBlob();
-			blob.setBytes(1, BikeTypeVO.getBikePhoto());
+			blob.setBytes(1, BikeTypeVO.getBike_photo());
 			pstmt.setBlob(4, blob);
 			// set price
 			pstmt.setDouble(5, BikeTypeVO.getPrice());
 			// set sqBiketypeId
-			pstmt.setString(6, BikeTypeVO.getSqBikeTypeId());
+			pstmt.setString(6, BikeTypeVO.getSq_bike_type_id());
 
 			// executeUpdate
 			pstmt.executeUpdate();
@@ -192,15 +186,15 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 
 			while (rs.next()) {
 				BikeTypeVo = new BikeTypeVO();
-				BikeTypeVo.setSqBikeTypeId(rs.getString(1));
-				BikeTypeVo.setBikeTypeName(rs.getString(2));
-				BikeTypeVo.setBikeTitle(rs.getString(3));
+				BikeTypeVo.setSq_bike_type_id(rs.getString(1));
+				BikeTypeVo.setBike_type_name(rs.getString(2));
+				BikeTypeVo.setBike_title(rs.getString(3));
 				// get CLOB
 				Clob clob = rs.getClob(4);
-				BikeTypeVo.setBikeDescription(clobToString(clob));
+				BikeTypeVo.setBike_description(clobToString(clob));
 				// get Blob
 				Blob blob = rs.getBlob(5);
-				BikeTypeVo.setBikePhoto(blobToByteArr(blob));
+				BikeTypeVo.setBike_photo(blobToByteArr(blob));
 				BikeTypeVo.setPrice(rs.getInt(6));
 			}
 
@@ -246,15 +240,15 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 			
 			while(rs.next()) {
 				BikeTypeVO BikeTypeVO = new BikeTypeVO();
-				BikeTypeVO.setSqBikeTypeId(rs.getString(1));
-				BikeTypeVO.setBikeTypeName(rs.getString(2));
-				BikeTypeVO.setBikeTitle(rs.getString(3));
+				BikeTypeVO.setSq_bike_type_id(rs.getString(1));
+				BikeTypeVO.setBike_type_name(rs.getString(2));
+				BikeTypeVO.setBike_title(rs.getString(3));
 				//Clob 
 				Clob clob = rs.getClob(4);
-				BikeTypeVO.setBikeDescription(clobToString(clob));
+				BikeTypeVO.setBike_description(clobToString(clob));
 				//blob 
 				Blob blob = rs.getBlob(5);
-				BikeTypeVO.setBikePhoto(blobToByteArr(blob));
+				BikeTypeVO.setBike_photo(blobToByteArr(blob));
 				BikeTypeVO.setPrice(rs.getInt(6));
 				list.add(BikeTypeVO);//ADD　list
 			}
