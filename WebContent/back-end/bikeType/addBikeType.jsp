@@ -43,7 +43,7 @@
 						<label for="bikeType" class="col-sm-2 col-form-label">車種類型</label>
 						<input type="text" class="col-sm-10 form-control ${errorMsgs.bike_type_name==null?'':'is-invalid'} " id="bikeType"
 							name="bike_type_name" placeholder="請輸入車種類型" >
-						<!--errormsg -->
+						<!--errorMsg -->
 						<div class="invalid-feedback col-sm-10 ">${errorMsgs.bike_type_name}</div>
 
 					</div>
