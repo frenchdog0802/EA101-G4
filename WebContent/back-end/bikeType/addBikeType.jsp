@@ -11,7 +11,7 @@
 <!-- Bootstrap CSS -->
 
 <link rel="stylesheet"
-	href="/EA101_G4/${contextPath}/bootstrap-components/css/bootstrap.min.css">
+	href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css">
 
 
 
@@ -37,10 +37,10 @@
 	<div class="container mt-5">
 		<div class="row">
 			<div class="col">
-				<form method="POST" action="/EA101_G4/bike/BikeTypeServlet.do"
+				<form method="POST" action="<%=request.getContextPath()%>/bike/BikeTypeServlet.do"
 					enctype="multipart/form-data">
 					<div class="form-group row">
-						<label for="bikeType" class="col-sm-2 col-form-label">車種類型</label>
+						<label for="bikeType" class="col-sm-2 col-form-label">車種類型  </label>
 						<input type="text" class="col-sm-10 form-control ${errorMsgs.bike_type_name==null?'':'is-invalid'} " id="bikeType"
 							name="bike_type_name" placeholder="請輸入車種類型" >
 						<!--errorMsg -->
@@ -87,7 +87,7 @@
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script
-		src="/EA101_G4/${contextPath}/bootstrap-components/js/bootstrap.min.js"></script>
+		src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
 
 	<script>
 
