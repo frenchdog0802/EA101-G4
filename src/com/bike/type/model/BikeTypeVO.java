@@ -9,6 +9,7 @@ public class BikeTypeVO implements Serializable {
 	private String bike_title;
 	private String bike_description;
 	private byte[] bike_photo;
+	
 	private Integer price;
 	
 	public String getSq_bike_type_id() {

@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.bike.type.model.BikeTypeDAO;
@@ -29,7 +30,7 @@ public class BikeTypeServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 
@@ -80,7 +81,6 @@ public class BikeTypeServlet extends HttpServlet {
 					errorMsgs.put("bike_type_name", "種類名稱請勿空白");
 				} else if (!bike_type_name.trim().matches(NameReg)) {
 					errorMsgs.put("bike_type_name", "種類名稱請輸入正確格式");
-					bike_type_name = null;
 				}
 				;
 				// bike_title
@@ -101,7 +101,7 @@ public class BikeTypeServlet extends HttpServlet {
 				try {
 					price = Integer.parseInt(req_price);
 				} catch (NumberFormatException nfe) {
-					errorMsgs.put("bike_price", "請輸入金額");
+					errorMsgs.put("price", "請輸入正確金額");
 				}
 				;
 
@@ -116,13 +116,14 @@ public class BikeTypeServlet extends HttpServlet {
 
 				// send error
 				if (errorMsgs.size() != 0) {
+					session.setAttribute("failInsertImg", bike_photo.getInputStream());
 					request.setAttribute("BikeTypeVO", bikeVOInsert);
 					RequestDispatcher failView = request.getRequestDispatcher("/back-end/bikeType/addBikeType.jsp");
 					failView.forward(request, response);
 					return;
-				}
-				;
-
+				};
+				
+				session.removeAttribute("failInsertImg");
 				// insert STMT
 				BikeTypeService.insert(bikeVOInsert);
 
