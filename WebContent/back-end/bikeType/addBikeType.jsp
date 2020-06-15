@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.bike.type.model.*"%>
+<jsp:useBean id="BikeTypeVO" class="com.bike.type.model.BikeTypeVO"  scope="request"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,9 @@
 	<title>addBike</title>
 </head>
 <body>
-
+	<a herf="<%=request.getContextPath()%>/back-end/bikeType/listAll.jsp" class="btn btn-primary btn-lg" aria-label="Left Align">
+  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true">回上一頁</span>
+</a>
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -50,19 +53,19 @@
 					<div class="form-group row">
 						<label for="bikeTitle" class="col-sm-2 col-form-label">單車標題</label>
 						<input type="text" class="col-sm-10 form-control" id="bikeTitle"
-							name="bike_title" placeholder="請輸入單車標題">
+							name="bike_title" placeholder="請輸入單車標題" value="${BikeTypeVO.bike_title}" >
 					</div>
 
 					<div class="form-group row">
 						<label for="bikePrice" class="col-sm-2 col-form-label">價格</label>
 						<input type="number" class="col-sm-10 form-control" id="bikePrice"
-							name="price" placeholder="價格">
+							name="price" placeholder="價格" value="${BikeTypeVO.price}">
 					</div>
 
 					<div class="form-group row">
 						<label for="bikeDesription" class="col-sm-2 col-form-label">單車敘述</label>
 						<textarea  id="bikeDesription" class="col-sm-10"
-							name="bike_description" rows="10"></textarea>
+							name="bike_description" rows="10">${BikeTypeVO.bike_description}</textarea>
 					</div>
 
 					<div class="form-group row">

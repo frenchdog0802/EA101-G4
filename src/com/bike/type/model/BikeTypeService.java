@@ -14,8 +14,13 @@ public class BikeTypeService {
 	public void insert(BikeTypeVO BikeTypeVO) {
 		dao.insert(BikeTypeVO);
 	};
-//	public void update(BikeTypeVO BikeTypeVO){};
+	public void update(BikeTypeVO BikeTypeVO){
+		dao.update(BikeTypeVO);
+	};
 //	public void delete(String Sq_bike_type_id){};
-//	public BikeTypeVO findByPrimaryKey(String sq_bike_type_id){};
+	public BikeTypeVO findByPrimaryKey(String sq_bike_type_id){
+		return dao.findByPrimaryKey(sq_bike_type_id);
+	};
+	
 //	public List<BikeTypeVO> getAll(){};
 }
