@@ -85,7 +85,7 @@ public class BikeTypeServlet extends HttpServlet {
 				;
 				// bike_title
 				if (bike_title == null || bike_title.trim().length() == 0) {
-					errorMsgs.put("errorMsgs", "標題請勿空白");
+					errorMsgs.put("bike_title", "標題請勿空白");
 				}
 				// bike_description
 				if (bike_description == null || bike_description.trim().length() == 0) {
@@ -101,7 +101,7 @@ public class BikeTypeServlet extends HttpServlet {
 				try {
 					price = Integer.parseInt(req_price);
 				} catch (NumberFormatException nfe) {
-					errorMsgs.put("price", "請輸入金額");
+					errorMsgs.put("bike_price", "請輸入金額");
 				}
 				;
 
@@ -138,7 +138,7 @@ public class BikeTypeServlet extends HttpServlet {
 			}
 		}
 
-		//////////////////////////////////////// listAll.jsp.update
+		//////////////////////////  listAll.jsp.update
 		if ("getOne_For_Update".equals(action)) {
 			String sq_bike_type_id = request.getParameter("sq_bike_type_id");
 			BikeTypeDAO BikeTypeDAO = new BikeTypeDAO();
@@ -149,7 +149,7 @@ public class BikeTypeServlet extends HttpServlet {
 			forwardView.forward(request, response);
 		}
 
-		//////////////////////////////////////// getOneForUpdate.jsp.update
+		////////////////////////    getOneForUpdate.jsp.update
 		if ("confrim_Update".equals(action)) {
 			// errorMap --錯誤處理
 			Map<String, String> errorMsgs = new LinkedHashMap<>();
@@ -167,8 +167,9 @@ public class BikeTypeServlet extends HttpServlet {
 				String NameReg = "^[(\u4e00-\u9fa5)(\\w)]{2,6}$";
 				if (!bike_type_name.trim().matches(NameReg)) {
 					errorMsgs.put("bike_type_name", "種類名稱請輸入正確格式");
-				}
-				;
+				};
+				
+				
 
 				// price
 				Integer price = null;
@@ -176,8 +177,8 @@ public class BikeTypeServlet extends HttpServlet {
 					price = Integer.parseInt(req_price);
 				} catch (NumberFormatException nfe) {
 					errorMsgs.put("price", "請輸入正確金額");
-				}
-				;
+				};
+				
 
 				// set updateVO
 				BikeTypeVO bikeVOUpdate = new BikeTypeVO();
@@ -186,9 +187,12 @@ public class BikeTypeServlet extends HttpServlet {
 				bikeVOUpdate.setBike_type_name(bike_type_name);
 				bikeVOUpdate.setBike_title(bike_title);
 				bikeVOUpdate.setBike_description(bike_description);
-				if (bike_photo.getSize() != 0) {
+				if (bike_photo.getSize() == 0) {
+					bikeVOUpdate.setBike_photo(BikeTypeService.findByPrimaryKey(sq_bike_type_id).getBike_photo());
+				}else {
 					bikeVOUpdate.setBike_photo(inputStreamToByteArr(bike_photo.getInputStream()));
 				}
+				
 				bikeVOUpdate.setPrice(price);
 
 				// send error
@@ -197,8 +201,8 @@ public class BikeTypeServlet extends HttpServlet {
 					RequestDispatcher failView = request.getRequestDispatcher("/back-end/bikeType/getOneForUpdate.jsp");
 					failView.forward(request, response);
 					return;
-				}
-				;
+				};
+				
 
 				// update STMT
 				BikeTypeService.update(bikeVOUpdate);

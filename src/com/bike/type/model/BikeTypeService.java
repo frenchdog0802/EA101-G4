@@ -22,5 +22,7 @@ public class BikeTypeService {
 		return dao.findByPrimaryKey(sq_bike_type_id);
 	};
 	
-//	public List<BikeTypeVO> getAll(){};
+	public List<BikeTypeVO> getAll(){
+		return dao.getAll();
+	};
 }

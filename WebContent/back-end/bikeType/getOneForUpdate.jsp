@@ -20,17 +20,6 @@
 <title>Update here</title>
 </head>
 <body>
-
-
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message.value}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
 	<a href="<%=request.getContextPath()%>/back-end/bikeType/listAll.jsp" class="btn btn-primary btn-lg" aria-label="Left Align">
   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true">回上一頁</span>
 </a>

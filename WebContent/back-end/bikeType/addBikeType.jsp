@@ -20,23 +20,13 @@
 <title>addBike</title>
 </head>
 <body>
-
-	<title>addBike</title>
+	
 </head>
 <body>
-	<a herf="<%=request.getContextPath()%>/back-end/bikeType/listAll.jsp" class="btn btn-primary btn-lg" aria-label="Left Align">
+	<a href="<%=request.getContextPath()%>/back-end/bikeType/listAll.jsp" class="btn btn-primary btn-lg" aria-label="Left Align">
   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true">回上一頁</span>
 </a>
 
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message.value}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
 	<div class="container mt-5">
 		<div class="row">
 			<div class="col">
@@ -48,24 +38,30 @@
 							name="bike_type_name" placeholder="請輸入車種類型" >
 						<!--errorMsg -->
 						<div class="invalid-feedback col-sm-10 ">${errorMsgs.bike_type_name}</div>
-
 					</div>
+					
 					<div class="form-group row">
 						<label for="bikeTitle" class="col-sm-2 col-form-label">單車標題</label>
-						<input type="text" class="col-sm-10 form-control" id="bikeTitle"
+						<input type="text" class="col-sm-10 form-control ${errorMsgs.bike_title==null?'':'is-invalid'}" id="bikeTitle"
 							name="bike_title" placeholder="請輸入單車標題" value="${BikeTypeVO.bike_title}" >
+						<!--errorMsg -->
+						<div class="invalid-feedback col-sm-10 ">${errorMsgs.bike_title}</div>
 					</div>
 
 					<div class="form-group row">
-						<label for="bikePrice" class="col-sm-2 col-form-label">價格</label>
+						<label for="bikePrice" class="col-sm-2 col-form-label ${errorMsgs.price==null?'':'is-invalid'}">價格</label>
 						<input type="number" class="col-sm-10 form-control" id="bikePrice"
 							name="price" placeholder="價格" value="${BikeTypeVO.price}">
+						<!--errorMsg -->
+						<div class="invalid-feedback col-sm-10 ">${errorMsgs.price}</div>
 					</div>
 
 					<div class="form-group row">
 						<label for="bikeDesription" class="col-sm-2 col-form-label">單車敘述</label>
 						<textarea  id="bikeDesription" class="col-sm-10"
 							name="bike_description" rows="10">${BikeTypeVO.bike_description}</textarea>
+						<!--errorMsg -->
+						<div class="invalid-feedback col-sm-10 ">${errorMsgs.bike_description}</div>
 					</div>
 
 					<div class="form-group row">
@@ -75,6 +71,8 @@
 								id="upLoad"> <label class="custom-file-label"
 								for="upLoad" data-browse="上傳"></label>
 						</div>
+						<!--errorMsg -->
+						<div class="invalid-feedback col-sm-10 ">${errorMsgs.bike_photo}</div>
 					</div>
 
 					<div id="showImg" class="text-center"></div>
