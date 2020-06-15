@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.bike.type.model.BikeTypeDAO;
 import com.bike.type.model.BikeTypeService;
 import com.bike.type.model.BikeTypeVO;
-
 
 @MultipartConfig
 public class BikeTypeServlet extends HttpServlet {
@@ -106,6 +106,17 @@ public class BikeTypeServlet extends HttpServlet {
 				RequestDispatcher failView = request.getRequestDispatcher("/back-end/bikeType/addBikeType.jsp");
 				failView.forward(request, response);
 			}
+		}
+		
+		//update
+		if("getOne_For_Update".equals(action)) {
+			String sq_bike_type_id = request.getParameter("sq_bike_type_id") ;
+			BikeTypeDAO BikeTypeDAO = new BikeTypeDAO();
+			BikeTypeVO BikeTypeVO = BikeTypeDAO.findByPrimaryKey(sq_bike_type_id);
+			request.setAttribute("BikeTypeVO", BikeTypeVO);
+			// forward
+			RequestDispatcher forwardView = request.getRequestDispatcher("/back-end/bikeType/getOneForUpdate.jsp");
+			forwardView.forward(request, response);
 		}
 	}
 	

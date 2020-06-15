@@ -24,7 +24,7 @@
 @media ( min-width :960px) {
 	.mydescription {
 		word-break: break-all;
-		max-width: 1000px;
+		max-width: 950px;
 	}
 	;
 }
@@ -37,7 +37,7 @@
 				<input type="password" class="form-control" id="inputbike_type_id" placeholder="請輸入車種編號">
 			</div>
 			<button type="submit" class="btn btn-primary mt-3">查詢</button>
-			<a href="addBikeType.jsp" class="btn btn-success mt-3 mx-3">新增</a>
+			<a href="<%=request.getContextPath()%>/back-end/bikeType/addBikeType.jsp" class="btn btn-success mt-3 mx-3">新增</a>
 		</form>
 	</div>
 <!-- 	pageContext.request.scheme pageContext.request.serverName pageContext.request.serverPort -->
@@ -55,6 +55,7 @@
 						<th scope="col">車種標題</th>
 						<th scope="col">車種敘述</th>
 						<th scope="col">價格/天</th>
+						<th scope="col">修改</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -70,6 +71,13 @@
 							<td class="align-middle">${bikeVO.bike_title}</td>
 							<td class="mydescription align-middle">${bikeVO.bike_description}</td>
 							<td class="align-middle">${bikeVO.price}</td>
+							<td>
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/bike/BikeTypeServlet.do" style="margin-bottom: 0px;">
+								     <input type="submit" value="修改">
+								     <input type="hidden" name="sq_bike_type_id"  value="${bikeVO.sq_bike_type_id}">
+								     <input type="hidden" name="action"	value="getOne_For_Update">
+						     	</FORM>
+						     </td>
 						</tr>
 					</c:forEach>
 				</tbody>
