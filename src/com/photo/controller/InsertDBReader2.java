@@ -27,7 +27,7 @@ public class InsertDBReader2 extends HttpServlet {
 		res.setContentType("image/gif");
 		ServletOutputStream out = res.getOutputStream();
 		System.out.println(failInsertImg);
-
+		//取不到直
 		try {
 			BufferedInputStream in = new BufferedInputStream(failInsertImg);
 			byte[] buffer = new byte[1024];
