@@ -61,27 +61,7 @@
 							<th scope="col">剩餘車輛</th>
 						</tr>
 					</thead>
-					<tbody>
-					
-						<tr>
-							<th>aaa</th>
-							<th>bbb</th>
-							<th>aa</th>
-							<th>bb</th>
-						</tr>
-						<tr>
-							<th>aa</th>
-							<th>aa</th>
-							<th>aaa</th>
-							<th>aa</th>
-						</tr>
-						<tr>
-							<th>aaaaaaaaaa</th>
-							<th>aaaaaaaaaa</th>
-							<th>aaaaaaa</th>
-							<th>aaaaaaaa</th>
-						</tr>
-					</tbody>
+					<jsp:include page="<request.getContextPath()>bike/bikeStoreList">
 				</table>
 			</div>
 		</div>

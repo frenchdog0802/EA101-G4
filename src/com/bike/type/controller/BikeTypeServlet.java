@@ -116,14 +116,17 @@ public class BikeTypeServlet extends HttpServlet {
 
 				// send error
 				if (errorMsgs.size() != 0) {
-					session.setAttribute("failInsertImg", bike_photo.getInputStream());
+					System.out.println(!errorMsgs.containsKey("bike_photo"));
+					if(!errorMsgs.containsKey("bike_photo")) {
+						session.setAttribute("failInsertImg", bike_photo.getInputStream());
+					}
 					request.setAttribute("BikeTypeVO", bikeVOInsert);
 					RequestDispatcher failView = request.getRequestDispatcher("/back-end/bikeType/addBikeType.jsp");
 					failView.forward(request, response);
 					return;
 				};
 				
-				session.removeAttribute("failInsertImg");
+
 				// insert STMT
 				BikeTypeService.insert(bikeVOInsert);
 
