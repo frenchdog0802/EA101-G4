@@ -142,8 +142,8 @@ public class BikeTypeServlet extends HttpServlet {
 		//////////////////////////  listAll.jsp.update
 		if ("getOne_For_Update".equals(action)) {
 			String sq_bike_type_id = request.getParameter("sq_bike_type_id");
-			BikeTypeDAO BikeTypeDAO = new BikeTypeDAO();
-			BikeTypeVO BikeTypeVO = BikeTypeDAO.findByPrimaryKey(sq_bike_type_id);
+			BikeTypeService BikeTypeService = new BikeTypeService();
+			BikeTypeVO BikeTypeVO = BikeTypeService.findByPrimaryKey(sq_bike_type_id);
 			request.setAttribute("BikeTypeVO", BikeTypeVO);
 			// forward
 			RequestDispatcher forwardView = request.getRequestDispatcher("/back-end/bikeType/getOneForUpdate.jsp");
@@ -155,7 +155,7 @@ public class BikeTypeServlet extends HttpServlet {
 			// errorMap --錯誤處理
 			Map<String, String> errorMsgs = new LinkedHashMap<>();
 			request.setAttribute("errorMsgs", errorMsgs);
-
+			
 			try {
 				String sq_bike_type_id = request.getParameter("sq_bike_type_id");
 				String bike_type_name = request.getParameter("bike_type_name");
@@ -171,7 +171,6 @@ public class BikeTypeServlet extends HttpServlet {
 				};
 				
 				
-
 				// price
 				Integer price = null;
 				try {
@@ -221,12 +220,20 @@ public class BikeTypeServlet extends HttpServlet {
 	}
 
 	// inputStreamToByteArr
-	public static byte[] inputStreamToByteArr(InputStream in) throws IOException {
-		byte[] buffer = new byte[in.available()];
-		int bytesRead;
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		while ((bytesRead = in.read(buffer)) != -1) {
-			output.write(buffer, 0, bytesRead);
+	public static byte[] inputStreamToByteArr(InputStream in) {
+		byte[] buffer;
+		ByteArrayOutputStream output = null;
+		try {
+			buffer = new byte[in.available()];
+			int bytesRead;
+			output = new ByteArrayOutputStream();
+			while ((bytesRead = in.read(buffer)) != -1) {
+				output.write(buffer, 0, bytesRead);
+			}
+			output.close();
+			in.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 		return output.toByteArray();
 	}

@@ -4,11 +4,11 @@
 <%@ page import="com.bike.type.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
-<jsp:useBean id="BikeTypeVO" class="com.bike.type.model.BikeTypeVO"
-scope="request" />
+<jsp:useBean id="BikeTypeVO" class="com.bike.type.model.BikeTypeVO" scope="request" /> 
+ 
 
 <%
-BikeTypeDAO_interface bikeDao = new BikeTypeDAO();
+BikeTypeService bikeDao = new BikeTypeService();
 List<BikeTypeVO> list = bikeDao.getAll();
 pageContext.setAttribute("list", list);
 
@@ -101,6 +101,7 @@ List<BikeTypeVO> list1 = Arrays.asList(BikeTypeVO);
 		</tbody>
 	</table>
 	<%@ include file="page3.file"%>
+	<div class="w-100 m-3"></div>
 </div>
 </div>
 
