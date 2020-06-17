@@ -8,24 +8,30 @@ public class TESTBikeRentDetailDAO {
 
 		BikeRentDetailDAO BikeRentDetailDAO = new BikeRentDetailDAO();
 
-//		// insert
+		// insert
 //		BikeRentDetailVO BikeRentDetailVO = new BikeRentDetailVO();
 //		BikeRentDetailVO.setSq_rent_id("RT-600004");
 //		BikeRentDetailVO.setSq_bike_type_id("630005");
 //		BikeRentDetailVO.setSq_bike_id("640002");
 //		BikeRentDetailVO.setPrice(99999);
-//		
+//		BikeRentDetailVO.setRsved_rent_date(java.sql.Date.valueOf("2020-06-06"));
+//		BikeRentDetailVO.setEx_return_date(java.sql.Date.valueOf("2020-06-09"));
+//		BikeRentDetailVO.setReal_return_date(java.sql.Date.valueOf("2020-06-09"));
+//		BikeRentDetailVO.setExtra_cost(999);
 //		BikeRentDetailDAO.insert(BikeRentDetailVO);
 		
 		//update
 		
 //		BikeRentDetailVO BikeRentDetailVO = new BikeRentDetailVO();
-//		BikeRentDetailVO.setSq_rent_detail_id("610007");
 //		BikeRentDetailVO.setSq_rent_id("RT-600004");
 //		BikeRentDetailVO.setSq_bike_type_id("630005");
 //		BikeRentDetailVO.setSq_bike_id("640002");
 //		BikeRentDetailVO.setPrice(99999);
-//		
+//		BikeRentDetailVO.setRsved_rent_date(java.sql.Date.valueOf("2020-06-06"));
+//		BikeRentDetailVO.setEx_return_date(java.sql.Date.valueOf("2020-06-08"));
+//		BikeRentDetailVO.setReal_return_date(java.sql.Date.valueOf("2020-06-08"));
+//		BikeRentDetailVO.setExtra_cost(989);
+//		BikeRentDetailVO.setSq_rent_detail_id("610007");
 //		BikeRentDetailDAO.update(BikeRentDetailVO);
 		
 		
@@ -55,6 +61,10 @@ public class TESTBikeRentDetailDAO {
 			System.out.println(BikeRentDetailVO.getSq_bike_id());
 			System.out.println(BikeRentDetailVO.getSq_bike_type_id());
 			System.out.println(BikeRentDetailVO.getPrice());
+			System.out.println(BikeRentDetailVO.getRsved_rent_date());
+			System.out.println(BikeRentDetailVO.getEx_return_date());
+			System.out.println(BikeRentDetailVO.getReal_return_date());
+			System.out.println(BikeRentDetailVO.getExtra_cost());
 			
 		}
 		

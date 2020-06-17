@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class BikeStoreVO implements Serializable {
-
+	public BikeStoreVO() {
+		
+	};
 	private String sq_bike_store_id;
 	private String bike_store_name;
 	private String location;

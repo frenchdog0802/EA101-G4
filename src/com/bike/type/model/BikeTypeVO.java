@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class BikeTypeVO implements Serializable {
 	
+	public BikeTypeVO() {
+		
+	};
+	
 	private String sq_bike_type_id;
 	private String bike_type_name;
 	private String bike_title;

@@ -1,23 +1,21 @@
 package com.bike.rent.master.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-public class BikeRentMasterVO {
+public class BikeRentMasterVO implements Serializable  {
+	public BikeRentMasterVO() {
+		
+	};
 	private String sq_rent_id;
 	private String sq_member_id;
 	private String sq_bike_store_id;
 	private Integer rent_payment;
-	private Date rsved_rent_date;
-	private Date real_rent_date;
-	private Date ex_return_date;
-	private Date real_return_date;
 	private Integer od_total_price;
-	private Integer od_price;
 	private String rent_name;
 	private String rent_phone;
 	private Integer rent_od_status;
-	private Integer pick_up_status;
 	private Timestamp order_date;
 	
 	
@@ -51,42 +49,14 @@ public class BikeRentMasterVO {
 	public void setRent_payment(Integer rent_payment) {
 		this.rent_payment = rent_payment;
 	}
-	public Date getRsved_rent_date() {
-		return rsved_rent_date;
-	}
-	public void setRsved_rent_date(Date rsved_rent_date) {
-		this.rsved_rent_date = rsved_rent_date;
-	}
-	public Date getReal_rent_date() {
-		return real_rent_date;
-	}
-	public void setReal_rent_date(Date real_rent_date) {
-		this.real_rent_date = real_rent_date;
-	}
-	public Date getEx_return_date() {
-		return ex_return_date;
-	}
-	public void setEx_return_date(Date ex_return_date) {
-		this.ex_return_date = ex_return_date;
-	}
-	public Date getReal_return_date() {
-		return real_return_date;
-	}
-	public void setReal_return_date(Date real_return_date) {
-		this.real_return_date = real_return_date;
-	}
+
 	public Integer getOd_total_price() {
 		return od_total_price;
 	}
 	public void setOd_total_price(Integer od_total_price) {
 		this.od_total_price = od_total_price;
 	}
-	public Integer getOd_price() {
-		return od_price;
-	}
-	public void setOd_price(Integer od_price) {
-		this.od_price = od_price;
-	}
+
 	public String getRent_name() {
 		return rent_name;
 	}
@@ -105,12 +75,6 @@ public class BikeRentMasterVO {
 	public void setRent_od_status(Integer rent_od_status) {
 		this.rent_od_status = rent_od_status;
 	}
-	public Integer getPick_up_status() {
-		return pick_up_status;
-	}
-	public void setPick_up_status(Integer pick_up_status) {
-		this.pick_up_status = pick_up_status;
-	}
-	
+
 	
 }
