@@ -94,7 +94,7 @@ public class BikeTypeServlet extends HttpServlet {
 				}
 				
 				// bike_photo
-				if (bike_photo_part.getSize() == 0) {
+				if (bike_photo_part.getSize() == 0  ) {
 					if (session.getAttribute("bike_photo_array") == null) {
 						errorMsgs.put("bike_photo", "請上傳照片");
 					} else {
@@ -110,8 +110,8 @@ public class BikeTypeServlet extends HttpServlet {
 					price = Integer.parseInt(req_price);
 				} catch (NumberFormatException nfe) {
 					errorMsgs.put("price", "請輸入正確金額");
-				}
-				;
+				};
+				
 
 				// insertVO data
 

@@ -24,6 +24,7 @@ public class InsertDBReader2 extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		byte[] failInsertImg = (byte[]) session.getAttribute("bike_photo_array");
+		
 		res.setContentType("image/gif");
 		ServletOutputStream out = res.getOutputStream();
 		
