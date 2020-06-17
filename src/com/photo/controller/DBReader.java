@@ -24,7 +24,7 @@ public class DBReader extends HttpServlet {
 			BikeTypeService BikeTypeService = new BikeTypeService();
 			byte[] baos = BikeTypeService.findByPrimaryKey(sq_bike_type_id).getBike_photo();
 			BufferedInputStream in = new BufferedInputStream(new ByteArrayInputStream(baos));
-			byte[] buf = new byte[4 * 1024]; // 4K buffer
+			byte[] buf = new byte[4 * 1024]; 
 			int len;
 			while ((len = in.read(buf)) != -1) {
 				out.write(buf, 0, len);

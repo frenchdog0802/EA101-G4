@@ -23,27 +23,18 @@ public class InsertDBReader2 extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		InputStream failInsertImg = (InputStream) session.getAttribute("failInsertImg");
+		byte[] failInsertImg = (byte[]) session.getAttribute("bike_photo_array");
 		res.setContentType("image/gif");
 		ServletOutputStream out = res.getOutputStream();
-		System.out.println(failInsertImg);
-		//取不到直
+		
 		try {
-			BufferedInputStream in = new BufferedInputStream(failInsertImg);
-			byte[] buffer = new byte[1024];
-			int len = 0;
-			while ((len = in.read(buffer)) != -1) {
-				out.write(buffer, 0, len);
-		    }  
-			in.close();
+			out.write(failInsertImg);
 		}catch(Exception e) {
-			InputStream inErr = getServletContext().getResourceAsStream("/BrandBack/image/default.png");
-			byte[] buffer = new byte[1024];
-			int len = 0;
-			while ((len = inErr.read(buffer)) != -1) {
-				out.write(buffer, 0, len);
-		    }  
-			inErr.close();
+			InputStream in = getServletContext().getResourceAsStream("/BrandBack/image/default.png");
+			byte[] buffer = new byte[in.available()];
+			out.write(buffer);
+			in.close();
+		   
 		}finally {
 			out.close();
 		}
