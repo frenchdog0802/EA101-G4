@@ -21,7 +21,7 @@
 	
 </head>
 <body>
-	<a href="<%=request.getContextPath()%>/back-end/bikeType/listAll.jsp" class="btn btn-primary" >
+	<a href="<%=request.getContextPath()%>/back-end/bikeType/bikeTypeListAll.jsp" class="btn btn-primary" >
   <span class="glyphicon glyphicon-arrow-left" >回上一頁</span>
 	</a>
 

@@ -48,7 +48,7 @@ public class BikeTypeServlet extends HttpServlet {
 			}
 
 			if (errorMsgs.size() != 0) {
-				RequestDispatcher errorView = request.getRequestDispatcher("/back-end/bikeType/listAll.jsp");
+				RequestDispatcher errorView = request.getRequestDispatcher("/back-end/bikeType/bikeTypeListAll.jsp");
 				errorView.forward(request, response);
 				return;
 			}
@@ -56,7 +56,7 @@ public class BikeTypeServlet extends HttpServlet {
 			BikeTypeService BikeTypeService = new BikeTypeService();
 			BikeTypeVO BikeTypeVO = BikeTypeService.findByPrimaryKey(sq_bike_type_id);
 			request.setAttribute("BikeTypeVO", BikeTypeVO);
-			RequestDispatcher successView = request.getRequestDispatcher("/back-end/bikeType/listAll.jsp");
+			RequestDispatcher successView = request.getRequestDispatcher("/back-end/bikeType/bikeTypeListAll.jsp");
 			successView.forward(request, response);
 		}
 
@@ -139,7 +139,7 @@ public class BikeTypeServlet extends HttpServlet {
 				BikeTypeService.insert(bikeVOInsert);
 				session.removeAttribute("bike_photo_array");
 				// forward
-				RequestDispatcher successView = request.getRequestDispatcher("/back-end/bikeType/listAll.jsp");
+				RequestDispatcher successView = request.getRequestDispatcher("/back-end/bikeType/bikeTypeListAll.jsp");
 				successView.forward(request, response);
 
 				// other error
@@ -218,7 +218,7 @@ public class BikeTypeServlet extends HttpServlet {
 				// update STMT
 				BikeTypeService.update(bikeVOUpdate);
 				// forward
-				RequestDispatcher successView = request.getRequestDispatcher("/back-end/bikeType/listAll.jsp");
+				RequestDispatcher successView = request.getRequestDispatcher("/back-end/bikeType/bikeTypeListAll.jsp");
 				successView.forward(request, response);
 
 				// other error
