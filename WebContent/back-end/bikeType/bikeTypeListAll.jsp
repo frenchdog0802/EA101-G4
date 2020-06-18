@@ -15,8 +15,9 @@ pageContext.setAttribute("list", list);
 // pageContext.removeAttribute("list");
 // List<BikeTypeVO> list1 = Arrays.asList(BikeTypeVO);
 // 	pageContext.setAttribute("list", list1);
-// }
+// //123123}
 %>
+
 <html>
 <head>
 	<meta name="viewport"
