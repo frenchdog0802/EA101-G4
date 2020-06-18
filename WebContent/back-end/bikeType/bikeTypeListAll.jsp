@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.bike.type.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%-- <jsp:useBean id="BikeTypeVO" class="com.bike.type.model.BikeTypeVO" scope="request" />  --%>
  
@@ -42,6 +41,7 @@ List<BikeTypeVO> list1 = Arrays.asList(BikeTypeVO);
 			}
 		}
 	</style>
+</head>
 	<body>
 
 		<div class="container-fluid">
@@ -74,8 +74,8 @@ List<BikeTypeVO> list1 = Arrays.asList(BikeTypeVO);
 					<th scope="col">修改</th>
 				</tr>
 			</thead>
-			<tbody>
-				<%@ include file="page1.file"%>
+			<tbody>               
+				<%@ include file="/back-end/bikeType/page1.file"%>
 				<c:forEach var="bikeVO" items="${list}" begin="<%=pageIndex%>"
 				end="<%=pageIndex+rowsPerPage-1%>">
 				<tr>
@@ -100,7 +100,7 @@ List<BikeTypeVO> list1 = Arrays.asList(BikeTypeVO);
 			</c:forEach>
 		</tbody>
 	</table>
-	<%@ include file="page3.file"%>
+	<%@ include file="/back-end/bikeType/page3.file"%>
 	<div class="w-100 m-3"></div>
 </div>
 </div>
