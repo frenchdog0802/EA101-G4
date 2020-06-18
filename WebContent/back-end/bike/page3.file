@@ -4,20 +4,23 @@
 					<div class="col text-center">
 						<A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage - 1%>"
 							class="btn btn-primary btn-sm 
-				<%if (pageIndex < pageIndexArray[pageNumber - 1]) {%> disabled <%}%>"
+				<%if (whichPage <= 1) {%> disabled <%}%>"
 							role="button" aria-disabled="true">上一頁 </A>&nbsp;
 						<%
 							for (int i = 1; i <= pageNumber; i++) {
 						%>
 						<A href="<%=request.getRequestURI()%>?whichPage=<%=i%>"
-							class="mx-3 "><%=i%></A>&nbsp;
+							class="mx-3 page-index" ><%=i%></A>&nbsp;
 						<%
 							}
 						%>
 						<A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage + 1%>"
 							class="btn btn-primary btn-sm 
-				<%if (pageIndex >= pageNumber) {%> disabled <%}%>"
+				<%if (whichPage >= pageNumber) {%> disabled <%}%>"
 							role="button" aria-disabled="true">下一頁 </A>&nbsp;
 					</div>
 				</div>
 			</div>
+			
+
+			

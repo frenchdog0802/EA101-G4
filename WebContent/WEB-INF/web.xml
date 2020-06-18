@@ -10,6 +10,16 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+  <!--BikeServlet Controller  -->
+  <servlet>
+    <servlet-name>BikeServlet</servlet-name>
+    <servlet-class>com.bike.bike.controller.BikeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BikeServlet</servlet-name>
+    <url-pattern>/bike/BikeServlet.do</url-pattern>
+  </servlet-mapping>
+  
   <!--BikeTypeServlet Controller  -->
   <servlet>
     <servlet-name>BikeTypeServlet</servlet-name>
