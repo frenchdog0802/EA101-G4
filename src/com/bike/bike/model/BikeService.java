@@ -10,6 +10,10 @@ public class BikeService {
 		this.BikeDAO = new BikeDAO();
 	}
 	
+	public BikeVO findByPrimaryKey(String sq_bike_id) {
+		return BikeDAO.findByPrimaryKey(sq_bike_id);
+	};
+	
 	public List<BikeVO> getAll(){
 		return BikeDAO.getAll();
 	}
