@@ -20,7 +20,7 @@
 <title>Update here</title>
 </head>
 <body>
-	<a href="<%=request.getContextPath()%>/back-end/bikeType/listAll.jsp" class="btn btn-primary btn-lg" aria-label="Left Align">
+	<a href="<%=request.getContextPath()%>/back-end/bikeType/bikeTypeListAll.jsp" class="btn btn-primary btn-lg" aria-label="Left Align">
   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true">回上一頁</span>
 </a>
 	<div class="container mt-5">

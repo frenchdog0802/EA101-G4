@@ -17,7 +17,7 @@ public class BikeTypeService {
 	public void update(BikeTypeVO BikeTypeVO){
 		dao.update(BikeTypeVO);
 	};
-//	public void delete(String Sq_bike_type_id){};
+
 	public BikeTypeVO findByPrimaryKey(String sq_bike_type_id){
 		return dao.findByPrimaryKey(sq_bike_type_id);
 	};
@@ -25,4 +25,27 @@ public class BikeTypeService {
 	public List<BikeTypeVO> getAll(){
 		return dao.getAll();
 	};
+//	public void delete(String Sq_bike_type_id){};
+	
+	public String findBikeStatus(Integer BikeStatus) {
+		String status = null;
+		  switch(BikeStatus) { 
+          case 0: 
+        	  status =  new String("未出租");
+        	  break; 
+          case 1: 
+        	  status =  new String("出租中"); 
+              break; 
+          case 2: 
+        	  status =  new String("維修");
+              break; 
+          case 3: 
+        	  status =  new String("遺失");
+              break; 
+          case 4: 
+        	  status =  new String("報廢");
+              break; 
+      }
+		  return status;
+	}
 }

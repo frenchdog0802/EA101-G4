@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>			
 			<div class="container">
 				<div class="row">
-					<div class="col text-center ">
+					<div class="col text-center">
 						<A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage - 1%>"
 							class="btn btn-primary btn-sm 
 				<%if (whichPage <= 1) {%> disabled <%}%>"
@@ -9,8 +9,8 @@
 						<%
 							for (int i = 1; i <= pageNumber; i++) {
 						%>
-						<A  href="<%=request.getRequestURI()%>?whichPage=<%=i%>"
-							class="mx-3 page-index"><%=i%></A>&nbsp;
+						<A href="<%=request.getRequestURI()%>?whichPage=<%=i%>"
+							class="mx-3 page-index" ><%=i%></A>&nbsp;
 						<%
 							}
 						%>
@@ -21,3 +21,6 @@
 					</div>
 				</div>
 			</div>
+			
+
+			

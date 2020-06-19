@@ -10,6 +10,16 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+  <!--BikeServlet Controller  -->
+  <servlet>
+    <servlet-name>BikeServlet</servlet-name>
+    <servlet-class>com.bike.bike.controller.BikeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BikeServlet</servlet-name>
+    <url-pattern>/bike/BikeServlet.do</url-pattern>
+  </servlet-mapping>
+  
   <!--BikeTypeServlet Controller  -->
   <servlet>
     <servlet-name>BikeTypeServlet</servlet-name>
@@ -47,6 +57,7 @@
     <url-pattern>/photo/DBReader2.do</url-pattern>
   </servlet-mapping>
   
+<!--   KaiNong -->
   	<servlet>
 		<servlet-name>showImg</servlet-name>
 		<servlet-class>imgReader.showImg</servlet-class>
@@ -83,6 +94,31 @@
 		<url-pattern>/back_end/Shop_product/shop_product.do</url-pattern>
 	</servlet-mapping>
 	
-  
-  
+<!--   筑峰 -->
+  <servlet>
+		<servlet-name>MemServlet</servlet-name>
+		<servlet-class>com.member.controller.MemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemServlet</servlet-name>
+		<url-pattern>/member/mem.do</url-pattern>
+	</servlet-mapping>	
+	<servlet>
+    <servlet-name>MemDBReader</servlet-name>
+    <servlet-class>com.member.model.MemDBReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemDBReader</servlet-name>
+    <url-pattern>/member/DBReader.do</url-pattern>
+  </servlet-mapping>
+	
+	<servlet>
+		<servlet-name>StaffServlet</servlet-name>
+		<servlet-class>com.staff.controller.StaffServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StaffServlet</servlet-name>
+		<url-pattern>/staff/staff.do</url-pattern>
+	</servlet-mapping>
 </web-app>
+
