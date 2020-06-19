@@ -41,9 +41,9 @@ public class BikeDAO implements BikeDAO_interface {
 			con = DriverManager.getConnection(url, userId, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			System.out.println(BikeVO.getSq_bike_type_id());
-			System.out.println(BikeVO.getSq_bike_store_id());
-			System.out.println(BikeVO.getBike_status());
+//			System.out.println(BikeVO.getSq_bike_type_id());
+//			System.out.println(BikeVO.getSq_bike_store_id());
+//			System.out.println(BikeVO.getBike_status());
 	
 			pstmt.setString(1,BikeVO.getSq_bike_type_id());
 			pstmt.setString(2,BikeVO.getSq_bike_store_id());
