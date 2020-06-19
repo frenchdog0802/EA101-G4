@@ -11,7 +11,7 @@
  %>   
  
  <%@ include file="/back-end/backFrame/backHeader"%>
- 	<link rel="stylesheet" type="text/css" href="backBrand.css">
+ 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-end/backCss/backBrand.css">
     <title>¼tµP«á¥x</title>
  <%@ include file="/back-end/backFrame/backBody"%>
 				<div class="row" style="background-color: white;">
