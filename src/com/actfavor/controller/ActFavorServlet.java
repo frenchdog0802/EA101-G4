@@ -1,14 +1,12 @@
-package com.act.controller;
+package com.actfavor.controller;
 
 import java.io.*;
 import java.util.*;
 import javax.servlet.*;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 import com.act.model.*;
 
-@MultipartConfig
-public class ActServlet extends HttpServlet {
+public class ActFavorServlet extends HttpServlet {
            
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {

@@ -134,7 +134,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 	}
 
 
-	// 此取消只是把活動狀態改成2(取消活動)
+	// 此方法只是把活動狀態改成2(取消活動)
 	@Override
 	public void cancel(String SQ_ACTIVITY_ID) {
 
@@ -177,7 +177,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 
 	}
 	
-	// 此取消只是把活動狀態改成2(取消活動)
+	// 此方法只是把活動狀態改成4(下架活動)
 		@Override
 		public void delete(String SQ_ACTIVITY_ID) {
 
@@ -387,7 +387,7 @@ public class ActJDBCDAO implements ActDAO_interface {
     		con.setAutoCommit(false);
 			
     		// 先新增活動
-			String cols[] = {"SQ_ACTIVITY_ID","SQ_MEMBER_ID"}; //joined_act_detail綁定這兩個欄位(複合主鍵)
+			String cols[] = {"SQ_ACTIVITY_ID"}; //joined_act_detail綁定這兩個欄位(複合主鍵)
 			pstmt = con.prepareStatement(INSERT_STMT , cols);			
 			pstmt.setString(1, actVO.getSq_route_id());
 			pstmt.setString(2, actVO.getSq_member_id());
@@ -509,7 +509,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 	    // 取消活動(前台)
 		dao.cancel("ACT-700011");
 		
-		// 取消活動(後台)
+		// 下架活動(後台)
 		dao.delete("ACT-700011");
 
 		// 查詢
@@ -549,6 +549,32 @@ public class ActJDBCDAO implements ActDAO_interface {
 			System.out.print(aAct.getGp_status());
 			System.out.println();
 		}
+		
+		//新增活動,參加活動明細及主辦者也會跟著產生
+//		ActVO actVO4 = new ActVO();
+//		byte[] pic3 = getPictureByteArray("C://DB_photos//NankanPark.jpg");
+//		actVO4.setSq_route_id("RP110001");
+//		actVO4.setSq_member_id("910009");
+//		actVO4.setAct_title("南崁河濱公園");
+//		actVO4.setMax_population(new Integer(20));
+//		actVO4.setMin_population(new Integer(5));
+//		actVO4.setPopulation(new Integer(10));
+//		actVO4.setAct_description("老人小孩皆可娛樂的場所");
+//		actVO4.setStart_time(java.sql.Date.valueOf("2020-06-01"));
+//		actVO4.setEnd_time(java.sql.Date.valueOf("2020-06-05"));
+//		actVO4.setAct_start_time(java.sql.Date.valueOf("2020-06-06"));
+//		actVO4.setAct_end_time(java.sql.Date.valueOf("2020-06-08"));
+//		actVO4.setAct_picture(pic3);
+//		
+//		List<ActJoinVO> testList = new ArrayList<ActJoinVO>(); // 準備置入員工數人
+//		ActJoinVO actjoinVO = new ActJoinVO();   // 員工POJO1
+//		
+//		actjoinVO.setSq_member_id("910009");
+//		actjoinVO.setJoin_time(java.sql.Timestamp.valueOf("2020-05-20 10:11:12"));
+//
+//		testList.add(actjoinVO);
+//	
+//		dao.insertWithActJoin(actVO4 , testList);
 
 	}
 
@@ -598,6 +624,5 @@ public class ActJDBCDAO implements ActDAO_interface {
 		i++;
 
 	}
-
 	
 }
