@@ -5,8 +5,8 @@ import java.sql.*;
 public class Shop_reportDAO implements Shop_reportDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "KAINONG";
-	String passwd = "123456";
+	String userid = "EA101_G4";
+	String passwd = "EA101_G4";
 
 	private static final String INSERT = "INSERT INTO SHOP_REPORT (SQ_MEMBER_ID, SQ_PRODUCT_ID, SHOP_REPORT_DETAIL, SHOP_REPORT_TIME, SHOP_REPORT_STATUS) VALUES (('PRR-'||LPAD(to_char(SQ_SHOP_REPORT_ID.NEXTVAL),6,0)), ?, ?, ?, ?, ?)";
 	private static final String UPDATE = "UPDATE SHOP_REPORT SET SQ_MEMBER_ID=?, SQ_PRODUCT_ID=?, SHOP_REPORT_DETAIL=?, SHOP_REPORT_TIME=?, SHOP_REPORT_STATUS=? WHERE SQ_SHOP_REPORT_ID = ?";

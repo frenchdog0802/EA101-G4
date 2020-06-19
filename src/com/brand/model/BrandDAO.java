@@ -8,8 +8,8 @@ import java.util.*;
 public class BrandDAO implements BrandDAO_interface{
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String user = "KAINONG";
-	String password = "123456";
+	String user = "EA101_G4";
+	String password = "EA101_G4";
 	
 	private static final String INSERT_STMT = "INSERT INTO BRAND (SQ_BRAND_ID, BRAND_NAME, BRAND_PHONE, BRAND_ADDRESS, BRAND_SIGN, BRAND_DETAIL)"
 			+ "VALUES (SQ_BRAND_ID.NEXTVAL, ?, ?, ?, ?, ?)";
