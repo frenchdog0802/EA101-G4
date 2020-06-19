@@ -75,7 +75,10 @@ List<BikeVO> list1 = Arrays.asList(BikeVO);
 			<tr>
 				<td class="align-middle">${bikeVO.sq_bike_id}</td>
 				<td class="align-middle">${bikeTypeSvc.findByPrimaryKey(bikeVO.sq_bike_type_id).bike_type_name}</td>
-				<td class="mydescription align-middle">${bikeTypeSvc.findBikeStatus(bikeVO.bike_status)}</td>
+				<td class="mydescription align-middle">
+				
+				${bikeTypeSvc.findBikeStatus(bikeVO.bike_status)}
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
