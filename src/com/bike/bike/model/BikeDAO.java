@@ -191,9 +191,7 @@ public class BikeDAO implements BikeDAO_interface {
 				}
 			}
 		}
-
 		return BikeVO;
-
 	}
 	
 
