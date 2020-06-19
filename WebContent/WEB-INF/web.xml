@@ -46,4 +46,34 @@
     <servlet-name>InsertDBReader2</servlet-name>
     <url-pattern>/photo/DBReader2.do</url-pattern>
   </servlet-mapping>
+  
+<!--   筑峰 -->
+  <servlet>
+		<servlet-name>MemServlet</servlet-name>
+		<servlet-class>com.member.controller.MemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemServlet</servlet-name>
+		<url-pattern>/member/mem.do</url-pattern>
+	</servlet-mapping>	
+	<servlet>
+    <servlet-name>MemDBReader</servlet-name>
+    <servlet-class>com.member.model.MemDBReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemDBReader</servlet-name>
+    <url-pattern>/member/DBReader.do</url-pattern>
+  </servlet-mapping>
+	
+	<servlet>
+		<servlet-name>StaffServlet</servlet-name>
+		<servlet-class>com.staff.controller.StaffServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StaffServlet</servlet-name>
+		<url-pattern>/staff/staff.do</url-pattern>
+	</servlet-mapping>
 </web-app>
+
+
+

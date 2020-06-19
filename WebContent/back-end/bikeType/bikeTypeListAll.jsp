@@ -11,11 +11,11 @@ BikeTypeService bikeDao = new BikeTypeService();
 List<BikeTypeVO> list = bikeDao.getAll();
 pageContext.setAttribute("list", list);
 
-if (BikeTypeVO.getSq_bike_type_id() != null) {
-pageContext.removeAttribute("list");
-List<BikeTypeVO> list1 = Arrays.asList(BikeTypeVO);
-	pageContext.setAttribute("list", list1);
-}
+// if (BikeTypeVO.getSq_bike_type_id() != null) {
+// pageContext.removeAttribute("list");
+// List<BikeTypeVO> list1 = Arrays.asList(BikeTypeVO);
+// 	pageContext.setAttribute("list", list1);
+// }
 %>
 <html>
 <head>
