@@ -120,5 +120,50 @@
 		<servlet-name>StaffServlet</servlet-name>
 		<url-pattern>/staff/staff.do</url-pattern>
 	</servlet-mapping>
+<!--   宗霖 -->	
+	<servlet>
+	<servlet-name>ActServlet</servlet-name>
+	<servlet-class>com.act.controller.ActServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>ActServlet</servlet-name>
+	<url-pattern>/act/ActServlet.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+		<servlet-name>DBGifReader2</servlet-name>
+		<servlet-class>com.act.controller.DBGifReader2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DBGifReader2</servlet-name>
+		<url-pattern>/act/DBGifReader2</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+	<servlet-name>ActJoinServlet</servlet-name>
+	<servlet-class>com.actjoin.controller.ActJoinServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>ActJoinServlet</servlet-name>
+	<url-pattern>/act/ActJoinServlet.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+	<servlet-name>ActFavorServlet</servlet-name>
+	<servlet-class>com.actfavor.controller.ActFavorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>ActFavorServlet</servlet-name>
+	<url-pattern>/act/ActFavorServlet.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+	<servlet-name>ActReportServlet</servlet-name>
+	<servlet-class>com.actreport.controller.ActReportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>ActReportServlet</servlet-name>
+	<url-pattern>/act/ActReportServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>
 
