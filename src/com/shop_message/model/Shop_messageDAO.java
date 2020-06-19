@@ -6,8 +6,8 @@ import java.util.*;
 public class Shop_messageDAO implements Shop_messageDAO_interface{
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String user = "KAINONG";
-	String password = "123456";
+	String user = "EA101_G4";
+	String password = "EA101_G4";
 	
 	public static final String INSERT = "INSERT INTO SHOP_MESSAGE(SQ_PRODUCT_ID, SHOP_MESSAGE_DETAIL, SHOP_MESSAGE_TIME, SHOP_MESSAGE_STATUS) "
 			+ "VALUES (('PRM-'||LPAD(to_char(SQ_SHOP_MESSAGE_ID.NEXTVAL),6,0)), ?, ?, ?, ?)";
