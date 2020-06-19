@@ -1,0 +1,24 @@
+</head>
+   <body>
+   	<div class="container-fluid"> 
+	  	<div class="row" style="background-color: #2f323b;">
+	  		<div class="col-2 home"	>
+	  			<button class="btn btn-block homebtn" >
+					<img src="<%=request.getContextPath()%>/back-end/backFrame/image/house.png" class="img-fluid" style="width: 80%;">
+				</button>
+	  		</div>
+			<div class="col-10">
+				<div class="row" style="background-color:  #4778c7;">
+					<div class="col-lg-6 col-md-6 align-self-center">
+						
+					</div>
+					<div class="col-lg-1 col-md-1" style="padding-left: 3px; padding-right: 3px;">
+						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/user.png" class="img-fluid" style="margin: 0 auto;">
+					</div>
+				 	<div class="col-lg-2 col-md-2 text-left align-self-center " style="padding-left: 0px; padding-right: 0px;">
+				 		<h5 class="pt-2">ID : </h5>
+				 	</div>
+				 	<div class="col-lg-3 col-md-3 text-left align-self-center" style="padding-left: 0px; padding-right: 0px;">
+				 		<h5 class="pt-2">NAME : </h5>
+				 	</div>
+				</div>

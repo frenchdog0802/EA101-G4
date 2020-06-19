@@ -2,25 +2,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.bike.type.model.*"%>
+<%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <jsp:useBean id="BikeTypeVO" class="com.bike.type.model.BikeTypeVO" scope="request" /> 
  
 
 <%
+BikeTypeService bikeDao = new BikeTypeService();
+List<BikeTypeVO> list = bikeDao.getAll();
+pageContext.setAttribute("list", list);
 
-List<BikeTypeVO> list ;
- if (BikeTypeVO.getSq_bike_type_id() != null) { 
- 	list = Arrays.asList(BikeTypeVO); 
- 	pageContext.setAttribute("list", list); 
- }else{ 
- 	BikeTypeService bikeDao = new BikeTypeService(); 
- 	list = bikeDao.getAll(); 
- 	pageContext.setAttribute("list", list); 
- } 
- 
+if (BikeTypeVO.getSq_bike_type_id() != null) {
+pageContext.removeAttribute("list");
+List<BikeTypeVO> list1 = Arrays.asList(BikeTypeVO);
+	pageContext.setAttribute("list", list1);
+}
 %>
-
-
 <html>
 <head>
 	<meta name="viewport"
@@ -45,7 +42,6 @@ List<BikeTypeVO> list ;
 			}
 		}
 	</style>
-</head>
 	<body>
 
 		<div class="container-fluid">
@@ -57,7 +53,7 @@ List<BikeTypeVO> list ;
 				name="sq_bike_type_id" placeholder="請輸入車種編號">
 			</div>
 			<input type="hidden" name="action" value="getOne_For_Display">
-			<input type="submit" class="btn btn-primary mt-3 "  value="查詢"></input>
+			<input type="submit" class="btn btn-primary mt-3" value="查詢"></input>
 			<a
 			href="<%=request.getContextPath()%>/back-end/bikeType/addBikeType.jsp"
 			class="btn btn-success mt-3 mx-3">新增</a>
@@ -78,8 +74,8 @@ List<BikeTypeVO> list ;
 					<th scope="col">修改</th>
 				</tr>
 			</thead>
-			<tbody>               
-				<%@ include file="/back-end/bikeType/page1.file"%>
+			<tbody>
+				<%@ include file="page1.file"%>
 				<c:forEach var="bikeVO" items="${list}" begin="<%=pageIndex%>"
 				end="<%=pageIndex+rowsPerPage-1%>">
 				<tr>
@@ -104,7 +100,7 @@ List<BikeTypeVO> list ;
 			</c:forEach>
 		</tbody>
 	</table>
-	<%@ include file="/back-end/bikeType/page3.file"%>
+	<%@ include file="page3.file"%>
 	<div class="w-100 m-3"></div>
 </div>
 </div>
@@ -124,22 +120,15 @@ List<BikeTypeVO> list ;
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script
 		src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
-
 		<script>
 			$(function(){
-				//table 
 				$("tbody tr").click(function(){	
 					$("tbody tr").css({"background-color":"inherit",
 						"color":"inherit"});
 					$(this).css({"background-color":"#CCDDFF",
 						"color":"#fff"});	
 				});
-				//pagelink
-				$(".page-index").eq(<%=whichPage-1%>).addClass("text-danger");
-				
 			})	
-			
-			
 		</script>
 	</body>
 	</html>
