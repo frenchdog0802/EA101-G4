@@ -6,8 +6,8 @@ import java.util.*;
 public class Shop_orderDAO implements Shop_orderDAO_interface{
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String user = "KAINONG";
-	String password = "123456";
+	String user = "EA101_G4";
+	String password = "EA101_G4";
 	
 	public static final String INSERT = "INSERT INTO SHOP_ORDER(SQ_MEMBER_ID, SQ_STORE_ADDRESS_ID, ORDER_ADDRESS, ORDER_DATE, PAY_DEADLINE, SHOP_ORDER_PRICE, PAY_MODE, ORDER_STATUS"
 			+ "VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), ?, ?, ?, ?, ?, ?, ?, ?)";

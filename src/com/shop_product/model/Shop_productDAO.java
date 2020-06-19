@@ -7,8 +7,8 @@ import java.util.List;
 public class Shop_productDAO implements Shop_productDAO_interface{
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String user = "KAINONG";
-	String password = "123456";
+	String user = "EA101_G4";
+	String password = "EA101_G4";
 	
 	private static final String INSERT_STMT = "INSERT INTO SHOP_PRODUCT (sq_product_id, sq_brand_id, product_kind_name, stock_total, product_name, product_price, product_pic,"
 			+ " product_detail, product_model, product_color, add_date, product_material, product_status) VALUES (SQ_PRODUCT_ID.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?)";
