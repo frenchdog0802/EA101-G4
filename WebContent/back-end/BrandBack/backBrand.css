@@ -1,0 +1,39 @@
+		#brandcontent{
+			height: 500px;
+		}
+		#brandcontent table{
+			width: 100%;
+			table-layout: fixed;
+		}
+		#brandcontent tr{
+			height: 30px;
+			text-align: center;
+		}
+		td{
+			border: 1px black solid;
+			width: 100%;
+			white-space: normal;
+			word-break: break-all;
+			word-wrap: break-word;
+		}
+		#td_id{
+			width: 6%;
+		}
+		#td_name{
+			width: 8%;
+		}
+		#td_phone{
+			width: 10%;
+		}
+		#td_address{
+			width: 22%;
+		}
+		#td_sign{
+			width: 7%;
+		}
+		#td_detail{
+			width: 37%;
+		}
+		#td_lastbtn{
+			width: 5%;
+		}

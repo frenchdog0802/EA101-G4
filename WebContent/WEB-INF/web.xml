@@ -57,6 +57,43 @@
     <url-pattern>/photo/DBReader2.do</url-pattern>
   </servlet-mapping>
   
+<!--   KaiNong -->
+  	<servlet>
+		<servlet-name>showImg</servlet-name>
+		<servlet-class>imgReader.showImg</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showImg</servlet-name>
+		<url-pattern>/showImg</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>showImg2</servlet-name>
+		<servlet-class>imgReader.showImg2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showImg2</servlet-name>
+		<url-pattern>/showImg2/showImg2.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>BrandServlet</servlet-name>
+		<servlet-class>com.brand.controller.BrandServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BrandServlet</servlet-name>
+		<url-pattern>/back-end/BrandBack/brand.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Shop_productServlet</servlet-name>
+		<servlet-class>com.shop_product.controller.Shop_productServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Shop_productServlet</servlet-name>
+		<url-pattern>/back_end/Shop_product/shop_product.do</url-pattern>
+	</servlet-mapping>
+	
 <!--   筑峰 -->
   <servlet>
 		<servlet-name>MemServlet</servlet-name>
@@ -84,6 +121,4 @@
 		<url-pattern>/staff/staff.do</url-pattern>
 	</servlet-mapping>
 </web-app>
-
-
 
