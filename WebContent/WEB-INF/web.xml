@@ -10,6 +10,16 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+<!--   琮寶 -->
+<!-- BikeStoreAjaxServlet -->
+  <servlet>
+    <servlet-name>BikeStoreAjaxServlet</servlet-name>
+    <servlet-class>com.bike.store.controller.BikeStoreAjaxServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BikeStoreAjaxServlet</servlet-name>
+    <url-pattern>/bike/BikeStoreAjaxServlet.do</url-pattern>
+  </servlet-mapping>
   <!--BikeServlet Controller  -->
   <servlet>
     <servlet-name>BikeServlet</servlet-name>
