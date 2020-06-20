@@ -84,10 +84,10 @@
 			</c:forEach>
 		</select></td>
 	</tr>
+<!-- 	----此欄是會員編號,但不論前台或後台都不給改(因為已經綁定主揪者的會員編號) -->
 	<tr>
-		<td>會員編號(如910001):</td>
-		<td><input type="TEXT" name="sq_member_id" size="45" 
-			 value="<%= (actVO==null)? "之後要改成servlet取值新增進去" : actVO.getSq_member_id()%>" /></td>
+		<td><input type="hidden" name="sq_member_id" size="45" 
+			 value="<%= actVO.getSq_member_id()%>" /></td>
 	</tr>
 	<tr>
 		<td>活動標題:</td>
@@ -107,19 +107,19 @@
 	</tr>
 	<tr>
 		<td>報名起始時間:</td>
-		<td><input name="start_time" id="f_date1" type="text" value="<%=actVO.getStart_time()%>" /></td>
+		<td><input name="start_time" id="start_time" type="text" value="<%=actVO.getStart_time()%>" /></td>
 	</tr>
 	<tr>
 		<td>報名結束時間:</td>
-		<td><input name="end_time" id="f_date2" type="text" value="<%=actVO.getEnd_time()%>" /></td>
+		<td><input name="end_time" id="end_time" type="text" value="<%=actVO.getEnd_time()%>" /></td>
 	</tr>
 	<tr>
 		<td>活動開始時間:</td>
-		<td><input name="act_start_time" id="f_date3" type="text" value="<%=actVO.getAct_start_time()%>" /></td>
+		<td><input name="act_start_time" id="act_start_time" type="text" value="<%=actVO.getAct_start_time()%>" /></td>
 	</tr>
 	<tr>
 		<td>活動結束時間:</td>
-		<td><input name="act_end_time" id="f_date4" type="text" value="<%=actVO.getAct_end_time()%>" /></td>
+		<td><input name="act_end_time" id="act_end_time" type="text" value="<%=actVO.getAct_end_time()%>" /></td>
 	</tr>
 	<tr>
 		<td>活動說明:</td>
@@ -134,6 +134,8 @@
 		<td>活動圖片:</td>
 		<td>
 		<input type="FILE" name="act_picture" accept=".jpg,.png,.jpeg" onchange="loadImageFile(event)">
+		<input type="hidden" name="act_picture" size="45" 
+			 value="<%= (actVO==null)? "" : actVO.getAct_picture()%>" />
 		<img id="image" src="" >
 		</td>
 	</tr>
@@ -167,57 +169,55 @@
 </style>
 
 <script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
-           theme: '',              //theme: 'dark',
- 	       timepicker:false,       //timepicker:true,
- 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
- 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '<%=actVO.getStart_time()%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-        $.datetimepicker.setLocale('zh');
-        $('#f_date2').datetimepicker({
-           theme: '',              //theme: 'dark',
- 	       timepicker:false,       //timepicker:true,
- 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
- 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '<%=actVO.getEnd_time()%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-        $.datetimepicker.setLocale('zh');
-        $('#f_date3').datetimepicker({
-           theme: '',              //theme: 'dark',
- 	       timepicker:false,       //timepicker:true,
- 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
- 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '<%=actVO.getAct_start_time()%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-        $.datetimepicker.setLocale('zh');
-        $('#f_date4').datetimepicker({
-           theme: '',              //theme: 'dark',
- 	       timepicker:false,       //timepicker:true,
- 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
- 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '<%=actVO.getAct_end_time()%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
+$.datetimepicker.setLocale('zh'); // kr ko ja en
+$(function(){
+	 $('#start_time').datetimepicker({
+	  format:'Y-m-d',
+	  onShow:function(){
+	   this.setOptions({
+	    maxDate:$('#end_time').val()?$('#end_time').val():false
+	   })
+	  },
+	  minDate:'-1970-01-01',
+	  value: '<%=actVO.getStart_time()%>',
+	  timepicker:false
+	 });
+	 
+	 $('#end_time').datetimepicker({
+	  format:'Y-m-d',
+	  onShow:function(){
+	   this.setOptions({
+	    minDate:$('#start_time').val()?$('#start_time').val():false,
+	    maxDate:$('#act_start_time').val()?$('#act_start_time').val():false	
+	   })
+	  },
+	  value: '<%=actVO.getEnd_time()%>',
+	  timepicker:false
+	 });
+	 
+	 $('#act_start_time').datetimepicker({
+		  format:'Y-m-d',
+		  onShow:function(){
+		   this.setOptions({
+		    minDate:$('#end_time').val()?$('#end_time').val():false,
+		   	maxDate:$('#act_end_time').val()?$('#act_end_time').val():false		
+		   })
+		  },
+		  value: '<%=actVO.getAct_start_time()%>',
+		  timepicker:false
+		 });
+	 
+	 $('#act_end_time').datetimepicker({
+		  format:'Y-m-d',
+		  onShow:function(){
+		   this.setOptions({
+		    minDate:$('#act_start_time').val()?$('#act_start_time').val():false
+		   })
+		  },
+		  value: '<%=actVO.getAct_end_time()%>',
+		  timepicker:false
+		 });
+});
         
         //圖片預覽
         function loadImageFile(event){ 
