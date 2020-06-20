@@ -297,6 +297,15 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 		}
 		return list;
 	}
-
-
+	public static void main(String args[]) {
+		Shop_productDAO dao = new Shop_productDAO();
+		List<Shop_productVO> list = dao.getAll();
+		for (Shop_productVO vo : list) {
+			System.out.print(vo.getSq_product_id() + ",");
+			System.out.print(vo.getSq_brand_id() + ",");
+			System.out.print(vo.getProduct_kind_name() + ",");
+			System.out.print(vo.getStock_total() + ",");
+			System.out.println();
+		}
+	}
 }

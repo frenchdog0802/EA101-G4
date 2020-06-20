@@ -119,7 +119,7 @@
 				    					</td>
 				    					<td>
 										 	<FORM METHOD="post" ACTION="brand.do" style="position: relative;">
-										    	<input type="submit" value="­×§ï" style="position: absolute; opacity: 0;">
+										    	<input type="submit" value="§R°£" style="position: absolute; opacity: 0;">
 											    <img src="image/delicon.png" alt="" class="img-fluid">
 										    	<input type="hidden" name="sq_brand_id" value="${brandVO.sq_brand_id}">
 										    	<input type="hidden" name="action" value="delete">
