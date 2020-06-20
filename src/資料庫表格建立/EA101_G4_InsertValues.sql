@@ -738,47 +738,73 @@ INSERT INTO BRAND VALUES(SQ_BRAND_ID.NEXTVAL, 'ROCKRIDER', '02-6549872', '104台
 -----------------------------------商城商品---------------------------------------
 
 
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '騎行服', 30, '男款透氣排汗自行車短袖內衣 VAN RYSEL 300', 149, load_blob('vanrysel_cloth1.jpg'), '男款自行車底層衣100採用可有效排汗的輕盈布料，打造舒適愉悅的穿著體驗。',
-'M,L,XL', '黑', TO_DATE(sysdate,'YYYY-MM-DD'), '主要布料 : 100.0%聚酯纖維', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '外套/風衣', 20, '男款透氣防曬自行車防風外套 BTWIN 500M', 499, load_blob('twinrain.jpg'), '輕巧精緻的夾克是專為城市自行車設計。 能防小雨、防風，也防春/秋的太陽。 日間或夜間都能提升您騎乘時的可見度。
-在城鎮中騎行時保護騎乘自行車者不被風吹、不受細雨淋', 'S', 'RED', TO_DATE(sysdate,'YYYY-MM-DD'), '主要布料 : 100.0% 聚酯纖維', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '公路車', 10, '7段變速自行車平把公路車 BTWIN Triban 100 FB', 6499, load_blob('BIKE1.jpg'), '單齒盤設計讓起步非常輕鬆：讓你能隨時掌握所在的檔位！32 mm輪胎及直式手把設計也更加舒適！',
-'M', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 車架（自行車） : 100.0% 鋁合金 6061', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520003', '登山車', 5, 'BIG.NINE 300', 23200, load_blob('merdiabike2.jpg'), '「Made in Taiwan 台灣製造」，BIG.NINE與BIG.SEVEN單避震車系，其功能設計與細膩做工，完整詮釋了美利達47年的造車知識累積與經驗堆疊。',
-'L', '藍,灰', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 100.0% 鋁', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520003', '公路車', 2, 'SCULTURA DISC FORCE-EDITION', 148000, load_blob('merdiabike1.jpg'), '超輕量的CF4碳纖維車架，M/L尺寸僅有860公克。ProTour賽事驗證的競賽騎乘幾何設定；下管與立管採用「NACA快背斷面」管形，搭配1又1/8”漸變至1又1/4”的異徑頭管，協助降低空氣阻力。強悍踩踏力道傳輸的BB386規格；後上叉具有提升舒適度的吸震機能。輪煞版本使用傳統快拆的花鼓；碟煞版本則採用配置散熱鰭片的Flat Mount卡鉗與直通軸碟煞花鼓系統。',
-'XL', '麗黑', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 車架（自行車）: 100.0%鋁合金6061', 1); 
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520002', '外套/風衣', 10, '女款自行車防雨防風外套 GAINT RC 500', 1749, load_blob('giantoutcloth1.jpg'), '這款外套具有防水、透氣、彈性的薄膜，可提供雨中騎乘時絕佳的舒適性。摺疊式檔片可提供飛濺防護',
-'S,M,L', '粉紅', TO_DATE(sysdate,'YYYY-MM-DD'), '主要布料:100.0%聚酯纖維 過肩:100.0%聚酯纖維 塗層:100.0%聚氨酯（Polyurethane）塗層', 1);  
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520003', '太陽眼鏡', 30, '輕量款 抗UV自行車太陽眼鏡 MERIDA XC100', 299, load_blob('sunglass1.jpg'), '搭配可調式鼻墊及橡膠塗層鏡架，100自行車太陽眼鏡使眼鏡安全服貼臉型。寬幅鏡片提供您更好的保護和絕佳視野。',
-'', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 框架:85.0%聚醯纖維12, 框架:10.0%橡膠-熱塑性橡膠（TPR） 框架:5.0%不銹鋼 鏡片:100.0%聚碳酸酯', 1); 
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520005', '手套', 20, '可觸控 登山自行車防滑手套 ROCKRIDER ST 500', 499, load_blob('hand1.jpg'), '配戴登山車手套ST 500可於騎行或跌倒時防止植物刮傷雙手。手套選用既舒適又透氣的布料和設計。',
-'', '藍,黑', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 手背:97.0%聚酯纖維 手背:3.0%氨輪 掌面:100.0%聚氨酯（Polyurethane）塗層', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520005', '安全帽', 10, '登山車安全帽 ROCKRIDER', 499, load_blob('safecap.jpg'), '易於調整且舒適，Rockrider ST 100登山車安全帽保護你的頭部不受碰撞傷害。享受加大且較通風的9個通風孔設計。',
-'', '黑', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 泡棉 : 100.0% 發泡聚苯乙烯（EPS，保麗龍） 彈殼 : 100.0% 聚碳酸酯（PC） 帶子 : 100.0% 聚丙烯纖維 扣環 : 100.0% 聚醯纖維', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '打氣筒', 20, '附胎壓計台灣製自行車打氣筒 BTWIN FLP 500', 299, load_blob('fullair1.jpg'), '通用打氣筒（法式／英式／美式），附bars與PSI顯示的胎壓表（指針式胎壓計）。',
-'', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 75.0%聚丙烯纖維, 25.0%鋁', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520002', '水壺', 50, 'CCC車隊高流量水壺 750cc', 160, load_blob('giant_waterb1.jpg'), '750 ml自行車水壺。塑膠材質可減少異味。水壺蓋可防止水從瓶口濺出。可拆卸瓶蓋。',
-'', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 瓶身:100.0%聚丙烯纖維 蓋、帽:100.0%聚丙烯纖維 墊片:100.0%矽膠 奶嘴:100.0%TPE苯乙烯－丁二烯(碳)－苯乙烯共聚物(氫)', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520002', '水壺架', 30, 'GIANT AIRWAY DUAL CAGE 側開水壺架', 320, load_blob('giant_watera1.jpg'), '輕量時尚的自行車水壺架，玻璃纖維材質，加固塑料，耐用性強。',
-'', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 底盤 : 90.0%尼龍材質 10.0%玻璃纖維（FG）', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '外胎/內胎', 10, '【20*1.75】20吋童車輪胎 BTWIN City 5 Protect', 299, load_blob('inout1.jpg'), '防穿刺與高性能表現，側面胎紋為轉向提供良好的抓地性，Protect+科技。',
-'', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 膜:80.0%橡膠-天然橡膠（NR）-乳膠 膜:20.0%橡膠-合成橡膠）', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520005', '坐墊', 10, '記憶泡棉自行車坐墊套  ROCKRIDER 500 memory', 299, load_blob('chair1.jpg'), '適用於休閒自行車運動的「記憶泡棉」坐墊套，搭配可調式束帶，可貼合所有坐墊（最大14cm）。',
-'', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 墊料:100.0%聚氨酯纖維（PU） 外層布料:100.0%聚酯纖維 背部布料:100.0%聚醯纖維', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '工具箱', 5, '自行車萬用工具箱 BTWIN 900', 2499, load_blob('workbox1.jpg'), '40款工具，43個功能，讓你受益良多。工具放在盒內，盒子用兩個扣子關起扣上，攜帶及存放皆容易且符合人體工學。',
-'', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 本體:80.0%鋼 8.0%聚丙烯纖維 8.0%PVC塑膠（聚氯乙烯） 2.0%聚醯纖維 2.0%橡膠-熱塑性橡膠（TPR） 外蓋:100.0%聚乙烯', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '騎行服','男款透氣排汗自行車短袖內衣 VAN RYSEL 300', 149, load_blob('vanrysel_cloth1.jpg'), '男款自行車底層衣100採用可有效排汗的輕盈布料，打造舒適愉悅的穿著體驗。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '主要布料 : 100.0%聚酯纖維', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '外套/風衣','男款透氣防曬自行車防風外套 BTWIN 500M', 499, load_blob('twinrain.jpg'), '輕巧精緻的夾克是專為城市自行車設計。 能防小雨、防風，也防春/秋的太陽。 日間或夜間都能提升您騎乘時的可見度。在城鎮中騎行時保護騎乘自行車者不被風吹、不受細雨淋', 
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '主要布料 : 100.0% 聚酯纖維', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '公路車','7段變速自行車平把公路車 BTWIN Triban 100 FB', 6499, load_blob('BIKE1.jpg'), '單齒盤設計讓起步非常輕鬆：讓你能隨時掌握所在的檔位！32 mm輪胎及直式手把設計也更加舒適！', 
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 車架（自行車） : 100.0% 鋁合金 6061', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520003', '登山車', 'BIG.NINE 300', 23200, load_blob('merdiabike2.jpg'), '「Made in Taiwan 台灣製造」，BIG.NINE與BIG.SEVEN單避震車系，其功能設計與細膩做工，完整詮釋了美利達47年的造車知識累積與經驗堆疊。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 100.0% 鋁', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520003', '公路車', 'SCULTURA DISC FORCE-EDITION', 148000, load_blob('merdiabike1.jpg'), '超輕量的CF4碳纖維車架，M/L尺寸僅有860公克。ProTour賽事驗證的競賽騎乘幾何設定；下管與立管採用「NACA快背斷面」管形，搭配1又1/8”漸變至1又1/4”的異徑頭管，協助降低空氣阻力。強悍踩踏力道傳輸的BB386規格；後上叉具有提升舒適度的吸震機能。輪煞版本使用傳統快拆的花鼓；碟煞版本則採用配置散熱鰭片的Flat Mount卡鉗與直通軸碟煞花鼓系統。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 車架（自行車）: 100.0%鋁合金6061', 1); 
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520002', '外套/風衣', '女款自行車防雨防風外套 GAINT RC 500', 1749, load_blob('giantoutcloth1.jpg'), '這款外套具有防水、透氣、彈性的薄膜，可提供雨中騎乘時絕佳的舒適性。摺疊式檔片可提供飛濺防護',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '主要布料:100.0%聚酯纖維 過肩:100.0%聚酯纖維 塗層:100.0%聚氨酯（Polyurethane）塗層', 1);  
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520003', '太陽眼鏡','輕量款 抗UV自行車太陽眼鏡 MERIDA XC100', 299, load_blob('sunglass1.jpg'), '搭配可調式鼻墊及橡膠塗層鏡架，100自行車太陽眼鏡使眼鏡安全服貼臉型。寬幅鏡片提供您更好的保護和絕佳視野。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 框架:85.0%聚醯纖維12, 框架:10.0%橡膠-熱塑性橡膠（TPR） 框架:5.0%不銹鋼 鏡片:100.0%聚碳酸酯', 1); 
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520005', '手套','可觸控 登山自行車防滑手套 ROCKRIDER ST 500', 499, load_blob('hand1.jpg'), '配戴登山車手套ST 500可於騎行或跌倒時防止植物刮傷雙手。手套選用既舒適又透氣的布料和設計。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 手背:97.0%聚酯纖維 手背:3.0%氨輪 掌面:100.0%聚氨酯（Polyurethane）塗層', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520005', '安全帽','登山車安全帽 ROCKRIDER', 499, load_blob('safecap.jpg'), '易於調整且舒適，Rockrider ST 100登山車安全帽保護你的頭部不受碰撞傷害。享受加大且較通風的9個通風孔設計。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 泡棉 : 100.0% 發泡聚苯乙烯（EPS，保麗龍） 彈殼 : 100.0% 聚碳酸酯（PC） 帶子 : 100.0% 聚丙烯纖維 扣環 : 100.0% 聚醯纖維', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '打氣筒','附胎壓計台灣製自行車打氣筒 BTWIN FLP 500', 299, load_blob('fullair1.jpg'), '通用打氣筒（法式／英式／美式），附bars與PSI顯示的胎壓表（指針式胎壓計）。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 75.0%聚丙烯纖維, 25.0%鋁', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520002', '水壺','CCC車隊高流量水壺 750cc', 160, load_blob('giant_waterb1.jpg'), '750 ml自行車水壺。塑膠材質可減少異味。水壺蓋可防止水從瓶口濺出。可拆卸瓶蓋。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 瓶身:100.0%聚丙烯纖維 蓋、帽:100.0%聚丙烯纖維 墊片:100.0%矽膠 奶嘴:100.0%TPE苯乙烯－丁二烯(碳)－苯乙烯共聚物(氫)', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520002', '水壺架','GIANT AIRWAY DUAL CAGE 側開水壺架', 320, load_blob('giant_watera1.jpg'), '輕量時尚的自行車水壺架，玻璃纖維材質，加固塑料，耐用性強。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 底盤 : 90.0%尼龍材質 10.0%玻璃纖維（FG）', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '外胎/內胎','20吋童車輪胎 BTWIN City 5 Protect', 299, load_blob('inout1.jpg'), '防穿刺與高性能表現，側面胎紋為轉向提供良好的抓地性，Protect+科技。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 膜:80.0%橡膠-天然橡膠（NR）-乳膠 膜:20.0%橡膠-合成橡膠）', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520005', '坐墊','記憶泡棉自行車坐墊套  ROCKRIDER 500 memory', 299, load_blob('chair1.jpg'), '適用於休閒自行車運動的「記憶泡棉」坐墊套，搭配可調式束帶，可貼合所有坐墊（最大14cm）。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 墊料:100.0%聚氨酯纖維（PU） 外層布料:100.0%聚酯纖維 背部布料:100.0%聚醯纖維', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '工具箱','自行車萬用工具箱 BTWIN 900', 2499, load_blob('workbox1.jpg'), '40款工具，43個功能，讓你受益良多。工具放在盒內，盒子用兩個扣子關起扣上，攜帶及存放皆容易且符合人體工學。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 本體:80.0%鋼 8.0%聚丙烯纖維 8.0%PVC塑膠（聚氯乙烯） 2.0%聚醯纖維 2.0%橡膠-熱塑性橡膠（TPR） 外蓋:100.0%聚乙烯', 1);
 
 
+--------------------------------------------------------------------------------
+
+------------------------------------商品庫存-------------------------------------
+
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510001', '黑', 'M', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510001', '黑', 'L', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510001', '黑', 'XL', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510002', '紅', 'S', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510002', '紅', 'M', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510003', '', '', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510004', '藍', 'L', 5);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510004', '灰', 'L', 5);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510005', '麗黑', 'XL', 3);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510006', '粉紅', 'S', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510006', '粉紅', 'M', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510006', '粉紅', 'L', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510007', '', '', 20);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510008', '藍', '', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510008', '黑', '', 15);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510009', '黑', '', 5);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510010', '', '', 20);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510011', '', '', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510012', '黑', '', 100);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510013', '', '', 20);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510014', '', '', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510015', '', '', 5);
 --------------------------------------------------------------------------------
 
 -----------------------------------商品訂單---------------------------------------
 
 
 --'OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0)
-INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910001', '550001', '桃園市平鎮區中央路187號', systimestamp,  TO_DATE(sysdate+7,'YYYY-MM-DD'), 499, 1, 1);
-INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910002', '550002', '300新竹市東區東大路一段155號', systimestamp,  TO_DATE(sysdate+7,'YYYY-MM-DD'), 148000, 2, 2);
-INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910003', '550003', '台北市信義區忠孝東路五段386號', systimestamp,  TO_DATE(sysdate+7,'YYYY-MM-DD'), 2000, 2, 3);
+INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910001', '550001', '桃園市平鎮區中央路187號', systimestamp,  to_date(to_char(sysdate+7,'yyyy-mm-dd'),'yyyy-mm-dd'), 499, 1, 1);
+INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910002', '550002', '300新竹市東區東大路一段155號', systimestamp,  to_date(to_char(sysdate+7,'yyyy-mm-dd'),'yyyy-mm-dd'), 148000, 2, 2);
+INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910003', '550003', '台北市信義區忠孝東路五段386號', systimestamp, to_date(to_char(sysdate+7,'yyyy-mm-dd'),'yyyy-mm-dd'), 2000, 2, 3);
 
 
 --------------------------------------------------------------------------------
