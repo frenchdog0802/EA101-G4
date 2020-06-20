@@ -30,6 +30,53 @@ public class BikeDAO implements BikeDAO_interface {
 	//GET ALL STMT
 	private static final String GET_ALL_STMT = "SELECT * FROM bike ORDER BY sq_bike_id";
 	
+	//GET ALL BIKE WHERE STROE HAS
+	private static final String GET_BIKE_COUNT_STMT = "select count(*) from bike where sq_bike_store_id = ? and bike_status = 0";
+	
+	
+	
+	@Override
+	public Integer findStoreBikeEmpty(String sq_bike_store_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		Integer count = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userId, passwd);
+			pstmt = con.prepareStatement(GET_BIKE_COUNT_STMT);
+			pstmt.setString(1, sq_bike_store_id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			count  = rs.getInt(1);
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return count;
+	}
+	
+	
+	
+	
 	
 	@Override
 	public void insert(BikeVO BikeVO) {

@@ -87,11 +87,11 @@
 			</c:forEach>
 		</select></td>
 	</tr>
-	<tr>
-		<td>會員編號:</td>
-		<td><input type="TEXT" name="sq_member_id" size="45" 
-			 value="<%= (actVO==null)? "(如910001),但之後要改成servlet取值填進這裡" : actVO.getSq_member_id()%>" /></td>
-	</tr>
+<!-- 	<tr> -->
+<!-- 		<td>會員編號:</td> -->
+<!-- 		<td><input type="TEXT" name="sq_member_id" size="45"  -->
+<%-- 			 value="<%= (actVO==null)? "(如910001),但之後要改成servlet取值填進這裡" : actVO.getSq_member_id()%>" /></td> --%>
+<!-- 	</tr> -->
 	<tr>
 		<td>上限人數:</td>
 		<td><input type="TEXT" name="max_population" size="3"
@@ -109,19 +109,19 @@
 	</tr>
 	<tr>
 		<td>報名起始時間:</td>
-		<td><input name="start_time" id="f_date1" type="text" /></td>
+		<td><input name="start_time" id="start_time" type="text" /></td>
 	</tr>
 	<tr>
 		<td>報名結束時間:</td>
-		<td><input name="end_time" id="f_date2" type="text" /></td>
+		<td><input name="end_time" id="end_time" type="text" /></td>
 	</tr>
 	<tr>
 		<td>活動開始時間:</td>
-		<td><input name="act_start_time" id="f_date3" type="text" /></td>
+		<td><input name="act_start_time" id="act_start_time" type="text" /></td>
 	</tr>
 	<tr>
 		<td>活動結束時間:</td>
-		<td><input name="act_end_time" id="f_date4" type="text" /></td>
+		<td><input name="act_end_time" id="act_end_time" type="text" /></td>
 	</tr>
 
 	<tr>
@@ -147,35 +147,6 @@
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
-<% 
-  java.sql.Date start_time = null;
-  try {
-	  start_time = actVO.getStart_time();
-   } catch (Exception e) {
-	   start_time = new java.sql.Date(System.currentTimeMillis());
-   }
-  
-  java.sql.Date end_time = null;
-  try {
-	  end_time = actVO.getEnd_time();
-   } catch (Exception e) {
-	   end_time = new java.sql.Date(System.currentTimeMillis());
-   }
-  
-  java.sql.Date act_start_time = null;
-  try {
-	  act_start_time = actVO.getAct_start_time();
-   } catch (Exception e) {
-	   act_start_time = new java.sql.Date(System.currentTimeMillis());
-   }
-  
-  java.sql.Date act_end_time = null;
-  try {
-	  act_end_time = actVO.getAct_end_time();
-   } catch (Exception e) {
-	   act_end_time = new java.sql.Date(System.currentTimeMillis());
-   }
-%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
@@ -189,57 +160,51 @@
 </style>
 
 <script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
-	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-		   value: '<%=start_time%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-        $.datetimepicker.setLocale('zh');
-        $('#f_date2').datetimepicker({
-	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-		   value: '<%=end_time%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-        $.datetimepicker.setLocale('zh');
-        $('#f_date3').datetimepicker({
-	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-		   value: '<%=act_start_time%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-        $.datetimepicker.setLocale('zh');
-        $('#f_date4').datetimepicker({
-	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-		   value: '<%=act_end_time%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
+$.datetimepicker.setLocale('zh'); // kr ko ja en
+$(function(){
+	 $('#start_time').datetimepicker({
+	  format:'Y-m-d',
+	  onShow:function(){
+	   this.setOptions({
+	    maxDate:$('#end_time').val()?$('#end_time').val():false
+	   })
+	  },
+	  minDate:'-1970-01-01',
+	  timepicker:false
+	 });
+	 
+	 $('#end_time').datetimepicker({
+	  format:'Y-m-d',
+	  onShow:function(){
+	   this.setOptions({
+	    minDate:$('#start_time').val()?$('#start_time').val():false,
+	    maxDate:$('#act_start_time').val()?$('#act_start_time').val():false	
+	   })
+	  },
+	  timepicker:false
+	 });
+	 
+	 $('#act_start_time').datetimepicker({
+		  format:'Y-m-d',
+		  onShow:function(){
+		   this.setOptions({
+		    minDate:$('#end_time').val()?$('#end_time').val():false,
+		   	maxDate:$('#act_end_time').val()?$('#act_end_time').val():false		
+		   })
+		  },
+		  timepicker:false
+		 });
+	 
+	 $('#act_end_time').datetimepicker({
+		  format:'Y-m-d',
+		  onShow:function(){
+		   this.setOptions({
+		    minDate:$('#act_start_time').val()?$('#act_start_time').val():false
+		   })
+		  },
+		  timepicker:false
+		 });
+});
         
         //圖片預覽
         function loadImageFile(event){ 

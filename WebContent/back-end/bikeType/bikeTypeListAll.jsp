@@ -4,7 +4,7 @@
 <%@ page import="com.bike.type.model.*"%>
 
 <jsp:useBean id="BikeTypeVO" class="com.bike.type.model.BikeTypeVO" scope="request" /> 
- 
+
 
 <%
 

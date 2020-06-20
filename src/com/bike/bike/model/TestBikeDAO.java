@@ -8,6 +8,9 @@ public class TestBikeDAO {
 		
 		BikeDAO BikeDAO = new BikeDAO();
 		
+		Integer count = BikeDAO.findStoreBikeEmpty("620007");
+		System.out.println(count);
+		
 		//insert
 		
 //		BikeVO bikeVo = new BikeVO();
