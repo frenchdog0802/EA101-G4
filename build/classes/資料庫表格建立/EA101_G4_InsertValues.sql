@@ -1049,12 +1049,12 @@ VALUES
 
 --------------------------------------------------------
 --  for table bike_rent_detail 租車訂單明細
---------------------------------------------------------
-INSERT INTO bike_rent_detail(sq_rent_detail_id,sq_rent_id,sq_bike_type_id,sq_bike_id ,price,rsved_rent_date,ex_return_date,real_return_date,extra_cost )VALUES(sq_rent_detail_id.NEXTVAL,'RT-600001','630001',null,450,to_date('2020-08-28', 'yyyy-mm-dd'),to_date('2020-09-28', 'yyyy-mm-dd'),null,null);
-INSERT INTO bike_rent_detail(sq_rent_detail_id,sq_rent_id,sq_bike_type_id,sq_bike_id ,price,rsved_rent_date,ex_return_date,real_return_date,extra_cost )VALUES(sq_rent_detail_id.NEXTVAL,'RT-600002','630003',null,300,to_date('2020-07-28', 'yyyy-mm-dd'),to_date('2020-08-01', 'yyyy-mm-dd'),null,null);
-INSERT INTO bike_rent_detail(sq_rent_detail_id,sq_rent_id,sq_bike_type_id,sq_bike_id ,price,rsved_rent_date,ex_return_date,real_return_date,extra_cost )VALUES(sq_rent_detail_id.NEXTVAL,'RT-600003','630005',null,200,to_date('2020-07-05', 'yyyy-mm-dd'),to_date('2020-07-10', 'yyyy-mm-dd'),null,null);
-INSERT INTO bike_rent_detail(sq_rent_detail_id,sq_rent_id,sq_bike_type_id,sq_bike_id ,price,rsved_rent_date,ex_return_date,real_return_date,extra_cost )VALUES(sq_rent_detail_id.NEXTVAL,'RT-600004','630003',null,300,to_date('2020-07-15', 'yyyy-mm-dd'),to_date('2020-08-01', 'yyyy-mm-dd'),null,null);
-INSERT INTO bike_rent_detail(sq_rent_detail_id,sq_rent_id,sq_bike_type_id,sq_bike_id ,price,rsved_rent_date,ex_return_date,real_return_date,extra_cost )VALUES(sq_rent_detail_id.NEXTVAL,'RT-600005','630005',null,200,to_date('2020-06-28', 'yyyy-mm-dd'),to_date('2020-07-01', 'yyyy-mm-dd'),null,null);
+--------------------------------------------------------TO_TIMESTAMP('2003/12/13 10:13:18', 'YYYY/MM/DD HH:MI:SS')
+INSERT INTO bike_rent_detail(sq_rent_detail_id,sq_rent_id,sq_bike_type_id,sq_bike_id ,price,rsved_rent_date,ex_return_date,real_return_date,extra_cost )VALUES(sq_rent_detail_id.NEXTVAL,'RT-600001','630001',null,450,to_date('2020-08-28 10:00:00', 'YYYY/MM/DD HH24:mi:ss'),to_date('2020-09-28 18:00:00', 'YYYY/MM/DD HH24:mi:ss'),null,null);
+INSERT INTO bike_rent_detail(sq_rent_detail_id,sq_rent_id,sq_bike_type_id,sq_bike_id ,price,rsved_rent_date,ex_return_date,real_return_date,extra_cost )VALUES(sq_rent_detail_id.NEXTVAL,'RT-600002','630003',null,300,to_date('2020-07-28 10:00:00', 'YYYY/MM/DD HH24:mi:ss'),to_date('2020-08-01 18:00:00', 'YYYY/MM/DD HH24:mi:ss'),null,null);
+INSERT INTO bike_rent_detail(sq_rent_detail_id,sq_rent_id,sq_bike_type_id,sq_bike_id ,price,rsved_rent_date,ex_return_date,real_return_date,extra_cost )VALUES(sq_rent_detail_id.NEXTVAL,'RT-600003','630005',null,200,to_date('2020-07-05 10:00:00', 'YYYY/MM/DD HH24:mi:ss'),to_date('2020-07-10 18:00:00', 'YYYY/MM/DD HH24:mi:ss'),null,null);
+INSERT INTO bike_rent_detail(sq_rent_detail_id,sq_rent_id,sq_bike_type_id,sq_bike_id ,price,rsved_rent_date,ex_return_date,real_return_date,extra_cost )VALUES(sq_rent_detail_id.NEXTVAL,'RT-600004','630003',null,300,to_date('2020-07-15 10:00:00', 'YYYY/MM/DD HH24:mi:ss'),to_date('2020-08-01 18:00:00', 'YYYY/MM/DD HH24:mi:ss'),null,null);
+INSERT INTO bike_rent_detail(sq_rent_detail_id,sq_rent_id,sq_bike_type_id,sq_bike_id ,price,rsved_rent_date,ex_return_date,real_return_date,extra_cost )VALUES(sq_rent_detail_id.NEXTVAL,'RT-600005','630005',null,200,to_date('2020-06-28 10:00:00', 'YYYY/MM/DD HH24:mi:ss'),to_date('2020-07-01 18:00:00', 'YYYY/MM/DD HH24:mi:ss'),null,null);
   
   --網頁資訊
 

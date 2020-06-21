@@ -1,6 +1,10 @@
 package com.act.model;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.actjoin.model.ActJoinVO;
+
 import java.sql.Date;
 
 public class ActService {
@@ -29,8 +33,15 @@ public class ActService {
 		actVO.setAct_end_time(act_end_time);
 		actVO.setAct_picture(act_picture);
 
-		dao.insert(actVO);
+		List<ActJoinVO> testList = new ArrayList<ActJoinVO>();
+		ActJoinVO actjoinVO = new ActJoinVO();  
+		java.sql.Timestamp join_time = new java.sql.Timestamp(System.currentTimeMillis());
+		actjoinVO.setSq_member_id(sq_member_id);
+		actjoinVO.setJoin_time(join_time);
 
+		testList.add(actjoinVO);
+	
+		dao.insertWithActJoin(actVO , testList);
 		return actVO;
 	}
 
