@@ -21,11 +21,11 @@ pageContext.setAttribute("list", list);
 				<div class="row text-center">
 					<div class="col">
 						<label for="startDate">取車日期&時間 : </label> <input id="startDate"
-						name="startDate" type="text">
+						name="startDate" type="text" autocomplete="off">
 					</div>
 					<div class="col">
 						<label for="endDate">還車日期&時間 : </label> <input type="text"
-						id="endDate" name="endDate">
+						id="endDate" name="endDate" autocomplete="off">
 					</div>
 				</div>
 			</div>
@@ -116,7 +116,7 @@ pageContext.setAttribute("list", list);
 				 	type :"POST",
 				 	url  :"<%=request.getContextPath()%>/bike/BikeStoreAjaxServlet.do",
 				 	dataType:"JSON",
-				 	data: {startDate: startDate, endDate: endDate},
+				 	data: {startDate: startDate, endDate: endDate , action : "searchDate"},
 				 	sueecss:function(data){
 				 		console.log(data);
 				 	}

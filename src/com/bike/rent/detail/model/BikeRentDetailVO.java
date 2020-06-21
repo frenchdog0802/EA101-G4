@@ -2,6 +2,7 @@ package com.bike.rent.detail.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class BikeRentDetailVO implements Serializable {
 	
@@ -14,6 +15,9 @@ public class BikeRentDetailVO implements Serializable {
 	private String sq_bike_id;
 	private Integer price;
 	private Integer extra_cost;
+	private Timestamp rsved_rent_date;
+	private Timestamp ex_return_date;
+	private Timestamp real_return_date;
 	
 	public Integer getExtra_cost() {
 		return extra_cost;
@@ -21,27 +25,24 @@ public class BikeRentDetailVO implements Serializable {
 	public void setExtra_cost(Integer extra_cost) {
 		this.extra_cost = extra_cost;
 	}
-	public Date getRsved_rent_date() {
+	public Timestamp getRsved_rent_date() {
 		return rsved_rent_date;
 	}
-	public void setRsved_rent_date(Date rsved_rent_date) {
+	public void setRsved_rent_date(Timestamp rsved_rent_date) {
 		this.rsved_rent_date = rsved_rent_date;
 	}
-	public Date getEx_return_date() {
+	public Timestamp getEx_return_date() {
 		return ex_return_date;
 	}
-	public void setEx_return_date(Date ex_return_date) {
+	public void setEx_return_date(Timestamp ex_return_date) {
 		this.ex_return_date = ex_return_date;
 	}
-	public Date getReal_return_date() {
+	public Timestamp getReal_return_date() {
 		return real_return_date;
 	}
-	public void setReal_return_date(Date real_return_date) {
+	public void setReal_return_date(Timestamp real_return_date) {
 		this.real_return_date = real_return_date;
 	}
-	private Date rsved_rent_date;
-	private Date ex_return_date;
-	private Date real_return_date;
 	
 	public String getSq_rent_detail_id() {
 		return sq_rent_detail_id;

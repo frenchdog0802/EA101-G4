@@ -46,12 +46,13 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 			pstmt.setString(2, BikeRentDetailVO.getSq_bike_type_id());
 			pstmt.setString(3, BikeRentDetailVO.getSq_bike_id());
 			pstmt.setInt(4, BikeRentDetailVO.getPrice());
-			pstmt.setDate(5, BikeRentDetailVO.getRsved_rent_date());
+			pstmt.setInt(5, BikeRentDetailVO.getExtra_cost());
+			pstmt.setTimestamp(6, BikeRentDetailVO.getRsved_rent_date());
 			//set ex_return_date
-			pstmt.setDate(6, BikeRentDetailVO.getEx_return_date());
+			pstmt.setTimestamp(7, BikeRentDetailVO.getEx_return_date());
 			//set real_return_date
-			pstmt.setDate(7, BikeRentDetailVO.getReal_return_date());
-			pstmt.setInt(8, BikeRentDetailVO.getExtra_cost());
+			pstmt.setTimestamp(8, BikeRentDetailVO.getReal_return_date());
+			
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -93,12 +94,13 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 			pstmt.setString(2, BikeRentDetailVO.getSq_bike_type_id());
 			pstmt.setString(3, BikeRentDetailVO.getSq_bike_id());
 			pstmt.setInt(4, BikeRentDetailVO.getPrice());
-			pstmt.setDate(5, BikeRentDetailVO.getRsved_rent_date());
+			pstmt.setInt(5, BikeRentDetailVO.getExtra_cost());
+			pstmt.setTimestamp(6, BikeRentDetailVO.getRsved_rent_date());
 			//set ex_return_date
-			pstmt.setDate(6, BikeRentDetailVO.getEx_return_date());
+			pstmt.setTimestamp(7, BikeRentDetailVO.getEx_return_date());
 			//set real_return_date
-			pstmt.setDate(7, BikeRentDetailVO.getReal_return_date());
-			pstmt.setInt(8, BikeRentDetailVO.getExtra_cost());
+			pstmt.setTimestamp(8, BikeRentDetailVO.getReal_return_date());
+			
 			pstmt.setString(9, BikeRentDetailVO.getSq_rent_detail_id());
 
 			// executeUpdate
@@ -184,10 +186,11 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 				BikeRentDetailVO.setSq_rent_id(rs.getString(2));
 				BikeRentDetailVO.setSq_bike_type_id(rs.getString(3));
 				BikeRentDetailVO.setSq_bike_id(rs.getString(4));
-				BikeRentDetailVO.setRsved_rent_date(rs.getDate(5));
-				BikeRentDetailVO.setEx_return_date(rs.getDate(6));
-				BikeRentDetailVO.setReal_return_date(rs.getDate(7));
-				BikeRentDetailVO.setExtra_cost(rs.getInt(8));
+				BikeRentDetailVO.setExtra_cost(rs.getInt(5));
+				BikeRentDetailVO.setRsved_rent_date(rs.getTimestamp(6));
+				BikeRentDetailVO.setEx_return_date(rs.getTimestamp(7));
+				BikeRentDetailVO.setReal_return_date(rs.getTimestamp(8));
+				
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -238,9 +241,9 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 				BikeRentDetailVO.setSq_bike_id(rs.getString(4));
 				BikeRentDetailVO.setPrice(rs.getInt(5));
 				BikeRentDetailVO.setExtra_cost(rs.getInt(6));
-				BikeRentDetailVO.setRsved_rent_date(rs.getDate(7));
-				BikeRentDetailVO.setEx_return_date(rs.getDate(8));
-				BikeRentDetailVO.setReal_return_date(rs.getDate(9));
+				BikeRentDetailVO.setRsved_rent_date(rs.getTimestamp(7));
+				BikeRentDetailVO.setEx_return_date(rs.getTimestamp(8));
+				BikeRentDetailVO.setReal_return_date(rs.getTimestamp(9));
 				
 				list.add(BikeRentDetailVO);
 			}
