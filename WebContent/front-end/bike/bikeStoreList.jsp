@@ -46,7 +46,7 @@ pageContext.setAttribute("list", list);
 					<label for="Search" class="col-form-label">Search : </label>
 					<div>
 						<input type="text" class="form-control search" placeholder="收尋店家"
- 						id="Search">
+						id="Search">
 					</div>
 				</div>
 			</div>
@@ -105,22 +105,29 @@ pageContext.setAttribute("list", list);
 				//     })
 
 			});
-			
+		
+
+
 			//ajax Search
 			$('#startDate').change(function(){
-				 startDate =  $(this).val();
+				startDate =  $(this).val();
 			})
 			$('#endDate').change(function(){
-				 endDate =  $(this).val();
-					 $.ajax({
-				 	type :"POST",
-				 	url  :"<%=request.getContextPath()%>/bike/BikeStoreAjaxServlet.do",
-				 	dataType:"JSON",
-				 	data: {startDate: startDate, endDate: endDate , action : "searchDate"},
-				 	sueecss:function(data){
-				 		console.log(data);
-				 	}
-				 })
+				endDate =  $(this).val();
+				$.ajax({
+					type :"POST",
+					url  :"<%=request.getContextPath()%>/bike/BikeStoreAjaxServlet.do",
+					dataType:"JSON",
+					data: {startDate: startDate, endDate: endDate , action : "searchDate"},
+					success:function(data){
+						for (var i = 0 ; i < $("tbody").find('tr').size();i++){
+							let storeName =  $("tbody").find("tr").eq(i).find("th").eq(0).text();
+							if(data[storeName] != null){
+								$("tbody").find("tr").eq(i).find("th").eq(4).text(data[storeName]);
+							}
+						}
+					}
+				})
 			})
 			
 
