@@ -625,16 +625,16 @@ INSERT into WATER_STATION (SQ_STATION_ID, STATION_NAME,	STATION_ADDRESS, LONGITU
 --------------------------------------------------------
 
 --上限改成'ACT'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0')
-Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110001','910001','外木山濱海自行車道',20,5,10,'在這裡騎車、漫步，戲水、聽濤，或是看著美麗礁岩、基隆嶼和大小貨輪靜靜地發呆，不論做什麼都使人倍感療癒，不捨離去。',to_date('2020-01-28','yyyy-mm-dd'),to_date('2020-02-05','yyyy-mm-dd'),to_date('2020-02-10','yyyy-mm-dd'),to_date('2020-02-15','yyyy-mm-dd'),load_blob('image001.jpg'),4);
-Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110001','910002','延平河濱公園自行車道',40,3,24,'延平河濱公園是台北很受歡迎的河濱綠地，逛完文藝氣息滿滿的迪化街後，再到這裡吹風觀浪，可說是假日最棒的享受。',to_date('2020-02-05','yyyy-mm-dd'),to_date('2020-02-19','yyyy-mm-dd'),to_date('2020-02-20','yyyy-mm-dd'),to_date('2020-02-27','yyyy-mm-dd'),load_blob('image002.jpg'),0);
-Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110001','910003','基隆河左岸自行車道',35,2,30,'找個下午，以大佳河濱公園為起點，從北中山騎到南松山，來到彩虹橋可別忘了到饒河夜市好好逛逛，用各式各樣讓人流口水的美味小吃，為這趟旅程寫下最迷人的句點。',to_date('2020-02-17','yyyy-mm-dd'),to_date('2020-02-28','yyyy-mm-dd'),to_date('2020-03-05','yyyy-mm-dd'),to_date('2020-03-15','yyyy-mm-dd'),load_blob('image003.jpg'),0);
-Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110001','910004','新店溪右岸自行車道',30,10,5,'跨越雙北的新店溪右岸自行車道，從碧潭沿溪直達萬華，這條綠色走廊有著城市中最難能可貴的色彩，騎在新店溪畔，不自覺的心中會感到一陣暢快。',to_date('2020-02-25','yyyy-mm-dd'),to_date('2020-03-05','yyyy-mm-dd'),to_date('2020-03-10','yyyy-mm-dd'),to_date('2020-03-15','yyyy-mm-dd'),load_blob('image004.jpg'),1);
-Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110001','910005','北勢溪自行車道',15,5,1,'沿著清可見底的北勢溪，享受山林間最舒適的微風與清新的空氣，不只讓人療癒，更讓人從都市文明的積勞中痊癒。而這條自行車道最特殊的，就是有段路從茶園上頭穿過的高架車道，直擊純淨水源地培養出的回甘滋味。',to_date('2020-02-28','yyyy-mm-dd'),to_date('2020-03-03','yyyy-mm-dd'),to_date('2020-03-05','yyyy-mm-dd'),to_date('2020-03-07','yyyy-mm-dd'),load_blob('image005.jpg'),1);
-Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110001','910006','北海岸雙灣自行車道',10,2,8,'騎上單車前，從淺水灣開始，先在海邊的林立的咖啡店以咖啡佐蔚藍大海，為旅途喝下滿滿活力；接著騎到麟山鼻，一路從此到白沙灣，享受北台灣最美的沙灘風景。除了沙灘外，麟山鼻更有著珍貴的藻礁地形、可愛迷人的小漁港，以及豐富的潮間帶生態，都是必須騎上這條木棧車道的最佳理由。',to_date('2020-03-10','yyyy-mm-dd'),to_date('2020-03-15','yyyy-mm-dd'),to_date('2020-03-20','yyyy-mm-dd'),to_date('2020-03-22','yyyy-mm-dd'),load_blob('image006.jpg'),0);
-Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110001','910007','八里左岸自行車道',5,2,5,'全長15公里的八里左岸自行車道，從五股溼地的觀音坑溪口開始，沿途經過關渡大橋、八里渡船頭，一直到挖子尾生態保護區、十三行博物館等景點，一整路的秀麗水景與豐富自然生態，令人嘆為觀止。終點站的十三行博物館，更是北台灣最值得造訪的博物館之一。',to_date('2020-03-20','yyyy-mm-dd'),to_date('2020-03-30','yyyy-mm-dd'),to_date('2020-03-31','yyyy-mm-dd'),to_date('2020-04-01','yyyy-mm-dd'),load_blob('image007.jpg'),3);
-Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110001','910008','舊草嶺自行車道',10,5,9,'從福隆火車站開始，穿越那曾經東南亞最長的舊草嶺隧道，隨著「丟丟銅仔」的懷舊聲響，到達宜蘭頭城，在沿海地帶眺望太平洋令人驚嘆的蔚藍，以及遠方可愛的龜山島。接著，沿著濱海公路造訪東北角秘境－萊萊海岸，發現不可思議的海蝕地景。在一陣驚嘆後，持續一路向北，就能抵達台灣最東方的燈塔－三貂角，不自覺地完成了一次極點之旅。',to_date('2020-03-28','yyyy-mm-dd'),to_date('2020-04-05','yyyy-mm-dd'),to_date('2020-04-6','yyyy-mm-dd'),to_date('2020-04-10','yyyy-mm-dd'),load_blob('image008.jpg'),0);
-Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110001','910009','觀音北環埤塘自行車道',25,10,1,'在南桃園的觀音鄉，有著以埤塘與蓮花為主題的「南北環自行車道」。南環讓旅人可以悠遊在蓮池間，感受清心自在；北環則使人放鬆於埤塘邊，感受心曠神怡。而北環路線除了埤塘，更特別的是還有700棵白千層樹林秘境，綿延近3公里，隨著陽光灑落，形成鄉間最迷人的畫面。此外，北環沿線還有2017年地景藝術節的裝置藝術，帶領旅人看見自然韻味，更看見藝術的趣味。',to_date('2020-04-10','yyyy-mm-dd'),to_date('2020-04-15','yyyy-mm-dd'),to_date('2020-04-18','yyyy-mm-dd'),to_date('2020-04-20','yyyy-mm-dd'),load_blob('image009.jpg'),2);
-Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110001','910009','新屋綠色走廊',40,5,25,'沒有單車的朋友來到綠色走廊不用擔心，在走廊入口就有不少租車店家，除了一般的個人腳踏車，也提供協力車的服務，讓大朋友小朋友都可以快樂享受騎車的樂趣。而長達4公里的綠色走廊可不是單純只有綠樹，沿路也能有觀望遼闊海面的景觀台，更可以依著濱海大道，享受海風的吹拂。',to_date('2020-05-04','yyyy-mm-dd'),to_date('2020-05-25','yyyy-mm-dd'),to_date('2020-06-10','yyyy-mm-dd'),to_date('2020-06-15','yyyy-mm-dd'),load_blob('image010.jpg'),0);
+Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110001','910001','不能錯過的冬山河自行車道',20,5,10,'在這裡騎車、漫步，戲水、聽濤，或是看著美麗礁岩，不論做什麼都使人倍感療癒，不捨離去。',to_date('2020-01-28','yyyy-mm-dd'),to_date('2020-02-05','yyyy-mm-dd'),to_date('2020-02-10','yyyy-mm-dd'),to_date('2020-02-15','yyyy-mm-dd'),load_blob('image001.jpg'),4);
+Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110002','910002','悠遊集集綠色隧道自行車道',40,3,24,'來場與大自然的約會。',to_date('2020-02-05','yyyy-mm-dd'),to_date('2020-02-19','yyyy-mm-dd'),to_date('2020-02-20','yyyy-mm-dd'),to_date('2020-02-27','yyyy-mm-dd'),load_blob('image002.jpg'),0);
+Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110003','910003','慵懶的午後斗六古坑',35,2,30,'找個下午，來個慵懶的午後時光。',to_date('2020-02-17','yyyy-mm-dd'),to_date('2020-02-28','yyyy-mm-dd'),to_date('2020-03-05','yyyy-mm-dd'),to_date('2020-03-15','yyyy-mm-dd'),load_blob('image003.jpg'),0);
+Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110004','910004','來場浪漫的愛河約會之旅',30,10,5,'愛河自行車道中最經典推薦的就屬愛河之心到五福路橋這一段,騎著單車就能欣賞到愛河上游至下游風景。',to_date('2020-02-25','yyyy-mm-dd'),to_date('2020-03-05','yyyy-mm-dd'),to_date('2020-03-10','yyyy-mm-dd'),to_date('2020-03-15','yyyy-mm-dd'),load_blob('image004.jpg'),1);
+Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110005','910005','金色柔柔波光之淡水金色水岸',15,5,1,'沿線美麗的風景與知名的觀光景點，使其美名不脛而走，還不在忙碌的週末出來放鬆一下嗎。',to_date('2020-02-28','yyyy-mm-dd'),to_date('2020-03-03','yyyy-mm-dd'),to_date('2020-03-05','yyyy-mm-dd'),to_date('2020-03-07','yyyy-mm-dd'),load_blob('image005.jpg'),1);
+Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110006','910006','號稱最美的車道等你來看',10,2,8,'位於日月潭的向山自行車道曾被CNN評選為全球十大最美腳踏車道，你還不來看看嗎。',to_date('2020-03-10','yyyy-mm-dd'),to_date('2020-03-15','yyyy-mm-dd'),to_date('2020-03-20','yyyy-mm-dd'),to_date('2020-03-22','yyyy-mm-dd'),load_blob('image006.jpg'),0);
+Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110007','910007','全台最大的海埔新生地 360度的環繞美景',5,2,5,'多樣化的多樣的生態環境與棲地型態 一處擁有豐富自然資源的生態園區，占地面積約一千五百公頃的森林園區，彷彿騎車置身在大自然當中。',to_date('2020-03-20','yyyy-mm-dd'),to_date('2020-03-30','yyyy-mm-dd'),to_date('2020-03-31','yyyy-mm-dd'),to_date('2020-04-01','yyyy-mm-dd'),load_blob('image007.jpg'),3);
+Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110008','910008','拜訪南臺灣人文歷史古蹟之旅',10,5,9,'這一帶匯集了最多小吃、歷史老街、各級古蹟，『安平運河沿岸自行車道』從"安憶橋"往左走，則可以讓您飽覽自然風光，全都是攝影取景的好地方。',to_date('2020-03-28','yyyy-mm-dd'),to_date('2020-04-05','yyyy-mm-dd'),to_date('2020-04-6','yyyy-mm-dd'),to_date('2020-04-10','yyyy-mm-dd'),load_blob('image008.jpg'),0);
+Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110009','910009','舒適休閒的新竹海岸線自行車道',25,10,1,'這絕對是輕鬆踩踏行程，全程沒有上下坡，漂亮的海景隨時陪伴你身旁，吹拂著海風騎卡踏車，超舒服的！快點來試試看。',to_date('2020-04-10','yyyy-mm-dd'),to_date('2020-04-15','yyyy-mm-dd'),to_date('2020-04-18','yyyy-mm-dd'),to_date('2020-04-20','yyyy-mm-dd'),load_blob('image009.jpg'),2);
+Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) values ('ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),'RP110010','910009','新店溪自行車道口袋地圖帶路吃喝玩樂',40,5,25,'新店溪自行車道是條輕鬆悠閒的自行車道，橫跨雙北的新店溪自行車道，串連北市萬華區、中正區、文山區及新北新店區，新北市推出口袋地圖，不論吃、喝、玩等景點一目了然。。',to_date('2020-05-04','yyyy-mm-dd'),to_date('2020-05-25','yyyy-mm-dd'),to_date('2020-06-10','yyyy-mm-dd'),to_date('2020-06-15','yyyy-mm-dd'),load_blob('image010.jpg'),0);
 
 
 --------------------------------------------------------
@@ -644,16 +644,16 @@ Insert into ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPU
   
 --這一段的第一個值要看活動表格的pk欄值下去改
 
-Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700001','910002',to_date('2020-01-29 14:01:02', 'yyyy-mm-dd hh24:mi:ss'));
-Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700002','910001',to_date('2020-02-07 10:40:57', 'yyyy-mm-dd hh24:mi:ss'));
-Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700003','910001',to_date('2020-02-19 17:04:42', 'yyyy-mm-dd hh24:mi:ss'));
-Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700004','910001',to_date('2020-02-28 06:51:15', 'yyyy-mm-dd hh24:mi:ss'));
-Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700005','910001',to_date('2020-03-01 08:21:42', 'yyyy-mm-dd hh24:mi:ss'));
-Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700006','910001',to_date('2020-03-13 12:33:20', 'yyyy-mm-dd hh24:mi:ss'));
-Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700007','910001',to_date('2020-03-25 20:20:42', 'yyyy-mm-dd hh24:mi:ss'));
-Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700008','910001',to_date('2020-03-29 16:01:07', 'yyyy-mm-dd hh24:mi:ss'));
-Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700009','910001',to_date('2020-04-11 23:05:33', 'yyyy-mm-dd hh24:mi:ss'));
-Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700010','910001',to_date('2020-05-20 10:11:12', 'yyyy-mm-dd hh24:mi:ss'));
+Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700001','910001',to_date('2020-01-29 14:01:02', 'yyyy-mm-dd hh24:mi:ss'));
+Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700002','910002',to_date('2020-02-07 10:40:57', 'yyyy-mm-dd hh24:mi:ss'));
+Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700003','910003',to_date('2020-02-19 17:04:42', 'yyyy-mm-dd hh24:mi:ss'));
+Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700004','910004',to_date('2020-02-28 06:51:15', 'yyyy-mm-dd hh24:mi:ss'));
+Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700005','910005',to_date('2020-03-01 08:21:42', 'yyyy-mm-dd hh24:mi:ss'));
+Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700006','910006',to_date('2020-03-13 12:33:20', 'yyyy-mm-dd hh24:mi:ss'));
+Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700007','910007',to_date('2020-03-25 20:20:42', 'yyyy-mm-dd hh24:mi:ss'));
+Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700008','910008',to_date('2020-03-29 16:01:07', 'yyyy-mm-dd hh24:mi:ss'));
+Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700009','910009',to_date('2020-04-11 23:05:33', 'yyyy-mm-dd hh24:mi:ss'));
+Insert into JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) values ('ACT-700010','910009',to_date('2020-05-20 10:11:12', 'yyyy-mm-dd hh24:mi:ss'));
 
 --------------------------------------------------------
 --  for Table ACT_FAVORITE
@@ -682,8 +682,8 @@ Insert into ACT_FAVORITE (SQ_ACTIVITY_ID,SQ_MEMBER_ID,FAVORITE_TIME) values ('AC
 
 
 --這一段的第一個值要看活動表格的pk欄值下去改(第一筆是01第二筆是02)
-Insert into ACTIVITYREPORT (SQ_ACTICITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700001','910001','描述與事實不符',1); --這個部份的ID編號要看上面的並且一樣，用流水號會新增，這樣就錯了
-Insert into ACTIVITYREPORT (SQ_ACTICITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700002','910001','地點標示錯誤',0);
+Insert into ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700001','910001','描述與事實不符',1); --這個部份的ID編號要看上面的並且一樣，用流水號會新增，這樣就錯了
+Insert into ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700002','910001','地點標示錯誤',0);
 
 --------------------------------------------------------
 --  for Table MEMBER_STORE_ACTIVITY
@@ -738,47 +738,73 @@ INSERT INTO BRAND VALUES(SQ_BRAND_ID.NEXTVAL, 'ROCKRIDER', '02-6549872', '104台
 -----------------------------------商城商品---------------------------------------
 
 
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '騎行服', 30, '男款透氣排汗自行車短袖內衣 VAN RYSEL 300', 149, load_blob('vanrysel_cloth1.jpg'), '男款自行車底層衣100採用可有效排汗的輕盈布料，打造舒適愉悅的穿著體驗。',
-'M,L,XL', '黑', TO_DATE(sysdate,'YYYY-MM-DD'), '主要布料 : 100.0%聚酯纖維', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '外套/風衣', 20, '男款透氣防曬自行車防風外套 BTWIN 500M', 499, load_blob('twinrain.jpg'), '輕巧精緻的夾克是專為城市自行車設計。 能防小雨、防風，也防春/秋的太陽。 日間或夜間都能提升您騎乘時的可見度。
-在城鎮中騎行時保護騎乘自行車者不被風吹、不受細雨淋', 'S', 'RED', TO_DATE(sysdate,'YYYY-MM-DD'), '主要布料 : 100.0% 聚酯纖維', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '公路車', 10, '7段變速自行車平把公路車 BTWIN Triban 100 FB', 6499, load_blob('BIKE1.jpg'), '單齒盤設計讓起步非常輕鬆：讓你能隨時掌握所在的檔位！32 mm輪胎及直式手把設計也更加舒適！',
-'M', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 車架（自行車） : 100.0% 鋁合金 6061', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520003', '登山車', 5, 'BIG.NINE 300', 23200, load_blob('merdiabike2.jpg'), '「Made in Taiwan 台灣製造」，BIG.NINE與BIG.SEVEN單避震車系，其功能設計與細膩做工，完整詮釋了美利達47年的造車知識累積與經驗堆疊。',
-'L', '藍,灰', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 100.0% 鋁', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520003', '公路車', 2, 'SCULTURA DISC FORCE-EDITION', 148000, load_blob('merdiabike1.jpg'), '超輕量的CF4碳纖維車架，M/L尺寸僅有860公克。ProTour賽事驗證的競賽騎乘幾何設定；下管與立管採用「NACA快背斷面」管形，搭配1又1/8”漸變至1又1/4”的異徑頭管，協助降低空氣阻力。強悍踩踏力道傳輸的BB386規格；後上叉具有提升舒適度的吸震機能。輪煞版本使用傳統快拆的花鼓；碟煞版本則採用配置散熱鰭片的Flat Mount卡鉗與直通軸碟煞花鼓系統。',
-'XL', '麗黑', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 車架（自行車）: 100.0%鋁合金6061', 1); 
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520002', '外套/風衣', 10, '女款自行車防雨防風外套 GAINT RC 500', 1749, load_blob('giantoutcloth1.jpg'), '這款外套具有防水、透氣、彈性的薄膜，可提供雨中騎乘時絕佳的舒適性。摺疊式檔片可提供飛濺防護',
-'S,M,L', '粉紅', TO_DATE(sysdate,'YYYY-MM-DD'), '主要布料:100.0%聚酯纖維 過肩:100.0%聚酯纖維 塗層:100.0%聚氨酯（Polyurethane）塗層', 1);  
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520003', '太陽眼鏡', 30, '輕量款 抗UV自行車太陽眼鏡 MERIDA XC100', 299, load_blob('sunglass1.jpg'), '搭配可調式鼻墊及橡膠塗層鏡架，100自行車太陽眼鏡使眼鏡安全服貼臉型。寬幅鏡片提供您更好的保護和絕佳視野。',
-'', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 框架:85.0%聚醯纖維12, 框架:10.0%橡膠-熱塑性橡膠（TPR） 框架:5.0%不銹鋼 鏡片:100.0%聚碳酸酯', 1); 
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520005', '手套', 20, '可觸控 登山自行車防滑手套 ROCKRIDER ST 500', 499, load_blob('hand1.jpg'), '配戴登山車手套ST 500可於騎行或跌倒時防止植物刮傷雙手。手套選用既舒適又透氣的布料和設計。',
-'', '藍,黑', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 手背:97.0%聚酯纖維 手背:3.0%氨輪 掌面:100.0%聚氨酯（Polyurethane）塗層', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520005', '安全帽', 10, '登山車安全帽 ROCKRIDER', 499, load_blob('safecap.jpg'), '易於調整且舒適，Rockrider ST 100登山車安全帽保護你的頭部不受碰撞傷害。享受加大且較通風的9個通風孔設計。',
-'', '黑', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 泡棉 : 100.0% 發泡聚苯乙烯（EPS，保麗龍） 彈殼 : 100.0% 聚碳酸酯（PC） 帶子 : 100.0% 聚丙烯纖維 扣環 : 100.0% 聚醯纖維', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '打氣筒', 20, '附胎壓計台灣製自行車打氣筒 BTWIN FLP 500', 299, load_blob('fullair1.jpg'), '通用打氣筒（法式／英式／美式），附bars與PSI顯示的胎壓表（指針式胎壓計）。',
-'', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 75.0%聚丙烯纖維, 25.0%鋁', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520002', '水壺', 50, 'CCC車隊高流量水壺 750cc', 160, load_blob('giant_waterb1.jpg'), '750 ml自行車水壺。塑膠材質可減少異味。水壺蓋可防止水從瓶口濺出。可拆卸瓶蓋。',
-'', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 瓶身:100.0%聚丙烯纖維 蓋、帽:100.0%聚丙烯纖維 墊片:100.0%矽膠 奶嘴:100.0%TPE苯乙烯－丁二烯(碳)－苯乙烯共聚物(氫)', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520002', '水壺架', 30, 'GIANT AIRWAY DUAL CAGE 側開水壺架', 320, load_blob('giant_watera1.jpg'), '輕量時尚的自行車水壺架，玻璃纖維材質，加固塑料，耐用性強。',
-'', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 底盤 : 90.0%尼龍材質 10.0%玻璃纖維（FG）', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '外胎/內胎', 10, '【20*1.75】20吋童車輪胎 BTWIN City 5 Protect', 299, load_blob('inout1.jpg'), '防穿刺與高性能表現，側面胎紋為轉向提供良好的抓地性，Protect+科技。',
-'', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 膜:80.0%橡膠-天然橡膠（NR）-乳膠 膜:20.0%橡膠-合成橡膠）', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520005', '坐墊', 10, '記憶泡棉自行車坐墊套  ROCKRIDER 500 memory', 299, load_blob('chair1.jpg'), '適用於休閒自行車運動的「記憶泡棉」坐墊套，搭配可調式束帶，可貼合所有坐墊（最大14cm）。',
-'', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 墊料:100.0%聚氨酯纖維（PU） 外層布料:100.0%聚酯纖維 背部布料:100.0%聚醯纖維', 1);
-INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '工具箱', 5, '自行車萬用工具箱 BTWIN 900', 2499, load_blob('workbox1.jpg'), '40款工具，43個功能，讓你受益良多。工具放在盒內，盒子用兩個扣子關起扣上，攜帶及存放皆容易且符合人體工學。',
-'', '', TO_DATE(sysdate,'YYYY-MM-DD'), '材質 : 本體:80.0%鋼 8.0%聚丙烯纖維 8.0%PVC塑膠（聚氯乙烯） 2.0%聚醯纖維 2.0%橡膠-熱塑性橡膠（TPR） 外蓋:100.0%聚乙烯', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '騎行服','男款透氣排汗自行車短袖內衣 VAN RYSEL 300', 149, load_blob('vanrysel_cloth1.jpg'), '男款自行車底層衣100採用可有效排汗的輕盈布料，打造舒適愉悅的穿著體驗。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '主要布料 : 100.0%聚酯纖維', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '外套/風衣','男款透氣防曬自行車防風外套 BTWIN 500M', 499, load_blob('twinrain.jpg'), '輕巧精緻的夾克是專為城市自行車設計。 能防小雨、防風，也防春/秋的太陽。 日間或夜間都能提升您騎乘時的可見度。在城鎮中騎行時保護騎乘自行車者不被風吹、不受細雨淋', 
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '主要布料 : 100.0% 聚酯纖維', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '公路車','7段變速自行車平把公路車 BTWIN Triban 100 FB', 6499, load_blob('BIKE1.jpg'), '單齒盤設計讓起步非常輕鬆：讓你能隨時掌握所在的檔位！32 mm輪胎及直式手把設計也更加舒適！', 
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 車架（自行車） : 100.0% 鋁合金 6061', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520003', '登山車', 'BIG.NINE 300', 23200, load_blob('merdiabike2.jpg'), '「Made in Taiwan 台灣製造」，BIG.NINE與BIG.SEVEN單避震車系，其功能設計與細膩做工，完整詮釋了美利達47年的造車知識累積與經驗堆疊。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 100.0% 鋁', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520003', '公路車', 'SCULTURA DISC FORCE-EDITION', 148000, load_blob('merdiabike1.jpg'), '超輕量的CF4碳纖維車架，M/L尺寸僅有860公克。ProTour賽事驗證的競賽騎乘幾何設定；下管與立管採用「NACA快背斷面」管形，搭配1又1/8”漸變至1又1/4”的異徑頭管，協助降低空氣阻力。強悍踩踏力道傳輸的BB386規格；後上叉具有提升舒適度的吸震機能。輪煞版本使用傳統快拆的花鼓；碟煞版本則採用配置散熱鰭片的Flat Mount卡鉗與直通軸碟煞花鼓系統。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 車架（自行車）: 100.0%鋁合金6061', 1); 
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520002', '外套/風衣', '女款自行車防雨防風外套 GAINT RC 500', 1749, load_blob('giantoutcloth1.jpg'), '這款外套具有防水、透氣、彈性的薄膜，可提供雨中騎乘時絕佳的舒適性。摺疊式檔片可提供飛濺防護',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '主要布料:100.0%聚酯纖維 過肩:100.0%聚酯纖維 塗層:100.0%聚氨酯（Polyurethane）塗層', 1);  
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520003', '太陽眼鏡','輕量款 抗UV自行車太陽眼鏡 MERIDA XC100', 299, load_blob('sunglass1.jpg'), '搭配可調式鼻墊及橡膠塗層鏡架，100自行車太陽眼鏡使眼鏡安全服貼臉型。寬幅鏡片提供您更好的保護和絕佳視野。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 框架:85.0%聚醯纖維12, 框架:10.0%橡膠-熱塑性橡膠（TPR） 框架:5.0%不銹鋼 鏡片:100.0%聚碳酸酯', 1); 
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520005', '手套','可觸控 登山自行車防滑手套 ROCKRIDER ST 500', 499, load_blob('hand1.jpg'), '配戴登山車手套ST 500可於騎行或跌倒時防止植物刮傷雙手。手套選用既舒適又透氣的布料和設計。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 手背:97.0%聚酯纖維 手背:3.0%氨輪 掌面:100.0%聚氨酯（Polyurethane）塗層', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520005', '安全帽','登山車安全帽 ROCKRIDER', 499, load_blob('safecap.jpg'), '易於調整且舒適，Rockrider ST 100登山車安全帽保護你的頭部不受碰撞傷害。享受加大且較通風的9個通風孔設計。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 泡棉 : 100.0% 發泡聚苯乙烯（EPS，保麗龍） 彈殼 : 100.0% 聚碳酸酯（PC） 帶子 : 100.0% 聚丙烯纖維 扣環 : 100.0% 聚醯纖維', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '打氣筒','附胎壓計台灣製自行車打氣筒 BTWIN FLP 500', 299, load_blob('fullair1.jpg'), '通用打氣筒（法式／英式／美式），附bars與PSI顯示的胎壓表（指針式胎壓計）。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 75.0%聚丙烯纖維, 25.0%鋁', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520002', '水壺','CCC車隊高流量水壺 750cc', 160, load_blob('giant_waterb1.jpg'), '750 ml自行車水壺。塑膠材質可減少異味。水壺蓋可防止水從瓶口濺出。可拆卸瓶蓋。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 瓶身:100.0%聚丙烯纖維 蓋、帽:100.0%聚丙烯纖維 墊片:100.0%矽膠 奶嘴:100.0%TPE苯乙烯－丁二烯(碳)－苯乙烯共聚物(氫)', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520002', '水壺架','GIANT AIRWAY DUAL CAGE 側開水壺架', 320, load_blob('giant_watera1.jpg'), '輕量時尚的自行車水壺架，玻璃纖維材質，加固塑料，耐用性強。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 底盤 : 90.0%尼龍材質 10.0%玻璃纖維（FG）', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '外胎/內胎','20吋童車輪胎 BTWIN City 5 Protect', 299, load_blob('inout1.jpg'), '防穿刺與高性能表現，側面胎紋為轉向提供良好的抓地性，Protect+科技。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 膜:80.0%橡膠-天然橡膠（NR）-乳膠 膜:20.0%橡膠-合成橡膠）', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520005', '坐墊','記憶泡棉自行車坐墊套  ROCKRIDER 500 memory', 299, load_blob('chair1.jpg'), '適用於休閒自行車運動的「記憶泡棉」坐墊套，搭配可調式束帶，可貼合所有坐墊（最大14cm）。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 墊料:100.0%聚氨酯纖維（PU） 外層布料:100.0%聚酯纖維 背部布料:100.0%聚醯纖維', 1);
+INSERT INTO SHOP_PRODUCT VALUES(SQ_PRODUCT_ID.NEXTVAL, '520001', '工具箱','自行車萬用工具箱 BTWIN 900', 2499, load_blob('workbox1.jpg'), '40款工具，43個功能，讓你受益良多。工具放在盒內，盒子用兩個扣子關起扣上，攜帶及存放皆容易且符合人體工學。',
+to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), '材質 : 本體:80.0%鋼 8.0%聚丙烯纖維 8.0%PVC塑膠（聚氯乙烯） 2.0%聚醯纖維 2.0%橡膠-熱塑性橡膠（TPR） 外蓋:100.0%聚乙烯', 1);
 
 
+--------------------------------------------------------------------------------
+
+------------------------------------商品庫存-------------------------------------
+
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510001', '黑', 'M', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510001', '黑', 'L', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510001', '黑', 'XL', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510002', '紅', 'S', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510002', '紅', 'M', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510003', '', '', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510004', '藍', 'L', 5);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510004', '灰', 'L', 5);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510005', '麗黑', 'XL', 3);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510006', '粉紅', 'S', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510006', '粉紅', 'M', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510006', '粉紅', 'L', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510007', '', '', 20);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510008', '藍', '', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510008', '黑', '', 15);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510009', '黑', '', 5);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510010', '', '', 20);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510011', '', '', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510012', '黑', '', 100);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510013', '', '', 20);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510014', '', '', 10);
+INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510015', '', '', 5);
 --------------------------------------------------------------------------------
 
 -----------------------------------商品訂單---------------------------------------
 
 
 --'OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0)
-INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910001', '550001', '桃園市平鎮區中央路187號', systimestamp,  TO_DATE(sysdate+7,'YYYY-MM-DD'), 499, 1, 1);
-INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910002', '550002', '300新竹市東區東大路一段155號', systimestamp,  TO_DATE(sysdate+7,'YYYY-MM-DD'), 148000, 2, 2);
-INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910003', '550003', '台北市信義區忠孝東路五段386號', systimestamp,  TO_DATE(sysdate+7,'YYYY-MM-DD'), 2000, 2, 3);
+INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910001', '550001', '桃園市平鎮區中央路187號', systimestamp,  to_date(to_char(sysdate+7,'yyyy-mm-dd'),'yyyy-mm-dd'), 499, 1, 1);
+INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910002', '550002', '300新竹市東區東大路一段155號', systimestamp,  to_date(to_char(sysdate+7,'yyyy-mm-dd'),'yyyy-mm-dd'), 148000, 2, 2);
+INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910003', '550003', '台北市信義區忠孝東路五段386號', systimestamp, to_date(to_char(sysdate+7,'yyyy-mm-dd'),'yyyy-mm-dd'), 2000, 2, 3);
 
 
 --------------------------------------------------------------------------------

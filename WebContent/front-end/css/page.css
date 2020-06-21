@@ -1,0 +1,83 @@
+/*
+BAND.CSS
+
+Course:  Bootstrap 4 Quick Start
+Author:  Brad Hussey
+Website: bradhussey.ca
+*/
+
+html,
+body {
+  font-family: 'Noto Sans TC', sans-serif !important;
+  height: 100%;
+}
+::-webkit-scrollbar {
+  display:none;
+}
+
+.jumbotron {
+  margin-bottom: 0;
+  background-image: url("bike-img/4-1.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+
+
+.jumbotron .container {
+  font-size: 32px !important;
+  padding: 4rem;
+}
+
+
+
+/*調整底部footer*/
+#footer-main {
+  background: #222;
+  color: white;
+  font-size: 0.8rem;
+  padding: 2.5rem 0;
+  font-family: "Microsoft YaHei", cursive;
+}
+
+
+/*導覽列顏色+透明度*/
+
+.nav-nav {
+  background-color: #fff933;
+  font-family: "Microsoft YaHei", cursive;
+  margin-right: auto;
+  margin-left: auto;
+  line-height: 1rem;
+}
+.dropdown-menu {
+  width: auto;
+  height: auto;
+  background-color: #fff933;
+  font-family: "Microsoft YaHei", cursive;
+  font-size: 16px;
+  margin: 2px;
+  padding-top: 5px;
+  overflow: hidden;
+  float: left;
+  line-height: 35px;
+  min-width: 100%;
+  border: 0px;
+}
+#submenu >li a {
+  cursor: pointer;
+  width: 100%;
+  text-align:center;
+  color:black;
+}
+.dropdown-item{
+ color: black;
+ width: 100%;
+}
+.sidebarYellow-1{
+  background-color: #fff933;
+}
+.sidebarYellow-2{
+  background-color: #fff000;
+}

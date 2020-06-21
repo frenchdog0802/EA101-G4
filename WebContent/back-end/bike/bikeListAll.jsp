@@ -3,7 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.bike.bike.model.*"%>
 
-<jsp:useBean id="bikeSvc" scope="page" class="com.bike.type.model.BikeTypeService" />
+<jsp:useBean id="bikeTypeSvc" scope="page" class="com.bike.type.model.BikeTypeService" />
 <jsp:useBean id="BikeVO" class="com.bike.bike.model.BikeVO" scope="request"/>
 <%
 BikeService bikeDao = new BikeService();
@@ -28,6 +28,20 @@ List<BikeVO> list1 = Arrays.asList(BikeVO);
 
 </head>
 <body>
+		<div class="container">
+			<form action="<%=request.getContextPath()%>/bike/BikeServlet.do" method="POST">
+			<div class="form-group row">
+				<label for="choose_bikeType" class="col-form-label">選擇車種</label>
+					<select  id="sq_bike_type_id" name="sq_bike_type_id">
+						<c:forEach var="bikeTypeVO" items="${bikeTypeSvc.getAll()}">
+						<option value="${bikeTypeVO.sq_bike_type_id}">${bikeTypeVO.bike_type_name}</option>
+					</c:forEach>
+				</select>
+				<input type="hidden" name="action" value="choose_type">
+			<input type="submit" value="送出">
+		</div>
+		</form>
+	</div>
 	<div class="container-fluid">
 		<form class="form-inline"
 		ACTION="<%=request.getContextPath()%>/bike/BikeServlet.do">
@@ -39,7 +53,7 @@ List<BikeVO> list1 = Arrays.asList(BikeVO);
 		<input type="hidden" name="action" value="getOne_For_Display">
 		<input type="submit" class="btn btn-primary mt-3" value="查詢"></input>
 		<a
-		href="<%=request.getContextPath()%>/back-end/bikeType/addBike.jsp"
+		href="<%=request.getContextPath()%>/back-end/bike/addBike.jsp"
 		class="btn btn-success mt-3 mx-3">新增</a>
 	</form>
 </div>
@@ -60,8 +74,11 @@ List<BikeVO> list1 = Arrays.asList(BikeVO);
 			end="<%=pageIndex+rowsPerPage-1%>">
 			<tr>
 				<td class="align-middle">${bikeVO.sq_bike_id}</td>
-				<td class="align-middle">${bikeSvc.findByPrimaryKey(bikeVO.sq_bike_type_id).bike_type_name}</td>
-				<td class="mydescription align-middle">${bikeSvc.findBikeStatus(bikeVO.bike_status)}</td>
+				<td class="align-middle">${bikeTypeSvc.findByPrimaryKey(bikeVO.sq_bike_type_id).bike_type_name}</td>
+				<td class="mydescription align-middle">
+				
+				${bikeTypeSvc.findBikeStatus(bikeVO.bike_status)}
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -75,7 +92,9 @@ List<BikeVO> list1 = Arrays.asList(BikeVO);
 
 <script>
 	$(function(){
+			//whichPage-1 不然會多一個index
 			$(".page-index").eq(<%=whichPage-1%>).addClass("text-danger");
+				
 	})	
 </script>
 

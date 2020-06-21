@@ -1,26 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <%@ page import="com.bike.type.model.*"%> --%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-<!-- Bootstrap CSS -->
-
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css">
-<!-- ss -->
-
-
-
-<title>addBike</title>
-	
-</head>
-<body>
+<jsp:include page="/front-end/bike/page-nav"></jsp:include>
 	<a href="<%=request.getContextPath()%>/back-end/bikeType/bikeTypeListAll.jsp" class="btn btn-primary" >
   <span class="glyphicon glyphicon-arrow-left" >回上一頁</span>
 	</a>

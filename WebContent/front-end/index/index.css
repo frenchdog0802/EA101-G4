@@ -1,0 +1,90 @@
+ html,
+ body {
+    height: 100%;
+    /*overflow-x: hidden;*/
+
+}
+::-webkit-scrollbar {
+    display:none;
+}
+
+/*調整底部footer*/
+#footer-main {
+    background: #222;
+    color: white;
+    font-size: 0.8rem;
+    padding: 2.5rem 0;
+    font-family: "Microsoft YaHei", cursive;
+}
+
+
+/*導覽列顏色+透明度*/
+
+nav {
+    background-color: #fff933;
+    font-family: "Microsoft YaHei", cursive;
+    margin-right: auto;
+    margin-left: auto;
+    line-height: 1rem;
+}
+.dropdown-menu {
+    width: auto;
+    height: auto;
+    background-color: #fff933;
+    font-family: "Microsoft YaHei", cursive;
+    font-size: 16px;
+    margin: 2px;
+    padding-top: 5px;
+    overflow: hidden;
+    float: left;
+    line-height: 35px;
+    min-width: 100%;
+    border: 0px;
+}
+#submenu >li a {
+    cursor: pointer;
+    width: 100%;
+    text-align:center;
+    color:black;
+}
+.dropdown-item{
+ color: black;
+ width: 100%;
+}
+
+
+/*輪播圖內容置中*/
+.carousel-caption-center{
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: initial;
+}
+.btn-primary{
+    background-color: rgba(180, 113, 87, 1);
+}
+.btn-primary:hover{
+    background-color: rgba(114, 72, 50, 1);
+}
+
+.sidebarYellow-1{
+    background-color: #fff933;
+}
+.sidebarYellow-2{
+    background-color: #fff000;
+}
+.rowGray{
+    background-color: #fafafa;
+}
+
+@media (min-width: 960px) {
+  .sidebarYellow-1{
+    height: 25%;
+    }
+.sidebarYellow-2{
+    height: 25%;
+    }
+}
+
+
+
+
