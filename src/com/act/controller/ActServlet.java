@@ -163,7 +163,6 @@ public class ActServlet extends HttpServlet {
 				try {
 					start_time = java.sql.Date.valueOf(req.getParameter("start_time").trim());
 				} catch (IllegalArgumentException e) {
-					start_time = new java.sql.Date(System.currentTimeMillis());
 					errorMsgs.add("請輸入報名開始時間!");
 				}
 
@@ -171,7 +170,6 @@ public class ActServlet extends HttpServlet {
 				try {
 					end_time = java.sql.Date.valueOf(req.getParameter("end_time").trim());
 				} catch (IllegalArgumentException e) {
-					end_time = new java.sql.Date(System.currentTimeMillis());
 					errorMsgs.add("請輸入報名結束時間!");
 				}
 
@@ -179,7 +177,6 @@ public class ActServlet extends HttpServlet {
 				try {
 					act_start_time = java.sql.Date.valueOf(req.getParameter("act_start_time").trim());
 				} catch (IllegalArgumentException e) {
-					act_start_time = new java.sql.Date(System.currentTimeMillis());
 					errorMsgs.add("請輸入活動開始時間!");
 				}
 
@@ -187,8 +184,17 @@ public class ActServlet extends HttpServlet {
 				try {
 					act_end_time = java.sql.Date.valueOf(req.getParameter("act_end_time").trim());
 				} catch (IllegalArgumentException e) {
-					act_end_time = new java.sql.Date(System.currentTimeMillis());
 					errorMsgs.add("請輸入活動結束時間!");
+				}
+				
+				if(start_time.compareTo(end_time)>0 || start_time.compareTo(end_time)==0 ) {
+					errorMsgs.add("報名開始日期要在報名結束日期之前");
+				}
+				if(end_time.compareTo(act_start_time)>0 || end_time.compareTo(act_start_time)==0) {
+					errorMsgs.add("報名結束日期要在活動開始日期之前");
+				}
+				if(act_start_time.compareTo(act_end_time)>0 || act_start_time.compareTo(act_end_time)==0) {
+					errorMsgs.add("活動開始日期要在活動結束日期之前");
 				}
 
 				String act_description = req.getParameter("act_description").trim();
@@ -217,6 +223,9 @@ public class ActServlet extends HttpServlet {
 					gp_status = 1;
 					errorMsgs.add("請選擇成團狀態");
 				}
+				
+				
+
 
 				ActVO actVO = new ActVO();
 				actVO.setSq_route_id(sq_route_id);
@@ -233,7 +242,7 @@ public class ActServlet extends HttpServlet {
 				actVO.setAct_picture(act_picture);
 				actVO.setGp_status(gp_status);
 				actVO.setSq_activity_id(sq_activity_id);
-
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("actVO", actVO); // 含有輸入格式錯誤的actVO物件,也存入req
@@ -325,7 +334,7 @@ public class ActServlet extends HttpServlet {
 				end_time = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.add("請輸入報名結束時間!");
 			}
-
+			
 			java.sql.Date act_start_time = null;
 			try {
 				act_start_time = java.sql.Date.valueOf(req.getParameter("act_start_time").trim());
@@ -341,6 +350,17 @@ public class ActServlet extends HttpServlet {
 				act_end_time = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.add("請輸入活動結束時間!");
 			}
+			
+			if(start_time.compareTo(end_time)>0 || start_time.compareTo(end_time)==0 ) {
+				errorMsgs.add("報名開始日期要在報名結束日期之前");
+			}
+			if(end_time.compareTo(act_start_time)>0 || end_time.compareTo(act_start_time)==0) {
+				errorMsgs.add("報名結束日期要在活動開始日期之前");
+			}
+			if(act_start_time.compareTo(act_end_time)>0 || act_start_time.compareTo(act_end_time)==0) {
+				errorMsgs.add("活動開始日期要在活動結束日期之前");
+			}
+			
 
 			String act_description = req.getParameter("act_description").trim();
 			if (act_description == null || act_description.trim().length() == 0) {

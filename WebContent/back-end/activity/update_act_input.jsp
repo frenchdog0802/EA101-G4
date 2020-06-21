@@ -107,19 +107,19 @@
 	</tr>
 	<tr>
 		<td>報名起始時間:</td>
-		<td><input name="start_time" id="start_time" type="text" value="<%=actVO.getStart_time()%>" /></td>
+		<td><input name="start_time" id="start_time" type="text" value="<%=actVO.getStart_time()%>" onchange="function1()"/></td>
 	</tr>
 	<tr>
 		<td>報名結束時間:</td>
-		<td><input name="end_time" id="end_time" type="text" value="<%=actVO.getEnd_time()%>" /></td>
+		<td><input name="end_time" id="end_time" type="text" value="<%=actVO.getEnd_time()%>" onchange="function2()" readonly="readonly"/></td>
 	</tr>
 	<tr>
 		<td>活動開始時間:</td>
-		<td><input name="act_start_time" id="act_start_time" type="text" value="<%=actVO.getAct_start_time()%>" /></td>
+		<td><input name="act_start_time" id="act_start_time" type="text" value="<%=actVO.getAct_start_time()%>" onchange="function3()" readonly="readonly"/></td>
 	</tr>
 	<tr>
 		<td>活動結束時間:</td>
-		<td><input name="act_end_time" id="act_end_time" type="text" value="<%=actVO.getAct_end_time()%>" /></td>
+		<td><input name="act_end_time" id="act_end_time" type="text" value="<%=actVO.getAct_end_time()%>" readonly="readonly"/></td>
 	</tr>
 	<tr>
 		<td>活動說明:</td>
@@ -180,6 +180,7 @@ $(function(){
 	  },
 	  minDate:'-1970-01-01',
 	  value: '<%=actVO.getStart_time()%>',
+	  validateOnBlur: true,
 	  timepicker:false
 	 });
 	 
@@ -192,6 +193,7 @@ $(function(){
 	   })
 	  },
 	  value: '<%=actVO.getEnd_time()%>',
+	  validateOnBlur: true,
 	  timepicker:false
 	 });
 	 
@@ -204,6 +206,7 @@ $(function(){
 		   })
 		  },
 		  value: '<%=actVO.getAct_start_time()%>',
+		  validateOnBlur: true,
 		  timepicker:false
 		 });
 	 
@@ -215,17 +218,45 @@ $(function(){
 		   })
 		  },
 		  value: '<%=actVO.getAct_end_time()%>',
+		  validateOnBlur: true,
 		  timepicker:false
 		 });
 });
-        
-        //圖片預覽
-        function loadImageFile(event){ 
-  			var image = document.getElementById('image'); 
-  			image.src = URL.createObjectURL(event.target.files[0]);
-  			image.width = 250;
-  			image.height = 150;
-  			};
+
+
+	//當日期有輸入資料時解索下一格日期資料
+	$("#start_time").change(function myfunction1() {
+		if (!($(this).val() == "")) {
+			$("#end_time").prop('readonly', false);
+		}
+		if (($(this).val() == "")) {
+			$("#end_time").prop('readonly', true);
+		}
+	});
+	$("#end_time").change(function myfunction2() {
+		if (!($(this).val() == "")) {
+			$("#act_start_time").prop('readonly', false);
+		}
+		if (($(this).val() == "")) {
+			$("#act_start_time").prop('readonly', true);
+		}
+	});
+	$("#act_start_time").change(function myfunction3() {
+		if (!($(this).val() == "")) {
+			$("#act_end_time").prop('readonly', false);
+		}
+		if (($(this).val() == "")) {
+			$("#act_end_time").prop('readonly', true);
+		}
+	});
+
+	//圖片預覽
+	function loadImageFile(event) {
+		var image = document.getElementById('image');
+		image.src = URL.createObjectURL(event.target.files[0]);
+		image.width = 250;
+		image.height = 150;
+	};
 
 	// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
 
