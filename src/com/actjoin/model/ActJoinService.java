@@ -1,7 +1,6 @@
 package com.actjoin.model;
 
 import java.util.List;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class ActJoinService {
@@ -37,11 +36,11 @@ public class ActJoinService {
 		return actjoinVO;
 	}
 
-	public void deleteActJoin(String sq_activity_id) {
-		dao.delete(sq_activity_id);
+	public void deleteActJoin(String sq_activity_id, String sq_member_id) {
+		dao.delete(sq_activity_id, sq_member_id);
 	}
 
-	public ActJoinVO getOneActJoin(String sq_activity_id) {
+	public List<ActJoinVO> getOneActJoin(String sq_activity_id) {
 		return dao.findByPrimaryKey(sq_activity_id);
 	}
 
