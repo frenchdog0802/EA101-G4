@@ -7,7 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.TreeMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.bike.bike.model.BikeService;
@@ -24,6 +27,8 @@ import com.bike.rent.master.model.BikeRentMasterService;
 import com.bike.rent.master.model.BikeRentMasterVO;
 import com.bike.store.model.BikeStoreService;
 import com.bike.store.model.BikeStoreVO;
+import com.bike.store.temporarily.model.BikeStoreAreaModel;
+import com.google.gson.Gson;
 
 public class BikeStoreAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -42,10 +47,9 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if ("searchDate".equals(action)) {
-
 			String startDate = request.getParameter("startDate");
 			String endDate = request.getParameter("endDate");
-			HashMap<String,Integer> map = new HashMap<>();
+			HashMap<String, Integer> map = new HashMap<>();
 			// 單車物件
 			BikeService BikeSvc = new BikeService();
 			// 租車店家
@@ -61,9 +65,9 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 
 			// 1.找出所有店家編號
 			for (BikeStoreVO BikeStoreVO : BikeStoreList) {
-				
-				String BikeStoreID = BikeStoreVO.getSq_bike_store_id();//店家編號
-				
+
+				String BikeStoreID = BikeStoreVO.getSq_bike_store_id();// 店家編號
+
 				List<String> BikeSearchMasterList = new ArrayList<>();// 找出rent_master裡面店家有的訂單編號的LIST
 
 				List<BikeRentDetailVO> BikeSearchDetailList = new ArrayList<>();// 找出rent_detail裡面店家有的訂單物件的LIST
@@ -74,7 +78,7 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 						BikeSearchMasterList.add(BikeRentMasterVO.getSq_rent_id());
 					}
 				}
-				
+
 				// 3.找出rent_detail裡面店家有幾張訂單明細
 				for (BikeRentDetailVO BikeRentDetailVO : BikeRentDetailList) {
 					for (String BikeSearchId : BikeSearchMasterList) {
@@ -97,7 +101,8 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 						if (!(inputStartDate.before(sqlStartDate) && inputEndDate.before(sqlStartDate))) {
 							if (!(inputStartDate.after(sqlEndDate) && inputEndDate.after(sqlEndDate))) {
 								failMatch++;
-							};
+							}
+							;
 						}
 					} catch (ParseException e) {
 						e.printStackTrace();
@@ -105,10 +110,41 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 				}
 				Integer Bike = BikeSvc.findStoreBikeEmpty(BikeStoreID);
 				Integer matchBike = Bike - failMatch;
-				//System.out.println(BikeStoreVO.getBike_store_name()+":"+matchBike+"輛");
-				map.put(BikeStoreVO.getBike_store_name() , matchBike);
-			};
+				// System.out.println(BikeStoreVO.getBike_store_name()+":"+matchBike+"輛");
+				map.put(BikeStoreVO.getBike_store_name(), matchBike);
+			}
+			;
+
+			JSONObject responseJSONObject = new JSONObject(map);
+			out.println(responseJSONObject);
+		}
+		
+		
+		
+		if("searchArea".equals(action)) {
 			
+			String area = request.getParameter("area");
+			// 租車店家
+			
+			HashMap<String, List>  map = new HashMap<>();
+			BikeService bikeSvc = new BikeService();
+			BikeStoreService BikeStoreSvc = new BikeStoreService();
+			//暫存的model 傳回前端頁面
+			List<BikeStoreAreaModel> BikeStoreReturnList = new ArrayList<>();
+			List<BikeStoreVO> BikeStorelist = BikeStoreSvc.getAll();
+			for(BikeStoreVO BikeStoreVO : BikeStorelist) {
+				if(area.equals(BikeStoreVO.getArea())) {
+					BikeStoreAreaModel bsa = new BikeStoreAreaModel();
+					bsa.setBike_store_name(BikeStoreVO.getBike_store_name());
+					bsa.setLocation(BikeStoreVO.getLocation());
+					bsa.setPhone(BikeStoreVO.getPhone());
+					bsa.setStore_opentime(BikeStoreVO.getStore_opentime());
+					//找出空車
+					bsa.setEmpty_bike(bikeSvc.findStoreBikeEmpty(BikeStoreVO.getSq_bike_store_id()));
+					BikeStoreReturnList.add(bsa);
+				}
+			}
+			map.put("returnValue",BikeStoreReturnList );
 			JSONObject responseJSONObject = new JSONObject(map);
 			out.println(responseJSONObject);
 		}

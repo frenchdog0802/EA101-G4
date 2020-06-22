@@ -7,15 +7,16 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+   <link rel="stylesheet"
+	href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css">
     <!-- font style -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&display=swap');
     </style>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="band.css">
-
+<!--     <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/page.css"> -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/page.css">
 
 </head>
 <body>
@@ -27,7 +28,7 @@
             <h1 class="navbar-brand">
                 <!-- 導覽列圖片 -->
                 <!-- <img src="https://img.icons8.com/ios/50/000000/cycling-bmx.png" /> -->
-                <img src="bike-img/home10.png" />
+                <img src="<%=request.getContextPath()%>/front-end/img/home10.png" />
             </h1>
             <button data-toggle="collapse" class="navbar-toggler" data-target="#submenu">
                 <span class="navbar-toggler-icon"></span>
