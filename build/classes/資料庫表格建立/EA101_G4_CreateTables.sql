@@ -577,6 +577,7 @@ CREATE TABLE bike_store(
   store_opentime       VARCHAR2(40)  NOT NULL,
   store_status         NUMBER(1)     NOT NULL,
   create_time           TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  area     VARCHAR2(40)  NOT NULL,
   PRIMARY KEY(sq_bike_store_id)
 );
 
