@@ -3,14 +3,16 @@ pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.bike.store.model.*"%>
+<jsp:useBean id="BikeSvc" class="com.bike.bike.model.BikeService" scope="page" />
+<link   rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 
-<jsp:useBean id="BikeSvc" class="com.bike.bike.model.BikeService" />
 
 <%
 BikeStoreService BikeStoreDAOService = new BikeStoreService();
 List<BikeStoreVO> list = BikeStoreDAOService.getAll();
 pageContext.setAttribute("list", list);
 %>
+
 <html lang="en">
 <head>
 <style>
@@ -23,9 +25,8 @@ pageContext.setAttribute("list", list);
 
 </head>
 <body>
-	<%@include file="/front-end/bike/page-nav"%>
-	
-	<img src="/EA101-G4/WebContent/front-end/img/18-1.jpg">
+	<%@include file="/front-end/page-file/page-nav"%>
+
 	<div class="container mt-3">
 		<div class="row">
 			<div class="col">
@@ -82,7 +83,8 @@ pageContext.setAttribute("list", list);
 				<tbody id="tbody">
 					<c:forEach var="BikeStoreVO" items="${list}" varStatus="e">
 					<tr>
-						<th>${BikeStoreVO.bike_store_name }</th>
+					<input id="sq_bike_store_id" value="${BikeStoreVO.sq_bike_store_id}" type="hidden"/>
+						<th>${BikeStoreVO.bike_store_name} </th>
 						<th>${BikeStoreVO.location }</th>
 						<th>${BikeStoreVO.phone }</th>
 						<th>${BikeStoreVO.store_opentime }</th>
@@ -97,12 +99,15 @@ pageContext.setAttribute("list", list);
 
 </div>
 
-<%@include file="/front-end/bike/page-footer"%>
+<%@include file="/front-end/page-file/page-footer"%>
 
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 <script>
 	
 	$.datetimepicker.setLocale('zh');
-	$(function() {
+	$(function(){
+		$(".fun-text").text("預約租車");
 		
 		//ajax SearchArea
 		$(".nav-area>a").click(function() {
@@ -153,16 +158,13 @@ pageContext.setAttribute("list", list);
 						endDate : endDate,
 					},
 					success : function(data) {
-						
 						//獲取表格資料
 						var tbody = document.getElementById("tbody");
-						let rows = tbody.rows.length;
+						var rows = tbody.rows.length;
 
-						for(let i =0 ; i <rows ; i++){
-							for(let j=0 ; j<tbody.rows[i].cells.length ; j++){
-								let storeName = tbody.rows[i].cells[0].innerHTML;
-								tbody.rows[i].cells[4].innerHTML = data[storeName];
-							}
+						for(var i =0 ; i <rows ; i++){					
+								var storeName = tbody.rows[i].cells[0].innerText;
+								tbody.rows[i].cells[4].innerHTML =data[storeName];
 						}
 					}
 				})
@@ -172,9 +174,35 @@ pageContext.setAttribute("list", list);
 
 			//ajax submit data
 			$("#tbody tr").click(function(e){
+				var sq_bike_store_id = $(this).find("input").val();
+				var startDate = $('#startDate').val();
+				var endDate = $('#endDate').val();
+				var matchBike = $(this).find("th").eq(4).text();
 				
-				console.log($(this).find("th").eq(0).html());
-			})
+				//錯誤處理
+				if(startDate=='' || endDate==''){
+					alert("請先輸入日期");
+					return;
+				}
+		
+				$.ajax({
+					type:"POST",
+					url:"<%=request.getContextPath()%>/bike/BikeStoreAjaxServlet.do",
+					data:{
+						action:"confirm",
+						sq_bike_store_id : sq_bike_store_id,
+						startDate:startDate,
+						endDate :endDate,
+						matchBike : matchBike,
+					},
+					success:function(data){
+						window.location.href = data;
+					}
+						
+				});
+			});
+			
+			
 			
 			//table hover
 			$("#tbody tr").hover(function(){

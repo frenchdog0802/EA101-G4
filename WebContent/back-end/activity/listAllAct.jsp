@@ -13,7 +13,7 @@
 
 <html>
 <head>
-<title>所有員工資料 - listAllAct.jsp</title>
+<title>所有活動資料 - listAllAct.jsp</title>
 
 <style>
   table#table-1 {

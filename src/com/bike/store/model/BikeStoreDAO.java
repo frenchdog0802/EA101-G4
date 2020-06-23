@@ -184,18 +184,13 @@ public class BikeStoreDAO implements BikeStoreDAO_interface {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 			if (con != null) {
 				try {
+					rs.close();
+					pstmt.close();
 					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -235,18 +230,13 @@ public class BikeStoreDAO implements BikeStoreDAO_interface {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 			if (con != null) {
 				try {
+					rs.close();
+					pstmt.close();
 					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}

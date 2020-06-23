@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>IBM Act: Home</title>
+<title>IBM ActReport: Home</title>
 
 <style>
   table#table-1 {
@@ -30,10 +30,10 @@
 <body bgcolor='white'>
 
 <table id="table-1">
-   <tr><td><h3>IBM Act: Home</h3><h4>( MVC )</h4></td></tr>
+   <tr><td><h3>IBM ActReport: Home</h3><h4>( MVC )</h4></td></tr>
 </table>
 
-<p>This is the Home page for IBM Act: Home</p>
+<p>This is the Home page for IBM ActReport: Home</p>
 
 <h3>資料查詢:</h3>
 	
@@ -48,39 +48,18 @@
 </c:if>
 
 <ul>
-  <li><a href='listAllAct.jsp'>List</a> all Acts.  <br><br></li>
+  <li><a href='listAllActReport.jsp'>List</a> all Acts.  <br><br></li>
   
   
   <li>
-    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActServlet.do" >
-        <b>輸入活動編號 (如ACT-700001):</b>
-        <input type="text" name="sq_activity_id">
+    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do" >
+        <b>輸入活動檢舉編號 (如710000):</b>
+        <input type="text" name="sq_activityreport_id">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
     </FORM>
   </li>
 
-  <jsp:useBean id="actSvc" scope="page" class="com.act.model.ActService" />
-   
-  <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActServlet.do" >
-       <b>選擇活動編號:</b>
-       <select size="1" name="sq_activity_id">
-         <c:forEach var="actVO" items="${actSvc.all}" > 
-          <option value="${actVO.sq_activity_id}">${actVO.sq_activity_id}
-         </c:forEach>   
-       </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
-       <input type="submit" value="送出">
-    </FORM>
-  </li>
-</ul>
-
-
-<h3>活動管理</h3>
-
-<ul>
-  <li><a href='addAct.jsp'>Add</a> a new Act.</li>
 </ul>
 
 </body>
