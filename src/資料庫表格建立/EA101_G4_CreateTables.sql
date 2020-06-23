@@ -612,11 +612,10 @@ CREATE TABLE bike(
 );
 COMMENT ON COLUMN  bike.bike_status IS
 '車輛狀態:
-0:未出租
-1:出租中
-2:維修
-3:遺失
-4:報廢';
+0:維修
+1:遺失
+2:報廢
+';
 
 
 CREATE TABLE bike_rent_master

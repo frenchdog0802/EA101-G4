@@ -10,14 +10,13 @@
    <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css">
     <!-- font style -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&display=swap');
-    </style>
+
 
     <!-- Custom CSS -->
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/page-file/css/page.css">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&display=swap');
 .jumbotron {
   margin-bottom: 0;
   /******************************這裡可自己換圖片  1920*1000 *************************************************************/
@@ -27,8 +26,7 @@
   background-size: cover;
 }
 </style>
-</head>
-<body>
+
 
  <!-- 導覽列 -->
  <div class="row ">
@@ -129,6 +127,6 @@
 
 <section class="jumbotron text-xs-center ">
     <div class="container my-5">
-        <p class="h1 jumbotron-heading text-white">自己修改</p>
+        <p class="h1 jumbotron-heading text-white fun-text"><!--放入功能名子--></p>
     </div>
 </section>
