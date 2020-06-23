@@ -14,6 +14,7 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 	private static final String UPDATE = "UPDATE JOINED_ACT_DETAIL set SQ_MEMBER_ID=?, JOIN_TIME=? where SQ_ACTIVITY_ID = ?";
 	private static final String DELETE_ACTJOIN = "DELETE FROM JOINED_ACT_DETAIL where SQ_ACTIVITY_ID = ? and SQ_MEMBER_ID = ?";	
 	private static final String GET_ONE_STMT = "SELECT * FROM JOINED_ACT_DETAIL where SQ_ACTIVITY_ID = ?";
+	private static final String GET_ONE_MEMBER = "SELECT * FROM JOINED_ACT_DETAIL where SQ_MEMBER_ID = ?";
 	private static final String GET_ALL_STMT = "SELECT * FROM JOINED_ACT_DETAIL order by SQ_ACTIVITY_ID";
 	private static final String JOINEDPEOPLE = "SELECT COUNT(SQ_MEMBER_ID) FROM JOINED_ACT_DETAIL where SQ_ACTIVITY_ID = ?";
 	
@@ -366,6 +367,67 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 		  return count;
 		  
 		 }
+	
+	@Override
+	public List<ActJoinVO> findByMemberId(String SQ_MEMBER_ID) {
+
+		List<ActJoinVO> list = new ArrayList<ActJoinVO>();
+		ActJoinVO actjoinVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ONE_MEMBER);
+
+			pstmt.setString(1, SQ_MEMBER_ID);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				actjoinVO = new ActJoinVO();
+				actjoinVO.setSq_activity_id(rs.getString("SQ_ACTIVITY_ID"));
+				actjoinVO.setSq_member_id(rs.getString("SQ_MEMBER_ID"));
+				actjoinVO.setJoin_time(rs.getTimestamp("JOIN_TIME"));
+				list.add(actjoinVO);
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 
 	public static void main(String[] args) throws IOException {
 
@@ -413,6 +475,5 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 		 System.out.println(i);
 
 	}
-
 
 }
