@@ -16,6 +16,15 @@ public class BikeStoreVO implements Serializable {
 	private Double store_latitute;
 	private Integer store_status;
 	private Date create_time;
+	private String area;
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
 
 	public String getSq_bike_store_id() {
 		return sq_bike_store_id;

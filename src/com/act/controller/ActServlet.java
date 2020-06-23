@@ -10,6 +10,8 @@ import com.act.model.*;
 @MultipartConfig
 public class ActServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 2740932033209328712L;
+
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
@@ -193,7 +195,7 @@ public class ActServlet extends HttpServlet {
 				if(end_time.compareTo(act_start_time)>0 || end_time.compareTo(act_start_time)==0) {
 					errorMsgs.add("報名結束日期要在活動開始日期之前");
 				}
-				if(act_start_time.compareTo(act_end_time)>0 || act_start_time.compareTo(act_end_time)==0) {
+				if(act_start_time.compareTo(act_end_time)>0) { //活動可以當天開始當天結束
 					errorMsgs.add("活動開始日期要在活動結束日期之前");
 				}
 
@@ -357,7 +359,7 @@ public class ActServlet extends HttpServlet {
 			if(end_time.compareTo(act_start_time)>0 || end_time.compareTo(act_start_time)==0) {
 				errorMsgs.add("報名結束日期要在活動開始日期之前");
 			}
-			if(act_start_time.compareTo(act_end_time)>0 || act_start_time.compareTo(act_end_time)==0) {
+			if(act_start_time.compareTo(act_end_time)>0) {
 				errorMsgs.add("活動開始日期要在活動結束日期之前");
 			}
 			

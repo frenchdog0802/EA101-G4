@@ -17,7 +17,7 @@ body {
 
 .jumbotron {
   margin-bottom: 0;
-  background-image: url("bike-img/4-1.jpg");
+  background-image: url("<%=request.getContextPath()%>/front-end/page-file/img/18-1.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -32,19 +32,20 @@ body {
 
 
 
+
 /*調整底部footer*/
 #footer-main {
   background: #222;
   color: white;
   font-size: 0.8rem;
   padding: 2.5rem 0;
-/*   font-family: "Microsoft YaHei", cursive; */
+  font-family: "Microsoft YaHei", cursive;
 }
 
 
 /*導覽列顏色+透明度*/
 
-.nav-nav {
+.page-nav {
   background-color: #fff933;
   font-family: "Microsoft YaHei", cursive;
   margin-right: auto;

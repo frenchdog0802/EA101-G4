@@ -1,7 +1,6 @@
 package com.actreport.model;
 
 import java.io.Serializable;
-import java.sql.*;
 
 public class ActReportVO implements Serializable{
 

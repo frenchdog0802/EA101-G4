@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <!-- Required meta tags always come first -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,18 +17,28 @@
     </style>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/page.css">
 
-
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/page-file/css/page.css">
+<style>
+.jumbotron {
+  margin-bottom: 0;
+  background-image: url("<%=request.getContextPath()%>/front-end/page-file/img/18-1.jpg");/*這裡可自己換圖片  1920*1000 */
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+</style>
+</head>
+<body>
 
  <!-- 導覽列 -->
  <div class="row ">
     <div class="col">
-        <nav class="navbar navbar-expand-lg navbar-dark font-weight-bold nav-nav" >
+        <nav class="navbar navbar-expand-lg navbar-dark font-weight-bold" >
             <h1 class="navbar-brand">
                 <!-- 導覽列圖片 -->
                 <!-- <img src="https://img.icons8.com/ios/50/000000/cycling-bmx.png" /> -->
-                <img src="bike-img/home10.png" />
+                <img src="<%=request.getContextPath()%>/front-end/page-file/img/home10.png" />
             </h1>
             <button data-toggle="collapse" class="navbar-toggler" data-target="#submenu">
                 <span class="navbar-toggler-icon"></span>
@@ -108,14 +120,67 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-item nav-link btn-dark rounded text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sign-in</a>
                         <!--text-dark active nav-item  -->
+
                     </li>
                 </ul>
             </div>
         </nav>
     </div>
 </div>
+
 <section class="jumbotron text-xs-center ">
     <div class="container my-5">
-        <p class="h1 jumbotron-heading text-white">自己更改名稱</p>
+        <p class="h1 jumbotron-heading text-white">自己修改</p>
     </div>
 </section>
+
+
+<!-- before footer -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col sidebarYellow-1 text-center">
+            <p class="h2 m-5">EA101-G4</p>
+        </div>
+    </div>
+</div>
+<!-- footer -->
+<footer id="footer-main">
+    <div class="container">
+        <div class="row">
+            <div class="col"><span class="h4 font-weight-bolder text-dark">LOGO</span></div>
+            <div class="col"><span class="h4 font-weight-bolder text-dark">LINKS</span></div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <p>uncopyright 2020. EA101</p>
+            </div>
+            <div class="col-sm-3">
+                <ul class="list-unstyled">
+                    <li><a class="text-light" href="#">home</a></li>
+                    <li><a class="text-light" href="#">what we do</a></li>
+                    <li><a class="text-light" href="#">about</a></li>
+                    <li><a class="text-light" href="#">latest</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <ul class="list-unstyled">
+                    <li><a class="text-light" href="#">facebook</a></li>
+                    <li><a class="text-light" href="#">twitter</a></li>
+                    <li><a class="text-light" href="#">youtube</a></li>
+                    <li><a class="text-light" href="#">linkedin</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- footer--end-->
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="bootstrap-components/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/page-file/js/nav.js"></script>
+
+
+</body>
+</html>

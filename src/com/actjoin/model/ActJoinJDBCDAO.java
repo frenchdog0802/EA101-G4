@@ -1,13 +1,6 @@
 package com.actjoin.model;
 
 import java.util.*;
-
-import com.act.model.ActVO;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.*;
 
@@ -19,10 +12,11 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 
 	private static final String INSERT_STMT = "INSERT INTO JOINED_ACT_DETAIL (SQ_ACTIVITY_ID,SQ_MEMBER_ID,JOIN_TIME) VALUES (?, ?, ?)";
 	private static final String UPDATE = "UPDATE JOINED_ACT_DETAIL set SQ_MEMBER_ID=?, JOIN_TIME=? where SQ_ACTIVITY_ID = ?";
-	private static final String DELETE_ACTJOIN = "DELETE FROM JOINED_ACT_DETAIL where SQ_ACTIVITY_ID = ?";	
-	private static final String GET_ONE_STMT = "SELECT SQ_ACTIVITY_ID, SQ_MEMBER_ID, JOIN_TIME FROM JOINED_ACT_DETAIL where SQ_ACTIVITY_ID = ?";
-	private static final String GET_ALL_STMT = "SELECT SQ_ACTIVITY_ID, SQ_MEMBER_ID, JOIN_TIME FROM JOINED_ACT_DETAIL order by SQ_ACTIVITY_ID";
-
+	private static final String DELETE_ACTJOIN = "DELETE FROM JOINED_ACT_DETAIL where SQ_ACTIVITY_ID = ? and SQ_MEMBER_ID = ?";	
+	private static final String GET_ONE_STMT = "SELECT * FROM JOINED_ACT_DETAIL where SQ_ACTIVITY_ID = ?";
+	private static final String GET_ALL_STMT = "SELECT * FROM JOINED_ACT_DETAIL order by SQ_ACTIVITY_ID";
+	private static final String JOINEDPEOPLE = "SELECT COUNT(SQ_MEMBER_ID) FROM JOINED_ACT_DETAIL where SQ_ACTIVITY_ID = ?";
+	
 	@Override
 	public void insert(ActJoinVO actjoinVO) {
 
@@ -112,7 +106,7 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 	}
 
 		@Override
-		public void delete(String SQ_ACTIVITY_ID) {
+		public void delete(String SQ_ACTIVITY_ID, String SQ_MEMBER_ID) {
 
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -124,6 +118,7 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 				pstmt = con.prepareStatement(DELETE_ACTJOIN);
 
 				pstmt.setString(1, SQ_ACTIVITY_ID);
+				pstmt.setString(2, SQ_MEMBER_ID);
 
 				pstmt.executeUpdate();
 
@@ -155,8 +150,9 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 
 
 	@Override
-	public ActJoinVO findByPrimaryKey(String SQ_ACTIVITY_ID) {
+	public List<ActJoinVO> findByPrimaryKey(String SQ_ACTIVITY_ID) {
 
+		List<ActJoinVO> list = new ArrayList<ActJoinVO>();
 		ActJoinVO actjoinVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -174,12 +170,11 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 
 			while (rs.next()) {
 
-				// empVo 也稱為 Domain01 objects
 				actjoinVO = new ActJoinVO();
 				actjoinVO.setSq_activity_id(rs.getString("SQ_ACTIVITY_ID"));
 				actjoinVO.setSq_member_id(rs.getString("SQ_MEMBER_ID"));
 				actjoinVO.setJoin_time(rs.getTimestamp("JOIN_TIME"));
-				
+				list.add(actjoinVO);
 			}
 
 			// Handle any driver errors
@@ -212,7 +207,7 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 				}
 			}
 		}
-		return actjoinVO;
+		return list;
 	}
 
 	@Override
@@ -315,6 +310,62 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 		}
 
 	}
+	
+	public int search(String SQ_ACTIVITY_ID) {
+		  
+		  Connection con = null;
+		  PreparedStatement pstmt = null;
+		  ResultSet rs = null;
+		  int count = 0;
+		  
+		  try {
+
+		   Class.forName(driver);
+		   con = DriverManager.getConnection(url, userid, passwd);
+		   pstmt = con.prepareStatement(JOINEDPEOPLE);
+
+		   pstmt.setString(1, SQ_ACTIVITY_ID);
+
+		   rs = pstmt.executeQuery();
+
+		   if(rs.next()) {
+		    count=rs.getInt(1);
+		   }
+		    
+
+		   // Handle any driver errors
+		  } catch (ClassNotFoundException e) {
+		   throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		   // Handle any SQL errors
+		  } catch (SQLException se) {
+		   throw new RuntimeException("A database error occured. " + se.getMessage());
+		   // Clean up JDBC resources
+		  } finally {
+		   if (rs != null) {
+		    try {
+		     rs.close();
+		    } catch (SQLException se) {
+		     se.printStackTrace(System.err);
+		    }
+		   }
+		   if (pstmt != null) {
+		    try {
+		     pstmt.close();
+		    } catch (SQLException se) {
+		     se.printStackTrace(System.err);
+		    }
+		   }
+		   if (con != null) {
+		    try {
+		     con.close();
+		    } catch (Exception e) {
+		     e.printStackTrace(System.err);
+		    }
+		   }
+		  }
+		  return count;
+		  
+		 }
 
 	public static void main(String[] args) throws IOException {
 
@@ -337,17 +388,10 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 		dao.update(actjoinVO2);
 		
 		// 刪除
-		dao.delete("ACT-700010");
+		dao.delete("ACT-700001", "910001");
 
 		// 查詢
-		ActJoinVO actjoinVO3 = dao.findByPrimaryKey("ACT-700001");
-		System.out.print(actjoinVO3.getSq_activity_id() + ",");
-		System.out.print(actjoinVO3.getSq_member_id() + ",");
-		System.out.print(actjoinVO3.getJoin_time() + ",");
-		System.out.println("---------------------");
-
-		// 查詢
-		List<ActJoinVO> list = dao.getAll();
+		List<ActJoinVO> list = dao.findByPrimaryKey("ACT-700001");
 		for (ActJoinVO aActJoin : list) {
 			System.out.print(aActJoin.getSq_activity_id() + ",");
 			System.out.print(aActJoin.getSq_member_id() + ",");
@@ -355,6 +399,20 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 			System.out.println();
 		}
 
+		// 查詢
+		List<ActJoinVO> list2 = dao.getAll();
+		for (ActJoinVO aActJoin : list2) {
+			System.out.print(aActJoin.getSq_activity_id() + ",");
+			System.out.print(aActJoin.getSq_member_id() + ",");
+			System.out.print(aActJoin.getJoin_time() + ",");
+			System.out.println();
+		}
+		
+		//取得參加人數
+		int i = dao.search("ACT-700001");     
+		 System.out.println(i);
+
 	}
+
 
 }

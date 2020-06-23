@@ -412,8 +412,7 @@ CREATE TABLE ACTIVITY (
 COMMENT ON COLUMN ACTIVITY.GP_STATUS IS '0.成團
 1.未成團
 2.取消揪團
-3.人數已滿
-4.下架';
+3.下架';
 
 CREATE TABLE JOINED_ACT_DETAIL (
   SQ_ACTIVITY_ID VARCHAR2(40) NOT NULL, 
@@ -577,8 +576,8 @@ CREATE TABLE bike_store(
   store_latitude       DECIMAL(17,12) NOT NULL,
   store_opentime       VARCHAR2(40)  NOT NULL,
   store_status         NUMBER(1)     NOT NULL,
+   area     VARCHAR2(40)  NOT NULL,
   create_time           TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  area     VARCHAR2(40)  NOT NULL,
   PRIMARY KEY(sq_bike_store_id)
 );
 

@@ -3,8 +3,9 @@ pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.bike.store.model.*"%>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/bikeStoreList.css">
+
 <jsp:useBean id="BikeSvc" class="com.bike.bike.model.BikeService" />
+
 <%
 BikeStoreService BikeStoreDAOService = new BikeStoreService();
 List<BikeStoreVO> list = BikeStoreDAOService.getAll();
@@ -12,9 +13,19 @@ pageContext.setAttribute("list", list);
 %>
 <html lang="en">
 <head>
+<style>
+@media (max-width: 1920px) {
+  .search{
+  	width: 270px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 	<%@include file="/front-end/bike/page-nav"%>
+	
+	<img src="/EA101-G4/WebContent/front-end/img/18-1.jpg">
 	<div class="container mt-3">
 		<div class="row">
 			<div class="col">
@@ -32,17 +43,18 @@ pageContext.setAttribute("list", list);
 		</div>
 		<!-- 分頁 -->
 		<div class="row mt-4">
-			<div class="col-8" >
-				<nav class="nav nav-pills nav-fill nav-tabs nav-area" >
+			<div class="col-8">
+				<nav class="nav nav-pills nav-fill nav-tabs nav-area">
 					<a href="#" class=" nav-item nav-link  active" data-toggle="pill">全臺</a>
 					<a href="#" class=" nav-item nav-link " data-toggle="pill">北部</a> <a
+					href="#" class=" nav-item nav-link " data-toggle="pill">中部</a> <a
 					href="#" class=" nav-item nav-link " data-toggle="pill">南部</a> <a
-					href="#" class=" nav-item nav-link " data-toggle="pill">東部</a> <a
-					href="#" class=" nav-item nav-link " data-toggle="pill">西部</a>
+					href="#" class=" nav-item nav-link " data-toggle="pill">東部</a>
+
 				</nav>
 			</div>
 			<div class="col-4">
-				<div class="form-group row mt-1 mb-1" >
+				<div class="form-group row mt-1 mb-1">
 					<label for="Search" class="col-form-label">Search : </label>
 					<div>
 						<input type="text" class="form-control search" placeholder="收尋店家"
@@ -67,7 +79,7 @@ pageContext.setAttribute("list", list);
 						<th scope="col">車輛數量</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="tbody">
 					<c:forEach var="BikeStoreVO" items="${list}" varStatus="e">
 					<tr>
 						<th>${BikeStoreVO.bike_store_name }</th>
@@ -81,34 +93,51 @@ pageContext.setAttribute("list", list);
 		</table>
 	</div>
 </div>
+
+
 </div>
 
 <%@include file="/front-end/bike/page-footer"%>
+
 <script>
+	
 	$.datetimepicker.setLocale('zh');
 	$(function() {
-		var startDate;
-		var endDate;
+		
+		//ajax SearchArea
 		$(".nav-area>a").click(function() {
-
 			var area = $(this).text();
-				// $.ajax({
-				//         type :"POST",
-				//         url  : "/testServlet/myServlet",
-				//         data : { 
-				//             datafromtestFile : $("#input").val(),                            
-				//             },
-				//         dataType: "text",
-				//         success : function(happy) {
-				//             $("#output").html(happy);                            
-				//     }
-				//     })
-
-			});
+			$.ajax({
+				type :"POST",
+				url  : "<%=request.getContextPath()%>/bike/BikeStoreAjaxServlet.do",
+				data : {
+					action:"searchArea",
+					area : area,                            
+				},
+				dataType: "JSON",
+				success : function(data) {
+					let str = "";
+					　$.each(data.returnValue, function(index, json) { 
+						str+="<tr>";
+						str+=
+						"<td>"+json.bike_store_name+"</td>"+
+						"<td>"+json.location+"</td>"+
+						"<td>"+json.phone+"</td>"+
+						"<td>"+json.store_opentime+"</td>"+
+						"<td>"+json.empty_bike+"</td>";
+						str+="</tr>";
+					　　}); 
+					$("tbody").empty();
+					$("tbody").append(str);
+				}
+			})
+		});
 		
 
 
-			//ajax Search
+			//ajax SearchDate
+			var startDate;
+			var endDate;
 			$('#startDate').change(function(){
 				startDate =  $(this).val();
 			})
@@ -117,21 +146,46 @@ pageContext.setAttribute("list", list);
 				$.ajax({
 					type :"POST",
 					url  :"<%=request.getContextPath()%>/bike/BikeStoreAjaxServlet.do",
-					dataType:"JSON",
-					data: {startDate: startDate, endDate: endDate , action : "searchDate"},
-					success:function(data){
-						for (var i = 0 ; i < $("tbody").find('tr').size();i++){
-							let storeName =  $("tbody").find("tr").eq(i).find("th").eq(0).text();
-							if(data[storeName] != null){
-								$("tbody").find("tr").eq(i).find("th").eq(4).text(data[storeName]);
+					dataType : "JSON",
+					data : {
+						action : "searchDate",
+						startDate : startDate,
+						endDate : endDate,
+					},
+					success : function(data) {
+						
+						//獲取表格資料
+						var tbody = document.getElementById("tbody");
+						let rows = tbody.rows.length;
+
+						for(let i =0 ; i <rows ; i++){
+							for(let j=0 ; j<tbody.rows[i].cells.length ; j++){
+								let storeName = tbody.rows[i].cells[0].innerHTML;
+								tbody.rows[i].cells[4].innerHTML = data[storeName];
 							}
 						}
 					}
 				})
 			})
+
 			
 
+			//ajax submit data
+			$("#tbody tr").click(function(e){
+				
+				console.log($(this).find("th").eq(0).html());
+			})
+			
+			//table hover
+			$("#tbody tr").hover(function(){
+				$(this).css('cursor', 'pointer');
+				$(this).css('color', 'blue');
+			},function(){
+				$(this).css('color', 'inherit');
+			})
 
+				
+			
 
 			//datetimepicker
 			$('#startDate').datetimepicker(
@@ -140,12 +194,12 @@ pageContext.setAttribute("list", list);
 						step : 60, //step: 60 (這是timepicker的預設間隔60分鐘)
 						format : 'Y-m-d H:i',
 						value : '',
-						minDate: '-1970-01-01',
-						timepicker:true,
+						minDate : '-1970-01-01',
+						timepicker : true,
 						onShow : function() {
 							this.setOptions({
-								maxDate : $('#endDate').val() ? $(
-									'#endDate').val() : false
+								maxDate : $('#endDate').val() ? $('#endDate')
+								.val() : false
 							})
 						}
 					//minDate:           '-1970-01-01', // 去除今日(不含)之前
@@ -161,7 +215,7 @@ pageContext.setAttribute("list", list);
 							'#startDate').val() : false
 					})
 				},
-				
+
 				timepicker : true,
 				step : 60
 			})
