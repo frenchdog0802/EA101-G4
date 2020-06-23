@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -29,11 +30,44 @@ public class BikeDAO implements BikeDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT * FROM bike WHERE sq_bike_id = ?";
 	//GET ALL STMT
 	private static final String GET_ALL_STMT = "SELECT * FROM bike ORDER BY sq_bike_id";
-	
-	//GET ALL BIKE WHERE STROE HAS
+	//GET ALL BIKE WHERE STROE HAS is empty
 	private static final String GET_BIKE_COUNT_STMT = "select count(*) from bike where sq_bike_store_id = ? and bike_status = 0";
+	//GET ALL BIKEType WHERE STROE HAS
+		private static final String GET_BIKE_TYPE_STMT ="select sq_bike_type_id from bike where sq_bike_store_id =?";
 	
-	
+	@Override
+	public List<String> findStoreBikeType(String sq_bike_store_id){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<String> list =  new LinkedList<>();;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userId, passwd);
+			pstmt = con.prepareStatement(GET_BIKE_TYPE_STMT);
+			pstmt.setString(1, sq_bike_store_id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null) {
+				try {
+					rs.close();
+					pstmt.close();
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 	
 	@Override
 	public Integer findStoreBikeEmpty(String sq_bike_store_id) {
@@ -56,18 +90,13 @@ public class BikeDAO implements BikeDAO_interface {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace();
-				}
-			}
 			if (con != null) {
 				try {
+					rs.close();
+					pstmt.close();
 					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -141,18 +170,12 @@ public class BikeDAO implements BikeDAO_interface {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace();
-				}
-			}
 			if (con != null) {
 				try {
+					pstmt.close();
 					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -176,18 +199,12 @@ public class BikeDAO implements BikeDAO_interface {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 			if (con != null) {
 				try {
+					pstmt.close();
 					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -223,18 +240,13 @@ public class BikeDAO implements BikeDAO_interface {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 			if (con != null) {
 				try {
+					rs.close();
+					pstmt.close();
 					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -271,6 +283,16 @@ public class BikeDAO implements BikeDAO_interface {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			if (con != null) {
+				try {
+					rs.close();
+					pstmt.close();
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
 		}
 
 		return list;

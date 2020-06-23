@@ -11,11 +11,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.TreeMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +42,7 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		HttpSession session = request.getSession();
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
@@ -50,71 +52,21 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 			String startDate = request.getParameter("startDate");
 			String endDate = request.getParameter("endDate");
 			HashMap<String, Integer> map = new HashMap<>();
-			// 單車物件
-			BikeService BikeSvc = new BikeService();
+
 			// 租車店家
 			BikeStoreService BikeStoreSvc = new BikeStoreService();
-			// 訂單明細
-			BikeRentDetailService BikeRentDetailSvc = new BikeRentDetailService();
-			// 主要訂單
-			BikeRentMasterService BikeRentMasterSvc = new BikeRentMasterService();
 
-			List<BikeRentMasterVO> BikeRentMasterList = BikeRentMasterSvc.getAll();
-			List<BikeRentDetailVO> BikeRentDetailList = BikeRentDetailSvc.getAll();
 			List<BikeStoreVO> BikeStoreList = BikeStoreSvc.getAll();
 
 			// 1.找出所有店家編號
 			for (BikeStoreVO BikeStoreVO : BikeStoreList) {
 
 				String BikeStoreID = BikeStoreVO.getSq_bike_store_id();// 店家編號
+				Integer matchBike = findDateEmptyBike(startDate ,  endDate , BikeStoreID);
 
-				List<String> BikeSearchMasterList = new ArrayList<>();// 找出rent_master裡面店家有的訂單編號的LIST
-
-				List<BikeRentDetailVO> BikeSearchDetailList = new ArrayList<>();// 找出rent_detail裡面店家有的訂單物件的LIST
-
-				for (BikeRentMasterVO BikeRentMasterVO : BikeRentMasterList) {
-					// 2.找出rent_master裡面店家有的訂單編號
-					if (BikeRentMasterVO.getSq_bike_store_id().equals(BikeStoreID)) {
-						BikeSearchMasterList.add(BikeRentMasterVO.getSq_rent_id());
-					}
-				}
-
-				// 3.找出rent_detail裡面店家有幾張訂單明細
-				for (BikeRentDetailVO BikeRentDetailVO : BikeRentDetailList) {
-					for (String BikeSearchId : BikeSearchMasterList) {
-						if (BikeSearchId.equals(BikeRentDetailVO.getSq_rent_id())) {
-							BikeSearchDetailList.add(BikeRentDetailVO);
-						}
-					}
-				}
-
-				// 印出訂單明細物件店家擁有並開始比對時間
-				Integer failMatch = 0;// 比對成功次數
-				for (BikeRentDetailVO BikeSearchDetail : BikeSearchDetailList) {
-					Date sqlStartDate = new Date(BikeSearchDetail.getRsved_rent_date().getTime()); // timeStamp轉換成util.Date
-					Date sqlEndDate = new Date(BikeSearchDetail.getEx_return_date().getTime());
-					// 開始比對時間simpleFormat
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
-					try {
-						Date inputStartDate = sdf.parse(startDate);
-						Date inputEndDate = sdf.parse(endDate);
-						if (!(inputStartDate.before(sqlStartDate) && inputEndDate.before(sqlStartDate))) {
-							if (!(inputStartDate.after(sqlEndDate) && inputEndDate.after(sqlEndDate))) {
-								failMatch++;
-							}
-							;
-						}
-					} catch (ParseException e) {
-						e.printStackTrace();
-					}
-				}
-				Integer Bike = BikeSvc.findStoreBikeEmpty(BikeStoreID);
-				Integer matchBike = Bike - failMatch;
-				// System.out.println(BikeStoreVO.getBike_store_name()+":"+matchBike+"輛");
 				map.put(BikeStoreVO.getBike_store_name(), matchBike);
-			}
-			;
-
+			};
+			
 			JSONObject responseJSONObject = new JSONObject(map);
 			out.println(responseJSONObject);
 		}
@@ -126,7 +78,7 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 			String area = request.getParameter("area");
 			// 租車店家
 			
-			HashMap<String, List>  map = new HashMap<>();
+			HashMap<String, List<BikeStoreAreaModel>>  map = new HashMap<>();
 			BikeService bikeSvc = new BikeService();
 			BikeStoreService BikeStoreSvc = new BikeStoreService();
 			//暫存的model 傳回前端頁面
@@ -148,7 +100,83 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 			JSONObject responseJSONObject = new JSONObject(map);
 			out.println(responseJSONObject);
 		}
+		
+		
+		if("confirm".equals(action)) {
+			//接收參數
+			String sq_bike_store_id = request.getParameter("sq_bike_store_id");
+			String startDate = request.getParameter("startDate");
+			String endDate = request.getParameter("endDate"); 
+			String matchBike = request.getParameter("matchBike");
+			
+			
+			//查詢資料
+			BikeStoreService BikeStoreSvc = new BikeStoreService();
+			BikeStoreVO BikeStoreVO= BikeStoreSvc.findByPrimaryKey(sq_bike_store_id);
+			session.setAttribute("BikeStoreVO", BikeStoreVO);
+			session.setAttribute("startDate", startDate);
+			session.setAttribute("endDate", endDate);
+			session.setAttribute("matchBike", matchBike);
+			out.println(request.getContextPath()+"/front-end/bike/rentMaster.jsp");
+		}
 
+	}
+	
+	
+	public Integer findDateEmptyBike(String startDate , String endDate , String BikeStoreID) {
+		// 單車物件
+		BikeService BikeSvc = new BikeService();
+		// 訂單明細
+		BikeRentDetailService BikeRentDetailSvc = new BikeRentDetailService();
+		// 主要訂單
+		BikeRentMasterService BikeRentMasterSvc = new BikeRentMasterService();
+
+		List<BikeRentMasterVO> BikeRentMasterList = BikeRentMasterSvc.getAll();
+		List<BikeRentDetailVO> BikeRentDetailList = BikeRentDetailSvc.getAll();
+
+		List<String> BikeSearchMasterList = new ArrayList<>();// 找出rent_master裡面店家有的訂單編號的LIST
+
+		List<BikeRentDetailVO> BikeSearchDetailList = new ArrayList<>();// 找出rent_detail裡面店家有的訂單物件的LIST
+
+		for (BikeRentMasterVO BikeRentMasterVO : BikeRentMasterList) {
+			// 2.找出rent_master裡面店家有的訂單編號
+			if (BikeRentMasterVO.getSq_bike_store_id().equals(BikeStoreID)) {
+				BikeSearchMasterList.add(BikeRentMasterVO.getSq_rent_id());
+			}
+		}
+
+		// 3.找出rent_detail裡面店家有幾張訂單明細
+		for (BikeRentDetailVO BikeRentDetailVO : BikeRentDetailList) {
+			for (String BikeSearchId : BikeSearchMasterList) {
+				if (BikeSearchId.equals(BikeRentDetailVO.getSq_rent_id())) {
+					BikeSearchDetailList.add(BikeRentDetailVO);
+				}
+			}
+		}
+
+		// 印出訂單明細物件店家擁有並開始比對時間
+		Integer failMatch = 0;// 比對成功次數
+		for (BikeRentDetailVO BikeSearchDetail : BikeSearchDetailList) {
+			Date sqlStartDate = new Date(BikeSearchDetail.getRsved_rent_date().getTime()); // timeStamp轉換成util.Date
+			Date sqlEndDate = new Date(BikeSearchDetail.getEx_return_date().getTime());
+			// 開始比對時間simpleFormat
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
+			try {
+				Date inputStartDate = sdf.parse(startDate);
+				Date inputEndDate = sdf.parse(endDate);
+				if (!(inputStartDate.before(sqlStartDate) && inputEndDate.before(sqlStartDate))) {
+					if (!(inputStartDate.after(sqlEndDate) && inputEndDate.after(sqlEndDate))) {
+						failMatch++;
+					};
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		Integer Bike = BikeSvc.findStoreBikeEmpty(BikeStoreID);
+		Integer matchBike = Bike - failMatch;
+		// System.out.println(BikeStoreVO.getBike_store_name()+":"+matchBike+"輛");
+		return matchBike;
 	}
 
 }
