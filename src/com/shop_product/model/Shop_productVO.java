@@ -7,13 +7,10 @@ public class Shop_productVO implements java.io.Serializable{
 	private String sq_product_id;
 	private String sq_brand_id;
 	private String product_kind_name;
-	private Integer stock_total;
 	private String product_name;
 	private Integer product_price;
 	private byte[] product_pic;
 	private String product_detail;
-	private String product_model;
-	private String product_color;
 	private Date add_date;
 	private String product_material;
 	private Integer product_status;
@@ -35,12 +32,6 @@ public class Shop_productVO implements java.io.Serializable{
 	}
 	public void setProduct_kind_name(String product_kind_name) {
 		this.product_kind_name = product_kind_name;
-	}
-	public Integer getStock_total() {
-		return stock_total;
-	}
-	public void setStock_total(Integer stock_total) {
-		this.stock_total = stock_total;
 	}
 	public String getProduct_name() {
 		return product_name;
@@ -65,18 +56,6 @@ public class Shop_productVO implements java.io.Serializable{
 	}
 	public void setProduct_detail(String product_detail) {
 		this.product_detail = product_detail;
-	}
-	public String getProduct_model() {
-		return product_model;
-	}
-	public void setProduct_model(String product_model) {
-		this.product_model = product_model;
-	}
-	public String getProduct_color() {
-		return product_color;
-	}
-	public void setProduct_color(String product_color) {
-		this.product_color = product_color;
 	}
 	public Date getAdd_date() {
 		return add_date;
