@@ -17,7 +17,7 @@ body {
 
 .jumbotron {
   margin-bottom: 0;
-  background-image: url("C:\G4_Project\git\EA101-G4\WebContent\front-end\img\18-1.jpg");
+  background-image: url("<%=request.getContextPath()%>/front-end/page-file/img/18-1.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -45,7 +45,7 @@ body {
 
 /*導覽列顏色+透明度*/
 
-nav {
+.page-nav {
   background-color: #fff933;
   font-family: "Microsoft YaHei", cursive;
   margin-right: auto;

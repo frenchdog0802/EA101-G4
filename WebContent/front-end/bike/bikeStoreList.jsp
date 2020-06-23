@@ -3,88 +3,9 @@ pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.bike.store.model.*"%>
-<link rel="stylesheet"
-href="<%=request.getContextPath()%>/front-end/css/bikeStoreList.css">
+
 <jsp:useBean id="BikeSvc" class="com.bike.bike.model.BikeService" />
-<style>
 
-html,
-body {
-  font-family: 'Noto Sans TC', sans-serif !important;
-  height: 100%;
-}
-::-webkit-scrollbar {
-  display:none;
-}
-
-.jumbotron {
-  margin-bottom: 0;
-  background-image: url("\EA101-G4\WebContent\front-end\img\18-1.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-}
-
-
-
-.jumbotron .container {
-  font-size: 32px !important;
-  padding: 4rem;
-}
-
-
-
-
-/*調整底部footer*/
-#footer-main {
-  background: #222;
-  color: white;
-  font-size: 0.8rem;
-  padding: 2.5rem 0;
-  font-family: "Microsoft YaHei", cursive;
-}
-
-
-/*導覽列顏色+透明度*/
-
-nav {
-  background-color: #fff933;
-  font-family: "Microsoft YaHei", cursive;
-  margin-right: auto;
-  margin-left: auto;
-  line-height: 1rem;
-}
-.dropdown-menu {
-  width: auto;
-  height: auto;
-  background-color: #fff933;
-  font-family: "Microsoft YaHei", cursive;
-  font-size: 16px;
-  margin: 2px;
-  padding-top: 5px;
-  overflow: hidden;
-  float: left;
-  line-height: 35px;
-  min-width: 100%;
-  border: 0px;
-}
-#submenu >li a {
-  cursor: pointer;
-  width: 100%;
-  text-align:center;
-  color:black;
-}
-.dropdown-item{
- color: black;
- width: 100%;
-}
-.sidebarYellow-1{
-  background-color: #fff933;
-}
-.sidebarYellow-2{
-  background-color: #fff000;
-}
-</style>
 <%
 BikeStoreService BikeStoreDAOService = new BikeStoreService();
 List<BikeStoreVO> list = BikeStoreDAOService.getAll();
@@ -92,6 +13,14 @@ pageContext.setAttribute("list", list);
 %>
 <html lang="en">
 <head>
+<style>
+@media (max-width: 1920px) {
+  .search{
+  	width: 270px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 	<%@include file="/front-end/bike/page-nav"%>
@@ -243,7 +172,8 @@ pageContext.setAttribute("list", list);
 
 			//ajax submit data
 			$("#tbody tr").click(function(e){
-				console.log($(this).text());
+				
+				console.log($(this).find("th").eq(0).html());
 			})
 			
 			//table hover
