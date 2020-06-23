@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Required meta tags always come first -->
@@ -16,8 +15,8 @@
     </style>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/page.css">
-
+<!--     <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/page.css"> -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/page.css">
 
 </head>
 <body>
@@ -29,7 +28,7 @@
             <h1 class="navbar-brand">
                 <!-- 導覽列圖片 -->
                 <!-- <img src="https://img.icons8.com/ios/50/000000/cycling-bmx.png" /> -->
-                <img src="bike-img/home10.png" />
+                <img src="<%=request.getContextPath()%>/front-end/img/home10.png" />
             </h1>
             <button data-toggle="collapse" class="navbar-toggler" data-target="#submenu">
                 <span class="navbar-toggler-icon"></span>
@@ -111,15 +110,17 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-item nav-link btn-dark rounded text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sign-in</a>
                         <!--text-dark active nav-item  -->
+
                     </li>
                 </ul>
             </div>
         </nav>
     </div>
 </div>
+
 <section class="jumbotron text-xs-center ">
     <div class="container my-5">
-        <p class="h1 jumbotron-heading text-white">自己更改名稱</p>
+        <p class="h1 jumbotron-heading text-white">購物商城</p>
     </div>
 </section>
 
@@ -164,14 +165,10 @@
 </footer>
 <!-- footer--end-->
 
-
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
-
-	<script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="bootstrap-components/js/bootstrap.min.js"></script>
 
 
 <script>

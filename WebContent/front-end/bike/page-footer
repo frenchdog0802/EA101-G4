@@ -37,17 +37,12 @@
     </div>
 </footer>
 <!-- footer--end-->
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script
-		src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="bootstrap-components/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/page-file/js/nav.js"></script>
 
-<script src="<%=request.getContextPath()%>/front-end/js/nav.js"></script>
-
-<!--datetimepicker-->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>		
 
 

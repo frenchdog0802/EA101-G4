@@ -17,11 +17,11 @@ public class BikeStoreDAO implements BikeStoreDAO_interface {
 
 	// Insert
 	public static String INSERT_STMT = "INSERT INTO bike_store"
-			+ "(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_longitude,store_latitude,store_opentime,store_status)"
-			+ "VALUES(sq_bike_store_id.NEXTVAL,?,?,?,?,?,?,?)";
+			+ "(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_longitude,store_latitude,store_opentime,store_status,area)"
+			+ "VALUES(sq_bike_store_id.NEXTVAL,?,?,?,?,?,?,?,?)";
 
 	// Update
-	public static String UPDATE_STMT = "UPDATE bike_store SET  bike_store_name = ?,bike_store_location = ?,bike_store_phone = ?,store_longitude = ?,store_latitude= ?,store_opentime = ?,store_status = ? WHERE sq_bike_store_id = ?";
+	public static String UPDATE_STMT = "UPDATE bike_store SET  bike_store_name = ?,bike_store_location = ?,bike_store_phone = ?,store_longitude = ?,store_latitude= ?,store_opentime = ?,store_status = ?,area= ? WHERE sq_bike_store_id = ?";
 
 	// delete
 	public static String DELETE_STMT = "DELETE FROM bike_store WHERE sq_bike_store_id = ?";
@@ -46,6 +46,7 @@ public class BikeStoreDAO implements BikeStoreDAO_interface {
 			pstmt.setDouble(5, BikeStoreVO.getStore_latitute());
 			pstmt.setString(6, BikeStoreVO.getStore_opentime());
 			pstmt.setInt(7, BikeStoreVO.getStore_status());
+			pstmt.setString(8, BikeStoreVO.getArea());
 
 			pstmt.executeUpdate();
 
@@ -90,7 +91,8 @@ public class BikeStoreDAO implements BikeStoreDAO_interface {
 
 			pstmt.setString(6, BikeStoreVO.getStore_opentime());
 			pstmt.setInt(7, BikeStoreVO.getStore_status());
-			pstmt.setString(8, BikeStoreVO.getSq_bike_store_id());
+			pstmt.setString(8, BikeStoreVO.getArea());
+			pstmt.setString(9, BikeStoreVO.getSq_bike_store_id());
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -174,6 +176,7 @@ public class BikeStoreDAO implements BikeStoreDAO_interface {
 				BikeStoreVO.setStore_latitute(rs.getDouble(6));
 				BikeStoreVO.setStore_opentime(rs.getString(7));
 				BikeStoreVO.setStore_status(rs.getInt(8));
+				BikeStoreVO.setArea(rs.getString(9));
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -223,6 +226,7 @@ public class BikeStoreDAO implements BikeStoreDAO_interface {
 				bikeVo.setStore_latitute(rs.getDouble(6));
 				bikeVo.setStore_opentime(rs.getString(7));
 				bikeVo.setStore_status(rs.getInt(8));
+				bikeVo.setArea(rs.getString(9));
 				list.add(bikeVo);
 			}
 			
