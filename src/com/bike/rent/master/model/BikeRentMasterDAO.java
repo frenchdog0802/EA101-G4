@@ -203,18 +203,13 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 			if (con != null) {
 				try {
+					rs.close();
+					pstmt.close();
 					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -255,6 +250,16 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			if (con != null) {
+				try {
+					rs.close();
+					pstmt.close();
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
 		}
 
 		return list;

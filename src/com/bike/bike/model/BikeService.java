@@ -10,6 +10,10 @@ public class BikeService {
 		this.BikeDAO = new BikeDAO();
 	}
 	
+	public List<String> findStoreBikeType(String sq_bike_store_id) {
+		return BikeDAO.findStoreBikeType(sq_bike_store_id);
+	}
+	
 	public Integer findStoreBikeEmpty(String sq_bike_store_id) {
 		return BikeDAO.findStoreBikeEmpty(sq_bike_store_id);
 	}
