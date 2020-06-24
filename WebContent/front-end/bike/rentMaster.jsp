@@ -80,10 +80,10 @@
 				<div class="row">
 					<div class="col">
 						<div class="form-group">
-							<select class="form-control">
-								<option value="" disabled selected>選擇車種</option>
+							<select class="form-control selectType">
+								<option  disabled selected>選擇車種</option>
 								<c:forEach var="bikeTypeId" items="${BikeSvc.findStoreBikeType(BikeStoreVO.sq_bike_store_id)}">
-								<option>${BikeTypeSvc.findByPrimaryKey(bikeTypeId).bike_type_name}</option>
+								<option value="${bikeTypeId}">${BikeTypeSvc.findByPrimaryKey(bikeTypeId).bike_type_name}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -140,7 +140,22 @@
 
 	<script>
 	$(function(){
-		$(".fun-text").text("選擇車種");  // text("")裡面自己輸入功能名稱 
+		$(".fun-text").text("選擇車種");  // text("")裡面輸入自己功能名稱 
+		$(".selectType").change(function(){
+			var bikeTypeId = $(this).val();
+			$.ajax({
+				type:"POST",
+				url:"<%=request.getContextPath()%>/bike/BikeStoreAjaxServlet.do",
+				data:{
+					action:"find_type_quantity",
+					sq_bike_type_id = bikeTypeId;
+				},
+				success:function(data){
+					console.log(data);
+				}
+				
+			})
+		})
 	});
 	</script>
 
