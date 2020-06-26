@@ -33,7 +33,48 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT * FROM bike_rent_master WHERE sq_rent_id = ?";
 	// get all
 	private static final String GET_ALL_STMT = "SELECT * FROM bike_rent_master";
+	
+	//get MASTERID
+	private static final String GET_ALL_MASTERID_FORM_STORE = "select sq_rent_id from bike_rent_master where SQ_BIKE_STORE_ID= ?";
 
+	
+	@Override
+	public List<String> getRentMasterId(String sq_bike_store_id){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<String> list= new ArrayList<>();
+		ResultSet rs = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userId, passwd);
+			pstmt = con.prepareStatement(GET_ALL_MASTERID_FORM_STORE);
+			pstmt.setString(1, sq_bike_store_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String masterId = rs.getString(1);
+				list.add(masterId);
+			}
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (con != null) {
+				try {
+					rs.close();
+					pstmt.close();
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	
 	@Override
 	public void insert(BikeRentMasterVO BikeRentMasterVO) {
 		Connection con = null;

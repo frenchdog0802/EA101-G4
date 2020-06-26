@@ -14,4 +14,8 @@ public class BikeRentMasterService {
 		return dao.getAll();
 	}
 	
+	
+	public List<String> getRentMasterId(String sq_bike_store_id){
+		return dao.getRentMasterId(sq_bike_store_id);
+	}
 }

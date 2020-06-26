@@ -9,4 +9,6 @@ public interface BikeRentMasterDAO_interface {
 	public void delete(String sq_rent_id);
 	public BikeRentMasterVO findByPrimaryKey(String sq_rent_id);
 	public List<BikeRentMasterVO> getAll();
+	
+	public List<String> getRentMasterId(String sq_bike_store_id); 
 }

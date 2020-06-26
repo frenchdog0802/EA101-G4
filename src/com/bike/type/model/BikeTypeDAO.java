@@ -205,9 +205,7 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 				// get Blob
 				Blob blob = rs.getBlob(6);
 				BikeTypeVo.setBike_photo(blobToByteArr(blob));
-				
 			}
-
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

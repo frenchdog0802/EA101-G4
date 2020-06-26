@@ -66,7 +66,9 @@
 							
 								<li class="list-group-item">預計還車時間<span class="float-right text-danger">${endDate}</span></li>
 							
-								<li class="list-group-item">目前車種<span class="float-right text-danger">剩餘:${matchBike}台</span></li>
+								<li class="list-group-item">店家目前<span class="float-right text-danger">剩餘:${matchBike}台</span></li>
+								
+								<li class="list-group-item">目前車種<span class="float-right text-danger">剩餘:<span class="bikeSum"></span>台</span></li>
 							
 								
 							</ul>
@@ -80,36 +82,33 @@
 				<div class="row">
 					<div class="col">
 						<div class="form-group">
-							<select class="form-control">
-								<option value="" disabled selected>選擇車種</option>
-								<c:forEach var="bikeTypeId" items="${BikeSvc.findStoreBikeType(BikeStoreVO.sq_bike_store_id)}">
-								<option>${BikeTypeSvc.findByPrimaryKey(bikeTypeId).bike_type_name}</option>
-								</c:forEach>
+							<select class="form-control selectBikeType">
+									<option value="" disabled selected>選擇車種</option>
+									<c:forEach var="bikeTypeId" items="${BikeSvc.findStoreBikeType(BikeStoreVO.sq_bike_store_id)}">
+										<option value="${bikeTypeId}">${BikeTypeSvc.findByPrimaryKey(bikeTypeId).bike_type_name}</option>
+									</c:forEach>
 							</select>
 						</div>
 					</div>
-					<div class="col">
-						<select class="form-control" id="selectBikeQuantity">
+					<div class="col ">
+						<select class="form-control selectBikeQuantity" >
 							<option value="" disabled selected>選擇數量</option>
-							<option>2</option>
 						</select>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col ">
 						<div class="row">
-							<div class="col text-center">
-								<img src="bike-img/6-1.jpg" class="img-thumbnail" alt="">
+							<div class="col text-center ">
+								<img src="bike-img/6-1.jpg" class="img-thumbnail" id="bike-img" alt=""/>
 							</div>
 						</div>
 
 						<div class="row m-3">
 							<div class="col text-center">
-								<h5>Lorem ipsum dolor sit amet.</h5>
+								<h5 class="bike_title"></h5>
 
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Dolore nihil voluptatem, est similique fuga placeat quod alias
-									ab quaerat mollitia!</p>
+								<p class="bike_description"></p>
 							</div>
 						</div>
 
@@ -140,7 +139,38 @@
 
 	<script>
 	$(function(){
-		$(".fun-text").text("選擇車種");  // text("")裡面自己輸入功能名稱 
+		$(".fun-text").text("選擇車種");  // text("")裡面自己輸入功能名稱
+		
+		$(".selectBikeType").click(function(){
+			var bikeTypeId = $(this).val();
+			$.ajax({
+				type:"POST",
+				url:"<%=request.getContextPath()%>/bike/BikeStoreAjaxServlet.do",
+				data:{
+					action:"findTypeQuantity",
+					bikeTypeId : bikeTypeId,
+				},
+				dataType:"JSON",
+				success:function(data){
+					
+					$(".bikeSum").text(data.bikeSum);
+					$(".bike_title").text(data.bike_title);
+					$(".bike_description").text(data.bike_description);
+					$("#bike-img").attr("src","<%=request.getContextPath()%>/photo/DBReader.do?sq_bike_type_id="+bikeTypeId);
+					
+					//select 數量
+					$(".selectBikeQuantity option").remove();
+					var bikeSum = parseInt(data.bikeSum);
+					for(var i=0 ; i<=bikeSum ; i++){
+						$(".selectBikeQuantity").append($("<option></option>").attr("value", i).text(i));
+					}
+					
+				},
+			
+			})
+		})
+		
+		
 	});
 	</script>
 

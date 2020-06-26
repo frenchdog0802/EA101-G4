@@ -30,6 +30,8 @@ import com.bike.rent.master.model.BikeRentMasterVO;
 import com.bike.store.model.BikeStoreService;
 import com.bike.store.model.BikeStoreVO;
 import com.bike.store.temporarily.model.BikeStoreAreaModel;
+import com.bike.type.model.BikeTypeService;
+import com.bike.type.model.BikeTypeVO;
 import com.google.gson.Gson;
 
 public class BikeStoreAjaxServlet extends HttpServlet {
@@ -109,7 +111,6 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 			String endDate = request.getParameter("endDate"); 
 			String matchBike = request.getParameter("matchBike");
 			
-			
 			//查詢資料
 			BikeStoreService BikeStoreSvc = new BikeStoreService();
 			BikeStoreVO BikeStoreVO= BikeStoreSvc.findByPrimaryKey(sq_bike_store_id);
@@ -119,8 +120,73 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 			session.setAttribute("matchBike", matchBike);
 			out.println(request.getContextPath()+"/front-end/bike/rentMaster.jsp");
 		}
+		
+		//找出目前商家的車種有幾台可以租
+		if("findTypeQuantity".equals(action)) {
+			//取參數
+			String sq_bike_type_id = request.getParameter("bikeTypeId");
+			String startDate = (String)session.getAttribute("startDate");
+			String endDate = (String)session.getAttribute("endDate");
+			
+			BikeStoreVO BikeStoreVO = (BikeStoreVO)session.getAttribute("BikeStoreVO");
+			BikeService BikeSvc = new BikeService();
+			
+			//找出這店家擁有這車種的所有車輛
+			String sq_bike_store_id = BikeStoreVO.getSq_bike_store_id();
+			Integer allBike = BikeSvc.findBikeTypeAndStore(sq_bike_store_id, sq_bike_type_id);
+			
+			//找出訂單master裡面商家的訂單編號
+			BikeRentMasterService BikeRentMasterSvc = new BikeRentMasterService();
+			BikeRentDetailService BikeDetailSvc = new BikeRentDetailService();
+			List<String> BikeSearchMasterList = BikeRentMasterSvc.getRentMasterId(sq_bike_store_id);
+			 
+			//找出明細裡面商家擁有的車種
+			Integer failMatch = 0;
+			for(String sq_rent_id :BikeSearchMasterList ) {
+				List<BikeRentDetailVO> BikeDetailVOlist = BikeDetailSvc.getDetail(sq_rent_id, sq_bike_type_id);
+				//比對每張訂單
+				for(BikeRentDetailVO BikeRentDetailVO: BikeDetailVOlist) {
+					//取出日期
+					Date sqlStartDate = new Date(BikeRentDetailVO.getRsved_rent_date().getTime()); // timeStamp轉換成util.Date
+					Date sqlEndDate = new Date(BikeRentDetailVO.getEx_return_date().getTime());
+					// 開始比對時間simpleFormat
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
+					try {
+						Date inputStartDate = sdf.parse(startDate);
+						Date inputEndDate = sdf.parse(endDate);
+						if (!(inputStartDate.before(sqlStartDate) && inputEndDate.before(sqlStartDate))) {
+							if (!(inputStartDate.after(sqlEndDate) && inputEndDate.after(sqlEndDate))) {
+								failMatch++;
+							};
+						}
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
+			//bikeSum結果車輛數
+			Integer bikeSum = allBike - failMatch;
+			BikeTypeService BikeTypeSvc = new BikeTypeService();
+			BikeTypeVO BikeTypeVO  = BikeTypeSvc.findByPrimaryKey(sq_bike_type_id);
+			//建構回傳JSON
+			HashMap<String, String> userMap = new HashMap<>();
+			try {
+				userMap.put("bikeSum", Integer.toString(bikeSum));
+				userMap.put("bike_title" ,BikeTypeVO.getBike_title());
+				userMap.put("bike_description", BikeTypeVO.getBike_description());
+			}catch(NullPointerException nlce) {
+				nlce.printStackTrace();
+				System.out.println("BikeStoreAjax空直 之後再抓蟲 176行");
+			}
+			
+			JSONObject reponseJSONObject = new JSONObject(userMap);
+			out.println(reponseJSONObject);
+			
+			
+		}
 
-	}
+	}//doPost end
 	
 	
 	public Integer findDateEmptyBike(String startDate , String endDate , String BikeStoreID) {
@@ -130,20 +196,12 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 		BikeRentDetailService BikeRentDetailSvc = new BikeRentDetailService();
 		// 主要訂單
 		BikeRentMasterService BikeRentMasterSvc = new BikeRentMasterService();
-
-		List<BikeRentMasterVO> BikeRentMasterList = BikeRentMasterSvc.getAll();
 		List<BikeRentDetailVO> BikeRentDetailList = BikeRentDetailSvc.getAll();
+		List<String> BikeSearchMasterList = null; // 裝入rent_master裡面店家有的訂單編號的LIST
+		List<BikeRentDetailVO> BikeSearchDetailList = new ArrayList<>();// 裝入rent_detail裡面店家有的訂單物件的LIST
 
-		List<String> BikeSearchMasterList = new ArrayList<>();// 找出rent_master裡面店家有的訂單編號的LIST
-
-		List<BikeRentDetailVO> BikeSearchDetailList = new ArrayList<>();// 找出rent_detail裡面店家有的訂單物件的LIST
-
-		for (BikeRentMasterVO BikeRentMasterVO : BikeRentMasterList) {
-			// 2.找出rent_master裡面店家有的訂單編號
-			if (BikeRentMasterVO.getSq_bike_store_id().equals(BikeStoreID)) {
-				BikeSearchMasterList.add(BikeRentMasterVO.getSq_rent_id());
-			}
-		}
+		//2.找出rent_master裡面店家有的訂單編號
+		BikeSearchMasterList = BikeRentMasterSvc.getRentMasterId(BikeStoreID);
 
 		// 3.找出rent_detail裡面店家有幾張訂單明細
 		for (BikeRentDetailVO BikeRentDetailVO : BikeRentDetailList) {
