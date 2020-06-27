@@ -16,7 +16,10 @@
  
  		
 	<%@include file="/front-end/page-file/page-footer"%>
-<!-- 	基本的jquery已經引入  需要datetimepicker再自己引入 -->
+<!-- 	jquery已經引入  -->
+<!-- 	sweetAlert已經引入   -->
+<!-- 	boostrap4已經引入   -->
+<!-- 需要datetimepicker再自己引入 -->
 
 
 	<script>
