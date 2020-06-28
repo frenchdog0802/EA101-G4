@@ -32,6 +32,55 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT * FROM bike_rent_detail WHERE sq_rent_detail_id=?";
 	// get all
 	private static final String GET_ALL_STMT = "SELECT * FROM bike_rent_detail";
+	//找出明細裡面商家擁有的車種
+	private static final String GET_ALL_DETAIL = "SELECT * FROM bike_rent_detail WHERE SQ_rent_id= ? and sq_bike_type_id = ?";
+	
+	
+	@Override
+	public List<BikeRentDetailVO> getDetail(String sq_rent_id,String sq_bike_type_id){
+		List<BikeRentDetailVO> list = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userId, passwd);
+			pstmt = con.prepareStatement(GET_ALL_DETAIL);
+			pstmt.setString(1,sq_rent_id );
+			pstmt.setString(2, sq_bike_type_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BikeRentDetailVO BikeRentDetailVO = new BikeRentDetailVO();
+				BikeRentDetailVO.setSq_rent_detail_id(rs.getString(1));
+				BikeRentDetailVO.setSq_rent_id(rs.getString(2));
+				BikeRentDetailVO.setSq_bike_type_id(rs.getString(3));
+				BikeRentDetailVO.setSq_bike_id(rs.getString(4));
+				BikeRentDetailVO.setPrice(rs.getInt(5));
+				BikeRentDetailVO.setExtra_cost(rs.getInt(6));
+				BikeRentDetailVO.setRsved_rent_date(rs.getTimestamp(7));
+				BikeRentDetailVO.setEx_return_date(rs.getTimestamp(8));
+				BikeRentDetailVO.setReal_return_date(rs.getTimestamp(9));
+				list.add(BikeRentDetailVO);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null) {
+				try {
+					rs.close();
+					pstmt.close();
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
+		
+	}
 
 	@Override
 	public void insert(BikeRentDetailVO BikeRentDetailVO) {
@@ -186,10 +235,11 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 				BikeRentDetailVO.setSq_rent_id(rs.getString(2));
 				BikeRentDetailVO.setSq_bike_type_id(rs.getString(3));
 				BikeRentDetailVO.setSq_bike_id(rs.getString(4));
-				BikeRentDetailVO.setExtra_cost(rs.getInt(5));
-				BikeRentDetailVO.setRsved_rent_date(rs.getTimestamp(6));
-				BikeRentDetailVO.setEx_return_date(rs.getTimestamp(7));
-				BikeRentDetailVO.setReal_return_date(rs.getTimestamp(8));
+				BikeRentDetailVO.setPrice(rs.getInt(5));
+				BikeRentDetailVO.setExtra_cost(rs.getInt(6));
+				BikeRentDetailVO.setRsved_rent_date(rs.getTimestamp(7));
+				BikeRentDetailVO.setEx_return_date(rs.getTimestamp(8));
+				BikeRentDetailVO.setReal_return_date(rs.getTimestamp(9));
 				
 			}
 

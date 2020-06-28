@@ -41,17 +41,17 @@ public class TESTDAO {
 //		System.out.println(bikeFk.getPrice());
 //		
 		//get_All
-		List<BikeTypeVO> bikeAll = dao.getAll();
-		for(BikeTypeVO bike : bikeAll) {
-			System.out.print(bike.getSq_bike_type_id());
-			System.out.print(bike.getBike_type_name());
-			System.out.print(bike.getBike_title());
-			System.out.print(bike.getBike_description());
-			System.out.print(bike.getBike_photo());
-			System.out.print(bike.getPrice());
-			System.out.println();
+//		List<BikeTypeVO> bikeAll = dao.getAll();
+//		for(BikeTypeVO bike : bikeAll) {
+//			System.out.print(bike.getSq_bike_type_id());
+//			System.out.print(bike.getBike_type_name());
+//			System.out.print(bike.getBike_title());
+//			System.out.print(bike.getBike_description());
+//			System.out.print(bike.getBike_photo());
+//
+//			System.out.println();
 //			
-		}
+//		}
 	}
 
 }

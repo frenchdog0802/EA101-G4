@@ -32,6 +32,7 @@ public class DBReader extends HttpServlet {
 			in.close();
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("沒圖片");
 		}finally {
 			

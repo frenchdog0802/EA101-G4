@@ -8,6 +8,12 @@ public class TestBikeRentMasterDAO {
 
 		
 		BikeRentMasterDAO_interface BikeRentMasterDAO = new BikeRentMasterDAO();
+		
+		List<String> list = BikeRentMasterDAO.getRentMasterId("620001");
+		
+		for(String i : list) {
+			System.out.println(i);
+		}
 //		
 //		//insert	
 //		BikeRentMasterVO BikeRentMasterVO = new BikeRentMasterVO();
@@ -55,19 +61,19 @@ public class TestBikeRentMasterDAO {
 //		System.out.println(BikeRentMasterVO.getOrder_date());
 		
 		//get all
-		List<BikeRentMasterVO> list = BikeRentMasterDAO.getAll();
-		
-		for(BikeRentMasterVO BikeRentMasterVO:list) {
-			System.out.println(BikeRentMasterVO.getSq_rent_id());
-			System.out.println(BikeRentMasterVO.getSq_member_id());
-			System.out.println(BikeRentMasterVO.getSq_bike_store_id());
-			System.out.println(BikeRentMasterVO.getRent_payment());
-			System.out.println(BikeRentMasterVO.getOd_total_price());
-			System.out.println(BikeRentMasterVO.getRent_name());
-			System.out.println(BikeRentMasterVO.getRent_phone());
-			System.out.println(BikeRentMasterVO.getRent_od_status());
-			System.out.println(BikeRentMasterVO.getOrder_date());
-		}
+//		List<BikeRentMasterVO> list = BikeRentMasterDAO.getAll();
+//		
+//		for(BikeRentMasterVO BikeRentMasterVO:list) {
+//			System.out.println(BikeRentMasterVO.getSq_rent_id());
+//			System.out.println(BikeRentMasterVO.getSq_member_id());
+//			System.out.println(BikeRentMasterVO.getSq_bike_store_id());
+//			System.out.println(BikeRentMasterVO.getRent_payment());
+//			System.out.println(BikeRentMasterVO.getOd_total_price());
+//			System.out.println(BikeRentMasterVO.getRent_name());
+//			System.out.println(BikeRentMasterVO.getRent_phone());
+//			System.out.println(BikeRentMasterVO.getRent_od_status());
+//			System.out.println(BikeRentMasterVO.getOrder_date());
+//		}
 		
 		
 		

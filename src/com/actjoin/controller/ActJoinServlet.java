@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+
+import com.act.model.ActVO;
 import com.actjoin.model.ActJoinService;
 import com.actjoin.model.ActJoinVO;
 
@@ -86,10 +88,7 @@ public class ActJoinServlet extends HttpServlet {
 						.getRequestDispatcher("/back-end/joinActivity/select_actjoinpage.jsp");
 				failureView.forward(req, res);
 			}
-		}
-		
-		
-		
+		}		
 		
 		if ("delete".equals(action)) { // 來自listAllAct.jsp
 

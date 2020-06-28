@@ -397,7 +397,6 @@ CREATE TABLE ACTIVITY (
        ACT_TITLE VARCHAR2(200) NOT NULL,
        MAX_POPULATION NUMBER(10) CHECK(MAX_POPULATION>0) NOT NULL,
        MIN_POPULATION NUMBER(10) CHECK(MIN_POPULATION>0) NOT NULL,
-       POPULATION NUMBER(20) CHECK(POPULATION>0) NOT NULL, 
        ACT_DESCRIPTION CLOB NOT NULL, 
        START_TIME DATE NOT NULL, 
        END_TIME DATE NOT NULL, 
@@ -592,8 +591,9 @@ CREATE TABLE bike_type(
   bike_type_name   VARCHAR2(200) NOT NULL,
   bike_title       VARCHAR2(200) NOT NULL,
   bike_description CLOB ,
-  bike_price       NUMBER(8,2)   NOT NULL,
   bike_photo       BLOB ,
+  bike_daily_price       NUMBER(8,2)   NOT NULL,
+  bike_hourly_price       NUMBER(8,2)   NOT NULL,
   
   PRIMARY KEY(sq_bike_type_id)
 );
@@ -612,9 +612,10 @@ CREATE TABLE bike(
 );
 COMMENT ON COLUMN  bike.bike_status IS
 '車輛狀態:
-0:維修
-1:遺失
-2:報廢
+0:正常
+1:維修
+2:遺失
+3:報廢
 ';
 
 

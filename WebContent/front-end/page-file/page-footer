@@ -10,27 +10,28 @@
 <footer id="footer-main">
     <div class="container">
         <div class="row">
-            <div class="col"><span class="h4 font-weight-bolder text-dark">LOGO</span></div>
-            <div class="col"><span class="h4 font-weight-bolder text-dark">LINKS</span></div>
+            <div class="col"><span class="h4 font-weight-bolder text-white">LOGO</span></div>
+            <div class="col"><span class="h4 font-weight-bolder text-white">LINKS</span></div>
         </div>
         <div class="row">
-            <div class="col-6">
-                <p>uncopyright 2020. EA101</p>
+            <div class="col-6 py-3">
+                <img src="<%=request.getContextPath()%>/front-end/index/indexImg/PAPAGO.png" height="100" width="100" class="img-fluid">
+                 <p class="mt-3 text-dark">uncopyright 2020. EA101-G4</p>
             </div>
             <div class="col-sm-3">
-                <ul class="list-unstyled">
-                    <li><a class="text-light" href="#">home</a></li>
-                    <li><a class="text-light" href="#">what we do</a></li>
-                    <li><a class="text-light" href="#">about</a></li>
-                    <li><a class="text-light" href="#">latest</a></li>
+                <ul class="list-unstyled ">
+                    <li class="mt-3"><a class="text-dark" href="#">home</a></li>
+                    <li class="mt-3"><a class="text-dark" href="#">what we do</a></li>
+                    <li class="mt-3"><a class="text-dark" href="#">about</a></li>
+                    <li class="mt-3"><a class="text-dark" href="#">latest</a></li>
                 </ul>
             </div>
             <div class="col-sm-3">
                 <ul class="list-unstyled">
-                    <li><a class="text-light" href="#">facebook</a></li>
-                    <li><a class="text-light" href="#">twitter</a></li>
-                    <li><a class="text-light" href="#">youtube</a></li>
-                    <li><a class="text-light" href="#">linkedin</a></li>
+                    <li class="mt-3"><a class="text-dark" href="#">facebook</a></li>
+                    <li class="mt-3"><a class="text-dark" href="#">twitter</a></li>
+                    <li class="mt-3"><a class="text-dark" href="#">youtube</a></li>
+                    <li class="mt-3"><a class="text-dark" href="#">linkedin</a></li>
                 </ul>
             </div>
         </div>
@@ -43,6 +44,8 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/front-end/page-file/js/nav.js"></script>
+<!-- sweet alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 
 
