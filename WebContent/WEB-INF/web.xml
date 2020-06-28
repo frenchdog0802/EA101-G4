@@ -11,6 +11,15 @@
   </welcome-file-list>
   
 <!--   琮寶 -->
+<!-- BikeEcpayServlet -->
+  <servlet>
+    <servlet-name>BikeEcpayServlet</servlet-name>
+    <servlet-class>com.bike.store.controller.BikeEcpayServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BikeEcpayServlet</servlet-name>
+    <url-pattern>/bike/BikeEcpayServlet.do</url-pattern>
+  </servlet-mapping>
 <!-- BikeStoreAjaxServlet -->
   <servlet>
     <servlet-name>BikeStoreAjaxServlet</servlet-name>
