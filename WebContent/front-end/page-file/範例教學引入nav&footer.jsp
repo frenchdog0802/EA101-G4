@@ -19,7 +19,6 @@
 <!-- 	jquery已經引入  -->
 <!-- 	sweetAlert已經引入   -->
 <!-- 	boostrap4已經引入   -->
-<!-- 需要datetimepicker再自己引入 -->
 
 
 	<script>
