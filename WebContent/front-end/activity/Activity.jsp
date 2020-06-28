@@ -70,10 +70,11 @@
     <c:forEach var="actVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'" width="200" height="185" alt=""></a>
+          <a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}"><img class="card-img-top" src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'" width="200" height="185" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">${actVO.act_title}</a>
+            <a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">${actVO.act_title}</a>
+       
             </h4>
             <p class="card-text">${actVO.act_description}</p>
           </div>
@@ -85,7 +86,7 @@
     <!-- Pagination -->
     <ul class="pagination justify-content-center">
       <li class="page-item">
-        <a class="page-link" href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>" aria-label="Previous">
+        <a class="page-link" id = "previous" href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
           <span class="sr-only">Previous</span>
         </a>
@@ -111,6 +112,42 @@
 		$(".fun-text").text("");  // text("")裡面自己輸入功能名稱 
 	});
 	</script>
+	
+	
+	
+<!-- 	<script type="text/javascript"> -->
+        
+//     var xhr;
+
+//     function createXMLHttpRequest() {
+//         if (window.ActiveXObject) {
+//         	xhr = new ActiveXObject("Microsoft.XMLHTTP");
+//         }
+//         else if (window.XMLHttpRequest) {
+//         	xhr = new XMLHttpRequest();
+//         }
+//     }
+
+//     function callback() {
+//         if (xhr.readyState == 4) {
+//             if (xhr.status == 200) {
+//                 document.write(xhr.responseText);
+//             } else if (xhr.status == 204){
+//                 //xxx();
+//             }
+//         }
+//     }
+    
+//     function getPage(url) {
+
+//         createXMLHttpRequest();
+
+//         xhr.open("GET", url, true);
+//         xhr.onreadystatechange = callback;
+//         xhr.send(null);
+//     }
+
+<!-- </script> -->
 
 </body>
 </html>

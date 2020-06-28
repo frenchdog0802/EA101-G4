@@ -18,12 +18,12 @@ public class ActJDBCDAO implements ActDAO_interface {
 	String userid = "EA101_G4";
 	String passwd = "EA101_G4";
 
-	private static final String INSERT_STMT = "INSERT INTO ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) VALUES ( 'ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
-	private static final String UPDATE = "UPDATE ACTIVITY set SQ_ROUTE_ID=?, SQ_MEMBER_ID=?, ACT_TITLE=?, MAX_POPULATION=?, MIN_POPULATION=?, POPULATION=?, ACT_DESCRIPTION=?, START_TIME=?, END_TIME=?, ACT_START_TIME=?, ACT_END_TIME=?, ACT_PICTURE=?, GP_STATUS=? where SQ_ACTIVITY_ID = ?";
+	private static final String INSERT_STMT = "INSERT INTO ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) VALUES ( 'ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
+	private static final String UPDATE = "UPDATE ACTIVITY set SQ_ROUTE_ID=?, SQ_MEMBER_ID=?, ACT_TITLE=?, MAX_POPULATION=?, MIN_POPULATION=?, ACT_DESCRIPTION=?, START_TIME=?, END_TIME=?, ACT_START_TIME=?, ACT_END_TIME=?, ACT_PICTURE=?, GP_STATUS=? where SQ_ACTIVITY_ID = ?";
 	private static final String CANCEL = "UPDATE ACTIVITY set GP_STATUS=2 where SQ_ACTIVITY_ID = ?";
 	private static final String DELETE = "UPDATE ACTIVITY set GP_STATUS=3 where SQ_ACTIVITY_ID = ?";
-	private static final String GET_ONE_STMT = "SELECT SQ_ACTIVITY_ID, SQ_ROUTE_ID, SQ_MEMBER_ID, ACT_TITLE, MAX_POPULATION, MIN_POPULATION, POPULATION, ACT_DESCRIPTION, to_char(START_TIME,'yyyy-mm-dd') START_TIME, to_char(END_TIME,'yyyy-mm-dd') END_TIME, to_char(ACT_START_TIME,'yyyy-mm-dd') ACT_START_TIME, to_char(ACT_END_TIME,'yyyy-mm-dd') ACT_END_TIME, ACT_PICTURE, GP_STATUS FROM ACTIVITY where SQ_ACTIVITY_ID = ?";
-	private static final String GET_ALL_STMT = "SELECT SQ_ACTIVITY_ID, SQ_ROUTE_ID, SQ_MEMBER_ID, ACT_TITLE, MAX_POPULATION, MIN_POPULATION, POPULATION, ACT_DESCRIPTION, to_char(START_TIME,'yyyy-mm-dd') START_TIME, to_char(END_TIME,'yyyy-mm-dd') END_TIME, to_char(ACT_START_TIME,'yyyy-mm-dd') ACT_START_TIME, to_char(ACT_END_TIME,'yyyy-mm-dd') ACT_END_TIME, ACT_PICTURE, GP_STATUS FROM ACTIVITY order by SQ_ACTIVITY_ID";
+	private static final String GET_ONE_STMT = "SELECT SQ_ACTIVITY_ID, SQ_ROUTE_ID, SQ_MEMBER_ID, ACT_TITLE, MAX_POPULATION, MIN_POPULATION, ACT_DESCRIPTION, to_char(START_TIME,'yyyy-mm-dd') START_TIME, to_char(END_TIME,'yyyy-mm-dd') END_TIME, to_char(ACT_START_TIME,'yyyy-mm-dd') ACT_START_TIME, to_char(ACT_END_TIME,'yyyy-mm-dd') ACT_END_TIME, ACT_PICTURE, GP_STATUS FROM ACTIVITY where SQ_ACTIVITY_ID = ?";
+	private static final String GET_ALL_STMT = "SELECT SQ_ACTIVITY_ID, SQ_ROUTE_ID, SQ_MEMBER_ID, ACT_TITLE, MAX_POPULATION, MIN_POPULATION, ACT_DESCRIPTION, to_char(START_TIME,'yyyy-mm-dd') START_TIME, to_char(END_TIME,'yyyy-mm-dd') END_TIME, to_char(ACT_START_TIME,'yyyy-mm-dd') ACT_START_TIME, to_char(ACT_END_TIME,'yyyy-mm-dd') ACT_END_TIME, ACT_PICTURE, GP_STATUS FROM ACTIVITY order by SQ_ACTIVITY_ID";
 
 	@Override
 	public void insert(ActVO actVO) {
@@ -42,13 +42,12 @@ public class ActJDBCDAO implements ActDAO_interface {
 			pstmt.setString(3, actVO.getAct_title());
 			pstmt.setInt(4, actVO.getMax_population());
 			pstmt.setInt(5, actVO.getMin_population());
-			pstmt.setInt(6, actVO.getPopulation());
-			pstmt.setString(7, actVO.getAct_description());
-			pstmt.setDate(8, actVO.getStart_time());
-			pstmt.setDate(9, actVO.getEnd_time());
-			pstmt.setDate(10, actVO.getAct_start_time());
-			pstmt.setDate(11, actVO.getAct_end_time());
-			pstmt.setBytes(12, actVO.getAct_picture());
+			pstmt.setString(6, actVO.getAct_description());
+			pstmt.setDate(7, actVO.getStart_time());
+			pstmt.setDate(8, actVO.getEnd_time());
+			pstmt.setDate(9, actVO.getAct_start_time());
+			pstmt.setDate(10, actVO.getAct_end_time());
+			pstmt.setBytes(11, actVO.getAct_picture());
 		
 			pstmt.executeUpdate();
 
@@ -95,15 +94,14 @@ public class ActJDBCDAO implements ActDAO_interface {
 			pstmt.setString(3, actVO.getAct_title());
 			pstmt.setInt(4, actVO.getMax_population());
 			pstmt.setInt(5, actVO.getMin_population());
-			pstmt.setInt(6, actVO.getPopulation());
-			pstmt.setString(7, actVO.getAct_description());
-			pstmt.setDate(8, actVO.getStart_time());
-			pstmt.setDate(9, actVO.getEnd_time());
-			pstmt.setDate(10, actVO.getAct_start_time());
-			pstmt.setDate(11, actVO.getAct_end_time());
-			pstmt.setBytes(12, actVO.getAct_picture());
-			pstmt.setInt(13, actVO.getGp_status());
-			pstmt.setString(14, actVO.getSq_activity_id());
+			pstmt.setString(6, actVO.getAct_description());
+			pstmt.setDate(7, actVO.getStart_time());
+			pstmt.setDate(8, actVO.getEnd_time());
+			pstmt.setDate(9, actVO.getAct_start_time());
+			pstmt.setDate(10, actVO.getAct_end_time());
+			pstmt.setBytes(11, actVO.getAct_picture());
+			pstmt.setInt(12, actVO.getGp_status());
+			pstmt.setString(13, actVO.getSq_activity_id());
 
 			pstmt.executeUpdate();
 
@@ -249,7 +247,6 @@ public class ActJDBCDAO implements ActDAO_interface {
 				actVO.setAct_title(rs.getString("ACT_TITLE"));
 				actVO.setMax_population(rs.getInt("MAX_POPULATION"));
 				actVO.setMin_population(rs.getInt("MIN_POPULATION"));
-				actVO.setPopulation(rs.getInt("POPULATION"));
 				actVO.setAct_description(rs.getString("ACT_DESCRIPTION"));
 				actVO.setStart_time(rs.getDate("START_TIME"));
 				actVO.setEnd_time(rs.getDate("END_TIME"));
@@ -322,7 +319,6 @@ public class ActJDBCDAO implements ActDAO_interface {
 				actVO.setAct_title(rs.getString("ACT_TITLE"));
 				actVO.setMax_population(rs.getInt("MAX_POPULATION"));
 				actVO.setMin_population(rs.getInt("MIN_POPULATION"));
-				actVO.setPopulation(rs.getInt("POPULATION"));
 				actVO.setAct_description(rs.getString("ACT_DESCRIPTION"));
 				actVO.setStart_time(rs.getDate("START_TIME"));
 				actVO.setEnd_time(rs.getDate("END_TIME"));
@@ -394,13 +390,12 @@ public class ActJDBCDAO implements ActDAO_interface {
 			pstmt.setString(3, actVO.getAct_title());
 			pstmt.setInt(4, actVO.getMax_population());
 			pstmt.setInt(5, actVO.getMin_population());
-			pstmt.setInt(6, actVO.getPopulation());
-			pstmt.setString(7, actVO.getAct_description());
-			pstmt.setDate(8, actVO.getStart_time());
-			pstmt.setDate(9, actVO.getEnd_time());
-			pstmt.setDate(10, actVO.getAct_start_time());
-			pstmt.setDate(11, actVO.getAct_end_time());
-			pstmt.setBytes(12, actVO.getAct_picture());
+			pstmt.setString(6, actVO.getAct_description());
+			pstmt.setDate(7, actVO.getStart_time());
+			pstmt.setDate(8, actVO.getEnd_time());
+			pstmt.setDate(9, actVO.getAct_start_time());
+			pstmt.setDate(10, actVO.getAct_end_time());
+			pstmt.setBytes(11, actVO.getAct_picture());
 			pstmt.executeUpdate();
 			//掘取對應的自增主鍵值
 			String next_sq_activity_id = null;
@@ -469,86 +464,82 @@ public class ActJDBCDAO implements ActDAO_interface {
 
 		ActJDBCDAO dao = new ActJDBCDAO();
 
-		byte[] pic = getPictureByteArray("C://DB_photos//NankanPark.jpg");
-		// 新增
-		ActVO actVO1 = new ActVO();
-		actVO1.setSq_route_id("RP110001");
-		actVO1.setSq_member_id("910009");
-		actVO1.setAct_title("南崁河濱公園");
-		actVO1.setMax_population(new Integer(20));
-		actVO1.setMin_population(new Integer(5));
-		actVO1.setPopulation(new Integer(10));
-		actVO1.setAct_description("老人小孩皆可娛樂的場所");
-		actVO1.setStart_time(java.sql.Date.valueOf("2020-06-01"));
-		actVO1.setEnd_time(java.sql.Date.valueOf("2020-06-05"));
-		actVO1.setAct_start_time(java.sql.Date.valueOf("2020-06-06"));
-		actVO1.setAct_end_time(java.sql.Date.valueOf("2020-06-08"));
-		actVO1.setAct_picture(pic);
-		dao.insert(actVO1);
+//		byte[] pic = getPictureByteArray("C://DB_photos//NankanPark.jpg");
+//		// 新增
+//		ActVO actVO1 = new ActVO();
+//		actVO1.setSq_route_id("RP110001");
+//		actVO1.setSq_member_id("910009");
+//		actVO1.setAct_title("南崁河濱公園");
+//		actVO1.setMax_population(new Integer(20));
+//		actVO1.setMin_population(new Integer(5));
+//		actVO1.setAct_description("老人小孩皆可娛樂的場所");
+//		actVO1.setStart_time(java.sql.Date.valueOf("2020-06-01"));
+//		actVO1.setEnd_time(java.sql.Date.valueOf("2020-06-05"));
+//		actVO1.setAct_start_time(java.sql.Date.valueOf("2020-06-06"));
+//		actVO1.setAct_end_time(java.sql.Date.valueOf("2020-06-08"));
+//		actVO1.setAct_picture(pic);
+//		dao.insert(actVO1);
 
 		// 修改
-		byte[] pic2 = getPictureByteArray("C://DB_photos//green.jpg");
-		ActVO actVO2 = new ActVO();
-		
-		actVO2.setSq_route_id("RP110001");
-		actVO2.setSq_member_id("910009");
-		actVO2.setAct_title("大鶯綠野景觀自行車道");
-		actVO2.setMax_population(new Integer(30));
-		actVO2.setMin_population(new Integer(10));
-		actVO2.setPopulation(new Integer(25));
-		actVO2.setAct_description("騎車踏青好去處");
-		actVO2.setStart_time(java.sql.Date.valueOf("2020-06-05"));
-		actVO2.setEnd_time(java.sql.Date.valueOf("2020-06-09"));
-		actVO2.setAct_start_time(java.sql.Date.valueOf("2020-06-10"));
-		actVO2.setAct_end_time(java.sql.Date.valueOf("2020-06-12"));
-		actVO2.setAct_picture(pic2);
-		actVO2.setGp_status(new Integer(1));
-		actVO2.setSq_activity_id("ACT-700011");
-		dao.update(actVO2);
-
-	    // 取消活動(前台)
-		dao.cancel("ACT-700011");
-		
-		// 下架活動(後台)
-		dao.delete("ACT-700011");
-
-		// 查詢
-		ActVO actVO3 = dao.findByPrimaryKey("ACT-700011");
-		System.out.print(actVO3.getSq_activity_id() + ",");
-		System.out.print(actVO3.getSq_route_id() + ",");
-		System.out.print(actVO3.getSq_member_id() + ",");
-		System.out.print(actVO3.getAct_title() + ",");
-		System.out.print(actVO3.getMax_population() + ",");
-		System.out.print(actVO3.getMin_population() + ",");
-		System.out.print(actVO3.getPopulation() + ",");
-		System.out.print(actVO3.getAct_description() + ",");
-		System.out.print(actVO3.getStart_time() + ",");
-		System.out.print(actVO3.getEnd_time() + ",");
-		System.out.print(actVO3.getAct_start_time() + ",");
-		System.out.print(actVO3.getAct_end_time() + ",");
-		System.out.print(actVO3.getAct_picture()+ ",");
-		System.out.print(actVO3.getGp_status());
-		System.out.println("---------------------");
-
-		// 查詢
-		List<ActVO> list = dao.getAll();
-		for (ActVO aAct : list) {
-			System.out.print(aAct.getSq_activity_id() + ",");
-			System.out.print(aAct.getSq_route_id() + ",");
-			System.out.print(aAct.getSq_member_id() + ",");
-			System.out.print(aAct.getAct_title() + ",");
-			System.out.print(aAct.getMax_population() + ",");
-			System.out.print(aAct.getMin_population() + ",");
-			System.out.print(aAct.getPopulation() + ",");
-			System.out.print(aAct.getAct_description() + ",");
-			System.out.print(aAct.getStart_time() + ",");
-			System.out.print(aAct.getEnd_time() + ",");
-			System.out.print(aAct.getAct_start_time() + ",");
-			System.out.print(aAct.getAct_end_time() + ",");
-			System.out.print(aAct.getAct_picture() + ",");
-			System.out.print(aAct.getGp_status());
-			System.out.println();
-		}
+//		byte[] pic2 = getPictureByteArray("C://DB_photos//green.jpg");
+//		ActVO actVO2 = new ActVO();
+//		
+//		actVO2.setSq_route_id("RP110001");
+//		actVO2.setSq_member_id("910009");
+//		actVO2.setAct_title("大鶯綠野景觀自行車道");
+//		actVO2.setMax_population(new Integer(30));
+//		actVO2.setMin_population(new Integer(10));
+//		actVO2.setAct_description("騎車踏青好去處");
+//		actVO2.setStart_time(java.sql.Date.valueOf("2020-06-05"));
+//		actVO2.setEnd_time(java.sql.Date.valueOf("2020-06-09"));
+//		actVO2.setAct_start_time(java.sql.Date.valueOf("2020-06-10"));
+//		actVO2.setAct_end_time(java.sql.Date.valueOf("2020-06-12"));
+//		actVO2.setAct_picture(pic2);
+//		actVO2.setGp_status(new Integer(1));
+//		actVO2.setSq_activity_id("ACT-700011");
+//		dao.update(actVO2);
+//
+//	    // 取消活動(前台)
+//		dao.cancel("ACT-700011");
+//		
+//		// 下架活動(後台)
+//		dao.delete("ACT-700011");
+//
+//		// 查詢
+//		ActVO actVO3 = dao.findByPrimaryKey("ACT-700011");
+//		System.out.print(actVO3.getSq_activity_id() + ",");
+//		System.out.print(actVO3.getSq_route_id() + ",");
+//		System.out.print(actVO3.getSq_member_id() + ",");
+//		System.out.print(actVO3.getAct_title() + ",");
+//		System.out.print(actVO3.getMax_population() + ",");
+//		System.out.print(actVO3.getMin_population() + ",");
+//		System.out.print(actVO3.getAct_description() + ",");
+//		System.out.print(actVO3.getStart_time() + ",");
+//		System.out.print(actVO3.getEnd_time() + ",");
+//		System.out.print(actVO3.getAct_start_time() + ",");
+//		System.out.print(actVO3.getAct_end_time() + ",");
+//		System.out.print(actVO3.getAct_picture()+ ",");
+//		System.out.print(actVO3.getGp_status());
+//		System.out.println("---------------------");
+//
+//		// 查詢
+//		List<ActVO> list = dao.getAll();
+//		for (ActVO aAct : list) {
+//			System.out.print(aAct.getSq_activity_id() + ",");
+//			System.out.print(aAct.getSq_route_id() + ",");
+//			System.out.print(aAct.getSq_member_id() + ",");
+//			System.out.print(aAct.getAct_title() + ",");
+//			System.out.print(aAct.getMax_population() + ",");
+//			System.out.print(aAct.getMin_population() + ",");
+//			System.out.print(aAct.getAct_description() + ",");
+//			System.out.print(aAct.getStart_time() + ",");
+//			System.out.print(aAct.getEnd_time() + ",");
+//			System.out.print(aAct.getAct_start_time() + ",");
+//			System.out.print(aAct.getAct_end_time() + ",");
+//			System.out.print(aAct.getAct_picture() + ",");
+//			System.out.print(aAct.getGp_status());
+//			System.out.println();
+//		}
 		
 		//新增活動,參加活動明細及主辦者也會跟著產生
 //		ActVO actVO4 = new ActVO();
@@ -558,7 +549,6 @@ public class ActJDBCDAO implements ActDAO_interface {
 //		actVO4.setAct_title("南崁河濱公園");
 //		actVO4.setMax_population(new Integer(20));
 //		actVO4.setMin_population(new Integer(5));
-//		actVO4.setPopulation(new Integer(10));
 //		actVO4.setAct_description("老人小孩皆可娛樂的場所");
 //		actVO4.setStart_time(java.sql.Date.valueOf("2020-06-01"));
 //		actVO4.setEnd_time(java.sql.Date.valueOf("2020-06-05"));

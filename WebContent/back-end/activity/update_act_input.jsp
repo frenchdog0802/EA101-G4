@@ -102,10 +102,6 @@
 		<td><input type="TEXT" name="min_population" size="3"	value="<%=actVO.getMin_population()%>" /></td>
 	</tr>
 	<tr>
-		<td>參加人數:</td>
-		<td><input type="TEXT" name="population" size="3"	value="<%=actVO.getPopulation()%>" /></td>
-	</tr>
-	<tr>
 		<td>報名起始時間:</td>
 		<td><input name="start_time" id="start_time" type="text" value="<%=actVO.getStart_time()%>" onchange="function1()"/></td>
 	</tr>

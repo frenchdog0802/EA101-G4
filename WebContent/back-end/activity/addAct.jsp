@@ -103,11 +103,6 @@
 			 value="<%= (actVO==null)? "1" : actVO.getMax_population()%>" /></td>
 	</tr>
 	<tr>
-		<td>參加人數:</td>
-		<td><input type="text" name="population" size="3" 
-			 value="<%= (actVO==null)? "1" : actVO.getPopulation()%>" /></td>
-	</tr>
-	<tr>
 		<td>報名起始時間:</td>
 		<td><input name="start_time" id="start_time" type="text" onchange="function1()"/></td>
 	</tr>

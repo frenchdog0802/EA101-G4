@@ -312,7 +312,7 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 
 	}
 	
-	public int search(String SQ_ACTIVITY_ID) {
+	public int search(String SQ_ACTIVITY_ID) { //找參加人數用
 		  
 		  Connection con = null;
 		  PreparedStatement pstmt = null;

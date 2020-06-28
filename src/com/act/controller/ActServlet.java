@@ -6,6 +6,8 @@ import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 import com.act.model.*;
+import com.actjoin.model.ActJoinService;
+import com.actjoin.model.ActJoinVO;
 
 @MultipartConfig
 public class ActServlet extends HttpServlet {
@@ -59,9 +61,16 @@ public class ActServlet extends HttpServlet {
 				/*************************** 2.開始查詢資料 *****************************************/
 				ActService actSvc = new ActService();
 				ActVO actVO = actSvc.getOneAct(sq_activity_id);
+								
 				if (actVO == null) {
 					errorMsgs.add("查無資料");
 				}
+				
+				ActJoinService actjoinSvc = new ActJoinService();
+				int i = actjoinSvc.getOneJoinPeople(sq_activity_id);
+				actVO.setPopulation(i);
+				
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/activity/select_page.jsp");
@@ -79,6 +88,39 @@ public class ActServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/activity/select_page.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("getFrontOne_For_Display".equals(action)) { 
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				String str = req.getParameter("sq_activity_id");
+
+				String sq_activity_id = new String(str);
+
+				/*************************** 2.開始查詢資料 *****************************************/
+				ActService actSvc = new ActService();
+				ActVO actVO = actSvc.getOneAct(sq_activity_id);
+				ActJoinService actjoinSvc = new ActJoinService();
+				int i = actjoinSvc.getOneJoinPeople(sq_activity_id);
+				actVO.setPopulation(i);
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("actVO", actVO);// 資料庫取出的actVO物件,存入req
+				String url = "/front-end/activity/ActivityOne.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/activity/ActivityOne.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -151,14 +193,6 @@ public class ActServlet extends HttpServlet {
 				} catch (NumberFormatException e) {
 					min_population = 1;
 					errorMsgs.add("最低人數請填數字.");
-				}
-
-				Integer population = null;
-				try {
-					population = new Integer(req.getParameter("population").trim());
-				} catch (NumberFormatException e) {
-					population = 1;
-					errorMsgs.add("參加人數請填數字.");
 				}
 
 				java.sql.Date start_time = null;
@@ -235,7 +269,6 @@ public class ActServlet extends HttpServlet {
 				actVO.setAct_title(act_title);
 				actVO.setMax_population(max_population);
 				actVO.setMin_population(min_population);
-				actVO.setPopulation(population);
 				actVO.setStart_time(start_time);
 				actVO.setEnd_time(end_time);
 				actVO.setAct_start_time(act_start_time);
@@ -256,7 +289,7 @@ public class ActServlet extends HttpServlet {
 				/*************************** 2.開始修改資料 *****************************************/
 				ActService actSvc = new ActService();
 				actVO = actSvc.updateAct(sq_route_id, sq_member_id, act_title, max_population, min_population,
-						population, start_time, end_time, act_start_time, act_end_time, act_description, act_picture,
+						start_time, end_time, act_start_time, act_end_time, act_description, act_picture,
 						gp_status, sq_activity_id);
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
@@ -311,14 +344,6 @@ public class ActServlet extends HttpServlet {
 			} catch (NumberFormatException e) {
 				min_population = 1;
 				errorMsgs.add("下限人數請填數字.");
-			}
-
-			Integer population = null;
-			try {
-				population = new Integer(req.getParameter("population").trim());
-			} catch (NumberFormatException e) {
-				population = 1;
-				errorMsgs.add("參加人數請填數字.");
 			}
 
 			java.sql.Date start_time = null;
@@ -384,7 +409,6 @@ public class ActServlet extends HttpServlet {
 			actVO.setAct_title(act_title);
 			actVO.setMax_population(max_population);
 			actVO.setMin_population(min_population);
-			actVO.setPopulation(population);
 			actVO.setStart_time(start_time);
 			actVO.setEnd_time(end_time);
 			actVO.setAct_start_time(act_start_time);
@@ -402,7 +426,7 @@ public class ActServlet extends HttpServlet {
 
 			/*************************** 2.開始新增資料 ***************************************/
 			ActService actSvc = new ActService();
-			actVO = actSvc.addAct(sq_route_id, sq_member_id, act_title, max_population, min_population, population,
+			actVO = actSvc.addAct(sq_route_id, sq_member_id, act_title, max_population, min_population,
 					start_time, end_time, act_start_time, act_end_time, act_description, act_picture);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
