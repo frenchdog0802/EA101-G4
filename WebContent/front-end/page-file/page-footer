@@ -44,6 +44,8 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/front-end/page-file/js/nav.js"></script>
+<!-- sweet alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 
 

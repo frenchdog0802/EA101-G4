@@ -121,8 +121,8 @@ public class BikeTypeServlet extends HttpServlet {
 				bikeVOInsert.setBike_title(bike_title);
 				bikeVOInsert.setBike_description(bike_description);
 				bikeVOInsert.setBike_photo(bike_photo_array);
-				bikeVOInsert.setPrice(price);
-
+				bikeVOInsert.setBike_daily_price(price);
+				bikeVOInsert.setBike_hourly_price(price);
 				// send error
 				if (errorMsgs.size() != 0) {
 					if (!errorMsgs.containsKey("bike_photo")) {
@@ -204,8 +204,8 @@ public class BikeTypeServlet extends HttpServlet {
 					bikeVOUpdate.setBike_photo(inputStreamToByteArr(bike_photo.getInputStream()));
 				}
 
-				bikeVOUpdate.setPrice(price);
-
+//				bikeVOUpdate.setPrice(price);
+//				bike_hourly_price
 				// send error
 				if (errorMsgs.size() != 0) {
 					request.setAttribute("BikeTypeVO", bikeVOUpdate);
