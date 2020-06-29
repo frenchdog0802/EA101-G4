@@ -31,12 +31,11 @@ public class BikeEcpayServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-		String action = request.getParameter("action");
+		String action = request.getParameter("action"); //網頁指定訊息
 		HttpSession session = request.getSession();
+		
 		if("pay".equals(action)) {
-			
 			//接收參數
-
 			//建立商品描述
 			String startDate  = (String)session.getAttribute("startDate");
 			String endDate  = (String)session.getAttribute("endDate");
@@ -68,22 +67,21 @@ public class BikeEcpayServlet extends HttpServlet {
 			//商店id
 			obj.setStoreID(BikeStoreVO.getSq_bike_store_id());
 			//訂單編號
-			obj.setMerchantTradeNo("testCompany881010");
+			obj.setMerchantTradeNo("testCompany881225");
 //			設定MerchantTradeDate 合作特店交易時間
 			obj.setMerchantTradeDate(formatstr);
 //			設定TotalAmount 交易金額
 			obj.setTotalAmount(totalPrice);
-//			設定TradeDesc 交易描述
-			obj.setTradeDesc("PAPAGO租車 :"+BikeStoreVO.getBike_store_name()+"店家");
-//			設定客製化欄位 
-			obj.setCustomField1(BikeStoreVO.getBike_store_name());
 //			設定ItemName 商品名稱
 			obj.setItemName(items.toString());
-//			設定ReturnURL 付款完成通知回傳網址 使用  https://7299cf1ce94a.ngrok.io
-			String returnURL = "https://7299cf1ce94a.ngrok.io/EA101_G4/front-end/bike/bikeStoreList.jsp";
+//			設定自訂回傳訊息 
+			obj.setCustomField1("returnMsg");
+//			設定ReturnURL 付款完成通知回傳網址 使用  ngrok.io
+			String returnURL = "https://d1c218187190.ngrok.io/EA101_G4/bike/testEcpayRel.do";
 			obj.setReturnURL(returnURL);
 //			設定ClientBackURL Client端返回合作特店系統的按鈕連結
-			obj.setClientBackURL(returnURL);
+			String clientBackURL = "https://d1c218187190.ngrok.io/EA101_G4/front-end/bike/bikeStoreList.jsp";
+			obj.setClientBackURL(clientBackURL);
 //			設定OrderResultURL Client端回傳付款結果網址 跟ReturnURL二選一
 //			obj.setOrderResultURL(returnURL);
 //			設定NeedExtraPaidInfo 是否需要額外的付款資訊 
@@ -93,31 +91,42 @@ public class BikeEcpayServlet extends HttpServlet {
 			String form = all.aioCheckOut(obj, null);
 			out.println(form);
 		}
+		
+		String CustomField1 = request.getParameter("CustomField1"); //綠界回傳交易訊息(自訂)
+		if("returnMsg".equals(CustomField1)) {
+//			MerchantID 特店編號                       2000132
+//			MerchantTradeNo 特店交易編號    testCompany881224
+//			StoreID 特店旗下店舖代號		  620001
+//			Int	RtnCode  交易狀態 	      1
+//			RtnMsg 交易訊息			  交易成功
+//			TradeNo  綠界交易編號			2006291129266663
+//			Int	TradeAmt  交易金額			900
+//			PaymentDate 付款時間 			2020/06/29 11:17:04
+//			PaymentType 特店選擇的付款方式	Credit_CreditCard
+//			TradeDate 訂單成立時間			2020/06/29 11:15:38
+			
+			response.setContentType("text/html;charset=UTF-8");
+			request.setCharacterEncoding("UTF-8");
+			String MerchantID = request.getParameter("MerchantID");
+			String MerchantTradeNo = request.getParameter("MerchantTradeNo");
+			String StoreID = request.getParameter("StoreID");
+			Integer RtnCode = Integer.parseInt(request.getParameter("RtnCode"));
+			String RtnMsg = request.getParameter("RtnMsg");
+			Integer	TradeAmt = Integer.parseInt(request.getParameter("TradeAmt"));
+			String TradeNo = request.getParameter("TradeNo");
+			String PaymentDate = request.getParameter("PaymentDate");
+			String PaymentType = request.getParameter("PaymentType");
+			String TradeDate = request.getParameter("TradeDate");
+			
+//			步驟
+//			先做到訂單欄位增加綠界交易編號
+//			再來新增訂單 同時自增主見 交易明細同時增加
+			
+		}
 	}
 
 	
-//	public static String genAioCheckOutOneTime(){
-////		產生信用卡一次付清訂單物件
-//		AioCheckOutOneTime obj = new AioCheckOutOneTime();
-//		//訂單編號
-//		obj.setMerchantTradeNo("testCompany888888");
-////		設定MerchantTradeDate 合作特店交易時間
-//		obj.setMerchantTradeDate("2017/01/01 08:05:23");
-////		設定TotalAmount 交易金額
-//		obj.setTotalAmount("50");
-////		設定TradeDesc 交易描述
-//		obj.setTradeDesc("test Description");
-////		設定ItemName 商品名稱
-//		obj.setItemName("TestItem");
-////		設定ReturnURL 付款完成通知回傳網址
-//		obj.setReturnURL("http://211.23.128.214:5000");
-////		設定NeedExtraPaidInfo 是否需要額外的付款資訊 
-//		obj.setNeedExtraPaidInfo("N");
-//		 //setRedeem是否使用紅利折抵
-//		obj.setRedeem("Y");   
-//		String form = all.aioCheckOut(obj, null);
-//		return form;
-//	}
+
 
 
 }

@@ -9,9 +9,16 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
-<!--   琮寶 -->
-<!-- BikeEcpayServlet -->
+ <!--   測試用 -->
+   <servlet>
+    <servlet-name>testEcpayRel</servlet-name>
+    <servlet-class>com.bike.store.controller.testEcpayRel</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>testEcpayRel</servlet-name>
+    <url-pattern>/bike/testEcpayRel.do</url-pattern>
+  </servlet-mapping>
+<!--   測試用 -->
   <servlet>
     <servlet-name>BikeEcpayServlet</servlet-name>
     <servlet-class>com.bike.store.controller.BikeEcpayServlet</servlet-class>
@@ -20,7 +27,6 @@
     <servlet-name>BikeEcpayServlet</servlet-name>
     <url-pattern>/bike/BikeEcpayServlet.do</url-pattern>
   </servlet-mapping>
-<!-- BikeStoreAjaxServlet -->
   <servlet>
     <servlet-name>BikeStoreAjaxServlet</servlet-name>
     <servlet-class>com.bike.store.controller.BikeStoreAjaxServlet</servlet-class>
@@ -29,7 +35,6 @@
     <servlet-name>BikeStoreAjaxServlet</servlet-name>
     <url-pattern>/bike/BikeStoreAjaxServlet.do</url-pattern>
   </servlet-mapping>
-  <!--BikeServlet Controller  -->
   <servlet>
     <servlet-name>BikeServlet</servlet-name>
     <servlet-class>com.bike.bike.controller.BikeServlet</servlet-class>
@@ -38,8 +43,6 @@
     <servlet-name>BikeServlet</servlet-name>
     <url-pattern>/bike/BikeServlet.do</url-pattern>
   </servlet-mapping>
-  
-  <!--BikeTypeServlet Controller  -->
   <servlet>
     <servlet-name>BikeTypeServlet</servlet-name>
     <servlet-class>com.bike.type.controller.BikeTypeServlet</servlet-class>
@@ -48,8 +51,7 @@
     <servlet-name>BikeTypeServlet</servlet-name>
     <url-pattern>/bike/BikeTypeServlet.do</url-pattern>
   </servlet-mapping>
-  <!--BikeStore Controller  -->
-    <servlet>
+  <servlet>
     <servlet-name>BikeStoreServlet</servlet-name>
     <servlet-class>com.bike.type.controller.BikeStoreServlet</servlet-class>
   </servlet>
@@ -57,7 +59,6 @@
     <servlet-name>BikeStoreServlet</servlet-name>
     <url-pattern>/bike/BikeStoreServlet.do</url-pattern>
   </servlet-mapping>
-  <!--DBReader Controller  -->
   <servlet>
     <servlet-name>DBReader</servlet-name>
     <servlet-class>com.photo.controller.DBReader</servlet-class>
@@ -66,7 +67,6 @@
     <servlet-name>DBReader</servlet-name>
     <url-pattern>/photo/DBReader.do</url-pattern>
   </servlet-mapping>
-  <!--InsertDBReader2 Controller  -->
   <servlet>
     <servlet-name>InsertDBReader2</servlet-name>
     <servlet-class>com.photo.controller.InsertDBReader2</servlet-class>
@@ -75,54 +75,47 @@
     <servlet-name>InsertDBReader2</servlet-name>
     <url-pattern>/photo/DBReader2.do</url-pattern>
   </servlet-mapping>
-  
-<!--   KaiNong -->
-  	<servlet>
-		<servlet-name>showImg</servlet-name>
-		<servlet-class>imgReader.showImg</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>showImg</servlet-name>
-		<url-pattern>/showImg</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>showImg2</servlet-name>
-		<servlet-class>imgReader.showImg2</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>showImg2</servlet-name>
-		<url-pattern>/showImg2/showImg2.do</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>BrandServlet</servlet-name>
-		<servlet-class>com.brand.controller.BrandServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>BrandServlet</servlet-name>
-		<url-pattern>/back-end/BrandBack/brand.do</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>Shop_productServlet</servlet-name>
-		<servlet-class>com.shop_product.controller.Shop_productServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Shop_productServlet</servlet-name>
-		<url-pattern>/back_end/Shop_product/shop_product.do</url-pattern>
-	</servlet-mapping>
-	
-<!--   筑峰 -->
   <servlet>
-		<servlet-name>MemServlet</servlet-name>
-		<servlet-class>com.member.controller.MemServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>MemServlet</servlet-name>
-		<url-pattern>/member/mem.do</url-pattern>
-	</servlet-mapping>	
-	<servlet>
+    <servlet-name>showImg</servlet-name>
+    <servlet-class>imgReader.showImg</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showImg</servlet-name>
+    <url-pattern>/showImg</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>showImg2</servlet-name>
+    <servlet-class>imgReader.showImg2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showImg2</servlet-name>
+    <url-pattern>/showImg2/showImg2.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>BrandServlet</servlet-name>
+    <servlet-class>com.brand.controller.BrandServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BrandServlet</servlet-name>
+    <url-pattern>/back-end/BrandBack/brand.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Shop_productServlet</servlet-name>
+    <servlet-class>com.shop_product.controller.Shop_productServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Shop_productServlet</servlet-name>
+    <url-pattern>/back_end/Shop_product/shop_product.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemServlet</servlet-name>
+    <servlet-class>com.member.controller.MemServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemServlet</servlet-name>
+    <url-pattern>/member/mem.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>MemDBReader</servlet-name>
     <servlet-class>com.member.model.MemDBReader</servlet-class>
   </servlet>
@@ -130,59 +123,62 @@
     <servlet-name>MemDBReader</servlet-name>
     <url-pattern>/member/DBReader.do</url-pattern>
   </servlet-mapping>
-	
-	<servlet>
-		<servlet-name>StaffServlet</servlet-name>
-		<servlet-class>com.staff.controller.StaffServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>StaffServlet</servlet-name>
-		<url-pattern>/staff/staff.do</url-pattern>
-	</servlet-mapping>
-<!--   宗霖 -->	
-	<servlet>
-	<servlet-name>ActServlet</servlet-name>
-	<servlet-class>com.act.controller.ActServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-	<servlet-name>ActServlet</servlet-name>
-	<url-pattern>/act/ActServlet.do</url-pattern>
-  </servlet-mapping>
-  
   <servlet>
-		<servlet-name>DBGifReader2</servlet-name>
-		<servlet-class>com.act.controller.DBGifReader2</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>DBGifReader2</servlet-name>
-		<url-pattern>/act/DBGifReader2</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-	<servlet-name>ActJoinServlet</servlet-name>
-	<servlet-class>com.actjoin.controller.ActJoinServlet</servlet-class>
+    <servlet-name>StaffServlet</servlet-name>
+    <servlet-class>com.staff.controller.StaffServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-	<servlet-name>ActJoinServlet</servlet-name>
-	<url-pattern>/act/ActJoinServlet.do</url-pattern>
+    <servlet-name>StaffServlet</servlet-name>
+    <url-pattern>/staff/staff.do</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-	<servlet-name>ActFavorServlet</servlet-name>
-	<servlet-class>com.actfavor.controller.ActFavorServlet</servlet-class>
+    <servlet-name>ActServlet</servlet-name>
+    <servlet-class>com.act.controller.ActServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-	<servlet-name>ActFavorServlet</servlet-name>
-	<url-pattern>/act/ActFavorServlet.do</url-pattern>
+    <servlet-name>ActServlet</servlet-name>
+    <url-pattern>/act/ActServlet.do</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-	<servlet-name>ActReportServlet</servlet-name>
-	<servlet-class>com.actreport.controller.ActReportServlet</servlet-class>
+    <servlet-name>DBGifReader2</servlet-name>
+    <servlet-class>com.act.controller.DBGifReader2</servlet-class>
   </servlet>
   <servlet-mapping>
-	<servlet-name>ActReportServlet</servlet-name>
-	<url-pattern>/act/ActReportServlet.do</url-pattern>
+    <servlet-name>DBGifReader2</servlet-name>
+    <url-pattern>/act/DBGifReader2</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ActJoinServlet</servlet-name>
+    <servlet-class>com.actjoin.controller.ActJoinServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActJoinServlet</servlet-name>
+    <url-pattern>/act/ActJoinServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ActFavorServlet</servlet-name>
+    <servlet-class>com.actfavor.controller.ActFavorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActFavorServlet</servlet-name>
+    <url-pattern>/act/ActFavorServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ActReportServlet</servlet-name>
+    <servlet-class>com.actreport.controller.ActReportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActReportServlet</servlet-name>
+    <url-pattern>/act/ActReportServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BikeEcpayTest</display-name>
+    <servlet-name>BikeEcpayTest</servlet-name>
+    <servlet-class>com.bike.store.controller.BikeEcpayServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BikeEcpayTest</servlet-name>
+    <url-pattern>/BikeEcpayTest</url-pattern>
   </servlet-mapping>
 </web-app>
-
