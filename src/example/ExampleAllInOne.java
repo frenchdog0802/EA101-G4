@@ -27,7 +27,7 @@ public class ExampleAllInOne {
 	public static AllInOne all;
 	public static void main(String[] args) {
 		initial();
-		System.out.println("compare CheckMacValue method testing result: " + cmprChkMacValue());
+//		System.out.println("compare CheckMacValue method testing result: " + cmprChkMacValue());
 //		System.out.println("apple pay create order: " + postCreateServerOrder());
 //		System.out.println("doAction: " + postDoAction());
 //		System.out.println("queryTradeInfo: " + postQueryTradeInfo());
@@ -36,12 +36,12 @@ public class ExampleAllInOne {
 //		System.out.println("queryTrade: " + postQueryTrade());
 //		System.out.println("tradeNoAio: " + postTradeNoAio());
 //		System.out.println("fundingReconDetail: " + postFundingReconDetail());
-//		System.out.println("aioCheckOutALL: " + genAioCheckOutALL());
-		//System.out.println("aioCheckOutATM: " + genAioCheckOutATM());
+		System.out.println("aioCheckOutALL: " + genAioCheckOutALL());
+		System.out.println("aioCheckOutATM: " + genAioCheckOutATM());
 //		System.out.println("aioCheckOutCVS: " + genAioCheckOutCVS());
 //		System.out.println("aioCheckOutBARCODE: " + genAioCheckOutBARCODE());
 //		System.out.println("aioCheckOutDevide: " + genAioCheckOutDevide()); //分期
-		System.out.println("aioCheckOutOneTime: " + genAioCheckOutOneTime());//紅利折抵(可以一次付清)
+//		System.out.println("aioCheckOutOneTime: " + genAioCheckOutOneTime());//紅利折抵(可以一次付清)
 //		System.out.println("aioCheckOutPeriod: " + genAioCheckOutPeriod()); //定期定額
 //		System.out.println("aioCheckOutWebATM: " + genAioCheckOutWebATM());
 	}
@@ -159,7 +159,7 @@ public class ExampleAllInOne {
 	public static String genAioCheckOutALL(){
 //		產生訂單物件(不指定付款方式，由綠界顯示)
 		AioCheckOutALL obj = new AioCheckOutALL();
-		obj.setMerchantTradeNo("testCompany563332");
+		obj.setMerchantTradeNo("testCompany4332");
 		obj.setMerchantTradeDate("2017/01/01 08:05:23");
 		obj.setTotalAmount("50");
 		obj.setTradeDesc("test Description");

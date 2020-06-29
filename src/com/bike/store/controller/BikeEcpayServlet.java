@@ -67,7 +67,7 @@ public class BikeEcpayServlet extends HttpServlet {
 			//商店id
 			obj.setStoreID(BikeStoreVO.getSq_bike_store_id());
 			//訂單編號
-			obj.setMerchantTradeNo("testCompany881225");
+			obj.setMerchantTradeNo("testCompany88454561");
 //			設定MerchantTradeDate 合作特店交易時間
 			obj.setMerchantTradeDate(formatstr);
 //			設定TotalAmount 交易金額
@@ -76,14 +76,16 @@ public class BikeEcpayServlet extends HttpServlet {
 			obj.setItemName(items.toString());
 //			設定自訂回傳訊息 
 			obj.setCustomField1("returnMsg");
+//			設定交易訊息
+			obj.setTradeDesc("aaaaaaaaa");
 //			設定ReturnURL 付款完成通知回傳網址 使用  ngrok.io
-			String returnURL = "https://d1c218187190.ngrok.io/EA101_G4/bike/testEcpayRel.do";
+			String returnURL = "https://43394dbd656b.ngrok.io/EA101_G4/bike/testEcpayRel.do";
 			obj.setReturnURL(returnURL);
 //			設定ClientBackURL Client端返回合作特店系統的按鈕連結
-			String clientBackURL = "https://d1c218187190.ngrok.io/EA101_G4/front-end/bike/bikeStoreList.jsp";
-			obj.setClientBackURL(clientBackURL);
+			String clientBackURL = "https://43394dbd656b.ngrok.io/EA101_G4/front-end/bike/bikeStoreList.jsp";
+//			obj.setClientBackURL(clientBackURL);
 //			設定OrderResultURL Client端回傳付款結果網址 跟ReturnURL二選一
-//			obj.setOrderResultURL(returnURL);
+			obj.setOrderResultURL(clientBackURL);
 //			設定NeedExtraPaidInfo 是否需要額外的付款資訊 
 			obj.setNeedExtraPaidInfo("N");
 			 //setRedeem是否使用紅利折抵
@@ -105,8 +107,7 @@ public class BikeEcpayServlet extends HttpServlet {
 //			PaymentType 特店選擇的付款方式	Credit_CreditCard
 //			TradeDate 訂單成立時間			2020/06/29 11:15:38
 			
-			response.setContentType("text/html;charset=UTF-8");
-			request.setCharacterEncoding("UTF-8");
+
 			String MerchantID = request.getParameter("MerchantID");
 			String MerchantTradeNo = request.getParameter("MerchantTradeNo");
 			String StoreID = request.getParameter("StoreID");
@@ -117,6 +118,10 @@ public class BikeEcpayServlet extends HttpServlet {
 			String PaymentDate = request.getParameter("PaymentDate");
 			String PaymentType = request.getParameter("PaymentType");
 			String TradeDate = request.getParameter("TradeDate");
+			
+			
+			
+			
 			
 //			步驟
 //			先做到訂單欄位增加綠界交易編號
