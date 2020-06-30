@@ -18,6 +18,7 @@ import java.util.TreeMap;
 
 import javax.servlet.RequestDispatcher;
 import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.AllInOneService;
 import ecpay.payment.integration.domain.AioCheckOutOneTime;
 
 public class BikeEcpayServlet extends HttpServlet {
@@ -62,7 +63,6 @@ public class BikeEcpayServlet extends HttpServlet {
 			String totalPrice = request.getParameter("totalPrice");
 			
 			//串接金流
-			AllInOne all = new AllInOne("");
 			AioCheckOutOneTime obj = new AioCheckOutOneTime();
 			//商店id
 			obj.setStoreID(BikeStoreVO.getSq_bike_store_id());
@@ -90,7 +90,9 @@ public class BikeEcpayServlet extends HttpServlet {
 			obj.setNeedExtraPaidInfo("N");
 			 //setRedeem是否使用紅利折抵
 			obj.setRedeem("N");   
-			String form = all.aioCheckOut(obj, null);
+			
+			AllInOneService allInOneSvc = new AllInOneService();
+			String form = allInOneSvc.aioCheckOut(obj, null);
 			out.println(form);
 		}
 		
