@@ -630,15 +630,19 @@ CREATE TABLE bike_rent_master
     rent_phone        VARCHAR2(40) NOT NULL,
     rent_od_status    NUMBER(1,0) NOT NULL,
 	order_date        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   tradeno        VARCHAR2(40) NOT NULL,
     PRIMARY KEY (sq_rent_id),
     CONSTRAINT fk_bike_master_member FOREIGN KEY(sq_member_id) REFERENCES member(sq_member_id),
     CONSTRAINT fk_bike_master_bike_store FOREIGN KEY(sq_bike_store_id) REFERENCES bike_store(sq_bike_store_id)
   );
+  
+COMMENT ON COLUMN  bike_rent_master.tradeno IS
+'綠界交易編號' ;
 
  COMMENT ON COLUMN  bike_rent_master.rent_payment IS
-'付款模式:
-0:信用卡
-1:現場付款'; 
+'付款模式 信用卡:
+0:付款成功
+1:付款失敗'; 
 
 
 COMMENT ON COLUMN  bike_rent_master.rent_od_status IS
