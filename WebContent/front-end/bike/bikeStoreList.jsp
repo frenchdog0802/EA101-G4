@@ -122,7 +122,7 @@ pageContext.setAttribute("list", list);
 				dataType: "JSON",
 				success : function(data) {
 					let str = "";
-					　$.each(data.returnValue, function(index, json) { 
+					$.each(data.returnValue, function(index, json) { 
 						str+="<tr>";
 						str+=
 						"<td>"+json.bike_store_name+"</td>"+
@@ -131,7 +131,7 @@ pageContext.setAttribute("list", list);
 						"<td>"+json.store_opentime+"</td>"+
 						"<td>"+json.empty_bike+"</td>";
 						str+="</tr>";
-					　　}); 
+					}); 
 					$("tbody").empty();
 					$("tbody").append(str);
 				}
