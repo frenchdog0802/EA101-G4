@@ -12,16 +12,6 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-	<!-- 測試用 -->
-	<servlet>
-		<servlet-name>testEcpayRel</servlet-name>
-		<servlet-class>com.bike.store.controller.testEcpayRel</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>testEcpayRel</servlet-name>
-		<url-pattern>/bike/testEcpayRel.do</url-pattern>
-	</servlet-mapping>
-	<!-- 測試用 -->
 	<!-- 琮寶 -->
 	<!-- BikeEcpayServlet -->
 	<servlet>

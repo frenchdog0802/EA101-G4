@@ -10,6 +10,10 @@ public class BikeRentMasterService {
 		dao = new  BikeRentMasterDAO();
 	}
 	
+	public void insert(BikeRentMasterVO BikeRentMasterVO) {
+		dao.insert(BikeRentMasterVO); 
+	}
+	
 	public List<BikeRentMasterVO> getAll(){
 		return dao.getAll();
 	}
@@ -17,5 +21,9 @@ public class BikeRentMasterService {
 	
 	public List<String> getRentMasterId(String sq_bike_store_id){
 		return dao.getRentMasterId(sq_bike_store_id);
+	}
+	
+	public String getCurrentKeys() {
+		return dao.getCurrentKeys();
 	}
 }

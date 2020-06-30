@@ -17,7 +17,7 @@ public class BikeRentMasterVO implements Serializable  {
 	private String rent_phone;
 	private Integer rent_od_status;
 	private Timestamp order_date;
-	
+	private String tradeno;
 	
 	public String getSq_rent_id() {
 		return sq_rent_id;
@@ -74,6 +74,12 @@ public class BikeRentMasterVO implements Serializable  {
 	}
 	public void setRent_od_status(Integer rent_od_status) {
 		this.rent_od_status = rent_od_status;
+	}
+	public String getTradeno() {
+		return tradeno;
+	}
+	public void setTradeno(String tradeno) {
+		this.tradeno = tradeno;
 	}
 
 	

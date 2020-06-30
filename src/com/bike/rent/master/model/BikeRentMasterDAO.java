@@ -21,11 +21,11 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 
 	// insert
 	private static final String INSERT_STMT = "INSERT INTO "
-			+ "bike_rent_master(sq_rent_id, sq_member_id,sq_bike_store_id,rent_payment,od_total_price,rent_name,rent_phone ,rent_od_status)"
-			+ "VALUES('RT'||'-'||LPAD(to_char(sq_rent_id.NEXTVAL), 6, '0'),?,?,?,?,?,?,?)";
+			+ "bike_rent_master(sq_rent_id, sq_member_id,sq_bike_store_id,rent_payment,od_total_price,rent_name,rent_phone ,rent_od_status,tradeno)"
+			+ "VALUES(?,?,?,?,?,?,?,?,?)";
 
 	// update
-	private static final String UPDATE_STMT = "UPDATE bike_rent_master SET sq_member_id=?,sq_bike_store_id=?,rent_payment=?,od_total_price=?,rent_name=?,rent_phone=?,rent_od_status=?"
+	private static final String UPDATE_STMT = "UPDATE bike_rent_master SET sq_member_id=?,sq_bike_store_id=?,rent_payment=?,od_total_price=?,rent_name=?,rent_phone=?,rent_od_status=?,tradeno=?"
 			+ "WHERE sq_rent_id = ?";
 	// delete
 	private static final String DELETE_STMT = "DELETE FROM bike_rent_master WHERE sq_rent_id = ?";
@@ -36,8 +36,42 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 	
 	//get MASTERID
 	private static final String GET_ALL_MASTERID_FORM_STORE = "select sq_rent_id from bike_rent_master where SQ_BIKE_STORE_ID= ?";
-
 	
+	//get getCurrentKeys
+	private static final String GET_CURRENTKEY = "select sq_rent_id from (select * from bike_rent_master order by order_date desc ) where rownum=1";
+	
+	
+	public String getCurrentKeys() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		String sq_rent_id = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userId, passwd);
+			pstmt = con.prepareStatement(GET_CURRENTKEY);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				sq_rent_id= rs.getString(1);
+			}
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (con != null) {
+				try {
+					rs.close();
+					pstmt.close();
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return sq_rent_id;
+	}
 	@Override
 	public List<String> getRentMasterId(String sq_bike_store_id){
 		Connection con = null;
@@ -84,23 +118,26 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userId, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
-
+			
+			pstmt.setString(1, BikeRentMasterVO.getSq_rent_id());
 			// set sq_member_id
-			pstmt.setString(1, BikeRentMasterVO.getSq_member_id());
+			pstmt.setString(2, BikeRentMasterVO.getSq_member_id());
 			// set sq_bike_store_id
-			pstmt.setString(2, BikeRentMasterVO.getSq_bike_store_id());
+			pstmt.setString(3, BikeRentMasterVO.getSq_bike_store_id());
 			// set rent_payment
-			pstmt.setInt(3, BikeRentMasterVO.getRent_payment());
+			pstmt.setInt(4, BikeRentMasterVO.getRent_payment());
 			// set od_total_price
-			pstmt.setInt(4, BikeRentMasterVO.getOd_total_price());
+			pstmt.setInt(5, BikeRentMasterVO.getOd_total_price());
 			// set rent_name
-			pstmt.setString(5, BikeRentMasterVO.getRent_name());
+			pstmt.setString(6, BikeRentMasterVO.getRent_name());
 			// set rent_phone
-			pstmt.setString(6, BikeRentMasterVO.getRent_phone());
+			pstmt.setString(7, BikeRentMasterVO.getRent_phone());
 			// set rent_od_status
-			pstmt.setInt(7, BikeRentMasterVO.getRent_od_status());
+			pstmt.setInt(8, BikeRentMasterVO.getRent_od_status());
 			// set pick_up_status
-
+			
+			pstmt.setString(9,BikeRentMasterVO.getTradeno());
+			
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -148,8 +185,10 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 			pstmt.setString(6, BikeRentMasterVO.getRent_phone());
 			// set rent_od_status
 			pstmt.setInt(7, BikeRentMasterVO.getRent_od_status());
+			
+			pstmt.setString(8, BikeRentMasterVO.getTradeno());
 			// set sq_rent_id
-			pstmt.setString(8, BikeRentMasterVO.getSq_rent_id());
+			pstmt.setString(9, BikeRentMasterVO.getSq_rent_id());
 
 			pstmt.executeUpdate();
 
@@ -237,6 +276,7 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 				BikeRentMasterVO.setRent_phone(rs.getString(7));
 				BikeRentMasterVO.setRent_od_status(rs.getInt(8));
 				BikeRentMasterVO.setOrder_date(rs.getTimestamp(9));
+				BikeRentMasterVO.setTradeno(rs.getString(10));
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -284,6 +324,7 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 				BikeRentMasterVO.setRent_phone(rs.getString(7));
 				BikeRentMasterVO.setRent_od_status(rs.getInt(8));
 				BikeRentMasterVO.setOrder_date(rs.getTimestamp(9));
+				BikeRentMasterVO.setTradeno(rs.getString(10));
 				list.add(BikeRentMasterVO);
 			}
 
