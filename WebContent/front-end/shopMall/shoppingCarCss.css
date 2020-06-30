@@ -1,4 +1,4 @@
-		.searchbtn{
+.searchbtn{
 			vertical-align: middle;
 			white-space: nowrap;
 			padding-right: 0;
@@ -32,46 +32,33 @@
 		}
 		div#sample{
 		 	border: 1px solid transparent;
+		 	height: 100%;
 		 	background-color: white;
-		 	height: 110%;
-
 		}
+
 		div#sample:hover{ 
 		    border-color: black;
-		    position:absolute;
-		    z-index: 3;
-		    height: 130%;
 		}
 		.pdzero{
 			padding-right: 0;
 			padding-left: 0;
 		}
-		.list-img{
-			height: 160px;
-			width: 160px;
-			margin: 0 auto;
-			display:  table;	
-		}
-		.list-img2{
-			display:table-cell;
-    		vertical-align:middle;
-    		text-align:center;
-    		height:100%;	
-		}
-		.list-img img{
-			width:120%;
-			
-		}
 		.listbox{
 			text-align: center;
+		}
+		div#sample:hover .listbox .list-boxs{ 
 			font-size: 120%;
+		    text-align: center;
 		    margin-top: 10px;
 		    margin-bottom: 10px;
+		}
+		#footer-main {
+			background: #222;
+			color: white;
+			font-size: 0.8rem;
+			padding: 2.5rem 0;
+		}
 
-		}
-		div#sample:hover .list-img{ 
-		    width: 80%;
-		}
 		.dropdown-menu {
     		min-width: 130%;
 		}
@@ -88,27 +75,19 @@
 			border-radius:0 6px 6px 6px;
 			text-align: center;
 		}
-		.dropdown-menu> li{
+		.dropdown-menu li{
 			margin-bottom: 5px;
 		}
-		.dropdown-menu a{
-			color: black;
-			font-size: 80%;
-			padding-left: 15px;
-		}
-		.dropdown-menu a:hover{
-			text-decoration:none;
-			color: black;
+		.dropdown-menu li:hover{
+			background-color: #F0F0F0;
 		}
 		.dropdown-submenu:hover>.dropdown-menu{
 			display:block;
 		}
 		.dropdown-submenu>a:after{
 			display:block;
-			float:right;
-			width:0;
+			float:right;width:0;
 			height:0;
-			border-color:transparent;
 			border-style:solid;
 			border-width:5px 0 5px 5px;
 			border-left-color:#cccccc;
@@ -118,67 +97,94 @@
 		.dropdown-submenu:hover>a:after{
 			border-left-color:#ffffff;
 		}
-		.dropdown-submenu.pull-left{
-			float:none;
+		.pagetitle{
+			font-size: 200%;
+			text-align: center;
+			padding-top: 10px; 
+			padding-bottom: 10px; 
 		}
-		.dropdown-submenu.pull-left>.dropdown-menu{
-			left:-100%;
-			margin-left:10px;
-			border-radius:6px 0 6px 6px;
+		.shopcar_title{
+			width: 100%;
+			background-color: #c0c0c0;
+		}	
+		.shopcar_title td{
+			border:1px solid #a0a0a0;
 		}
-		#footer-main {
-			background: #222;
-			color: white;
-			font-size: 0.8rem;
-			padding: 2.5rem 0;
+		.detail_td{
+			width: 45%;
+			text-align: center;
 		}
-		.first{
-			font-size: 150%;
-			font-weight:bold;
+		.num_td{
+			width: 10%;
+			text-align: center;
 		}
-		.item{
-			font-size: 150%;
+		.price_td{
+			width: 15%;
+			text-align: center;
 		}
-		.left_col li{
-			margin-bottom: 8px;
-
+		.store_td{
+			width: 10%;
+			text-align: center;
 		}
-		.left_col hr{
-			width: 80%;
+		.change_td{
+			width: 20%;
+			text-align: center;
 		}
-		.left_detail{
-			background-color: #F0F0F0;
-			width: 85%;
-		}
-		.left_detail ol{
-			list-style: none;
-			margin: 0; 
-			padding-left: 10px;
-		}
-		.left_detail a{
+		.dropdown-menu a{
 			color: black;
-			font-size: 80%;
 		}
-		.left_detail a:hover{
+		.dropdown-menu a:hover{
 			text-decoration:none;
 			color: black;
 		}
-		hr{
+		.pro{
+			background-color: #FAF4FF;
+		}
+		.pro_pic{
+			width: 20%;
+		}
+		.pro_pic img{
+			margin: 5px;
 			width: 90%;
 		}
-		.left_detail button{
-			padding-left: 0;
+		.pro_name{
+			width: 25%;
 		}
-		.left_detail hr{
-			margin-top: 10px;
-			margin-bottom: 10px;
+		.pro_quan{
+			width: 10%;
+			text-align: center;
 		}
-		#shopCar{
-			width : 60px;
-		    position: fixed; 
-		    top: 50%; 
-		    right: -60px; 
-		    background: red;
-		    padding: 5px 5px;
-		    border-radius: 10px 0px 0px 10px;
+		.pro_quan input{
+			width: 50%;
+		}
+		.pro_price{
+			width: 15%;
+			text-align: center;
+		}
+		.pro_yn{
+			width: 10%;
+			text-align: center;
+		}
+		.pro_del{
+			width: 20%;
+			text-align: center;
+		}
+		.car_sel{
+			background-color:  #c0c0c0;
+			width: 100%;
+			margin-left: 1px;
+		}
+		.car_price{
+			font-size: 115%;
+		}
+		.car_sel button{
+			width: 100%;
+		}
+		.td_space span{
+			width: 500%; 
+			margin-top: 3px; 
+			margin-bottom: 3px;
+		}
+		.shopcar_btn{
+			padding-right: 0;
 		}

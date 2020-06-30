@@ -3,13 +3,23 @@ package com.shop_product.model;
 import java.sql.Date;
 
 public class Shop_productVO implements java.io.Serializable{
+
 	private static final long serialVersionUID = 1L;
+	
+	public Shop_productVO() {
+		sq_product_id = "";
+		product_name = "";
+		product_price = 0;
+		product_quantity = 1;
+	}
+	
 	private String sq_product_id;
 	private String sq_brand_id;
 	private String product_kind_name;
 	private String product_name;
 	private Integer product_price;
 	private byte[] product_pic;
+	private Integer product_quantity;
 	private String product_detail;
 	private Date add_date;
 	private String product_material;
@@ -75,5 +85,46 @@ public class Shop_productVO implements java.io.Serializable{
 	public void setProduct_status(Integer product_status) {
 		this.product_status = product_status;
 	}
+	public Integer getProduct_quantity() {
+		return product_quantity;
+	}
+	public void setProduct_quantity(Integer product_quantity) {
+		this.product_quantity = product_quantity;
+	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((product_name == null) ? 0 : product_name.hashCode());
+		result = prime * result + ((product_price == null) ? 0 : product_price.hashCode());
+		result = prime * result + ((sq_product_id == null) ? 0 : sq_product_id.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Shop_productVO other = (Shop_productVO) obj;
+		if (product_name == null) {
+			if (other.product_name != null)
+				return false;
+		} else if (!product_name.equals(other.product_name))
+			return false;
+		if (product_price == null) {
+			if (other.product_price != null)
+				return false;
+		} else if (!product_price.equals(other.product_price))
+			return false;
+		if (sq_product_id == null) {
+			if (other.sq_product_id != null)
+				return false;
+		} else if (!sq_product_id.equals(other.sq_product_id))
+			return false;
+		return true;
+	}
 }

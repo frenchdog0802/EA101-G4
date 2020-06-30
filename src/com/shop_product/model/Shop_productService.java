@@ -58,4 +58,10 @@ public class Shop_productService {
 	public List<Shop_productVO> findByKindName(String product_kind_name){
 		return dao.findByKindName(product_kind_name);
 	}
+	public List<Shop_productVO> getPriceUp(){
+		return dao.findByPriceUP();
+	}
+	public List<Shop_productVO> getPriceDown(){
+		return dao.findByPriceDown();
+	}
 }

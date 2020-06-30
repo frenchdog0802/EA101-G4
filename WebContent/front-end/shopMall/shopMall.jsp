@@ -21,16 +21,30 @@
     <title>商城</title>
   </head>
   <body>
+  	<%@include file="/front-end/page-file/page-nav"%>
     <div class="container-fluid">
     	<div class="row mt-3 pl-3 pr-3">
     		<div class=" col-12">
     			<div class="row">
     				<div class="col-1"></div>
-					<div class="col-1" style="padding-right: 0; padding-left: 0;">
-						<div class="btn-group">
-							
+					<div class="col-1 pdzero">
+						<button class="btn"  onclick="location.href='javascript:window.location.reload()'">商城首頁
+						</button>
+						<button class="srhByPrice" value="priceUp">依價格&nbsp;&uarr;</button>
+						<button class="srhByPrice" value="priceDown">依價格&nbsp;&darr;</button>
+					</div>
+					<div class="col-1 btn-group">
+						<div class="dropdown">
+							<button class="btn btn-secondary dropdown-toggle pdzero" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    	排序
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="#">依價格&nbsp;&uarr;</a>
+								<a class="dropdown-item" href="#">依價格&nbsp;&darr;</a>
+								<a class="dropdown-item" href="#">依上架時間&nbsp;&uarr;</a>
+						  		<a class="dropdown-item" href="#">依上架時間&nbsp;&darr;</a>
+							</div>
 						</div>
-					<div class="col-1"></div>	
 					</div>
     				<div class="col-6 searchbtn mt-1">
 						<input type="search" id="search" placeholder="Search..." />
@@ -42,27 +56,7 @@
 						<span>xxx</span>
 						<span>xxx</span>
 					</div>
-    			</div>
-    			<div class="row mt-2 sort_title">
-    				<div class="col-1"></div>
-    				<div class="col-1 bg-primary" style="padding-right: 0;">
-    					<div class="btn-group">
-							<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
-								<span class="caret">排序</span>
-							</button>
-							<ul class="dropdown-menu">
-								<li><a href="#"><span>依金錢&nbsp;&uarr;</span></a></li>
-								<li><a href="#"><span>依金錢&nbsp;&darr;</span></a></li>
-								<li><a href="#"><span>依上架時間&nbsp;&uarr;</span></a></li>
-								<li><a href="#"><span>依上架時間&nbsp;&darr;</span></a></li>
-							</ul>
-						</div>
-    				</div>
-    				<div class="col-9 pt-2 bg-primary">
-    					<%@ include file="/front-end/shopMall/page1.file"%>
-    				</div>
-    				<div class="col-1"></div>
-    			</div>
+    			</div>    					
     			<hr class="mb-3 mt-3">
     			<div class="row">
     				<div class="col-1"></div>
@@ -106,29 +100,34 @@
 	    					</div>
 	    				</div>		
     				</div>
+    				<%@ include file="/front-end/shopMall/page1.file"%>
     				<div class="col-8">
-    					<div class="row">
+    					<div class="row products-range">
     						<c:forEach var="productVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		    				<div class="col-xs-6 col-sm-4 col-md-3 pdzero">
-		    					<div id="sample">
-		    						<div class="list-img">
-		    							<div class="list-img2">
-		    								<img src="<%=request.getContextPath()%>/showImg4?id=${productVO.sq_product_id}" class="img-fluid">
-			    						</div>
-			    					</div>
-			    					<div class="listbox">
-			    						<div class="list-boxs">
-			    							<span class="mb-1">${productVO.product_name}</span>
-			    						</div>
-			    						<div class="list-boxs">
-			    							<span>$XXX元</span>
-			    						</div>
-			    						<div class="list-boxs mt-2">
-			    							<button class="btn bg-secondary">加入收藏</button>
-			    						</div>
-			    					</div>
-			    				</div>	
-		    				</div>
+			    				<div class="col-xs-6 col-sm-4 col-md-3 pdzero product" data-price="${productVO.product_price}">
+				    					<div id="sample">
+				    						<div class="list-img">
+				    							<div class="list-img2">
+				    								<img src="<%=request.getContextPath()%>/showImg4?id=${productVO.sq_product_id}" class="img-fluid">
+					    						</div>
+					    					</div>
+					    					<div class="listbox">
+					    						<div class="list-boxs">
+					    							<span class="mb-1">${productVO.product_name}</span>
+					    						</div>
+					    						<div class="list-boxs price">
+					    							$${productVO.product_price}元
+					    						</div>
+					    						<div class="list-boxs mt-2">
+					    							<button class="btn bg-secondary">加入收藏</button>
+					    							<button class="btn bg-secondary addproduct">放入購物車</button>
+					    						</div>
+					    					</div>
+					    				</div>
+					    				<input type="hidden" name="id" value="${productVO.sq_product_id}">
+						    			<input type="hidden" name="name" value="${productVO.product_name}">
+										<input type="hidden" name="price" value="${productVO.product_price}">
+			    				</div>
 		    				</c:forEach>		    				
     					</div>
     				</div>
@@ -143,53 +142,102 @@
     		</div>
     	</div>
     </div>
-	<footer id="footer-main">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-3">
-					<p>uncopyright 2020. EA101</p>
-				</div>
-				<div class="col-sm-3">
-					<ul class="list-unstyled">
-						<li><a href="">home</a></li>
-						<li><a href="">what we do</a></li>
-						<li><a href="">about</a></li>
-						<li><a href="">latest</a></li>
-					</ul>
-				</div>
-				<div class="col-sm-3">
-					<ul class="list-unstyled">
-						<li><a href="">facebook</a></li>
-						<li><a href="">twitter</a></li>
-						<li><a href="">youtube</a></li>
-						<li><a href="">linkedin</a></li>
-					</ul>
-				</div>
-				<div class="col-sm-3">
-					<h6>a tiny header</h6>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam expedita fugit saepe, eum ad, quam! Eum magnam suscipit nulla ullam aliquam consectetur provident, nihil consequuntur porro labore asperiores corrupti esse?</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  	<script>
+    <div id="shopCar">
+		<a href="<%=request.getContextPath()%>/front-end/shopMall/shoppingCar.jsp"><img src="image/cart.png" class="img-fluid"></a>
+	</div>
+	<%@include file="/front-end/page-file/page-footer"%>
+    <script>
   		$(document).ready(function() {
+  			$(".addproduct").click(function() {
+  		        $.ajax({
+  		        	type : "POST",
+  		        	url  : "<%=request.getContextPath()%>/shopping.do",
+  		        	data : {
+  		        		action : "ADD",
+  		        		id : $("input[name=id]", $(this).parents(".product")).val(),
+  		        		name : $("input[name=name]", $(this).parents(".product")).val(),
+  		        		price : $("input[name=price]", $(this).parents(".product")).val(),
+  		        	},
+  		        	success : function(){
+  		        		if($("#shopCar").css("right") != 0){
+  		        			$("#shopCar").animate({right:'0px'}); 
+  		        		}
+  		        	}
+  		        });
+  		    });
   			$('.kind').click(function(){
   				$.ajax({
   					type :"POST",
   					url  : "<%=request.getContextPath()%>/back_end/Shop_product/product.do",
+  					dataType: 'json',
   					data : {
   						action : "getByKind",
   	  	  	  			product_kind_name : $(this).val(),                           
   					},
   					success : function(data) {
-  						
+  							console.log(data);
+  							let str = "";
+							let str1 = "";
+							for(let index = 0 ; index < data.length ; index++) { 
+								str1 += 
+				    				 "<div class='col-xs-6 col-sm-4 col-md-3 pdzero'>"+
+				    				 		"<div id='sample'>"+
+				    				 		"<div class='list-img'>"+
+				    				 			"<div class='list-img2'>"+
+ 				    				 				"<img src='<%=request.getContextPath()%>/showImg4?id=" + data[index].id + "' class='img-fluid'>"+
+				    				 			"</div>"+
+					    			 		"</div>"+
+					    			 		"<div class='listbox'>"+
+					    			 			"<div class='list-boxs'>"+
+					    			 				"<span class='mb-1'>" + data[index].name + "</span>"+
+					    			 			"</div>"+
+					    			 			"<div class='list-boxs'>"+
+					    							"<span>" + data[index].price + "元</span>"+
+					    			 			"</div>"+
+					    			 			"<div class='list-boxs mt-2'>"+
+					    			 				"<button class='btn bg-secondary'>加入收藏</button>"+
+					    			 			"</div>"+
+					    			 		"</div>"+
+					    			 	"</div>"+
+				    				 "</div>";
+							} 
+  						$("#product").empty();
+  						$("#product").append(str+str1);
   					}
-  				})
-	  		});
+  				});
+  			});
+  			$(".srhByPrice").click(function() {				
+  			    var sortMethod = $(this).val();
+  			    if(sortMethod == 'priceUp')
+  			    {
+  			        sortAsc();
+  			    }
+  			    else if(sortMethod == 'priceDown')
+  			    {
+  			        sortDesc();
+  			    }
+
+  			});
   		});
-  	</script>
-  </body>
+
+  		function sortAsc()
+		{
+		    var products = $('.product');
+		    products.sort(function(a, b){ return $(a).data("price")-$(b).data("price")});
+		    $(".products-range").html(products);
+		}
+
+		function sortDesc()
+		{
+		    var products = $('.product');
+		    products.sort(function(a, b){ return $(b).data("price") - $(a).data("price")});
+		    $(".products-range").html(products);
+		}
+		
+  		$(function(){
+  			$(".fun-text").text("商城");  // text("")裡面自己輸入功能名稱 
+  		});
+  		
+  		</script>
+  	</body>
 </html>
