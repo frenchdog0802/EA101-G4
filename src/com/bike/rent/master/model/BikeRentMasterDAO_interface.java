@@ -11,4 +11,6 @@ public interface BikeRentMasterDAO_interface {
 	public List<BikeRentMasterVO> getAll();
 	
 	public List<String> getRentMasterId(String sq_bike_store_id); 
+	
+	public String getCurrentKeys() ;
 }
