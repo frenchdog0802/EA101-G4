@@ -31,9 +31,3 @@
          }
     } 
 %>
-	<span>查詢關鍵字 : </span>
-    <span>xxx</span>
-    <span>&nbsp;&nbsp;</span>
-    <span>搜尋結果共 : </span>
-	<span> <%=rowNumber%> </span>
-	<span> 筆</span>

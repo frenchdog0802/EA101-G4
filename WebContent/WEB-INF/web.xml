@@ -106,6 +106,15 @@
 		<servlet-name>showImg2</servlet-name>
 		<url-pattern>/showImg2/showImg2.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>showImg4</servlet-name>
+		<servlet-class>imgReader.showImg4</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showImg4</servlet-name>
+		<url-pattern>/showImg4</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>BrandServlet</servlet-name>
@@ -123,6 +132,15 @@
 	<servlet-mapping>
 		<servlet-name>Shop_productServlet</servlet-name>
 		<url-pattern>/back_end/Shop_product/shop_product.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ShoppingServlet</servlet-name>
+		<servlet-class>com.shopping.controller.ShoppingServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShoppingServlet</servlet-name>
+		<url-pattern>/shopping.do</url-pattern>
 	</servlet-mapping>
 
 	<!-- 筑峰 -->
