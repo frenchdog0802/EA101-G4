@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bike.rent.detail.model.BikeRentDetailDAO;
 import com.bike.rent.detail.model.BikeRentDetailVO;
 import com.bike.type.model.BikeTypeVO;
 
@@ -111,7 +112,7 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 	
 	
 	@Override
-	public void  insertWithDetail(BikeRentMasterVO BikeRentMasterVO,List<BikeRentDetailVO>list ) {
+	public void  insertWithDetail(BikeRentMasterVO BikeRentMasterVO,List<BikeRentDetailVO> list ) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -144,6 +145,13 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 			pstmt.executeUpdate();
 			
 			//在同時新增明細
+			BikeRentDetailDAO brdao = new BikeRentDetailDAO();
+			for(BikeRentDetailVO BikeRentDetailVO : list) {
+				BikeRentDetailVO.setSq_rent_detail_id(BikeRentMasterVO.getSq_rent_id());
+				brdao.insert2(BikeRentDetailVO, con);
+			}
+			con.commit();
+			con.setAutoCommit(true);
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
