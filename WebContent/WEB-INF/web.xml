@@ -196,4 +196,45 @@
 		<servlet-name>ActReportServlet</servlet-name>
 		<url-pattern>/act/ActReportServlet.do</url-pattern>
 	</servlet-mapping>
+
+	<!--芷薇 -->
+	<servlet>
+		<servlet-name>RouteServlet</servlet-name>
+		<servlet-class>com.route.controller.RouteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RouteServlet</servlet-name>
+		<url-pattern>/front-end/route/route.do</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>RouteImgServlet</servlet-name>
+		<servlet-class>com.route.controller.RouteImgServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RouteImgServlet</servlet-name>
+		<url-pattern>/front-end/route/route.img</url-pattern>
+		<url-pattern>/back-end/route/route.img</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>WaterStationServlet</servlet-name>
+		<servlet-class>com.waterStation.controller.WaterStationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WaterStationServlet</servlet-name>
+		<url-pattern>/back-end/waterStation/water.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>WaterStationImgServlet</servlet-name>
+		<servlet-class>com.waterStation.controller.WaterStationImgServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WaterStationImgServlet</servlet-name>
+		<url-pattern>/back-end/waterStation/water.stationImage</url-pattern>
+	</servlet-mapping>
+
+
 </web-app>
