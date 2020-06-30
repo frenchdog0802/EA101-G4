@@ -8,7 +8,6 @@
 	List<Shop_productVO> list = shop_productSvc.getAll();
 	pageContext.setAttribute("list", list);
 %>
-<!-- adsasdasd -->
 <!doctype html>
 <html lang="en">
   <head>
