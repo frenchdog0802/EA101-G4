@@ -13,8 +13,8 @@ public class BikeTypeVO implements Serializable {
 	private String bike_title;
 	private String bike_description;
 	private byte[] bike_photo;
-	
-	private Integer price;
+	private Integer bike_daily_price;
+	private Integer bike_hourly_price;
 	
 	public String getSq_bike_type_id() {
 		return sq_bike_type_id;
@@ -46,11 +46,18 @@ public class BikeTypeVO implements Serializable {
 	public void setBike_photo(byte[] bike_photo) {
 		this.bike_photo = bike_photo;
 	}
-	public Integer getPrice() {
-		return price;
+
+	public Integer getBike_daily_price() {
+		return bike_daily_price;
 	}
-	public void setPrice(Integer price) {
-		this.price = price;
+	public void setBike_daily_price(Integer bike_daily_price) {
+		this.bike_daily_price = bike_daily_price;
+	}
+	public Integer getBike_hourly_price() {
+		return bike_hourly_price;
+	}
+	public void setBike_hourly_price(Integer bike_hourly_price) {
+		this.bike_hourly_price = bike_hourly_price;
 	}
 	
 	

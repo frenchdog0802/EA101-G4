@@ -8,13 +8,12 @@ public class TestBikeDAO {
 		
 		BikeDAO BikeDAO = new BikeDAO();
 		
+		System.out.println(BikeDAO.findBikeTypeAndStore("620001", "630001"));
+		
 //		Integer count = BikeDAO.findStoreBikeEmpty("620007");
 //		System.out.println(count);
 		
-		List<String> list = BikeDAO.findStoreBikeType("620001");
-		for(String String:list) {
-			System.out.println(String);
-		}
+
 		//insert
 		
 //		BikeVO bikeVo = new BikeVO();

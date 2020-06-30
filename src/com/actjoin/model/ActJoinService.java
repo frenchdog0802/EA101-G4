@@ -43,6 +43,10 @@ public class ActJoinService {
 	public List<ActJoinVO> getOneActJoin(String sq_activity_id) {
 		return dao.findByPrimaryKey(sq_activity_id);
 	}
+	
+	public int getOneJoinPeople(String sq_activity_id) {
+		return dao.search(sq_activity_id);
+	}
 
 	public List<ActJoinVO> getAll() {
 		return dao.getAll();

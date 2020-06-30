@@ -39,7 +39,7 @@ public class ActReportService {
 		return dao.findByPrimaryKey(sq_actreport_id);
 	}
 	
-	public ActReportVO getOneActReportForMember(String sq_member_id) {
+	public ActReportVO getOneActReportForMember(String sq_member_id) { //給前台會員找自己檢舉用
 		return dao.findByMemberId(sq_member_id);
 	}
 

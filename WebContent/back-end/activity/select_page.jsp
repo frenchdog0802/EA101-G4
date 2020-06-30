@@ -48,7 +48,7 @@
 </c:if>
 
 <ul>
-  <li><a href='listAllAct.jsp'>List</a> all Acts.  <br><br></li>
+  <li><a href='<%=request.getContextPath()%>/back-end/activity/listAllAct.jsp'>List</a> all Acts.  <br><br></li>
   
   
   <li>

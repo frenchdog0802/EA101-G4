@@ -17,4 +17,9 @@ public class BikeRentDetailService {
 	public List<BikeRentDetailVO> getAll(){
 		return dao.getAll();
 	}
+	
+	//找出明細裡面商家擁有的車種
+	public List<BikeRentDetailVO> getDetail(String sq_rent_id,String sq_bike_type_id){
+		return dao.getDetail(sq_rent_id, sq_bike_type_id);
+	}
 }

@@ -33,49 +33,36 @@ public class ActReportServlet extends HttpServlet {
 
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String str = req.getParameter("sq_activity_id");
-				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("請輸入活動編號");
+				String sq_activityreport_id = req.getParameter("sq_activityreport_id");
+				if (sq_activityreport_id == null || (sq_activityreport_id.trim()).length() == 0) {
+					errorMsgs.add("請輸入活動檢舉編號");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/reportActivity/select_page.jsp");
+							.getRequestDispatcher("/back-end/reportActivity/select_ActReportpage.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
 				
-				String sq_activity_id = null;
-				try {
-					sq_activity_id = new String(str);
-				} catch (Exception e) {
-					errorMsgs.add("活動編號格式不正確");
-				}
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/activity/select_page.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
 				
 				/***************************2.開始查詢資料*****************************************/
-				ActService actSvc = new ActService();
-				ActVO actVO = actSvc.getOneAct(sq_activity_id);
-				if (actVO == null) {
+				ActReportService actreportSvc = new ActReportService();
+				ActReportVO actreportVO = actreportSvc.getOneActReport(sq_activityreport_id);
+				if (actreportVO == null) {
 					errorMsgs.add("查無資料");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/activity/select_page.jsp");
+							.getRequestDispatcher("/back-end/reportActivity/select_ActReportpage.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("actVO", actVO); // 資料庫取出的actVO物件,存入req
-				String url = "/back-end/activity/listOneAct.jsp";
+				req.setAttribute("actreportVO", actreportVO); // 資料庫取出的actVO物件,存入req
+				String url = "/back-end/reportActivity/listOneActReport.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneAct.jsp
 				successView.forward(req, res);
 
@@ -83,7 +70,7 @@ public class ActReportServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/activity/select_page.jsp");
+						.getRequestDispatcher("/back-end/reportActivity/select_ActReportpage.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -293,7 +280,7 @@ public class ActReportServlet extends HttpServlet {
 				/***************************2.開始新增資料***************************************/
 				ActService actSvc = new ActService();
 				actVO = actSvc.addAct(
-						sq_route_id, sq_member_id, act_title, max_population, min_population, population, 
+						sq_route_id, sq_member_id, act_title, max_population, min_population, 
 						start_time, end_time, act_start_time, act_end_time, act_description,
 						act_picture);
 				

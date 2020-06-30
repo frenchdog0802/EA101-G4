@@ -52,7 +52,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>活動檢舉資料修改 - update_actreport_input.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/reportActivity/select_actreportpage.jsp"><img src="<%=request.getContextPath()%>/back-end/activity/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/reportActivity/select_ActReportpage.jsp"><img src="<%=request.getContextPath()%>/back-end/activity/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 

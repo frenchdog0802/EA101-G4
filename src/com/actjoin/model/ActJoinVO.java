@@ -9,10 +9,20 @@ public class ActJoinVO implements Serializable{
 	private String sq_activity_id;
 	private String sq_member_id;
 	private Timestamp join_time;
+	private Integer i;
 	
 	public ActJoinVO() {
 		super();
 	}
+	
+	public Integer getI() {
+		return i;
+	}
+
+	public void setI(Integer i) {
+		this.i = i;
+	}
+
 
 	public ActJoinVO(String sq_activity_id,  String sq_member_id, Timestamp join_time) {
 		this.sq_activity_id = sq_activity_id;

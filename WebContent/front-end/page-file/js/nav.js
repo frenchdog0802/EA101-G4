@@ -11,7 +11,7 @@
               //Distance scrolled down the page
               let navHeight = $(navbar).height(); //Height of navbar
               //When scrolling down AND you've scrolled past navHeight * 2.25,add Class
-              if (currentScroll > previousScroll && currentScroll > navHeight * 2.25) {
+              if (currentScroll > previousScroll && currentScroll > navHeight * 1) {
                 $(navbar).removeClass("fixed-top");
                 //When scrolling up AND you've scrolled less than navHeight, remove Class
             } else if (previousScroll > currentScroll && !(currentScroll <= navHeight)) {

@@ -15,7 +15,7 @@ public class ActService {
 	}
 
 	public ActVO addAct(String sq_route_id, String sq_member_id, String act_title, Integer max_population,
-			Integer min_population,Integer population, Date start_time, Date end_time, Date act_start_time,
+			Integer min_population, Date start_time, Date end_time, Date act_start_time,
 			Date act_end_time, String act_description, byte[] act_picture) {
 
 		ActVO actVO = new ActVO();
@@ -25,7 +25,6 @@ public class ActService {
 		actVO.setAct_title(act_title);
 		actVO.setMax_population(max_population);
 		actVO.setMin_population(min_population);
-		actVO.setPopulation(population);
 		actVO.setAct_description(act_description);
 		actVO.setStart_time(start_time);
 		actVO.setEnd_time(end_time);
@@ -46,7 +45,7 @@ public class ActService {
 	}
 
 	public ActVO updateAct(String sq_route_id, String sq_member_id, String act_title,
-			Integer max_population, Integer min_population, Integer population, Date start_time,
+			Integer max_population, Integer min_population, Date start_time,
 			Date end_time, Date act_start_time,Date act_end_time, String act_description,
 			byte[] act_picture, Integer gp_status, String sq_activity_id) {
 
@@ -57,7 +56,6 @@ public class ActService {
 		actVO.setAct_title(act_title);
 		actVO.setMax_population(max_population);
 		actVO.setMin_population(min_population);
-		actVO.setPopulation(population);
 		actVO.setAct_description(act_description);
 		actVO.setStart_time(start_time);
 		actVO.setEnd_time(end_time);
