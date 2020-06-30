@@ -1030,29 +1030,29 @@ INSERT INTO bike(sq_bike_id ,sq_bike_type_id, sq_bike_store_id, bike_status)VALU
 
 --上線改成'RT'||'-'||LPAD(to_char(sq_rent_id.NEXTVAL), 6, '0')
 INSERT INTO bike_rent_master
-(sq_rent_id, sq_member_id,sq_bike_store_id,rent_payment,od_total_price,rent_name,rent_phone ,rent_od_status)
+(sq_rent_id, sq_member_id,sq_bike_store_id,rent_payment,od_total_price,rent_name,rent_phone ,rent_od_status,tradeno)
 VALUES
-('RT'||'-'||LPAD(to_char(sq_rent_id.NEXTVAL), 6, '0'),'910001','620001',0,13500,'老皮','0987654321',1);
+('RT'||'-'||LPAD(to_char(sq_rent_id.NEXTVAL), 6, '0'),'910001','620001',0,13500,'老皮','0987654321',1,'2006291129266664');
 
 INSERT INTO bike_rent_master
-(sq_rent_id, sq_member_id,sq_bike_store_id,rent_payment,od_total_price,rent_name,rent_phone ,rent_od_status)
+(sq_rent_id, sq_member_id,sq_bike_store_id,rent_payment,od_total_price,rent_name,rent_phone ,rent_od_status,tradeno)
 VALUES
-('RT'||'-'||LPAD(to_char(sq_rent_id.NEXTVAL), 6, '0'),'910002','620002',0,1200,'豆皮','0987654321',1);
+('RT'||'-'||LPAD(to_char(sq_rent_id.NEXTVAL), 6, '0'),'910002','620002',0,1200,'豆皮','0987654321',1,'2006291129266665');
 
 INSERT INTO bike_rent_master
-(sq_rent_id, sq_member_id,sq_bike_store_id,rent_payment,od_total_price,rent_name,rent_phone ,rent_od_status)
+(sq_rent_id, sq_member_id,sq_bike_store_id,rent_payment,od_total_price,rent_name,rent_phone ,rent_od_status,tradeno)
 VALUES
-('RT'||'-'||LPAD(to_char(sq_rent_id.NEXTVAL), 6, '0'),'910003','620004',0,1000,'Peter','0987654321',1);
+('RT'||'-'||LPAD(to_char(sq_rent_id.NEXTVAL), 6, '0'),'910003','620004',0,1000,'Peter','0987654321',1,'2006291129266666');
 
 INSERT INTO bike_rent_master
-(sq_rent_id, sq_member_id,sq_bike_store_id,rent_payment,od_total_price,rent_name,rent_phone ,rent_od_status)
+(sq_rent_id, sq_member_id,sq_bike_store_id,rent_payment,od_total_price,rent_name,rent_phone ,rent_od_status,tradeno)
 VALUES
-('RT'||'-'||LPAD(to_char(sq_rent_id.NEXTVAL), 6, '0'),'910001','620007',0,4500,'David','0987654321',1);
+('RT'||'-'||LPAD(to_char(sq_rent_id.NEXTVAL), 6, '0'),'910001','620007',0,4500,'David','0987654321',1,'2006291129266667');
 
 INSERT INTO bike_rent_master
-(sq_rent_id, sq_member_id,sq_bike_store_id,rent_payment,od_total_price,rent_name,rent_phone ,rent_od_status)
+(sq_rent_id, sq_member_id,sq_bike_store_id,rent_payment,od_total_price,rent_name,rent_phone ,rent_od_status,tradeno)
 VALUES
-('RT'||'-'||LPAD(to_char(sq_rent_id.NEXTVAL), 6, '0'),'910005','620011',0,600,'黑皮','0987654321',1);
+('RT'||'-'||LPAD(to_char(sq_rent_id.NEXTVAL), 6, '0'),'910005','620011',0,600,'黑皮','0987654321',1,'2006291129266668');
 
 --------------------------------------------------------
 --  for table bike_rent_detail 租車訂單明細
