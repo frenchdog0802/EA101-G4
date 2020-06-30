@@ -1,0 +1,41 @@
+    	.choshop span{
+    		font-size: 150%;
+    	}
+    	.choshop select{
+    		font-size: 123%;
+    	}
+    	.checkbtn{
+    		text-align: center;
+    	}
+    	.checkbtn button{
+			width: 45%;
+			height: 40px;
+    	}
+    	.shoptd{
+    		padding-left: 10px;
+    		padding-top: 5px;
+       	}
+       	.takedt{
+       		font-size: 130%;
+       		width: 90%;
+       	}
+       	.takedt_t{
+       		padding-top: 8px;
+       	}
+       	.takedt_td{
+       		padding-top: 10px;
+       	}
+       	.takedt_td input{
+ 			width: 100%;
+       	}
+       	.finalbtn{
+       		padding-right: 15px;
+       		text-align: right;
+       	}
+       	.finalbtn button{
+       		width: 30%;
+       	}
+		.samemem{
+			width: 20px;
+			height: 20px;
+		}
