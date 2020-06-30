@@ -37,6 +37,52 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 	
 	
 	@Override
+	public void insert2(BikeRentDetailVO BikeRentDetailVO , java.sql.Connection con) {
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = con.prepareStatement(INSERT_STMT);
+			pstmt.setString(1, BikeRentDetailVO.getSq_rent_id());
+			pstmt.setString(2, BikeRentDetailVO.getSq_bike_type_id());
+			pstmt.setString(3, BikeRentDetailVO.getSq_bike_id());
+			pstmt.setInt(4, BikeRentDetailVO.getPrice());
+			pstmt.setInt(5, BikeRentDetailVO.getExtra_cost());
+			pstmt.setTimestamp(6, BikeRentDetailVO.getRsved_rent_date());
+			//set ex_return_date
+			pstmt.setTimestamp(7, BikeRentDetailVO.getEx_return_date());
+			//set real_return_date
+			pstmt.setTimestamp(8, BikeRentDetailVO.getReal_return_date());
+			
+
+			pstmt.executeUpdate();
+			
+		}catch(SQLException ce) {
+			if(con != null) {
+				try {
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-deatil");
+					con.rollback();
+				}catch(SQLException cecep) {
+					throw new RuntimeException("rollback error occured. "
+							+ cecep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ ce.getMessage());
+			// Clean up JDBC resources
+		}finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+	
+	@Override
 	public List<BikeRentDetailVO> getDetail(String sq_rent_id,String sq_bike_type_id){
 		List<BikeRentDetailVO> list = new ArrayList<>();
 		Connection con = null;

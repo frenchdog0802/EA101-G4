@@ -156,6 +156,8 @@ public class BikeEcpayServlet extends HttpServlet {
 			
 			BikeRentMasterSvc.insert(BikeRentMasterVO);
 			
+			//同時新增到明細
+			
 			
 			
 		}
