@@ -19,8 +19,8 @@ public class ShoppingServlet extends HttpServlet{
 		List<Shop_productVO> buylist = (Vector<Shop_productVO>)session.getAttribute("shoppingcar");
 		String action = req.getParameter("action");
 		System.out.println(action);
-		if(!action.equals("CHECKOUT")) {
-			if(action.equals("DELETE")) {
+		if(action.equals("DELETE")) {
+			try {
 				String delete = req.getParameter("del");
 				int d = Integer.parseInt(delete);
 				buylist.remove(d);
@@ -29,10 +29,15 @@ public class ShoppingServlet extends HttpServlet{
 				session.setAttribute("shoppingcar", buylist);	
 				RequestDispatcher rd = req.getRequestDispatcher(url);
 				rd.forward(req, res);
+			}catch(Exception e){
+				e.printStackTrace();
+				RequestDispatcher fail = req.getRequestDispatcher("/front-end/ShopMall/ShopMall.jsp");
+				fail.forward(req, res);
 			}
-			else if(action.equals("ADD")) {
+		}
+		if(action.equals("ADD")) {
+			try {
 				Shop_productVO aproduct = getProduct(req);
-
 				if(buylist == null) {
 					buylist = new Vector<Shop_productVO>();
 					buylist.add(aproduct);
@@ -43,20 +48,19 @@ public class ShoppingServlet extends HttpServlet{
 					} else {
 						buylist.add(aproduct);
 					}
-				}	
-			}						
-		}else if(action.equals("CHECKOUT")) {
-			Integer total = 0;
-			for (int i = 0; i < buylist.size(); i++) {
-				Shop_productVO order = buylist.get(i);
-				Integer price = order.getProduct_price();
-				Integer quantity = order.getProduct_quantity();
-				total += (price * quantity);
-			}
-
-			String amount = String.valueOf(total);
-			req.setAttribute("amount", amount);
-			String url = "/front-end/shopMall/shoppingCar.jsp";
+				}
+				session.setAttribute("shoppingcar", buylist);
+			}catch(Exception e) {
+				e.printStackTrace();
+				RequestDispatcher fail = req.getRequestDispatcher("/front-end/ShopMall/ShopMall.jsp");
+				fail.forward(req, res);
+			}	
+		}						
+		if(action.equals("CHECKOUT")) {
+			String total = req.getParameter("total");
+			session.setAttribute("total", total);
+			
+			String url = "/front-end/shopMall/shopPayDetail.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
 		}
@@ -66,9 +70,11 @@ public class ShoppingServlet extends HttpServlet{
 		String id = req.getParameter("id");
 		String name = req.getParameter("name");
 		String price = req.getParameter("price");
+		
 		System.out.println(id);
 		System.out.println(name);
 		System.out.println(price);
+		
 		Shop_productVO product = new Shop_productVO();
 		product.setSq_product_id(id);
 		product.setProduct_name(name);
