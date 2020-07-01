@@ -22,6 +22,11 @@ public class ActFavorServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		HttpSession session = req.getSession();
+		String sq_member_id = (String)session.getAttribute("sq_member_id");
+			if(sq_member_id==null) {
+				session.setAttribute("sq_memberid", "910003");
+			}
 
         if ("insert".equals(action)) { // 來自addAct.jsp的請求  
 			
@@ -29,11 +34,11 @@ public class ActFavorServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			
 			
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String sq_activity_id = req.getParameter("sq_activity_id").trim();
-				String sq_member_id = req.getParameter("sq_member_id").trim();
+				
 				Timestamp favorite_time = new java.sql.Timestamp(System.currentTimeMillis());
 				ActFavorVO actfavorVO = new ActFavorVO();
 				actfavorVO.setSq_activity_id(sq_activity_id);
@@ -72,7 +77,7 @@ public class ActFavorServlet extends HttpServlet {
 			try {
 				/***************************1.接收請求參數***************************************/
 				String sq_activity_id =req.getParameter("sq_activity_id");
-				String sq_member_id =req.getParameter("sq_member_id");
+		
 				
 				/***************************2.開始刪除資料***************************************/
 				ActFavorService actfavorSvc = new ActFavorService();

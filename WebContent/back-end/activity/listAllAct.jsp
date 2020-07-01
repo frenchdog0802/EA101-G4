@@ -9,7 +9,7 @@
     List<ActVO> list = actSvc.getAll();
     pageContext.setAttribute("list",list);
 %>
-
+<jsp:useBean id="actjoinSvc" class="com.actjoin.model.ActJoinService"/>
 
 <%@include file="/back-end/backFrame/backHeader"%>
 <title>所有活動資料 - listAllAct.jsp</title>
@@ -110,7 +110,7 @@
 			<td>${actVO.act_title}</td>
 			<td>${actVO.max_population}</td>
 			<td>${actVO.min_population}</td> 
-			<td>${actVO.population}</td>
+			<td>${actjoinSvc.getOneJoinPeople(actVO.sq_activity_id)}</td>
 			<td>${actVO.start_time}</td>
 			<td>${actVO.end_time}</td>
 			<td>${actVO.act_start_time}</td>
