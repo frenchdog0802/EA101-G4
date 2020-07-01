@@ -79,7 +79,6 @@ public class BikeEcpayServlet extends HttpServlet {
 			sb.append(sq_rent_idStr);
 			sb.append(sq_rent_idNum);
 			sq_rent_id = sb.toString();
-			System.out.println(sq_rent_id);
 			// 商店VO
 			BikeStoreVO BikeStoreVO = (BikeStoreVO) session.getAttribute("BikeStoreVO");
 			// 交易日期
