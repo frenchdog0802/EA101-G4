@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>								
+    pageEncoding="UTF-8"%>
 								<!-----------backHeader----------->
 <%@include file="/back-end/backFrame/backHeader"%>
 								<!-----------backHeader----------->
@@ -39,13 +39,23 @@
 
 								<!-----------backNav----------->
 <!-- --------------------------------------------------------------------------------------------->					
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					租車管理
+				</div>
+				<div class="col">
+					訂單管理
+				</div>
+			</div>
+		</div>
 
 
-			<!-- 自由發揮處 -->
+			
 
 
 <!-- --------------------------------------------------------------------------------------------->
 								<!-----------backFooter----------->
 
-		<%@include file="/back-end/backFrame/backFooter"%>
+	<%@include file="/back-end/backFrame/backFooter"%>
  			
