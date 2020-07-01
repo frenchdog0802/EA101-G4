@@ -16,12 +16,16 @@ import com.bike.type.model.BikeTypeService;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
+import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import ecpay.payment.integration.AllInOne;
@@ -74,7 +78,8 @@ public class BikeEcpayServlet extends HttpServlet {
 			StringBuilder sb = new StringBuilder();// 串接回來
 			sb.append(sq_rent_idStr);
 			sb.append(sq_rent_idNum);
-
+			sq_rent_id = sb.toString();
+			System.out.println(sq_rent_id);
 			// 商店VO
 			BikeStoreVO BikeStoreVO = (BikeStoreVO) session.getAttribute("BikeStoreVO");
 			// 交易日期
@@ -89,7 +94,8 @@ public class BikeEcpayServlet extends HttpServlet {
 //			商店id
 			obj.setStoreID(BikeStoreVO.getSq_bike_store_id());
 //			訂單編號
-			obj.setMerchantTradeNo(sb.toString());
+			obj.setMerchantTradeNo(sq_rent_id);
+					
 //			設定MerchantTradeDate 合作特店交易時間
 			obj.setMerchantTradeDate(formatstr);
 //			設定TotalAmount 交易金額
@@ -99,10 +105,10 @@ public class BikeEcpayServlet extends HttpServlet {
 //			設定交易訊息
 			obj.setTradeDesc("支付信用卡");
 //			設定ReturnURL 付款完成通知回傳網址 使用  ngrok.io
-			String returnURL = "https://aedc94d95b20.ngrok.io/EA101_G4/bike/BikeEcpayServlet.do";
+			String returnURL = "https://f98859717b23.ngrok.io/EA101_G4/bike/BikeEcpayServlet.do";
 			obj.setReturnURL(returnURL);
 //			設定ClientBackURL Client端返回合作特店系統的按鈕連結
-			String clientBackURL = "https://aedc94d95b20.ngrok.io/EA101_G4/front-end/bike/bikeStoreList.jsp";
+			String clientBackURL = "https://f98859717b23.ngrok.io/EA101_G4/front-end/bike/bikeStoreList.jsp";
 			obj.setClientBackURL(clientBackURL);
 //			設定OrderResultURL Client端回傳付款結果網址 跟ReturnURL二選一
 //			obj.setOrderResultURL(clientBackURL);
@@ -110,15 +116,21 @@ public class BikeEcpayServlet extends HttpServlet {
 			obj.setNeedExtraPaidInfo("N");
 //			setRedeem是否使用紅利折抵
 			obj.setRedeem("N");
-//			設定自訂回傳訊息 controller接收
+//			設定自訂回傳訊息 controller接收action
 			obj.setCustomField1("returnMsg");
+			obj.setCustomField2(startDate+"#"+endDate);
+			obj.setCustomField3(bookMap.toString());
+			
 
+			
 			AllInOneService allInOneSvc = new AllInOneService();
 			String form = allInOneSvc.aioCheckOut(obj, null);
 			out.println(form);
 		}
 
-		String CustomField1 = request.getParameter("CustomField1"); // 綠界回傳交易訊息(自訂)
+		
+		// 綠界回傳交易訊息(自訂)
+		String CustomField1 = request.getParameter("CustomField1"); 
 		if ("returnMsg".equals(CustomField1)) {
 
 			BikeTypeService bikeTypeSvc = new BikeTypeService();
@@ -139,25 +151,28 @@ public class BikeEcpayServlet extends HttpServlet {
 //			PaymentType 特店選擇的付款方式	Credit_CreditCard	String PaymentType = request.getParameter("PaymentType");
 //			TradeDate 訂單成立時間			2020/06/29 11:15:38 String TradeDate = request.getParameter("TradeDate");
 
-//			取得所有參數
-
-			Map<String , String[]> map = request.getParameterMap();
-			for (Entry<String, String[]> entry : map.entrySet()) {
-				System.out.println(entry.getKey()+":");
-				System.out.println(entry.getValue());
-			}
-
-		
+	
 
 		// 接受參數回傳取需要參數
 
-		String MerchantTradeNo = request.getParameter("MerchantTradeNo");
+		String MerchantTradeNo = request.getParameter("MerchantTradeNo");//request.getParameter("MerchantTradeNo");
 		String StoreID = request.getParameter("StoreID");
 		Integer RtnCode = Integer.parseInt(request.getParameter("RtnCode"));
 		Integer TradeAmt = Integer.parseInt(request.getParameter("TradeAmt"));
 		String TradeNo = request.getParameter("TradeNo");
-		String startDate = (String) session.getAttribute("startDate");
-		String endDate = (String) session.getAttribute("endDate");
+		
+		//map.toString
+		String CustomField3 = request.getParameter("CustomField3");
+		Map<String , String > bookMap =  stringToMap(CustomField3);
+		
+		//處理日期
+		//date#date
+		String CustomField2 = request.getParameter("CustomField2");
+		String startDate = null;
+		String endDate = null;
+		int j = CustomField2.indexOf("#");
+		startDate = CustomField2.substring(0,j);
+		endDate =  CustomField2.substring(j+1);
 
 		// 新增到訂單
 		BikeRentMasterService BikeRentMasterSvc = new BikeRentMasterService();
@@ -173,27 +188,36 @@ public class BikeEcpayServlet extends HttpServlet {
 		BikeRentMasterVO.setTradeno(TradeNo);
 
 		// 同時新增到明細
-		HashSet<BikeRentDetailVO> list = new HashSet<>();
+		List<BikeRentDetailVO> list = new ArrayList<>();
 		// 取得購物車商品
-		HashMap<String, Integer> bookMap = (HashMap<String, Integer>) session.getAttribute("bookMap");
-		for (Map.Entry<String, Integer> entry : bookMap.entrySet()) {
+
+		for (Map.Entry<String, String> entry : bookMap.entrySet()) {
 			BikeRentDetailVO BikeRentDetailVO = new BikeRentDetailVO();
-			String sq_bike_type_id = entry.getKey();
-			int num = entry.getValue();
+			String sq_bike_type_id = entry.getKey().trim();
+			int num = new Integer(entry.getValue());
 			for (int i = 0; i < num; i++) {
 				BikeRentDetailVO.setSq_rent_id(MerchantTradeNo);
 				BikeRentDetailVO.setSq_bike_type_id(sq_bike_type_id);
 				// 新增金額
-				int dailyPrice = bikeTypeSvc.findByPrimaryKey(sq_bike_type_id).getBike_daily_price();
-				int hourlyPrice = bikeTypeSvc.findByPrimaryKey(sq_bike_type_id).getBike_hourly_price();
-
+				int dailyPrice = 0;
+				int hourlyPrice = 0;
+				try {
+					dailyPrice = bikeTypeSvc.findByPrimaryKey(sq_bike_type_id).getBike_daily_price();
+					hourlyPrice = bikeTypeSvc.findByPrimaryKey(sq_bike_type_id).getBike_hourly_price();
+				}catch(NullPointerException ce) {
+					if(dailyPrice == 0 ) dailyPrice =0;
+					if(hourlyPrice == 0 ) hourlyPrice =0;
+				};
 				int price = getPrice(dailyPrice, hourlyPrice, startDate, endDate);
 				BikeRentDetailVO.setPrice(price);
+				BikeRentDetailVO.setExtra_cost(0);
 				// 新增日期
-				BikeRentDetailVO.setRsved_rent_date(java.sql.Timestamp.valueOf(startDate));
-				BikeRentDetailVO.setEx_return_date(java.sql.Timestamp.valueOf(endDate));
+				BikeRentDetailVO.setRsved_rent_date(java.sql.Timestamp.valueOf(startDate+":00"));
+				BikeRentDetailVO.setEx_return_date(java.sql.Timestamp.valueOf(endDate+":00"));
+				list.add(BikeRentDetailVO);
 			}
 		}
+
 		BikeRentMasterSvc.insertWithDetail(BikeRentMasterVO, list);
 	}
 
@@ -230,10 +254,21 @@ public class BikeEcpayServlet extends HttpServlet {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
 		cost = (Dailyprice * days + Hourlyprice * hours);
-
 		return cost;
+	}
+	
+	public Map<String , String> stringToMap(String MapString){
+		int s1 = MapString.indexOf("{");
+		String reg1 = MapString.substring(s1+1);
+		int s2 = reg1.indexOf("}");
+		String reg2 = reg1.substring(0,s2);
+	
+		Map<String, String> reconstructedUtilMap = Arrays.stream(reg2.split(","))
+	            .map(s -> s.split("="))
+	            .collect(Collectors.toMap(s -> s[0], s -> s[1]));
+		
+		return reconstructedUtilMap;
 	}
 
 }

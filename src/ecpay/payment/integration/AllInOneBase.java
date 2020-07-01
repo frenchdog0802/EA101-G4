@@ -41,9 +41,10 @@ public class AllInOneBase {
 //			doc = EcpayFunction.xmlParser(configPath);
 		/* when using testing code */
 		// school
-		//String paymentConfPath = "file:///C:\\G4_Project\\git\\EA101-G4\\WebContent\\WEB-INF\\payment_conf.xml";
+		String paymentConfPath = "file:///C:\\G4_Project\\git\\EA101-G4\\WebContent\\WEB-INF\\payment_conf.xml";
+		
 		// home
-		String paymentConfPath = "file:///C:\\專題\\git\\EA101-G4\\WebContent\\WEB-INF\\payment_conf.xml";
+//		String paymentConfPath = "file:///C:\\專題\\git\\EA101-G4\\WebContent\\WEB-INF\\payment_conf.xml";
 
 		doc = EcpayFunction.xmlParser(paymentConfPath);
 

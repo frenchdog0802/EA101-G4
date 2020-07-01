@@ -2,12 +2,24 @@ package com.bike.rent.master.model;
 
 import java.util.List;
 
+
 public class TestBikeRentMasterDAO {
 	public static void main(String[] args) {
 
 
 		
 		BikeRentMasterDAO_interface BikeRentMasterDAO = new BikeRentMasterDAO();
+		BikeRentMasterService BikeRentMasterSvc = new BikeRentMasterService();
+		String sq_rent_id = BikeRentMasterSvc.getCurrentKeys();
+		String sq_rent_idNum = null;
+		String sq_rent_idStr = null;
+		int j = sq_rent_id.indexOf("X");
+		sq_rent_idStr = sq_rent_id.substring(0, j + 1);
+		sq_rent_idNum = Integer.toString(new Integer(sq_rent_id.substring(j + 1)) + 1);
+		StringBuilder sb = new StringBuilder();// 串接回來
+		sb.append(sq_rent_idStr);
+		sb.append(sq_rent_idNum);
+		System.out.println(sb.toString());
 		
 //		List<String> list = BikeRentMasterDAO.getRentMasterId("620001");
 //		
@@ -44,7 +56,6 @@ public class TestBikeRentMasterDAO {
 //		BikeRentMasterDAO.update(BikeRentMasterVO);
 		
 		
-		System.out.println(BikeRentMasterDAO.getCurrentKeys());
 		//get one 
 //		BikeRentMasterVO BikeRentMasterVO = BikeRentMasterDAO.findByPrimaryKey("RT-600001");
 //		System.out.println(BikeRentMasterVO.getTradeno());

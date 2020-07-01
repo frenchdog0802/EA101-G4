@@ -113,7 +113,7 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 	
 	
 	@Override
-	public void  insertWithDetail(BikeRentMasterVO BikeRentMasterVO,HashSet<BikeRentDetailVO> list ) {
+	public void  insertWithDetail(BikeRentMasterVO BikeRentMasterVO,List<BikeRentDetailVO> list ) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
