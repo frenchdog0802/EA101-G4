@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import com.bike.rent.detail.model.BikeRentDetailDAO;
@@ -112,7 +113,7 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 	
 	
 	@Override
-	public void  insertWithDetail(BikeRentMasterVO BikeRentMasterVO,List<BikeRentDetailVO> list ) {
+	public void  insertWithDetail(BikeRentMasterVO BikeRentMasterVO,HashSet<BikeRentDetailVO> list ) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -146,6 +147,7 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 			
 			//在同時新增明細
 			BikeRentDetailDAO brdao = new BikeRentDetailDAO();
+			
 			for(BikeRentDetailVO BikeRentDetailVO : list) {
 				BikeRentDetailVO.setSq_rent_detail_id(BikeRentMasterVO.getSq_rent_id());
 				brdao.insert2(BikeRentDetailVO, con);
