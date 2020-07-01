@@ -8,10 +8,6 @@
 	String sq_member_id = (String)session.getAttribute("sq_member_id");
 %>
 
-<%
-	List<ActJoinVO> joinlist = (List<ActJoinVO>)request.getAttribute("joinlist");
-%>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +35,7 @@
       <li class="breadcrumb-item">
         <a href="index.html">Home</a>
       </li>
-      <li class="breadcrumb-item active">${actVO.act_title}</li>
+      <li class="breadcrumb-item active">${actVO.act_title}${actjoinVO.sq_activity_id}${actjoinVO.sq_member_id}</li>
     </ol>
 
     <!-- Portfolio Item Row -->
@@ -66,26 +62,26 @@
         </ul>
      
        <div>
-	        <c:if test="${actVO.sq_member_id != sq_member_id}">
+       		<c:choose>
+       		
+       		<c:when test="${actVO.sq_activity_id == actjoinVO.sq_activity_id && sq_member_id == actjoinVO.sq_member_id || actVO.sq_member_id == sq_member_id}">
+		        <FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do">
+		        	<input type="button" value="已參加" class="btn btn-primary" disabled>
+		        </FORM>
+		    </c:when>
+		    
+	        <c:when test="${actVO.sq_member_id != sq_member_id}">
 				<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do">
 					<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
 					<input type="hidden" name="action"value="insert">
 					<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 					<input type="submit" value="參加活動" class="btn btn-primary"> 	
 				</FORM> 
-	        </c:if>
-	        <c:if test="${actVO.sq_member_id == sq_member_id}">
-	        	<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do">
-	        		<input type="button" value="已參加" class="btn btn-primary" disabled>
-	        	</FORM>
-	        </c:if>
-	        <c:forEach var="actjoinVO" items="${joinlist}">
-		        <c:if test="${actVO.sq_activity_id == actjoinVO.sq_activity_id && actVO.sq_member_id == actjoinVO.sq_member_id}">
-		        	<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do">
-		        		<input type="button" value="已參加" class="btn btn-primary" disabled>
-		        	</FORM>
-		        </c:if>
-	        </c:forEach>
+	        </c:when>
+	        <c:otherwise>
+	        
+	        </c:otherwise>      
+	       	</c:choose>
 	        
       </div>
 

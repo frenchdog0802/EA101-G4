@@ -117,15 +117,14 @@ public class ActServlet extends HttpServlet {
 				
 				ActJoinVO actjoinVO = new ActJoinVO();	//驗證是否重複參加
 				List<ActJoinVO> list = actjoinSvc.getAll(); 
-				List<ActJoinVO> joinlist = new ArrayList<>();
+				
 				for(ActJoinVO joinact : list) {
-					if(actjoinVO.getSq_activity_id() == sq_activity_id && actjoinVO.getSq_member_id() == sq_member_id) {
-						joinact.setSq_activity_id(sq_activity_id);
-						joinact.setSq_member_id(sq_member_id);
-						joinlist.add(joinact);
+					if(joinact.getSq_activity_id().contains(sq_activity_id) && joinact.getSq_member_id().contains(sq_member_id)) {
+						actjoinVO.setSq_activity_id(sq_activity_id);
+						actjoinVO.setSq_member_id(sq_member_id);
+						req.setAttribute("actjoinVO", actjoinVO);
 					}
 				}
-				req.setAttribute("joinlist", joinlist);
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("actVO", actVO);// 資料庫取出的actVO物件,存入req
 				String url = "/front-end/activity/ActivityOne.jsp";
