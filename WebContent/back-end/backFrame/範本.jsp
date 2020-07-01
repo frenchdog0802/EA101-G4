@@ -77,7 +77,7 @@
 				</div>
 				<div class="liststy">
 					<button class="btn listbtn my-3">
-						<img src="image/Bike.png" class="img-fluid">
+						<img src="image/Bike1.png" class="img-fluid">
 					</button>							
 				</div>
 				<div class="liststy">
@@ -87,12 +87,12 @@
 				</div>
 				<div class="liststy">
 					<button class="btn listbtn my-3">
-						<img src="image/web.png" class="img-fluid">
+						<img src="image/web1.png" class="img-fluid">
 					</button>		
 				</div>
 				<div class="liststy">
 					<button class="btn listbtn my-3">
-						<img src="image/route.png" class="img-fluid">
+						<img src="image/route1.png" class="img-fluid">
 					</button>			
 				</div>
 				<div class="liststy">
