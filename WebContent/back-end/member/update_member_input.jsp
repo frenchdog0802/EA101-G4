@@ -1,10 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.member.model.*"%>
+<%@ page import="java.util.*"%>
 
 <%
-	MemVO memVO = (MemVO) request.getAttribute("MemVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+	MemVO memVO = (MemVO) request.getAttribute("memVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
+
 
 <html>
 <head>
@@ -76,11 +78,12 @@ th, td {
 	</c:if>
 
 	<FORM METHOD="post"
-		ACTION="<%=request.getContextPath()%>/member/mem.do" enctype="multipart/form-data">
+		ACTION="<%=request.getContextPath()%>/member/mem.do"
+		enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>會員編號:<font color=red><b>*</b></font></td>
-				<td><%=memVO.getSq_member_id()%></td>
+				<td>${memVO.sq_member_id}</td>
 			</tr>
 			<tr>
 				<td>會員姓名:</td>
@@ -103,8 +106,9 @@ th, td {
 					value="<%=memVO.getM_email()%>" /></td>
 			</tr>
 			<td>性別:</td>
-			<td><select name="gender" id="gender"><option value="1">男</option>
-					<option value="2">女</option>
+			<td><select name="gender" id="gender">
+					<option value="1" ${memVO.getGender()==1?"selected" : ""}>男</option>
+					<option value="2" ${memVO.getGender()==2?"selected" : ""}>女</option>
 			</select></td>
 			<tr>
 				<td>生日:</td>
@@ -112,7 +116,7 @@ th, td {
 			</tr>
 			<tr>
 				<td>暱稱:</td>
-				<td><input type="TEXT" name="nick_name" size="45"
+				<td><input type="TEXT" name="nick_name" 
 					value="<%=memVO.getNick_name()%>" /></td>
 			</tr>
 			<tr>
@@ -126,19 +130,38 @@ th, td {
 					value="<%=memVO.getAddress()%>" /></td>
 			</tr>
 			<tr>
-				<td>頭像照片:</td>
-				<td><input type="file" name="m_photo" size="45"
-					 /><img id="demo"></td>
+				<td>頭像圖片:</td>
+				<td><input type="file" name="m_photo" id="m_photo_id"
+					accept="image/gif, image/jpeg, image/png" />
+					<div>
+					<% if(session.getAttribute("m_photo") == null){ %>
+						<img id="member_avatar"
+								src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${memVO.sq_member_id}"
+								style="height: 100px;">
+					<%}else{%>
+					<img id="member_avatar" src="<%=request.getContextPath()%>/member/MemSessionImg.do"
+								class="img-fluid" style="height: 100px;">
+					<%}%>
+					</div></td>
 			</tr>
 			<tr>
 				<td>名片背景圖:</td>
-				<td><input type="file" name="back_img" size="45"
-					 /><img id="demo1"></td>
+				<td><input type="file" name="back_img" 
+					id="back_img_id" accept="image/gif, image/jpeg, image/png" />
+					<div>
+						<% if(session.getAttribute("back_img") == null){ %>
+						<img id="Signature_file"
+								src="<%=request.getContextPath()%>/member/DBReader2.do?sq_member_id=${memVO.sq_member_id}"
+								style="height: 100px;">
+					<%}else{%>
+							<img id="Signature_file" src="<%=request.getContextPath()%>/member/MemSessionBackImg.do"
+								class="img-fluid" style="height: 100px;">
+					<%}%>
+					</div>
 			</tr>
 
 		</table>
-		<br>
-		<input type="hidden" name="action" value="update"> <input
+		<br> <input type="hidden" name="action" value="update"> <input
 			type="hidden" name="sq_member_id"
 			value="<%=memVO.getSq_member_id()%>"> <input type="submit"
 			value="送出修改">
@@ -226,5 +249,35 @@ th, td {
 	//              }
 	//              return [true, ""];
 	//      }});
+
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				$('#member_avatar').attr('src', e.target.result);
+			}
+
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	$("#m_photo_id").change(function() {
+		readURL(this);
+	});
+
+	function readURL2(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				$('#Signature_file').attr('src', e.target.result);
+			}
+
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	$("#back_img_id").change(function() {
+		readURL2(this);
+	});
 </script>
 </html>

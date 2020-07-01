@@ -31,6 +31,7 @@ public class MemServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		HttpSession session = req.getSession();
 
 		System.out.println(action);
 
@@ -62,7 +63,7 @@ public class MemServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/member/selectMember_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/member/selectMember_page.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -75,7 +76,7 @@ public class MemServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/member/selectMember_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/member/selectMember_page.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -109,7 +110,7 @@ public class MemServlet extends HttpServlet {
 				MemVO memVO = memSvc.getOneMem(sq_member_id);
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-				req.setAttribute("MemVO", memVO); // 資料庫取出的empVO物件,存入req
+				req.setAttribute("memVO", memVO); // 資料庫取出的memVO物件,存入req
 				String url = "/back-end/member/update_member_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 				successView.forward(req, res);
@@ -155,7 +156,7 @@ public class MemServlet extends HttpServlet {
 				if (cellphone == null || cellphone.trim().length() == 0) {
 					errorMsgs.add("電話請勿空白");
 				}
-				
+
 				java.sql.Date birthday = null;
 				try {
 					birthday = java.sql.Date.valueOf(req.getParameter("birthday").trim());
@@ -163,7 +164,7 @@ public class MemServlet extends HttpServlet {
 					birthday = new java.sql.Date(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
 				}
-				
+
 				String m_email = req.getParameter("m_email").trim();
 				if (m_email == null || m_email.trim().length() == 0) {
 					errorMsgs.add("請輸入email");
@@ -177,30 +178,52 @@ public class MemServlet extends HttpServlet {
 				if (address == null || address.trim().length() == 0) {
 					errorMsgs.add("請輸入聯絡地址");
 				}
-							
+
 				Integer gender = new Integer(req.getParameter("gender"));
-				
-				
+
 				Date registered = new java.sql.Date(System.currentTimeMillis());
+				
 				
 				
 				InputStream in = req.getPart("m_photo").getInputStream();
 				byte[] m_photo = null;
-				if(in.available()!=0) {
-					m_photo =new byte[in.available()];
+				if (session.getAttribute("m_photo") == null) {
+					if (in.available() == 0) {
+						MemService MemSrc = new MemService();
+						MemVO memVO = MemSrc.getOneMem(sq_member_id);
+						m_photo = memVO.getM_photo();
+					}else {
+						m_photo = new byte[in.available()];
+						session.setAttribute("m_photo", m_photo);
+						in.read(m_photo);
+						in.close();
+					}
+				} else {
+					m_photo = (byte[]) session.getAttribute("m_photo");
 					in.read(m_photo);
 					in.close();
-				}else errorMsgs.add("頭相未選擇上傳圖片");
-				
-				
+				}
+							
 				InputStream in2 = req.getPart("back_img").getInputStream();
 				byte[] back_img = null;
-				if(in2.available()!=0) {
-					back_img =new byte[in.available()];
+				if (session.getAttribute("back_img") == null) {
+					if (in2.available() == 0) {
+						MemService MemSrc = new MemService();
+						MemVO memVO = MemSrc.getOneMem(sq_member_id);
+						back_img = memVO.getBack_img();
+					} else {
+						back_img = new byte[in2.available()];
+						session.setAttribute("back_img",back_img);
+						in2.read(back_img);
+						in2.close();
+					}
+				}else {
+					back_img =(byte[]) session.getAttribute("back_img");
 					in2.read(back_img);
 					in2.close();
 				}
-
+				
+				
 				MemVO memVO = new MemVO();
 				memVO.setMember_account(member_account);
 				memVO.setPassword(password);
@@ -215,27 +238,29 @@ public class MemServlet extends HttpServlet {
 				memVO.setNick_name(nick_name);
 				memVO.setAddress(address);
 				memVO.setSq_member_id(sq_member_id);
-				
+
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("MemVO", memVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/member/update_member_input.jsp");
+					req.setAttribute("memVO", memVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/back-end/member/update_member_input.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
-				
+
 				/*************************** 2.開始修改資料 *****************************************/
 				MemService memSvc = new MemService();
-				memVO = memSvc.updateMem(member_account, password, m_name, gender, birthday, cellphone,
-						m_email, registered, m_photo, back_img, nick_name, address, sq_member_id);
-
+				memVO = memSvc.updateMem(member_account, password, m_name, gender, birthday, cellphone, m_email,
+						registered, m_photo, back_img, nick_name, address, sq_member_id);
+				session.removeAttribute("m_photo");
+				session.removeAttribute("back_img");
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("memVO", memVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				String url = "/back-end/member/listAllMember.jsp";
-				
+
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
-			
+
 				/*************************** 其他可能的錯誤處理 *************************************/
 
 			} catch (Exception e) {
@@ -277,7 +302,7 @@ public class MemServlet extends HttpServlet {
 				if (cellphone == null || cellphone.trim().length() == 0) {
 					errorMsgs.add("電話請勿空白");
 				}
-				
+
 				java.sql.Date birthday = null;
 				try {
 					birthday = java.sql.Date.valueOf(req.getParameter("birthday").trim());
@@ -285,7 +310,7 @@ public class MemServlet extends HttpServlet {
 					birthday = new java.sql.Date(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
 				}
-				
+
 				String m_email = req.getParameter("m_email").trim();
 				if (m_email == null || m_email.trim().length() == 0) {
 					errorMsgs.add("請輸入email");
@@ -295,39 +320,54 @@ public class MemServlet extends HttpServlet {
 				if (nick_name == null || nick_name.trim().length() == 0) {
 					errorMsgs.add("請輸入暱稱");
 				}
-				
+
 				String address = req.getParameter("address").trim();
 				if (address == null || address.trim().length() == 0) {
 					errorMsgs.add("請輸入聯絡地址");
 				}
 
 				Integer validation = new Integer(req.getParameter("validation"));
-				
 
 				Integer gender = new Integer(req.getParameter("gender"));
-				
+
 				Date registered = new java.sql.Date(System.currentTimeMillis());
-				
-				
+
 				InputStream in = req.getPart("m_photo").getInputStream();
 				byte[] m_photo = null;
-				if(in.available()!=0) {
-					m_photo =new byte[in.available()];
+				if (in.available() == 0) {
+					if (session.getAttribute("m_photo") == null) {
+						errorMsgs.add("頭相未選擇上傳圖片");
+					} else {
+						m_photo = (byte[]) session.getAttribute("m_photo");
+						in.read(m_photo);
+						in.close();
+					}
+				} else {
+					m_photo = new byte[in.available()];
+					session.setAttribute("m_photo", m_photo);
 					in.read(m_photo);
 					in.close();
-				}else errorMsgs.add("頭相未選擇上傳圖片");
-				
-				
+				}
+
 				InputStream in2 = req.getPart("back_img").getInputStream();
 				byte[] back_img = null;
-				if(in2.available()!=0) {
-					back_img =new byte[in.available()];
+				if (in2.available() == 0) {
+					if (session.getAttribute("back_img") == null) {
+						errorMsgs.add("簽名檔未選擇上傳圖片");
+					} else {
+						back_img = (byte[]) session.getAttribute("back_img");
+						in2.read(back_img);
+						in2.close();
+					}
+				} else {
+					back_img = new byte[in2.available()];
+					session.setAttribute("back_img", back_img);
 					in2.read(back_img);
 					in2.close();
-				}else errorMsgs.add("簽名檔未選擇上傳圖片");
-				
+				}
+
 				MemVO memVO = new MemVO();
-				
+
 				memVO.setMember_account(member_account);
 				memVO.setPassword(password);
 				memVO.setM_name(m_name);
@@ -342,7 +382,6 @@ public class MemServlet extends HttpServlet {
 				memVO.setNick_name(nick_name);
 				memVO.setAddress(address);
 
-				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memVO", memVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -350,15 +389,17 @@ public class MemServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
-				
+
 				/*************************** 2.開始新增資料 ***************************************/
 				MemService memSvc = new MemService();
-				memVO = memSvc.addMem(member_account, password, m_name, gender, birthday, cellphone, 
-						m_email, validation, registered, m_photo, back_img, nick_name, address);
+				memVO = memSvc.addMem(member_account, password, m_name, gender, birthday, cellphone, m_email,
+						validation, registered, m_photo, back_img, nick_name, address);
+				session.removeAttribute("m_photo");
+				session.removeAttribute("back_img");
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/back-end/member/listAllMember.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
-				successView.forward(req, res);			
+				successView.forward(req, res);
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
@@ -373,13 +414,14 @@ public class MemServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			String requestURL = req.getParameter("requestURL");
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
 				String sq_member_id = new String(req.getParameter("sq_member_id"));
 
 				/*************************** 2.開始刪除資料 ***************************************/
 				MemService memSvc = new MemService();
+				MemVO memVO = memSvc.getOneMem(sq_member_id);
 				memSvc.deleteMem(sq_member_id);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
