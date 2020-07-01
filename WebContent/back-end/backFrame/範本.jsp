@@ -27,7 +27,7 @@
 	  	<div class="row" style="background-color: #2f323b;">
 	  		<div class="col-1 home"	>
 	  			<button class="btn btn-block homebtn" >
-					<img src="image/house.png" class="img-fluid" style="width: 80%;">
+					<img src="image/house1.png" class="img-fluid" style="width: 80%;">
 				</button>
 	  		</div>
 			<div class="col-11 ">
@@ -77,37 +77,37 @@
 				</div>
 				<div class="liststy">
 					<button class="btn listbtn my-3">
-						<img src="image/shop1.png" class="img-fluid">
+						<img src="image/Bike.png" class="img-fluid">
 					</button>							
 				</div>
 				<div class="liststy">
 					<button class="btn listbtn my-3">
-						<img src="image/shop1.png" class="img-fluid">
+						<img src="image/Plan1.png" class="img-fluid">
 					</button>
 				</div>
 				<div class="liststy">
 					<button class="btn listbtn my-3">
-						<img src="image/shop1.png" class="img-fluid">
+						<img src="image/web.png" class="img-fluid">
 					</button>		
 				</div>
 				<div class="liststy">
 					<button class="btn listbtn my-3">
-						<img src="image/shop1.png" class="img-fluid">
+						<img src="image/route.png" class="img-fluid">
 					</button>			
 				</div>
 				<div class="liststy">
 					<button class="btn listbtn my-3">
-						<img src="image/report.png" class="img-fluid">
+						<img src="image/report1.png" class="img-fluid">
 					</button>		
 				</div>
 				<div class="liststy">
 					<button class="btn listbtn my-3">
-						<img src="image/mail.png" class="img-fluid">
+						<img src="image/mail1.png" class="img-fluid">
 					</button>		
 				</div>
 				<div class="liststy">
 					<button class="btn listbtn my-3">
-						<img src="image/member.png" class="img-fluid">
+						<img src="image/member1.png" class="img-fluid">
 					</button>		
 				</div>
 				<div style="height: 300px;"></div>
