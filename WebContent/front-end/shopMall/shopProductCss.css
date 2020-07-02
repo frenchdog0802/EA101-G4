@@ -145,3 +145,12 @@
 	    .slick-prev:before .slick-next:before {
 	      color: black;
 	    }
+	    #shopCar{
+			width : 60px;
+		    position: fixed; 
+		    top: 50%; 
+		    right: -60px; 
+		    background: red;
+		    padding: 5px 5px;
+		    border-radius: 10px 0px 0px 10px;
+		}

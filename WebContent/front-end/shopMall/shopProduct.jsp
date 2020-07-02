@@ -87,9 +87,11 @@
 	   							<tr>
 	    							<td><span>尺寸 :</span></td>
 	    							<td class="second_td">
-	    								<select style="margin-left: 10px;">
+	    								<select id="color" style="margin-left: 10px;">
 	    								<% if(colorList.size() <= 1){%>
-	    									<option>單一顏色</option>
+	    									<c:forEach var="color" items="${colorList}">
+	    										<option value="${color}">單一顏色</option>
+	    									</c:forEach>
 	    								<%}else{%>
 	    									<c:forEach var="color" items="${colorList}">
 	    										<option value="${color}">${color}</option>
@@ -101,9 +103,9 @@
 	    						<tr>
 	    							<td><span>顏色 : </span></td>
 	    							<td class="second_td">
-	    								<select style="margin-left: 10px;">
+	    								<select id="model" style="margin-left: 10px;">
 	    								<% if(modelList.size() <= 1){%>
-	    									<option>單一顏色</option>
+	    									<option value="${model}">單一尺寸</option>
 	    								<%}else{%>
 	    									<c:forEach var="model" items="${modelList}">
 	    										<option value="${model}">${model}</option>
@@ -119,7 +121,10 @@
 	    					</table>
 	   					</div>
 	   					<div id="product_join">
-	    					<button class="btn bg-success">加入購物車</button>
+	   						<button class="btn bg-secondary addproduct">加入購物車</button>
+	   							<input type="hidden" name="id" value=<%=productVO.getSq_product_id()%>>
+					   			<input type="hidden" name="name" value="<%=productVO.getProduct_name()%>">
+								<input type="hidden" name="price" value="<%=productVO.getProduct_price()%>">
 	    					<button class="btn bg-success">加入收藏</button>
 	    				</div>
     				</div>
@@ -190,7 +195,9 @@
     		</div>
     	</div>
  	</div>
- 		
+ 	<div id="shopCar">
+		<a href="<%=request.getContextPath()%>/front-end/shopMall/shoppingCar.jsp"><img src="image/cart.png" class="img-fluid"></a>
+	</div>		
 	<%@include file="/front-end/page-file/page-footer"%>
 	<script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
 	<script>
@@ -205,7 +212,25 @@
 			});
 		});
 		$(document).ready(function() {
-			
+			$(".addproduct").click(function() {
+  		        $.ajax({
+  		        	type : "POST",
+  		        	url  : "<%=request.getContextPath()%>/shopping.do",
+  		        	data : {
+  		        		action : "ADD",
+  		        		id : $("input[name=id]").val(),
+  		        		name : $("input[name=name]").val(),
+  		        		price : $("input[name=price]").val(),
+  		        		color : $("#color").val(),
+  		        		model : $("#model").val(),
+  		        	},
+  		        	success : function(){
+  		        		if($("#shopCar").css("right") != 0){
+  		        			$("#shopCar").animate({right:'0px'}); 
+  		        		}
+  		        	}
+  		        });
+  		    });
 		});
 		$(function(){
 			$(".fun-text").text("商品");  // text("")裡面自己輸入功能名稱 
