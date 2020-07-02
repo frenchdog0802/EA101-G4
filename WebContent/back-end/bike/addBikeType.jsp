@@ -1,13 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
+								<!-----------backHeader----------->
+<%@include file="/back-end/backFrame/backHeader"%>
+								<!-----------backHeader----------->
+<!-- --------------------------------------------------------------------------------------------->    
+  
 
-<a
-	href="<%=request.getContextPath()%>/back-end/bikeType/bikeTypeListAll.jsp"
-	class="btn btn-primary"> <span
-	class="glyphicon glyphicon-arrow-left">回上一頁</span>
-</a>
+                               <!---------放自己的CSS與title----------->
+
+
+
+<!-- --------------------------------------------------------------------------------------------->  
+								<!-----------backBody----------->
+
+ <%@include file="/back-end/backFrame/backBody"%>
+
+								<!-----------backBody----------->
+<!-- --------------------------------------------------------------------------------------------->
+<!--分頁自己改-->
+
+				<div class="row" style="background-color: white;">
+					<ul class="nav nav-tabs">
+					  <li class="nav-item ">
+					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">車種管理</span></a><!--在哪一個頁面就哪加active和span的style-->
+					  </li>
+					  <li class="nav-item ">
+					    <a class="nav-link " href="#"><span >車輛管理</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>租車訂單</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>還車訂單</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>歷史訂單</span></a>
+					  </li>
+					</ul>
+				</div>	
+
+
+				
+<!--分頁自己改-->
+<!-- --------------------------------------------------------------------------------------------->
+								<!-----------backNav----------->
+	<%@include file="/back-end/backFrame/backNav"%>
+
+								<!-----------backNav----------->
+<!-- --------------------------------------------------------------------------------------------->					
+
+
 
 <div class="container mt-5">
 	<div class="row">
@@ -79,13 +123,31 @@
 		</div>
 	</div>
 </div>
+<script>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script
-	src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
+		$("#upLoad").change(()=>{
+			$("#showImg").empty();
+			var files = $("#upLoad")[0].files;
+			if(files != null & files.length > 0){
+				var file = files[0];
+				if(file.type.indexOf('image') != -1){
+					$(".custom-file-label").text(file.name);
+					var reader = new FileReader();
+					reader.addEventListener('load',(e)=>{
+						var result = e.target.result;
+						var img = document.createElement("img");
+						img.src = result;
+						img.classList.add("img-fluid");
+						$("#showImg").append(img);
+					})
+					reader.readAsDataURL(file);
+				}
+			}
+		});
+	</script>
 
+<!-- --------------------------------------------------------------------------------------------->
+								<!-----------backFooter----------->
 
-</body>
-</html>
+	<%@include file="/back-end/backFrame/backFooter"%>
+ 			

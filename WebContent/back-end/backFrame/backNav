@@ -49,3 +49,5 @@
 			</div>				
 		 	<div class="col-11">
 				<div class="row">
+					<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script	src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>  
