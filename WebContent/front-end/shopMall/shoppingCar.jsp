@@ -19,7 +19,7 @@
   	<% 
   	 	@SuppressWarnings("unchecked")
   		Vector<Shop_productVO> buylist = (Vector<Shop_productVO>) session.getAttribute("shoppingcar");
-  		String amount = (String)request.getAttribute("amount");
+  		Integer total = 0;
   	%>
     <div class="container">
     	<div class="row mt-3 pl-3 pr-3">
@@ -27,51 +27,7 @@
     		<div class=" col-10">
     			<div class="row">
 					<div class="col-1" style="padding-left: 0; padding-right: 0;">
-						<div class="btn-group">
-							<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
-								分類
-								<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu">
-								<li class="dropdown-submenu">自行車<span></span>
-									 <ul class="dropdown-menu">
-								        <li><a href="">登山型</a></li>
-								        <li><a href="">公路型</a></li>
-								        <li><a href="">混和路面型</a></li>
-								    </ul>
-								</li>
-								<li class="dropdown-submenu">服裝<span></span>
-									 <ul class="dropdown-menu">
-								        <li><a href="">騎行服</a></li>
-								        <li><a href="">外套/風衣</a></li>
-								        <li><a href="">雨衣/雨褲</a></li>
-								    </ul>
-								</li>
-								<li class="dropdown-submenu">配件<span></span>
-									 <ul class="dropdown-menu">
-								        <li><a href="">太陽眼鏡</a></li>
-								        <li><a href="">手套/袖套</a></li>
-								    	<li><a href="">帽套/脖圍</a></li>
-								    	<li><a href="">安全帽</a></li>
-								    </ul>
-								</li>
-								<li class="dropdown-submenu">裝備<span></span>
-									 <ul class="dropdown-menu">
-								        <li><a href="">車燈</a></li>
-								        <li><a href="">打氣筒</a></li>
-								        <li><a href="">水壺/水壺架</a></li>
-								        <li><a href="">車鎖</a></li>
-								    </ul>
-								</li>
-								<li class="dropdown-submenu">零件<span></span>
-									 <ul class="dropdown-menu">
-								        <li><a href="">外胎/內胎</a></li>
-								        <li><a href="">坐墊</a></li>
-								        <li><a href="">維修保養工具</a></li>
-								    </ul>
-								</li>
-							</ul>
-						</div>
+						<button onclick="location.href='<%=request.getContextPath()%>/front-end/shopMall/shopMall.jsp'" class="btn btn-primary">商城</button>
 					</div>
     				<div class="col-7 searchbtn mt-1">
 						<input type="search" id="search" placeholder="Search..." />
@@ -107,6 +63,9 @@
     						if(buylist != null && (buylist.size() > 0)) {
     							for (int i = 0; i < buylist.size(); i++) {
     								Shop_productVO order = buylist.get(i);
+    								Integer price = order.getProduct_price();
+    								Integer quantity = order.getProduct_quantity();
+    								total += (price * quantity);
     					%>
 						<table>
 							<tr class="pro">
@@ -137,12 +96,17 @@
     					<div class="row mt-1 pt-2 pr-3 car_sel">
     						<div class="col-3 car_price">
     							<span>總額 : </span>
-								<span><%=amount%></span>
+								<span><%=total%></span>
     						</div>
-    						<div class="col-3"></div>
-    						<div class="col-3 shopcar_btn">
-    							<button class="btn bg-success mb-2">前往結帳</button>
-    						</div>
+    						<div class="col-6"></div>
+	    					<div class="col-3 shopcar_btn">
+	    						<form method="POST" action="<%=request.getContextPath()%>/shopping.do">
+	    							<button class="btn bg-success mb-2">前往結帳</button>
+	    							<% session.setAttribute("shoppingcar", buylist); %>
+	    							<input type="hidden" name="total" value="<%=total%>">
+	    							<input type="hidden" name="action" value="CHECKOUT">
+	    						</form>
+	    					</div>
     					</div>
     				</div>
     			</div>

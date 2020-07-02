@@ -102,31 +102,33 @@
     				</div>
     				<%@ include file="/front-end/shopMall/page1.file"%>
     				<div class="col-8">
-    					<div class="row products-range">
+    					<div class="row products-range product">
     						<c:forEach var="productVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-			    				<div class="col-xs-6 col-sm-4 col-md-3 pdzero product" data-price="${productVO.product_price}">
-				    					<div id="sample">
-				    						<div class="list-img">
-				    							<div class="list-img2">
-				    								<img src="<%=request.getContextPath()%>/showImg4?id=${productVO.sq_product_id}" class="img-fluid">
-					    						</div>
-					    					</div>
-					    					<div class="listbox">
-					    						<div class="list-boxs">
-					    							<span class="mb-1">${productVO.product_name}</span>
-					    						</div>
-					    						<div class="list-boxs price">
-					    							$${productVO.product_price}元
-					    						</div>
-					    						<div class="list-boxs mt-2">
-					    							<button class="btn bg-secondary">加入收藏</button>
-					    							<button class="btn bg-secondary addproduct">放入購物車</button>
-					    						</div>
+			    				<div class="col-xs-6 col-sm-4 col-md-3 pdzero" data-price="${productVO.product_price}">
+				    				<div id="sample">
+				    					<div class="list-img">
+				    						<div class="list-img2">
+					    						<a href="<%=request.getContextPath()%>/front-end/shopMall/shopProduct.jsp?id=${productVO.sq_product_id}">
+				    								<img src="<%=request.getContextPath()%>/showImg4?id=${productVO.sq_product_id}" class="img-fluid"/>
+					    						</a>
 					    					</div>
 					    				</div>
-					    				<input type="hidden" name="id" value="${productVO.sq_product_id}">
-						    			<input type="hidden" name="name" value="${productVO.product_name}">
-										<input type="hidden" name="price" value="${productVO.product_price}">
+					    				<div class="listbox">
+					    					<div class="list-boxs" style="height: 60px; text-align: center;">
+					    						<span class="mb-1">${productVO.product_name}</span>
+					    					</div>
+					    					<div class="list-boxs price">
+					   							$${productVO.product_price}元
+					   						</div>
+					   						<div class="list-boxs mt-2">
+					   							<button class="btn bg-secondary">加入收藏</button>
+<!-- 				    							<button class="btn bg-secondary addproduct">放入購物車</button> -->
+				    						</div>
+				    					</div>
+				    				</div>
+<%-- 				    				<input type="hidden" name="id" value="${productVO.sq_product_id}"> --%>
+<%-- 					    			<input type="hidden" name="name" value="${productVO.product_name}"> --%>
+<%-- 									<input type="hidden" name="price" value="${productVO.product_price}"> --%>
 			    				</div>
 		    				</c:forEach>		    				
     					</div>
@@ -168,7 +170,7 @@
   			$('.kind').click(function(){
   				$.ajax({
   					type :"POST",
-  					url  : "<%=request.getContextPath()%>/back_end/Shop_product/product.do",
+  					url  : "<%=request.getContextPath()%>/product.do",
   					dataType: 'json',
   					data : {
   						action : "getByKind",
@@ -200,8 +202,8 @@
 					    			 	"</div>"+
 				    				 "</div>";
 							} 
-  						$("#product").empty();
-  						$("#product").append(str);
+  						$(".product").empty();
+  						$(".product").append(str);
   					}
   				});
   			});

@@ -163,9 +163,8 @@ public class ActJoinServlet extends HttpServlet {
 			int i = actjoinSvc.getOneJoinPeople(sq_activity_id);
 			actVO.setPopulation(i);
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/front-end/activity/ActivityOne.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllAct.jsp
-			successView.forward(req, res);
+			String  url=req.getParameter("requestURL");   
+			res.sendRedirect(url);
 
 			/*************************** 其他可能的錯誤處理 **********************************/
 

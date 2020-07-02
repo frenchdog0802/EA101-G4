@@ -18,6 +18,12 @@
 <meta name="author" content="">
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/modern-business.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+	.btn-primary{
+		margin-left:10px;
+	}	
+</style>
 </head>
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
@@ -29,13 +35,13 @@
   <div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">${actVO.act_title}</h1>
+    <h1 class="mt-4 mb-3">${actVO.act_title}<input type="button" value="返回列表" class="btn btn-primary" id="returnlist"></h1>
 
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="index.html">Home</a>
+        <a href="<%=request.getContextPath()%>/front-end/activity/Activity.jsp">Home</a>
       </li>
-      <li class="breadcrumb-item active">${actVO.act_title}${actjoinVO.sq_activity_id}${actjoinVO.sq_member_id}</li>
+      <li class="breadcrumb-item active">${actVO.act_title}</li>
     </ol>
 
     <!-- Portfolio Item Row -->
@@ -61,7 +67,7 @@
           <li>活動結束時間:${actVO.act_end_time}</li>
         </ul>
      
-       <div>
+       <div class="row">
        		<c:choose>
        		
        		<c:when test="${actVO.sq_activity_id == actjoinVO.sq_activity_id && sq_member_id == actjoinVO.sq_member_id || actVO.sq_member_id == sq_member_id}">
@@ -74,7 +80,7 @@
 				<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do">
 					<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
 					<input type="hidden" name="action"value="insert">
-					<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+					<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
 					<input type="submit" value="參加活動" class="btn btn-primary"> 	
 				</FORM> 
 	        </c:when>
@@ -82,8 +88,11 @@
 	        
 	        </c:otherwise>      
 	       	</c:choose>
-	        
-      </div>
+	       	
+	       	<input type="submit" value="加入收藏" class="btn btn-primary">
+	       	<input type="submit" value="活動檢舉" class="btn btn-primary"> 
+	    </div>
+	   
 
     </div>
     <!-- /.row -->
@@ -131,6 +140,11 @@
 	$(function(){
 		$(".fun-text").text("");  // text("")裡面自己輸入功能名稱 
 	});
+	</script>
+	<script>
+		$("#returnlist").click(function(){
+			window.location = '<%=request.getContextPath()%>/front-end/activity/Activity.jsp'
+		});
 	</script>
 
 </body>
