@@ -21,17 +21,26 @@
 
 				<div class="row" style="background-color: white;">
 					<ul class="nav nav-tabs">
-					  <li class="nav-item">
-					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">item1</span></a><!--在哪一個頁面就哪加active和span的style-->
+					  <li class="nav-item ">
+					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">車種管理</span></a><!--在哪一個頁面就哪加active和span的style-->
+					  </li>
+					  <li class="nav-item ">
+					    <a class="nav-link " href="#"><span >車輛管理</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>item2</span></a>
+					    <a class="nav-link" href="#"><span>租車訂單</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>item3</span></a>
+					    <a class="nav-link" href="#"><span>還車訂單</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>歷史訂單</span></a>
 					  </li>
 					</ul>
 				</div>	
+
+
+				
 <!--分頁自己改-->
 <!-- --------------------------------------------------------------------------------------------->
 								<!-----------backNav----------->
@@ -39,13 +48,11 @@
 
 								<!-----------backNav----------->
 <!-- --------------------------------------------------------------------------------------------->					
-		<div class="container">
+		<div class="container my-2">
 			<div class="row">
 				<div class="col">
-					租車管理
 				</div>
-				<div class="col">
-					訂單管理
+				<div class="col ">
 				</div>
 			</div>
 		</div>
