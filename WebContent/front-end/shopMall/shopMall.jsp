@@ -177,9 +177,8 @@
   					success : function(data) {
   							console.log(data);
   							let str = "";
-							let str1 = "";
 							for(let index = 0 ; index < data.length ; index++) { 
-								str1 += 
+								str += 
 				    				 "<div class='col-xs-6 col-sm-4 col-md-3 pdzero'>"+
 				    				 		"<div id='sample'>"+
 				    				 		"<div class='list-img'>"+
@@ -202,7 +201,7 @@
 				    				 "</div>";
 							} 
   						$("#product").empty();
-  						$("#product").append(str+str1);
+  						$("#product").append(str);
   					}
   				});
   			});

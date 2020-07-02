@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -57,7 +57,6 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 			String startDate = request.getParameter("startDate");
 			String endDate = request.getParameter("endDate");
 			HashMap<String, Integer> map = new HashMap<>();
-
 			// 租車店家
 			BikeStoreService BikeStoreSvc = new BikeStoreService();
 
@@ -203,9 +202,9 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 			
 			
 			//取session map 存入(商品租車)清單
-			TreeMap<String, Integer> bookMap  = (TreeMap<String, Integer>)session.getAttribute("bookMap");
+			LinkedHashMap<String, Integer> bookMap  = (LinkedHashMap<String, Integer>)session.getAttribute("bookMap");
 			if(bookMap==null) {
-				bookMap = new TreeMap<>();
+				bookMap = new LinkedHashMap<>();
 			}
 			bookMap.put(selectBikeType ,parseIntQuantity );
 			session.setAttribute("bookMap", bookMap);
@@ -247,7 +246,7 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 			//計算租金 取出清單明細
 			BikeTypeService bikeTypeSvc = new BikeTypeService();
 			int total = 0; //租金
-			TreeMap<String, Integer> bookMap = (TreeMap<String, Integer>)session.getAttribute("bookMap");
+			HashMap<String, Integer> bookMap = (HashMap<String, Integer>)session.getAttribute("bookMap");
 			for (Entry<String, Integer> entry : bookMap.entrySet()) {    
 				String sq_bike_type_id = entry.getKey();
 				int bikequantity = entry.getValue();

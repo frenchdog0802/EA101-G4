@@ -12,4 +12,7 @@ public interface BikeRentDetailDAO_interface {
 	
 	//找出明細裡面商家擁有的車種
 	public List<BikeRentDetailVO> getDetail(String sq_rent_id,String sq_bike_type_id);
+	
+	//(實務上並不常用, 但,可用在訂單主檔與明細檔一次新增成功)
+	public void insert2(BikeRentDetailVO BikeRentDetailVO , java.sql.Connection con);
 }

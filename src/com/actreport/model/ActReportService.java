@@ -35,6 +35,10 @@ public class ActReportService {
 	}
 
 
+	public int getOneActReportStatus(String sq_activity_id) {
+		return dao.findGpStatusByPK(sq_activity_id);
+	}
+	
 	public ActReportVO getOneActReport(String sq_actreport_id) {
 		return dao.findByPrimaryKey(sq_actreport_id);
 	}

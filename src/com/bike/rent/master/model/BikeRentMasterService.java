@@ -1,6 +1,9 @@
 package com.bike.rent.master.model;
 
+import java.util.HashSet;
 import java.util.List;
+
+import com.bike.rent.detail.model.BikeRentDetailVO;
 
 public class BikeRentMasterService {
 	
@@ -10,8 +13,8 @@ public class BikeRentMasterService {
 		dao = new  BikeRentMasterDAO();
 	}
 	
-	public void insert(BikeRentMasterVO BikeRentMasterVO) {
-		dao.insert(BikeRentMasterVO); 
+	public void insertWithDetail(BikeRentMasterVO BikeRentMasterVO,List<BikeRentDetailVO> list ) {
+		dao.insertWithDetail(BikeRentMasterVO , list ); 
 	}
 	
 	public List<BikeRentMasterVO> getAll(){

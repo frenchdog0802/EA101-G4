@@ -15,6 +15,7 @@ public class ActReportJDBCDAO implements ActReportDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT SQ_ACTIVITYREPORT_ID, SQ_ACTIVITY_ID, SQ_MEMBER_ID, REPORT_REASON, REPORT_STATUS FROM ACTIVITYREPORT where SQ_ACTIVITYREPORT_ID = ?";
 	private static final String GET_ONE_MEMBER = "SELECT SQ_ACTIVITYREPORT_ID, SQ_ACTIVITY_ID, SQ_MEMBER_ID, REPORT_REASON, REPORT_STATUS FROM ACTIVITYREPORT where SQ_MEMBER_ID = ?";
 	private static final String GET_ALL_STMT = "SELECT SQ_ACTIVITYREPORT_ID, SQ_ACTIVITY_ID, SQ_MEMBER_ID, REPORT_REASON, REPORT_STATUS FROM ACTIVITYREPORT order by SQ_ACTIVITYREPORT_ID";
+	private static final String GET_ONE_STATUS = "SELECT REPORT_STATUS FROM ACTIVITYREPORT where SQ_ACTIVITY_ID=?";
 
 	@Override
 	public void insert(ActReportVO actreportVO) {
@@ -228,6 +229,63 @@ public class ActReportJDBCDAO implements ActReportDAO_interface {
 		}
 		return actreportVO;
 	}
+	
+	@Override
+	public int findGpStatusByPK(String SQ_ACTVITY_ID) {
+
+		ActReportVO actreportVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ONE_STATUS);
+
+			pstmt.setString(1, SQ_ACTVITY_ID);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+			    count=rs.getInt(1);
+			   }
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return count;
+	}
+
 
 
 	@Override
@@ -304,11 +362,11 @@ public class ActReportJDBCDAO implements ActReportDAO_interface {
 //		dao.insert(actreportVO1);
 //
 //		// 修改
-		ActReportVO actreportVO2 = new ActReportVO();
-		actreportVO2.setReport_status(1);
-		actreportVO2.setSq_activityreport_id("710000");
-
-		dao.update(actreportVO2);
+//		ActReportVO actreportVO2 = new ActReportVO();
+//		actreportVO2.setReport_status(1);
+//		actreportVO2.setSq_activityreport_id("710000");
+//
+//		dao.update(actreportVO2);
 
 		
 
@@ -322,15 +380,15 @@ public class ActReportJDBCDAO implements ActReportDAO_interface {
 //		System.out.println("---------------------");
 ////
 //		// 查詢
-//		List<ActReportVO> list = dao.getAll();
-//		for (ActReportVO aActReport : list) {
-//			System.out.print(aActReport.getSq_activityreport_id() + ",");
-//			System.out.print(aActReport.getSq_activity_id() + ",");
-//			System.out.print(aActReport.getSq_member_id() + ",");
-//			System.out.print(aActReport.getReport_reason() + ",");
-//			System.out.print(aActReport.getReport_status());
-//			System.out.println();
-//		}
+		List<ActReportVO> list = dao.getAll();
+		for (ActReportVO aActReport : list) {
+			System.out.print(aActReport.getSq_activityreport_id() + ",");
+			System.out.print(aActReport.getSq_activity_id() + ",");
+			System.out.print(aActReport.getSq_member_id() + ",");
+			System.out.print(aActReport.getReport_reason() + ",");
+			System.out.print(aActReport.getReport_status());
+			System.out.println();
+		}
 
 	}
 

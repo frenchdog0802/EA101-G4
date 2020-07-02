@@ -8,9 +8,13 @@
 </head>
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
- 	
+	
  	<div class="container my-5">
+ 	
+ 	
 	<!--  	內容寫在這裡 自由發揮 -->
+	
+	
  	</div>
  
  
@@ -29,8 +33,6 @@
 
 </body>
 </html>
-
-
 
 
 

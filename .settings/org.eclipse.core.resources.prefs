@@ -2,6 +2,8 @@
 <<<<<<<=HEAD
 >>>>>>>=bd969cb1e15ab36897b7c0dcda1b1b427c4369a6
 eclipse.preferences.version=1
+encoding//WebContent/back-end/backFrame/\u7BC4\u672C.jsp=UTF-8
+encoding//WebContent/back-end/bike/bikeMaster.jsp=UTF-8
 encoding//WebContent/back-end/bikeType/addBikeType.jsp=UTF-8
 encoding//WebContent/front-end/bike/bikeStoreList.jsp=UTF-8
 encoding//WebContent/front-end/page-file/\u7BC4\u4F8B\u6559\u5B78\u5F15\u5165nav&footer.jsp=UTF-8
