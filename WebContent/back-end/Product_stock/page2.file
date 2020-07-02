@@ -1,0 +1,35 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+ 			<div class="col-2"></div>
+    		<div class="col-10" style=" padding-right: 0;">
+	    		<ul class="pagination float-right mt-2">
+	    			<%if (rowsPerPage<rowNumber) {%>
+	    				<%if(pageIndex>=rowsPerPage){%>
+							<li><A class="page-link" href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>">上一頁</A></li>&nbsp;
+	    				<%}%>
+	    				<%for (int i = -1; i < 2; i++) {%>
+	    					<%if((whichPage+i)>0 && pageNumber>=whichPage+i){%>
+	    						<%if(i == 0){%>
+	    							<li class="page-item active"><a class="page-link" href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+i%>"><%=whichPage+i%></a></li>
+	    						<%}else{%>
+	    							<li class="page-item"><a class="page-link" href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+i%>"><%=whichPage+i%></a></li>
+	    						<%}%>
+	    					<%}%>	
+						<%}%>	
+						&nbsp;
+						<%if(pageIndex<pageIndexArray[pageNumber-1]){%>    						    						
+							<li><A class="page-link" href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+1%>">下一頁 </A></li>&nbsp;
+						<%}%>
+					<%}%>  	    					
+	  				<%if (pageNumber>1) {%>
+	  				<p class="dropsty">跳轉至 :</p>
+					    <FORM METHOD="post" ACTION="<%=request.getRequestURI()%>">   
+					       <select size="1" name="whichPage" class="mt-1 ml-2">
+					         <%for (int i=1; i<=pageNumber; i++){%>
+					            <option value="<%=i%>">第<%=i%>頁
+					         <%}%> 
+					       </select>
+					       <input type="submit" value="確認" class="mt-1 ml-1">  
+						</FORM>
+					<%}%>							
+	    		</ul>
+    		</div>

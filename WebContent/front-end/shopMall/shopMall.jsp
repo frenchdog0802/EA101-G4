@@ -102,13 +102,15 @@
     				</div>
     				<%@ include file="/front-end/shopMall/page1.file"%>
     				<div class="col-8">
-    					<div class="row products-range">
+    					<div class="row products-range product">
     						<c:forEach var="productVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-			    				<div class="col-xs-6 col-sm-4 col-md-3 pdzero product" data-price="${productVO.product_price}">
+			    				<div class="col-xs-6 col-sm-4 col-md-3 pdzero" data-price="${productVO.product_price}">
 				    					<div id="sample">
 				    						<div class="list-img">
 				    							<div class="list-img2">
-				    								<img src="<%=request.getContextPath()%>/showImg4?id=${productVO.sq_product_id}" class="img-fluid">
+					    							<a href="<%=request.getContextPath()%>/front-end/shopMall/shopProduct.jsp?id=${productVO.sq_product_id}">
+				    									<img src="<%=request.getContextPath()%>/showImg4?id=${productVO.sq_product_id}" class="img-fluid"/>
+					    							</a>
 					    						</div>
 					    					</div>
 					    					<div class="listbox">
@@ -168,7 +170,7 @@
   			$('.kind').click(function(){
   				$.ajax({
   					type :"POST",
-  					url  : "<%=request.getContextPath()%>/back_end/Shop_product/product.do",
+  					url  : "<%=request.getContextPath()%>/product.do",
   					dataType: 'json',
   					data : {
   						action : "getByKind",
@@ -200,8 +202,8 @@
 					    			 	"</div>"+
 				    				 "</div>";
 							} 
-  						$("#product").empty();
-  						$("#product").append(str);
+  						$(".product").empty();
+  						$(".product").append(str);
   					}
   				});
   			});

@@ -58,7 +58,8 @@ public class ShoppingServlet extends HttpServlet{
 		}						
 		if(action.equals("CHECKOUT")) {
 			String total = req.getParameter("total");
-			session.setAttribute("total", total);
+			System.out.println(buylist.size());
+			System.out.println(total);
 			
 			String url = "/front-end/shopMall/shopPayDetail.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
