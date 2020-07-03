@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.member.model.*"%>
 <%@ page import="java.util.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
@@ -6,11 +7,7 @@
 <%
 MemVO memVO = (MemVO) request.getAttribute("memVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
 %>
-<%
-    MemService memSvc = new MemService();
-    List<MemVO> list = memSvc.getAll();
-    pageContext.setAttribute("list",list);
-%>
+
 <html>
 <head>
 <title>會員資料 - listOneMember.jsp</title>
@@ -75,24 +72,43 @@ MemVO memVO = (MemVO) request.getAttribute("memVO"); //EmpServlet.java(Concrolle
 		<th>驗證狀態</th>
 		<th>註冊時間</th>
 		<th>簽名檔圖</th>
+		<th>修改</th>
+		<th>刪除</th>
+		
 	</tr>
+	
 	<tr>
 			<td>${memVO.sq_member_id}</td>
 			<td><img src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${memVO.sq_member_id}"
-						height="30%"></td>
+						width="100"></td>
 			<td>${memVO.m_name}</td>
 <%-- 			<td>${memVO.member_account}</td> --%>
 <%-- 			<td>${memVO.password}</td> --%>
-			<td>${memVO.gender}</td>
+			<td>${memVO.getGender()==1 ? "男" : "女"}</td>
 			<td>${memVO.birthday}</td>
 			<td>${memVO.nick_name}</td>
 			<td>${memVO.m_email}</td>
 			<td>${memVO.cellphone}</td> 
 			<td>${memVO.address}</td>
-			<td>${memVO.validation}</td>
+			<td>${memVO.getValidation()==0 ? "尚未驗證" : "已驗證"}</td>
 			<td>${memVO.registered}</td>
-			<td>${memVO.back_img}</td>
+			<div><td><img src="<%=request.getContextPath()%>/member/DBReader2.do?sq_member_id=${memVO.sq_member_id}"
+						width="100"></td><div>
+			
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/mem.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="修改">
+			     <input type="hidden" name="sq_member_id"  value="${memVO.sq_member_id}">
+			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			</td>
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/mem.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="刪除">
+			     <input type="hidden" name="sq_member_id"  value="${memVO.sq_member_id}">
+			     <input type="hidden" name="action" value="delete"></FORM>
+			</td>
 	</tr>
+	
 </table>
 
 </body>

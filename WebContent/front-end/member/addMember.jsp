@@ -124,7 +124,7 @@ button:hover {
 			<td style="text-align: center">
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/back-end/member/selectMember_page.jsp"><img
+						href="<%=request.getContextPath()%>/front-end/member/selectMember_page.jsp"><img
 						src="images/tomcat.png" width="100" height="100" border="0">回首頁</a>
 				</h4>
 			</td>

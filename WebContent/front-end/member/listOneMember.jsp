@@ -1,20 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
 <%@ page import="com.member.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
+<%@ page import="java.util.*"%>
+<%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-    MemService memSvc = new MemService();
-    List<MemVO> list = memSvc.getAll();
-    pageContext.setAttribute("list",list);
+MemVO memVO = (MemVO) request.getAttribute("memVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
 %>
-
-   
 
 <html>
 <head>
-<title>所有會員資料 - listAllMember.jsp</title>
+<title>會員資料 - listOneMember.jsp</title>
 
 <style>
   table#table-1 {
@@ -35,7 +31,7 @@
 
 <style>
   table {
-	width: 800px;
+	width: 600px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -52,27 +48,15 @@
 </head>
 <body bgcolor='white'>
 
-<h4>此頁練習採用 EL 的寫法取值:</h4>
+<h4>此頁暫練習採用 Script 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>所有會員資料 - listAllMember.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/member/selectMember_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h3>員工資料 - ListOneMember.jsp</h3>
+		 <h4><a href="<%=request.getContextPath()%>/front-end/member/selectMember_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
-
-
-<table class="table">
-<thead class="thead-dark">
+<table>
 	<tr>
 		<th>會員編號</th>
 		<th>頭像</th>
@@ -90,15 +74,13 @@
 		<th>簽名檔圖</th>
 		<th>修改</th>
 		<th>刪除</th>
-	</tr>
-	<thead>
-	<%@ include file="page1.file" %> 
-	<c:forEach var="memVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
-		<tr>
+	</tr>
+	
+	<tr>
 			<td>${memVO.sq_member_id}</td>
-			<div><td><img src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${memVO.sq_member_id}"
-						width="100"></td><div>
+			<td><img src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${memVO.sq_member_id}"
+						width="100"></td>
 			<td>${memVO.m_name}</td>
 <%-- 			<td>${memVO.member_account}</td> --%>
 <%-- 			<td>${memVO.password}</td> --%>
@@ -108,7 +90,7 @@
 			<td>${memVO.m_email}</td>
 			<td>${memVO.cellphone}</td> 
 			<td>${memVO.address}</td>
-			<div><td>${memVO.getValidation()==0 ? "尚未驗證" : "已驗證"}</td></div>
+			<td>${memVO.getValidation()==0 ? "尚未驗證" : "已驗證"}</td>
 			<td>${memVO.registered}</td>
 			<div><td><img src="<%=request.getContextPath()%>/member/DBReader2.do?sq_member_id=${memVO.sq_member_id}"
 						width="100"></td><div>
@@ -125,10 +107,9 @@
 			     <input type="hidden" name="sq_member_id"  value="${memVO.sq_member_id}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
-		</tr>
-	</c:forEach>
+	</tr>
+	
 </table>
-<%@ include file="page2.file" %>
 
 </body>
 </html>
