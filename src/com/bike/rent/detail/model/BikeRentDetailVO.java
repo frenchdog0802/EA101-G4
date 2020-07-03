@@ -3,8 +3,11 @@ package com.bike.rent.detail.model;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 
-public class BikeRentDetailVO implements Serializable {
+public class BikeRentDetailVO implements Serializable,Comparable<BikeRentDetailVO>{
 	
 	public BikeRentDetailVO() {
 		
@@ -19,6 +22,10 @@ public class BikeRentDetailVO implements Serializable {
 	private Timestamp ex_return_date;
 	private Timestamp real_return_date;
 	
+	//假VO傳回bikeStore頁面
+	private List<String> bikeTypeList;
+	private String bikeTypeName;
+	
 	public Integer getExtra_cost() {
 		return extra_cost;
 	}
@@ -27,6 +34,10 @@ public class BikeRentDetailVO implements Serializable {
 	}
 	public Timestamp getRsved_rent_date() {
 		return rsved_rent_date;
+	}
+	@Override
+	public int compareTo(BikeRentDetailVO o) {
+		return getRsved_rent_date().compareTo(o.getRsved_rent_date());
 	}
 	public void setRsved_rent_date(Timestamp rsved_rent_date) {
 		this.rsved_rent_date = rsved_rent_date;
@@ -74,6 +85,20 @@ public class BikeRentDetailVO implements Serializable {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
+	
+	public List<String> getBikeTypeList() {
+		return bikeTypeList;
+	}
+	public void setBikeTypeList(List<String> bikeTypeList) {
+		this.bikeTypeList = bikeTypeList;
+	}
+	public String getBikeTypeName() {
+		return bikeTypeName;
+	}
+	public void setBikeTypeName(String bikeTypeName) {
+		this.bikeTypeName = bikeTypeName;
+	}
+	
 	
 	
 	

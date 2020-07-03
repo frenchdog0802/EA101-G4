@@ -1,13 +1,16 @@
 package com.actjoin.controller;
 
 import java.io.*;
+import java.sql.Timestamp;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.act.model.ActService;
 import com.act.model.ActVO;
 import com.actjoin.model.ActJoinService;
 import com.actjoin.model.ActJoinVO;
+
 
 public class ActJoinServlet extends HttpServlet {
  
@@ -23,6 +26,11 @@ public class ActJoinServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		HttpSession session = req.getSession();
+		String sq_member_id = (String)session.getAttribute("sq_member_id");
+			if(sq_member_id==null) {
+				session.setAttribute("sq_member_id", "910003");
+			}
 		
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_actjoinpage.jsp的請求
@@ -100,7 +108,6 @@ public class ActJoinServlet extends HttpServlet {
 			try {
 				/***************************1.接收請求參數***************************************/
 				String sq_activity_id =req.getParameter("sq_activity_id");
-				String sq_member_id =req.getParameter("sq_member_id");
 				/***************************2.開始刪除資料***************************************/
 				ActJoinService actjoinSvc = new ActJoinService();
 				
@@ -118,5 +125,50 @@ public class ActJoinServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		if ("insert".equals(action)) { // 來自addAct.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+			String sq_activity_id = new String(req.getParameter("sq_activity_id").trim());
+			Timestamp join_time = new java.sql.Timestamp(System.currentTimeMillis());
+			
+
+			ActJoinVO actjoinVO = new ActJoinVO();
+			ActJoinService actjoinSvc = new ActJoinService();
+			actjoinVO.setSq_activity_id(sq_activity_id);
+			actjoinVO.setSq_member_id(sq_member_id);
+			actjoinVO.setJoin_time(join_time);
+			
+			
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				req.setAttribute("actjoinVO", actjoinVO); // 含有輸入格式錯誤的actVO物件,也存入req
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/activity/ActivityOne.jsp");
+				failureView.forward(req, res);
+				return;
+			}
+			ActService actSvc = new ActService();
+			ActVO actVO = actSvc.getOneAct(sq_activity_id);
+			
+			
+			
+			req.setAttribute("actVO", actVO);// 資料庫取出的actVO物件,存入req
+			/*************************** 2.開始新增資料 ***************************************/
+			actjoinVO = actjoinSvc.addActJoin(sq_activity_id, sq_member_id, join_time);
+			int i = actjoinSvc.getOneJoinPeople(sq_activity_id);
+			actVO.setPopulation(i);
+			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+			String  url=req.getParameter("requestURL");   
+			res.sendRedirect(url);
+
+			/*************************** 其他可能的錯誤處理 **********************************/
+
+		}
+		
 	}
 }

@@ -10,7 +10,7 @@ public class ActJoinService {
 		dao = new ActJoinJDBCDAO();
 	}
 
-	public ActJoinVO addEmp(String sq_activity_id, String sq_member_id, Timestamp join_time) {
+	public ActJoinVO addActJoin(String sq_activity_id, String sq_member_id, Timestamp join_time) {
 
 		ActJoinVO actjoinVO = new ActJoinVO();
 
@@ -22,7 +22,7 @@ public class ActJoinService {
 		return actjoinVO;
 	}
 
-	public ActJoinVO updateAct(String sq_member_id, Timestamp join_time, String sq_activity_id) {
+	public ActJoinVO updateActJoin(String sq_member_id, Timestamp join_time, String sq_activity_id) {
 
 		ActJoinVO actjoinVO = new ActJoinVO();
 

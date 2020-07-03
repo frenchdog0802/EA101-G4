@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@include file="/front-end/page-file/page-nav"%>
+
 <a
 	href="<%=request.getContextPath()%>/back-end/bikeType/bikeTypeListAll.jsp"
 	class="btn btn-primary"> <span
@@ -86,27 +86,6 @@
 <script
 	src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
 
-<script>
 
-		$("#upLoad").change(()=>{
-			$("#showImg").empty();
-			var files = $("#upLoad")[0].files;
-			if(files != null & files.length > 0){
-				var file = files[0];
-				if(file.type.indexOf('image') != -1){
-					$(".custom-file-label").text(file.name);
-					var reader = new FileReader();
-					reader.addEventListener('load',(e)=>{
-						var result = e.target.result;
-						var img = document.createElement("img");
-						img.src = result;
-						img.classList.add("img-fluid");
-						$("#showImg").append(img);
-					})
-					reader.readAsDataURL(file);
-				}
-			}
-		});
-	</script>
 </body>
 </html>

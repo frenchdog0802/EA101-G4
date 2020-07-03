@@ -14,18 +14,7 @@ pageEncoding="UTF-8"%>
 	<title>Insert Bike</title>
 </head>
 <body>
-	<div class="container">
-			<div class="form-group row">
-				<label for="choose_bikeType" class="col-form-label col-sm-2 ">選擇車種</label>
-				<div class="col-sm-10">
-					<select class="form-control" id="sq_bike_type_id" name="sq_bike_type_id">
-						<c:forEach var="bikeTypeVO" items="${BikeTypeSvc.getAll()}">
-						<option value="${bikeTypeVO.sq_bike_type_id}">${bikeTypeVO.bike_type_name}</option>
-					</c:forEach>
-				</select>
-			</div>
-		</div>
-	</div>
+
 	<div class="container-fluid">
 		<form method="POST" action="<%=request.getContextPath()%>/bike/BikeServlet.do">
 			<!-- 輸入店家 到時候直接登入綁定店家編號 -->

@@ -13,7 +13,7 @@ public class BikeRentMasterService {
 		dao = new  BikeRentMasterDAO();
 	}
 	
-	public void insertWithDetail(BikeRentMasterVO BikeRentMasterVO,HashSet<BikeRentDetailVO> list ) {
+	public void insertWithDetail(BikeRentMasterVO BikeRentMasterVO,List<BikeRentDetailVO> list ) {
 		dao.insertWithDetail(BikeRentMasterVO , list ); 
 	}
 	

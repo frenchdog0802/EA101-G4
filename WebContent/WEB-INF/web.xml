@@ -13,6 +13,16 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 	<!-- 琮寶 -->
+	<!-- BikeRentDetailServlet -->
+	<servlet>
+		<servlet-name>BikeRentDetailServlet</servlet-name>
+		<servlet-class>com.bike.rent.detail.controller.BikeRentDetailServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BikeRentDetailServlet</servlet-name>
+		<url-pattern>/bike/BikeRentDetailServlet.do</url-pattern>
+	</servlet-mapping>
+	<!-- BikeRentDetailServlet -->
 	<!-- BikeEcpayServlet -->
 	<servlet>
 		<servlet-name>BikeEcpayServlet</servlet-name>

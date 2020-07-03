@@ -1,48 +1,53 @@
-			</div>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+		</div>
 		</div>
 		<div class="row" style="background-color: #eeeff4;">
-			<div class="col-2 leftnav">
+			<div class="col-1 leftnav">
 				<div class="liststyF">
-					<button class="btn" style="padding-top: 0; padding-bottom:0;">
-						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/shop.png" class="img-fluid">
+					<button class="btn listbtn my-3 ">
+						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/shop1.png" class="img-fluid">
 					</button>		
 				</div>
 				<div class="liststy">
-					<button class="btn" style="padding-top: 0; padding-bottom:0;">
-						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/Bike.png" class="img-fluid">
+					<button class="btn listbtn my-3">
+						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/Bike1.png" class="img-fluid">
 					</button>							
 				</div>
 				<div class="liststy">
-					<button class="btn" style="padding-top: 0; padding-bottom:0;">
-						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/Plan.png" class="img-fluid">
+					<button class="btn listbtn my-3">
+						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/Plan1.png" class="img-fluid">
 					</button>
 				</div>
 				<div class="liststy">
-					<button class="btn" style="padding-top: 0; padding-bottom:0;">
-						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/route.png" class="img-fluid">
+					<button class="btn listbtn my-3">
+						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/web1.png" class="img-fluid">
 					</button>		
 				</div>
 				<div class="liststy">
-					<button class="btn" style="padding-top: 0; padding-bottom:0;">
-						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/web.png" class="img-fluid">
+					<button class="btn listbtn my-3">
+						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/route1.png" class="img-fluid">
 					</button>			
 				</div>
 				<div class="liststy">
-					<button class="btn" style="padding-top: 0; padding-bottom:0;">
-						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/report.png" class="img-fluid">
+					<button class="btn listbtn my-3">
+						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/report1.png" class="img-fluid">
 					</button>		
 				</div>
 				<div class="liststy">
-					<button class="btn" style="padding-top: 0; padding-bottom:0;">
-						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/mail.png" class="img-fluid">
+					<button class="btn listbtn my-3">
+						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/mail1.png" class="img-fluid">
 					</button>		
 				</div>
 				<div class="liststy">
-					<button class="btn" style="padding-top: 0; padding-bottom:0;">
-						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/member.png" class="img-fluid">
+					<button class="btn listbtn my-3">
+						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/member1.png" class="img-fluid">
 					</button>		
 				</div>
 				<div style="height: 300px;"></div>
 			</div>				
-		 	<div class="col-10">
+		 	<div class="col-11">
 				<div class="row">
+					<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script	src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>  

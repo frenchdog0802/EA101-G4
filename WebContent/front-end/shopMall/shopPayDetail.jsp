@@ -1,11 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="com.member.model.*"%>
+<%-- <%@ page import="com.member.model.*"%> --%>
 <%@ page import="java.util.*"%>
 <% 
-	MemService memSvc = new MemService();
-	MemVO memVO = memSvc.findByPrimaryKey("910002");
+// 	MemService memSvc = new MemService();
+// 	MemVO memVO = memSvc.findByPrimaryKey("910002");
 %>
 
 <!DOCTYPE html>
@@ -92,28 +92,28 @@
 				    						<td class="takedt_t"><span>收件人 :</span></td>
 				    						<td class="takedt_td">
 				    							<input type="text" id="tname" value="">
-				    							<input type="hidden" id="name" value="<%=memVO.getM_name()%>">
+<%-- 				    							<input type="hidden" id="name" value="<%=memVO.getM_name()%>"> --%>
 				    						</td>
 				    					</tr>
 				    					<tr>
 				    						<td class="takedt_t"><span>連絡電話 :</span></td>
 				    						<td class="takedt_td">
 				    							<input type="text" id="tphone" value="">
-				    							<input type="hidden" id="phone" value="<%=memVO.getCellphone()%>">
+<%-- 				    							<input type="hidden" id="phone" value="<%=memVO.getCellphone()%>"> --%>
 				    						</td>
 				    					</tr>
 				    					<tr>
 				    						<td class="takedt_t"><span>Email :</span></td>
 				    						<td class="takedt_td">
 				    							<input type="text" id="temail" value="">
-				    							<input type="hidden" id="email" value="<%=memVO.getM_email()%>">
+<%-- 				    							<input type="hidden" id="email" value="<%=memVO.getM_email()%>"> --%>
 				    						</td>
 				    					</tr>
 				    					<tr>
 				    						<td class="takedt_t"><span>收件地址 :</span></td>
 				    						<td class="takedt_td">
 				    							<input type="text" id="taddress" value="">
-				    							<input type="hidden" id="address" value="<%=memVO.getAddress()%>">
+<%-- 				    							<input type="hidden" id="address" value="<%=memVO.getAddress()%>"> --%>
 				    						</td>
 				    					</tr>
 				    				</table>

@@ -57,7 +57,6 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 			String startDate = request.getParameter("startDate");
 			String endDate = request.getParameter("endDate");
 			HashMap<String, Integer> map = new HashMap<>();
-
 			// 租車店家
 			BikeStoreService BikeStoreSvc = new BikeStoreService();
 
