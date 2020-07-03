@@ -49,7 +49,7 @@ href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 	</div>
 
 	<div class="row">
-		<table class="table">
+		<table class="table text-center table-hover">
 			<thead>
 				<tr>
 					<th scope="col">順序</th>
@@ -57,6 +57,8 @@ href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 					<th scope="col">車種</th>
 					<th scope="col">車輛編號</th>
 					<th scope="col">時間</th>
+					<th scope="col">確認車輛</th>
+					<th scope="col">取消訂單</th>
 				</tr>
 			</thead>
 			<tbody id="tbody">
@@ -99,23 +101,29 @@ src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"
 					var rsved_rent_date = json.rsved_rent_date
 					var rsved_rent_date_str = rsved_rent_date.slice(0,16);
 					component += `
-					<tr>
-					<td>${'${i}'}</td>
-					<td>${'${sq_rent_id}'}</td>
-					<td>${'${bikeTypeName}'}</td>
-					<td>
-					<select id='SelectBike'>
-					<option value="" disabled selected>選擇車輛</option>
-					`;
-					for(var j =0 ; j<bikeTypeList.length ; j++){
-						component += `<option>${'${bikeTypeList[j]}'}</option>`;		
-					};
+						<tr>
+						<td>${'${i+1}'}</td>
+						<td>${'${sq_rent_id}'}</td>
+						<td>${'${bikeTypeName}'}</td>
+						<td>
+						<select id='SelectBike'>
+						<option value="" disabled selected>選擇車輛</option>`;
+						
+						for(var j =0 ; j<bikeTypeList.length ; j++){
+							component += `<option>${'${bikeTypeList[j]}'}</option>`;		
+						};
+						
 					component +=`	
-					</select>
-					</td>
-					<td>${'${rsved_rent_date_str}'}</td>
-					</tr>
-					`;	
+						</select>
+						</td>
+						<td>${'${rsved_rent_date_str}'}</td>
+						`;
+						
+					component += `
+							<td><button class="btn btn-primary btn-sm">送出</button></td>
+							<td><button class="btn btn-danger btn-sm">取消</button></td>
+						</tr>`;
+					
 				}
 				$("#tbody").html(component);
 				

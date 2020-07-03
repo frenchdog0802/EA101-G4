@@ -69,7 +69,7 @@ public class BikeRentDetailServlet extends HttpServlet {
 			List<BikeRentDetailVO> bikeRentDetailList = bikeRentDetailSvc.getAll();
 			
 			// 找出這間店訂單明細VO 裝入list
-			LinkedList<BikeRentDetailVO> storeRetailVOSet = new LinkedList<>();
+			LinkedList<BikeRentDetailVO> storeRetailVOList = new LinkedList<>();
 			
 			for (BikeRentDetailVO BikeRentDetailVO : bikeRentDetailList) {
 				for (String storeRentId : storeRentIdList) {
@@ -85,14 +85,14 @@ public class BikeRentDetailServlet extends HttpServlet {
 						BikeRentDetailVO.setBikeTypeList(bikeTypeList);
 						//裝入車種名稱
 						BikeRentDetailVO.setBikeTypeName(bikeTypeSvc.findByPrimaryKey(BikeRentDetailVO.getSq_bike_type_id()).getBike_type_name());
-						storeRetailVOSet.add(BikeRentDetailVO);
+						storeRetailVOList.add(BikeRentDetailVO);
 					}
 				}
 			};
-			Collections.sort(storeRetailVOSet);
+			Collections.sort(storeRetailVOList);
 			//傳回的JSON
 			HashMap initMap = new HashMap();
-			initMap.put("returnList",storeRetailVOSet);
+			initMap.put("returnList",storeRetailVOList);
 			JSONObject initJSONObject = new JSONObject(initMap);
 			session.setAttribute("initJSONObject", initJSONObject);
 			out.println(initJSONObject);

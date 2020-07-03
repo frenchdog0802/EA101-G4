@@ -12,6 +12,7 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+
 	<!-- 琮寶 -->
 	<!-- BikeRentDetailServlet -->
 	<servlet>
@@ -106,7 +107,7 @@
 		<servlet-name>showImg2</servlet-name>
 		<url-pattern>/showImg2/showImg2.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>showImg4</servlet-name>
 		<servlet-class>imgReader.showImg4</servlet-class>
@@ -133,7 +134,7 @@
 		<servlet-name>Shop_productServlet</servlet-name>
 		<url-pattern>/back_end/Shop_product/shop_product.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ShoppingServlet</servlet-name>
 		<servlet-class>com.shopping.controller.ShoppingServlet</servlet-class>
@@ -253,6 +254,15 @@
 		<servlet-name>WaterStationImgServlet</servlet-name>
 		<url-pattern>/back-end/waterStation/water.stationImage</url-pattern>
 	</servlet-mapping>
+
+	<!-- 連線池 -->
+	<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/EA101_G4</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
 
 
 </web-app>

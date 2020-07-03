@@ -14,12 +14,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class BikeTypeDAO implements BikeTypeDAO_interface {
 
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userId = "EA101_G4";
-	String passwd = "EA101_G4";
+//	String driver = "oracle.jdbc.driver.OracleDriver";
+//	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+//	String userId = "EA101_G4";
+//	String passwd = "EA101_G4";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/EA101_G4");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	// INSERT
 	private static final String INSERT_STMT = "INSERT INTO bike_type(sq_bike_type_id,bike_type_name,bike_title ,bike_description,bike_photo,bike_daily_price,bike_hourly_price)"
@@ -40,8 +54,8 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userId, passwd);
+			
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			// set typeName
 			pstmt.setString(1, BikeTypeVO.getBike_type_name());
@@ -60,8 +74,6 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 			pstmt.setInt(6, BikeTypeVO.getBike_hourly_price());
 			
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -90,8 +102,8 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userId, passwd);
+			
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
 			// set bikeTypeName
@@ -117,8 +129,6 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 
 			// executeUpdate
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -146,14 +156,12 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userId, passwd);
+			
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_STMT);
 
 			pstmt.setString(1, SqBikeTypeId);
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		} finally {
@@ -184,8 +192,8 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userId, passwd);
+			
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, sqBikeTypeId);
@@ -207,8 +215,6 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 				BikeTypeVo.setBike_daily_price(rs.getInt(6));
 				BikeTypeVo.setBike_hourly_price(rs.getInt(7));
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -237,8 +243,8 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url,userId,passwd);
+			
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			
@@ -261,8 +267,6 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 				list.add(BikeTypeVO);//ADD　list
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
