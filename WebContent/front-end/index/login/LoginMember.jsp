@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.member_login.model.*"%>
 
@@ -17,7 +16,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="bootstrap-components/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="login.css">
 <title>Hello, world!</title>
 
@@ -34,7 +34,7 @@
 				<!-- Icon -->
 				<div class="fadeIn first">
 					<h1>Login</h1>
-					<img src="bike-img/home10.png" id="icon" alt="User Icon" />
+					<img src="<%=request.getContextPath()%>/front-end/index/bike-img/home10.png" id="icon" alt="User Icon" />
 				</div>
 				<div>
 					<c:if test="${not empty errorMsgs}">
@@ -47,11 +47,11 @@
 					</c:if>
 				</div>
 				<!-- Login Form -->
-				<form METHOD="post" class="modal-content animate"
+				<form METHOD="post" 
 					ACTION="<%=request.getContextPath()%>/login/memlogin.do">
 					<input type="text" id="login" class="fadeIn second"
-						name="member_account" placeholder="account"
-						value="<%=(memLoginVO == null) ? " " : memLoginVO.getMember_account()%>">>
+						name="member_account" placeholder="account" 
+						value="<%=(memLoginVO == null) ? "": memLoginVO.getMember_account()%>">
 					<input type="text" id="password" class="fadeIn third" name="login"
 						placeholder="password"> <input type="submit"
 						class="fadeIn fourth" name="action" value="login" required />
@@ -59,7 +59,10 @@
 
 				<!-- Remind Passowrd -->
 				<div id="formFooter">
-					<a class="underlineHover" href="#">Go to the Site</a>
+					<div id="formFooter">
+						<a class="underlineHover mx-1" href="#">返回網頁</a> 
+						<a class="underlineHover mx-1" href="#">註冊</a>
+					</div>
 				</div>
 
 			</div>
@@ -68,6 +71,7 @@
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="bootstrap-components/js/bootstrap.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
 </body>
 </html>
