@@ -91,7 +91,7 @@ public class MemLoginServlet extends HttpServlet {
 //				
 				if (!errorMsgs.isEmpty()) {
 					request.setAttribute("memLoginVO", memLoginVO);
-					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/index/LoginMember.jsp");
+					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/login/LoginMember.jsp");
 					failureView.forward(request, response);
 					System.out.println("輸入錯誤,請重新確認");
 					return; // 程式中斷

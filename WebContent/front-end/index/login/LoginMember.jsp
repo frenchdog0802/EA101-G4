@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.member_login.model.*"%>
 
@@ -18,7 +19,7 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="bootstrap-components/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="login.css">
-<title>Login</title>
+<title>Hello, world!</title>
 
 </head>
 <body>
@@ -35,11 +36,7 @@
 					<h1>Login</h1>
 					<img src="bike-img/home10.png" id="icon" alt="User Icon" />
 				</div>
-				
-				<!-- Login Form -->
-				<form METHOD="post" class="modal-content animate"
-					ACTION="<%=request.getContextPath()%>/login/memlogin.do">
-					<div>
+				<div>
 					<c:if test="${not empty errorMsgs}">
 						<font style="color: red">請修正以下錯誤:</font>
 						<ul>
@@ -49,14 +46,15 @@
 						</ul>
 					</c:if>
 				</div>
-				<div>	
+				<!-- Login Form -->
+				<form METHOD="post" class="modal-content animate"
+					ACTION="<%=request.getContextPath()%>/login/memlogin.do">
 					<input type="text" id="login" class="fadeIn second"
 						name="member_account" placeholder="account"
-						value="<%=(memLoginVO == null) ? "account" : memLoginVO.getMember_account()%>">
+						value="<%=(memLoginVO == null) ? " " : memLoginVO.getMember_account()%>">>
 					<input type="text" id="password" class="fadeIn third" name="login"
 						placeholder="password"> <input type="submit"
 						class="fadeIn fourth" name="action" value="login" required />
-				</div>		
 				</form>
 
 				<!-- Remind Passowrd -->
