@@ -42,7 +42,7 @@ public class MemService {
 	}
 
 	public MemVO updateMem(String member_account, String password, String m_name, Integer gender, Date birthday,
-			String cellphone, String m_email, Date registered, byte[] m_photo, byte[] back_img,
+			String cellphone, String m_email, Date registered,byte[] m_photo,byte[] back_img,
 			String nick_name, String address, String sq_member_id) {
 
 		MemVO memVO = new MemVO();
