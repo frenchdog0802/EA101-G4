@@ -6,9 +6,9 @@
 <%@ page import="com.brand.model.*"%>
 <%
 	Shop_productService shop_productSvc = new Shop_productService();
-	List<Shop_productVO> list = shop_productSvc.getAll();
+	String product_kind_name = (String)request.getAttribute("product_kind_name");
+	List<Shop_productVO> list = shop_productSvc.findByKindName(product_kind_name);
 	pageContext.setAttribute("list", list);
-
 %>
 <jsp:useBean id="brandSvc" scope="page" class="com.brand.model.BrandService" />	
 <%@ include file="/back-end/backFrame/backHeader"%>
@@ -61,7 +61,7 @@
 								<option value="外套/風衣">外套/風衣
 								<option value="雨衣/雨褲">雨衣/雨褲
 								<option value="太陽眼鏡">太陽眼鏡
-								<option value="手套">手套/袖套"
+								<option value="手套/袖套">手套/袖套"
 								<option value="口罩/脖圍/帽套">口罩/脖圍/帽套
 								<option value="安全帽">安全帽
 								<option value="打氣筒">打氣筒
@@ -117,7 +117,7 @@
                                                        	</button>
                                                     </div>
 	                                                <div class="modal-body">
-	                                                	<img src="<%=request.getContextPath()%>/showImg4?id=${productVO.sq_product_id}" class="img-fluid" style="">
+	                                                	<img src="<%=request.getContextPath()%>/showImg4?id=${productVO.sq_product_id}" class="img-fluid">
 	                                                </div>
 	                                                <div class="modal-footer">
 	                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

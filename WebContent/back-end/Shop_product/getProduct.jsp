@@ -5,12 +5,8 @@
 <%@ page import="com.shop_product.model.*"%>
 <%@ page import="com.brand.model.*"%>
 <%
-	Shop_productService shop_productSvc = new Shop_productService();
-	List<Shop_productVO> list = shop_productSvc.getAll();
-	pageContext.setAttribute("list", list);
-
+	Shop_productVO productVO = (Shop_productVO)request.getAttribute("productVO");
 %>
-<jsp:useBean id="brandSvc" scope="page" class="com.brand.model.BrandService" />	
 <%@ include file="/back-end/backFrame/backHeader"%>
  	<link rel="stylesheet" type="text/css" href="backProduct.css">
     <title>商品後台</title>
@@ -32,9 +28,9 @@
 		<div class="container-fluid">
 			<div class="row mt-3">
             	<div class="col-3 searchbtn mt-1 ml-3">
-					<FORM METHOD="post" ACTION="product.do" style="position: relative;">
+					<FORM METHOD="post" ACTION="shop_product.do" style="position: relative;">
 						<input type="text" name="sq_product_id" id="search" placeholder="輸入產品編號 (如510001):"/>
-						<input type="hidden" name="action"	value="getOneById">
+						<input type="hidden" name="action"	value="getOne">
 						<input type="submit" value="送出" style="position: absolute; opacity: 0;" class="icon">
 						<img src="image/search.png" class="img-fluid icon" >
 				    </FORM>
@@ -51,26 +47,14 @@
                 </div>
                 <div class="col-3">
                 	<jsp:useBean id="shop_productService" scope="page" class="com.shop_product.model.Shop_productService" />  
-					<FORM METHOD="post" ACTION="product.do" class="mt-2">
+					<FORM METHOD="post" ACTION="shop_product.do" class="mt-2">
 						<b>選擇產品編號:</b>
-						<select size="1" name="product_kind_name">
-								<option value="登山車">登山車
-								<option value="公路車">公路車
-								<option value="混和路面型">混和路面型
-								<option value="騎行服">騎行服
-								<option value="外套/風衣">外套/風衣
-								<option value="雨衣/雨褲">雨衣/雨褲
-								<option value="太陽眼鏡">太陽眼鏡
-								<option value="手套">手套/袖套"
-								<option value="口罩/脖圍/帽套">口罩/脖圍/帽套
-								<option value="安全帽">安全帽
-								<option value="打氣筒">打氣筒
-								<option value="水壺/水壺架">水壺/水壺架
-								<option value="外胎/內胎">外胎/內胎
-								<option value="坐墊">坐墊
-								<option value="維修保養工具">維修保養工具 
+						<select size="1" name="sq_product_id">
+							<c:forEach var="Shop_productVO" items="${shop_productService.all}" > 
+								<option value="${Shop_productVO.sq_product_id}">${Shop_productVO.sq_product_id}
+							</c:forEach>   
 						</select>
-						<input type="hidden" name="action" value="getByKindName">
+						<input type="hidden" name="action" value="getOne">
 						<input type="submit" value="送出">
 					</FORM>	
                 </div>
@@ -94,14 +78,10 @@
     								<th id="td_btn"></th>
     								<th id="td_btn"></th>
     							</tr>
-    						</thead>
-<%@ include file="page1.file" %> 		
-				   			<c:forEach var="productVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+    						</thead>						   
 				   				<tr>
 				    				<td>${productVO.sq_product_id}</td>
-				    				<td>						        				
-				    					${brandSvc.getOneBrand(productVO.sq_brand_id).brand_name}	
-				    				</td>
+				    				<td>${productVO.sq_brand_id}</td>
 				    				<td>${productVO.product_kind_name}</td>
 				   					<td>${productVO.product_name}</td>
 				   					<td>${productVO.product_price}</td>
@@ -117,7 +97,7 @@
                                                        	</button>
                                                     </div>
 	                                                <div class="modal-body">
-	                                                	<img src="<%=request.getContextPath()%>/showImg4?id=${productVO.sq_product_id}" class="img-fluid" style="">
+	                                                	<img src="/showImg4?id=${productVO.sq_product_id}" class="img-fluid">
 	                                                </div>
 	                                                <div class="modal-footer">
 	                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -175,24 +155,22 @@
 				    				<td>
 				    					<FORM METHOD="post" ACTION="product.do" style="position: relative;">
 										    <input type="submit" value="修改" style="position: absolute; opacity: 0;">
-										    <input type="image" src="image/changeicon.png" alt="Submit" align="right" class="img-fluid"/>
-										    <input type="hidden" name="sq_product_id"  value="${productVO.sq_product_id}">
+										    <img src="image/changeicon.png" alt="" class="img-fluid">
+										    <input type="hidden" name="sq_product_id"  value="${ProductVO.sq_product_id}">
 										    <input type="hidden" name="action"	value="getOneForUpdate">
 										</FORM>
 				    				</td>
 				    				<td>
 										 <FORM METHOD="post" ACTION="product.do" style="position: relative;">
 										   	<input type="submit" value="刪除" style="position: absolute; opacity: 0;">
-										   	<input type="image" src="image/delicon.png" alt="Submit" align="right" class="img-fluid"/>
+										    <img src="image/delicon.png" alt="" class="img-fluid">
 									    	<input type="hidden" name="sq_product_id" value="${productVO.sq_product_id}">
 									    	<input type="hidden" name="action" value="delete">
 									    </FORM>
 									</td>
-				    			</tr>
-				    		</c:forEach>			
+				    			</tr>			
     					</table>
     					<div class="row pr-3">
-    						<%@ include file="page2.file" %> 
     					</div>
     				</div>
     			</div>

@@ -24,7 +24,21 @@ public class Shop_productVO implements java.io.Serializable{
 	private Date add_date;
 	private String product_material;
 	private Integer product_status;
+	private String product_color;
+	private String product_model;
 	
+	public String getProduct_color() {
+		return product_color;
+	}
+	public void setProduct_color(String product_color) {
+		this.product_color = product_color;
+	}
+	public String getProduct_model() {
+		return product_model;
+	}
+	public void setProduct_model(String product_model) {
+		this.product_model = product_model;
+	}
 	public String getSq_product_id() {
 		return sq_product_id;
 	}
@@ -91,11 +105,12 @@ public class Shop_productVO implements java.io.Serializable{
 	public void setProduct_quantity(Integer product_quantity) {
 		this.product_quantity = product_quantity;
 	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((product_color == null) ? 0 : product_color.hashCode());
+		result = prime * result + ((product_model == null) ? 0 : product_model.hashCode());
 		result = prime * result + ((product_name == null) ? 0 : product_name.hashCode());
 		result = prime * result + ((product_price == null) ? 0 : product_price.hashCode());
 		result = prime * result + ((sq_product_id == null) ? 0 : sq_product_id.hashCode());
@@ -110,6 +125,16 @@ public class Shop_productVO implements java.io.Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Shop_productVO other = (Shop_productVO) obj;
+		if (product_color == null) {
+			if (other.product_color != null)
+				return false;
+		} else if (!product_color.equals(other.product_color))
+			return false;
+		if (product_model == null) {
+			if (other.product_model != null)
+				return false;
+		} else if (!product_model.equals(other.product_model))
+			return false;
 		if (product_name == null) {
 			if (other.product_name != null)
 				return false;

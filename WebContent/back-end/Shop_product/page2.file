@@ -1,26 +1,35 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
-
-  <%if (rowsPerPage<rowNumber) {%>
-    <%if(pageIndex>=rowsPerPage){%>
-        <A href="<%=request.getRequestURI()%>?whichPage=1">¶‹≤ƒ§@≠∂</A>&nbsp;
-        <A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>">§W§@≠∂ </A>&nbsp;
-    <%}%>
-  
-    <%if(pageIndex<pageIndexArray[pageNumber-1]){%>
-        <A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+1%>">§U§@≠∂ </A>&nbsp;
-        <A href="<%=request.getRequestURI()%>?whichPage=<%=pageNumber%>">¶‹≥Ã´·§@≠∂</A>&nbsp;
-    <%}%>
-  <%}%>  
-
-<br><br>
-
-  <%if (pageNumber>1) {%>
-    <FORM METHOD="post" ACTION="<%=request.getRequestURI()%>">   
-       <select size="1" name="whichPage">
-         <%for (int i=1; i<=pageNumber; i++){%>
-            <option value="<%=i%>">∏ı¶‹≤ƒ<%=i%>≠∂
-         <%}%> 
-       </select>
-       <input type="submit" value="ΩT©w" >  
-    </FORM>
-  <%}%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+ 			<div class="col-2"></div>
+    		<div class="col-10" style=" padding-right: 0;">
+	    		<ul class="pagination float-right mt-2">
+	    			<%if (rowsPerPage<rowNumber) {%>
+	    				<%if(pageIndex>=rowsPerPage){%>
+							<li><A class="page-link" href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>">‰∏ä‰∏ÄÈ†Å</A></li>&nbsp;
+	    				<%}%>
+	    				<%for (int i = -1; i < 2; i++) {%>
+	    					<%if((whichPage+i)>0 && pageNumber>=whichPage+i){%>
+	    						<%if(i == 0){%>
+	    							<li class="page-item active"><a class="page-link" href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+i%>"><%=whichPage+i%></a></li>
+	    						<%}else{%>
+	    							<li class="page-item"><a class="page-link" href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+i%>"><%=whichPage+i%></a></li>
+	    						<%}%>
+	    					<%}%>	
+						<%}%>	
+						&nbsp;
+						<%if(pageIndex<pageIndexArray[pageNumber-1]){%>    						    						
+							<li><A class="page-link" href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+1%>">‰∏ã‰∏ÄÈ†Å </A></li>&nbsp;
+						<%}%>
+					<%}%>  	    					
+	  				<%if (pageNumber>1) {%>
+	  				<p class="dropsty">Ë∑≥ËΩâËá≥ :</p>
+					    <FORM METHOD="post" ACTION="<%=request.getRequestURI()%>">   
+					       <select size="1" name="whichPage" class="mt-1 ml-2">
+					         <%for (int i=1; i<=pageNumber; i++){%>
+					            <option value="<%=i%>">Á¨¨<%=i%>È†Å
+					         <%}%> 
+					       </select>
+					       <input type="submit" value="Á¢∫Ë™ç" class="mt-1 ml-1">  
+						</FORM>
+					<%}%>							
+	    		</ul>
+    		</div>

@@ -3,6 +3,9 @@ package com.shop_product.model;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Emp2;
 
 public class Shop_productDAO implements Shop_productDAO_interface{
 	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -20,9 +23,7 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 	private static final String GET_ALL = "SELECT SQ_PRODUCT_ID, SQ_BRAND_ID, PRODUCT_KIND_NAME, PRODUCT_NAME,PRODUCT_PRICE, PRODUCT_PIC, PRODUCT_DETAIL,"
 			+ "ADD_DATE, PRODUCT_MATERIAL, PRODUCT_STATUS FROM SHOP_PRODUCT ORDER BY SQ_PRODUCT_ID";
 	private static final String GET_BY_KIND = "SELECT SQ_PRODUCT_ID, SQ_BRAND_ID, PRODUCT_KIND_NAME, PRODUCT_NAME,PRODUCT_PRICE, PRODUCT_PIC, PRODUCT_DETAIL, "
-			+ "ADD_DATE, PRODUCT_MATERIAL, PRODUCT_STATUS FROM SHOP_PRODUCT WHERE PRODUCT_KIND_NAME=?";
-	private static final String PRICE_UP = "SELECT * FROM SHOP_PRODUCT ORDER BY PRODUCT_PRICE DESC";
-	private static final String PRICE_DOWN = "SELECT * FROM SHOP_PRODUCT ORDER BY PRODUCT_PRICE ASC";		
+			+ "ADD_DATE, PRODUCT_MATERIAL, PRODUCT_STATUS FROM SHOP_PRODUCT WHERE PRODUCT_KIND_NAME=?";	
 			
 			
 	public void insert(Shop_productVO productVO) {
@@ -347,123 +348,6 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 		}
 		return list;
 	}
-	@Override
-	public List<Shop_productVO> findByPriceUP() {
-		List<Shop_productVO> list = new ArrayList<Shop_productVO>();
-		Shop_productVO shop_productVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
-			pstmt = con.prepareStatement(PRICE_UP);				
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				shop_productVO = new Shop_productVO();
-				shop_productVO.setSq_product_id(rs.getString("sq_product_id"));
-				shop_productVO.setSq_brand_id(rs.getString("sq_brand_id"));
-				shop_productVO.setProduct_kind_name(rs.getString("product_kind_name"));
-				shop_productVO.setProduct_name(rs.getString("product_name"));
-				shop_productVO.setProduct_price(rs.getInt("product_price"));
-				shop_productVO.setProduct_pic(rs.getBytes("product_pic"));
-				shop_productVO.setProduct_detail(rs.getString("product_detail"));
-				shop_productVO.setAdd_date(rs.getDate("add_date"));
-				shop_productVO.setProduct_material(rs.getString("product_material"));
-				shop_productVO.setProduct_status(rs.getInt("product_status"));
-				list.add(shop_productVO);
-			}
-			pstmt.clearParameters();
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
-		}catch(SQLException se) {
-			throw new RuntimeException("A database error occured."+se.getMessage());
-		}finally {
-			if(rs != null) {
-				try {
-					rs.close();
-				}catch(SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				}catch(SQLException se) {
-					se.printStackTrace();
-				}
-			}
-			if(con != null) {
-				try {
-					con.close();
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return list;
-	}
-
-	@Override
-	public List<Shop_productVO> findByPriceDown() {
-		List<Shop_productVO> list = new ArrayList<Shop_productVO>();
-		Shop_productVO shop_productVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
-			pstmt = con.prepareStatement(PRICE_DOWN);				
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				shop_productVO = new Shop_productVO();
-				shop_productVO.setSq_product_id(rs.getString("sq_product_id"));
-				shop_productVO.setSq_brand_id(rs.getString("sq_brand_id"));
-				shop_productVO.setProduct_kind_name(rs.getString("product_kind_name"));
-				shop_productVO.setProduct_name(rs.getString("product_name"));
-				shop_productVO.setProduct_price(rs.getInt("product_price"));
-				shop_productVO.setProduct_pic(rs.getBytes("product_pic"));
-				shop_productVO.setProduct_detail(rs.getString("product_detail"));
-				shop_productVO.setAdd_date(rs.getDate("add_date"));
-				shop_productVO.setProduct_material(rs.getString("product_material"));
-				shop_productVO.setProduct_status(rs.getInt("product_status"));
-				list.add(shop_productVO);
-			}
-			pstmt.clearParameters();
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
-		}catch(SQLException se) {
-			throw new RuntimeException("A database error occured."+se.getMessage());
-		}finally {
-			if(rs != null) {
-				try {
-					rs.close();
-				}catch(SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				}catch(SQLException se) {
-					se.printStackTrace();
-				}
-			}
-			if(con != null) {
-				try {
-					con.close();
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return list;
-	}
 //	public static void main(String args[]) {
 //		Shop_productDAO dao = new Shop_productDAO();
 //		List<Shop_productVO> list = dao.findByPriceDown();
@@ -475,4 +359,62 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 //			System.out.println();
 //		}		
 //	}
+
+	@Override
+	public List<Shop_productVO> getAll(Map<String, String[]> map) {
+		List<Shop_productVO> list = new ArrayList<Shop_productVO>();
+		Shop_productVO shop_productVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, user, password);
+			String finalSQL = "select * from shop_product "
+			          + jdbcUtil_CompositeQuery_Emp2.get_WhereCondition(map)
+			          + "order by sq_product_id";
+			pstmt = con.prepareStatement(finalSQL);				
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				shop_productVO = new Shop_productVO();
+				
+				shop_productVO.setSq_product_id(rs.getString("sq_product_id"));			
+				shop_productVO.setProduct_name(rs.getString("product_name"));
+				shop_productVO.setProduct_price(rs.getInt("product_price"));
+				
+				list.add(shop_productVO);
+			}
+			pstmt.clearParameters();
+		}catch(ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured."+se.getMessage());
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
+	}
 }
