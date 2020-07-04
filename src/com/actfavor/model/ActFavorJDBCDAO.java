@@ -2,6 +2,9 @@ package com.actfavor.model;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ActFavorJDBCDAO implements ActFavorDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -11,7 +14,8 @@ public class ActFavorJDBCDAO implements ActFavorDAO_interface {
 
 	private static final String INSERT_STMT = "INSERT INTO ACT_FAVORITE (SQ_ACTIVITY_ID,SQ_MEMBER_ID,FAVORITE_TIME) VALUES (?, ?, ?)";
 	private static final String DELETE_ACTFAVOR = "DELETE FROM ACT_FAVORITE where SQ_ACTIVITY_ID = ? and SQ_MEMBER_ID = ?";	
-
+	private static final String GET_ALL_STMT = "SELECT * FROM ACT_FAVORITE order by SQ_ACTIVITY_ID";
+	private static final String GET_ONE_MEMBER = "SELECT * FROM ACT_FAVORITE where SQ_MEMBER_ID = ?";
 	@Override
 	public void insert(ActFavorVO actfavorVO) {
 
@@ -98,6 +102,126 @@ public class ActFavorJDBCDAO implements ActFavorDAO_interface {
 				}
 			}
 
+		}
+		
+		@Override
+		public List<ActFavorVO> getAll() {
+			List<ActFavorVO> list = new ArrayList<ActFavorVO>();
+			ActFavorVO actfavorVO = null;
+
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			try {
+
+				Class.forName(driver);
+				con = DriverManager.getConnection(url, userid, passwd);
+				pstmt = con.prepareStatement(GET_ALL_STMT);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					// empVO 也稱為 Domain objects
+					actfavorVO = new ActFavorVO();
+					actfavorVO.setSq_activity_id(rs.getString("SQ_ACTIVITY_ID"));
+					actfavorVO.setSq_member_id(rs.getString("SQ_MEMBER_ID"));
+					actfavorVO.setFavorite_time(rs.getTimestamp("FAVORITE_TIME"));
+
+					list.add(actfavorVO); // Store the row in the list
+				}
+
+				// Handle any driver errors
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. " + se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return list;
+		}
+		
+		@Override
+		public List<ActFavorVO> findByMemberId(String SQ_MEMBER_ID) { //用會員自己的ID搜尋收藏的活動
+
+			List<ActFavorVO> list = new ArrayList<ActFavorVO>();
+			ActFavorVO actfavorVO = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			try {
+
+				Class.forName(driver);
+				con = DriverManager.getConnection(url, userid, passwd);
+				pstmt = con.prepareStatement(GET_ONE_MEMBER);
+
+				pstmt.setString(1, SQ_MEMBER_ID);
+
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+
+					actfavorVO = new ActFavorVO();
+					actfavorVO.setSq_activity_id(rs.getString("SQ_ACTIVITY_ID"));
+					actfavorVO.setSq_member_id(rs.getString("SQ_MEMBER_ID"));
+					actfavorVO.setFavorite_time(rs.getTimestamp("FAVORITE_TIME"));
+					list.add(actfavorVO);
+				}
+
+				// Handle any driver errors
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. " + se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return list;
 		}
 
 

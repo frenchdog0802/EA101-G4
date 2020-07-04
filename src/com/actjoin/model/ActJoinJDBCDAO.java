@@ -369,7 +369,7 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 		 }
 	
 	@Override
-	public List<ActJoinVO> findByMemberId(String SQ_MEMBER_ID) {
+	public List<ActJoinVO> findByMemberId(String SQ_MEMBER_ID) { //用會員自己的ID搜尋參加活動
 
 		List<ActJoinVO> list = new ArrayList<ActJoinVO>();
 		ActJoinVO actjoinVO = null;

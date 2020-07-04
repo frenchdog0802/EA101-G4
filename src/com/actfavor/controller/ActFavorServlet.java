@@ -25,10 +25,10 @@ public class ActFavorServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		String sq_member_id = (String)session.getAttribute("sq_member_id");
 			if(sq_member_id==null) {
-				session.setAttribute("sq_memberid", "910003");
+				session.setAttribute("sq_member_id", "910003");
 			}
 
-        if ("insert".equals(action)) { // 來自addAct.jsp的請求  
+        if ("insert".equals(action)) { // 來自ActivityOne.jsp的請求  
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -59,15 +59,14 @@ public class ActFavorServlet extends HttpServlet {
 						sq_activity_id, sq_member_id , favorite_time);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/back-end/activity/listAllAct.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllAct.jsp
-				successView.forward(req, res);				
+				String  url=req.getParameter("requestURL");   
+				res.sendRedirect(url);			
 				
 				/***************************其他可能的錯誤處理**********************************/
 			
 		}
 		
-		if ("delete".equals(action)) { // 來自listAllAct.jsp
+		if ("delete".equals(action)) { // 來自ActivityOne.jsp的請求 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -84,9 +83,8 @@ public class ActFavorServlet extends HttpServlet {
 				actfavorSvc.deleteActFavor(sq_activity_id, sq_member_id);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/back-end/activity/listAllAct.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
-				successView.forward(req, res);
+				String  url=req.getParameter("requestURL");   
+				res.sendRedirect(url);
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
