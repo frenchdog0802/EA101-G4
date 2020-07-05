@@ -11,17 +11,19 @@ pageEncoding="UTF-8"%>
 BikeStoreService BikeStoreDAOService = new BikeStoreService();
 List<BikeStoreVO> list = BikeStoreDAOService.getAll();
 pageContext.setAttribute("list", list);
+String action = request.getParameter("action");
+if("payFinish".equals(action)){
+	session.removeAttribute("BikeStoreVO");
+	session.removeAttribute("startDate");
+	session.removeAttribute("endDate");
+	session.removeAttribute("matchBike");
+	session.removeAttribute("bookMap");
+}
 %>
 
 <html lang="en">
 <head>
-<style>
-@media (max-width: 1920px) {
-  .search{
-  	width: 270px !important;
-  }
-}
-</style>
+
 
 </head>
 <body>
@@ -32,12 +34,12 @@ pageContext.setAttribute("list", list);
 			<div class="col">
 				<div class="row text-center">
 					<div class="col">
-						<label for="startDate">取車日期&時間 : </label> <input id="startDate"
-						name="startDate" type="text" autocomplete="off">
+						<label for="startDate">取車日期: </label> <input id="startDate" 
+						name="startDate" type="text" autocomplete="off" placeholder="請選擇日期" >
 					</div>
 					<div class="col">
-						<label for="endDate">還車日期&時間 : </label> <input type="text"
-						id="endDate" name="endDate" autocomplete="off">
+						<label for="endDate">還車日期 : </label> <input type="text" 
+						id="endDate" name="endDate" autocomplete="off" placeholder="請選擇日期">
 					</div>
 				</div>
 			</div>
@@ -55,10 +57,9 @@ pageContext.setAttribute("list", list);
 				</nav>
 			</div>
 			<div class="col-4">
-				<div class="form-group row mt-1 mb-1">
-					<label for="Search" class="col-form-label">Search : </label>
+				<div class="form-group row mt-1">
 					<div>
-						<input type="text" class="form-control search" placeholder="收尋店家"
+						<input type="text" class="form-control search " placeholder="搜尋店家" 
 						id="Search">
 					</div>
 				</div>
@@ -248,6 +249,20 @@ pageContext.setAttribute("list", list);
 				step : 60
 			})
 		});
+	
+		//sweetAlertPayfinish
+	<%
+		if("payFinish".equals(action)){
+	%>
+			Swal.fire({
+				  icon: 'success',
+				  title: '恭喜!已成功預定',
+				  showConfirmButton: false,
+				  timer: 1500
+				})
+	<%
+		}
+	%>
 	</script>
 
 </body>

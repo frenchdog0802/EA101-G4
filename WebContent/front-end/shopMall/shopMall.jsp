@@ -7,6 +7,15 @@
 	Shop_productService shop_productSvc = new Shop_productService();
 	List<Shop_productVO> list = shop_productSvc.getAll();
 	pageContext.setAttribute("list", list);
+	
+	@SuppressWarnings("unchecked")
+	List<Shop_productVO> buylist = (List<Shop_productVO>)session.getAttribute("shoppingcar");
+	Integer size;
+	if(buylist != null){
+		size = buylist.size();
+	}else{
+		size = 0;
+	}
 %>
 <!doctype html>
 <html lang="en">
@@ -30,33 +39,69 @@
 					<div class="col-1 pdzero">
 						<button class="btn"  onclick="location.href='javascript:window.location.reload()'">商城首頁
 						</button>
-						<button class="srhByPrice" value="priceUp">依價格&nbsp;&uarr;</button>
-						<button class="srhByPrice" value="priceDown">依價格&nbsp;&darr;</button>
 					</div>
-					<div class="col-1 btn-group">
-						<div class="dropdown">
-							<button class="btn btn-secondary dropdown-toggle pdzero" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						    	排序
-							</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#">依價格&nbsp;&uarr;</a>
-								<a class="dropdown-item" href="#">依價格&nbsp;&darr;</a>
-								<a class="dropdown-item" href="#">依上架時間&nbsp;&uarr;</a>
-						  		<a class="dropdown-item" href="#">依上架時間&nbsp;&darr;</a>
-							</div>
+					<div class="col-1 btn-group" style="padding-right: 0; padding-left: 0;">
+						<div class="mr-3">
+							<button class="btn btn-secondary">依條件搜尋</button>
 						</div>
 					</div>
-    				<div class="col-6 searchbtn mt-1">
+    				<div class="col-6 searchbtn" style="padding-left: 0;"> 
 						<input type="search" id="search" placeholder="Search..." />
 						<button type="button" class="icon"> <img src="image/search.png" class="img-fluid"></button>
 					</div>
-					<div class="col-3 mt-2" style="padding-right: 0;">
+					<div class="col-3 mt-1" style="padding-right: 0;">
 						<span>熱門搜尋: </span>
 						<span>xxx</span>
 						<span>xxx</span>
 						<span>xxx</span>
 					</div>
-    			</div>    					
+    			</div>    
+    			<div class="row mt-2 sort_title bg-primary" style="text-align:center; height:50px; line-height:50px;">
+    				<div class="col-2 pdzero" style="background-color: white;"></div>
+    				<div class="col-1">
+    					<div class="dropdown">
+							<button class="btn btn-secondary dropdown-toggle pdzero" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    	排序
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<button class="dropdown-item srhByPrice" value="priceUp">依價格&nbsp;&uarr;</button>
+								<button class="dropdown-item srhByPrice" value="priceDown">依價格&nbsp;&darr;</button>
+							</div>
+						</div>
+    				</div>
+    				<jsp:useBean id="brandService" scope="page" class="com.brand.model.BrandService" />  
+    				<div class="col-2 pt-2 ">
+    					<select class="form-control" id="brandSrh">
+    						<option value="" style="display: none">品牌</option>
+							<c:forEach var="brandVO" items="${brandService.all}" > 
+								<option value="${brandVO.sq_brand_id}">${brandVO.brand_name}
+							</c:forEach> 
+						</select>
+    				</div>
+    				
+    				<div class="col-2 pt-2">
+    					<select class="form-control" id="priceSrh">
+    						<option value="" style="display: none">價格區間</option>
+							<option value="5000">5000&nbsp;&uarr;</option>
+							<option value="1000">1000 ~ 5000</option>
+							<option value="500">500 ~ 1000</option>
+							<option value="100">500&nbsp;&darr;</option>
+						</select>
+    				</div>
+    				<jsp:useBean id="productService" scope="page" class="com.shop_product.model.Shop_productService" />  
+					<div class="col-2 pt-2">
+    					<select class="form-control" id="kindSrh">
+    						<option value="" style="display: none">種類</option>
+							<c:forEach var="productVO" items="${productService.all}" > 
+								<option value="${productVO.product_kind_name}">${productVO.product_kind_name}
+							</c:forEach> 
+						</select>
+    				</div>
+    				<div class="col-1 pdzero">
+    					<button id="conditionSrh" class="btn bg-success">搜尋</button>
+    				</div>
+    				<div class="col-2 pdzero" style="background-color: white;"></div>
+    			</div>					
     			<hr class="mb-3 mt-3">
     			<div class="row">
     				<div class="col-1"></div>
@@ -104,7 +149,7 @@
     				<div class="col-8">
     					<div class="row products-range product">
     						<c:forEach var="productVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-			    				<div class="col-xs-6 col-sm-4 col-md-3 pdzero" data-price="${productVO.product_price}">
+			    				<div class="col-xs-6 col-sm-4 col-md-3 pdzero productprice" data-price="${productVO.product_price}">
 				    				<div id="sample">
 				    					<div class="list-img">
 				    						<div class="list-img2">
@@ -147,7 +192,9 @@
     <div id="shopCar">
 		<a href="<%=request.getContextPath()%>/front-end/shopMall/shoppingCar.jsp"><img src="image/cart.png" class="img-fluid"></a>
 	</div>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<%@include file="/front-end/page-file/page-footer"%>
+	
     <script>
   		$(document).ready(function() {
   			$(".addproduct").click(function() {
@@ -174,11 +221,12 @@
   					dataType: 'json',
   					data : {
   						action : "getByKind",
-  	  	  	  			product_kind_name : $(this).val(),                           
+	  	  	  			product_kind_name : $(this).val(),
   					},
   					success : function(data) {
   							console.log(data);
   							let str = "";
+  							if(data.length != 0){
 							for(let index = 0 ; index < data.length ; index++) { 
 								str += 
 				    				 "<div class='col-xs-6 col-sm-4 col-md-3 pdzero'>"+
@@ -201,7 +249,61 @@
 					    			 		"</div>"+
 					    			 	"</div>"+
 				    				 "</div>";
-							} 
+								}
+							}else {
+  								str += "<div class='col-12 pdzero' style='text-align: center;'>"+
+								 	"<img src='<%=request.getContextPath()%>/front-end/shopMall/image/noData.png'>"+
+									"</div>";
+							}
+  						$(".product").empty();
+  						$(".product").append(str);
+  					}
+  				});
+  			});
+  			$('#conditionSrh').click(function(){
+  				console.log($('#priceSrh').val());
+  				$.ajax({
+  					type :"POST",
+  					url  : "<%=request.getContextPath()%>/product.do",
+  					dataType: 'json',
+  					data : {
+						action : "listEmps_ByCompositeQuery",
+  						product_kind_name : $('#kindSrh').val(), 
+  						sq_brand_id : $('#brandSrh').val(),
+  						product_price : $('#priceSrh').val(),                      
+  					},
+  					success : function(data) {
+  							console.log(data);
+  							let str = "";
+  							if(data.length != 0){
+  								for(let index = 0 ; index < data.length ; index++) { 
+  									str += 
+  					    				 "<div class='col-xs-6 col-sm-4 col-md-3 pdzero'>"+
+  					    				 		"<div id='sample'>"+
+  					    				 		"<div class='list-img'>"+
+  					    				 			"<div class='list-img2'>"+
+  	 				    				 				"<img src='<%=request.getContextPath()%>/showImg4?id=" + data[index].id + "' class='img-fluid'>"+
+  					    				 			"</div>"+
+  						    			 		"</div>"+
+  						    			 		"<div class='listbox'>"+
+  						    			 			"<div class='list-boxs'>"+
+  						    			 				"<span class='mb-1'>" + data[index].name + "</span>"+
+  						    			 			"</div>"+
+  						    			 			"<div class='list-boxs'>"+
+  						    							"<span>" + data[index].price + "元</span>"+
+  						    			 			"</div>"+
+  						    			 			"<div class='list-boxs mt-2'>"+
+  						    			 				"<button class='btn bg-secondary'>加入收藏</button>"+
+  						    			 			"</div>"+
+  						    			 		"</div>"+
+  						    			 	"</div>"+
+  					    				 "</div>";
+  								}	
+  							}else {
+  								str += "<div class='col-12 pdzero' style='text-align: center;'>"+
+  									 	"<img src='<%=request.getContextPath()%>/front-end/shopMall/image/noData.png'>"+
+  										"</div>";
+  							} 
   						$(".product").empty();
   						$(".product").append(str);
   					}
@@ -209,6 +311,7 @@
   			});
   			$(".srhByPrice").click(function() {				
   			    var sortMethod = $(this).val();
+  			    console.log(sortMethod);
   			    if(sortMethod == 'priceUp')
   			    {
   			        sortAsc();
@@ -217,20 +320,19 @@
   			    {
   			        sortDesc();
   			    }
-
   			});
   		});
 
   		function sortAsc()
 		{
-		    var products = $('.product');
+		    var products = $('.productprice');
 		    products.sort(function(a, b){ return $(a).data("price")-$(b).data("price")});
 		    $(".products-range").html(products);
 		}
 
 		function sortDesc()
 		{
-		    var products = $('.product');
+		    var products = $('.productprice');
 		    products.sort(function(a, b){ return $(b).data("price") - $(a).data("price")});
 		    $(".products-range").html(products);
 		}
@@ -238,7 +340,11 @@
   		$(function(){
   			$(".fun-text").text("商城");  // text("")裡面自己輸入功能名稱 
   		});
-  		
+  		window.onload = function(){
+             if(<%=size%> != 0){
+             	$("#shopCar").animate({right:'0px'});
+             }
+  		}
   		</script>
   	</body>
 </html>

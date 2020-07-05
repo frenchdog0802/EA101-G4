@@ -11,14 +11,6 @@
 %>
 
    
-    
-
-
-<%-- 
-	MemDAO dao = new MemDAO();
-    List<MemVO> list = dao.getAll();
-    pageContext.setAttribute("list",list);
---%>
 
 <html>
 <head>
@@ -79,7 +71,8 @@
 </c:if>
 
 
-<table>
+<table class="table">
+<thead class="thead-dark">
 	<tr>
 		<th>會員編號</th>
 		<th>頭像</th>
@@ -98,25 +91,27 @@
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>
+	<thead>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="memVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
 			<td>${memVO.sq_member_id}</td>
 			<div><td><img src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${memVO.sq_member_id}"
-						height="30%"></td><div>
+						width="100"></td><div>
 			<td>${memVO.m_name}</td>
 <%-- 			<td>${memVO.member_account}</td> --%>
 <%-- 			<td>${memVO.password}</td> --%>
-			<td>${memVO.gender}</td>
+			<td>${memVO.getGender()==1 ? "男" : "女"}</td>
 			<td>${memVO.birthday}</td>
 			<td>${memVO.nick_name}</td>
 			<td>${memVO.m_email}</td>
 			<td>${memVO.cellphone}</td> 
 			<td>${memVO.address}</td>
-			<td>${memVO.validation}</td>
+			<div><td>${memVO.getValidation()==0 ? "尚未驗證" : "已驗證"}</td></div>
 			<td>${memVO.registered}</td>
-			<td>${memVO.back_img}</td>
+			<div><td><img src="<%=request.getContextPath()%>/member/DBReader2.do?sq_member_id=${memVO.sq_member_id}"
+						width="100"></td><div>
 			
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/mem.do" style="margin-bottom: 0px;">

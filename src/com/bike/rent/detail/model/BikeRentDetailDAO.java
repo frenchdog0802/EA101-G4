@@ -9,17 +9,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 
 
 
 public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userId = "EA101_G4";
-	String passwd = "EA101_G4";
-
+//	String driver = "oracle.jdbc.driver.OracleDriver";
+//	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+//	String userId = "EA101_G4";
+//	String passwd = "EA101_G4";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/EA101_G4");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	// insert
 	private static final String INSERT_STMT = "INSERT INTO bike_rent_detail (sq_rent_detail_id,sq_rent_id,sq_bike_type_id,sq_bike_id ,price,extra_cost,rsved_rent_date,ex_return_date,real_return_date )"+
@@ -88,8 +100,8 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userId, passwd);
+			
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_DETAIL);
 			pstmt.setString(1,sq_rent_id );
 			pstmt.setString(2, sq_bike_type_id);
@@ -108,8 +120,6 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 				BikeRentDetailVO.setReal_return_date(rs.getTimestamp(9));
 				list.add(BikeRentDetailVO);
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -133,8 +143,7 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userId, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, BikeRentDetailVO.getSq_rent_id());
 			pstmt.setString(2, BikeRentDetailVO.getSq_bike_type_id());
@@ -146,11 +155,7 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 			pstmt.setTimestamp(7, BikeRentDetailVO.getEx_return_date());
 			//set real_return_date
 			pstmt.setTimestamp(8, BikeRentDetailVO.getReal_return_date());
-			
-
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -180,8 +185,8 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userId, passwd);
+			
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			
 			pstmt.setString(1, BikeRentDetailVO.getSq_rent_id());
@@ -199,8 +204,6 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 
 			// executeUpdate
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -229,16 +232,14 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userId, passwd);
+			
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_STMT);
 
 			pstmt.setString(1, sq_rent_detail_id);
 
 			// executeUpdate
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -268,8 +269,8 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userId, passwd);
+			
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, sq_rent_detail_id);
@@ -288,8 +289,6 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 				
 			}
 
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -323,8 +322,8 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url,userId,passwd);
+			
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			
@@ -343,8 +342,6 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 				list.add(BikeRentDetailVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

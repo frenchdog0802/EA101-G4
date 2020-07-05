@@ -6,6 +6,8 @@ import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 import com.act.model.*;
+import com.actfavor.model.ActFavorService;
+import com.actfavor.model.ActFavorVO;
 import com.actjoin.model.ActJoinService;
 import com.actjoin.model.ActJoinVO;
 
@@ -25,7 +27,7 @@ public class ActServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		String sq_member_id = (String)session.getAttribute("sq_member_id");
 			if(sq_member_id==null) {
-				session.setAttribute("sq_memberid", "910003");
+				session.setAttribute("sq_member_id", "910003");
 			}
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
@@ -95,7 +97,7 @@ public class ActServlet extends HttpServlet {
 			}
 		}
 		
-		if ("getFrontOne_For_Display".equals(action)) { 
+		if ("getFrontOne_For_Display".equals(action)) { //來自前台Activity.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -115,7 +117,7 @@ public class ActServlet extends HttpServlet {
 				int i = actjoinSvc.getOneJoinPeople(sq_activity_id);
 				actVO.setPopulation(i);
 				
-				ActJoinVO actjoinVO = new ActJoinVO();	//驗證是否重複參加
+				ActJoinVO actjoinVO = new ActJoinVO();	//判斷是否參加過活動
 				List<ActJoinVO> list = actjoinSvc.getAll(); 
 				
 				for(ActJoinVO joinact : list) {
@@ -123,6 +125,17 @@ public class ActServlet extends HttpServlet {
 						actjoinVO.setSq_activity_id(sq_activity_id);
 						actjoinVO.setSq_member_id(sq_member_id);
 						req.setAttribute("actjoinVO", actjoinVO);
+					}
+				}
+				
+				ActFavorVO actfavorVO = new ActFavorVO(); //判斷是否加入過收藏
+				ActFavorService actfavorSvc = new ActFavorService();
+				List<ActFavorVO> list2 = actfavorSvc.getAll();
+				for(ActFavorVO favoract : list2) {
+					if(favoract.getSq_activity_id().contains(sq_activity_id) && favoract.getSq_member_id().contains(sq_member_id)) {
+						actfavorVO.setSq_activity_id(sq_activity_id);
+						actfavorVO.setSq_member_id(sq_member_id);
+						req.setAttribute("actfavorVO", actfavorVO);
 					}
 				}
 				

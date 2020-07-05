@@ -3,6 +3,8 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.act.model.*"%>
 <%@ page import="com.actjoin.model.*"%>
+<%@ page import="com.actfavor.model.*"%>
+<%@ page import="com.actreport.model.*"%>
 
 <%
 	String sq_member_id = (String)session.getAttribute("sq_member_id");
@@ -89,7 +91,28 @@
 	        </c:otherwise>      
 	       	</c:choose>
 	       	
-	       	<input type="submit" value="加入收藏" class="btn btn-primary">
+	       	<c:choose>
+	       	<c:when test="${actVO.sq_activity_id == actfavorVO.sq_activity_id && sq_member_id == actfavorVO.sq_member_id}">
+		       	<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActFavorServlet.do">
+					<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
+					<input type="hidden" name="action"value="delete">
+					<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
+					<input type="submit" value="已收藏" class="btn btn-primary"> 	
+				</FORM> 
+			</c:when>
+			<c:when test="">
+		       
+			</c:when>
+			<c:otherwise>
+	        	<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActFavorServlet.do">
+					<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
+					<input type="hidden" name="action"value="insert">
+					<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
+					<input type="submit" value="收藏活動" class="btn btn-primary"> 	
+				</FORM>	
+	        </c:otherwise>
+			</c:choose>
+			
 	       	<input type="submit" value="活動檢舉" class="btn btn-primary"> 
 	    </div>
 	   
