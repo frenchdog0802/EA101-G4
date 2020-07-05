@@ -2,6 +2,7 @@ package com.bike.store.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -104,10 +106,10 @@ public class BikeEcpayServlet extends HttpServlet {
 //			設定交易訊息
 			obj.setTradeDesc("支付信用卡");
 //			設定ReturnURL 付款完成通知回傳網址 使用  ngrok.io
-			String returnURL = "https://78e4c02be61d.ngrok.io/EA101_G4/bike/BikeEcpayServlet.do";
+			String returnURL = "https://7d6eb223d328.ngrok.io/EA101_G4/bike/BikeEcpayServlet.do";
 			obj.setReturnURL(returnURL);
 //			設定ClientBackURL Client端返回合作特店系統的按鈕連結
-			String clientBackURL = "https://78e4c02be61d.ngrok.io/EA101_G4/front-end/bike/bikeStoreList.jsp?action=payFinish";
+			String clientBackURL = "https://7d6eb223d328.ngrok.io/EA101_G4/front-end/bike/bikeStoreList.jsp?action=payFinish";
 			obj.setClientBackURL(clientBackURL);
 //			設定OrderResultURL Client端回傳付款結果網址 跟ReturnURL二選一
 //			obj.setOrderResultURL(clientBackURL);
@@ -149,9 +151,32 @@ public class BikeEcpayServlet extends HttpServlet {
 //			PaymentDate 付款時間 			2020/06/29 11:17:04 String PaymentDate = request.getParameter("PaymentDate");
 //			PaymentType 特店選擇的付款方式	Credit_CreditCard	String PaymentType = request.getParameter("PaymentType");
 //			TradeDate 訂單成立時間			2020/06/29 11:15:38 String TradeDate = request.getParameter("TradeDate");
-
-	
-
+			 System.out.println("--------------request----------------");
+			Enumeration<String> parameterNames = request.getParameterNames();
+	        while (parameterNames.hasMoreElements()) {
+	            String paramName = parameterNames.nextElement();
+	            String[] paramValues = request.getParameterValues(paramName);
+	            for (int i = 0; i < paramValues.length; i++) {
+	                String paramValue = paramValues[i];
+	                System.out.println(paramName);
+	                System.out.println(paramValue);
+	            }
+	 
+	        }
+	        System.out.println("--------------session----------------");
+	    	Enumeration<String> sessionNames = ((ServletRequest) session).getParameterNames();
+	        while (sessionNames.hasMoreElements()) {
+	            String sessionName = sessionNames.nextElement();
+	            String[] paramValues = request.getParameterValues(sessionName);
+	            for (int i = 0; i < paramValues.length; i++) {
+	                String paramValue = paramValues[i];
+	                System.out.println(sessionName);
+	                System.out.println(paramValue);
+	            }
+	 
+	        }
+	 
+		
 		// 接受參數回傳取需要參數
 
 		String MerchantTradeNo = request.getParameter("MerchantTradeNo");//request.getParameter("MerchantTradeNo");

@@ -37,7 +37,7 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO bike_rent_detail (sq_rent_detail_id,sq_rent_id,sq_bike_type_id,sq_bike_id ,price,extra_cost,rsved_rent_date,ex_return_date,real_return_date )"+
 												"VALUES(sq_rent_detail_id.NEXTVAL,?,?,?,?,?,?,?,?)";
 	// update
-	private static final String UPDATE_STMT = "UPDATE bike_rent_detail SET sq_rent_id=?,sq_bike_type_id=?,sq_bike_id=?,price=? ,rsved_rent_date=?,ex_return_date=?,real_return_date=?,extra_cost=? where sq_rent_detail_id=?";
+	private static final String UPDATE_STMT = "UPDATE bike_rent_detail SET sq_rent_id=?,sq_bike_type_id=?,sq_bike_id=?,price=?,extra_cost=?,rsved_rent_date=?,ex_return_date=?,real_return_date=?where sq_rent_detail_id=?";
 	// delete
 	private static final String DELETE_STMT = "DELETE FROM bike_rent_detail WHERE sq_rent_detail_id=?";
 	// get one
@@ -185,7 +185,6 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 
 		try {
 
-			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			

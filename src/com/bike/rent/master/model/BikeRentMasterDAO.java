@@ -54,6 +54,9 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 	//get MASTERID
 	private static final String GET_ALL_MASTERID_FORM_STORE = "select sq_rent_id from bike_rent_master where SQ_BIKE_STORE_ID= ?";
 	
+	//get MASTERIDIsVaild
+	private static final String GET_ALL_MASTERID_FORM_STORE_IsVaild = "select sq_rent_id from bike_rent_master where SQ_BIKE_STORE_ID= ? AND RENT_OD_STATUS = ? ";
+	
 	//get getCurrentKeys
 	private static final String GET_CURRENTKEY = "select sq_rent_id from (select * from bike_rent_master order by order_date desc ) where rownum=1";
 	
@@ -87,6 +90,43 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 		}
 		return sq_rent_id;
 	}
+	
+	@Override
+	public List<String> getRentMasterIdIsVaild(String sq_bike_store_id , Integer rent_od_status){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<String> list= new ArrayList<>();
+		ResultSet rs = null;
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_MASTERID_FORM_STORE_IsVaild);
+			pstmt.setString(1, sq_bike_store_id);
+			pstmt.setInt(2, rent_od_status);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String masterId = rs.getString(1);
+				list.add(masterId);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (con != null) {
+				try {
+					rs.close();
+					pstmt.close();
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	
 	@Override
 	public List<String> getRentMasterId(String sq_bike_store_id){
 		Connection con = null;
