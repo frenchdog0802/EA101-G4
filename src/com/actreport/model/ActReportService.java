@@ -9,14 +9,12 @@ public class ActReportService {
 		dao = new ActReportJDBCDAO();
 	}
 
-	public ActReportVO addActReport(String sq_activity_id, String sq_member_id, String report_reason,
-			Integer report_status) {
+	public ActReportVO addActReport(String sq_activity_id, String sq_member_id, String report_reason) {
 
 		ActReportVO actreportVO = new ActReportVO();
 		actreportVO.setSq_activity_id(sq_activity_id);
 		actreportVO.setSq_member_id(sq_member_id);
 		actreportVO.setReport_reason(report_reason);
-		actreportVO.setReport_status(report_status);
 		
 		dao.insert(actreportVO);
 

@@ -10,6 +10,8 @@ import com.actfavor.model.ActFavorService;
 import com.actfavor.model.ActFavorVO;
 import com.actjoin.model.ActJoinService;
 import com.actjoin.model.ActJoinVO;
+import com.actreport.model.ActReportService;
+import com.actreport.model.ActReportVO;
 
 @MultipartConfig
 public class ActServlet extends HttpServlet {
@@ -136,6 +138,17 @@ public class ActServlet extends HttpServlet {
 						actfavorVO.setSq_activity_id(sq_activity_id);
 						actfavorVO.setSq_member_id(sq_member_id);
 						req.setAttribute("actfavorVO", actfavorVO);
+					}
+				}
+				
+				ActReportVO actreportVO = new ActReportVO(); //判斷是否檢舉過活動
+				ActReportService actreportSvc = new ActReportService();
+				List<ActReportVO> list3 = actreportSvc.getAll();
+				for(ActReportVO reportact : list3) {
+					if(reportact.getSq_activity_id().contains(sq_activity_id) && reportact.getSq_member_id().contains(sq_member_id)) {
+						actreportVO.setSq_activity_id(sq_activity_id);
+						actreportVO.setSq_member_id(sq_member_id);
+						req.setAttribute("actreportVO", actreportVO);
 					}
 				}
 				

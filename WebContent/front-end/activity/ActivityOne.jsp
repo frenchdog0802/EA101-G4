@@ -100,9 +100,6 @@
 					<input type="submit" value="已收藏" class="btn btn-primary"> 	
 				</FORM> 
 			</c:when>
-			<c:when test="">
-		       
-			</c:when>
 			<c:otherwise>
 	        	<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActFavorServlet.do">
 					<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
@@ -113,7 +110,54 @@
 	        </c:otherwise>
 			</c:choose>
 			
-	       	<input type="submit" value="活動檢舉" class="btn btn-primary"> 
+			<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+							
+						<div class="modal-header">
+							<h2 class="modal-title" id="myModalLabel">檢舉活動</h2>
+			                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			            </div>
+						
+						<div class="modal-body">
+			<!-- =========================================以下為輸入的內容========================================== -->
+			              <textarea name="report_reason" maxlength="65" id="textarea1" rows=5 cols=83 style="resize: none;"></textarea>
+			<!-- =========================================以上為原輸入的內容========================================== -->
+						</div>
+						
+						<div class="modal-footer">
+			                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			                <FORM METHOD="post" id="form3" ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do">
+								<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
+								<input type="hidden" name="action" value="insert">
+								<input type="hidden" id="reason" name="report_reason">
+								<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
+								<input type="submit" value="送出" name="textsub" id="textsub" class="btn btn-primary" onclick="return CheckText()"> 	
+							</FORM>
+			            </div>
+					</div>
+				</div>
+			</div>
+			
+			<c:choose>
+       		
+       		<c:when test="${actVO.sq_activity_id == actreportVO.sq_activity_id && sq_member_id == actreportVO.sq_member_id || actVO.sq_member_id == sq_member_id}">
+		        <FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do">
+		        	<input type="button" value="已檢舉" class="btn btn-primary" disabled>
+		        </FORM>
+		    </c:when>
+		    
+	        <c:when test="${actVO.sq_member_id != sq_member_id}">
+				<div style="padding-left:1px">
+					<button id="actreport" class="btn btn-primary" onclick="showModal()">檢舉活動</button>
+				</div>
+	        </c:when>
+	        <c:otherwise>
+	        
+	        </c:otherwise>      
+	       	</c:choose>
+			
+	       	 
 	    </div>
 	   
 
@@ -168,7 +212,34 @@
 		$("#returnlist").click(function(){
 			window.location = '<%=request.getContextPath()%>/front-end/activity/Activity.jsp'
 		});
+		
+		$("#actreport").click(function(){
+			$("#basicModal").modal({show: true});
+		});
 	</script>
-
+	<script>
+	 var val = document.getElementById("textarea1");
+	 var tar = document.getElementById('reason');
+	 var sub = document.getElementById("textsub");
+	    val.addEventListener("input", function(e) {
+	        var t = this.value;
+	        tar.value = t;
+	    })
+	    
+	 	 function CheckText()
+	    {
+	        if(tar.value ==='' || tar.value === null || tar.value === non || tar.value === empty)
+	        {
+	            alert("請輸入檢舉原因");
+	            return false;
+	        }
+	        else
+	        {
+	            alert("內容符合要求");
+	            return true;
+	        }
+	    }
+	    
+	</script>
 </body>
 </html>
