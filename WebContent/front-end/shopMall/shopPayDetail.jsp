@@ -159,6 +159,7 @@
 			$("#tphone").val("");
 			$("#temail").val("");
 			$("#taddress").val("");
+			$(".samemem").prop("checked", false);
 		});
 	});
 	$(function(){

@@ -9,6 +9,7 @@
     pageContext.setAttribute("list",list);
 %>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +35,7 @@
 
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="index.html">Home</a>
+        <a href="<%=request.getContextPath()%>/front-end/activity/Activity.jsp">Home</a>
       </li>
       <li class="breadcrumb-item active">活動列表</li>
     </ol>
@@ -67,32 +68,49 @@
        
     <div class="row">
     <%@ include file="page1.file" %>
+    <jsp:useBean id="actreportSvc" class="com.actreport.model.ActReportService"/>
     <c:forEach var="actVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-      <div class="col-lg-4 col-sm-6 portfolio-item">
+    <c:if test="${actreportSvc.getOneActReportStatus(actVO.sq_activity_id) !=1 && (actVO.gp_status==0 || actVO.gp_status==1)}">
+      <div class="col-lg-4 col-sm-6 portfolio-item ${actVO.sq_activity_id}">
         <div class="card h-100">
           <a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}"><img class="card-img-top" src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'" width="200" height="185" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
             <a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">${actVO.act_title}</a>
-       
             </h4>
             <p class="card-text">${actVO.act_description}</p>
           </div>
         </div>
-      </div>
+      </div>   
+     </c:if>
+     
+     
+     <c:if test="${actreportSvc.getOneActReportStatus(actVO.sq_activity_id) ==1 || (actVO.gp_status==2 || actVO.gp_status==3)}">
+      <div class="col-lg-4 col-sm-6 portfolio-item ${actVO.sq_activity_id}">
+        <div class="card h-100" style="background-color: red" >
+         <img class="card-img-top" src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'" width="200" height="185" alt="">
+          <div class="card-body">
+            <h4 class="card-title">${actVO.act_title}</h4>
+            <p class="card-text">${actVO.act_description}</p>
+          </div>
+        </div>
+      </div>   
+     </c:if>
+     
+   
       </c:forEach>
     </div>
 
     <!-- Pagination -->
     <ul class="pagination justify-content-center">
-      <li class="page-item">
+      <li class="page-item <%if (whichPage <= 1) {%> disabled <%}%>">
         <a class="page-link" id = "previous" href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
           <span class="sr-only">Previous</span>
         </a>
       </li>
       <%@ include file="page2.file" %>
-      <li class="page-item">
+      <li class="page-item <%if (whichPage >= pageNumber) {%> disabled <%}%>">
         <a class="page-link" href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+1%>" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
           <span class="sr-only">Next</span>
@@ -110,6 +128,8 @@
 	<script>
 	$(function(){
 		$(".fun-text").text("");  // text("")裡面自己輸入功能名稱 
+		
+		
 	});
 	</script>
 	
@@ -117,36 +137,6 @@
 	
 <!-- 	<script type="text/javascript"> -->
         
-//     var xhr;
-
-//     function createXMLHttpRequest() {
-//         if (window.ActiveXObject) {
-//         	xhr = new ActiveXObject("Microsoft.XMLHTTP");
-//         }
-//         else if (window.XMLHttpRequest) {
-//         	xhr = new XMLHttpRequest();
-//         }
-//     }
-
-//     function callback() {
-//         if (xhr.readyState == 4) {
-//             if (xhr.status == 200) {
-//                 document.write(xhr.responseText);
-//             } else if (xhr.status == 204){
-//                 //xxx();
-//             }
-//         }
-//     }
-    
-//     function getPage(url) {
-
-//         createXMLHttpRequest();
-
-//         xhr.open("GET", url, true);
-//         xhr.onreadystatechange = callback;
-//         xhr.send(null);
-//     }
-
 <!-- </script> -->
 
 </body>

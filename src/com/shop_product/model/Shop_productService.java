@@ -2,6 +2,8 @@ package com.shop_product.model;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
+
 public class Shop_productService {
 	
 	private Shop_productDAO_interface dao;
@@ -58,10 +60,7 @@ public class Shop_productService {
 	public List<Shop_productVO> findByKindName(String product_kind_name){
 		return dao.findByKindName(product_kind_name);
 	}
-	public List<Shop_productVO> getPriceUp(){
-		return dao.findByPriceUP();
-	}
-	public List<Shop_productVO> getPriceDown(){
-		return dao.findByPriceDown();
+	public List<Shop_productVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
 	}
 }

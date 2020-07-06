@@ -9,6 +9,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.member.model.*;
 ;
 
@@ -24,6 +26,7 @@ public class MemDBReader extends HttpServlet {
 
 		res.setContentType("image/gif");
 		ServletOutputStream out = res.getOutputStream();
+//		HttpSession session = req.getSession();
 		try {
 			String sq_member_id = req.getParameter("sq_member_id");
 			MemService MemService = new MemService();
@@ -39,7 +42,7 @@ public class MemDBReader extends HttpServlet {
 //			in.close();
 
 		} catch (Exception e) {
-			System.out.println("沒圖片");
+			System.out.println("M_photo沒圖片");
 		}finally {
 			
 			out.close();

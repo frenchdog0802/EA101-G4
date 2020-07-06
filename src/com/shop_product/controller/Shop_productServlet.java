@@ -8,11 +8,12 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.brand.model.BrandService;
-import com.brand.model.BrandVO;
+import com.brand.model.*;
 import com.shop_product.model.*;
+import com.product_stock.model.*;
 
 @MultipartConfig
 public class Shop_productServlet extends HttpServlet {
@@ -26,6 +27,7 @@ public class Shop_productServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		HttpSession session = req.getSession();
+		res.setContentType("text/html;charset=UTF-8");
 		if("insert".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -41,7 +43,7 @@ public class Shop_productServlet extends HttpServlet {
 				String kind_name = req.getParameter("kind_name");
 				String brand = req.getParameter("brand");
 				
-				Integer price = new Integer(req.getParameter("price").trim());
+				Integer price = Integer.parseInt(req.getParameter("price").trim());
 				String pricestr = String.valueOf(price);
 				String priceReg = "^(0|[1-9][0-9]*)$";
 				if(pricestr == null || pricestr.trim().length() == 0) {
@@ -156,7 +158,8 @@ public class Shop_productServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
 				String product_kind_name = req.getParameter("product_kind_name");
-
+				Shop_productService productSvc = new Shop_productService();
+				List<Shop_productVO> list = productSvc.findByKindName(product_kind_name);
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("product_kind_name", product_kind_name); 
 					RequestDispatcher fail = req.getRequestDispatcher("/back_end/BrandBack/noData.jsp");
@@ -214,7 +217,7 @@ public class Shop_productServlet extends HttpServlet {
 				String kind_name = req.getParameter("kind_name");
 				String brand = req.getParameter("brand");
 				
-				Integer price = new Integer(req.getParameter("price").trim());
+				Integer price = Integer.parseInt(req.getParameter("price").trim());
 				String pricestr = String.valueOf(price);
 				String priceReg = "^(0|[1-9][0-9]*)$";
 				if(pricestr == null || pricestr.trim().length() == 0) {
@@ -255,7 +258,7 @@ public class Shop_productServlet extends HttpServlet {
 				}else if(!material.trim().matches(nameReg)) {
 					errorMsgs.add("名稱欄位只能是中、英文字母、數字和_,請長度必須在2到10之間");
 				}
-				Integer status = new Integer(req.getParameter("status"));
+				Integer status = Integer.parseInt(req.getParameter("status"));
 				System.out.println(status);
 				
 				Shop_productVO productVO = new Shop_productVO();
@@ -286,14 +289,99 @@ public class Shop_productServlet extends HttpServlet {
 			}
 		}
 		if("getByKind".equals(action)) {
-			res.setContentType("application/text; charset=utf-8");
+			HashMap<String, String> map = new HashMap<>();
 	        PrintWriter out = res.getWriter();
 			String kind = req.getParameter("product_kind_name");
 			Shop_productService productSvc = new Shop_productService();
 			List<Shop_productVO> list = productSvc.findByKindName(kind);
-			JSONObject jsonList = new JSONObject(list);
-			System.out.println(jsonList);
-			out.print(jsonList);
+			JSONArray json = new JSONArray();
+			for(Shop_productVO vo: list){
+				JSONObject jsonList = new JSONObject();
+				jsonList.put("name", vo.getProduct_name());
+				jsonList.put("id", vo.getSq_product_id());
+				jsonList.put("price", vo.getProduct_price());
+				json.put(jsonList);
+			}
+			out.print(json);
+		}
+		if ("listEmps_ByCompositeQuery".equals(action)) { // 來自select_page.jsp的複合查詢請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				
+				/***************************1.將輸入資料轉為Map**********************************/ 
+				//採用Map<String,String[]> getParameterMap()的方法 
+				//注意:an immutable java.util.Map 
+				//Map<String, String[]> map = req.getParameterMap();
+				Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
+				PrintWriter out = res.getWriter();
+				if (req.getParameter("whichPage") == null){
+					HashMap<String, String[]> map1 = new HashMap<String, String[]>(req.getParameterMap());
+					session.setAttribute("map",map1);
+					map = map1;
+				}
+				/***************************2.開始複合查詢***************************************/
+				Shop_productService productSvc = new Shop_productService();
+				List<Shop_productVO> list  = productSvc.getAll(map);
+				Iterator<Shop_productVO> iterator = list.iterator();
+				for(String key : map.keySet()){
+					String value = map.get(key)[0];
+					if(value != null && value.trim().length() != 0) {
+						if("product_price".equals(key)) {
+							if("5000".equals(value)) {
+								while (iterator.hasNext()) {
+									Shop_productVO vo = iterator.next();
+									if(vo.getProduct_price() < 5000) {
+										iterator.remove();
+									}
+								}
+							}else if("1000".equals(value)) {
+								while (iterator.hasNext()) {
+									Shop_productVO vo = iterator.next();
+									if(1000 > vo.getProduct_price() || vo.getProduct_price() >= 5000) {
+										iterator.remove();
+									}
+								}
+							}else if("500".equals(value)) {
+								while (iterator.hasNext()) {
+									Shop_productVO vo = iterator.next();
+									if(500 > vo.getProduct_price() || vo.getProduct_price() >= 1000) {
+										iterator.remove();
+									}
+								}
+							}else if("100".equals(value)) {
+								while (iterator.hasNext()) {
+									Shop_productVO vo = iterator.next();
+									if(vo.getProduct_price() >= 500) {
+										iterator.remove();
+									}
+								}
+							}	
+						}
+					}
+				}
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				JSONArray json = new JSONArray();
+				for(Shop_productVO vo: list){
+					JSONObject jsonList = new JSONObject();
+					jsonList.put("name", vo.getProduct_name());
+					jsonList.put("id", vo.getSq_product_id());
+					jsonList.put("price", vo.getProduct_price());
+					json.put(jsonList);
+				}
+				out.print(json);
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/select_page.jsp");
+				failureView.forward(req, res);
+			}
 		}
 	}
 }

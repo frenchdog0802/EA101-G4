@@ -20,7 +20,7 @@ public class MemJDBCDAO implements MemDAO_interface {
 	private static final String GET_ALL_STMT = 
 			"SELECT * FROM member order by sq_member_id";
 	private static final String GET_ONE_STMT = 
-			"SELECT sq_member_id,member_account,password,m_name,gender,to_char(birthday,'yyyy-mm-dd') birthday,cellphone,m_email,validation,registered,m_photo,back_img,nick_name,address FROM member where sq_member_id = ?"; // sq_member_id?
+			"SELECT * FROM member where sq_member_id = ?"; // sq_member_id?
 	private static final String DELETE = 
 			"DELETE FROM member where sq_member_id = ?";
 	private static final String UPDATE = 
@@ -205,6 +205,13 @@ public class MemJDBCDAO implements MemDAO_interface {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -269,6 +276,13 @@ public class MemJDBCDAO implements MemDAO_interface {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -310,39 +324,41 @@ public class MemJDBCDAO implements MemDAO_interface {
 		
 //		修改
 		
-		MemVO memVO2 = new MemVO();
-		memVO2.setSq_member_id("910020");
-		memVO2.setMember_account("asdf159753");
-		memVO2.setPassword("password456852");
-		memVO2.setM_name("Tomcat");
-		memVO2.setGender(1);
-		memVO2.setBirthday(java.sql.Date.valueOf("2000-01-01"));
-		memVO2.setCellphone("0966542137");
-		memVO2.setM_email("tom456852@gmail.com");
-		memVO2.setValidation(0);
-		memVO2.setRegistered(java.sql.Date.valueOf("2000-01-01"));
-		memVO2.setM_photo(null);
-		memVO2.setBack_img(null);
-		memVO2.setNick_name("Tommy111");
-		memVO2.setAddress("桃園市中壢區中大路300號");
-		dao.update(memVO2);
+//		MemVO memVO2 = new MemVO();
+//		memVO2.setSq_member_id("910020");
+//		memVO2.setMember_account("asdf159753");
+//		memVO2.setPassword("password456852");
+//		memVO2.setM_name("Tomcat");
+//		memVO2.setGender(1);
+//		memVO2.setBirthday(java.sql.Date.valueOf("2000-01-01"));
+//		memVO2.setCellphone("0966542137");
+//		memVO2.setM_email("tom456852@gmail.com");
+//		memVO2.setValidation(0);
+//		memVO2.setRegistered(java.sql.Date.valueOf("2000-01-01"));
+//		memVO2.setM_photo(null);
+//		memVO2.setBack_img(null);
+//		memVO2.setNick_name("Tommy111");
+//		memVO2.setAddress("桃園市中壢區中大路300號");
+//		dao.update(memVO2);
 
 		
 		
 //		//刪除
 //		dao.delete("910013");
-//		
-//		//查詢
-//		MemVO memVO3 = dao.findByPrimaryKey("910010");
-//		System.out.print(memVO3.getSq_member_id() + ",");
-//		System.out.print(memVO3.getM_photo() + ",");
-//		System.out.print(memVO3.getM_name() + ",");
-//		System.out.print(memVO3.getBirthday() + ",");
-//		System.out.print(memVO3.getM_email() + ",");
-//		System.out.print(memVO3.getCellphone() + ",");
-//		System.out.print(memVO3.getNick_name() + ",");
-//		System.out.println(memVO3.getAddress());
-//		System.out.println("---------------------");
+		
+		//查詢
+		MemVO memVO3 = dao.findByPrimaryKey("910010");
+		System.out.print(memVO3.getSq_member_id() + ",");
+		System.out.print(memVO3.getM_photo() + ",");
+		System.out.print(memVO3.getM_name() + ",");
+		System.out.print(memVO3.getBirthday() + ",");
+		System.out.print(memVO3.getM_email() + ",");
+		System.out.print(memVO3.getCellphone() + ",");
+		System.out.print(memVO3.getNick_name() + ",");
+		System.out.println(memVO3.getAddress());
+		System.out.println(memVO3.getM_photo());
+		System.out.println(memVO3.getBack_img());
+		System.out.println("---------------------");
 //
 //		List<MemVO> list = dao.getAll();
 //		for(MemVO allMem : list ) {

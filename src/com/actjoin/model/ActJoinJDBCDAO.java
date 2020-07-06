@@ -369,7 +369,7 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 		 }
 	
 	@Override
-	public List<ActJoinVO> findByMemberId(String SQ_MEMBER_ID) {
+	public List<ActJoinVO> findByMemberId(String SQ_MEMBER_ID) { //用會員自己的ID搜尋參加活動
 
 		List<ActJoinVO> list = new ArrayList<ActJoinVO>();
 		ActJoinVO actjoinVO = null;
@@ -442,37 +442,37 @@ public class ActJoinJDBCDAO implements ActJoinDAO_interface {
 
 		// 修改
 		
-		ActJoinVO actjoinVO2 = new ActJoinVO();
-		actjoinVO2.setSq_member_id("910002");
-		actjoinVO2.setJoin_time(java.sql.Timestamp.valueOf("2020-06-19 09:10:11"));
-		actjoinVO2.setSq_activity_id("ACT-700009");
-	
-		dao.update(actjoinVO2);
-		
-		// 刪除
-		dao.delete("ACT-700001", "910001");
-
-		// 查詢
-		List<ActJoinVO> list = dao.findByPrimaryKey("ACT-700001");
-		for (ActJoinVO aActJoin : list) {
-			System.out.print(aActJoin.getSq_activity_id() + ",");
-			System.out.print(aActJoin.getSq_member_id() + ",");
-			System.out.print(aActJoin.getJoin_time() + ",");
-			System.out.println();
-		}
-
-		// 查詢
-		List<ActJoinVO> list2 = dao.getAll();
-		for (ActJoinVO aActJoin : list2) {
-			System.out.print(aActJoin.getSq_activity_id() + ",");
-			System.out.print(aActJoin.getSq_member_id() + ",");
-			System.out.print(aActJoin.getJoin_time() + ",");
-			System.out.println();
-		}
-		
-		//取得參加人數
-		int i = dao.search("ACT-700001");     
-		 System.out.println(i);
+//		ActJoinVO actjoinVO2 = new ActJoinVO();
+//		actjoinVO2.setSq_member_id("910002");
+//		actjoinVO2.setJoin_time(java.sql.Timestamp.valueOf("2020-06-19 09:10:11"));
+//		actjoinVO2.setSq_activity_id("ACT-700009");
+//	
+//		dao.update(actjoinVO2);
+//		
+//		// 刪除
+//		dao.delete("ACT-700001", "910001");
+//
+//		// 查詢
+//		List<ActJoinVO> list = dao.findByPrimaryKey("ACT-700001");
+//		for (ActJoinVO aActJoin : list) {
+//			System.out.print(aActJoin.getSq_activity_id() + ",");
+//			System.out.print(aActJoin.getSq_member_id() + ",");
+//			System.out.print(aActJoin.getJoin_time() + ",");
+//			System.out.println();
+//		}
+//
+//		// 查詢
+//		List<ActJoinVO> list2 = dao.getAll();
+//		for (ActJoinVO aActJoin : list2) {
+//			System.out.print(aActJoin.getSq_activity_id() + ",");
+//			System.out.print(aActJoin.getSq_member_id() + ",");
+//			System.out.print(aActJoin.getJoin_time() + ",");
+//			System.out.println();
+//		}
+//		
+//		//取得參加人數
+//		int i = dao.search("ACT-700001");     
+//		 System.out.println(i);
 
 	}
 

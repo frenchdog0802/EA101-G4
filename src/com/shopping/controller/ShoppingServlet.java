@@ -18,7 +18,6 @@ public class ShoppingServlet extends HttpServlet{
 		@SuppressWarnings("unchecked")
 		List<Shop_productVO> buylist = (Vector<Shop_productVO>)session.getAttribute("shoppingcar");
 		String action = req.getParameter("action");
-		System.out.println(action);
 		if(action.equals("DELETE")) {
 			try {
 				String delete = req.getParameter("del");
@@ -58,8 +57,11 @@ public class ShoppingServlet extends HttpServlet{
 		}						
 		if(action.equals("CHECKOUT")) {
 			String total = req.getParameter("total");
-			session.setAttribute("total", total);
 			
+			System.out.println(buylist);
+			System.out.println(total);
+			
+			session.setAttribute("totalPrice", total);
 			String url = "/front-end/shopMall/shopPayDetail.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);

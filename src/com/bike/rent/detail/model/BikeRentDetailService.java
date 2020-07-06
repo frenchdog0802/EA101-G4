@@ -22,4 +22,14 @@ public class BikeRentDetailService {
 	public List<BikeRentDetailVO> getDetail(String sq_rent_id,String sq_bike_type_id){
 		return dao.getDetail(sq_rent_id, sq_bike_type_id);
 	}
+	
+	//修改
+	public void update(BikeRentDetailVO BikeRentDetailVO) {
+		dao.update(BikeRentDetailVO);
+	}
+	
+	//刪除
+	public void delete(String sq_rent_detail_id) {
+		dao.delete(sq_rent_detail_id);
+	}
 }

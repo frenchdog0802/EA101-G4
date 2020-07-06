@@ -1,6 +1,7 @@
 package com.actfavor.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class ActFavorService {
 	private ActFavorDAO_interface dao;
@@ -24,6 +25,9 @@ public class ActFavorService {
 	public void deleteActFavor(String sq_activity_id, String sq_member_id) {
 		dao.delete(sq_activity_id, sq_member_id);
 	}
-
+	
+	public List<ActFavorVO> getAll() {
+		return dao.getAll();
+	}
 	
 }

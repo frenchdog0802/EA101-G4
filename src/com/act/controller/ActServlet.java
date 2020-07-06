@@ -6,8 +6,12 @@ import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 import com.act.model.*;
+import com.actfavor.model.ActFavorService;
+import com.actfavor.model.ActFavorVO;
 import com.actjoin.model.ActJoinService;
 import com.actjoin.model.ActJoinVO;
+import com.actreport.model.ActReportService;
+import com.actreport.model.ActReportVO;
 
 @MultipartConfig
 public class ActServlet extends HttpServlet {
@@ -23,7 +27,10 @@ public class ActServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		HttpSession session = req.getSession();
-		String sq_member_id = (String) session.getAttribute("sq_member_id");
+		String sq_member_id = (String)session.getAttribute("sq_member_id");
+			if(sq_member_id==null) {
+				session.setAttribute("sq_member_id", "910003");
+			}
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -92,7 +99,7 @@ public class ActServlet extends HttpServlet {
 			}
 		}
 		
-		if ("getFrontOne_For_Display".equals(action)) { 
+		if ("getFrontOne_For_Display".equals(action)) { //來自前台Activity.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -111,6 +118,40 @@ public class ActServlet extends HttpServlet {
 				ActJoinService actjoinSvc = new ActJoinService();
 				int i = actjoinSvc.getOneJoinPeople(sq_activity_id);
 				actVO.setPopulation(i);
+				
+				ActJoinVO actjoinVO = new ActJoinVO();	//判斷是否參加過活動
+				List<ActJoinVO> list = actjoinSvc.getAll(); 
+				
+				for(ActJoinVO joinact : list) {
+					if(joinact.getSq_activity_id().contains(sq_activity_id) && joinact.getSq_member_id().contains(sq_member_id)) {
+						actjoinVO.setSq_activity_id(sq_activity_id);
+						actjoinVO.setSq_member_id(sq_member_id);
+						req.setAttribute("actjoinVO", actjoinVO);
+					}
+				}
+				
+				ActFavorVO actfavorVO = new ActFavorVO(); //判斷是否加入過收藏
+				ActFavorService actfavorSvc = new ActFavorService();
+				List<ActFavorVO> list2 = actfavorSvc.getAll();
+				for(ActFavorVO favoract : list2) {
+					if(favoract.getSq_activity_id().contains(sq_activity_id) && favoract.getSq_member_id().contains(sq_member_id)) {
+						actfavorVO.setSq_activity_id(sq_activity_id);
+						actfavorVO.setSq_member_id(sq_member_id);
+						req.setAttribute("actfavorVO", actfavorVO);
+					}
+				}
+				
+				ActReportVO actreportVO = new ActReportVO(); //判斷是否檢舉過活動
+				ActReportService actreportSvc = new ActReportService();
+				List<ActReportVO> list3 = actreportSvc.getAll();
+				for(ActReportVO reportact : list3) {
+					if(reportact.getSq_activity_id().contains(sq_activity_id) && reportact.getSq_member_id().contains(sq_member_id)) {
+						actreportVO.setSq_activity_id(sq_activity_id);
+						actreportVO.setSq_member_id(sq_member_id);
+						req.setAttribute("actreportVO", actreportVO);
+					}
+				}
+				
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("actVO", actVO);// 資料庫取出的actVO物件,存入req
 				String url = "/front-end/activity/ActivityOne.jsp";
@@ -166,9 +207,7 @@ public class ActServlet extends HttpServlet {
 				String sq_activity_id = req.getParameter("sq_activity_id").trim();
 				String sq_route_id = req.getParameter("sq_route_id").trim();
 //				String sq_member_id = req.getParameter("sq_member_id").trim();
-				if (sq_member_id == null) {
-					session.setAttribute("sq_member_id", "910003"); // 此行之後要刪掉 測試用
-				}
+				
 				String act_title = new String(req.getParameter("act_title").trim());
 				String act_titleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{5,50}$";
 				if (act_title == null || act_title.trim().length() == 0) {
@@ -317,9 +356,7 @@ public class ActServlet extends HttpServlet {
 			String act_title = new String(req.getParameter("act_title").trim());
 			String sq_route_id = req.getParameter("sq_route_id").trim();
 //				String sq_member_id = req.getParameter("sq_member_id").trim();		
-			if (sq_member_id == null) {
-				session.setAttribute("sq_member_id", "910003"); // 此行之後要刪掉 測試用
-			}
+			
 
 			String act_titleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{5,50}$";
 			if (act_title == null || act_title.trim().length() == 0) {

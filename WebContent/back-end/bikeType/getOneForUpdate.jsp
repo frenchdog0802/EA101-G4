@@ -31,7 +31,7 @@
 					<div class="form-group row">
 					
 <!-- 						sq_bike_type_id要跟後台比對的值 -->
-						<input type="hidden" name="sq_bike_type_id" value="${BikeTypeVO.sq_bike_type_id}">
+						<input type="hidden" name="sq_bike_type_id" readonly value="${BikeTypeVO.sq_bike_type_id}">
 						
 						<label for="bikeType" class="col-sm-2 col-form-label">車種類型  </label>
 						<input type="text" class="col-sm-10 form-control ${errorMsgs.bike_type_name==null?'':'is-invalid'} " id="bikeType"

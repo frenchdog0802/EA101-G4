@@ -3,6 +3,12 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.act.model.*"%>
 <%@ page import="com.actjoin.model.*"%>
+<%@ page import="com.actfavor.model.*"%>
+<%@ page import="com.actreport.model.*"%>
+
+<%
+	String sq_member_id = (String)session.getAttribute("sq_member_id");
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,20 +20,28 @@
 <meta name="author" content="">
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/modern-business.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+	.btn-primary{
+		margin-left:10px;
+	}	
+</style>
 </head>
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
  	
+
+  
  	<div class="container my-5">
   <!-- Page Content -->
   <div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">${actVO.act_title}</h1>
+    <h1 class="mt-4 mb-3">${actVO.act_title}<input type="button" value="返回列表" class="btn btn-primary" id="returnlist"></h1>
 
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="index.html">Home</a>
+        <a href="<%=request.getContextPath()%>/front-end/activity/Activity.jsp">Home</a>
       </li>
       <li class="breadcrumb-item active">${actVO.act_title}</li>
     </ol>
@@ -45,7 +59,7 @@
         <h3 class="my-3">活動細節</h3>
         <ul>
           <li>活動主辦者:${actVO.sq_member_id}</li>
-          <li>活動路線:</li>
+          <li>活動路線:${actVO.sq_route_id}</li>
           <li>上限人數:${actVO.max_population}</li>
           <li>最低開團人數:${actVO.min_population}</li>
           <li>目前參加人數:${actVO.population}</li>
@@ -54,34 +68,98 @@
           <li>活動開始時間:${actVO.act_start_time}</li>
           <li>活動結束時間:${actVO.act_end_time}</li>
         </ul>
-        <c:if test="${jaVO.joinact_is_join!=1}">
-			<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/activity.do">
-				<input type="hidden" id="act_no" name="act_no" value="${actVO.act_no}">
-				<input type="hidden" name="action"value="readyjoin">
-				<input type="submit" value="參加" class="btn btn-primary"> 	
-			</FORM>  
-		</c:if>
-		<c:if test="${jaVO.joinact_is_join==1}">    
-			<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/activity/activity.do">
-				<input type="button" value="已參加" class="btn btn-primary" disabled='true'> 	
-			</FORM>  
-		</c:if>
-        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActFavorServlet.do" name="form1">
-        <input type="hidden" name="action" value="insert">
-        <input type="submit" value="收藏活動">
-        </FORM>
-        <div>
-<%-- 					<c:if test="${not empty memberVO}"> --%>
-<%-- 						<% --%>
-// 							TravelScoreVO scored = (TravelScoreVO) travelScoreSvc.getCheck(travelVO.getTra_no(),memberVO.getMem_no());
-// 							pageContext.setAttribute("scored",scored);
-<%-- 						%> --%>
-						<div>
-		                    <button id="report" class="btn btn-danger btn-lg">檢舉</button>
-		                    <input type="hidden" name="tra_no" value="${travelVO.tra_no}">
-		                    <input type="hidden" name="mem_no" value="${memberVO.mem_no}">
-				    	</div>
-      </div>
+     
+       <div class="row">
+       		<c:choose>
+       		
+       		<c:when test="${actVO.sq_activity_id == actjoinVO.sq_activity_id && sq_member_id == actjoinVO.sq_member_id || actVO.sq_member_id == sq_member_id}">
+		        <FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do">
+		        	<input type="button" value="已參加" class="btn btn-primary" disabled>
+		        </FORM>
+		    </c:when>
+		    
+	        <c:when test="${actVO.sq_member_id != sq_member_id}">
+				<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do">
+					<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
+					<input type="hidden" name="action"value="insert">
+					<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
+					<input type="submit" value="參加活動" class="btn btn-primary"> 	
+				</FORM> 
+	        </c:when>
+	        <c:otherwise>
+	        
+	        </c:otherwise>      
+	       	</c:choose>
+	       	
+	       	<c:choose>
+	       	<c:when test="${actVO.sq_activity_id == actfavorVO.sq_activity_id && sq_member_id == actfavorVO.sq_member_id}">
+		       	<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActFavorServlet.do">
+					<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
+					<input type="hidden" name="action"value="delete">
+					<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
+					<input type="submit" value="已收藏" class="btn btn-primary"> 	
+				</FORM> 
+			</c:when>
+			<c:otherwise>
+	        	<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActFavorServlet.do">
+					<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
+					<input type="hidden" name="action"value="insert">
+					<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
+					<input type="submit" value="收藏活動" class="btn btn-primary"> 	
+				</FORM>	
+	        </c:otherwise>
+			</c:choose>
+			
+			<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+							
+						<div class="modal-header">
+							<h2 class="modal-title" id="myModalLabel">檢舉活動</h2>
+			                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			            </div>
+						
+						<div class="modal-body">
+			<!-- =========================================以下為輸入的內容========================================== -->
+			              <textarea name="report_reason" maxlength="65" id="textarea1" rows=5 cols=83 style="resize: none;"></textarea>
+			<!-- =========================================以上為原輸入的內容========================================== -->
+						</div>
+						
+						<div class="modal-footer">
+			                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			                <FORM METHOD="post" id="form3" ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do">
+								<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
+								<input type="hidden" name="action" value="insert">
+								<input type="hidden" id="reason" name="report_reason">
+								<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
+								<input type="submit" value="送出" name="textsub" id="textsub" class="btn btn-primary" onclick="return CheckText()"> 	
+							</FORM>
+			            </div>
+					</div>
+				</div>
+			</div>
+			
+			<c:choose>
+       		
+       		<c:when test="${actVO.sq_activity_id == actreportVO.sq_activity_id && sq_member_id == actreportVO.sq_member_id || actVO.sq_member_id == sq_member_id}">
+		        <FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do">
+		        	<input type="button" value="已檢舉" class="btn btn-primary" disabled>
+		        </FORM>
+		    </c:when>
+		    
+	        <c:when test="${actVO.sq_member_id != sq_member_id}">
+				<div style="padding-left:1px">
+					<button id="actreport" class="btn btn-primary" onclick="showModal()">檢舉活動</button>
+				</div>
+	        </c:when>
+	        <c:otherwise>
+	        
+	        </c:otherwise>      
+	       	</c:choose>
+			
+	       	 
+	    </div>
+	   
 
     </div>
     <!-- /.row -->
@@ -120,6 +198,8 @@
    
       </div>
     </div>
+  </div>  
+    
  		
 	<%@include file="/front-end/page-file/page-footer"%>
 
@@ -128,6 +208,38 @@
 		$(".fun-text").text("");  // text("")裡面自己輸入功能名稱 
 	});
 	</script>
-
+	<script>
+		$("#returnlist").click(function(){
+			window.location = '<%=request.getContextPath()%>/front-end/activity/Activity.jsp'
+		});
+		
+		$("#actreport").click(function(){
+			$("#basicModal").modal({show: true});
+		});
+	</script>
+	<script>
+	 var val = document.getElementById("textarea1");
+	 var tar = document.getElementById('reason');
+	 var sub = document.getElementById("textsub");
+	    val.addEventListener("input", function(e) {
+	        var t = this.value;
+	        tar.value = t;
+	    })
+	    
+	 	 function CheckText()
+	    {
+	        if(tar.value ==='' || tar.value === null || tar.value === non || tar.value === empty)
+	        {
+	            alert("請輸入檢舉原因");
+	            return false;
+	        }
+	        else
+	        {
+	            alert("內容符合要求");
+	            return true;
+	        }
+	    }
+	    
+	</script>
 </body>
 </html>

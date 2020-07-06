@@ -12,7 +12,28 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+
 	<!-- 琮寶 -->
+	<!-- BikeRentDetailServlet -->
+	<servlet>
+		<servlet-name>BikeRentMasterServlet</servlet-name>
+		<servlet-class>com.bike.rent.master.controller.BikeRentMasterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BikeRentMasterServlet</servlet-name>
+		<url-pattern>/bike/BikeRentMasterServlet.do</url-pattern>
+	</servlet-mapping>
+	<!-- BikeRentDetailServlet -->
+	<!-- BikeRentDetailServlet -->
+	<servlet>
+		<servlet-name>BikeRentDetailServlet</servlet-name>
+		<servlet-class>com.bike.rent.detail.controller.BikeRentDetailServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BikeRentDetailServlet</servlet-name>
+		<url-pattern>/bike/BikeRentDetailServlet.do</url-pattern>
+	</servlet-mapping>
+	<!-- BikeRentDetailServlet -->
 	<!-- BikeEcpayServlet -->
 	<servlet>
 		<servlet-name>BikeEcpayServlet</servlet-name>
@@ -96,7 +117,7 @@
 		<servlet-name>showImg2</servlet-name>
 		<url-pattern>/showImg2/showImg2.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>showImg4</servlet-name>
 		<servlet-class>imgReader.showImg4</servlet-class>
@@ -123,7 +144,7 @@
 		<servlet-name>Shop_productServlet</servlet-name>
 		<url-pattern>/back_end/Shop_product/shop_product.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ShoppingServlet</servlet-name>
 		<servlet-class>com.shopping.controller.ShoppingServlet</servlet-class>
@@ -152,6 +173,71 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>MemDBReader2</servlet-name>
+		<servlet-class>com.member.model.MemDBReader2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemDBReader2</servlet-name>
+		<url-pattern>/member/DBReader2.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MemSessionImg</servlet-name>
+		<servlet-class>com.member.model.MemSessionImg</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemSessionImg</servlet-name>
+		<url-pattern>/member/MemSessionImg.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MemSessionBackImg</servlet-name>
+		<servlet-class>com.member.model.MemSessionBackImg</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemSessionBackImg</servlet-name>
+		<url-pattern>/member/MemSessionBackImg.do</url-pattern>
+	</servlet-mapping>
+	
+	<!-- login前台登入使用 -->
+	<servlet>
+		<servlet-name>MemLoginService</servlet-name>
+		<servlet-class>com.member_login.controller.MemLoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemLoginService</servlet-name>
+		<url-pattern>/login/memlogin.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- filter使用 -->
+<!-- 	<filter> -->
+<!-- 		<filter-name>SetCharacterEncodingFilter</filter-name> -->
+<!-- 		<filter-class>com.filter.SetCharacterEncodingFilter</filter-class> -->
+<!-- 		<init-param> -->
+<!-- 			<param-name>encoding</param-name> -->
+<!-- 			<param-value>UTF-8</param-value> -->
+<!-- 		</init-param> -->
+<!-- 	</filter> -->
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>SetCharacterEncodingFilter</filter-name> -->
+<!-- 		<url-pattern>/*</url-pattern> -->
+<!-- 	</filter-mapping> -->
+
+<!-- 	<filter> -->
+<!-- 		<filter-name>MemberLoginFilter</filter-name> -->
+<!-- 		<filter-class>com.filter.MemberLoginFilter</filter-class> -->
+<!-- 	</filter> -->
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>MemberLoginFilter</filter-name> -->
+<!-- 		<url-pattern>/back-end/*</url-pattern> -->
+<!-- 		<dispatcher>REQUEST</dispatcher> -->
+<!-- 		<dispatcher>FORWARD</dispatcher> -->
+<!-- 		<dispatcher>INCLUDE</dispatcher> -->
+<!-- 		<dispatcher>ERROR</dispatcher> -->
+<!-- 		<dispatcher>ASYNC</dispatcher> -->
+<!-- 	</filter-mapping> -->
+	
+	<servlet>
 		<servlet-name>StaffServlet</servlet-name>
 		<servlet-class>com.staff.controller.StaffServlet</servlet-class>
 	</servlet>
@@ -159,6 +245,7 @@
 		<servlet-name>StaffServlet</servlet-name>
 		<url-pattern>/staff/staff.do</url-pattern>
 	</servlet-mapping>
+		
 	<!-- 宗霖 -->
 	<servlet>
 		<servlet-name>ActServlet</servlet-name>
@@ -243,6 +330,15 @@
 		<servlet-name>WaterStationImgServlet</servlet-name>
 		<url-pattern>/back-end/waterStation/water.stationImage</url-pattern>
 	</servlet-mapping>
+
+	<!-- 連線池 -->
+	<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/EA101_G4</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
 
 
 </web-app>
