@@ -32,8 +32,8 @@ public class RouteJDBCDAO implements RouteDAO_interface {
 	private static final String DELETE_ROUTE = "DELETE FROM ROUTE_PLAN WHERE SQ_ROUTE_ID=?";
 	private static final String DELETE_ROUTE_DETAIL = "DELETE FROM ROUTE_PLAN_DETAIL WHERE SQ_ROUTE_ID=?";
 
-	private static final String UPDATE_ByMemId = "UPDATE ROUTE_PLAN SET ROUTE_NAME=?, DISTANCE=?, COUNTRY=?, START_AREA=?, END_AREA=?, ROUTE_IMAGE=?, ROUTE_INTRODUCTION=? WHERE SQ_MEMBER_ID = ?";
-	private static final String UPDATE_ByStafId = "UPDATE ROUTE_PLAN SET ROUTE_NAME=?, DISTANCE=?, COUNTRY=?, START_AREA=?, END_AREA=?, ROUTE_IMAGE=?, ROUTE_INTRODUCTION=?, CHECK_FLAG=?, ADD_ROUTE=? WHERE SQ_STAFF_ID = ?";
+	private static final String UPDATE_ByMemId = "UPDATE ROUTE_PLAN SET ROUTE_NAME=?, DISTANCE=?, COUNTRY=?, START_AREA=?, END_AREA=?, ROUTE_IMAGE=?, ROUTE_INTRODUCTION=? WHERE SQ_ROUTE_ID = ?";
+	private static final String UPDATE_ByStafId = "UPDATE ROUTE_PLAN SET CHECK_FLAG=?, ADD_ROUTE=? WHERE SQ_ROUTE_ID = ?";
 
 	@Override
 	public void insert(RouteVO routeVO) {
@@ -60,7 +60,7 @@ public class RouteJDBCDAO implements RouteDAO_interface {
 			pstmt.setInt(12, routeVO.getAddRoute());
 
 			pstmt.executeUpdate();
-			// 捕獲例外
+			// ��靘��
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException se) {
@@ -139,18 +139,15 @@ public class RouteJDBCDAO implements RouteDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE_ByStafId);
-
-			pstmt.setString(1, routeVO.getRouteName());
-			pstmt.setDouble(2, routeVO.getDistance());
-			pstmt.setString(3, routeVO.getCountry());
-			pstmt.setString(4, routeVO.getStartArea());
-			pstmt.setString(5, routeVO.getEndArea());
-			pstmt.setBytes(6, routeVO.getRouteImage());
-			pstmt.setString(7, routeVO.getRouteIntroduction());
-			pstmt.setInt(8, routeVO.getCheckFlag());
-			pstmt.setInt(9, routeVO.getAddRoute());
-			pstmt.setString(10, routeVO.getSqStaffId());
+			System.out.println(UPDATE_ByStafId);
+			pstmt.setInt(1, routeVO.getCheckFlag());
+			pstmt.setInt(2, routeVO.getAddRoute());
+			pstmt.setString(3, routeVO.getSqRouteId());
+			System.out.println(routeVO.getCheckFlag());
+			System.out.println(routeVO.getAddRoute());
+			System.out.println(routeVO.getSqRouteId());
 			pstmt.executeUpdate();
+			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 			// Handle any SQL errors
@@ -187,22 +184,22 @@ public class RouteJDBCDAO implements RouteDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 
-			// 1●設定於 pstm.executeUpdate()之前
+			// 1��身摰 pstm.executeUpdate()銋��
 			con.setAutoCommit(false);
 
-			// 先刪除路線細節
+			// ���頝舐�敦蝭�
 			pstmt = con.prepareStatement(DELETE_ROUTE_DETAIL);
 			pstmt.setString(1, sqRouteId);
 			updateCount_ROUDEs = pstmt.executeUpdate();
-			// 再刪除路線
+			// ���頝舐��
 			pstmt = con.prepareStatement(DELETE_ROUTE);
 			pstmt.setString(1, sqRouteId);
 			pstmt.executeUpdate();
 
-			// 2●設定於 pstm.executeUpdate()之後
+			// 2��身摰 pstm.executeUpdate()銋��
 			con.commit();
 			con.setAutoCommit(true);
-			System.out.println("刪除路線ID" + sqRouteId + "時，共有停留點" + updateCount_ROUDEs + "個停留點同時被刪除");
+			System.out.println("��頝舐�D" + sqRouteId + "���������" + updateCount_ROUDEs + "������◤��");
 
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
@@ -210,7 +207,7 @@ public class RouteJDBCDAO implements RouteDAO_interface {
 		} catch (SQLException se) {
 			if (con != null) {
 				try {
-					// 3●設定於當有exception發生時之catch區塊內
+					// 3��身摰���xception�����atch��憛
 					con.rollback();
 				} catch (SQLException excep) {
 					throw new RuntimeException("rollback error occured. " + excep.getMessage());

@@ -10,16 +10,13 @@
 	pageContext.setAttribute("list", list);
 %>
 
+
+
 <%@include file="/back-end/backFrame/backHeader"%>
 <title>所有路線資料 - listAllRou.jsp</title>
-
+<link href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
 <style>
-table#table-1 {
-	background-color: #FEDFE1;
-	border-radius: 10px;
-	text-align: center;
-}
-
 table#table-1 h4 {
 	color: red;
 	display: block;
@@ -46,85 +43,120 @@ table, th, td {
 	border-collapse: collapse;
 }
 
-th, td {
+th {
 	padding: 5px;
 	text-align: center;
 	width: 50px;
+}
+
+td {
+	text-align: center;
 }
 </style>
 
 
 <%@include file="/back-end/backFrame/backBody"%>
 <div class="row" style="background-color: white;">
-					<ul class="nav nav-tabs">
-					  <li class="nav-item">
-					    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/route/listAllRou.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">所有路線資料</span></a><!--在哪一個頁面就哪加active和span的style-->
-					  </li>
-					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>item2</span></a>
-					  </li>
-					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>item3</span></a>
-					  </li>
-					</ul>
-				</div>
-				<%@include file="/back-end/backFrame/backNav"%>
-					
-	<center>
-		
-		<%-- 錯誤表列 --%>
-		<c:if test="${not empty errorMsgs}">
-			<font style="color: red">請修正以下錯誤:</font>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="color: red">${message}</li>
-				</c:forEach>
-			</ul>
-		</c:if>
+	<ul class="nav nav-tabs">
+		<li class="nav-item"><a class="nav-link active"
+			href="<%=request.getContextPath()%>/back-end/route/listAllRou.jsp"><span
+				style="padding-bottom: 8px; border-bottom: 3px blue solid;">所有路線資料</span></a>
+			<!--在哪一個頁面就哪加active和span的style--></li>
+		<li class="nav-item"><a class="nav-link active"
+			href="<%=request.getContextPath()%>/back-end/waterStation/listAllWs.jsp"><span
+				style="padding-bottom: 8px; border-bottom: 3px blue solid;">所有補水站資料</span></a>
+			<!--在哪一個頁面就哪加active和span的style--></li>
+	</ul>
+</div>
+<%@include file="/back-end/backFrame/backNav"%>
 
-		<table>
-			<tr>
-				<th>路線編號</th>
-				<th>路線名稱</th>
-				<th>路線總距離</th>
-				<th>路線圖片</th>
-				<th style="width: 300px">路線簡介</th>
-				<th>修改</th>
-				<th>刪除</th>
-			</tr>
-			<%@ include file="pages/page1.file"%>
-			<c:forEach var="rouVO" items="${list}" begin="<%=pageIndex%>"
-				end="<%=pageIndex+rowsPerPage-1%>">
+<center>
 
-				<tr>
-					<td>${rouVO.sqRouteId}</td>
-					<td>${rouVO.routeName}</td>
-					<td>${rouVO.distance}</td>
-					<td><img alt=""
-						src="<%=request.getContextPath()%>/back-end/route/route.img?SQ_ROUTE_ID=${rouVO.sqRouteId}"
-						style="width: 200px; height: 200px"></td>
-					<td style="text-align: left">${rouVO.routeIntroduction}</td>
-					<td>
-
-						<FORM METHOD="post"
-							ACTION="<%=request.getContextPath()%>/front-end/route/route.do"
-							style="margin-bottom: 0px;">
-							<input type="submit" value="修改"> <input type="hidden"
-								name="sqRouteId" value="${rouVO.sqRouteId}"> <input
-								type="hidden" name="action" value="getOne_For_Update">
-						</FORM>
-					</td>
-					<td>
-						<FORM METHOD="post"
-							ACTION="<%=request.getContextPath()%>/front-end/route/route.do"
-							style="margin-bottom: 0px;">
-							<input type="submit" value="刪除"> <input type="hidden"
-								name="sqRouteId" value="${rouVO.sqRouteId}"> <input
-								type="hidden" name="action" value="delete">
-						</FORM>
-					</td>
-				</tr>
+	<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
 			</c:forEach>
-		</table>
-		<%@ include file="pages/page2.file"%>
-<%@include file="/back-end/backFrame/backFooter"%>
+		</ul>
+	</c:if>
+
+	<table>
+		<tr>
+			<th style="width: 100px">路線編號</th>
+			<th style="width: 100px">路線名稱</th>
+			<th style="width: 100px">路線總距離</th>
+			<th>路線圖片</th>
+			<th style="width: 370px">路線簡介</th>
+			<th style="width: 100px">路線細節 </th>
+			<th>審核狀態</th>
+			<th>上架狀態</th>
+			<th>送出修改</th>
+		</tr>
+		<%@ include file="pages/page1.file"%>
+		<c:forEach var="rouVO" items="${list}" begin="<%=pageIndex%>"
+			end="<%=pageIndex+rowsPerPage-1%>">
+
+			<tr>
+				<td>${rouVO.sqRouteId}</td>
+				<td>${rouVO.routeName}</td>
+				<td>${rouVO.distance}</td>
+				<td><img alt=""
+					src="<%=request.getContextPath()%>/back-end/route/route.img?SQ_ROUTE_ID=${rouVO.sqRouteId}"
+					style="width: 200px; height: 200px"></td>
+				<td style="text-align: left">${rouVO.routeIntroduction}</td>
+				<td><a
+					href="<%=request.getContextPath()%>/front-end/route/routeD.jsp">查看路線細節</a>
+				</td>
+
+				<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/back-end/route/route.do" name="form1">
+				<td><select name="checkFlag" size="1" id="checkFlag"
+					onChange="change()">
+						<c:choose>
+							<c:when test="${rouVO.checkFlag == 0}">
+								<option value="0" selected>未審核</option>
+								<option value="1">審核通過</option>
+								<option value="2">審核未通過</option>
+							</c:when>
+							<c:when test="${rouVO.checkFlag == 1}">
+								<option value="0">未審核</option>
+								<option value="1" selected>審核通過</option>
+								<option value="2">審核未通過</option>
+							</c:when>
+							<c:when test="${rouVO.checkFlag == 2}">
+								<option value="0">未審核</option>
+								<option value="1">審核通過</option>
+								<option value="2" selected>審核未通過</option>
+							</c:when>
+						</c:choose>
+				</select></td>
+				<td>
+					<select name="addRoute" size="1" id="addRoute" onChange="change()">
+						<c:choose>
+							<c:when test="${rouVO.addRoute == 0}">
+								<option value="0" selected>未上架</option>
+								<option value="1">已上架</option>
+							</c:when>
+							<c:when test="${rouVO.addRoute == 1}">
+								<option value="0">未上架</option>
+								<option value="1" selected>已上架</option>
+							</c:when>
+						</c:choose>
+					</select>
+				</td>
+				<td>
+						<br> 
+						<input type="hidden" name="action" value="update">
+						<input  type="hidden" name="sqRouteId" value="${rouVO.sqRouteId}"> 
+						<input id="demo3" type="submit"	value="送出修改">
+					</FORM>
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
+	<script>
+		document.getElementById("demo3").onclick = function() {swal("提示", "修改成功", "success")};
+	</script>
+	<%@ include file="pages/page2.file"%>
+	<%@include file="/back-end/backFrame/backFooter"%>

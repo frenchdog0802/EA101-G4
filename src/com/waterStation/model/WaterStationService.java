@@ -27,21 +27,11 @@ public class WaterStationService {
 		dao.insert(wsVO);
 
 	}
-	public WaterStationVO updateWs(String sqStationId, String stationName, String stationAddress, Double longitude,
-			Double latitude, String country, String area, byte[] stationImage, String businessHours,
-			Integer checkFlag, Integer addStation) {
+	public WaterStationVO updateWs(String sqStationId, Integer checkFlag, Integer addStation) {
 		WaterStationVO wsVO = new WaterStationVO();
-		wsVO.setStationName(stationName);
-		wsVO.setStationAddress(stationAddress);
-		wsVO.setLongitude(longitude);
-		wsVO.setLatitude(latitude);
-		wsVO.setCountry(country);
-		wsVO.setArea(area);
-		wsVO.setStationImage(stationImage);
-		wsVO.setBusinessHours(businessHours);
+		wsVO.setSqStationId(sqStationId);
 		wsVO.setCheckFlag(checkFlag);
 		wsVO.setAddStation(addStation);
-		wsVO.setSqStationId(sqStationId);
 		dao.update(wsVO);
 		return wsVO;
 	}
