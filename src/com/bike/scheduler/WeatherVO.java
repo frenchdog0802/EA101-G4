@@ -6,7 +6,7 @@ import java.util.Date;
 public class WeatherVO implements Serializable{
 	
 	private String locationName;//車站名稱
-	private Date date; //日期
+	private String date; //日期
 	private String value; //value
 	private byte[] pic;
 	
@@ -16,10 +16,10 @@ public class WeatherVO implements Serializable{
 	public void setLocationName(String locationName) {
 		this.locationName = locationName;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public String getValue() {
