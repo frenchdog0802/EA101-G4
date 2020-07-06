@@ -233,7 +233,7 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 	@Override
 	public void insert2(Shop_order_detailVO detailVO, Connection con) {
 		PreparedStatement pstmt = null;
-		
+		System.out.println(detailVO.getSq_product_id());
 		try {
 			pstmt = con.prepareStatement(INSERT);
 			pstmt.setString(1, detailVO.getSq_order_id());
