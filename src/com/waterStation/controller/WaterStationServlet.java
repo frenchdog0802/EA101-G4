@@ -226,81 +226,42 @@ public class WaterStationServlet extends HttpServlet {
 			}
 		}
 		
-
-		if ("update".equals(action)) { // 來自update_ws_input.jsp的請求
+		
+		
+		
+		if ("update".equals(action)) { // 來自lissAllWs.jsp的請求
 			
+			System.out.println("coming to update");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 		
-			try {
+//			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String sqStationId = new String(req.getParameter("sqStationId").trim());
-				
+				System.out.println(sqStationId);
 				String stationName = req.getParameter("stationName");
-				String stationNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
-				if (stationName == null || stationName.trim().length() == 0) {
-					errorMsgs.add("補給站名稱: 請勿空白");
-				} else if (!stationName.trim().matches(stationNameReg)) { // 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("補給站名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
-				}
-
-				String stationAddress = req.getParameter("stationAddress").trim();
-				if (stationAddress == null || stationAddress.trim().length() == 0) {
-					errorMsgs.add("補給站地址請勿空白");
-				}
-
-				Double longitude = null;
+				
+				Integer checkFlag = null;
 				try {
-					longitude = new Double(req.getParameter("longitude").trim());
+					checkFlag = new Integer(req.getParameter("checkFlag").trim());
+					System.out.println(checkFlag);
 				} catch (NumberFormatException e) {
-					longitude = 0.0;
-					errorMsgs.add("經度請填數字.");
-				}
-
-				Double latitude = null;
+					checkFlag = 0;
+					errorMsgs.add("請輸入0(未審核)、1(已審核)、2(未通過)");
+				} 
+				Integer addStation = null;
 				try {
-					latitude = new Double(req.getParameter("latitude").trim());
+					addStation = new Integer(req.getParameter("addStation").trim());
+					System.out.println(addStation);
 				} catch (NumberFormatException e) {
-					latitude = 0.0;
-					errorMsgs.add("緯度請填數字.");
+					addStation = 0;
+					errorMsgs.add("請輸入0(未上架)、1(已上架)");
 				}
-
-				String country = req.getParameter("country").trim();
-				if (country == null || country.trim().length() == 0) {
-					errorMsgs.add("國家請勿空白");
-				}
-
-				String area = req.getParameter("area").trim();
-				if (area == null || area.trim().length() == 0) {
-					errorMsgs.add("縣市請勿空白");
-				}
-
-				Integer checkFlag = new Integer(req.getParameter("checkFlag").trim());
-
-				Integer addStation = new Integer(req.getParameter("addStation").trim());
-				
-				String businessHours = req.getParameter("businessHours").trim();
-				
-				
-				// 新增圖片
-				Part part = req.getPart("stationImage");
-				InputStream in =  part.getInputStream();
-				byte[] stationImage = new byte[in.available()];
-				in.read(stationImage);
-				in.close();
 				
 				WaterStationVO wsVO = new WaterStationVO();
 				wsVO.setSqStationId(sqStationId);
-				wsVO.setStationName(stationName);
-				wsVO.setStationAddress(stationAddress);
-				wsVO.setLongitude(longitude);
-				wsVO.setLatitude(latitude);
-				wsVO.setCountry(country);
-				wsVO.setArea(area);
-				wsVO.setStationImage(stationImage);
-				wsVO.setBusinessHours(businessHours);
 				wsVO.setCheckFlag(checkFlag);
 				wsVO.setAddStation(addStation);
 				
@@ -315,22 +276,21 @@ public class WaterStationServlet extends HttpServlet {
 				
 				/***************************2.開始修改資料*****************************************/
 				WaterStationService waterStationSvc = new WaterStationService();
-				wsVO = waterStationSvc.updateWs(sqStationId, stationName, stationAddress, longitude, latitude, country, area, stationImage,
-						businessHours, checkFlag, addStation);
+				wsVO = waterStationSvc.updateWs(sqStationId, checkFlag, addStation);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("wsVO", wsVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/back-end/waterStation/listOneWs.jsp";
+				req.setAttribute("wsVO", wsVO); // 資料庫update成功後,正確的的wsVO物件,存入req
+				String url = "/back-end/waterStation/listAllWs.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneWs.jsp
 				successView.forward(req, res);
 				
-				/***************************其他可能的錯誤處理*************************************/
-			} catch (Exception e) {
-				errorMsgs.add("修改資料失敗:"+e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/waterStation/update_ws_input.jsp");
-				failureView.forward(req, res);
-			}
+//				/***************************其他可能的錯誤處理*************************************/
+//			} catch (Exception e) {
+//				errorMsgs.add("修改資料失敗:"+e.getMessage());
+//				RequestDispatcher failureView = req
+//						.getRequestDispatcher("/back-end/waterStation/update_ws_input.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 				
 				

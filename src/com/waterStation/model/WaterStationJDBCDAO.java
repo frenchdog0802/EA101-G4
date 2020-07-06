@@ -18,14 +18,14 @@ import java.util.List;
 public class WaterStationJDBCDAO implements WaterStationDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "EA101";
-	String passwd = "123456";
+	String userid = "EA101_G4";
+	String passwd = "EA101_G4";
 
 	private static final String INSERT_STMT = "INSERT into WATER_STATION (SQ_STATION_ID, STATION_NAME,	STATION_ADDRESS, LONGITUDE,	LATITUDE,  COUNTRY, AREA, STATION_IMAGE, BUSINESS_HOURS, MODIFY_ID, INSERT_BY, CHECK_FLAG, ADD_STATION)  values ('WS'||LPAD(to_char(water_station_sequence.NEXTVAL), 6, '0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM WATER_STATION ORDER BY SQ_STATION_ID";
 	private static final String GET_ONE_STMT = "SELECT SQ_STATION_ID, STATION_NAME, STATION_ADDRESS, LONGITUDE, LATITUDE,  COUNTRY, AREA, STATION_IMAGE, BUSINESS_HOURS, INSERT_TIMESTAMP, UPDATE_TIMESTAMP, MODIFY_ID, INSERT_BY, CHECK_FLAG, ADD_STATION FROM WATER_STATION WHERE SQ_STATION_ID = ?";
 	private static final String DELETE = "DELETE FROM WATER_STATION WHERE SQ_STATION_ID = ?";
-	private static final String UPDATE = "UPDATE WATER_STATION set STATION_NAME=?, STATION_ADDRESS=?, LONGITUDE=?, LATITUDE=?,  COUNTRY=?, AREA=?, STATION_IMAGE=?, BUSINESS_HOURS=?, INSERT_TIMESTAMP=?, UPDATE_TIMESTAMP=?, MODIFY_ID=?, INSERT_BY=?, CHECK_FLAG=?, ADD_STATION=? WHERE SQ_STATION_ID = ?";
+	private static final String UPDATE = "UPDATE WATER_STATION SET CHECK_FLAG=?, ADD_STATION=? WHERE SQ_STATION_ID = ?";
 	
 	//取得圖片的方法
 	public static byte[] getPictureByteArray(String path) throws IOException {
@@ -107,24 +107,11 @@ public class WaterStationJDBCDAO implements WaterStationDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
-
-			pstmt.setString(1, wsVO.getStationName());
-			pstmt.setString(2, wsVO.getStationAddress());
-			pstmt.setDouble(3, wsVO.getLongitude());
-			pstmt.setDouble(4, wsVO.getLatitude());
-			pstmt.setString(5, wsVO.getCountry());
-			pstmt.setString(6, wsVO.getArea());
-			pstmt.setBytes(7, wsVO.getStationImage());
-			pstmt.setString(8, wsVO.getBusinessHours());
-			pstmt.setTimestamp(9, wsVO.getInsertTimestamp());
-			pstmt.setTimestamp(10, wsVO.getUpdateTimestamp());
-			pstmt.setString(11, wsVO.getModifyId());
-			pstmt.setString(12, wsVO.getInsertBy());
-			pstmt.setInt(13, wsVO.getCheckFlag());
-			pstmt.setInt(14, wsVO.getAddStation());
-			pstmt.setString(15, wsVO.getSqStationId());
-			;
-
+			
+			pstmt.setInt(1, wsVO.getCheckFlag());
+			pstmt.setInt(2, wsVO.getAddStation());
+			pstmt.setString(3, wsVO.getSqStationId());
+			
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
