@@ -141,10 +141,8 @@
 			
 			<c:choose>
        		
-       		<c:when test="${actVO.sq_activity_id == actreportVO.sq_activity_id && sq_member_id == actreportVO.sq_member_id || actVO.sq_member_id == sq_member_id}">
-		        <FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do">
+       		<c:when test="${actVO.sq_activity_id == actreportVO.sq_activity_id && sq_member_id == actreportVO.sq_member_id}">
 		        	<input type="button" value="已檢舉" class="btn btn-primary" disabled>
-		        </FORM>
 		    </c:when>
 		    
 	        <c:when test="${actVO.sq_member_id != sq_member_id}">
@@ -152,17 +150,17 @@
 					<button id="actreport" class="btn btn-primary" onclick="showModal()">檢舉活動</button>
 				</div>
 	        </c:when>
+	        <c:when test="${actVO.sq_member_id == sq_member_id}">
+		    	<input type="button" value="檢舉活動" class="btn btn-primary" disabled>
+		    </c:when>
 	        <c:otherwise>
 	        
 	        </c:otherwise>      
 	       	</c:choose>
-			
-	       	 
-	    </div>
+	    </div><!-- /.第二層row -->
 	   
-
     </div>
-    <!-- /.row -->
+    <!-- /.最外層row -->
 
     <!-- Related Projects Row -->
     <h3 class="my-4">相關路線</h3>
@@ -208,7 +206,7 @@
 		$(".fun-text").text("");  // text("")裡面自己輸入功能名稱 
 	});
 	</script>
-	<script>
+	<script> //返回列表的按鈕
 		$("#returnlist").click(function(){
 			window.location = '<%=request.getContextPath()%>/front-end/activity/Activity.jsp'
 		});
@@ -217,7 +215,7 @@
 			$("#basicModal").modal({show: true});
 		});
 	</script>
-	<script>
+	<script> //檢舉活動彈出視窗的判別式
 	 var val = document.getElementById("textarea1");
 	 var tar = document.getElementById('reason');
 	 var sub = document.getElementById("textsub");
@@ -226,20 +224,17 @@
 	        tar.value = t;
 	    })
 	    
-	 	 function CheckText()
-	    {
-	        if(tar.value ==='' || tar.value === null || tar.value === non || tar.value === empty)
-	        {
-	            alert("請輸入檢舉原因");
-	            return false;
-	        }
-	        else
-	        {
-	            alert("內容符合要求");
-	            return true;
-	        }
-	    }
-	    
+	 	
+		function CheckText() {
+			if (tar.value === '' || tar.value === null || tar.value === non
+					|| tar.value === empty) {
+				alert("請輸入檢舉原因");
+				return false;
+			} else {
+				alert("內容符合要求");
+				return true;
+			}
+		}
 	</script>
 </body>
 </html>
