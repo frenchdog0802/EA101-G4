@@ -23,7 +23,7 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, user, password);
 			pstmt = con.prepareStatement(INSERT);
-			
+			con.setAutoCommit(false);
 			pstmt.setString(1, shop_order_detailVO.getSq_order_id());
 			pstmt.setString(2, shop_order_detailVO.getSq_product_id());
 			pstmt.setInt(3, shop_order_detailVO.getProduct_price());
@@ -230,4 +230,41 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 		return list;
 	}
 
+	@Override
+	public void insert2(Shop_order_detailVO detailVO, Connection con) {
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = con.prepareStatement(INSERT);
+			pstmt.setString(1, detailVO.getSq_order_id());
+			pstmt.setString(2, detailVO.getSq_product_id());
+			pstmt.setInt(3, detailVO.getProduct_price());
+			pstmt.setInt(4, detailVO.getOrder_sum());
+			
+			pstmt.executeUpdate();
+			
+		}catch(SQLException ce) {
+			if(con != null) {
+				try {
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-deatil");
+					con.rollback();
+				}catch(SQLException cecep) {
+					throw new RuntimeException("rollback error occured. "
+							+ cecep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ ce.getMessage());
+			// Clean up JDBC resources
+		}finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+	}
 }

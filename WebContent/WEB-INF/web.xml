@@ -16,6 +16,16 @@
 	<!-- 琮寶 -->
 	<!-- BikeRentDetailServlet -->
 	<servlet>
+		<servlet-name>BikeRentMasterServlet</servlet-name>
+		<servlet-class>com.bike.rent.master.controller.BikeRentMasterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BikeRentMasterServlet</servlet-name>
+		<url-pattern>/bike/BikeRentMasterServlet.do</url-pattern>
+	</servlet-mapping>
+	<!-- BikeRentDetailServlet -->
+	<!-- BikeRentDetailServlet -->
+	<servlet>
 		<servlet-name>BikeRentDetailServlet</servlet-name>
 		<servlet-class>com.bike.rent.detail.controller.BikeRentDetailServlet</servlet-class>
 	</servlet>

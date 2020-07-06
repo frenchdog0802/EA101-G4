@@ -1,0 +1,54 @@
+		#brandcontent{
+			height: 500px;
+		}
+		#brandcontent table{
+			width: 100%;
+			table-layout: fixed;
+		}
+		#brandcontent tr{
+			height: 30px;
+			text-align: center;
+		}
+		td{
+			border: 1px black solid;
+			width: 100%;
+			white-space: normal;
+			word-break: break-all;
+			word-wrap: break-word;
+		}
+		#td_id{
+			width: 7%;
+		}
+		#td_kind{
+			width: 8%;
+		}
+		#td_name{
+			width: 25%;
+		}
+		#td_price{
+			width: 6%;
+		}
+		#td_pic{
+			width: 6%;
+		}	
+		#td_detail{
+			width: 6%;
+		}
+		#td_date{
+			width: 10%;
+		}
+		#td_mertail{
+			width: 6%;
+		}
+		#td_status{
+			width: 5%;
+		}
+		#td_btn{
+			width: 7%;
+		}
+
+
+
+
+
+

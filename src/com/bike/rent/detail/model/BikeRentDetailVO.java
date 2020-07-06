@@ -22,9 +22,11 @@ public class BikeRentDetailVO implements Serializable,Comparable<BikeRentDetailV
 	private Timestamp ex_return_date;
 	private Timestamp real_return_date;
 	
-	//假VO傳回bikeStore頁面
+	//假VO傳回bikeDetailResv頁面
 	private List<String> bikeTypeList;
 	private String bikeTypeName;
+	//假VO傳回bikeDetailEx頁面
+	private List<String> bike_status;
 	
 	public Integer getExtra_cost() {
 		return extra_cost;
@@ -97,6 +99,12 @@ public class BikeRentDetailVO implements Serializable,Comparable<BikeRentDetailV
 	}
 	public void setBikeTypeName(String bikeTypeName) {
 		this.bikeTypeName = bikeTypeName;
+	}
+	public List<String> getBike_status() {
+		return bike_status;
+	}
+	public void setBike_status(List<String> bike_status) {
+		this.bike_status = bike_status;
 	}
 	
 	
