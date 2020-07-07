@@ -163,6 +163,15 @@
 		<servlet-name>ShoppingServlet</servlet-name>
 		<url-pattern>/shopping.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ProductEcpayServlet</servlet-name>
+		<servlet-class>com.shopping.controller.ProductEcpayServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProductEcpayServlet</servlet-name>
+		<url-pattern>/productEcpayServlet.do</url-pattern>
+	</servlet-mapping>
 
 	<!-- 筑峰 -->
 	<servlet>

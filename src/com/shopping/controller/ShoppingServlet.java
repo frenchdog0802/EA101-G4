@@ -56,11 +56,7 @@ public class ShoppingServlet extends HttpServlet{
 			}	
 		}						
 		if(action.equals("CHECKOUT")) {
-			String total = req.getParameter("total");
-			
-			System.out.println(buylist);
-			System.out.println(total);
-			
+			String total = req.getParameter("total");			
 			session.setAttribute("totalPrice", total);
 			String url = "/front-end/shopMall/shopPayDetail.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
@@ -72,10 +68,6 @@ public class ShoppingServlet extends HttpServlet{
 		String id = req.getParameter("id");
 		String name = req.getParameter("name");
 		String price = req.getParameter("price");
-		
-		System.out.println(id);
-		System.out.println(name);
-		System.out.println(price);
 		
 		Shop_productVO product = new Shop_productVO();
 		product.setSq_product_id(id);

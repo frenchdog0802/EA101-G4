@@ -7,34 +7,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.bike.rent.detail.model.BikeRentDetailVO;
-import com.bike.rent.master.model.BikeRentMasterService;
-import com.bike.rent.master.model.BikeRentMasterVO;
-import com.bike.store.model.BikeStoreVO;
 import com.bike.type.model.BikeTypeService;
 import com.shop_order.model.Shop_orderService;
 import com.shop_order.model.Shop_orderVO;
-import com.shop_order_detail.model.Shop_order_detailService;
 import com.shop_order_detail.model.Shop_order_detailVO;
 import com.shop_product.model.Shop_productVO;
 
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
-import java.util.UUID;
 import java.util.Vector;
 
-import javax.servlet.RequestDispatcher;
-import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.AllInOneService;
 import ecpay.payment.integration.domain.AioCheckOutOneTime;
 
@@ -47,25 +35,25 @@ public class ProductEcpayServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+		throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String action = request.getParameter("action"); // 網頁指定訊息
 		HttpSession session = request.getSession();
 		List<Shop_productVO> buylist = (Vector<Shop_productVO>)session.getAttribute("shoppingcar");
+		
 		if ("pay".equals(action)) {
-
 			// 接收參數
 			// 建立商品描述
-			BikeTypeService bikeTypeSvc = new BikeTypeService();
+						
 			StringBuilder items = new StringBuilder();
-			
 			for(Shop_productVO vo : buylist) {
 				items.append(vo.getProduct_name());
 				items.append(" x " + vo.getProduct_quantity());
 				items.append("#");
 			}
+			System.out.println(items.toString());
 			// 取得訂單編號+1
 			Shop_orderService Shop_orderSvc = new Shop_orderService();
 			String shopOrder_id = Shop_orderSvc.getCurrentKey();//取得目前最大的訂單編號
@@ -78,7 +66,8 @@ public class ProductEcpayServlet extends HttpServlet {
 			sb.append(sq_rent_idStr);
 			sb.append(sq_rent_idNum);
 			shopOrder_id = sb.toString();
-
+			
+			System.out.println(shopOrder_id);		
 			// 交易日期
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -101,10 +90,10 @@ public class ProductEcpayServlet extends HttpServlet {
 //			設定交易訊息
 			obj.setTradeDesc("支付信用卡");
 //			設定ReturnURL 付款完成通知回傳網址 使用  ngrok.io
-			String returnURL = "https://78e4c02be61d.ngrok.io/EA101_G4/bike/BikeEcpayServlet.do";
+			String returnURL = "https://11cf8e050943.ngrok.io/EA101_G4/ProductEcpayServlet.do";
 			obj.setReturnURL(returnURL);
 //			設定ClientBackURL Client端返回合作特店系統的按鈕連結
-			String clientBackURL = "https://78e4c02be61d.ngrok.io/EA101_G4/front-end/bike/bikeStoreList.jsp?action=payFinish";
+			String clientBackURL = "https://11cf8e050943.ngrok.io/EA101_G4/front-end/shopMall/shoppignFinal.jsp";
 			obj.setClientBackURL(clientBackURL);
 //			設定OrderResultURL Client端回傳付款結果網址 跟ReturnURL二選一
 //			obj.setOrderResultURL(clientBackURL);
@@ -114,7 +103,7 @@ public class ProductEcpayServlet extends HttpServlet {
 			obj.setRedeem("N");
 //			設定自訂回傳訊息 controller接收action
 			obj.setCustomField1("returnMsg");
-			
+			obj.setCustomField2(buylist.toString());
 
 			
 			AllInOneService allInOneSvc = new AllInOneService();
@@ -182,17 +171,17 @@ public class ProductEcpayServlet extends HttpServlet {
 	}
 
 	
-	public Map<String , String> stringToMap(String MapString){
-		int s1 = MapString.indexOf("{");
-		String reg1 = MapString.substring(s1+1);
-		int s2 = reg1.indexOf("}");
-		String reg2 = reg1.substring(0,s2);
-	
-		Map<String, String> reconstructedUtilMap = Arrays.stream(reg2.split(","))
-	            .map(s -> s.split("="))
-	            .collect(Collectors.toMap(s -> s[0], s -> s[1]));
-		
-		return reconstructedUtilMap;
-	}
+//	public Map<String , String> stringToMap(String MapString){
+//		int s1 = MapString.indexOf("{");
+//		String reg1 = MapString.substring(s1+1);
+//		int s2 = reg1.indexOf("}");
+//		String reg2 = reg1.substring(0,s2);
+//	
+//		Map<String, String> reconstructedUtilMap = Arrays.stream(reg2.split(","))
+//	            .map(s -> s.split("="))
+//	            .collect(Collectors.toMap(s -> s[0], s -> s[1]));
+//		
+//		return reconstructedUtilMap;
+//	}
 
 }

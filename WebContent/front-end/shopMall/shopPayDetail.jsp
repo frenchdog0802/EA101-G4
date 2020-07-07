@@ -128,7 +128,11 @@
     					<div class="pt-2 pl-3 pb-2" style="background-color: #cccccc;">
     						<div class="finalbtn">
     							<button class="btn bg-secondary">上一步</button>
-			    				<button class="btn bg-secondary">下一步</button>
+<!-- 			    				<button class="btn bg-secondary">下一步</button> -->
+							<FORM METHOD="post" ACTION="productEcpayServlet.do">
+			    				<input type="submit" value="下一步">
+			    				<input type="hidden" name="action" value="pay">
+			    			</FORM>
 			    			</div>
 		    			</div>
     				</div>
