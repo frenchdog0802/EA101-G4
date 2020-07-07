@@ -116,7 +116,7 @@ public class ActServlet extends HttpServlet {
 				ActService actSvc = new ActService();
 				ActVO actVO = actSvc.getOneAct(sq_activity_id);
 				ActJoinService actjoinSvc = new ActJoinService();
-				int i = actjoinSvc.getOneJoinPeople(sq_activity_id);
+				int i = actjoinSvc.getOneJoinPeople(sq_activity_id); //查詢參加人數秀在ActivityOne.jsp
 				actVO.setPopulation(i);
 				
 				ActJoinVO actjoinVO = new ActJoinVO();	//判斷是否參加過活動

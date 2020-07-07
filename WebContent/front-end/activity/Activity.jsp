@@ -82,14 +82,13 @@
 								class="col-lg-4 col-sm-6 portfolio-item ${actVO.sq_activity_id}">
 								<div class="card h-100">
 									<a
-										href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}"><img
-										class="card-img-top"
-										src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'"
-										width="200" height="185" alt=""></a>
+										href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
+										<img class="card-img-top" src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'"
+										width="200" height="185" alt="">
+									</a>
 									<div class="card-body">
 										<h4 class="card-title">
-											<a
-												href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">${actVO.act_title}</a>
+											<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">${actVO.act_title}</a>
 										</h4>
 										<p class="card-text">${actVO.act_description}</p>
 									</div>
