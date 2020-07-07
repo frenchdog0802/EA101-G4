@@ -121,7 +121,6 @@ public class BikeEcpayServlet extends HttpServlet {
 			obj.setCustomField3(bookMap.toString());
 			
 
-			
 			AllInOneService allInOneSvc = new AllInOneService();
 			String form = allInOneSvc.aioCheckOut(obj, null);
 			out.println(form);

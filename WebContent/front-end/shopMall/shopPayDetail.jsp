@@ -86,57 +86,56 @@
 			    				</table>			    				
 			    			</div>
 			    			<div class="pl-4">
-			    				<form>
+			    				<FORM METHOD="post" ACTION="shopMall/productEcpayServlet.do">
 				    				<table class="takedt">
 				    					<tr>
 				    						<td class="takedt_t"><span>收件人 :</span></td>
 				    						<td class="takedt_td">
-				    							<input type="text" id="tname" value="">
+				    							<input type="text" id="tname" name="tname" value="">
 				    							<input type="hidden" id="name" value="<%=memVO.getM_name()%>">
 				    						</td>
 				    					</tr>
 				    					<tr>
 				    						<td class="takedt_t"><span>連絡電話 :</span></td>
 				    						<td class="takedt_td">
-				    							<input type="text" id="tphone" value="">
+				    							<input type="text" id="tphone" name="tphone" value="">
 				    							<input type="hidden" id="phone" value="<%=memVO.getCellphone()%>">
 				    						</td>
 				    					</tr>
 				    					<tr>
 				    						<td class="takedt_t"><span>Email :</span></td>
 				    						<td class="takedt_td">
-				    							<input type="text" id="temail" value="">
+				    							<input type="text" id="temail" name="temail" value="">
 				    							<input type="hidden" id="email" value="<%=memVO.getM_email()%>">
 				    						</td>
 				    					</tr>
 				    					<tr>
 				    						<td class="takedt_t"><span>收件地址 :</span></td>
 				    						<td class="takedt_td">
-				    							<input type="text" id="taddress" value="">
+				    							<input type="text" id="taddress" name="taddress" value="">
 				    							<input type="hidden" id="address" value="<%=memVO.getAddress()%>">
 				    						</td>
 				    					</tr>
-				    				</table>
-			    				</form>
+				    				</table>			    				
+			    				<hr style="margin-top: 3px; margin-bottom: 3px;">
+					    			<div class="row">
+					    				<div class="col-12">
+					    					<div class="pt-2 pl-3 pb-2" style="background-color: #cccccc;">
+					    						<div class="finalbtn">
+					    							<button class="btn bg-secondary">上一步</button>
+					<!-- 			    				<button class="btn bg-secondary">下一步</button> -->												
+								    				<input type="submit" value="下一步">
+								    				<input type="hidden" name="action" value="pay">								    			
+								    			</div>
+							    			</div>
+					    				</div>
+					    			</div>
+			    				</FORM>			    				
 		    				</div>
 		    			</div>
     				</div>
     			</div>
-    			<hr style="margin-top: 3px; margin-bottom: 3px;">
-    			<div class="row">
-    				<div class="col-12">
-    					<div class="pt-2 pl-3 pb-2" style="background-color: #cccccc;">
-    						<div class="finalbtn">
-    							<button class="btn bg-secondary">上一步</button>
-<!-- 			    				<button class="btn bg-secondary">下一步</button> -->
-							<FORM METHOD="post" ACTION="productEcpayServlet.do">
-			    				<input type="submit" value="下一步">
-			    				<input type="hidden" name="action" value="pay">
-			    			</FORM>
-			    			</div>
-		    			</div>
-    				</div>
-    			</div>
+    			
     		</div>
     		<div class="col-2"></div>
     	</div>

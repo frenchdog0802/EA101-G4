@@ -809,9 +809,9 @@ INSERT INTO SHOP_PRODUCT_STOCK VALUES(SQ_STOCK_ID.NEXTVAL,'510015', '', '', 5);
 
 
 --'OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0)
-INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910001', '550001', '桃園市平鎮區中央路187號', systimestamp,  to_date(to_char(sysdate+7,'yyyy-mm-dd'),'yyyy-mm-dd'), 499, 1, 1);
-INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910002', '550002', '300新竹市東區東大路一段155號', systimestamp,  to_date(to_char(sysdate+7,'yyyy-mm-dd'),'yyyy-mm-dd'), 148000, 2, 2);
-INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910003', '550003', '台北市信義區忠孝東路五段386號', systimestamp, to_date(to_char(sysdate+7,'yyyy-mm-dd'),'yyyy-mm-dd'), 2000, 2, 3);
+INSERT INTO SHOP_ORDER VALUES ('OD'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910001', '550001', '桃園市平鎮區中央路187號', systimestamp,  to_date(to_char(sysdate+7,'yyyy-mm-dd'),'yyyy-mm-dd'), 499, 1, 1);
+INSERT INTO SHOP_ORDER VALUES ('OD'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910002', '550002', '300新竹市東區東大路一段155號', systimestamp,  to_date(to_char(sysdate+7,'yyyy-mm-dd'),'yyyy-mm-dd'), 148000, 2, 2);
+INSERT INTO SHOP_ORDER VALUES ('OD'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '910003', '550003', '台北市信義區忠孝東路五段386號', systimestamp, to_date(to_char(sysdate+7,'yyyy-mm-dd'),'yyyy-mm-dd'), 2000, 2, 3);
 
 
 --------------------------------------------------------------------------------
@@ -819,12 +819,12 @@ INSERT INTO SHOP_ORDER VALUES ('OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0), '9
 ---------------------------------商品訂單明細-------------------------------------
 
 
-INSERT INTO SHOP_ORDER_DETAIL VALUES('OD-500001','510002',499,1);
-INSERT INTO SHOP_ORDER_DETAIL VALUES('OD-500002','510005',148000,1);
-INSERT INTO SHOP_ORDER_DETAIL VALUES('OD-500003','510001',499,2);
-INSERT INTO SHOP_ORDER_DETAIL VALUES('OD-500003','510009',499,1);
-INSERT INTO SHOP_ORDER_DETAIL VALUES('OD-500003','510010',299,1);
-INSERT INTO SHOP_ORDER_DETAIL VALUES('OD-500003','510013',299,2);
+INSERT INTO SHOP_ORDER_DETAIL VALUES('OD500001','510002',499,1);
+INSERT INTO SHOP_ORDER_DETAIL VALUES('OD500002','510005',148000,1);
+INSERT INTO SHOP_ORDER_DETAIL VALUES('OD500003','510001',499,2);
+INSERT INTO SHOP_ORDER_DETAIL VALUES('OD500003','510009',499,1);
+INSERT INTO SHOP_ORDER_DETAIL VALUES('OD500003','510010',299,1);
+INSERT INTO SHOP_ORDER_DETAIL VALUES('OD500003','510013',299,2);
 
 
 

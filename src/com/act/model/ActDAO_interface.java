@@ -11,7 +11,7 @@ public interface ActDAO_interface {
     public void delete(String actid);
     public ActVO findByPrimaryKey(String actid);
     public List<ActVO> getAll();
-  //同時新增活動與參加活動的主揪者 (實務上並不常用, 但,可用在活動與參加活動主揪者一次新增成功)
+	//同時新增活動與參加活動的主揪者 (實務上並不常用, 但,可用在活動與參加活動主揪者一次新增成功)
     public void insertWithActJoin(ActVO actVO , List<ActJoinVO> list);
     //萬用複合查詢(傳入參數型態Map)(回傳 List)
     //public Set<ActVO> getJoinActsBySqActId(String actid);

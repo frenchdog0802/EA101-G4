@@ -170,7 +170,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ProductEcpayServlet</servlet-name>
-		<url-pattern>/productEcpayServlet.do</url-pattern>
+		<url-pattern>/shopMall/productEcpayServlet.do</url-pattern>
 	</servlet-mapping>
 
 	<!-- 筑峰 -->
