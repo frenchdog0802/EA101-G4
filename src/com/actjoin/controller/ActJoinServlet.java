@@ -113,8 +113,8 @@ public class ActJoinServlet extends HttpServlet {
 				
 				actjoinSvc.deleteActJoin(sq_activity_id, sq_member_id);
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/back-end/joinActivity/listAllActJoin.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				String url = "/front-end/activity/Actmanagement.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneAct.jsp
 				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理**********************************/
