@@ -56,7 +56,26 @@
 			},
 			dataType:"JSON",
 			success:function(obj){
-				console.log(obj);
+				if(obj.url){
+					//ajax
+					$.ajax({
+						url:obj.url,
+						type:"GET",
+						dataType:"JSON",
+						success:function(data){
+							var jsonData = data.stringify();
+							$.ajax({
+								url:"<%=request.getContextPath()%>/WeatherServlet.do",
+								type:"POST",
+								data:{
+									action: "getURL",
+									jsonData : jsonData,
+								},
+							})
+						}
+					})
+				}
+				
 			}
 		})
 		});
