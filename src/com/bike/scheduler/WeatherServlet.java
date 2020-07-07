@@ -6,13 +6,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
-<<<<<<< HEAD
-import java.util.ArrayList;
-=======
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
->>>>>>> 4e8740e032a2ff3a5bf7f4a6b983aec30ee83c62
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,8 +32,8 @@ import redis.clients.jedis.Jedis;
 public class WeatherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public static String weatherDaily = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-004144CD-183A-4591-ADA1-2BD900E8CF63";
-
+	public static String weatherDaily1 = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-004144CD-183A-4591-ADA1-2BD900E8CF63";
+	public static String weatherDaily2 = "https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-005?Authorization=CWB-7F16E781-C330-42B7-94E0-23CDEE9FDC79&downloadType=WEB&format=JSON";
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
@@ -52,61 +48,14 @@ public class WeatherServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String action = request.getParameter("action");
-		Gson gson = new Gson();
 
-		// 從網頁ajax過來的資料
-		if ("init".equals(action)) {
-			if(jedis.sismember("weatherObj", "finish")) {
-				String jsonStr = null;
-				for(String str :jedis.smembers("weatherObj")) {
-					jsonStr = str;
-				}
-				JSONObject obj = new JSONObject(jsonStr);
-				out.println(obj);
-			}else {
-				String url = "https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-005?Authorization=CWB-7F16E781-C330-42B7-94E0-23CDEE9FDC79&downloadType=WEB&format=JSON";
-				HashMap map =  new HashMap();
-				map.put("url",url);
-				JSONObject resJSONObject = new JSONObject(map);
-				out.println(resJSONObject);
-			}
-			
-			if("getURL".equals(action)) {
-//			// 回傳的LIST
-//			List<String> parameterNameList = new LinkedList<>();
-//			List<String> parameterValueList = new LinkedList<>();
-//
-//			String jsonStr = request.getParameter("jsonStr");
-//			JSONObject obj = new JSONObject(jsonStr);
-//			JSONObject cwbopendata = obj.getJSONObject("cwbopendata");
-//			JSONObject datasetobj = cwbopendata.getJSONObject("dataset");
-//			JSONArray locationArr = datasetobj.getJSONArray("location");
-//			for (int i = 0; i < locationArr.length(); i++) {
-//				JSONObject locationObj = locationArr.getJSONObject(i);
-//				// 取地區名子
-//				JSONArray weatherElement = locationObj.getJSONArray("weatherElement");
-//				JSONObject weatherObj = weatherElement.getJSONObject(0);
-//				JSONArray timeArr = weatherObj.getJSONArray("time");
-//				for (int k = 0; k < timeArr.length(); k++) {
-//					JSONObject timeObj = timeArr.getJSONObject(k);
-//					String startTime = timeObj.getString("startTime");
-//					JSONObject parameterobj = timeObj.getJSONObject("parameter");
-//					if (startTime.indexOf("06:00:00") < 0) {
-//						continue;
-//					}
-//					// 取參數名
-//					String parameterName = parameterobj.getString("parameterName");
-//					// 取編號
-//					String parameterValue = parameterobj.getString("parameterValue");
-//					parameterNameList.add(parameterName);
-//					parameterValueList.add(parameterValue);
-//
-//				}
-//			}
-//			gosadd(parameterNameList, parameterValueList, jedis);
-			}
+		if("init".equals(action)) {
+			HashMap weather1 = handle1(weatherDaily1);
+			HashMap weather2 = handle2(weatherDaily2,weather1);
+			JSONObject JSONObject = new JSONObject(weather2);
+			out.println(JSONObject);
 		}
-
+		
 	}
 
 	@Override
@@ -114,16 +63,16 @@ public class WeatherServlet extends HttpServlet {
 
 	}
 
-	public void gosadd(List<String> parameterNameList, List<String> parameterValueList, Jedis jedis)
-			throws IOException {
+	public HashMap handle1(String url) throws IOException {
 //		回傳的LIST
+		HashMap map = new HashMap();
 		List<String> WeatherList = new LinkedList<>();
 		HashSet<String> area = new LinkedHashSet<>();
 		HashSet<String> date = new LinkedHashSet<>();
 		Gson gson = new Gson();
 		// 處理資料
-		String jsonStr = jsonStr(weatherDaily);
 		JSONObject obj;
+		String jsonStr = jsonStr(url);
 		obj = new JSONObject(jsonStr);
 		JSONObject recordsObj = obj.getJSONObject("records");
 		JSONArray locationsArr = recordsObj.getJSONArray("locations");
@@ -151,29 +100,59 @@ public class WeatherServlet extends HttpServlet {
 				String value = elementValue0.getString("value");
 				String measures = elementValue0.getString("measures");
 
-
 				WeatherList.add(value);
 				area.add(locationName);
 				date.add(startTime);
 			}
 		}
-		JsonArray weatherList = gson.toJsonTree(WeatherList).getAsJsonArray();
-		JsonArray areaSet = gson.toJsonTree(area).getAsJsonArray();
-		JsonArray dateSet = gson.toJsonTree(date).getAsJsonArray();
-		JsonArray paramNameList = gson.toJsonTree(parameterNameList).getAsJsonArray();
-		JsonArray paramValueList = gson.toJsonTree(parameterValueList).getAsJsonArray();
-		JsonObject jsonObject = new JsonObject();
-		jsonObject.add("weather", weatherList);
-		jsonObject.add("areaSet", areaSet);
-		jsonObject.add("dateSet", dateSet);
-		jsonObject.add("paramNameList", paramNameList);
-		jsonObject.add("paramValueList", paramValueList);
-		jedis.sadd("weatherObj", jsonObject.toString());
-		jedis.sadd("weatherObj", "finish");
+		map.put("WeatherList" , WeatherList);
+		map.put("area",area);
+		map.put("date",date);
+		return map;
 	};
+	
+	public HashMap handle2(String url ,HashMap map) throws IOException {
+//		回傳的LIST
+		JSONObject obj;
+		String jsonStr = jsonStr(url);
+		obj = new JSONObject(jsonStr);
+
+		// 回傳的LIST
+		List<String> parameterNameList = new LinkedList<>();
+		List<String> parameterValueList = new LinkedList<>();
+
+		JSONObject cwbopendata = obj.getJSONObject("cwbopendata");
+		JSONObject datasetobj = cwbopendata.getJSONObject("dataset");
+		JSONArray locationArr = datasetobj.getJSONArray("location");
+		for (int i = 0; i < locationArr.length(); i++) {
+			JSONObject locationObj = locationArr.getJSONObject(i);
+			// 取地區名子
+			JSONArray weatherElement = locationObj.getJSONArray("weatherElement");
+			JSONObject weatherObj = weatherElement.getJSONObject(0);
+			JSONArray timeArr = weatherObj.getJSONArray("time");
+			for (int k = 0; k < timeArr.length(); k++) {
+				JSONObject timeObj = timeArr.getJSONObject(k);
+				String startTime = timeObj.getString("startTime");
+				JSONObject parameterobj = timeObj.getJSONObject("parameter");
+				if (startTime.indexOf("06:00:00") < 0) {
+					continue;
+				}
+				// 取參數名
+				String parameterName = parameterobj.getString("parameterName");
+				// 取編號
+				String parameterValue = parameterobj.getString("parameterValue");
+				parameterNameList.add(parameterName);
+				parameterValueList.add(parameterValue);
+			}
+		}
+		map.put("parameterNameList" , parameterNameList);
+		map.put("parameterValueList",parameterValueList);
+		return map;
+	};
+	
+	
 
 	public static String jsonStr(String URL) throws IOException {
-
 		URL url = new URL(URL);
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		StringBuilder sb = new StringBuilder();
