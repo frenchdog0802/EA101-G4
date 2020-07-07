@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -83,6 +84,8 @@ public class WeatherServlet extends HttpServlet {
 				WeatherVOList.add(WeatherVO);
 			}
 		}
+//		List<Object1> List<WeatherVO>;
+		List<String> list2 = new ArrayList<>();
 		String json = gson.toJson(WeatherVOList);
 	}
 
