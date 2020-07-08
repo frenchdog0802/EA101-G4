@@ -17,7 +17,7 @@
     for(ActVO actVO:listact){
     	for(ActFavorVO actfavorVO:listfavor){
     		if(actVO.getSq_activity_id().contains(actfavorVO.getSq_activity_id()) && sq_member_id.contains(actfavorVO.getSq_member_id())){
-    			list2.add(actVO); 			
+    			list2.add(actVO);
     		}
     	}
     }
@@ -29,7 +29,7 @@
 <html lang="en">
 <head>
 <!--    CSS幫你們引入完了  你們要額外新增在自己寫-->
-<title>活動列表</title>
+<title>收藏的活動 | 鐵馬PAPAGO</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
@@ -40,6 +40,10 @@
 	.mr-3 {
 		width:64px;
 		height:64px;
+	}
+	
+	li.media{
+		width:800px;
 	}
 	
 </style>
@@ -62,7 +66,6 @@
 				</li>
 				<li class="breadcrumb-item active">收藏的活動</li>
 			</ol>
-
 			<div class="row">
 				<!-- Sidebar Column -->
 				<div class="col-lg-3 mb-4">
@@ -70,7 +73,7 @@
 						<a href="<%=request.getContextPath()%>/front-end/activity/Actmanagement.jsp" class="list-group-item">參加的活動</a> 
 						<a href="<%=request.getContextPath()%>/front-end/activity/myFoundedAct.jsp" class="list-group-item">主辦的活動</a> 
 						<a href="<%=request.getContextPath()%>/front-end/activity/myFavorAct.jsp" class="list-group-item active">收藏的活動</a> 
-						<a href="contact.html" class="list-group-item">檢舉的活動</a> 
+						<a href="<%=request.getContextPath()%>/front-end/activity/myReportAct.jsp" class="list-group-item">檢舉的活動</a> 
 					</div>
 				</div>
 				<!-- Content Column -->
@@ -94,14 +97,14 @@
 										</h5>
 										 
 										${actVO.act_description}
-										<c:if test="${actVO.sq_activity_id == actfavorVO.sq_activity_id && sq_member_id == actfavorVO.sq_member_id}">
+										<div class="form-inline">
 											<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActFavorServlet.do">
 												<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
 												<input type="hidden" name="action"value="delete">
-												<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
+												<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 												<input type="submit" value="取消收藏" class="btn btn-primary"> 	
 											</FORM>
-										</c:if>
+										</div>
 									</div>
 								</li>
 							</ul>

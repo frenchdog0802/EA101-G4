@@ -105,8 +105,9 @@ public class ActReportJDBCDAO implements ActReportDAO_interface {
 	}
 
 	@Override
-	public ActReportVO findByMemberId(String SQ_MEMBER_ID) {
-
+	public List<ActReportVO> findByMemberId(String SQ_MEMBER_ID) {
+		
+		List<ActReportVO> list = new ArrayList<ActReportVO>();
 		ActReportVO actfavorVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -131,7 +132,7 @@ public class ActReportJDBCDAO implements ActReportDAO_interface {
 				actfavorVO.setSq_member_id(rs.getString("SQ_MEMBER_ID"));
 				actfavorVO.setReport_reason(rs.getString("REPORT_REASON"));
 				actfavorVO.setReport_status(rs.getInt("REPORT_STATUS"));
-
+				list.add(actfavorVO);
 			}
 
 			// Handle any driver errors
@@ -164,7 +165,7 @@ public class ActReportJDBCDAO implements ActReportDAO_interface {
 				}
 			}
 		}
-		return actfavorVO;
+		return list;
 	}
 	
 	@Override
@@ -233,7 +234,6 @@ public class ActReportJDBCDAO implements ActReportDAO_interface {
 	@Override
 	public int findGpStatusByPK(String SQ_ACTVITY_ID) {
 
-		ActReportVO actreportVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

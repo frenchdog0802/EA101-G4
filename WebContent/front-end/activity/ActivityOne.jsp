@@ -14,7 +14,7 @@
 <html lang="en">
 <head>
 <!--    CSS幫你們引入完了  你們要額外新增在自己寫-->
-<title>活動列表</title>
+<title>鐵馬PAPAGO : ${actVO.act_title}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -96,7 +96,7 @@
 		       	<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActFavorServlet.do">
 					<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
 					<input type="hidden" name="action"value="delete">
-					<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
+					<input type="hidden" name="requestURL" value="/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
 					<input type="submit" value="已收藏" class="btn btn-primary"> 	
 				</FORM> 
 			</c:when>

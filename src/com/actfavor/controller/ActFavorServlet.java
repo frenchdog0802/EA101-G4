@@ -72,6 +72,7 @@ public class ActFavorServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL = req.getParameter("requestURL");
 	
 			try {
 				/***************************1.接收請求參數***************************************/
@@ -83,8 +84,9 @@ public class ActFavorServlet extends HttpServlet {
 				actfavorSvc.deleteActFavor(sq_activity_id, sq_member_id);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String  url=req.getParameter("requestURL");   
-				res.sendRedirect(url);
+				String url = requestURL;
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 刪除成功後,轉交回送出刪除的來源網頁
+				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {

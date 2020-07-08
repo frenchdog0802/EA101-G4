@@ -29,7 +29,7 @@
 <html lang="en">
 <head>
 <!--    CSS幫你們引入完了  你們要額外新增在自己寫-->
-<title>活動列表</title>
+<title>主辦的活動 | 鐵馬PAPAGO</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
@@ -40,6 +40,9 @@
 	.mr-3 {
 		width:64px;
 		height:64px;
+	}
+	li.media{
+		width:800px;
 	}
 </style>
 </head>
@@ -69,7 +72,7 @@
 						<a href="<%=request.getContextPath()%>/front-end/activity/Actmanagement.jsp" class="list-group-item">參加的活動</a> 
 						<a href="<%=request.getContextPath()%>/front-end/activity/myFoundedAct.jsp" class="list-group-item active">主辦的活動</a> 
 						<a href="<%=request.getContextPath()%>/front-end/activity/myFavorAct.jsp" class="list-group-item">收藏的活動</a> 
-						<a href="contact.html" class="list-group-item">檢舉的活動</a> 
+						<a href="<%=request.getContextPath()%>/front-end/activity/myReportAct.jsp" class="list-group-item">檢舉的活動</a> 
 					</div>
 				</div>
 				<!-- Content Column -->
@@ -91,7 +94,6 @@
 												${actVO.act_title}
 											</a>
 										</h5>
-										 <div class="row">
 										${actVO.act_description}
 										<div class="form-inline">
 										<c:if test="${actVO.gp_status == 2}">
@@ -105,7 +107,6 @@
 												<input type="submit" value="取消活動" class="btn btn-primary"> 	
 											</FORM>
 										</c:if>
-										</div>
 										</div>
 									</div>
 								</li>

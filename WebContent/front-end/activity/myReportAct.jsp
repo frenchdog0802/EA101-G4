@@ -2,22 +2,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.act.model.*"%>
-<%@ page import="com.actjoin.model.*"%>
-<jsp:useBean id="actreportSvc" class="com.actreport.model.ActReportService"/>
+<%@ page import="com.actreport.model.*"%>
 <%
 	String sq_member_id = (String)session.getAttribute("sq_member_id");
 	if(sq_member_id==null) {
 		session.setAttribute("sq_member_id", "910003");
 	}
-    ActJoinService actjoinSvc = new ActJoinService();
+    ActReportService actreportSvc = new ActReportService();
     ActService actSvc = new ActService();
     List<ActVO> listact = actSvc.getAll();
-    List<ActJoinVO> listjoin = actjoinSvc.getMyActJoin(sq_member_id);
+    List<ActReportVO> listreport = actreportSvc.getOneActReportForMember(sq_member_id);
     List<ActVO> list2 = new LinkedList<ActVO>();
+    ActReportVO actreportVO2 = new ActReportVO();
     for(ActVO actVO:listact){
-    	for(ActJoinVO actjoinVO:listjoin){
-    		if(actVO.getSq_activity_id().contains(actjoinVO.getSq_activity_id())){
+    	for(ActReportVO actreportVO:listreport){
+    		if(actVO.getSq_activity_id().contains(actreportVO.getSq_activity_id()) && sq_member_id.contains(actreportVO.getSq_member_id())){
     			list2.add(actVO);
+    			actreportVO2.setSq_activity_id(actreportVO.getSq_activity_id());
+    			actreportVO2.setReport_reason(actreportVO.getReport_reason());
+    			actreportVO2.setSq_member_id(sq_member_id);
+    			request.setAttribute("actreportVO2", actreportVO2);
     		}
     	}
     }
@@ -29,7 +33,7 @@
 <html lang="en">
 <head>
 <!--    CSS幫你們引入完了  你們要額外新增在自己寫-->
-<title>參加的活動 | 鐵馬PAPAGO</title>
+<title>檢舉的活動 | 鐵馬PAPAGO</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
@@ -41,10 +45,11 @@
 		width:64px;
 		height:64px;
 	}
+	
 	li.media{
 		width:800px;
 	}
-
+	
 </style>
 </head>
 <body>
@@ -63,17 +68,17 @@
 				<li class="breadcrumb-item"><a
 					href="<%=request.getContextPath()%>/front-end/activity/Actmanagement.jsp">活動管理</a>
 				</li>
-				<li class="breadcrumb-item active">參加的活動</li>
+				<li class="breadcrumb-item active">檢舉的活動</li>
 			</ol>
 
 			<div class="row">
 				<!-- Sidebar Column -->
 				<div class="col-lg-3 mb-4">
 					<div class="list-group">
-						<a href="<%=request.getContextPath()%>/front-end/activity/Actmanagement.jsp" class="list-group-item active">參加的活動</a> 
+						<a href="<%=request.getContextPath()%>/front-end/activity/Actmanagement.jsp" class="list-group-item">參加的活動</a> 
 						<a href="<%=request.getContextPath()%>/front-end/activity/myFoundedAct.jsp" class="list-group-item">主辦的活動</a> 
 						<a href="<%=request.getContextPath()%>/front-end/activity/myFavorAct.jsp" class="list-group-item">收藏的活動</a> 
-						<a href="<%=request.getContextPath()%>/front-end/activity/myReportAct.jsp" class="list-group-item">檢舉的活動</a> 
+						<a href="<%=request.getContextPath()%>/front-end/activity/myReportAct.jsp" class="list-group-item active">檢舉的活動</a> 
 					</div>
 				</div>
 				<!-- Content Column -->
@@ -95,28 +100,38 @@
 												${actVO.act_title}
 											</a>
 										</h5>
+										 
 										${actVO.act_description}
-										<div class="form-inline">
-										<c:if test="${sq_member_id == actVO.sq_member_id}">
-												<input type="submit" value="主辦無法退出" class="btn btn-primary" disabled> 	
-										</c:if>
-										</div>
-										<div class="form-inline">	
-										<c:if test="${sq_member_id != actVO.sq_member_id}">
-											<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do">
-												<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
-												<input type="hidden" id="sq_member_id" name="sq_member_id" value="sq_member_id">
-												<input type="hidden" name="action"value="delete">
-												<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
-												<input type="submit" value="退出活動" class="btn btn-primary"> 	
-											</FORM>
-										</c:if>
+										<div style="padding-left:1px">
+											<button id="actreport" class="btn btn-primary" onclick="showModal()">查看檢舉</button>
 										</div>
 									</div>
 								</li>
 							</ul>
 						</c:forEach>
 					</div>
+					
+			<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+							
+						<div class="modal-header">
+							<h2 class="modal-title" id="myModalLabel">查看檢舉</h2>
+			                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			            </div>
+						
+						<div class="modal-body">
+			<!-- =========================================以下為輸入的內容========================================== -->
+			              <textarea name="report_reason" maxlength="65" id="textarea1" rows=5 cols=83 style="resize: none;" disabled></textarea>
+			<!-- =========================================以上為原輸入的內容========================================== -->
+						</div>
+						
+						<div class="modal-footer">
+			                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			            </div>
+					</div>
+				</div>
+			</div>
 
 					<!-- Pagination -->
 					<ul class="pagination justify-content-center">
@@ -151,8 +166,12 @@
 		
 		
 	});
+	$("#actreport").click(function(){
+		$("#basicModal").modal({show: true});
+	});
 	</script>
-
+	
+	
 
 
 	<!-- 	<script type="text/javascript"> -->
