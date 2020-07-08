@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,6 +35,7 @@ public class WeatherServlet extends HttpServlet {
 
 	public static String weatherDaily1 = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-004144CD-183A-4591-ADA1-2BD900E8CF63";
 	public static String weatherDaily2 = "https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-005?Authorization=CWB-7F16E781-C330-42B7-94E0-23CDEE9FDC79&downloadType=WEB&format=JSON";
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
@@ -42,25 +44,39 @@ public class WeatherServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Jedis jedis = new Jedis("localhost", 6379);
-		jedis.auth("123456");
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String action = request.getParameter("action");
-
+		
 		if("init".equals(action)) {
-			HashMap weather1 = handle1(weatherDaily1);
-			HashMap weather2 = handle2(weatherDaily2,weather1);
-			JSONObject JSONObject = new JSONObject(weather2);
-			out.println(JSONObject);
+			Jedis jedis = new Jedis("localhost", 6379);
+			jedis.auth("123456");
+			Set<String> jsonSet =  jedis.smembers("weather");
+			String jsonStr = null;
+			for(String string:jsonSet) {
+				jsonStr = string;
+			}
+			JSONObject jsonObject = new JSONObject(jsonStr);
+			out.println(jsonObject);
 		}
 		
 	}
 
 	@Override
 	public void init() throws ServletException {
-
+		Jedis jedis = new Jedis("localhost", 6379);
+		jedis.auth("123456");
+		HashMap weather1 = null;
+		HashMap weather2 = null;
+		try {
+			weather1 = handle1(weatherDaily1);
+			weather2 = handle2(weatherDaily2,weather1);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		JSONObject JSONObject = new JSONObject(weather2);
+		jedis.sadd("weather", JSONObject.toString());
 	}
 
 	public HashMap handle1(String url) throws IOException {

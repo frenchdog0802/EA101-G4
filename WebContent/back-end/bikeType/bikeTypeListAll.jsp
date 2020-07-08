@@ -89,7 +89,7 @@ List<BikeTypeVO> list ;
 						<td class="align-middle">${bikeVO.bike_type_name}</td>
 						<td class="align-middle">${bikeVO.bike_title}</td>
 						<td class="mydescription align-middle">${bikeVO.bike_description}</td>
-						<td class="align-middle">${bikeVO.price}</td>
+<%-- 						<td class="align-middle">${bikeVO.price}</td> --%>
 						<td class="align-middle">
 							<FORM METHOD="post"
 							ACTION="<%=request.getContextPath()%>/bike/BikeTypeServlet.do"

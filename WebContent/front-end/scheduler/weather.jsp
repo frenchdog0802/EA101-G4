@@ -4,7 +4,12 @@
 <html lang="en">
 <head>
 <!--    CSS幫你們引入完了  你們要額外新增在自己寫-->
+<style>
+    #tbody th{
+     vertical-align:middle;
+}
 
+</style>
 </head>
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
@@ -35,11 +40,13 @@
 			</div>
 		</div>
 		<div class="row">
-			<table class="table">
-				<thead id="date">
+			<table
+				class="table table-bordered text-sm  table-striped text-center"
+				style="table-layout: fixed">
+				<thead id="date" class="table-primary">
 				</thead>
-				<tbody>
-					
+				<tbody id="tbody">
+
 				</tbody>
 			</table>
 		</div>
@@ -59,7 +66,6 @@
 	<script>
 	$(function(){
 		$(".fun-text").text("");  // text("")裡面自己輸入功能名稱 
-		
 		
 		$.ajax({
 			url:"<%=request.getContextPath()%>/WeatherServlet.do",
@@ -81,7 +87,7 @@
 					for(var i = 0 ; i <date.length;i++){
 						var splitdate = date[i].split(" ");
 						var week = getDayOfWeek(splitdate[0]);
-						var dateTime = splitdate[0];
+						var dateTime = splitdate[0].substr(5);
 						dateStr+="<td>"+dateTime+"<br>"+week+"</td>";
 					}
 					dateStr+="</tr>";
@@ -89,41 +95,138 @@
 					//處理日期--end
 					
 					//處理tbody
-					
+					var count=1;
+					var areaCount = 0;
+					var listLength = parameterNameList.length;
 					var tbodyStr = "";
-					for(var i =0 ; i<parameterValueList.length+area.length;i++){
-						
-					}
+					for(var i =0 ; i<listLength;i++){
+						if(count==1){
+							tbodyStr+="<tr>";
+							tbodyStr+="<th scope='row'>"+area[areaCount]+"</th>";
+							areaCount++;
+						}
+						//取相片編號
+						var WeatherPic = getWeatherPic(parameterValueList[i]);
+						tbodyStr+=
+							"<td class='mark'><img class'img-fluid' alt='"+WeatherList[i]+"' src='<%=request.getContextPath()%>/front-end/scheduler/weather/s"
+										+ WeatherPic + ".png'>" + "<br>"
+										+ parameterNameList[i] 
+										+ "</td>";
 
-				}
-			})
+								if (count == listLength) {
+									tbodyStr += "</tr>";
+									break;
+								}
+
+								if (count % 7 == 0) {
+									tbodyStr += "</tr><tr>";
+									tbodyStr += "<th>" + area[areaCount]
+											+ "</th>";
+									areaCount++;
+								}
+								count++;
+							}
+							$("tbody").html(tbodyStr);
+
+						},
+					    complete: function () {
+					    	//table click
+							$("#tbody tr td").click(function(e) {
+								var imgSrc = $(this).find("img").attr("src");
+								var imgAlt = $(this).find("img").attr("alt");
+								var areaName = $(this).closest("tr").find("th").eq(0).text();
+								 
+								Swal.fire({
+									  title: areaName,
+									  text: imgAlt,
+									  imageUrl: imgSrc,
+									  imageWidth: 128,
+									  imageHeight: 128,
+									  imageAlt: 'Custom image',
+									})
+							});
+							
+							//table hover
+							$("#tbody tr td").hover(function(){
+								$(this).css('cursor', 'pointer');
+								$(this).css('color', 'blue');
+							},function(){
+								$(this).css('color', 'inherit');
+							})
+					    }
+					})
+
 		})
-		
+
+		function getWeatherPic(value) {
+			value = value - 0;
+			if ([ 1 ].includes(value)) {
+				return 1;
+			}
+			if ([ 2, 3, 4 ].includes(value)) {
+				return 2;
+			}
+			if ([ 5, 6, 7 ].includes(value)) {
+				return 5;
+			}
+			if ([ 8, 9, 10, 12, 13, 14, 29 ].includes(value)) {
+				return 8;
+			}
+			if ([ 11 ].includes(value)) {
+				return 11;
+			}
+			if ([ 15, 16, 17, 18 ].includes(value)) {
+				return 19;
+			}
+			if ([ 20, 31 ].includes(value)) {
+				return 20;
+			}
+			if ([ 21, 22 ].includes(value)) {
+				return 21;
+			}
+			if ([ 23 ].includes(value)) {
+				return 23;
+			}
+			if ([ 24, 25 ].includes(value)) {
+				return 24;
+			}
+			if ([ 26, 27, 28, 32, 38, 39 ].includes(value)) {
+				return 26;
+			}
+			if ([ 33, 34, 35, 36 ].includes(value)) {
+				return 33;
+			}
+			if ([ 42 ].includes(value)) {
+				return 42;
+			}
+
+		}
+
 		function getDayOfWeek(dateStr) {
 			var dayOfWeek = "";
 			dateStr = dateStr.replace(/-/g, '/');
 			var date = new Date(dateStr);
 			switch (date.getDay()) {
 			case 0:
-				dayOfWeek = '週日';
+				dayOfWeek = '星期日';
 				break;
 			case 1:
-				dayOfWeek = '週一';
+				dayOfWeek = '星期一';
 				break;
 			case 2:
-				dayOfWeek = '週二';
+				dayOfWeek = '星期二';
 				break;
 			case 3:
-				dayOfWeek = '週三';
+				dayOfWeek = '星期三';
 				break;
 			case 4:
-				dayOfWeek = '週四';
+				dayOfWeek = '星期四';
 				break;
 			case 5:
-				dayOfWeek = '週五';
+				dayOfWeek = '星期五';
 				break;
 			case 6:
-				dayOfWeek = '週六';
+				dayOfWeek = '星期六';
 				break;
 			}
 			return dayOfWeek;
