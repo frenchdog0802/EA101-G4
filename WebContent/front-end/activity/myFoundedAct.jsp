@@ -16,7 +16,7 @@
     List<ActVO> list2 = new LinkedList<ActVO>();
     for(ActVO actVO:listact){
     	for(ActJoinVO actjoinVO:listjoin){
-    		if(actVO.getSq_activity_id().contains(actjoinVO.getSq_activity_id())){
+    		if(actVO.getSq_activity_id().contains(actjoinVO.getSq_activity_id()) && actVO.getSq_member_id().contains(actjoinVO.getSq_member_id())){
     			list2.add(actVO);
     		}
     	}
@@ -59,15 +59,15 @@
 				<li class="breadcrumb-item"><a
 					href="<%=request.getContextPath()%>/front-end/activity/Actmanagement.jsp">活動管理</a>
 				</li>
-				<li class="breadcrumb-item active">參加的活動</li>
+				<li class="breadcrumb-item active">主辦的活動</li>
 			</ol>
 
 			<div class="row">
 				<!-- Sidebar Column -->
 				<div class="col-lg-3 mb-4">
 					<div class="list-group">
-						<a href="<%=request.getContextPath()%>/front-end/activity/Actmanagement.jsp" class="list-group-item active">參加的活動</a> 
-						<a href="<%=request.getContextPath()%>/front-end/activity/myFoundedAct.jsp" class="list-group-item">主辦的活動</a> 
+						<a href="<%=request.getContextPath()%>/front-end/activity/Actmanagement.jsp" class="list-group-item">參加的活動</a> 
+						<a href="<%=request.getContextPath()%>/front-end/activity/myFoundedAct.jsp" class="list-group-item active">主辦的活動</a> 
 						<a href="<%=request.getContextPath()%>/front-end/activity/myFavorAct.jsp" class="list-group-item">收藏的活動</a> 
 						<a href="contact.html" class="list-group-item">檢舉的活動</a> 
 					</div>
@@ -93,17 +93,16 @@
 										</h5>
 										 <div class="row">
 										${actVO.act_description}
-										<c:if test="${sq_member_id == actVO.sq_member_id}">
-												<input type="submit" value="主辦無法退出" class="btn btn-primary" disabled> 	
+										<div class="form-inline">
+										<c:if test="${actVO.gp_status == 2}">
+												<input type="submit" value="已取消活動" class="btn btn-primary" disabled> 	
 										</c:if>
-										<div class="form-inline">	
-										<c:if test="${sq_member_id != actVO.sq_member_id}">
-											<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do">
+										<c:if test="${actVO.gp_status != 2}">
+											<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActServlet.do">
 												<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
-												<input type="hidden" id="sq_member_id" name="sq_member_id" value="sq_member_id">
-												<input type="hidden" name="action"value="delete">
+												<input type="hidden" name="action"value="cancel">
 												<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
-												<input type="submit" value="退出活動" class="btn btn-primary"> 	
+												<input type="submit" value="取消活動" class="btn btn-primary"> 	
 											</FORM>
 										</c:if>
 										</div>
