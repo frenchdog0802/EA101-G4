@@ -224,7 +224,7 @@
 	        tar.value = t;
 	    })
 	    
-	 	
+	 	//檢舉活動驗證
 		function CheckText() {
 			if (tar.value === '' || tar.value === null || tar.value === non
 					|| tar.value === empty) {

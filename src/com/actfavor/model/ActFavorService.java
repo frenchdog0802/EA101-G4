@@ -26,6 +26,10 @@ public class ActFavorService {
 		dao.delete(sq_activity_id, sq_member_id);
 	}
 	
+	public List<ActFavorVO> getMyActFavor(String sq_member_id) {
+		return dao.findByMemberId(sq_member_id);
+	}
+	
 	public List<ActFavorVO> getAll() {
 		return dao.getAll();
 	}

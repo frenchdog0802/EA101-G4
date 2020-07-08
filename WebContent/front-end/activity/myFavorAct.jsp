@@ -2,22 +2,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.act.model.*"%>
-<%@ page import="com.actjoin.model.*"%>
+<%@ page import="com.actfavor.model.*"%>
 <jsp:useBean id="actreportSvc" class="com.actreport.model.ActReportService"/>
 <%
 	String sq_member_id = (String)session.getAttribute("sq_member_id");
 	if(sq_member_id==null) {
 		session.setAttribute("sq_member_id", "910003");
 	}
-    ActJoinService actjoinSvc = new ActJoinService();
+    ActFavorService actfavorSvc = new ActFavorService();
     ActService actSvc = new ActService();
     List<ActVO> listact = actSvc.getAll();
-    List<ActJoinVO> listjoin = actjoinSvc.getMyActJoin(sq_member_id);
+    List<ActFavorVO> listfavor = actfavorSvc.getMyActFavor(sq_member_id);
     List<ActVO> list2 = new LinkedList<ActVO>();
     for(ActVO actVO:listact){
-    	for(ActJoinVO actjoinVO:listjoin){
-    		if(actVO.getSq_activity_id().contains(actjoinVO.getSq_activity_id())){
-    			list2.add(actVO);
+    	for(ActFavorVO actfavorVO:listfavor){
+    		if(actVO.getSq_activity_id().contains(actfavorVO.getSq_activity_id()) && sq_member_id.contains(actfavorVO.getSq_member_id())){
+    			list2.add(actVO); 			
     		}
     	}
     }
@@ -41,6 +41,7 @@
 		width:64px;
 		height:64px;
 	}
+	
 </style>
 </head>
 <body>
@@ -59,16 +60,16 @@
 				<li class="breadcrumb-item"><a
 					href="<%=request.getContextPath()%>/front-end/activity/Actmanagement.jsp">活動管理</a>
 				</li>
-				<li class="breadcrumb-item active">參加的活動</li>
+				<li class="breadcrumb-item active">收藏的活動</li>
 			</ol>
 
 			<div class="row">
 				<!-- Sidebar Column -->
 				<div class="col-lg-3 mb-4">
 					<div class="list-group">
-						<a href="<%=request.getContextPath()%>/front-end/activity/Actmanagement.jsp" class="list-group-item active">參加的活動</a> 
+						<a href="<%=request.getContextPath()%>/front-end/activity/Actmanagement.jsp" class="list-group-item">參加的活動</a> 
 						<a href="<%=request.getContextPath()%>/front-end/activity/myFoundedAct.jsp" class="list-group-item">主辦的活動</a> 
-						<a href="<%=request.getContextPath()%>/front-end/activity/myFavorAct.jsp" class="list-group-item">收藏的活動</a> 
+						<a href="<%=request.getContextPath()%>/front-end/activity/myFavorAct.jsp" class="list-group-item active">收藏的活動</a> 
 						<a href="contact.html" class="list-group-item">檢舉的活動</a> 
 					</div>
 				</div>
@@ -91,23 +92,16 @@
 												${actVO.act_title}
 											</a>
 										</h5>
-										 <div class="row">
+										 
 										${actVO.act_description}
-										<c:if test="${sq_member_id == actVO.sq_member_id}">
-												<input type="submit" value="主辦無法退出" class="btn btn-primary" disabled> 	
-										</c:if>
-										<div class="form-inline">	
-										<c:if test="${sq_member_id != actVO.sq_member_id}">
-											<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do">
+										<c:if test="${actVO.sq_activity_id == actfavorVO.sq_activity_id && sq_member_id == actfavorVO.sq_member_id}">
+											<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActFavorServlet.do">
 												<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
-												<input type="hidden" id="sq_member_id" name="sq_member_id" value="sq_member_id">
 												<input type="hidden" name="action"value="delete">
 												<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
-												<input type="submit" value="退出活動" class="btn btn-primary"> 	
+												<input type="submit" value="取消收藏" class="btn btn-primary"> 	
 											</FORM>
 										</c:if>
-										</div>
-										</div>
 									</div>
 								</li>
 							</ul>
