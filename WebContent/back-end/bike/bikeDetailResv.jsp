@@ -3,32 +3,30 @@ pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 
-<%@include file="/back-end/backFrame/backHeader"%>
+
 <jsp:useBean id="bikeRentDetailSvc"
 class="com.bike.rent.detail.model.BikeRentDetailService" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Required meta tags always come first -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css">
+	<!-- font style -->
+	<!---------放自己的CSS與title----------->
+	<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 
 
-<!---------放自己的CSS與title----------->
-<link rel="stylesheet" type="text/css"
-href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<%@include file="/back-end/backFrame/backBody"%>
-<!--分頁自己改-->
-<div class="row" style="background-color: white;">
-	<ul class="nav nav-tabs">
-		<li class="nav-item"><a class="nav-link active" href="#"><span
-			style="padding-bottom: 8px; border-bottom: 3px blue solid;">item1</span></a>
-			<!--在哪一個頁面就哪加active和span的style--></li>
-			<li class="nav-item"><a class="nav-link" href="#"><span>item2</span></a>
-			</li>
-			<li class="nav-item"><a class="nav-link" href="#"><span>item3</span></a>
-			</li>
-		</ul>
-	</div>
-	<!--分頁自己改-->
-	<%@include file="/back-end/backFrame/backNav"%>
-
+</head>
+<body>
 	<!-- 自由發揮處 -->
-
+${param.sq_rent_id}
 	<div class="container-fluid mx-3">
 		<div class="row mt-1">
 			<form class="form-inline">
@@ -57,7 +55,7 @@ href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 					</tr>
 				</thead>
 				<tbody id="tbody">
-
+						
 				</tbody>
 			</table>
 		</div>
@@ -70,7 +68,9 @@ href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 
 
 	<!-- 自由發揮處 -->
-
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/front-end/page-file/js/nav.js"></script>
 	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 	<script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
@@ -86,6 +86,7 @@ href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 			},
 			dataType: "JSON",
 			success : function(data) {
+				console.log(data);
 				var returnObj = data.returnList
 				var component ;
 				for(var i =0 ; i<returnObj.length;i++){
@@ -136,16 +137,16 @@ href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 			var sq_rent_id = tbody.rows[1].cells[0].innerText;
 			var jsonStr = "{";//組合JSON字串
 			for(var i =0 ; i <rows ; i++){	
-					
-					var sq_rent_detail_id = tbody.rows[i].cells[0].children[0].value;
-					var sq_bike_id = tbody.rows[i].cells[2].children[0].value;
-					
-					if(i!=0){
-						jsonStr+=",";
-					}
-					jsonStr+='"'+sq_rent_detail_id+'"';
-					jsonStr+=":";
-					jsonStr+='"'+sq_bike_id+'"';
+				
+				var sq_rent_detail_id = tbody.rows[i].cells[0].children[0].value;
+				var sq_bike_id = tbody.rows[i].cells[2].children[0].value;
+				
+				if(i!=0){
+					jsonStr+=",";
+				}
+				jsonStr+='"'+sq_rent_detail_id+'"';
+				jsonStr+=":";
+				jsonStr+='"'+sq_bike_id+'"';
 			}
 			jsonStr +="}";
 			console.log(jsonStr);
@@ -214,4 +215,5 @@ href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 	
 
 </script>
-<%@include file="/back-end/backFrame/backFooter"%>
+</body>
+</html>

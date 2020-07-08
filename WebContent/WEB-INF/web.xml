@@ -18,6 +18,7 @@
 	<servlet>
 		<servlet-name>WeatherServlet</servlet-name>
 		<servlet-class>com.bike.scheduler.WeatherServlet</servlet-class>
+		<load-on-startup>10</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>WeatherServlet</servlet-name>
