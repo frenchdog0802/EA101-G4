@@ -27,7 +27,7 @@
 </head>
 <body>
 	<!-- 自由發揮處 -->
-	<div class="container-fluid mx-3">
+	<div class="container-fluid">
 		<div class="row">
 			<table class="table text-center table-hover">
 				<thead>

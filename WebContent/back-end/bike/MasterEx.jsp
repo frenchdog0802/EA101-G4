@@ -77,17 +77,14 @@
 <div class="modal fade" id="DetailModel"  >
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-				
 			<div class="modal-header">
                 <h3 class="modal-title" id="myModalLabel">訂單成立</h3>
             </div>
-			
 			<div class="modal-body">
 <!-- =========================================以下為原bikeDetailResv.jsp的內容========================================== -->
 <%--                <jsp:include page="bikeDetailResv.jsp" /> --%>
 <!-- =========================================以上為原bikeDetailResv.jsp的內容========================================== -->
 			</div>
-			
 			<div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
             </div>
@@ -99,6 +96,13 @@
 src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	
+// 	modal暫時解法
+	$(".modal").on("shown.bs.modal", function () {
+	    if ($(".modal-backdrop").length > 1) {
+	        $(".modal-backdrop").not(':first').remove();
+	    }
+	})
 	
 	//initValue
 	$.ajax({

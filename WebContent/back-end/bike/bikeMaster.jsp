@@ -5,10 +5,7 @@
 <!-----------backHeader----------->
 <!-- --------------------------------------------------------------------------------------------->
 
-
-<!---------放自己的CSS與title----------->
-
-
+ <!---------放自己的CSS與title----------->
 
 <!-- --------------------------------------------------------------------------------------------->
 <!-----------backBody----------->
@@ -74,8 +71,9 @@
 		</table>
 	</div>
 </div>
-<div class="show">
-<div class="modal fade" id="DetailModel" tabindex="-1" role="dialog" aria-labelledby="basicModal" >
+<!-- modal -->
+
+<div class="modal fade" id="DetailModel" tabindex="-1" role="dialog"  aria-labelledby="basicModal" >
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 				
@@ -96,12 +94,19 @@
 		</div>
 	</div>
 </div>
-</div>
+
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script
 src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	
+// 	modal暫時解法
+	$(".modal").on("shown.bs.modal", function () {
+	    if ($(".modal-backdrop").length > 1) {
+	        $(".modal-backdrop").not(':first').remove();
+	    }
+	})
 	
 	//initValue
 	$.ajax({
@@ -129,7 +134,7 @@ $(document).ready(function() {
 						},
 						success:function(){
 							$(".modal-body").load("bikeDetailResv.jsp");
-						},
+						}
 					})
 			})
 			
@@ -169,7 +174,6 @@ $(document).ready(function() {
 			}
 		})
 	})
-	
 })
 
 
