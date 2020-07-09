@@ -206,7 +206,7 @@ public class ActServlet extends HttpServlet {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String sq_activity_id = req.getParameter("sq_activity_id").trim();
 				String sq_route_id = req.getParameter("sq_route_id").trim();
-//				String sq_member_id = req.getParameter("sq_member_id").trim();
+				String sq_member_idoriginal = req.getParameter("sq_member_id").trim();
 				
 				String act_title = new String(req.getParameter("act_title").trim());
 				String act_titleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{5,50}$";
@@ -304,7 +304,7 @@ public class ActServlet extends HttpServlet {
 
 				ActVO actVO = new ActVO();
 				actVO.setSq_route_id(sq_route_id);
-				actVO.setSq_member_id(sq_member_id);
+				actVO.setSq_member_id(sq_member_idoriginal);
 				actVO.setAct_title(act_title);
 				actVO.setMax_population(max_population);
 				actVO.setMin_population(min_population);
@@ -327,7 +327,7 @@ public class ActServlet extends HttpServlet {
 
 				/*************************** 2.開始修改資料 *****************************************/
 				ActService actSvc = new ActService();
-				actVO = actSvc.updateAct(sq_route_id, sq_member_id, act_title, max_population, min_population,
+				actVO = actSvc.updateAct(sq_route_id, sq_member_idoriginal,act_title, max_population, min_population,
 						start_time, end_time, act_start_time, act_end_time, act_description, act_picture,
 						gp_status, sq_activity_id);
 
