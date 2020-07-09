@@ -1,0 +1,48 @@
+		#brandcontent{
+			height: 500px;
+		}
+		#brandcontent table{
+			width: 100%;
+			table-layout: fixed;
+		}
+		#brandcontent tr{
+			height: 30px;
+			text-align: center;
+		}
+		td{
+			border: 1px black solid;
+			width: 100%;
+			white-space: normal;
+			word-break: break-all;
+			word-wrap: break-word;
+		}
+		#td_1{
+			width: 8%;
+		}
+		#td_2{
+			width: 8%;
+		}
+		#td_4{
+			width: 27%;
+		}
+		#td_5{
+			width: 7%;
+		}
+		#td_6{
+			width: 9%;
+		}
+		#td_7{
+			width: 9%;
+		}
+		#td_8{
+			width: 7%;
+		}
+		#td_9{
+			width: 7%;
+		}
+		#td_10{
+			width: 7%;
+		}
+		#td_lastbtn{
+			width: 6%;
+		}

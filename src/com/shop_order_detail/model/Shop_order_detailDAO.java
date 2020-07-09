@@ -3,6 +3,8 @@ package com.shop_order_detail.model;
 import java.sql.*;
 import java.util.*;
 
+import com.shop_product.model.Shop_productVO;
+
 public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
@@ -12,7 +14,7 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 	private static final String INSERT = "INSERT INTO SHOP_ORDER_DETAIL (SQ_ORDER_ID, SQ_PRODUCT_ID, PRODUCT_PRICE, ORDER_SUM) VALUES (?, ?, ?, ?)";
 	private static final String UPDATE = "UPDATE SHOP_ORDER_DETAIL SET PRODUCT_PRICE=?, ORDER_SUM=? WHERE SQ_ORDER_ID=? && SQ_PRODUCT_ID=?";	
 	private static final String DELETE = "DELETE FROM SHOP_ORDER_DETAIL where SQ_ORDER_ID=? && SQ_PRODUCT_ID=?";
-	private static final String GET_ONE = "SELECT SQ_ORDER_ID, SQ_PRODUCT_ID, PRODUCT_PRICE, ORDER_SUM FROM SHOP_ORDER_DETAIL WHERE SQ_ORDER_ID=? && SQ_PRODUCT_ID=?";
+	private static final String GET_ONE = "SELECT SQ_ORDER_ID, SQ_PRODUCT_ID, PRODUCT_PRICE, ORDER_SUM FROM SHOP_ORDER_DETAIL WHERE SQ_ORDER_ID=?";
 	private static final String GET_ALL = "SELECT SQ_ORDER_ID, SQ_PRODUCT_ID, PRODUCT_PRICE, ORDER_SUM FROM SHOP_ORDER_DETAIL ORDER BY SQ_ORDER_ID && SQ_PRODUCT_ID";
 	
 	@Override
@@ -102,7 +104,6 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 			pstmt = con.prepareStatement(DELETE);
 			
 			pstmt.setString(1, sq_order_id);
-			pstmt.setString(2, sq_product_id);
 			
 			pstmt.executeUpdate();
 			
@@ -129,15 +130,17 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 	}
 
 	@Override
-	public Shop_order_detailVO findByPrimaryKey(String sq_order_id, String sq_product_id) {
+	public List<Shop_order_detailVO> findByPrimaryKey(String sq_order_id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Shop_order_detailVO shop_order_detailVO = null;
+		List<Shop_order_detailVO> list = new ArrayList<Shop_order_detailVO>();
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, user, password);
 			pstmt = con.prepareStatement(GET_ONE);
+			pstmt.setString(1, sq_order_id);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				shop_order_detailVO = new Shop_order_detailVO();
@@ -145,6 +148,7 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 				shop_order_detailVO.setSq_product_id(rs.getString("sq_product_id"));
 				shop_order_detailVO.setProduct_price(rs.getInt("product_price"));
 				shop_order_detailVO.setOrder_sum(rs.getInt("order_sum"));
+				list.add(shop_order_detailVO);
 			}
 			
 		}catch(ClassNotFoundException e) {
@@ -174,7 +178,7 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 				}
 			}
 		}
-		return shop_order_detailVO;
+		return list;
 	}
 
 	@Override
@@ -267,4 +271,11 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 			}
 		}
 	}
+//	public static void main(String args[]) {
+//		Shop_order_detailDAO dao = new Shop_order_detailDAO();
+//		List<Shop_order_detailVO> list = dao.findByPrimaryKey("OD-500003");
+//		for(Shop_order_detailVO vo : list) {
+//			System.out.println(vo.getSq_product_id());
+//		}
+//	}
 }
