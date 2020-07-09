@@ -156,7 +156,6 @@ public class WeatherServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
@@ -174,10 +173,13 @@ public class WeatherServlet extends HttpServlet {
 				jedis.set("weather",JSONObject.toString());
 			}
 		};
-		
 		Calendar cal = new GregorianCalendar(2020,Calendar.JULY,1,23,00,00);
 		timer.schedule(task, cal.getTime(),1000*60*60*24);
-
+	}
+	
+	@Override
+	public void destroy(){
+		timer.cancel();
 	}
 
 	public HashMap handle1(String url) throws IOException {

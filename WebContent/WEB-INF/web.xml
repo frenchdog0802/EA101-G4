@@ -14,6 +14,11 @@
 	</welcome-file-list>
 
 	<!-- 琮寶 -->
+<!-- 	listener -->
+  <listener>
+    <listener-class>com.bike.listener.InitalizeBikeMaster</listener-class>
+  </listener>
+<!-- 	listener -->
 	<!-- WeatherServlet -->
 	<servlet>
 		<servlet-name>WeatherServlet</servlet-name>

@@ -227,8 +227,8 @@ if("payFinish".equals(action)){
 						timepicker : true,
 						onShow : function() {
 							this.setOptions({
-								maxDate : $('#endDate').val() ? $('#endDate')
-								.val() : false
+								maxDate : $('#endDate').val() ? $('#endDate').val() : false
+								
 							})
 						}
 					//minDate:           '-1970-01-01', // 去除今日(不含)之前
@@ -240,8 +240,8 @@ if("payFinish".equals(action)){
 				format : 'Y-m-d H:i',
 				onShow : function() {
 					this.setOptions({
-						minDate : $('#startDate').val() ? $(
-							'#startDate').val() : false
+						minDate : $('#startDate').val() ? $('#startDate').val() : false
+							
 					})
 				},
 

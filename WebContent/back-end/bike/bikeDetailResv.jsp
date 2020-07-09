@@ -51,7 +51,7 @@
 		</div>
 	</div>
 
-
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<!-- 自由發揮處 -->
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script
@@ -119,7 +119,7 @@
 				checkTime();
 			}
 		})
-	
+	//確認租車
 		$(".submitBikes").click(function(){
 			//獲取表格資料
 			var tbody = document.getElementById("tbody");
@@ -139,7 +139,6 @@
 				jsonStr+='"'+sq_bike_id+'"';
 			}
 			jsonStr +="}";
-			console.log(jsonStr);
 			$.ajax({
 				type:"POST",
 				url:"<%=request.getContextPath()%>/bike/BikeRentDetailServlet.do",
@@ -147,9 +146,16 @@
 					action:"submitBike",
 					jsonStr : jsonStr,
 					sq_rent_id : sq_rent_id,
-				},
-				complete:function(){
-					window.location = "<%=request.getRequestURL()%>";
+				},complete:function(){
+					Swal.fire({
+						  icon: 'success',
+						  title: '取車成功',
+						  timer: 1500,
+						  showConfirmButton: true,
+						  onClose: () => {
+							  window.location.href="<%=request.getContextPath()%>/back-end/bike/bikeMaster.jsp";
+						     }
+				    });
 				}
 			})
 			

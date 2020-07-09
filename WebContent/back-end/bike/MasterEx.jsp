@@ -7,8 +7,9 @@
 
 
 <!---------放自己的CSS與title----------->
+<style>
 
-
+</style>
 
 <!-- --------------------------------------------------------------------------------------------->
 <!-----------backBody----------->
@@ -30,7 +31,6 @@
 		</li>
 	</ul>
 </div>
-
 
 
 <!--分頁自己改-->
@@ -63,7 +63,7 @@
 					<th scope="col">姓名</th>
 					<th scope="col">電話</th>
 					<th scope="col">訂單狀態</th>
-					<th scope="col">取車日期</th>
+					<th scope="col">還車日期</th>
 					<th scope="col">綠界交易編號</th>
 					<th scope="col">查看明細</th>
 				</tr>
@@ -74,8 +74,7 @@
 		</table>
 	</div>
 </div>
-<div class="show">
-<div class="modal fade" id="DetailModel" tabindex="-1" role="dialog" aria-labelledby="basicModal" >
+<div class="modal fade" id="DetailModel"  >
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 				
@@ -92,10 +91,8 @@
 			<div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
             </div>
-		
 		</div>
 	</div>
-</div>
 </div>
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script
@@ -108,7 +105,7 @@ $(document).ready(function() {
 		url:"<%=request.getContextPath()%>/bike/BikeRentDetailServlet.do",
 		type :"POST",
 		data : {
-			action:"initResvMaster",
+			action:"initExMaster",
 		},
 		dataType: "JSON",
 		success : function(data) {
@@ -128,8 +125,8 @@ $(document).ready(function() {
 							sq_rent_id : sq_rent_id,
 						},
 						success:function(){
-							$(".modal-body").load("bikeDetailResv.jsp");
-						},
+							$(".modal-body").load("bikeDetailEx.jsp");
+						}
 					})
 			})
 			
@@ -229,4 +226,3 @@ function getValue(rent_od_status){
 <!-----------backFooter----------->
 
 <%@include file="/back-end/backFrame/backFooter"%>
-
