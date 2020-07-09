@@ -4,8 +4,7 @@
 <%@ page import="com.actjoin.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
-<html>
-<head>
+<%@include file="/back-end/backFrame/backHeader"%>
 <title>單一活動的參加會員資料 - listOneActjoin.jsp</title>
 
 <style>
@@ -50,17 +49,24 @@
 	text-overflow: ellipsis;
   }
 </style>
-
-</head>
-<body bgcolor='white'>
-
-<h4>此頁暫練習採用 Script 的寫法取值:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>活動資料 - ListOneActJoin.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/joinActivity/select_actjoinpage.jsp"><img src="<%=request.getContextPath()%>/back-end/activity/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
+<%@include file="/back-end/backFrame/backBody"%>
+<div class="row" style="background-color: white;">
+					<ul class="nav nav-tabs">
+					  <li class="nav-item">
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/listAllAct.jsp"><span>活動管理</span></a><!--在哪一個頁面就哪加active和span的style-->
+					  </li>
+					  <li class="nav-item">
+					   	<a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/addAct.jsp"><span>新增活動</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/joinActivity/listAllActJoin.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">參加會員管理</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/reportActivity/listAllActReport.jsp"><span>檢舉活動管理</span></a>
+					  </li>
+					</ul>
+				</div>	
+<%@include file="/back-end/backFrame/backNav"%>
 
 <table class="table1">
 	<tr>
@@ -84,6 +90,4 @@
 	</tr>
 	</c:forEach>
 </table>
-
-</body>
-</html>
+<%@include file="/back-end/backFrame/backFooter"%>

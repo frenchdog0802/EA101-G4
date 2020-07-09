@@ -60,13 +60,16 @@
 <div class="row" style="background-color: white;">
 					<ul class="nav nav-tabs">
 					  <li class="nav-item">
-					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">活動管理</span></a><!--在哪一個頁面就哪加active和span的style-->
+					    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/activity/listAllAct.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">活動管理</span></a><!--在哪一個頁面就哪加active和span的style-->
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>item2</span></a>
+					   	<a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/addAct.jsp"><span>新增活動</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>item3</span></a>
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/joinActivity/listAllActJoin.jsp"><span>參加會員管理</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/reportActivity/listAllActReport.jsp"><span>檢舉活動管理</span></a>
 					  </li>
 					</ul>
 				</div>	
@@ -80,7 +83,13 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActServlet.do" >
+        <b>輸入活動編號 (如ACT-700001):</b>
+        <input type="text" name="sq_activity_id">
+        <input type="hidden" name="action" value="getOne_For_Display">
+        <input type="submit" value="送出">
+</FORM>
+    
 <table class="table1">
 	<tr>
 		<th>活動編號</th>
