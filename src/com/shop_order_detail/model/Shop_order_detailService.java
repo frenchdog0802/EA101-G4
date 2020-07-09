@@ -34,8 +34,8 @@ public class Shop_order_detailService {
 	public void deleteShop_message(String sq_order_id, String sq_product_id) {
 		dao.delete(sq_order_id, sq_product_id);
 	}
-	public Shop_order_detailVO getOneShop_message(String sq_order_id, String sq_product_id) {
-		return dao.findByPrimaryKey(sq_order_id, sq_product_id);
+	public List<Shop_order_detailVO> getOneOrder_detail(String sq_order_id) {
+		return dao.findByPrimaryKey(sq_order_id);
 	}
 	public List<Shop_order_detailVO> getAll(){
 		return dao.getAll();
