@@ -1,8 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<html>
-<head>
+<%@include file="/back-end/backFrame/backHeader"%>
 <title>IBM Act: Home</title>
 
 <style>
@@ -26,15 +25,22 @@
   }
 </style>
 
-</head>
-<body bgcolor='white'>
-
-<table id="table-1">
-   <tr><td><h3>IBM Act: Home</h3><h4>( MVC )</h4></td></tr>
-</table>
-
-<p>This is the Home page for IBM Act: Home</p>
-
+<%@include file="/back-end/backFrame/backBody"%>
+<div class="row" style="background-color: white;">
+					<ul class="nav nav-tabs">
+					  <li class="nav-item">
+					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">活動管理</span></a><!--在哪一個頁面就哪加active和span的style-->
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>item2</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>item3</span></a>
+					  </li>
+					</ul>
+				</div>	
+<%@include file="/back-end/backFrame/backNav"%>
+<div>
 <h3>資料查詢:</h3>
 	
 <%-- 錯誤表列 --%>
@@ -46,7 +52,7 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
+<div>
 <ul>
   <li><a href='<%=request.getContextPath()%>/back-end/activity/listAllAct.jsp'>List</a> all Acts.  <br><br></li>
   
@@ -76,12 +82,11 @@
   </li>
 </ul>
 
-
-<h3>活動管理</h3>
+<div>
+<h3>新增活動:</h3>
 
 <ul>
   <li><a href='addAct.jsp'>Add</a> a new Act.</li>
 </ul>
-
-</body>
-</html>
+</div>
+<%@include file="/back-end/backFrame/backFooter"%>
