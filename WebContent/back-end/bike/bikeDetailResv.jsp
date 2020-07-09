@@ -1,48 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 
 
 <jsp:useBean id="bikeRentDetailSvc"
-class="com.bike.rent.detail.model.BikeRentDetailService" />
+	class="com.bike.rent.detail.model.BikeRentDetailService" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Required meta tags always come first -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
+<!-- Required meta tags always come first -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet"
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
 	href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css">
-	<!-- font style -->
-	<!---------放自己的CSS與title----------->
-	<link rel="stylesheet" type="text/css"
+<!-- font style -->
+<!---------放自己的CSS與title----------->
+<link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 
 
 </head>
 <body>
 	<!-- 自由發揮處 -->
-${param.sq_rent_id}
 	<div class="container-fluid mx-3">
-		<div class="row mt-1">
-			<form class="form-inline">
-				<div class="form-group mb-2">
-					<input id="searchDate" class="form-control" type="text"
-					autocomplete="off" placeholder="選擇日期">
-				</div>
-				<button type="button" class="btn btn-primary mx-2 mb-2">搜尋</button>
-				<div class="form-group mx-sm-3 mb-2">
-					<input id="searchRentID" class="form-control" type="text"
-					autocomplete="off" placeholder="輸入訂單編號">
-				</div>
-				<button type="button" class="btn btn-primary mb-2">搜尋</button>
-			</form>
-		</div>
-
 		<div class="row">
 			<table class="table text-center table-hover">
 				<thead>
@@ -55,7 +40,7 @@ ${param.sq_rent_id}
 					</tr>
 				</thead>
 				<tbody id="tbody">
-						
+
 				</tbody>
 			</table>
 		</div>
@@ -69,11 +54,13 @@ ${param.sq_rent_id}
 
 	<!-- 自由發揮處 -->
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
-	<script src="<%=request.getContextPath()%>/front-end/page-file/js/nav.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/front-end/page-file/js/nav.js"></script>
 	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 	<script
-	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+		src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 
@@ -86,7 +73,6 @@ ${param.sq_rent_id}
 			},
 			dataType: "JSON",
 			success : function(data) {
-				console.log(data);
 				var returnObj = data.returnList
 				var component ;
 				for(var i =0 ; i<returnObj.length;i++){
@@ -127,9 +113,13 @@ ${param.sq_rent_id}
 					
 				}
 				$("#tbody").html(component);
+			},
+			complete:function(){
+				//判斷時間未到不能取車
+				checkTime();
 			}
 		})
-		
+	
 		$(".submitBikes").click(function(){
 			//獲取表格資料
 			var tbody = document.getElementById("tbody");
@@ -166,18 +156,23 @@ ${param.sq_rent_id}
 		})
 		
 		
-		//dateTimepicker
-		$('#searchDate').datetimepicker({
-			format : 'Y-m-d',
-			onShow : function() {
-				this.setOptions({
-					minDate : '-1970-01-01',
-				})
-			},
-			timepicker : false,
-		});
+		
+		
 
 	});
+		
+	//判斷時間未到不能取車
+	function checkTime(){
+		 var resvTimet = $("#tbody>tr").find("td").eq(3).text();
+	     var resvTime = new Date(Date.parse(resvTimet .replace(/-/g,"/")));
+	     var curDate = new Date();
+	     
+	        if(resvTime <=curDate){
+	        	$('.submitBikes').attr('disabled', false);
+	        }else{
+	        	$('.submitBikes').attr('disabled', true);
+	        }
+	}
 		
 	//deleteBike取消車輛
 	function submitfunc(sq_rent_detail_id){

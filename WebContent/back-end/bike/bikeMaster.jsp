@@ -49,10 +49,10 @@
 			</div>
 			<button type="button" class="btn btn-primary mx-2 mb-2">搜尋</button>
 			<div class="form-group mx-sm-3 mb-2">
-				<input id="searchRentID" class="form-control" type="text"
+				<input id="searchRentId" class="form-control" type="text"
 					autocomplete="off" placeholder="輸入訂單編號">
 			</div>
-			<button type="button" class="btn btn-primary mb-2">搜尋</button>
+			<button type="button" id="searchRentIdBtn" class="btn btn-primary mb-2">搜尋</button>
 		</form>
 	</div>
 	<div class="row">
@@ -63,7 +63,7 @@
 					<th scope="col">姓名</th>
 					<th scope="col">電話</th>
 					<th scope="col">訂單狀態</th>
-					<th scope="col">結帳時間</th>
+					<th scope="col">取車日期</th>
 					<th scope="col">綠界交易編號</th>
 					<th scope="col">查看明細</th>
 				</tr>
@@ -103,7 +103,6 @@ src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	
 	//initValue
 	$.ajax({
 		url:"<%=request.getContextPath()%>/bike/BikeRentDetailServlet.do",
@@ -113,37 +112,14 @@ $(document).ready(function() {
 		},
 		dataType: "JSON",
 		success : function(data) {
-			var storeMasterList = data.storeMaster;
-			var str = "";
-			for(var i =0 ; i<storeMasterList.length;i++){
-				var storeMaster = storeMasterList[i];
-				var sq_rent_id = storeMaster.sq_rent_id;
-				var rent_name = storeMaster.rent_name;
-				var rent_phone = storeMaster.rent_phone;
-				var rent_od_status = storeMaster.rent_od_status;
-				//取得訂單狀態中文
-				var rent_od_statusStr = getValue(rent_od_status);
-				var order_date = storeMaster.order_date;
-				var order_date_spilt = order_date.split(" ");
-				var tradeno = storeMaster.tradeno;
-				str+="<tr>";
-				str+="<td>"+sq_rent_id+"</td>";
-				str+="<td>"+rent_name+"</td>";
-				str+="<td>"+rent_phone+"</td>";
-				str+="<td class='text-danger'>"+rent_od_statusStr+"<input type='hidden' value='"+rent_od_status+"'>"+"</td>";
-				str+="<td>"+order_date_spilt[0]+"</td>";
-				str+="<td>"+tradeno+"</td>";
-				str+="<td><button class='btn btn-sm btn-primary btn-sub' type='button' data-toggle='modal' data-target='#DetailModel'>查看</button></td>";
-				str+="</tr>";
-			}
-			$("#masterTbody").html(str);
+			
+			 handleJSON(data);
+			 
 		},complete:function(){
 			//查看submit
 			$(".btn-sub").click(function(){
-				var rent_od_status = $(this).closest("tr").find("td").eq(3).find("input").val();
 				var sq_rent_id = $(this).closest("tr").find("td").eq(0).text();
 				//狀態為未租車
-				if(rent_od_status==0){
 					$.ajax({
 						url:"<%=request.getContextPath()%>/bike/BikeRentDetailServlet.do",
 						type :"POST",
@@ -155,25 +131,78 @@ $(document).ready(function() {
 							$(".modal-body").load("bikeDetailResv.jsp");
 						},
 					})
-				}else{
-					$.ajax({
-						url:"<%=request.getContextPath()%>/bike/BikeRentDetailServlet.do",
-						type :"POST",
-						data : {
-							action:"findDetail",
-							rent_od_status : rent_od_status,
-						},
-						success:function(){
-// 							$(".modal-body").load("bikeDetailEx.jsp");
-						},
-					})
-				} 
-				
 			})
 			
 		}
 	})
+	
+	//搜尋單個編號
+	$("#searchRentIdBtn").click(function(){
+		var sq_rent_id = $("#searchRentId").val();
+		$.ajax({
+			type:"POST",
+			url:"<%=request.getContextPath()%>/bike/BikeRentDetailServlet.do",
+			data:{
+				action:"searchResvRentId",
+				sq_rent_id:sq_rent_id,
+			},
+			dataType:"JSON",
+			success:function(data){
+				handleJSON(data);
+			},complete:function(){
+				//查看submit
+				$(".btn-sub").click(function(){
+					var sq_rent_id = $(this).closest("tr").find("td").eq(0).text();
+					//狀態為未租車
+						$.ajax({
+							url:"<%=request.getContextPath()%>/bike/BikeRentDetailServlet.do",
+							type :"POST",
+							data : {
+								action:"initResv",
+								sq_rent_id : sq_rent_id,
+							},
+							success:function(){
+								$(".modal-body").load("bikeDetailResv.jsp");
+							},
+						})
+				})
+			}
+		})
+	})
+	
 })
+
+
+//處理回傳的JSON table
+function handleJSON(data){
+	var storeMasterList = data.storeMaster;
+	var str = "";
+	for(var i =0 ; i<storeMasterList.length;i++){
+		var storeMaster = storeMasterList[i];
+		var sq_rent_id = storeMaster.sq_rent_id;
+		var rent_name = storeMaster.rent_name;
+		var rent_phone = storeMaster.rent_phone;
+		var rent_od_status = storeMaster.rent_od_status;
+		//取得訂單狀態中文
+		var rent_od_statusStr = getValue(rent_od_status);
+		//訂單時間
+		var order_date = data.resvTime[sq_rent_id];
+		var order_date_spilt = order_date.split(" ");
+		var tradeno = storeMaster.tradeno;
+		str+="<tr>";
+		str+="<td>"+sq_rent_id+"</td>";
+		str+="<td>"+rent_name+"</td>";
+		str+="<td>"+rent_phone+"</td>";
+		str+="<td class='text-danger'>"+rent_od_statusStr+"</td>";
+		str+="<td>"+order_date_spilt[0]+"</td>";
+		str+="<td>"+tradeno+"</td>";
+		str+="<td><button class='btn btn-sm btn-primary btn-sub' type='button' data-toggle='modal' data-target='#DetailModel'>查看</button></td>";
+		str+="</tr>";
+	}
+	$("#masterTbody").html(str);
+}
+
+
 
 function getValue(rent_od_status){
 	switch (rent_od_status) {

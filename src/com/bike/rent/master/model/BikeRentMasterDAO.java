@@ -55,7 +55,7 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 	private static final String GET_ALL_MASTERID_FORM_STORE = "select sq_rent_id from bike_rent_master where SQ_BIKE_STORE_ID= ?";
 	
 	//get MASTERIDIsVaild
-	private static final String GET_ALL_MASTERID_FORM_STORE_IsVaild = "select sq_rent_id from bike_rent_master where SQ_BIKE_STORE_ID= ? AND RENT_OD_STATUS = ? ";
+	private static final String GET_ALL_MASTERID_FORM_STORE_IsVaild = "select * from bike_rent_master where SQ_BIKE_STORE_ID= ? AND RENT_OD_STATUS = ? ";
 	
 	//get getCurrentKeys
 	private static final String GET_CURRENTKEY = "select sq_rent_id from (select * from bike_rent_master order by order_date desc ) where rownum=1";
@@ -92,10 +92,10 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 	}
 	
 	@Override
-	public List<String> getRentMasterIdIsVaild(String sq_bike_store_id , Integer rent_od_status){
+	public List<BikeRentMasterVO> getRentMasterIdIsVaild(String sq_bike_store_id , Integer rent_od_status){
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		List<String> list= new ArrayList<>();
+		List<BikeRentMasterVO> list= new ArrayList<>();
 		ResultSet rs = null;
 		try {
 			
@@ -106,8 +106,18 @@ public class BikeRentMasterDAO implements BikeRentMasterDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				String masterId = rs.getString(1);
-				list.add(masterId);
+				BikeRentMasterVO BikeRentMasterVO= new BikeRentMasterVO();
+				BikeRentMasterVO.setSq_rent_id(rs.getString(1));
+				BikeRentMasterVO.setSq_member_id(rs.getString(2));
+				BikeRentMasterVO.setSq_bike_store_id(rs.getString(3));
+				BikeRentMasterVO.setRent_payment(rs.getInt(4));
+				BikeRentMasterVO.setOd_total_price(rs.getInt(5));
+				BikeRentMasterVO.setRent_name(rs.getString(6));
+				BikeRentMasterVO.setRent_phone(rs.getString(7));
+				BikeRentMasterVO.setRent_od_status(rs.getInt(8));
+				BikeRentMasterVO.setOrder_date(rs.getTimestamp(9));
+				BikeRentMasterVO.setTradeno(rs.getString(10));
+				list.add(BikeRentMasterVO);
 			}
 
 		} catch (SQLException e) {

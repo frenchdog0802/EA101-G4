@@ -33,8 +33,8 @@ public class BikeRentMasterService {
 		return dao.getRentMasterId(sq_bike_store_id);
 	}
 	
-	public List<String> getRentMasterIdIsVaild(String sq_bike_store_id , Integer rent_od_status){
-		return dao.getRentMasterId(sq_bike_store_id);
+	public List<BikeRentMasterVO> getRentMasterIdIsVaild(String sq_bike_store_id , Integer rent_od_status){
+		return dao.getRentMasterIdIsVaild(sq_bike_store_id,rent_od_status);
 	}
 	
 	public String getCurrentKeys() {

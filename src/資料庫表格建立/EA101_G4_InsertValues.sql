@@ -938,7 +938,10 @@ INSERT INTO  bike_type
 (sq_bike_type_id,bike_type_name,bike_title,bike_description,bike_photo,bike_daily_price,bike_hourly_price)
 VALUES
 (sq_bike_type_id.NEXTVAL,'電動單車','爬坡也可以很順暢','正如其名，借用電力作為前進動力的單車。騎單車載小孩或騎單車爬坡時，借用電力使你的行駛更加輕鬆。萬一電池沒電時，也可以和一般的單車一樣踩踏前行。',load_blob('bike_img_auto.jpg'),500,65);
-
+INSERT INTO  bike_type
+(sq_bike_type_id,bike_type_name,bike_title,bike_description,bike_photo,bike_daily_price,bike_hourly_price)
+VALUES
+('639999','取消車輛','取消車輛','取消車輛。',null,0,0);
 
 --------------------------------------------------------
 --  for table bike 店家車輛產品

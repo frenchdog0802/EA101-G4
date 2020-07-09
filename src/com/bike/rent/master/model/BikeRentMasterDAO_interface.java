@@ -16,7 +16,7 @@ public interface BikeRentMasterDAO_interface {
 	
 	public List<String> getRentMasterId(String sq_bike_store_id); //抓出所有訂單
 	
-	public List<String> getRentMasterIdIsVaild(String sq_bike_store_id , Integer rent_od_status);//抓出成立訂單
+	public List<BikeRentMasterVO> getRentMasterIdIsVaild(String sq_bike_store_id , Integer rent_od_status);//抓出成立訂單
 	public String getCurrentKeys() ;//抓取最大主鍵
 	
 
