@@ -52,23 +52,9 @@
     			</div>
     			<div class="row mt-4">
     				<div class="col-5 product_img" style="border: 1px solid black; padding-left: 10px; padding-right: 10px;">
-    					<section class="regular slider">
-						    <div>
-						    	<img src="<%=request.getContextPath()%>/showImg4?id=<%=productVO.getSq_product_id()%>" class="img-fluid">
-						    </div>
-						    <div>
-						    	<img src="image/商品二號.png" class="img-fluid">
-						    </div>
-						    <div>
-						    	<img src="image/商品二號.png" class="img-fluid">
-						    </div>
-						    <div>
-						    	<img src="image/商品二號.png" class="img-fluid">
-						    </div>
-						    <div>
-						    	<img src="image/商品二號.png" class="img-fluid">
-						    </div>
-						</section>
+						<div>
+							<img src="<%=request.getContextPath()%>/showImg4?id=<%=productVO.getSq_product_id()%>" class="img-fluid">
+						</div>
     				</div>
     				<div class="col-7">
     					<div id="product_name">

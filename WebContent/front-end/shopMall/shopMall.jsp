@@ -217,7 +217,7 @@
   			$('.kind').click(function(){
   				$.ajax({
   					type :"POST",
-  					url  : "<%=request.getContextPath()%>/product.do",
+  					url  : "<%=request.getContextPath()%>/back-end/Shop_product/shop_product.do",
   					dataType: 'json',
   					data : {
   						action : "getByKind",

@@ -74,13 +74,13 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 			con = DriverManager.getConnection(url, user, password);
 			pstmt = con.prepareStatement(INSERT);
 			
-//			pstmt.setString(1, orderVO.getSq_order_id());
-			pstmt.setString(1, orderVO.getSq_member_id());
-			pstmt.setString(2, orderVO.getSq_store_address_id());
-			pstmt.setString(3, orderVO.getOrder_address());
-			pstmt.setInt(4, orderVO.getShop_order_price());
-			pstmt.setInt(5, orderVO.getPay_mode());
-			pstmt.setInt(6, orderVO.getOrder_status());
+			pstmt.setString(1, orderVO.getSq_order_id());
+			pstmt.setString(2, orderVO.getSq_member_id());
+			pstmt.setString(3, orderVO.getSq_store_address_id());
+			pstmt.setString(4, orderVO.getOrder_address());
+			pstmt.setInt(5, orderVO.getShop_order_price());
+			pstmt.setInt(6, orderVO.getPay_mode());
+			pstmt.setInt(7, orderVO.getOrder_status());
 			
 			pstmt.executeUpdate();
 

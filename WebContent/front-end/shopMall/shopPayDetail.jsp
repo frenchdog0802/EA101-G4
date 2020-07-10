@@ -86,7 +86,7 @@
 			    				</table>			    				
 			    			</div>
 			    			<div class="pl-4">
-			    				<FORM METHOD="post" ACTION="shopMall/productEcpayServlet.do">
+			    				<FORM method="POST" action="<%=request.getContextPath()%>/shopping.do">
 				    				<table class="takedt">
 				    					<tr>
 				    						<td class="takedt_t"><span>收件人 :</span></td>
@@ -125,7 +125,7 @@
 					    							<button class="btn bg-secondary">上一步</button>
 					<!-- 			    				<button class="btn bg-secondary">下一步</button> -->												
 								    				<input type="submit" value="下一步">
-								    				<input type="hidden" name="action" value="pay">								    			
+								    				<input type="hidden" name="action" value="toCheck">								    			
 								    			</div>
 							    			</div>
 					    				</div>

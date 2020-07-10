@@ -101,10 +101,10 @@
     						<div class="col-6"></div>
 	    					<div class="col-3 shopcar_btn">
 	    						<form method="POST" action="<%=request.getContextPath()%>/shopping.do">
-	    							<button class="btn bg-success mb-2">前往結帳</button>
+	    							<button class="btn bg-success mb-2">下一步</button>
 	    							<% session.setAttribute("shoppingcar", buylist); %>
 	    							<input type="hidden" name="total" value="<%=total%>">
-	    							<input type="hidden" name="action" value="CHECKOUT">
+	    							<input type="hidden" name="action" value="CHECK">
 	    						</form>
 	    					</div>
     					</div>
