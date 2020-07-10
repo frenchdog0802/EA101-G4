@@ -23,12 +23,13 @@ public class RouteJDBCDAO implements RouteDAO_interface {
 	String userid = "EA101_G4";
 	String passwd = "EA101_G4";
 
-	private static final String INSERT_STMT = "INSERT INTO ROUTE_PLAN(SQ_ROUTE_ID, SQ_MEMBER_ID, SQ_STAFF_ID, ROUTE_NAME, DISTANCE, COUNTRY, START_AREA, END_AREA, ROUTE_IMAGE, ROUTE_INTRODUCTION, MODIFY_ID, CHECK_FLAG, ADD_ROUTE) VALUES (('RP'||LPAD(to_char(route_plan_sequence.NEXTVAL), 6, '0')),?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO ROUTE_PLAN(SQ_ROUTE_ID,ROUTE_NAME, DISTANCE, COUNTRY, START_AREA, END_AREA, ROUTE_IMAGE, ROUTE_INTRODUCTION,CHECK_FLAG, ADD_ROUTE) VALUES (('RP'||LPAD(to_char(route_plan_sequence.NEXTVAL), 6, '0')),?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM ROUTE_PLAN  ORDER BY SQ_ROUTE_ID";
 	private static final String GET_ONE_STMT = "SELECT SQ_ROUTE_ID, SQ_MEMBER_ID, SQ_STAFF_ID, ROUTE_NAME, DISTANCE, COUNTRY, START_AREA, END_AREA, ROUTE_IMAGE, ROUTE_INTRODUCTION, INSERT_TIMESTAMP, UPDATE_TIMESTAMP, MODIFY_ID, CHECK_FLAG, ADD_ROUTE FROM ROUTE_PLAN WHERE SQ_ROUTE_ID =?";
 	private static final String GET_Area_ByStartArea_STMT = "SELECT SQ_ROUTE_ID, ROUTE_NAME, DISTANCE, COUNTRY, START_AREA, END_AREA, ROUTE_IMAGE, ROUTE_INTRODUCTION FROM ROUTE_PLAN WHERE START_AREA IN ";
 	private static final String GET_Route_ByMemId = "SELECT SQ_ROUTE_ID, ROUTE_NAME, DISTANCE, COUNTRY, START_AREA, END_AREA, ROUTE_IMAGE, ROUTE_INTRODUCTION FROM ROUTE_PLAN WHERE SQ_MEMBER_ID=?";
-
+	private static final String GET_RouteID_ByRouteName = "SELECT SQ_ROUTE_ID FROM ROUTE_PLAN WHERE ROUTE_NAME=?";
+	
 	private static final String DELETE_ROUTE = "DELETE FROM ROUTE_PLAN WHERE SQ_ROUTE_ID=?";
 	private static final String DELETE_ROUTE_DETAIL = "DELETE FROM ROUTE_PLAN_DETAIL WHERE SQ_ROUTE_ID=?";
 
@@ -46,21 +47,18 @@ public class RouteJDBCDAO implements RouteDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, routeVO.getSqMemberId());
-			pstmt.setString(2, routeVO.getSqStaffId());
-			pstmt.setString(3, routeVO.getRouteName());
-			pstmt.setDouble(4, routeVO.getDistance());
-			pstmt.setString(5, routeVO.getCountry());
-			pstmt.setString(6, routeVO.getStartArea());
-			pstmt.setString(7, routeVO.getEndArea());
-			pstmt.setBytes(8, routeVO.getRouteImage());
-			pstmt.setString(9, routeVO.getRouteIntroduction());
-			pstmt.setString(10, routeVO.getModifyId());
-			pstmt.setInt(11, routeVO.getCheckFlag());
-			pstmt.setInt(12, routeVO.getAddRoute());
+			pstmt.setString(1, routeVO.getRouteName());
+			pstmt.setDouble(2, routeVO.getDistance());
+			pstmt.setString(3, routeVO.getCountry());
+			pstmt.setString(4, routeVO.getStartArea());
+			pstmt.setString(5, routeVO.getEndArea());
+			pstmt.setBytes(6, routeVO.getRouteImage());
+			pstmt.setString(7, routeVO.getRouteIntroduction());
+			pstmt.setInt(8, routeVO.getCheckFlag());
+			pstmt.setInt(9, routeVO.getAddRoute());
 
 			pstmt.executeUpdate();
-			// ��靘��
+			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException se) {
@@ -184,22 +182,22 @@ public class RouteJDBCDAO implements RouteDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 
-			// 1��身摰 pstm.executeUpdate()銋��
+			// 1●設定於 pstm.executeUpdate()之前
 			con.setAutoCommit(false);
 
-			// ���頝舐�敦蝭�
+			// 先刪除路線細節
 			pstmt = con.prepareStatement(DELETE_ROUTE_DETAIL);
 			pstmt.setString(1, sqRouteId);
 			updateCount_ROUDEs = pstmt.executeUpdate();
-			// ���頝舐��
+			// 再刪除路線
 			pstmt = con.prepareStatement(DELETE_ROUTE);
 			pstmt.setString(1, sqRouteId);
 			pstmt.executeUpdate();
 
-			// 2��身摰 pstm.executeUpdate()銋��
+			// 2●設定於 pstm.executeUpdate()之後
 			con.commit();
 			con.setAutoCommit(true);
-			System.out.println("��頝舐�D" + sqRouteId + "���������" + updateCount_ROUDEs + "������◤��");
+			System.out.println("刪除路線ID" + sqRouteId + "時，共有停留點" + updateCount_ROUDEs + "個停留點同時被刪除");
 
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
@@ -207,7 +205,7 @@ public class RouteJDBCDAO implements RouteDAO_interface {
 		} catch (SQLException se) {
 			if (con != null) {
 				try {
-					// 3��身摰���xception�����atch��憛
+					// 3●設定於當有exception發生時之catch區塊內
 					con.rollback();
 				} catch (SQLException excep) {
 					throw new RuntimeException("rollback error occured. " + excep.getMessage());
@@ -232,6 +230,59 @@ public class RouteJDBCDAO implements RouteDAO_interface {
 		}
 
 	}
+	
+	//利用路線名稱撈出相對應的routeID(這方法風險太高！！！)因為routeName不是單一，有時間再改吧
+		@Override
+		public RouteVO findByRouteName(String routeName) {
+			RouteVO routeVO = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				Class.forName(driver);
+				con = DriverManager.getConnection(url, userid, passwd);
+				pstmt = con.prepareStatement(GET_RouteID_ByRouteName);
+				pstmt.setString(1, routeName);
+				rs = pstmt.executeQuery();
+			
+				while (rs.next()) {
+					routeVO = new RouteVO();
+					routeVO.setSqRouteId(rs.getString("SQ_ROUTE_ID"));
+				}
+
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. " + se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return routeVO;
+		}
+	
 
 	@Override
 	public RouteVO findByPrimaryKey(String sqRouteId) {
@@ -490,6 +541,7 @@ public class RouteJDBCDAO implements RouteDAO_interface {
 		return set;
 
 	}
+	
 
 	public static byte[] blobToByteArr(Blob blob) {
 		InputStream is = null;
@@ -514,4 +566,6 @@ public class RouteJDBCDAO implements RouteDAO_interface {
 
 		return baos.toByteArray();
 	}
+
+
 }

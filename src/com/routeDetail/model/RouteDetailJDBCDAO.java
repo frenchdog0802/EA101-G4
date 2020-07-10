@@ -56,7 +56,7 @@ public class RouteDetailJDBCDAO implements RouteDetailDAO_interface {
 	public void insert(RouteDetailVO rouDeVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-
+		System.out.println("IN DAO");
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
@@ -66,7 +66,7 @@ public class RouteDetailJDBCDAO implements RouteDetailDAO_interface {
 			pstmt.setString(2, rouDeVO.getStepName());
 			pstmt.setDouble(3, rouDeVO.getStLongitude());
 			pstmt.setDouble(4, rouDeVO.getStLatitude());
-			pstmt.setBytes(5, rouDeVO.getStepImage());
+			pstmt.setBytes(5,  rouDeVO.getStepImage());
 			pstmt.setString(6, rouDeVO.getStepIntroduction());
 
 			pstmt.executeUpdate();
@@ -112,7 +112,7 @@ public class RouteDetailJDBCDAO implements RouteDetailDAO_interface {
 			pstmt.setDouble(3, rouDeVO.getStLatitude());
 			pstmt.setBytes(4, rouDeVO.getStepImage());
 			pstmt.setString(5, rouDeVO.getStepIntroduction());
-			pstmt.setString(6, rouDeVO.getSqSerialNum());
+			pstmt.setString(6, rouDeVO.getSqSerialNo());
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -309,8 +309,8 @@ public class RouteDetailJDBCDAO implements RouteDetailDAO_interface {
 	}
 
 	@Override
-	public Set<RouteDetailVO> getStepsByRouteId(String sqRouteId) {
-		Set<RouteDetailVO> set = new LinkedHashSet<RouteDetailVO>();
+	public List<RouteDetailVO> getStepsByRouteId(String sqRouteId) {
+		List<RouteDetailVO> list = new ArrayList<RouteDetailVO>();
 		RouteDetailVO rouDeVO = null;
 
 		Connection con = null;
@@ -327,7 +327,6 @@ public class RouteDetailJDBCDAO implements RouteDetailDAO_interface {
 
 			while (rs.next()) {
 				rouDeVO = new RouteDetailVO();
-
 				rouDeVO.setSqSerialNo(rs.getString("SQ_SERIAL_NUMBER"));
 				rouDeVO.setSqRouteId(rs.getString("SQ_ROUTE_ID"));
 				rouDeVO.setStepName(rs.getString("STEP_NAME"));
@@ -337,7 +336,7 @@ public class RouteDetailJDBCDAO implements RouteDetailDAO_interface {
 				Blob blob = rs.getBlob("STEP_IMAGE");
 				rouDeVO.setStepImage(blobToByteArr(blob));
 				rouDeVO.setStepIntroduction(rs.getString("STEP_INTRODUCTION"));
-				set.add(rouDeVO);
+				list.add(rouDeVO);
 
 			}
 			// Handle any driver errors
@@ -369,7 +368,7 @@ public class RouteDetailJDBCDAO implements RouteDetailDAO_interface {
 				}
 			}
 		}
-		return set;
+		return list;
 
 	}
 

@@ -45,8 +45,7 @@ body {
 	width: 350px;
 	height: 500px;
 	display: inline-block;
-	margin: 10px;
-	display: inline-block;
+	margin: 14px;
 }
 
 .card .content {
@@ -123,6 +122,8 @@ hr {
 	height: 250px;
 	border-radius: 10px;
 }
+
+
 </style>
 
 
@@ -159,10 +160,11 @@ $(document).ready(function(){
 					<span>位於縣市：</span>
 					<span class="startArea">`+startArea+`</span>
 				</div>
+ 				
 				<div class = "inner">
 					<span>路線簡介：</span>
 					<span class="routeIntroduction">`+routeIntroductionSplit+`</span>
-					<a href="url">...詳細介紹</a>
+					<a href="<%=request.getContextPath()%>/front-end/route/route.do?sqRouteId=`+sqRouteId+`&action=getOneRoute_For_Display">...詳細介紹</a>
 				</div>
 			</div>
 		`;
@@ -174,6 +176,7 @@ $(document).ready(function(){
 
 
 </head>
+
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
 	<h2>PAPAGO推薦路線</h2>
@@ -205,7 +208,7 @@ $(document).ready(function(){
 					</div>
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" name="selArea"
-							id="inlineCheckbox4" type="checkbox" value="新竹縣"> <label
+							id="inlineCheckbox4" type="checkbox" value="新竹縣,新竹市"> <label
 							class="form-check-label" for="inlineCheckbox4">新竹縣</label>
 					</div>
 					<div class="form-check form-check-inline">
@@ -308,11 +311,11 @@ $(document).ready(function(){
 					<input type="hidden" name="action" value="selectByCondition">
 				</div>
 			</div>
-			<div id="card-container">
-				<div class="row"></div>
+			<div >
+				<div class="row" id="card-container"></div>
 			</div>
 	</div>
-
+		
 	</form>
 
 
@@ -355,7 +358,7 @@ $(document).ready(function(){
 							//將文字轉成JSON
 							var obj = JSON.parse(xhr.responseText);
 							//取得各項參數
-							console.log(Object.keys(obj.rouVO).length);
+// 							console.log(Object.keys(obj.rouVO).length);
 							var routeName, startArea, sqRouteId, routeIntroduction;
 							for(i=0; i<Object.keys(obj.rouVO).length; i++){
 								if(obj && obj.rouVO && obj.rouVO[i]) {

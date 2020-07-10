@@ -61,9 +61,9 @@ public class TestJDBCDAO {
 //	}
 	
 	//查詢某條路線的所有停留點
-	Set<RouteDetailVO> set = dao.getStepsByRouteId("RP110001");
-	for (RouteDetailVO aRD : set) {
-		System.out.print(aRD.getSqSerialNum()+",");
+	List<RouteDetailVO> list = dao.getStepsByRouteId("RP110001");
+	for (RouteDetailVO aRD : list) {
+		System.out.print(aRD.getSqSerialNo()+",");
 		System.out.print(aRD.getStepName()+",");
 		System.out.print(aRD.getStLatitude()+",");
 		System.out.print(aRD.getStLongitude()+",");
