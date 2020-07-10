@@ -288,6 +288,11 @@ public class BikeRentDetailServlet extends HttpServlet {
 			JSONObject responseJson = new JSONObject(map);
 			out.println(responseJson);
 		}
+		
+		//還車成功
+		if ("initExMaster".equals(action)) {
+			//做到這裡繼續判斷
+		}
 	}
 }
 //訂單編號

@@ -61,16 +61,17 @@ $(document).ready(function() {
 		dataType:"JSON",
 		success:function(data){
 			var returnObj = data.returnList
-			console.log(returnObj);
+			console.log(JSON.stringify(returnObj));
 			var str="";
 			for(var i =0 ;i<returnObj.length;i++){
 				var sq_rent_id = returnObj[i].sq_rent_id;
+				var sq_rent_detail_id = returnObj[i].sq_rent_detail_id;
 				var bikeTypeName = returnObj[i].bikeTypeName;
 				var sq_bike_id = returnObj[i].sq_bike_id;
 				var ex_return_date = returnObj[i].ex_return_date;
 				var ex_return_dateStr = ex_return_date.slice(0,16);
 				str+="<tr>";
-				str+="<td>"+sq_rent_id+"</td>";
+				str+="<td>"+sq_rent_id+"<input value="+sq_rent_detail_id+" type='hidden'/>"+"</td>";
 				str+="<td>"+bikeTypeName+"</td>";
 				str+="<td>"+sq_bike_id+"</td>";
 				str+="<td><select  class='bikeStatus'><option value='' disabled selected>選擇車輛狀態</option><option value='0'>正常</option><option value='1'>維修</option><option value='2'>遺失</option><option value='3'>報廢</option></select></td>";
@@ -99,7 +100,54 @@ $(document).ready(function() {
 				//獲取表格資料
 				var tbody = document.getElementById("extbody");
 				var rows = tbody.rows.length;
-				var sq_rent_id = tbody.rows[1].cells[0].innerText;
+				//取訂單編號
+				var sq_rent_id= tbody.rows[0].cells[0].innerText;
+				var jsonStr = "[";//組合JSON字串
+				for(var i =0 ; i <rows ; i++){	
+					//取明細編號
+					var sq_rent_detail_id = tbody.rows[i].cells[0].children[0].value;
+					//取車輛編號
+					var sq_bike_id = tbody.rows[i].cells[2].innerText;
+					//取還車狀態
+					var sq_bike_status = tbody.rows[i].cells[3].children[0].value;
+					//取額外花費
+					var extra_cost = tbody.rows[i].cells[5].innerText;
+					//組合JSON
+					jsonStr+="{"
+					jsonStr+='"sq_rent_detail_id":"'+sq_rent_detail_id+'"';
+					jsonStr+=",";
+					jsonStr+='"sq_bike_id":"'+sq_bike_id+'"';
+					jsonStr+=",";
+					jsonStr+='"sq_bike_status":'+sq_bike_status;
+					jsonStr+=",";
+					jsonStr+='"extra_cost":'+extra_cost;
+					jsonStr+="}";
+					if(i!=(rows-1)){
+						jsonStr+=",";
+					}
+				}
+				jsonStr +="]";
+				//ajax傳值
+				$.ajax({
+					url:"<%=request.getContextPath()%>/bike/BikeRentDetailServlet.do",
+					type:"POST",
+					data:{
+						action:"returnBikes",
+						sq_rent_id : sq_rent_id,
+						jsonStr : jsonStr
+					},complete:function(){
+						Swal.fire({
+							  icon: 'success',
+							  title: '還車成功',
+							  timer: 1500,
+							  showConfirmButton: true,
+							  onClose: () => {
+								  window.location.href="<%=request.getContextPath()%>/back-end/bike/bikeDetail.jsp";
+							     }
+					    });
+					}
+				})
+				
 			})
 		}
 	});
