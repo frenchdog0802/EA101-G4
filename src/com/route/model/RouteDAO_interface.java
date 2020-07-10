@@ -8,6 +8,7 @@ public interface RouteDAO_interface {
 	public void updateByStaf(RouteVO routeVO);
 	public void delete(String sqRouteId);
 	public RouteVO findByPrimaryKey(String sqRouteId);
+	public RouteVO findByRouteName(String routeName);
 	public List<RouteVO> getAll();
 	//查詢某個區域內的路線起始點
 	public List<RouteVO> getAreaByStartArea(String startArea);

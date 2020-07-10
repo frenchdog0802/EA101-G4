@@ -18,6 +18,11 @@ public class RouteService {
 	public RouteVO getOneRoute(String sqRouteId) {
 		return dao.findByPrimaryKey(sqRouteId);
 	}
+	
+	public RouteVO getOneRouteByRouteName(String routeName) {
+		return dao.findByRouteName(routeName);
+	}
+	
 	public List<RouteVO> getAreaByStartArea(String startArea){
 		return dao.getAreaByStartArea(startArea);
 	}
@@ -27,12 +32,11 @@ public class RouteService {
 	public void deleteRoute(String sqRouteId) {
 		dao.delete(sqRouteId);
 	}
-	public RouteVO insert(String sqMemberId, String sqStaffId, String routeName, Double distance, String country, String startArea, 
-			String endArea, byte[] routeImage, String routeIntroduction, Timestamp insertTimestamp, Timestamp updateTimestamp, 
-			String modifyId, Integer checkFlag, Integer addRoute) {
+
+	public RouteVO insert(String routeName, Double distance, String country, String startArea, 
+			String endArea, byte[] routeImage, String routeIntroduction, 
+			 Integer checkFlag, Integer addRoute) {
 		RouteVO routeVO = new RouteVO();
-		routeVO.setSqMemberId(sqMemberId);
-		routeVO.setSqStaffId(sqStaffId);
 		routeVO.setRouteName(routeName);
 		routeVO.setDistance(distance);
 		routeVO.setCountry(country);
@@ -40,9 +44,6 @@ public class RouteService {
 		routeVO.setEndArea(endArea);
 		routeVO.setRouteImage(routeImage);
 		routeVO.setRouteIntroduction(routeIntroduction);
-		routeVO.setInsertTimestamp(insertTimestamp);
-		routeVO.setUpdateTimestamp(updateTimestamp);
-		routeVO.setModifyId(modifyId);
 		routeVO.setCheckFlag(checkFlag);
 		routeVO.setAddRoute(addRoute);
 		dao.insert(routeVO);

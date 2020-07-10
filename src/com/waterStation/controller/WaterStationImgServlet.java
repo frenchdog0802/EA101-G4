@@ -55,7 +55,7 @@ public class WaterStationImgServlet extends HttpServlet {
 	public void init() throws ServletException {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "EA101", "123456");
+			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "EA101_G4", "EA101_G4");
 		} catch (ClassNotFoundException e) {
 			throw new UnavailableException("Couldn't load JdbcOdbcDriver");
 		} catch (SQLException e) {
