@@ -9,11 +9,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
  <meta http-equiv="pragma" content="no-cache" /> 
  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"><!-- Bootstrap CSS -->
  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
  <title>自訂路線頁面</title>
  <style type="text/css">
   body{
@@ -50,7 +51,8 @@
       }); // 預設顯示地圖的座標與放大比例
   }
 
-
+  
+  
 
 
   //規劃路線
@@ -94,7 +96,7 @@
 		        for (var i =0; i < route.legs.length; i++) {
               dis += route.legs[i].distance.value ; 
             }
-            $("#dis").val((dis/1000)+'公里');
+            $("#dis").val((dis/1000));
             $("#dis").attr("value", (dis/1000));
           }else {
             window.alert("Directions request failed due to " + status);
@@ -128,7 +130,7 @@
           '</div>'+
           '</div>'+
           '<div class="Data-Items" style="float: left; width: 25%;">'+
-          '<input id=stepImg'+i+' type="file" onchange="showImg('+i+')" name="stepImg" size="45"/>'+
+          '<input id=stepImg'+i+' type="file" onclick="return changeSetImg('+i+')" onchange="showImg('+i+')" name="stepImg" size="45"/>'+
           '<img id=demo'+i+' style="width:150px; height:150px;"/>'+
           '<textarea class="stepIntro" id=stepIntro'+i+'></textarea><br />'+
           '<button type="button" onclick="setVal('+i+')">送出</button>'+
@@ -144,9 +146,18 @@
       }
       elevation(data);
     }
+  
+  	function changeSetImg(i){
+	  $("#stepImgFinal"+i).trigger("click");
+	  window.addEventListener('click', function() {
+	      showImg(i);
+	    });
+	  return false;
+ 	}
+  
 	//stepImg alert圖片預覽方法
      function showImg(i){
-        var stemImgTar = "#stepImg" + i;
+        var stemImgTar = "#stepImgFinal" + i;
         var file = $(stemImgTar)[0].files[0];
         var reader = new FileReader;
         reader.onload = function(e) {
@@ -155,6 +166,10 @@
         reader.readAsDataURL(file);
      }
     
+	
+	
+	
+	
      function addLis(routeMap,infowindow,i){
         markers[i].addListener("click", function() {
           infowindow.open(routeMap, markers[i]);
@@ -166,8 +181,7 @@
       function setVal(i){
         $(document).ready(function() {
         	
-        	console.log($('#demo'+i).attr("src"));
-        	console.log($('#stepIntro'+i).val());
+        
         	
         	if($('#stepIntro'+i).val() === '' || typeof $('#demo'+i).attr("src") === "undefined"){
                 window.alert("Plz enter the image and intro");
@@ -175,12 +189,18 @@
             }
 	          var stepIntro = $('#stepIntro'+i).val();
 	          $('#stepIntroFinal'+i).attr("value",stepIntro);
-	          var stepImg = $('#demo'+i).attr("src");
-	          console.log(stepImg);
-	          $('#stepImgFinal'+i).attr('src',stepImg);
+	          
+	          
+	          
 	          $(".gm-ui-hover-effect").trigger("click");
         })
       }
+     
+     
+     
+     
+     
+     
 
     //查詢海拔高度
     function elevation(data){
@@ -414,10 +434,11 @@ console.log(results);
 
 
 </script>    
-
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 </head>
 
 <body onload="initMap()" >
+<%@include file="/front-end/page-file/page-nav"%>
  <div class="container">
    <!-- <div class=row> -->
     <!-- <div class="col-md-12"> -->
@@ -453,13 +474,17 @@ console.log(results);
   <div class="col-md-3 input-group form-group">
    <div class="spot" style="font-size: x-large" >路線規劃：
     <br>
+    
+    
+ 
+    
     <label class="form-inline" />地點A：
     <input name="step" class="step form-control" value="" type="text" readonly></label>
     <input name="lat" class="lat" value="" type="hidden">
     <input name="lng" class="lng" value="" type="hidden">
     <input name="country" class="country" value="台灣" type="hidden">
     <input name="area" class="area" value="" type="hidden">
-    <img name="stepImg" class="stepImg" id="stepImgFinal0" src="" style="display: none">
+    <input id="stepImgFinal0" class="stepImg" name="stepImg0" value="" type="file"  style="display:none">
     <input name="stepIntro" class="stepIntro" id="stepIntroFinal0" value="" type="hidden">
 
     <label class="form-inline" />地點B：
@@ -468,7 +493,7 @@ console.log(results);
     <input name="lng" class="lng" value="" type="hidden">
     <input name="country" class="country" value="台灣" type="hidden">
     <input name="area" class="area" value="" type="hidden">
-    <img name="stepImg" class="stepImg" id="stepImgFinal1" src="" style="display: none">
+    <input id="stepImgFinal1" class="stepImg" name="stepImg1" value="" type="file" style="display:none">
     <input name="stepIntro" class="stepIntro" id="stepIntroFinal1" value="" type="hidden">
 
     <label class="form-inline" />地點C：
@@ -477,7 +502,7 @@ console.log(results);
     <input name="lng" class="lng" value="" type="hidden">
     <input name="country" class="country" value="台灣" type="hidden">
     <input name="area" class="area" value="" type="hidden">
-    <img name="stepImg" class="stepImg" id="stepImgFinal2" src="" style="display: none">
+    <input id="stepImgFinal2" class="stepImg" name="stepImg2" value="" type="file" style="display:none">
     <input name="stepIntro" class="stepIntro" id="stepIntroFinal2" value="" type="hidden">
 
     <label class="form-inline" />地點D：
@@ -486,7 +511,7 @@ console.log(results);
     <input name="lng" class="lng" value="" type="hidden">
     <input name="country" class="country" value="台灣" type="hidden">
     <input name="area" class="area" value="" type="hidden">
-    <img name="stepImg" class="stepImg" id="stepImgFinal3" src="" style="display: none">
+    <input id="stepImgFinal3" class="stepImg" name="stepImg3"  value=""  type="file" style="display:none">
     <input name="stepIntro" class="stepIntro" id="stepIntroFinal4" value="" type="hidden">
 
     <label class="form-inline" />地點E：
@@ -495,7 +520,7 @@ console.log(results);
     <input name="lng" class="lng" value="" type="hidden">
     <input name="country" class="country" value="台灣" type="hidden">
     <input name="area" class="area" value="" type="hidden">
-    <img name="stepImg" class="stepImg" id="stepImgFinal4" src="" style="display: none">
+    <input id="stepImgFinal4" class="stepImg" name="stepImg4"  value="" type="file" style="display:none">
     <input name="stepIntro" class="stepIntro" id="stepIntroFinal4" value="" type="hidden">
 
     <label class="form-inline" />地點F：
@@ -504,7 +529,7 @@ console.log(results);
     <input name="lng" class="lng" value="" type="hidden">
     <input name="country" class="country" value="台灣" type="hidden">
     <input name="area" class="area" value="" type="hidden">
-    <img name="stepImg" class="stepImg" id="stepImgFinal5" src="" style="display: none">
+    <input id="stepImgFinal5" class="stepImg" name="stepImg5"  value="" type="file" style="display:none">
     <input name="stepIntro" class="stepIntro" id="stepIntroFinal5" value="" type="hidden">
 
     <label class="form-inline" />地點G：
@@ -513,7 +538,7 @@ console.log(results);
     <input name="lng" class="lng" value="" type="hidden">
     <input name="country" class="country" value="台灣" type="hidden">
     <input name="area" class="area" value="" type="hidden">
-    <img name="stepImg" class="stepImg" id="stepImgFinal6" src="" style="display: none">
+    <input id="stepImgFinal6" class="stepImg" name="stepImg6"  value="" type="file" style="display:none">
     <input name="stepIntro" class="stepIntro" id="stepIntroFinal6" value="" type="hidden">
 
     <label class="form-inline" />地點H：
@@ -522,7 +547,7 @@ console.log(results);
     <input name="lng" class="lng" value="" type="hidden">
     <input name="country" class="country" value="台灣" type="hidden">
     <input name="area" class="area" value="" type="hidden">
-    <img name="stepImg" class="stepImg" id="stepImgFinal7" src="" style="display: none">
+    <input id="stepImgFinal7" class="stepImg" name="stepImg7"  value="" type="file" style="display:none">
     <input name="stepIntro" class="stepIntro" id="stepIntroFinal7" value="" type="hidden">
 
     <label class="form-inline" />地點I：
@@ -531,7 +556,7 @@ console.log(results);
     <input name="lng" class="lng" value="" type="hidden">
     <input name="country" class="country" value="台灣" type="hidden">
     <input name="area" class="area" value="" type="hidden">
-    <img name="stepImg" class="stepImg" id="stepImgFinal8" src="" style="display: none">
+    <input id="stepImgFinal8" class="stepImg" name="stepImg8"  value="" type="file" style="display:none">
     <input name="stepIntro" class="stepIntro" id="stepIntroFinal8" value="" type="hidden">
 
     <label class="form-inline" />地點J：
@@ -540,11 +565,11 @@ console.log(results);
     <input name="lng" class="lng" value="" type="hidden">
     <input name="country" class="country" value="台灣" type="hidden">
     <input name="area" class="area" value="" type="hidden">
-    <img name="stepImg" class="stepImg" id="stepImgFinal9" src="" style="display: none">
+    <input id="stepImgFinal9" class="stepImg" name="stepImg9"  value="" type="file" style="display:none">
     <input name="stepIntro" class="stepIntro" id="stepIntroFinal9" value="" type="hidden">
     
-    <br> <input type="hidden" name="checkFlag" value="0">
-	<br> <input type="hidden" name="addRoute" value="0">
+    <input type="hidden" name="checkFlag" value="0">
+	<input type="hidden" name="addRoute" value="0">
     
     
   </div>
@@ -559,19 +584,18 @@ console.log(results);
 <div class="row">
   <div class="col-md-6" > 
     <label class="form-inline" style="font-size: xx-large" />總距離：
-    <input name="dis" id="dis" class="dis form-control" value="" type="text" readonly></label>
+    <input name="dis" id="dis" class="dis form-control" value="" type="text" readonly>公里</label>
   </div>
   <div class="col-md-6"> 
      <input type="hidden" name="action" value="insert">
      <input id="btnSend" class="btn btn-outline-secondary float-right" type="submit" onclick="return checkinfor()" value="送出">
      
-     
   </div>
 </div>
 </FORM>
+</div>
 
-
-
+<%@include file="/front-end/page-file/page-footer"%>
 
 <script>
   function demoImg(){
@@ -584,17 +608,17 @@ console.log(results);
   }
   
   function checkinfor(){
-	  console.log($('#routeName').val());
-	  console.log($('#routeIntro').val());
-	  console.log($('#demo').attr("src"));
+	 
 	  if($('#routeName').val() === '' || $('#routeIntro').val() === '' || typeof $('#demo').attr("src") === "undefined" || $('#dis').val() === ''){
           window.alert("Plz enter the RouteName, Routeimage and RouteIntro or you haven't planned a route yet");
           return false;
       }else{
+    	  
     	  return true;
       }
     	  
   }
+ 
     
 </script>
 

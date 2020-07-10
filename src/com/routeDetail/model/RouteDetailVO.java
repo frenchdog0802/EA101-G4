@@ -12,12 +12,11 @@ public class RouteDetailVO implements Serializable{
 	private Timestamp insertTimestamp;
 	private byte[] stepImage;
 	private String stepIntroduction;
-	
-	public String getSqSerialNum() {
+	public String getSqSerialNo() {
 		return sqSerialNo;
 	}
-	public void setSqSerialNo(String sqSerialNum) {
-		this.sqSerialNo = sqSerialNum;
+	public void setSqSerialNo(String sqSerialNo) {
+		this.sqSerialNo = sqSerialNo;
 	}
 	public String getSqRouteId() {
 		return sqRouteId;

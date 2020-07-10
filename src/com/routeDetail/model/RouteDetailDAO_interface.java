@@ -15,5 +15,5 @@ public interface RouteDetailDAO_interface {
     public RouteDetailVO findByPrimaryKey(String sqSerialNo);
     public List<RouteDetailVO> getAll();
     //查詢某路線的停留點(一對多)(回傳 Set)
-    public Set<RouteDetailVO> getStepsByRouteId(String sqRouteId);
+    public List<RouteDetailVO> getStepsByRouteId(String sqRouteId);
 }

@@ -3,11 +3,15 @@ package com.routeDetail.model;
 import java.util.List;
 import java.util.Set;
 
+import com.route.model.RouteJDBCDAO;
+
 public class RouteDetailService {
 	private RouteDetailDAO_interface dao;
 
-	public RouteDetailService() {
+	
 
+	public RouteDetailService() {
+		dao = new RouteDetailJDBCDAO();
 	}
 
 	public List<RouteDetailVO> getAll() {
@@ -18,7 +22,7 @@ public class RouteDetailService {
 		dao.delete(sqSerialNo);
 	}
 
-	public Set<RouteDetailVO> getStepsByRouteId(String sqRouteId) {
+	public List<RouteDetailVO> getStepsByRouteId(String sqRouteId) {
 		return dao.getStepsByRouteId(sqRouteId);
 	}
 
@@ -41,19 +45,8 @@ public class RouteDetailService {
 
 	}
 
-	public RouteDetailVO insert(String sqRouteId, String stepName, Double stLongitude, Double stLatitude,
-			byte[] stepImage, String stepIntroduction) {
-		RouteDetailVO rouDeVO = new RouteDetailVO();
-
-		rouDeVO.setSqRouteId(sqRouteId);
-		rouDeVO.setStepName(stepName);
-		rouDeVO.setStLongitude(stLongitude);
-		rouDeVO.setStLatitude(stLatitude);
-		rouDeVO.setStepImage(stepImage);
-		rouDeVO.setStepIntroduction(stepIntroduction);
+	public void insert(RouteDetailVO rouDeVO) {
 		dao.insert(rouDeVO);
-		return rouDeVO;
-
 	}
 
 	// 應該要寫一個方法，可以用RouteId拿出此路線的全部停留點，一次修改！
