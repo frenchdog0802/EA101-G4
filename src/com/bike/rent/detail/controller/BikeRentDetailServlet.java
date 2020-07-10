@@ -87,8 +87,7 @@ public class BikeRentDetailServlet extends HttpServlet {
 
 			for (BikeRentDetailVO BikeRentDetailVO : bikeRentDetailList) {
 //					這間店的訂單編號 比對所有訂單明細編號 && 單車為空值
-				if (sq_rent_id_Resv.equals(BikeRentDetailVO.getSq_rent_id())
-						&& BikeRentDetailVO.getSq_bike_id() == null) {
+				if (sq_rent_id_Resv.equals(BikeRentDetailVO.getSq_rent_id())&& BikeRentDetailVO.getSq_bike_id() == null) {
 					// 取消車輛不顯示
 					if (!(BikeRentDetailVO.getSq_bike_type_id().equals("639999"))) {
 						// 裝入比對到的單車車輛車種到這個list

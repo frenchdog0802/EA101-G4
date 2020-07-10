@@ -96,7 +96,10 @@ $(document).ready(function() {
 			
 			//確認還車按鈕
 			$(".returnBikes").click(function(){
-// 				var 從這裡開始寫
+				//獲取表格資料
+				var tbody = document.getElementById("extbody");
+				var rows = tbody.rows.length;
+				var sq_rent_id = tbody.rows[1].cells[0].innerText;
 			})
 		}
 	});

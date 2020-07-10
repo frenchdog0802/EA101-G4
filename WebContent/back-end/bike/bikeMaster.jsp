@@ -117,7 +117,6 @@ $(document).ready(function() {
 		},
 		dataType: "JSON",
 		success : function(data) {
-			console.log(data);
 			 handleJSON(data);
 			 
 		},complete:function(){
@@ -191,8 +190,7 @@ function handleJSON(data){
 		var rent_od_statusStr = getValue(rent_od_status);
 		//訂單時間
 		var order_date = data.resvTime[sq_rent_id];
-		console.log(data.resvTime);
-		console.log(sq_rent_id);
+		
 		var order_date_spilt = order_date.split(" ");
 		var tradeno = storeMaster.tradeno;
 		str+="<tr>";

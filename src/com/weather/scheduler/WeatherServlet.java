@@ -1,4 +1,4 @@
-package com.bike.scheduler;
+package com.weather.scheduler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
