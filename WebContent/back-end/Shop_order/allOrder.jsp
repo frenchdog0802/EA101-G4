@@ -87,11 +87,11 @@
 				    					<td>${orderVO.sq_member_id}</td>
 				    					<td>${orderVO.order_address}</td>
 				    					<td>
-				    						<button value="${orderVO.sq_order_id}" type="button" class="btn btn-primary detail" data-toggle="modal" data-target="#exampleModalCenter${orderVO.sq_order_id}">
+				    						<button value="${orderVO.sq_order_id}" type="button" class="btn btn-primary detail" data-toggle="modal" data-target="#Modal${orderVO.sq_order_id}">
                                                	 明細
                                             </button>
-                                            <div class="modal fade" id="exampleModalCenter${orderVO.sq_order_id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            	<div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal fade" id="Modal${orderVO.sq_order_id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            	<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                                 	<div class="modal-content">
                                                     	<div class="modal-header">
                                                         	<h5 class="modal-title" id="exampleModalCenterTitle">訂單明細</h5>
@@ -103,6 +103,7 @@
                                                    	
                                                 	</div>
                                                     	<div class="modal-footer">
+                                                    		<button type="button" class="btn btn-secondary" data-dismiss="modal">Save</button>
                                                        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                     	</div>
                                                 	</div>
@@ -167,55 +168,64 @@
      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
      <script>
      $(document).ready(function() {
+			$('.modal').modal({
+				backdrop:'static', keyboard: false
+			});
 			$(".detail").click(function() {
 		        $.ajax({
 		        	type : "POST",
 		        	url  : "<%=request.getContextPath()%>/shop_order_detail.do",
+		        	dataType: 'json',
 		        	data : {
 		        		action : "getById",
 		        		order_id : $(this).val(),
 		        	},
 		        	success : function(data){
 		        		console.log(data);
-		        		let str = "";
-		        		str += "<table>"+
-					            	"<thead>"+
-					    			"<tr>"+
-					    				"<th id='td_de1'><span>產品編號</span></th>"+
-					    				"<th id='td_de2'><span>名稱</span></th>"+
-					    				"<th id='td_de3'><span>數量</span></th>"+
-					    			"</tr>"+
-					    		"</thead>";
-					    for(let index = 0 ; index < data.length ; index++) {
-					    str+=	"<tr>"+
-					    			"<td>" + data[index].name + "</td>"+
-					    			"<td>" + data[index].price + "</td>"+
-					    			"<td>" + data[index].sum + "</td>"+			
-					    	    	"<td>"+
+		        		console.log(data.length);
+			        		let str = "";
+			        		str += "<table>"+
+						            	"<thead>"+
+							    			"<tr>"+
+							    				"<th id='td_de1' style='width:50%'><span>產品編號</span></th>"+
+							    				"<th id='td_de2' style='width:15%'><span>名稱</span></th>"+
+							    				"<th id='td_de3' style='width:15%'><span>數量</span></th>"+
+							    				"<th id='td_de4' style='width:10%'></th>"+
+							    				"<th id='td_de4' style='width:10%'></th>"+
+							    			"</tr>"+
+						    			"</thead>";
+						    for(let index = 0 ; index < data.length ; index++) {
+						    str+=	
+						    	"<tr>"+
+						    		"<td>" + data[index].name + "</td>"+
+						    		"<td>" + data[index].price + "</td>"+
+						    		"<td>" + data[index].sum + "</td>"+			
+						    	    "<td>"+
+						    			"<FORM METHOD='post' ACTION='shop_order_detail.do' style='position: relative;'>"+
+						    				"<input type='submit' value='修改' style='position: absolute; opacity: 0;'>"+
+						    				"<input type='image' src='<%=request.getContextPath()%>/back_end/backFrame/image/changeicon.png' alt='Submit' align='right' class='img-fluid'/>"+
+						   					"<input type='hidden' name='sq_stock_id'  value='${orderVO.sq_order_id}'>"+
+											"<input type='hidden' name='action'	value='getOneForUpdate'>"+
+						  				"</FORM>"+
+						   			 "</td>"+
+						   			 "<td>"+
 					    				"<FORM METHOD='post' ACTION='shop_order_detail.do' style='position: relative;'>"+
-					    					"<input type='submit' value='修改' style='position: absolute; opacity: 0;'>"+
-					    					"<input type='image' src='<%=request.getContextPath()%>/back_end/backFrame/image/changeicon.png' alt='Submit' align='right' class='img-fluid'/>"+
-					    					"<input type='hidden' name='sq_stock_id'  value='${orderVO.sq_order_id}'>"+
-					   						"<input type='hidden' name='action'	value='getOneForUpdate'>"+
-					   					"</FORM>"+
-					   				 "</td>"+
-					   				 "<td>"+
-				    					"<FORM METHOD='post' ACTION='shop_order_detail.do' style='position: relative;'>"+
-				    						"<input type='submit' value='修改' style='position: absolute; opacity: 0;''>"+
+					    					"<input type='submit' value='修改' style='position: absolute; opacity: 0;''>"+
 					    					"<input type='image' src='<%=request.getContextPath()%>/back_end/backFrame/image/delicon.png' alt='Submit' align='right' class='img-fluid'/>"+
 					    					"<input type='hidden' name='sq_stock_id' value='${orderVO.sq_order_id}'>"+
 					    					"<input type='hidden' name='action' value='delete'>"+
 					   					"</FORM>"+
 					   				"</td>"  +        
-					   			"</tr>";
-					    	}				    					
-					    str+= "</table>";
-					    
-					    $(".modal-body").empty();
-  						$(".modal-body").append(str);
+						   		"</tr>";
+						    }				    					
+						    str+= "</table>";
+						    
+						    $(".modal-body").empty();
+	  						$(".modal-body").append(str);
 		        	}
 		        });
 		    });
 		});
+
      </script>
 <%@ include file="/back-end/backFrame/backFooter" %>

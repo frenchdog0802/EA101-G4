@@ -11,8 +11,7 @@
 %>
 
 
-<html>
-<head>
+<%@include file="/back-end/backFrame/backHeader"%>
 <title>所有活動檢舉資料 - listAllActReport.jsp</title>
 
 <style>
@@ -57,17 +56,24 @@
 	text-overflow: ellipsis;
   }
 </style>
-
-</head>
-<body bgcolor='white'>
-
-<h4>此頁練習採用 EL 的寫法取值:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>所有活動檢舉資料 - listAllActReport.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/reportActivity/select_ActReportpage.jsp"><img src="<%=request.getContextPath()%>/back-end/activity/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
+<%@include file="/back-end/backFrame/backBody"%>
+<div class="row" style="background-color: white;">
+					<ul class="nav nav-tabs">
+					  <li class="nav-item">
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/listAllAct.jsp"><span>活動管理</span></a><!--在哪一個頁面就哪加active和span的style-->
+					  </li>
+					  <li class="nav-item">
+					   	<a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/addAct.jsp"><span>新增活動</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/joinActivity/listAllActJoin.jsp"><span>參加會員管理</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/reportActivity/listAllActReport.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">檢舉活動管理</span></a>
+					  </li>
+					</ul>
+				</div>	
+<%@include file="/back-end/backFrame/backNav"%>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -78,7 +84,12 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do" >
+        <b>輸入活動檢舉編號 (如710000):</b>
+        <input type="text" name="sq_activityreport_id">
+        <input type="hidden" name="action" value="getOne_For_Display">
+        <input type="submit" value="送出">
+    </FORM>
 <table class="table1">
 	<tr>
 		<th>活動檢舉編號</th>
@@ -105,12 +116,11 @@
 			</td>
 			<td>
 				<p>0.檢舉未處理</p>
-				<p>1.檢舉已處理</p>
+				<p>1.檢舉成功</p>
+				<p>2.檢舉失敗</p>
 			</td>
 		</tr>
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>
-
-</body>
-</html>
+<%@include file="/back-end/backFrame/backFooter"%>

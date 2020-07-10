@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import com.act.model.*;
 import com.actreport.model.ActReportService;
 import com.actreport.model.ActReportVO;
 
@@ -123,15 +122,15 @@ public class ActReportServlet extends HttpServlet {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String sq_activityreport_id = new String(req.getParameter("sq_activityreport_id"));
 				Integer report_status = null;
-				String report_statusReg = "^[(0-1)]{1,1}$";
+				String report_statusReg = "^[(0-2)]{1,1}$";
 				try {
 					report_status = new Integer(req.getParameter("report_status").trim());
 				} catch (NumberFormatException e) {
 					report_status = 0;
-					errorMsgs.add("檢舉處理狀態請填0或1.");
+					errorMsgs.add("檢舉處理狀態請填0到2.");
 				}
 				if (!report_status.toString().matches(report_statusReg)) {
-					errorMsgs.add("檢舉處理狀態請填0或1.");
+					errorMsgs.add("檢舉處理狀態請填0到2.");
 				} 
 
 				ActReportVO actreportVO = new ActReportVO();

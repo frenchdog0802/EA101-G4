@@ -7,6 +7,7 @@ import java.util.Set;
 public class TestJDBCDAO {
 	public static void main(String[] args) {
 		RouteJDBCDAO dao = new RouteJDBCDAO();
+		
 
 //		 insert
 //		RouteVO rou1 = new RouteVO();
@@ -37,19 +38,19 @@ public class TestJDBCDAO {
 //		dao.updateByMem(rou2);
 //		
 //		//updateByStaf
-		RouteVO rou3 = new RouteVO();
-		rou3.setRouteName("工欲善其事");
-		rou3.setDistance(94.87);
-		rou3.setCountry("台灣");
-		rou3.setStartArea("龜山島");
-		rou3.setEndArea("龜山島");
-		rou3.setRouteImage(null);
-		rou3.setRouteIntroduction("測試成功吧！！！！");
-		rou3.setInsertTimestamp(java.sql.Timestamp.valueOf("2020-06-14 00:00:00"));
-		rou3.setCheckFlag(1);
-		rou3.setAddRoute(1);
-		rou3.setSqStaffId("2");
-		dao.updateByStaf(rou3);
+//		RouteVO rou3 = new RouteVO();
+//		rou3.setRouteName("工欲善其事");
+//		rou3.setDistance(94.87);
+//		rou3.setCountry("台灣");
+//		rou3.setStartArea("龜山島");
+//		rou3.setEndArea("龜山島");
+//		rou3.setRouteImage(null);
+//		rou3.setRouteIntroduction("測試成功吧！！！！");
+//		rou3.setInsertTimestamp(java.sql.Timestamp.valueOf("2020-06-14 00:00:00"));
+//		rou3.setCheckFlag(1);
+//		rou3.setAddRoute(1);
+//		rou3.setSqStaffId("2");
+//		dao.updateByStaf(rou3);
 //		
 //		
 //		//delete
@@ -76,26 +77,26 @@ public class TestJDBCDAO {
 //		System.out.println("---------------------");
 //		
 		//查詢全部路線
-//		List<RouteVO> list = dao.getAll();
-//		System.out.println(list.size());
-//		for (RouteVO aRou : list) {
-//			System.out.print(aRou.getSqRouteId() + ",");
-//			System.out.print(aRou.getSqMemberId() + ",");
-//			System.out.print(aRou.getSqStaffId() + ",");
-//			System.out.print(aRou.getRouteName() + ",");
-//			System.out.print(aRou.getDistance() + ",");
-//			System.out.print(aRou.getCountry() + ",");
-//			System.out.print(aRou.getStartArea() + ",");
-//			System.out.print(aRou.getEndArea() + ",");
-//			System.out.print(aRou.getRouteImage() + ",");
-//			System.out.print(aRou.getRouteIntroduction() + ",");
-//			System.out.print(aRou.getInsertTimestamp() + ",");
-//			System.out.print(aRou.getUpdateTimestamp() + ",");
-//			System.out.print(aRou.getModifyId() + ",");
-//			System.out.print(aRou.getCheckFlag() + ",");
-//			System.out.print(aRou.getAddRoute());
-//			System.out.println("---------------------");
-//		}
+		List<RouteVO> list = dao.getAll();
+		System.out.println(list.size());
+		for (RouteVO aRou : list) {
+			System.out.print(aRou.getSqRouteId() + ",");
+			System.out.print(aRou.getSqMemberId() + ",");
+			System.out.print(aRou.getSqStaffId() + ",");
+			System.out.print(aRou.getRouteName() + ",");
+			System.out.print(aRou.getDistance() + ",");
+			System.out.print(aRou.getCountry() + ",");
+			System.out.print(aRou.getStartArea() + ",");
+			System.out.print(aRou.getEndArea() + ",");
+			System.out.print(aRou.getRouteImage() + ",");
+			System.out.print(aRou.getRouteIntroduction() + ",");
+			System.out.print(aRou.getInsertTimestamp() + ",");
+			System.out.print(aRou.getUpdateTimestamp() + ",");
+			System.out.print(aRou.getModifyId() + ",");
+			System.out.print(aRou.getCheckFlag() + ",");
+			System.out.print(aRou.getAddRoute());
+			System.out.println("---------------------");
+		}
 		
 		
 		//查詢某區域內的路線

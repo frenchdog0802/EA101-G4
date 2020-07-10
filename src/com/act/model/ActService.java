@@ -44,7 +44,7 @@ public class ActService {
 		return actVO;
 	}
 
-	public ActVO updateAct(String sq_route_id, String sq_member_id, String act_title,
+	public ActVO updateAct(String sq_route_id, String sq_member_id,String act_title,
 			Integer max_population, Integer min_population, Date start_time,
 			Date end_time, Date act_start_time,Date act_end_time, String act_description,
 			byte[] act_picture, Integer gp_status, String sq_activity_id) {

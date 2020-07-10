@@ -6,10 +6,14 @@
   ActVO actVO = (ActVO) request.getAttribute("actVO"); //ActServlet.java (Concroller) 存入req的actVO物件 (包括幫忙取出的actVO, 也包括輸入資料錯誤時的actVO物件)
 %>
 
-<html>
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<%@include file="/back-end/backFrame/backHeader"%>
 <title>活動資料修改 - update_act_input.jsp</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/modern-business.css" rel="stylesheet">
 
 <style>
   table#table-1 {
@@ -45,215 +49,291 @@
   resize: none;
   }
 </style>
+<%@include file="/back-end/backFrame/backBody"%>
+<div class="row" style="background-color: white;">
+					<ul class="nav nav-tabs">
+					  <li class="nav-item">
+					    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/activity/listAllAct.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">活動管理</span></a><!--在哪一個頁面就哪加active和span的style-->
+					  </li>
+					  <li class="nav-item">
+					   	<a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/addAct.jsp"><span>新增活動</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/joinActivity/listAllActJoin.jsp"><span>參加會員管理</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/reportActivity/listAllActReport.jsp"><span>檢舉活動管理</span></a>
+					  </li>
+					</ul>
+				</div>	
+<%@include file="/back-end/backFrame/backNav"%>
+<div class="container my-5">
+	<h3>資料修改:</h3>
 
-</head>
-<body bgcolor='white'>
-
-<table id="table-1">
-	<tr><td>
-		 <h3>活動資料修改 - update_act_input.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/activity/select_page.jsp"><img src="<%=request.getContextPath()%>/back-end/activity/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
-
-<h3>資料修改:</h3>
-
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
-
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActServlet.do" name="form1" enctype="multipart/form-data">
-<table>
-	<tr>
-		<td>活動編號:<font color=red><b>*</b></font></td>
-		<td><%=actVO.getSq_activity_id()%></td>
-	</tr>
-	<jsp:useBean id="actSvc" scope="page" class="com.act.model.ActService" />
-	<tr>
-		<td>活動路線:</td>
-		<td><select size="1" name="sq_route_id">
-			<c:forEach var="actVO" items="${actSvc.all}">
-				<option value="${actVO.sq_route_id}" >${actVO.sq_route_id}</option>
-												<% //用EL寫法才可以KEEP原本的資料,就算出錯也不用重新填寫,用java寫法會出錯%>
+	<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
 			</c:forEach>
-		</select></td>
-	</tr>
-<!-- 	----此欄是會員編號,但不論前台或後台都不給改(因為已經綁定主揪者的會員編號) -->
-	<tr>
-		<td><input type="hidden" name="sq_member_id" size="45" 
-			 value="<%= actVO.getSq_member_id()%>" /></td>
-	</tr>
-	<tr>
-		<td>活動標題:</td>
-		<td><input type="TEXT" name="act_title" size="45"	value="<%=actVO.getAct_title()%>" /></td>
-	</tr>
-	<tr>
-		<td>上限人數:</td>
-		<td><input type="TEXT" name="max_population" size="3"	value="<%=actVO.getMax_population()%>" /></td>
-	</tr>
-	<tr>
-		<td>最低人數:</td>
-		<td><input type="TEXT" name="min_population" size="3"	value="<%=actVO.getMin_population()%>" /></td>
-	</tr>
-	<tr>
-		<td>報名起始時間:</td>
-		<td><input name="start_time" id="start_time" type="text" value="<%=actVO.getStart_time()%>" onchange="function1()"/></td>
-	</tr>
-	<tr>
-		<td>報名結束時間:</td>
-		<td><input name="end_time" id="end_time" type="text" value="<%=actVO.getEnd_time()%>" onchange="function2()" readonly="readonly"/></td>
-	</tr>
-	<tr>
-		<td>活動開始時間:</td>
-		<td><input name="act_start_time" id="act_start_time" type="text" value="<%=actVO.getAct_start_time()%>" onchange="function3()" readonly="readonly"/></td>
-	</tr>
-	<tr>
-		<td>活動結束時間:</td>
-		<td><input name="act_end_time" id="act_end_time" type="text" value="<%=actVO.getAct_end_time()%>" readonly="readonly"/></td>
-	</tr>
-	<tr>
-		<td>活動說明:</td>
-		<td><textarea name="act_description" id="textarea1" rows=10 cols=47><%=actVO.getAct_description()%></textarea></td>
-	</tr>
-	<tr>
-		<td>原本圖片:</td>
-		<td><img src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'" width=250 height="150"></td>
-	</tr>	
-	<tr>
+		</ul>
+	</c:if>
 
-		<td>活動圖片:</td>
-		<td>
-		<input type="FILE" name="act_picture" accept=".jpg,.png,.jpeg" onchange="loadImageFile(event)">
-		<input type="hidden" name="act_picture" size="45" 
-			 value="<%= (actVO==null)? "" : actVO.getAct_picture()%>" />
-		<img id="image" src="" >
-		</td>
-	</tr>
-	<tr>
-		<td>成團狀態:</td>
-		<td><input type="TEXT" name="gp_status" size="45"	value="<%=actVO.getGp_status()%>" /></td>
-	</tr>
+	<form METHOD="post"
+		ACTION="<%=request.getContextPath()%>/act/ActServlet.do" name="form1"
+		enctype="multipart/form-data">
+		<div class="form-group row">
+			<label for="inputActivityId3" class="col-sm-2 col-form-label">活動編號<font
+				color=red><b>*</b></font></label>
+			<div class="col-sm-10">
+				<%=actVO.getSq_activity_id()%>
+			</div>
+		</div>
+		<jsp:useBean id="routeSvc" scope="page" class="com.route.model.RouteService" />
+		<div class="form-group row">
+			<label for="selectActRoute3" class="col-sm-2 col-form-label">活動路線</label>
+			<div class="col-sm-10">
+				<select class="custom-select" id="selectActRoute3"
+					name="sq_route_id">
+					<c:forEach var="routeVO" items="${routeSvc.all}">
+						<option value="${routeVO.sqRouteId}" ${(actVO.sq_route_id==routeVO.sqRouteId)?'selected':'' }>${routeVO.sqRouteId}</option>
+					</c:forEach>
+				</select>
+			</div>
+		</div>
 
-</table>
-<br>
-<input type="hidden" name="action" value="update">
-<input type="hidden" name="sq_activity_id" value="<%=actVO.getSq_activity_id()%>">
-<input type="submit" value="送出修改"></FORM>
-</body>
+		<!-- 	----此欄是會員編號,但不論前台或後台都不給改(因為已經綁定主揪者的會員編號) -->
+			<input type="hidden" name="sq_member_id" size="45" value="<%=actVO.getSq_member_id()%>" />
+				
+		<div class="form-group row">
+			<label for="inputActivityTitle3" class="col-sm-2 col-form-label">活動標題</label>
+			<div class="col-sm-10">
+				<input type="TEXT" name="act_title" size="45"
+					value="<%=actVO.getAct_title()%>" />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputMaxPopulation3" class="col-sm-2 col-form-label">上限人數</label>
+			<div class="col-sm-10">
+				<input type="TEXT" name="max_population" size="3"
+					value="<%=actVO.getMax_population()%>" />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputMinPopulation3" class="col-sm-2 col-form-label">最低人數</label>
+			<div class="col-sm-10">
+				<input type="TEXT" name="min_population" size="3"
+					value="<%=actVO.getMin_population()%>" />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputStartTime3" class="col-sm-2 col-form-label">報名起始時間</label>
+			<div class="col-sm-10">
+				<input name="start_time" id="start_time" type="text"
+					value="<%=actVO.getStart_time()%>" onchange="function1()" />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputEndTime3" class="col-sm-2 col-form-label">報名結束時間</label>
+			<div class="col-sm-10">
+				<input name="end_time" id="end_time" type="text"
+					value="<%=actVO.getEnd_time()%>" onchange="function2()"
+					readonly="readonly" />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputActStartTime3" class="col-sm-2 col-form-label">活動開始時間</label>
+			<div class="col-sm-10">
+				<input name="act_start_time" id="act_start_time" type="text"
+					value="<%=actVO.getAct_start_time()%>" onchange="function3()"
+					readonly="readonly" />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputActEndTime3" class="col-sm-2 col-form-label">活動結束時間</label>
+			<div class="col-sm-10">
+				<input name="act_end_time" id="act_end_time" type="text"
+					value="<%=actVO.getAct_end_time()%>" readonly="readonly" />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputTextArea3" class="col-sm-2 col-form-label">活動說明</label>
+			<div class="col-sm-10">
+				<textarea name="act_description" id="textarea1" rows=10 cols=47><%=actVO.getAct_description()%></textarea>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="originalimg" class="col-sm-2 col-form-label">原本圖片</label>
+			<div class="col-sm-10">
+				<img
+					src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'"
+					width=250 height="150">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="exampleFormControlFile1" class="col-sm-2 col-form-label">活動圖片</label>
+			<div class="col-sm-10">
+				<input type="FILE" name="act_picture" accept=".jpg,.png,.jpeg"
+					onchange="loadImageFile(event)"> <input type="hidden"
+					name="act_picture" size="45"
+					value="<%=(actVO == null) ? "" : actVO.getAct_picture()%>" /> <img
+					id="image" src="">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputGp_Status3" class="col-sm-2 col-form-label">成團狀態</label>
+			<div class="col-sm-10">
+				<input type="TEXT" name="gp_status" size="45"
+					value="<%=actVO.getGp_status()%>" />
+			</div>
+		</div>
 
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label"></label>
+			<div class="col-sm-10">
+				<input type="hidden" name="action" value="update">
+				<input type="hidden" name="sq_activity_id"
+					   value="<%=actVO.getSq_activity_id()%>">
+				<input type="submit" value="送出修改" class="btn btn-primary">
+				<input type="button" value="返回列表" class="btn btn-primary"
+						id="returnlist"> 
+			</div>
+		</div>
+	</form>
+</div>
+<%@include file="/back-end/backFrame/backFooter"%>
 
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
-
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-
+<script
+	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 <style>
-  .xdsoft_datetimepicker .xdsoft_datepicker {
-           width:  300px;   /* width:  300px; */
-  }
-  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-           height: 151px;   /* height:  151px; */
-  }
+.xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
 </style>
 
 <script>
 $.datetimepicker.setLocale('zh'); // kr ko ja en
 $(function(){
-	 $('#start_time').datetimepicker({
+	 $('#inputStartTime3').datetimepicker({
 	  format:'Y-m-d',
 	  onShow:function(){
 	   this.setOptions({
-	    maxDate:$('#end_time').val()?$('#end_time').val():false
+	    maxDate:$('#inputEndTime3').val()?$('#inputEndTime3').val():false
 	   })
 	  },
 	  minDate:'-1970-01-01',
-	  value: '<%=actVO.getStart_time()%>',
 	  validateOnBlur: true,
-	  timepicker:false
+	  timepicker:false,
+	  scrollMonth : false,
+	  scrollInput : false
 	 });
 	 
-	 $('#end_time').datetimepicker({
+	 $('#inputEndTime3').datetimepicker({
 	  format:'Y-m-d',
 	  onShow:function(){
 	   this.setOptions({
-	    minDate:$('#start_time').val()?$('#start_time').val():false,
-	    maxDate:$('#act_start_time').val()?$('#act_start_time').val():false	
+	    minDate:$('#inputStartTime3').val()?$('#inputStartTime3').val():false,
+	    maxDate:$('#inputActStartTime3').val()?$('#inputActStartTime3').val():false	
 	   })
 	  },
-	  value: '<%=actVO.getEnd_time()%>',
 	  validateOnBlur: true,
-	  timepicker:false
+	  timepicker:false,
+	  scrollMonth : false,
+	  scrollInput : false
 	 });
 	 
-	 $('#act_start_time').datetimepicker({
+	 $('#inputActStartTime3').datetimepicker({
 		  format:'Y-m-d',
 		  onShow:function(){
 		   this.setOptions({
-		    minDate:$('#end_time').val()?$('#end_time').val():false,
-		   	maxDate:$('#act_end_time').val()?$('#act_end_time').val():false		
+		    minDate:$('#inputEndTime3').val()?$('#inputEndTime3').val():false,
+		   	maxDate:$('#inputActEndTime3').val()?$('#inputActEndTime3').val():false		
 		   })
 		  },
-		  value: '<%=actVO.getAct_start_time()%>',
 		  validateOnBlur: true,
-		  timepicker:false
+		  timepicker:false,
+		  scrollMonth : false,
+		  scrollInput : false
 		 });
 	 
-	 $('#act_end_time').datetimepicker({
+	 $('#inputActEndTime3').datetimepicker({
 		  format:'Y-m-d',
 		  onShow:function(){
 		   this.setOptions({
-		    minDate:$('#act_start_time').val()?$('#act_start_time').val():false
+		    minDate:$('#inputActStartTime3').val()?$('#inputActStartTime3').val():false
 		   })
 		  },
-		  value: '<%=actVO.getAct_end_time()%>',
 		  validateOnBlur: true,
-		  timepicker:false
+		  timepicker:false,
+		  scrollMonth : false,
+		  scrollInput : false
 		 });
 });
-
-
 	//當日期有輸入資料時解索下一格日期資料
-	$("#start_time").change(function myfunction1() {
-		if (!($(this).val() == "")) {
-			$("#end_time").prop('readonly', false);
+	$("#inputStartTime3").change(function myfunction1(){		
+		if(!($(this).val() == "")){
+			$("#inputEndTime3").prop('readonly', false);
 		}
-		if (($(this).val() == "")) {
-			$("#end_time").prop('readonly', true);
-		}
-	});
-	$("#end_time").change(function myfunction2() {
-		if (!($(this).val() == "")) {
-			$("#act_start_time").prop('readonly', false);
-		}
-		if (($(this).val() == "")) {
-			$("#act_start_time").prop('readonly', true);
+		if(($(this).val() == "")){
+			$("#inputEndTime3").prop('readonly', true);
 		}
 	});
-	$("#act_start_time").change(function myfunction3() {
-		if (!($(this).val() == "")) {
-			$("#act_end_time").prop('readonly', false);
+	$("#inputEndTime3").change(function myfunction2(){
+		if(!($(this).val() == "")){
+			$("#inputActStartTime3").prop('readonly', false);
 		}
-		if (($(this).val() == "")) {
-			$("#act_end_time").prop('readonly', true);
+		if(($(this).val() == "")){
+			$("#inputActStartTime3").prop('readonly', true);
 		}
 	});
-
-	//圖片預覽
-	function loadImageFile(event) {
-		var image = document.getElementById('image');
-		image.src = URL.createObjectURL(event.target.files[0]);
-		image.width = 250;
-		image.height = 150;
-	};
-
+	$("#inputActStartTime3").change(function myfunction3(){
+		if(!($(this).val() == "")){
+			$("#inputActEndTime3").prop('readonly', false);
+		}
+		if(($(this).val() == "")){
+			$("#inputActEndTime3").prop('readonly', true);
+		}	
+	});
+        
+        //圖片預覽
+        function loadImageFile(event){ 
+  			var image = document.getElementById('image'); 
+  			image.src = URL.createObjectURL(event.target.files[0]);
+  			image.width = 250;
+  			image.height = 150;
+  		};
+  		
+  		//返回列表
+  		$("#returnlist").click(function(){
+			window.location = '<%=request.getContextPath()%>/back-end/activity/listAllAct.jsp'
+		});
+		
+		$("#actreport").click(function(){
+			$("#basicModal").modal({show: true});
+		});
+		
+		//神奇小按鈕
+		$("#magic").click(function(){
+			$("#inputActivityTitle3").val("平台推薦新手風景漂亮路線");
+			$("#selectActRoute3").val("RP110007");
+			$("#inputMaxPopulation3").val("10");
+			$("#inputMinPopulation3").val("5");
+			$("#inputStartTime3").val("2020-07-23");
+			$("#inputEndTime3").val("2020-07-27");
+			$("#inputActStartTime3").val("2020-08-10");
+			$("#inputActEndTime3").val("2020-08-15");
+			$("#inputTextArea3").val("主要的生態特色為濕地生態系統，包括埤塘、水田、鹽田、河口沼澤、沿岸沙洲、潟湖、潮汐灘地等，例如外傘頂洲、好美寮溼地、鰲鼓濕地、北門潟湖。七股潟湖的周圍景觀是此風景區的重點");
+		});
 	// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
 
 	//      1.以下為某一天之前的日期無法選擇

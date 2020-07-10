@@ -34,6 +34,7 @@ import com.bike.rent.master.model.BikeRentMasterVO;
 import com.bike.type.model.BikeTypeService;
 import com.google.gson.Gson;
 
+
 public class BikeRentDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -51,7 +52,7 @@ public class BikeRentDetailServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
 
-		// initResv
+		// initResv------------------------------------------------------------------------------------------
 		if ("initResv".equals(action)) {
 //上限改成session 取得店家id資料			
 			String sq_bike_store_id = "620001";
@@ -66,7 +67,6 @@ public class BikeRentDetailServlet extends HttpServlet {
 				session.setAttribute("sq_rent_id", sq_rent_id);
 			}
 
-//			String sq_rent_id = "RTX6987656";
 			// 取得初始參數
 			BikeRentMasterService bikeRentMasterSvc = new BikeRentMasterService();// 先採取一張這個用不到
 			BikeRentDetailService bikeRentDetailSvc = new BikeRentDetailService();
@@ -78,7 +78,7 @@ public class BikeRentDetailServlet extends HttpServlet {
 			storeBikeList = bikeVOList.stream().filter(p -> p.getSq_bike_store_id().equals(sq_bike_store_id))
 					.collect(Collectors.toList());
 
-// 找出是這間店的訂單 //要改成連結過來
+
 			// 所有訂單明細編號
 			List<BikeRentDetailVO> bikeRentDetailList = bikeRentDetailSvc.getAll();
 
@@ -115,9 +115,6 @@ public class BikeRentDetailServlet extends HttpServlet {
 			initMap.put("returnList", storeRetailVOList);
 			JSONObject initJSONObject = new JSONObject(initMap);
 			out.println(initJSONObject);
-//			request.setAttribute("storeRetailVOList", storeRetailVOList);
-//			RequestDispatcher successView = request.getRequestDispatcher("/back-end/bike/bikeDetailResv.jsp");
-//			successView.forward(request, response);
 		}
 
 		// 取消單車
@@ -175,7 +172,9 @@ public class BikeRentDetailServlet extends HttpServlet {
 			List<BikeRentMasterVO> storeRentIdList = bikeRentMasterSvc.getRentMasterIdIsVaild(sq_bike_store_id, 1);
 			// 所有訂單明細編號
 			List<BikeRentDetailVO> bikeRentDetailList = bikeRentDetailSvc.getAll();
-
+//			---------------------------->>
+		
+//-------------------------------------<<
 			// 找出這間店訂單明細VO 裝入list
 			LinkedList<BikeRentDetailVO> storeRetailVOList = new LinkedList<>();
 
@@ -198,8 +197,8 @@ public class BikeRentDetailServlet extends HttpServlet {
 			out.println(initJSONObject);
 		}
 
-//MasterPage------------------------------------------------------------------------------------------------------------------
-		if ("initMaster".equals(action)) {
+//MasterResvPage------------------------------------------------------------------------------------------------------------------
+		if ("initResvMaster".equals(action)) {
 			// 上限改成session 取得店家id資料
 			String sq_bike_store_id = "620001";
 			// 取得初始參數
@@ -217,8 +216,7 @@ public class BikeRentDetailServlet extends HttpServlet {
 			for (BikeRentDetailVO BikeRentDetailVO : bikeRentDetailList) {
 				for (BikeRentMasterVO BikeRentMasterVO : storeMaster) {
 					if (BikeRentDetailVO.getSq_rent_id().equals(BikeRentMasterVO.getSq_rent_id())) {
-						resvTime.put(BikeRentDetailVO.getSq_rent_id(),
-								BikeRentDetailVO.getRsved_rent_date().toString());
+						resvTime.put(BikeRentDetailVO.getSq_rent_id(),BikeRentDetailVO.getRsved_rent_date().toString());	
 					}
 				}
 			}
@@ -228,6 +226,7 @@ public class BikeRentDetailServlet extends HttpServlet {
 			JSONObject responseJson = new JSONObject(map);
 			out.println(responseJson);
 		}
+		
 
 		if ("searchResvRentId".equals(action)) {
 			// 上限改成session 取得店家id資料
@@ -251,6 +250,36 @@ public class BikeRentDetailServlet extends HttpServlet {
 					if (BikeRentDetailVO.getSq_rent_id().equals(BikeRentMasterVO.getSq_rent_id())) {
 						resvTime.put(BikeRentDetailVO.getSq_rent_id(),
 								BikeRentDetailVO.getRsved_rent_date().toString());
+					}
+				}
+			}
+			HashMap map = new HashMap();
+			map.put("storeMaster", storeMaster);
+			map.put("resvTime", resvTime);
+			JSONObject responseJson = new JSONObject(map);
+			out.println(responseJson);
+		}
+		
+//		MasterEx--------------------------------------------------------------------------------------------------------------
+		if ("initExMaster".equals(action)) {
+			// 上限改成session 取得店家id資料
+			String sq_bike_store_id = "620001";
+			// 取得初始參數
+			BikeRentMasterService bikeRentMasterSvc = new BikeRentMasterService();
+			BikeRentDetailService bikeRentDetailSvc = new BikeRentDetailService();
+			// 找出是這間店的訂單
+			List<BikeRentMasterVO> storeRentList = bikeRentMasterSvc.getRentMasterIdIsVaild(sq_bike_store_id, 1);
+			List<BikeRentMasterVO> storeMaster = null;
+			storeMaster = storeRentList.stream().filter(p -> p.getSq_bike_store_id().equals(sq_bike_store_id))
+					.collect(Collectors.toList());
+			// 裝入回程時間
+			Map<String, String> resvTime = new LinkedHashMap<>();
+			List<BikeRentDetailVO> bikeRentDetailList = bikeRentDetailSvc.getAll();
+			// 比對訂單跟明細的編號並找出出發時間
+			for (BikeRentDetailVO BikeRentDetailVO : bikeRentDetailList) {
+				for (BikeRentMasterVO BikeRentMasterVO : storeMaster) {
+					if (BikeRentDetailVO.getSq_rent_id().equals(BikeRentMasterVO.getSq_rent_id())) {
+						resvTime.put(BikeRentDetailVO.getSq_rent_id(),BikeRentDetailVO.getEx_return_date().toString());	
 					}
 				}
 			}

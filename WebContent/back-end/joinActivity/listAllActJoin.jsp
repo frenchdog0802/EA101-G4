@@ -10,9 +10,7 @@
     pageContext.setAttribute("list",list);
 %>
 
-
-<html>
-<head>
+<%@include file="/back-end/backFrame/backHeader"%>
 <title>所有活動的參加會員資料 - listAllActjoin.jsp</title>
 
 <style>
@@ -58,17 +56,24 @@
   }
 </style>
 
-</head>
-<body bgcolor='white'>
-
-<h4>此頁練習採用 EL 的寫法取值:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>所有活動的參加會員資料 - listAllActjoin.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/joinActivity/select_actjoinpage.jsp"><img src="<%=request.getContextPath()%>/back-end/activity/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
-
+<%@include file="/back-end/backFrame/backBody"%>
+<div class="row" style="background-color: white;">
+					<ul class="nav nav-tabs">
+					  <li class="nav-item">
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/listAllAct.jsp"><span>活動管理</span></a><!--在哪一個頁面就哪加active和span的style-->
+					  </li>
+					  <li class="nav-item">
+					   	<a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/addAct.jsp"><span>新增活動</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/joinActivity/listAllActJoin.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">參加會員管理</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/reportActivity/listAllActReport.jsp"><span>檢舉活動管理</span></a>
+					  </li>
+					</ul>
+				</div>	
+<%@include file="/back-end/backFrame/backNav"%>
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -78,7 +83,12 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do" >
+        <b>輸入活動編號 (如ACT-700001):</b>
+        <input type="text" name="sq_activity_id">
+        <input type="hidden" name="action" value="getOne_For_Display">
+        <input type="submit" value="送出">
+    </FORM>
 <table class="table1">
 	<tr>
 		<th>活動編號</th>
@@ -87,6 +97,7 @@
 		
 	</tr>
 	<%@ include file="page1.file" %>
+	
 	<c:forEach var="actjoinVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">	
 		<tr>
 			<td>${actjoinVO.sq_activity_id}</td>
@@ -103,6 +114,4 @@
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>
-
-</body>
-</html>
+<%@include file="/back-end/backFrame/backFooter"%>
