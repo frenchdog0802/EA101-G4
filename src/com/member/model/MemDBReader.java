@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.member.model.*;
-;
+
 
 public class MemDBReader extends HttpServlet {
 
@@ -29,6 +29,8 @@ public class MemDBReader extends HttpServlet {
 //		HttpSession session = req.getSession();
 		try {
 			String sq_member_id = req.getParameter("sq_member_id");
+			
+			System.out.println("DBReader getsq_member_id="+ sq_member_id);
 			MemService MemService = new MemService();
 			byte[] baos = MemService.findByPrimaryKey(sq_member_id).getM_photo();
 			out.write(baos);
