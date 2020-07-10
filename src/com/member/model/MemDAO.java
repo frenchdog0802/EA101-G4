@@ -28,9 +28,12 @@ public class MemDAO implements MemDAO_interface {
 
 	private static final String INSERT_STMT = 
 			"INSERT INTO member (sq_member_id,member_account,password,m_name,gender,birthday,cellphone,m_email,validation,registered,m_photo,back_img,nick_name,address) VALUES (member_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT sq_member_id,member_account,password,m_name,gender,to_char(birthday,'yyyy-mm-dd') birthday,cellphone,m_email,validation,registered,m_photo,back_img,nick_name,address FROM member order by sq_member_id";
-	private static final String GET_ONE_STMT = "SELECT sq_member_id,member_account,password,m_name,gender,to_char(birthday,'yyyy-mm-dd') birthday,cellphone,m_email,validation,registered,m_photo,back_img,nick_name,address FROM member where sq_member_id = ?";// SELCET *FROM member sq_member_id?
-	private static final String DELETE = "DELETE FROM member where sq_member_id = ?";
+	private static final String GET_ALL_STMT = 
+			"SELECT sq_member_id,member_account,password,m_name,gender,to_char(birthday,'yyyy-mm-dd') birthday,cellphone,m_email,validation,registered,m_photo,back_img,nick_name,address FROM member order by sq_member_id";
+	private static final String GET_ONE_STMT = 
+			"SELECT sq_member_id,member_account,password,m_name,gender,to_char(birthday,'yyyy-mm-dd') birthday,cellphone,m_email,validation,registered,m_photo,back_img,nick_name,address FROM member where sq_member_id = ?";// SELCET *FROM member sq_member_id?
+	private static final String DELETE = 
+			"DELETE FROM member where sq_member_id = ?";
 	private static final String UPDATE =
 			"UPDATE member set  member_account=?, password=?, m_name=?, gender=?, birthday=?, cellphone=?, m_email=?, registered=?, m_photo=?, back_img=?, nick_name=?, address=? where sq_member_id = ?";
 	
