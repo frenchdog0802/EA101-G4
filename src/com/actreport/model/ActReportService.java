@@ -6,7 +6,7 @@ public class ActReportService {
 	private ActReportDAO_interface dao;
 
 	public ActReportService() {
-		dao = new ActReportJDBCDAO();
+		dao = new ActReportDAO();
 	}
 
 	public ActReportVO addActReport(String sq_activity_id, String sq_member_id, String report_reason) {

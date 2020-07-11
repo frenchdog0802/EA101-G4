@@ -2,6 +2,11 @@ package com.act.model;
 
 import java.util.*;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import com.actjoin.model.ActJoinJDBCDAO;
 import com.actjoin.model.ActJoinVO;
 
@@ -12,11 +17,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.*;
 
-public class ActJDBCDAO implements ActDAO_interface {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "EA101_G4";
-	String passwd = "EA101_G4";
+public class ActDAO implements ActDAO_interface {
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/EA101_G4");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static final String INSERT_STMT = "INSERT INTO ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) VALUES ( 'ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
 	private static final String UPDATE = "UPDATE ACTIVITY set SQ_ROUTE_ID=?, SQ_MEMBER_ID=?,ACT_TITLE=?, MAX_POPULATION=?, MIN_POPULATION=?, ACT_DESCRIPTION=?, START_TIME=?, END_TIME=?, ACT_START_TIME=?, ACT_END_TIME=?, ACT_PICTURE=?, GP_STATUS=? where SQ_ACTIVITY_ID = ?";
@@ -33,8 +43,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, actVO.getSq_route_id());
@@ -52,10 +61,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
+		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
@@ -85,8 +91,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 	
 			pstmt.setString(1, actVO.getSq_route_id());
@@ -106,10 +111,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
+		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
@@ -141,8 +143,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(CANCEL);
 
 			pstmt.setString(1, SQ_ACTIVITY_ID);
@@ -150,10 +151,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
+		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
@@ -184,8 +182,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 
 			try {
 
-				Class.forName(driver);
-				con = DriverManager.getConnection(url, userid, passwd);
+				con = ds.getConnection();
 				pstmt = con.prepareStatement(DELETE);
 
 				pstmt.setString(1, SQ_ACTIVITY_ID);
@@ -193,10 +190,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 				pstmt.executeUpdate();
 
 				// Handle any driver errors
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-				// Handle any SQL errors
-			} catch (SQLException se) {
+			}  catch (SQLException se) {
 				throw new RuntimeException("A database error occured. " + se.getMessage());
 				// Clean up JDBC resources
 			} finally {
@@ -229,8 +223,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, SQ_ACTIVITY_ID);
@@ -260,10 +253,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
+		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} catch (IOException e) {
@@ -305,8 +295,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -334,10 +323,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
+		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} catch (IOException e) {
@@ -376,8 +362,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			
 			// 1●設定於 pstm.executeUpdate()之前
     		con.setAutoCommit(false);
@@ -421,11 +406,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 			System.out.println("list.size()-B="+list.size());
 			
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
+		}  catch (SQLException se) {
 			if (con != null) {
 				try {
 					// 3●設定於當有exception發生時之catch區塊內
@@ -462,7 +443,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 
 	public static void main(String[] args) throws IOException {
 
-		ActJDBCDAO dao = new ActJDBCDAO();
+		ActDAO dao = new ActDAO();
 
 		byte[] pic = getPictureByteArray("C://DB_photos//NankanPark.jpg");
 		// 新增
