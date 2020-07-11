@@ -3,11 +3,25 @@ package com.store.model;
 import java.sql.*;
 import java.util.*;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class StoreDAO implements StoreDAO_interface{
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String user = "EA101_G4";
-	String password = "EA101_G4";
+//	String driver = "oracle.jdbc.driver.OracleDriver";
+//	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+//	String user = "EA101_G4";
+//	String password = "EA101_G4";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/EA101_G4");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public static final String INSERT = "INSERT INTO STORE_ADDRESS(SQ_STORE_ADDRESS_ID, STORE_NAME, STORE_ADDRESS_DETAIL, STORE_LONGITUDE, STORE_LATITUDE) "
 			+ "VALUES (SQ_STORE_ADDRESS_ID.NEXTVAL, ?, ?, ?, ?)";
@@ -21,8 +35,7 @@ public class StoreDAO implements StoreDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT);
 			
 			pstmt.setString(1, storeVO.getStore_name());
@@ -33,9 +46,6 @@ public class StoreDAO implements StoreDAO_interface{
 			pstmt.executeUpdate();
 			pstmt.clearParameters();
 			
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+ e.getMessage());
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -62,8 +72,6 @@ public class StoreDAO implements StoreDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
 			pstmt = con.prepareStatement(UPDATE);
 			
 			pstmt.setString(1, storeVO.getStore_name());
@@ -75,8 +83,6 @@ public class StoreDAO implements StoreDAO_interface{
 			pstmt.executeUpdate();
 			pstmt.clearParameters();
 			
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver." + e.getMessage());			
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured." +se.getMessage());
 		}finally {
@@ -102,8 +108,7 @@ public class StoreDAO implements StoreDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 			
 			pstmt.setString(1, sq_store_id);
@@ -111,8 +116,6 @@ public class StoreDAO implements StoreDAO_interface{
 			pstmt.executeUpdate();
 			pstmt.clearParameters();
 			
-		}catch(ClassNotFoundException se) {
-			throw new RuntimeException("Couldn't load database driver." + se.getMessage()) ;
 		}catch(SQLException e){
 			throw new RuntimeException("A database error occured." + e.getMessage());
 		}finally {
@@ -134,28 +137,23 @@ public class StoreDAO implements StoreDAO_interface{
 	}
 
 	@Override
-	public StoreVO findByPrimaryKey(String sq_store_id) {
+	public List<String> getShopName(String storeKey) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		StoreVO storeVO = null;
+		List<String> list = new ArrayList<String>();
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
-			pstmt = con.prepareStatement(GET_ONE);
-			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL);		
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
-				storeVO = new StoreVO();
-				storeVO.setSq_store_address_id(rs.getString("sq_address_id"));
-				storeVO.setStore_name(rs.getString("store_name"));
-				storeVO.setStore_address(rs.getString("store_address"));
-				storeVO.setLongitude(rs.getBigDecimal("longitude"));
-				storeVO.setLatitude(rs.getBigDecimal("latitude"));
+				String shopname = rs.getString("store_name");
+				String str = rs.getString("store_address_detail");
+				if(str.indexOf(storeKey) != -1) {
+					list.add(shopname);
+				}
 			}
-			pstmt.clearParameters();
-		}catch(ClassNotFoundException se){
-			throw new RuntimeException("Cloudn't load database driver." + se.getMessage());
 		}catch(SQLException e) {
 			throw new RuntimeException("A database error occured." + e.getMessage());
 		}finally {
@@ -181,7 +179,7 @@ public class StoreDAO implements StoreDAO_interface{
 				}
 			}
 		}
-		return storeVO;
+		return list;
 	}
 
 	@Override
@@ -192,8 +190,7 @@ public class StoreDAO implements StoreDAO_interface{
 		StoreVO storeVO = null;
 		List<StoreVO> list = new ArrayList<StoreVO>();
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL);		
 			rs = pstmt.executeQuery();
 			
@@ -208,8 +205,6 @@ public class StoreDAO implements StoreDAO_interface{
 				list.add(storeVO);
 			}
 			pstmt.clearParameters();
-		}catch(ClassNotFoundException se){
-			throw new RuntimeException("Cloudn't load database driver." + se.getMessage());
 		}catch(SQLException e) {
 			throw new RuntimeException("A database error occured." + e.getMessage());
 		}finally {

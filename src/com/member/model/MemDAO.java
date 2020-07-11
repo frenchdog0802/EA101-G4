@@ -23,6 +23,7 @@ public class MemDAO implements MemDAO_interface {
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
+
 }
 
 	private static final String INSERT_STMT = 

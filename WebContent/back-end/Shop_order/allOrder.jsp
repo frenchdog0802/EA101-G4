@@ -12,7 +12,7 @@
  	pageContext.setAttribute("list", list);
  %>   
  <%@ include file="/back-end/backFrame/backHeader"%>
- 	<link rel="stylesheet" type="text/css" href="backOrderCss.css">
+ 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/Shop_order/backOrderCss.css">
     <title>訂單後台</title>
  <%@ include file="/back-end/backFrame/backBody"%>
 				<div class="row" style="background-color: white;">
@@ -72,7 +72,6 @@
     									<th id="td_4"><span>取貨地址</span></th>
     									<th id="td_5"><span>明細</span></th>
     									<th id="td_6"><span>訂單日期</span></th>
-    									<th id="td_7"><span>訂單截止日</span></th>
     									<th id="td_8"><span>訂單總額</span></th>
     									<th id="td_9"><span>付款方式</span></th>
     									<th id="td_10"><span>狀態</span></th>
@@ -87,10 +86,10 @@
 				    					<td>${orderVO.sq_member_id}</td>
 				    					<td>${orderVO.order_address}</td>
 				    					<td>
-				    						<button value="${orderVO.sq_order_id}" type="button" class="btn btn-primary detail" data-toggle="modal" data-target="#Modal${orderVO.sq_order_id}">
+				    						<button value="${orderVO.sq_order_id}" type="button" class="btn btn-primary detail chose" data-toggle="modal" data-target="#Modal${orderVO.sq_order_id}">
                                                	 明細
                                             </button>
-                                            <div class="modal fade" id="Modal${orderVO.sq_order_id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal fade" id="Modal${orderVO.sq_order_id}" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">	
                                             	<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                                 	<div class="modal-content">
                                                     	<div class="modal-header">
@@ -100,18 +99,18 @@
                                                        		</button>
                                                     	</div>
                                                 	<div class="modal-body">
-                                                   	
+	                                                   	<jsp:include page="/back-end/Shop_order/orderDetail.jsp">
+														    <jsp:param name="id" value="${orderVO.sq_order_id}" />
+														</jsp:include>
                                                 	</div>
                                                     	<div class="modal-footer">
-                                                    		<button type="button" class="btn btn-secondary" data-dismiss="modal">Save</button>
                                                        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                     	</div>
                                                 	</div>
                                             	</div>
                                         	</div>
 				    					</td>
-				    					<td>${orderVO.order_date}</td>
-				    					<td>${orderVO.pay_deadline}</td>   
+				    					<td>${orderVO.order_date}</td>  
 				    					<td>${orderVO.shop_order_price}</td>
 				    					<td>
 				    						<c:if test="${orderVO.pay_mode == 1}">
@@ -139,16 +138,16 @@
 				    						</c:if>
 				    					</td>
 				    					<td>
-				    						<FORM METHOD="post" ACTION="shop_order.do" style="position: relative;">
+				    						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop_order.do" style="position: relative;">
 											    <input type="submit" value="修改" style="position: absolute; opacity: 0;">
-											    <input type="image" src="<%=request.getContextPath()%>/back_end/backFrame/image/changeicon.png" alt="Submit" align="right" class="img-fluid"/>
+											    <input type="image" src="<%=request.getContextPath()%>/back_end/backFrame/image/changeicon.png" alt="Submit" class="img-fluid"/>
 											    <input type="hidden" name="sq_stock_id"  value="${orderVO.sq_order_id}">
 											    <input type="hidden" name="action"	value="getOneForUpdate">
 											</FORM>
 				    					</td>
 				    					<td>
 										 	<FORM METHOD="post" ACTION="shop_order.do" style="position: relative;">
-										    	<input type="submit" value="修改" style="position: absolute; opacity: 0;">
+										    	<input type="submit" value="下架" style="position: absolute; opacity: 0;">
 											    <input type="image" src="<%=request.getContextPath()%>/back_end/backFrame/image/delicon.png" alt="Submit" align="right" class="img-fluid"/>
 										    	<input type="hidden" name="sq_stock_id" value="${orderVO.sq_order_id}">
 										    	<input type="hidden" name="action" value="delete">
@@ -166,66 +165,10 @@
 		 	</div>
      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-     <script>
-     $(document).ready(function() {
-			$('.modal').modal({
-				backdrop:'static', keyboard: false
-			});
-			$(".detail").click(function() {
-		        $.ajax({
-		        	type : "POST",
-		        	url  : "<%=request.getContextPath()%>/shop_order_detail.do",
-		        	dataType: 'json',
-		        	data : {
-		        		action : "getById",
-		        		order_id : $(this).val(),
-		        	},
-		        	success : function(data){
-		        		console.log(data);
-		        		console.log(data.length);
-			        		let str = "";
-			        		str += "<table>"+
-						            	"<thead>"+
-							    			"<tr>"+
-							    				"<th id='td_de1' style='width:50%'><span>產品編號</span></th>"+
-							    				"<th id='td_de2' style='width:15%'><span>名稱</span></th>"+
-							    				"<th id='td_de3' style='width:15%'><span>數量</span></th>"+
-							    				"<th id='td_de4' style='width:10%'></th>"+
-							    				"<th id='td_de4' style='width:10%'></th>"+
-							    			"</tr>"+
-						    			"</thead>";
-						    for(let index = 0 ; index < data.length ; index++) {
-						    str+=	
-						    	"<tr>"+
-						    		"<td>" + data[index].name + "</td>"+
-						    		"<td>" + data[index].price + "</td>"+
-						    		"<td>" + data[index].sum + "</td>"+			
-						    	    "<td>"+
-						    			"<FORM METHOD='post' ACTION='shop_order_detail.do' style='position: relative;'>"+
-						    				"<input type='submit' value='修改' style='position: absolute; opacity: 0;'>"+
-						    				"<input type='image' src='<%=request.getContextPath()%>/back_end/backFrame/image/changeicon.png' alt='Submit' align='right' class='img-fluid'/>"+
-						   					"<input type='hidden' name='sq_stock_id'  value='${orderVO.sq_order_id}'>"+
-											"<input type='hidden' name='action'	value='getOneForUpdate'>"+
-						  				"</FORM>"+
-						   			 "</td>"+
-						   			 "<td>"+
-					    				"<FORM METHOD='post' ACTION='shop_order_detail.do' style='position: relative;'>"+
-					    					"<input type='submit' value='修改' style='position: absolute; opacity: 0;''>"+
-					    					"<input type='image' src='<%=request.getContextPath()%>/back_end/backFrame/image/delicon.png' alt='Submit' align='right' class='img-fluid'/>"+
-					    					"<input type='hidden' name='sq_stock_id' value='${orderVO.sq_order_id}'>"+
-					    					"<input type='hidden' name='action' value='delete'>"+
-					   					"</FORM>"+
-					   				"</td>"  +        
-						   		"</tr>";
-						    }				    					
-						    str+= "</table>";
-						    
-						    $(".modal-body").empty();
-	  						$(".modal-body").append(str);
-		        	}
-		        });
-		    });
-		});
-
-     </script>
+  	 <script>
+  	 	$(".chose").click(function(){
+  	 		var a = $(this).val();
+  	 		console.log(a);
+  	 	});
+  	 </script>
 <%@ include file="/back-end/backFrame/backFooter" %>

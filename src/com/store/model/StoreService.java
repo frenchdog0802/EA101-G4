@@ -31,16 +31,17 @@ public class StoreService {
 		storeVO.setLatitude(latitude);
 		dao.update(storeVO);
 		
-		return dao.findByPrimaryKey(sq_address_id);
+		return storeVO;
 	}
 	
 	public void deleteStore(String sq_address_id) {		
 		dao.delete(sq_address_id);		
 	}
-	public StoreVO getOneStore(String sq_address_id) {
-		return dao.findByPrimaryKey(sq_address_id);
+	public List<String> getStoreName(String storeKey) {
+		return dao.getShopName(storeKey);
 	}
 	public List<StoreVO> getAll(){
 		return dao.getAll();
 	}
+	
 }

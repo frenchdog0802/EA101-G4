@@ -24,37 +24,40 @@
     					<div class="pt-2 pl-3 pb-3" style="background-color: #cccccc;">
 			    			<h3 class="pl-4">選擇領取地點</h3>
 			    			<hr class="ml-4" style="width: 90%; margin-bottom: 10px; margin-top: 10px;">
-			    			<form class="pl-4">
-								<input type="radio" name="service" id="home" class="mb-2" checked="true"> 
-								<label for="home">宅配到點</label><br>
-								<input type="radio" name="service" id="store" class="mb-2"> 
-								<label for="store">超商取貨</label><br>
-							</form>
 							<div class="row">
 								<div class="col-6 choshop pl-5 mt-3" id="choshop">
-									<table>
+									<form class="pl-4">
+										<input type="radio" name="service" id="home" class="mb-2" checked="true"> 
+										<label for="home">宅配到點</label><br>
+										<input type="radio" name="service" id="store" class="mb-2"> 
+										<label for="store">超商取貨</label><br>
+									</form>
+									<table class="address-zone">
 										<tr>
 											<td><span>選擇縣市 : </span></td>
 											<td class="shoptd">
-												<select name="County">
-												<option value="1">桃園市</option>
+												<select class="city" id="c1" disabled="disabled">
+													<option value="">請選擇</option>
 												</select>
 											</td>
 										</tr>
 										<tr>
 											<td><span>選擇行政區 : </span></td>
 											<td class="shoptd">
-												<select name="County">
-													<option value="1">中壢區</option>
+												<select class="county" id="c2" disabled="disabled">
+													<option value="">請選擇</option>
 												</select>
 											</td>
 										</tr>
 										<tr>
 											<td><span>選擇門市 : </span></td>
 											<td class="shoptd">
-												<select name="County">
-													<option value="1">中央門市</option>
+												<select name="shopname"  id="c3" disabled="disabled">
+													<option>請選擇</option>
 												</select>
+												<form>
+													<input type="hidden" class="zipcode" value="">
+												</form>
 											</td>
 										</tr>
 									</table>
@@ -64,7 +67,7 @@
 									</div>
 								</div><div></div>
 								<div class="col-6 pt-2 pl-4">
-									<iframe src="" style="width: 230px; height: 230px;"></iframe>
+									<div id="map" style="height: 250px;width: 80%;"></div>
 								</div>
 			    			</div>
 		    			</div>
@@ -142,8 +145,30 @@
 
  		
 	<%@include file="/front-end/page-file/page-footer"%>
+	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+	<script src="js/aj-address.js" type="text/javascript"></script>
 	<script>
-	$(document).ready(function(){
+	$(function () {
+        $('.address-zone').ajaddress();
+    });
+	$(document).ready(function(){	
+		$("#c2").change(function(){
+			var key = $(".zipcode").val();
+			console.log(key);
+			if(key != ''){
+				$.ajax({
+		        	type : "POST",
+		        	url  : "<%=request.getContextPath()%>/store/storeServlet.do",
+		        	data : {
+		        		action : "getShopName",
+		        		directKey : key,
+		        	},
+		        	success : function(data){
+		        		console.log(data);
+		        	}
+		        });
+			}
+		});
 		$(".samemem").click(function(){
 			if($(this).prop('checked')){
 				$("#tname").val($("#name").val());
@@ -164,7 +189,30 @@
 			$("#taddress").val("");
 			$(".samemem").prop("checked", false);
 		});
+		
 	});
+	//鎖定選項
+	var home = document.getElementById("home");
+	var store = document.getElementById("store");
+	var c1 = document.getElementById("c1");
+	var c2 = document.getElementById("c2");
+	var c3 = document.getElementById("c3");
+    var address = document.getElementById("taddress");
+	$('input[name=service]').change(function(){
+		if(store.checked){
+			c1.removeAttribute('disabled');
+			c2.removeAttribute('disabled');
+			c3.removeAttribute('disabled');
+			address.setAttribute('disabled', 'disabled');
+		}
+		if(home.checked){
+			c1.setAttribute('disabled', 'disabled');
+			c2.setAttribute('disabled', 'disabled');
+			c3.setAttribute('disabled', 'disabled');
+			address.removeAttribute('disabled');
+		}
+	});
+	
 	$(function(){
 		$(".fun-text").text("付款方式");  // text("")裡面自己輸入功能名稱 
 	});

@@ -61,7 +61,7 @@
 	</servlet-mapping>
 	<!-- BikeStoreAjaxServlet -->
 	<servlet>
-		<servlet-name>BikeStoreAjaxServlet</servlet-name>
+		<servlet-name>BikeStoreAjaFxServlet</servlet-name>
 		<servlet-class>com.bike.store.controller.BikeStoreAjaxServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -177,6 +177,15 @@
 	<servlet-mapping>
 		<servlet-name>ProductEcpayServlet</servlet-name>
 		<url-pattern>/shopMall/productEcpayServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>StoreServlet</servlet-name>
+		<servlet-class>com.store.controller.storeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StoreServlet</servlet-name>
+		<url-pattern>/store/storeServlet.do</url-pattern>
 	</servlet-mapping>
 
 	<!-- 筑峰 -->
