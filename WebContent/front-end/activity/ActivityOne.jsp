@@ -19,6 +19,20 @@
 	int afterRegistrationDate = end_time.compareTo(date);
 	int beforeAct = start_time.compareTo(date);
 %>
+<jsp:useBean id="actreportSvc" class="com.actreport.model.ActReportService"/>
+<% 
+    ActService actSvc = new ActService();
+    List<ActVO> list = actSvc.getAll();
+    List<ActVO> list2 = new LinkedList<ActVO>();
+    ActVO actVO4 = actSvc.getOneAct(actVO2.getSq_activity_id());
+    for(ActVO actVO3 : list){
+    	if(actreportSvc.getOneActReportStatus(actVO3.getSq_activity_id()) !=1 && (actVO3.getGp_status()==0 || actVO3.getGp_status()==1)
+    			&& actVO3.getSq_route_id().contains(actVO4.getSq_route_id()) && !(actVO3.getSq_activity_id().contains(actVO4.getSq_activity_id()))){ 		
+    		list2.add(actVO3);
+    	}
+    }
+    pageContext.setAttribute("list2",list2);
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +48,16 @@
 <style>
 	.btn-primary{
 		margin-left:10px;
+	}
+	
+	#relationimg{
+		width:100%;
+		height: 255px;
+	}
+	
+	#majorimg{
+		width:100%;
+		height:472px;
 	}
 </style>
 </head>
@@ -60,7 +84,7 @@
     <div class="row">
 
       <div class="col-md-8">
-        <img class="img-fluid" src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'" alt="">
+        <img id="majorimg" class="img-fluid" src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'" alt="">
       </div>
 	  <jsp:useBean id="memberSvc" scope="page" class="com.member.model.MemService" />
 	  <jsp:useBean id="routeSvc" scope="page" class="com.route.model.RouteService" />
@@ -190,33 +214,16 @@
     <!-- /.最外層row -->
 
     <!-- Related Projects Row -->
-    <h3 class="my-4">相關路線</h3>
+    <h3 class="my-4">相關活動</h3>
 
     <div class="row">
-
+		<c:forEach var="actVO5" items="${list2}" begin="${list2.size()-4}" end="${list2.size()-1}">
       <div class="col-md-3 col-sm-6 mb-4">
-        <a href="#">
-          <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+        <a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO5.sq_activity_id}">
+          <img id="relationimg" class="img-fluid" src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO5.sq_activity_id}'" alt="">
         </a>
       </div>
-
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="#">
-          <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-        </a>
-      </div>
-
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="#">
-          <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-        </a>
-      </div>
-
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="#">
-          <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-        </a>
-      </div>
+		</c:forEach>
 
     </div>
     <!-- /.row -->
