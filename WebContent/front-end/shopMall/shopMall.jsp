@@ -60,51 +60,53 @@
     			</div>    
 <!--	複合查詢(隱藏的DIV)		-->	
     			<div class="row mt-2 sort_title bg-primary collapse" id="collapseExample" style="text-align:center; height:50px; line-height:50px;">
-    				<div class="card card-body">
-	    				<div class="col-2 pdzero" style="background-color: white;"></div>
-	    				<div class="col-1">
-	    					<div class="dropdown">
-								<button class="btn btn-secondary dropdown-toggle pdzero" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							    	排序
-								</button>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									<button class="dropdown-item srhByPrice" value="priceUp">依價格&nbsp;&uarr;</button>
-									<button class="dropdown-item srhByPrice" value="priceDown">依價格&nbsp;&darr;</button>
+    				<div class="card card-body" style="padding:0;">
+	    				<div class="row bg-primary">
+		    				<div class="col-2 pdzero" style="background-color: white;"></div>
+		    				<div class="col-1">
+		    					<div class="dropdown">
+									<button class="btn btn-secondary dropdown-toggle pdzero" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    	排序
+									</button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<button class="dropdown-item srhByPrice" value="priceUp">依價格&nbsp;&uarr;</button>
+										<button class="dropdown-item srhByPrice" value="priceDown">依價格&nbsp;&darr;</button>
+									</div>
 								</div>
-							</div>
-	    				</div>
-	    				<jsp:useBean id="brandService" scope="page" class="com.brand.model.BrandService" />  
-	    				<div class="col-2 pt-2 ">
-	    					<select class="form-control" id="brandSrh">
-	    						<option value="" style="display: none">品牌</option>
-								<c:forEach var="brandVO" items="${brandService.all}" > 
-									<option value="${brandVO.sq_brand_id}">${brandVO.brand_name}
-								</c:forEach> 
-							</select>
-	    				</div>
-	    				
-	    				<div class="col-2 pt-2">
-	    					<select class="form-control" id="priceSrh">
-	    						<option value="" style="display: none">價格區間</option>
-								<option value="5000">5000&nbsp;&uarr;</option>
-								<option value="1000">1000 ~ 5000</option>
-								<option value="500">500 ~ 1000</option>
-								<option value="100">500&nbsp;&darr;</option>
-							</select>
-	    				</div>
-	    				<jsp:useBean id="productService" scope="page" class="com.shop_product.model.Shop_productService" />  
-						<div class="col-2 pt-2">
-	    					<select class="form-control" id="kindSrh">
-	    						<option value="" style="display: none">種類</option>
-								<c:forEach var="productVO" items="${productService.all}" > 
-									<option value="${productVO.product_kind_name}">${productVO.product_kind_name}
-								</c:forEach> 
-							</select>
-	    				</div>
-	    				<div class="col-1 pdzero">
-	    					<button id="conditionSrh" class="btn bg-success">搜尋</button>
-	    				</div>
-	    				<div class="col-2 pdzero" style="background-color: white;"></div>
+		    				</div>
+		    				<jsp:useBean id="brandService" scope="page" class="com.brand.model.BrandService" />  
+		    				<div class="col-2 pt-2 ">
+		    					<select class="form-control" id="brandSrh">
+		    						<option value="" style="display: none">品牌</option>
+									<c:forEach var="brandVO" items="${brandService.all}" > 
+										<option value="${brandVO.sq_brand_id}">${brandVO.brand_name}
+									</c:forEach> 
+								</select>
+		    				</div>
+		    				
+		    				<div class="col-2 pt-2">
+		    					<select class="form-control" id="priceSrh">
+		    						<option value="" style="display: none">價格區間</option>
+									<option value="5000">5000&nbsp;&uarr;</option>
+									<option value="1000">1000 ~ 5000</option>
+									<option value="500">500 ~ 1000</option>
+									<option value="100">500&nbsp;&darr;</option>
+								</select>
+		    				</div>
+		    				<jsp:useBean id="productService" scope="page" class="com.shop_product.model.Shop_productService" />  
+							<div class="col-2 pt-2">
+		    					<select class="form-control" id="kindSrh">
+		    						<option value="" style="display: none">種類</option>
+									<c:forEach var="productVO" items="${productService.all}" > 
+										<option value="${productVO.product_kind_name}">${productVO.product_kind_name}
+									</c:forEach> 
+								</select>
+		    				</div>
+		    				<div class="col-1 pdzero">
+		    					<button id="conditionSrh" class="btn bg-success">搜尋</button>
+		    				</div>
+		    				<div class="col-2 pdzero" style="background-color: white;"></div>
+		    			</div>
 	    			</div>
     			</div>	
 <!--	複合查詢(隱藏的DIV)		-->				
