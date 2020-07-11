@@ -6,7 +6,7 @@ public class MemLoginService {
 
 	public MemLoginService() {
 		
-		dao = new MemLoginJDBCDAO();
+		dao = new MemLoginDAO();
 	}
 	
 	public MemLoginVO login(String member_account) {
