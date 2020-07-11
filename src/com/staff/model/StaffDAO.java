@@ -13,14 +13,15 @@ import com.staff.model.StaffVO;
 public class StaffDAO implements StaffDAO_interface {
 
 	private static DataSource ds = null;
+	
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/EA101_G4");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-	}
+}
 	
 	private static final String INSERT_STMT = "INSERT INTO staff (sq_staff_id,sf_status,sf_account,sf_password,sf_name) VALUES (('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')), ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT sq_staff_id,sf_status,sf_account,sf_password,sf_name FROM staff order by sq_staff_id";
