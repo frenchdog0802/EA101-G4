@@ -11,7 +11,7 @@ public class ActService {
 	private ActDAO_interface dao;
 
 	public ActService() {
-		dao = new ActJDBCDAO();
+		dao = new ActDAO();
 	}
 
 	public ActVO addAct(String sq_route_id, String sq_member_id, String act_title, Integer max_population,

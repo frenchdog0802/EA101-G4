@@ -7,7 +7,7 @@ public class ActJoinService {
 	private ActJoinDAO_interface dao;
 
 	public ActJoinService() {
-		dao = new ActJoinJDBCDAO();
+		dao = new ActJoinDAO();
 	}
 
 	public ActJoinVO addActJoin(String sq_activity_id, String sq_member_id, Timestamp join_time) {
