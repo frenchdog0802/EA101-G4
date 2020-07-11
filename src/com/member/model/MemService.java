@@ -11,7 +11,7 @@ public class MemService {
 	private MemDAO_interface dao;
 
 	public MemService() {
-		dao = new MemJDBCDAO();
+		dao = new MemDAO();
 	}
 
 	public MemVO addMem(String member_account, String password, String m_name, Integer gender, Date birthday,
