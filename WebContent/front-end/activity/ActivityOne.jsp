@@ -9,6 +9,16 @@
 <%
 	String sq_member_id = (String)session.getAttribute("sq_member_id");
 %>
+<%
+	java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
+	ActVO actVO2 = (ActVO)request.getAttribute("actVO");
+	java.sql.Date act_end_time = actVO2.getAct_end_time();
+	java.sql.Date start_time = actVO2.getStart_time();
+	java.sql.Date end_time = actVO2.getEnd_time();
+	int afterAct = act_end_time.compareTo(date);
+	int afterRegistrationDate = end_time.compareTo(date);
+	int beforeAct = start_time.compareTo(date);
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +34,7 @@
 <style>
 	.btn-primary{
 		margin-left:10px;
-	}	
+	}
 </style>
 </head>
 <body>
@@ -52,14 +62,15 @@
       <div class="col-md-8">
         <img class="img-fluid" src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'" alt="">
       </div>
-
+	  <jsp:useBean id="memberSvc" scope="page" class="com.member.model.MemService" />
+	  <jsp:useBean id="routeSvc" scope="page" class="com.route.model.RouteService" />
       <div class="col-md-4">
         <h3 class="my-3">活動描述</h3>
         <p>${actVO.act_description}</p>
         <h3 class="my-3">活動細節</h3>
         <ul>
-          <li>活動主辦者:${actVO.sq_member_id}</li>
-          <li>活動路線:${actVO.sq_route_id}</li>
+          <li>活動主辦者:${memberSvc.getOneMem(actVO.sq_member_id).m_name}</li>
+          <li>活動路線:${routeSvc.getOneRoute(actVO.sq_route_id).routeName}</li>
           <li>上限人數:${actVO.max_population}</li>
           <li>最低開團人數:${actVO.min_population}</li>
           <li>目前參加人數:${actVO.population}</li>
@@ -68,14 +79,29 @@
           <li>活動開始時間:${actVO.act_start_time}</li>
           <li>活動結束時間:${actVO.act_end_time}</li>
         </ul>
-     
        <div class="row">
        		<c:choose>
+       		
+       		<c:when test="<%= beforeAct > 0 %>">
+		        <input type="button" value="即將來臨" class="btn btn-primary" disabled>
+		    </c:when>
+		    
+		    <c:when test="<%= afterAct < 0 %>">
+		        <input type="button" value="活動結束" class="btn btn-primary" disabled>
+		    </c:when>
        		
        		<c:when test="${actVO.sq_activity_id == actjoinVO.sq_activity_id && sq_member_id == actjoinVO.sq_member_id || actVO.sq_member_id == sq_member_id}">
 		        <FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do">
 		        	<input type="button" value="已參加" class="btn btn-primary" disabled>
 		        </FORM>
+		    </c:when>
+		    
+		    <c:when test="${actVO.population == actVO.max_population}">
+		        <input type="button" value="人數已滿" class="btn btn-primary" disabled>
+		    </c:when>
+		    
+		     <c:when test="<%= afterRegistrationDate < 0 %>">
+		        <input type="button" value="報名截止" class="btn btn-primary" disabled>
 		    </c:when>
 		    
 	        <c:when test="${actVO.sq_member_id != sq_member_id}">
@@ -86,6 +112,7 @@
 					<input type="submit" value="參加活動" class="btn btn-primary"> 	
 				</FORM> 
 	        </c:when>
+	    
 	        <c:otherwise>
 	        
 	        </c:otherwise>      
