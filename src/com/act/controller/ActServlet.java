@@ -151,7 +151,7 @@ public class ActServlet extends HttpServlet {
 						req.setAttribute("actreportVO", actreportVO);
 					}
 				}
-				
+
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("actVO", actVO);// 資料庫取出的actVO物件,存入req
 				String url = "/front-end/activity/ActivityOne.jsp";
