@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import java.sql.*;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -272,7 +273,7 @@ public class MemServlet extends HttpServlet {
 
 		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 
-			List<String> errorMsgs = new LinkedList<String>();
+			Map<String,String> errorMsgs = new HashMap<>();
 
 			req.setAttribute("errorMsgs", errorMsgs);
 
@@ -283,24 +284,24 @@ public class MemServlet extends HttpServlet {
 
 				// {2,10} 此程式為UTF-8編碼 中文字長度為3個btye? 若輸入4個字(12byte)則超過10 會產生錯誤(前端攔不住此錯誤)
 				if (m_name == null || m_name.trim().length() == 0) {
-					errorMsgs.add("姓名: 請勿空白");
+					errorMsgs.put("m_name","姓名: 請勿空白");
 				} else if (!m_name.trim().matches(m_nameReg)) { // 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到16之間");
+					errorMsgs.put("m_name","姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到16之間");
 				}
 
 				String member_account = req.getParameter("member_account").trim();
 				if (member_account == null || member_account.trim().length() == 0) {
-					errorMsgs.add("帳號請勿空白");
+					errorMsgs.put("member_account","帳號請勿空白");
 				}
 
 				String password = req.getParameter("password").trim();
 				if (password == null || password.trim().length() == 0) {
-					errorMsgs.add("密碼請勿空白");
+					errorMsgs.put("password","密碼請勿空白");
 				}
 
 				String cellphone = req.getParameter("cellphone").trim();
 				if (cellphone == null || cellphone.trim().length() == 0) {
-					errorMsgs.add("電話請勿空白");
+					errorMsgs.put("phone","電話請勿空白");
 				}
 
 				java.sql.Date birthday = null;
@@ -308,22 +309,19 @@ public class MemServlet extends HttpServlet {
 					birthday = java.sql.Date.valueOf(req.getParameter("birthday").trim());
 				} catch (IllegalArgumentException e) {
 					birthday = new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請輸入日期!");
+					errorMsgs.put("birthday","請輸入日期!");
 				}
 
 				String m_email = req.getParameter("m_email").trim();
 				if (m_email == null || m_email.trim().length() == 0) {
-					errorMsgs.add("請輸入email");
+					errorMsgs.put("m_email","請輸入email");
 				}
 
-				String nick_name = req.getParameter("nick_name").trim();
-				if (nick_name == null || nick_name.trim().length() == 0) {
-					errorMsgs.add("請輸入暱稱");
-				}
+				
 
 				String address = req.getParameter("address").trim();
 				if (address == null || address.trim().length() == 0) {
-					errorMsgs.add("請輸入聯絡地址");
+					errorMsgs.put("address","請輸入聯絡地址");
 				}
 
 				Integer validation = new Integer(req.getParameter("validation"));
@@ -336,7 +334,7 @@ public class MemServlet extends HttpServlet {
 				byte[] m_photo = null;
 				if (in.available() == 0) {
 					if (session.getAttribute("m_photo") == null) {
-						errorMsgs.add("頭相未選擇上傳圖片");
+						errorMsgs.put("m_photo","頭相未選擇上傳圖片");
 					} else {
 						m_photo = (byte[]) session.getAttribute("m_photo");
 						in.read(m_photo);
@@ -349,22 +347,7 @@ public class MemServlet extends HttpServlet {
 					in.close();
 				}
 
-				InputStream in2 = req.getPart("back_img").getInputStream();
-				byte[] back_img = null;
-				if (in2.available() == 0) {
-					if (session.getAttribute("back_img") == null) {
-						errorMsgs.add("簽名檔未選擇上傳圖片");
-					} else {
-						back_img = (byte[]) session.getAttribute("back_img");
-						in2.read(back_img);
-						in2.close();
-					}
-				} else {
-					back_img = new byte[in2.available()];
-					session.setAttribute("back_img", back_img);
-					in2.read(back_img);
-					in2.close();
-				}
+				
 
 				MemVO memVO = new MemVO();
 
@@ -378,14 +361,14 @@ public class MemServlet extends HttpServlet {
 				memVO.setValidation(validation);
 				memVO.setRegistered(registered);
 				memVO.setM_photo(m_photo);
-				memVO.setBack_img(back_img);
-				memVO.setNick_name(nick_name);
+				memVO.setBack_img(null);
+				memVO.setNick_name(null);
 				memVO.setAddress(address);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memVO", memVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/member/addMember.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/member/registered.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -393,7 +376,7 @@ public class MemServlet extends HttpServlet {
 				/*************************** 2.開始新增資料 ***************************************/
 				MemService memSvc = new MemService();
 				memVO = memSvc.addMem(member_account, password, m_name, gender, birthday, cellphone, m_email,
-						validation, registered, m_photo, back_img, nick_name, address);
+						validation, registered, m_photo, null, null, address);
 				session.removeAttribute("m_photo");
 				session.removeAttribute("back_img");
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
@@ -402,8 +385,8 @@ public class MemServlet extends HttpServlet {
 				successView.forward(req, res);
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/member/addMember.jsp");
+				e.printStackTrace();
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/member/registered.jsp");
 				failureView.forward(req, res);
 			}
 		}

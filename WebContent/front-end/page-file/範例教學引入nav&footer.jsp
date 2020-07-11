@@ -4,7 +4,9 @@
 <html lang="en">
 <head>
 <!--    CSS幫你們引入完了  你們要額外新增在自己寫-->
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/index/index.css">
 
+    <title>Welcome to EA101-G4</title>
 </head>
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>

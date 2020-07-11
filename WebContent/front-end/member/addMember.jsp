@@ -135,16 +135,7 @@ button:hover {
 
 	<%-- 錯誤表列 --%>
 	<table id="box">
-	<div id="error">
-		<c:if test="${not empty errorMsgs}">
-			<strong>請修正以下錯誤:</strong>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="color: red">${message}</li>
-				</c:forEach>
-			</ul>
-		</c:if>
-	</div>
+
 
 	<!-- 	<div id="box"> -->
 	
@@ -154,7 +145,8 @@ button:hover {
 			<tr>
 				<td>
 					<div class="input">
-						<label for="name">姓名:</label> <input type="TEXT" name="m_name"
+						<label for="name">姓名:</label> 
+						<input type="TEXT" name="m_name"
 							size="40"
 							value="<%=(memVO == null) ? "Peter2" : memVO.getM_name()%>" />
 					</div>
@@ -318,95 +310,25 @@ button:hover {
 </style>
 
 <script>
-        $.datetimepicker.setLocale('zh');
-        $('#b_date1').datetimepicker({
-	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-		   value: '<%=birthday%>',
-	// value:   new Date(),
-	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-	//startDate:	            '2017/07/10',  // 起始日
-	//minDate:               '-1970-01-01', // 去除今日(不含)之前
-	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-	});
-
-	// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
-
-	//      1.以下為某一天之前的日期無法選擇
-	//      var somedate1 = new Date('2017-06-15');
-	//      $('#f_date1').datetimepicker({
-	//          beforeShowDay: function(date) {
-	//        	  if (  date.getYear() <  somedate1.getYear() || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-	//              ) {
-	//                   return [false, ""]
-	//              }
-	//              return [true, ""];
-	//      }});
-
-	//      2.以下為某一天之後的日期無法選擇
-	//      var somedate2 = new Date('2017-06-15');
-	//      $('#f_date1').datetimepicker({
-	//          beforeShowDay: function(date) {
-	//        	  if (  date.getYear() >  somedate2.getYear() || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-	//              ) {
-	//                   return [false, ""]
-	//              }
-	//              return [true, ""];
-	//      }});
-
-	//      3.以下為兩個日期之外的日期無法選擇 (也可按需要換成其他日期)
-	//      var somedate1 = new Date('2017-06-15');
-	//      var somedate2 = new Date('2017-06-25');
-	//      $('#f_date1').datetimepicker({
-	//          beforeShowDay: function(date) {
-	//        	  if (  date.getYear() <  somedate1.getYear() || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-	//		             ||
-	//		            date.getYear() >  somedate2.getYear() || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-	//              ) {
-	//                   return [false, ""]
-	//              }
-	//              return [true, ""];
-	//      }});
-
-	function readURL(input) {
-		if (input.files && input.files[0]) {
+$("#upLoad").change(()=>{
+	$("#showImg").empty();
+	var files = $("#upLoad")[0].files;
+	if(files != null & files.length > 0){
+		var file = files[0];
+		if(file.type.indexOf('image') != -1){
+			$(".custom-file-label").text(file.name);
 			var reader = new FileReader();
-
-			reader.onload = function(e) {
-				$('#member_avatar').attr('src', e.target.result);
-			}
-
-			reader.readAsDataURL(input.files[0]);
+			reader.addEventListener('load',(e)=>{
+				var result = e.target.result;
+				var img = document.createElement("img");
+				img.src = result;
+				img.classList.add("img-fluid");
+				$("#showImg").append(img);
+			})
+			reader.readAsDataURL(file);
 		}
 	}
-	$("#m_photo_id").change(function() {
-		readURL(this);
-	});
-
-	function readURL2(input) {
-		if (input.files && input.files[0]) {
-			var reader2= new FileReader();
-
-			reader2.onload = function(e) {
-				$('#Signature_file').attr('src', e.target.result);
-			}
-
-			reader2.readAsDataURL(input.files[0]);
-		}
-	}
-	$("#back_img_id").change(function() {
-		readURL2(this);
-	});
+});
 </script>
 
 </html>

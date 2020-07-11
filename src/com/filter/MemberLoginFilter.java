@@ -30,7 +30,7 @@ public class MemberLoginFilter implements Filter {
 		MemLoginVO memLoginVO = (MemLoginVO) session.getAttribute("memLoginVO");
 		if (memLoginVO == null) {
 			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect(req.getContextPath() +"/front-end/login/LoginMember.jsp");
+			res.sendRedirect(req.getContextPath() +"/front-end/index/LoginMember.jsp");
 			return;
 		} else {
 			chain.doFilter(request, response);
