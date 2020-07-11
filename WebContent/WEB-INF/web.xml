@@ -61,7 +61,7 @@
 	</servlet-mapping>
 	<!-- BikeStoreAjaxServlet -->
 	<servlet>
-		<servlet-name>BikeStoreAjaFxServlet</servlet-name>
+		<servlet-name>BikeStoreAjaxServlet</servlet-name>
 		<servlet-class>com.bike.store.controller.BikeStoreAjaxServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
