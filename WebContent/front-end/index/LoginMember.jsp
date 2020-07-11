@@ -47,15 +47,11 @@
 					</c:if>
 				</div>
 				<!-- Login Form -->
-				<form METHOD="post" 
-					ACTION="<%=request.getContextPath()%>/login/memlogin.do">
-					<input type="text" id="login" class="fadeIn second"
-						name="member_account" placeholder="account" 
+					<input type="text" id="login" autocomplete="off" class="fadeIn second" name="member_account" placeholder="account" 
 						value="<%=(memLoginVO == null) ? "": memLoginVO.getMember_account()%>">
-					<input type="text" id="password" class="fadeIn third" name="login"
-						placeholder="password"> <input type="submit"
-						class="fadeIn fourth" name="action" value="login" required />
-				</form>
+					<input type="text" id="password" class="fadeIn third" name="login" placeholder="password" autocomplete="off"> 
+						<input type="submit" class="fadeIn submitbtn" name="action" value="login" />
+						
 
 				<!-- Remind Passowrd -->
 				<div id="formFooter">
@@ -73,5 +69,15 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script
 		src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
+	<script>
+	$( document ).ready(function(){
+		$(".submitbtn").click(function(){
+			var login = $("#login").val();
+			var pass = $("#password").val();
+			console.log(login);
+			console.log(pass);
+	})})
+		
+	</script>
 </body>
 </html>

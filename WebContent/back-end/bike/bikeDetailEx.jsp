@@ -145,19 +145,31 @@ $(document).ready(function() {
  					dataType:"JSON",
  					success:function(data){
  						console.log(data);
+ 						//sweetAlert
+ 						Swal.fire({
+ 							title: "額外金額 (逾時加賠償!)",
+ 							html:
+ 								"總共 :<b>"+data.total+"</b>元 <br>"+
+ 								"逾時 :<b>"+data.untilDays+"</b>天<b>"+data.untilHour+"</b>時",
+ 							icon: 'warning',
+ 							showCancelButton: false,
+ 							confirmButtonColor: '#3085d6',
+ 							confirmButtonText: '確認!'
+ 						}).then((result) => {
+ 							if (result.value) {
+									Swal.fire({
+										  icon: 'success',
+										  title: '還車成功',
+										  timer: 1500,
+										  showConfirmButton: true,
+										  onClose: () => {
+											  window.location.href="<%=request.getContextPath()%>/back-end/bike/MasterEx.jsp";
+										     }
+								    });
+									}
+ 						})
  					}
 					
-//					,complete:function(){
-// 						Swal.fire({
-// 							  icon: 'success',
-// 							  title: '還車成功',
-// 							  timer: 1500,
-// 							  showConfirmButton: true,
-// 							  onClose: () => {
-<%-- 								  window.location.href="<%=request.getContextPath()%>/back-end/bike/bikeDetail.jsp"; --%>
-// 							     }
-// 					    });
-// 					}
 				})
 				
 			})

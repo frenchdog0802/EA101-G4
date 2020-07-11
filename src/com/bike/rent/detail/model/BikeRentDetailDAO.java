@@ -291,15 +291,10 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 			if (con != null) {
 				try {
+					rs.close();
+					pstmt.close();
 					con.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -346,6 +341,8 @@ public class BikeRentDetailDAO implements BikeRentDetailDAO_interface {
 		} finally {
 			if (con != null) {
 				try {
+					rs.close();
+					pstmt.close();
 					con.close();
 				} catch (Exception e) {
 					e.printStackTrace(System.err);

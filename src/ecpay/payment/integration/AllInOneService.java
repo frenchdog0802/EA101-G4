@@ -1,6 +1,9 @@
 package ecpay.payment.integration;
 
 import ecpay.payment.integration.domain.InvoiceObj;
+import ecpay.payment.integration.domain.QueryCreditCardPeriodInfoObj;
+import ecpay.payment.integration.domain.QueryTradeInfoObj;
+import ecpay.payment.integration.domain.QueryTradeObj;
 
 public class AllInOneService {
 	
@@ -14,4 +17,12 @@ public class AllInOneService {
 	public String aioCheckOut(Object obj, InvoiceObj invoice) {
 		return all.aioCheckOut(obj, null);
 	}
+	
+	//查詢訂單
+	public String queryTrade(QueryTradeObj queryTradeObj){
+		return all.queryTrade(queryTradeObj);
+	}
+	
+
+
 }

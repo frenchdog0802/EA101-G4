@@ -168,30 +168,35 @@ public class BikeRentDetailServlet extends HttpServlet {
 		if ("initEx".equals(action)) {
 			// 上限改成session 取得店家id資料
 			String sq_bike_store_id = "620001";
+			// 取訂單編號 如果是空值去session取 如果不是存進去包含空字串
+			String sq_rent_id_Ex = null;
+			String sq_rent_id = request.getParameter("sq_rent_id");
+			if (sq_rent_id == null) {
+				sq_rent_id_Ex = (String) session.getAttribute("sq_rent_id");
+			} else {
+				sq_rent_id_Ex = sq_rent_id;
+				session.setAttribute("sq_rent_id", sq_rent_id);
+			}
 			// 取得初始參數
 			BikeRentMasterService bikeRentMasterSvc = new BikeRentMasterService();
 			BikeRentDetailService bikeRentDetailSvc = new BikeRentDetailService();
 			BikeTypeService bikeTypeSvc = new BikeTypeService();
 			// 找出是這間店的訂單
-			List<BikeRentMasterVO> storeRentIdList = bikeRentMasterSvc.getRentMasterIdIsVaild(sq_bike_store_id, 1);
+//			List<BikeRentMasterVO> storeRentIdList = bikeRentMasterSvc.getRentMasterIdIsVaild(sq_bike_store_id, 1);
 			// 所有訂單明細編號
 			List<BikeRentDetailVO> bikeRentDetailList = bikeRentDetailSvc.getAll();
-//			---------------------------->>
 		
-//-------------------------------------<<
 			// 找出這間店訂單明細VO 裝入list
 			LinkedList<BikeRentDetailVO> storeRetailVOList = new LinkedList<>();
 
 			for (BikeRentDetailVO BikeRentDetailVO : bikeRentDetailList) {
-				for (BikeRentMasterVO BikeRentMasterVO : storeRentIdList) {
-					if (BikeRentDetailVO.getSq_rent_id().equals(BikeRentMasterVO.getSq_rent_id())
+					if (BikeRentDetailVO.getSq_rent_id().equals(sq_rent_id_Ex)
 							&& BikeRentDetailVO.getSq_bike_id() != null) {
 						// 裝入車種名稱
 						BikeRentDetailVO.setBikeTypeName(bikeTypeSvc
 								.findByPrimaryKey(BikeRentDetailVO.getSq_bike_type_id()).getBike_type_name());
 						storeRetailVOList.add(BikeRentDetailVO);
 					}
-				}
 			}
 			Collections.sort(storeRetailVOList);
 			// 傳回的JSON
@@ -205,6 +210,7 @@ public class BikeRentDetailServlet extends HttpServlet {
 		if ("initResvMaster".equals(action)) {
 			// 上限改成session 取得店家id資料
 			String sq_bike_store_id = "620001";
+			
 			// 取得初始參數
 			BikeRentMasterService bikeRentMasterSvc = new BikeRentMasterService();
 			BikeRentDetailService bikeRentDetailSvc = new BikeRentDetailService();
@@ -213,8 +219,9 @@ public class BikeRentDetailServlet extends HttpServlet {
 			List<BikeRentMasterVO> storeMaster = null;
 			storeMaster = storeRentList.stream().filter(p -> p.getSq_bike_store_id().equals(sq_bike_store_id))
 					.collect(Collectors.toList());
-			// 裝入出發時間
+			// 裝入還車時間
 			Map<String, String> resvTime = new LinkedHashMap<>();
+			
 			List<BikeRentDetailVO> bikeRentDetailList = bikeRentDetailSvc.getAll();
 			// 比對訂單跟明細的編號並找出出發時間
 			for (BikeRentDetailVO BikeRentDetailVO : bikeRentDetailList) {
@@ -339,8 +346,11 @@ public class BikeRentDetailServlet extends HttpServlet {
 					singleExtraCost = dailyPrice * (int)untilDays;
 				}else {
 					singleExtraCost = 0;
+					untilHour = 0;
+					untilDays = 0;
 				}
-				map.put("untilHour",untilHour);
+				int hours = (int)untilHour%24; 
+				map.put("untilHour",hours);
 				map.put("untilDays",untilDays);
 				
 				
@@ -364,10 +374,28 @@ public class BikeRentDetailServlet extends HttpServlet {
 			BikeRentMasterSvc.update(BikeRentMasterVO);
 			
 			//回傳JSON
-			map.put("singleExtraCost",total);
+			map.put("total",total);
 			JSONObject resJson = new JSONObject(map);
 			out.println(resJson);
 			
+		}
+		
+//		history-------------------------------------------------------------
+		if("initHistoryMaster".equals(action)) {
+			String sq_bike_store_id = "620001";
+			//回傳資料
+			BikeRentMasterService bikeRentMasterSvc = new BikeRentMasterService();
+			List<BikeRentMasterVO> bikeRentMasterList =bikeRentMasterSvc.getAll();
+			// 找出是這間店完成和取消的訂單
+			List<BikeRentMasterVO>
+			storeMaster = bikeRentMasterList.stream()
+					.filter(p -> p.getSq_bike_store_id().equals(sq_bike_store_id))
+					.filter(p -> p.getRent_od_status()==2 || p.getRent_od_status()==3)
+					.collect(Collectors.toList());
+			HashMap map = new HashMap();
+			map.put("storeMaster", storeMaster);
+			JSONObject responseJson = new JSONObject(map);
+			out.println(responseJson);
 		}
 	}
 }

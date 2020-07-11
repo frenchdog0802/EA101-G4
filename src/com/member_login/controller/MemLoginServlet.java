@@ -45,11 +45,11 @@ public class MemLoginServlet extends HttpServlet {
 				if (member_account == null || (member_account.trim()).length() == 0) {
 					errorMsgs.add("請輸入帳號");
 				}
-//				if (!errorMsgs.isEmpty()) {
-//					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/login/LoginMember.jsp");
-//					failureView.forward(request, response);
-//					return;// 程式中斷
-//				}
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/index/LoginMember.jsp");
+					failureView.forward(request, response);
+					return;// 程式中斷
+				}
 				String password = request.getParameter("password").trim();
 				if (password == null || password.trim().length() == 0) {
 					errorMsgs.add("請輸入密碼");
@@ -63,7 +63,7 @@ public class MemLoginServlet extends HttpServlet {
 
 				if (!errorMsgs.isEmpty()) {
 					request.setAttribute("memLoginVO", memLoginVO);
-					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/login/LoginMember.jsp");
+					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/index/LoginMember.jsp");
 					failureView.forward(request, response);
 					return; // 程式中斷
 				}

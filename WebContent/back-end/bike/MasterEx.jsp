@@ -39,20 +39,7 @@
 <!-----------backNav----------->
 <!-- --------------------------------------------------------------------------------------------->
 <div class="container-fluid mx-3">
-	<div class="row mt-1">
-		<form class="form-inline">
-			<div class="form-group mb-2">
-				<input id="searchDate" class="form-control" type="text"
-					autocomplete="off" placeholder="選擇日期">
-			</div>
-			<button type="button" class="btn btn-primary mx-2 mb-2">搜尋</button>
-			<div class="form-group mx-sm-3 mb-2">
-				<input id="searchRentId" class="form-control" type="text"
-					autocomplete="off" placeholder="輸入訂單編號">
-			</div>
-			<button type="button" id="searchRentIdBtn" class="btn btn-primary mb-2">搜尋</button>
-		</form>
-	</div>
+
 	<div class="row">
 		<table class="table text-center table-hover">
 			<thead>
@@ -72,20 +59,24 @@
 		</table>
 	</div>
 </div>
-<div class="modal fade" id="DetailModel"  >
+<div class="modal fade" id="DetailModel" tabindex="-1" role="dialog"  aria-labelledby="basicModal" >
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
+				
 			<div class="modal-header">
                 <h3 class="modal-title" id="myModalLabel">訂單成立</h3>
             </div>
+			
 			<div class="modal-body">
 <!-- =========================================以下為原bikeDetailResv.jsp的內容========================================== -->
 <%--                <jsp:include page="bikeDetailResv.jsp" /> --%>
 <!-- =========================================以上為原bikeDetailResv.jsp的內容========================================== -->
 			</div>
+			
 			<div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
             </div>
+		
 		</div>
 	</div>
 </div>
@@ -111,9 +102,7 @@ $(document).ready(function() {
 		},
 		dataType: "JSON",
 		success : function(data) {
-			console.log(data);
 			 handleJSON(data);
-			 
 		},complete:function(){
 			//查看submit
 			$(".btn-sub").click(function(){
@@ -123,7 +112,7 @@ $(document).ready(function() {
 						url:"<%=request.getContextPath()%>/bike/BikeRentDetailServlet.do",
 						type :"POST",
 						data : {
-							action:"initResv",
+							action:"initEx",
 							sq_rent_id : sq_rent_id,
 						},
 						success:function(){
@@ -186,8 +175,6 @@ function handleJSON(data){
 		var rent_od_statusStr = getValue(rent_od_status);
 		//訂單時間
 		var order_date = data.resvTime[sq_rent_id];
-		console.log(data.resvTime);
-		console.log(sq_rent_id);
 		var order_date_spilt = order_date.split(" ");
 		var tradeno = storeMaster.tradeno;
 		str+="<tr>";
