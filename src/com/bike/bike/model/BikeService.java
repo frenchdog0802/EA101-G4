@@ -34,4 +34,8 @@ public class BikeService {
 		return BikeDAO.getAll();
 	}
 	
+	public void update(BikeVO BikeVO) {
+		BikeDAO.update(BikeVO);
+	}
+	
 }

@@ -27,7 +27,7 @@
 					<th scope="col">車種</th>
 					<th scope="col">車輛編號</th>
 					<th scope="col">還車狀態</th>
-					<th scope="col">時間</th>
+					<th scope="col">還車時間</th>
 					<th scope="col">額外花費</th>
 				</tr>
 			</thead>
@@ -60,6 +60,7 @@ $(document).ready(function() {
 		},
 		dataType:"JSON",
 		success:function(data){
+			console.log(JSON.stringify(data))
 			var returnObj = data.returnList
 			console.log(JSON.stringify(returnObj));
 			var str="";
@@ -102,7 +103,7 @@ $(document).ready(function() {
 				var rows = tbody.rows.length;
 				//取訂單編號
 				var sq_rent_id= tbody.rows[0].cells[0].innerText;
-				var jsonStr = "[";//組合JSON字串
+				var jsonStr = '[';//組合JSON字串
 				for(var i =0 ; i <rows ; i++){	
 					//取明細編號
 					var sq_rent_detail_id = tbody.rows[i].cells[0].children[0].value;
@@ -110,6 +111,8 @@ $(document).ready(function() {
 					var sq_bike_id = tbody.rows[i].cells[2].innerText;
 					//取還車狀態
 					var sq_bike_status = tbody.rows[i].cells[3].children[0].value;
+					//還車時間
+					var ex_return_date = tbody.rows[i].cells[4].innerText;
 					//取額外花費
 					var extra_cost = tbody.rows[i].cells[5].innerText;
 					//組合JSON
@@ -120,6 +123,8 @@ $(document).ready(function() {
 					jsonStr+=",";
 					jsonStr+='"sq_bike_status":'+sq_bike_status;
 					jsonStr+=",";
+					jsonStr+='"ex_return_date":"'+ex_return_date+'"';
+					jsonStr+=",";
 					jsonStr+='"extra_cost":'+extra_cost;
 					jsonStr+="}";
 					if(i!=(rows-1)){
@@ -127,6 +132,7 @@ $(document).ready(function() {
 					}
 				}
 				jsonStr +="]";
+				console.log(jsonStr)
 				//ajax傳值
 				$.ajax({
 					url:"<%=request.getContextPath()%>/bike/BikeRentDetailServlet.do",
@@ -135,17 +141,23 @@ $(document).ready(function() {
 						action:"returnBikes",
 						sq_rent_id : sq_rent_id,
 						jsonStr : jsonStr
-					},complete:function(){
-						Swal.fire({
-							  icon: 'success',
-							  title: '還車成功',
-							  timer: 1500,
-							  showConfirmButton: true,
-							  onClose: () => {
-								  window.location.href="<%=request.getContextPath()%>/back-end/bike/bikeDetail.jsp";
-							     }
-					    });
-					}
+ 					},
+ 					dataType:"JSON",
+ 					success:function(data){
+ 						console.log(data);
+ 					}
+					
+//					,complete:function(){
+// 						Swal.fire({
+// 							  icon: 'success',
+// 							  title: '還車成功',
+// 							  timer: 1500,
+// 							  showConfirmButton: true,
+// 							  onClose: () => {
+<%-- 								  window.location.href="<%=request.getContextPath()%>/back-end/bike/bikeDetail.jsp"; --%>
+// 							     }
+// 					    });
+// 					}
 				})
 				
 			})

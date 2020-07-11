@@ -1,7 +1,11 @@
 package com.bike.rent.detail.controller;
 
+import static java.time.temporal.ChronoUnit.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -290,14 +295,80 @@ public class BikeRentDetailServlet extends HttpServlet {
 		}
 		
 		//還車成功
-		if ("initExMaster".equals(action)) {
-			//做到這裡繼續判斷
+		if ("returnBikes".equals(action)) {
+
+			//接收參數 
+			String jsonStr = request.getParameter("jsonStr");
+			String sq_rent_id = request.getParameter("sq_rent_id");
+			JSONArray bikeDetailJson = new JSONArray(jsonStr);
+			
+			BikeTypeService BikeTypeSvc = new BikeTypeService();
+			BikeRentDetailService BikeRentDetailSvc = new BikeRentDetailService();
+			BikeRentMasterService BikeRentMasterSvc = new BikeRentMasterService();
+			BikeService BikeSvc = new BikeService();
+			//時間格式
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			//計算金額
+			Integer total = 0;
+			LocalDateTime now = LocalDateTime.now();
+			//裝入回傳的資料
+			HashMap map = new HashMap();
+			
+			for(int i =0 ; i <bikeDetailJson.length() ; i++) {
+				JSONObject obj = bikeDetailJson.getJSONObject(i);
+				String sq_rent_detail_id = obj.getString("sq_rent_detail_id");
+				String sq_bike_id = obj.getString("sq_bike_id");
+				Integer  bike_status = obj.getInt("sq_bike_status");
+				Integer extra_cost = obj.getInt("extra_cost");
+				//1.時間判斷時間有無超過多收錢  2.找出車種算錢 
+				Integer singleExtraCost = 0;
+				String ex_return_date = obj.getString("ex_return_date");
+				LocalDateTime ex_return_dateFormat = LocalDateTime.parse(ex_return_date, formatter);
+//				找出時間多久
+				long untilHour = ex_return_dateFormat.until(now, HOURS);
+				long untilDays = ex_return_dateFormat.until(now, DAYS);
+				//找出單車價格多少*時間
+				String bike_type_id = BikeSvc.findByPrimaryKey(sq_bike_id).getSq_bike_type_id();
+				if(untilHour>0 && untilHour<6) {
+					Integer hourPrice = BikeTypeSvc.findByPrimaryKey(bike_type_id).getBike_hourly_price();
+					singleExtraCost = hourPrice * (int)untilHour;
+				}else if(untilHour>6){
+					//判斷如果是0天的話算一天
+					untilDays = untilDays == 0 ? 1: untilDays;
+					Integer dailyPrice = BikeTypeSvc.findByPrimaryKey(bike_type_id).getBike_daily_price();
+					singleExtraCost = dailyPrice * (int)untilDays;
+				}else {
+					singleExtraCost = 0;
+				}
+				map.put("untilHour",untilHour);
+				map.put("untilDays",untilDays);
+				
+				
+				//資料庫處理 1.單車物件 2.訂單明細 3.訂單
+				BikeVO bikeVO = BikeSvc.findByPrimaryKey(sq_bike_id);
+				bikeVO.setBike_status(bike_status);
+				BikeSvc.update(bikeVO);
+				
+				BikeRentDetailVO BikeRentDetailVO = BikeRentDetailSvc.findByPrimaryKey(sq_rent_detail_id);
+				BikeRentDetailVO.setReal_return_date(Timestamp.valueOf(now));
+				BikeRentDetailVO.setExtra_cost(extra_cost+singleExtraCost);
+				BikeRentDetailSvc.update(BikeRentDetailVO);
+				
+				//訂單總共金額
+				total+=extra_cost+singleExtraCost;
+			}
+			
+			BikeRentMasterVO BikeRentMasterVO =  BikeRentMasterSvc.findByPrimaryKey(sq_rent_id);
+			BikeRentMasterVO.setOd_total_price(total);
+			BikeRentMasterVO.setRent_od_status(2);
+			BikeRentMasterSvc.update(BikeRentMasterVO);
+			
+			//回傳JSON
+			map.put("singleExtraCost",total);
+			JSONObject resJson = new JSONObject(map);
+			out.println(resJson);
+			
 		}
 	}
 }
-//訂單編號
-//車種
-//車輛編號
-//還車狀態
-//時間
-//確認車輛
+
