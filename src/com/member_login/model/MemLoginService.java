@@ -8,7 +8,8 @@ public class MemLoginService {
 	private MemLoginDAO_interface dao;
 
 	public MemLoginService() {
-		dao = new MemLoginJDBCDAO();
+		dao = new MemLoginDAO();
+
 	}
 	
 	public List<MemLoginVO> findAll() {

@@ -11,7 +11,7 @@ public class StaffService {
 
 	
 	public StaffService() {
-		dao = new StaffJDBCDAO();
+		dao = new StaffDAO();
 	}
 	public StaffVO addStaff(Integer sf_status,String sf_account,String sf_password,String sf_name) {
 

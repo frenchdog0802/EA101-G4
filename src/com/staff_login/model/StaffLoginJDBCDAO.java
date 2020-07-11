@@ -7,48 +7,41 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
 import com.member_login.model.MemLoginVO;
 import com.staff.model.StaffJDBCDAO;
 import com.staff.model.StaffVO;
 
-public class StaffLoginDAO implements StaffLoginDAO_interface {
+public class StaffLoginJDBCDAO implements StaffLoginDAO_interface{
 
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/EA101_G4");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String userid = "EA101_G4";
+	String passwd = "EA101_G4";
 
 	private static final String CONTRAST = "select * from staff where sf_account=? ";
 
 	@Override
 	public StaffLoginVO getOneStaff(String sf_account) {
-
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		StaffLoginVO staffLoginVO = null;
-
+		
+		
 		try {
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(CONTRAST);
-
+			
 			pstmt.setString(1, sf_account);
-
+			
 			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
+			
+			while(rs.next()) {
 				staffLoginVO = new StaffLoginVO();
-
+				
 				staffLoginVO.setSq_staff_id(rs.getString("sq_staff_id"));
 				staffLoginVO.setSf_status(rs.getInt("sf_status"));
 				staffLoginVO.setSf_account(rs.getString("sf_account"));
@@ -56,37 +49,41 @@ public class StaffLoginDAO implements StaffLoginDAO_interface {
 				staffLoginVO.setSf_name(rs.getString("sf_name"));
 				System.out.println("登入成功");
 			}
-		
-		} catch (SQLException se) {
+		}catch(ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+
+		}catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
+	}finally {
+		if(rs != null) {
+			try {
+				rs.close();
+			}catch(SQLException se) {
+				se.printStackTrace(System.err);
 			}
 		}
-
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (con != null) {
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+		
 		return staffLoginVO;
 	}
-
+	
+	
+	
 //	public static void main(String[] args) {
 //
 //		StaffLoginDAO dao = new StaffLoginDAO();
