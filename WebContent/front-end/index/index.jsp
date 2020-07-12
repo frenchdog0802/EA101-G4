@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@ page import ="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <!-- Required meta tags always come first -->
-<meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -311,12 +313,23 @@
 		</div>
 	</div>
 
-
-
 	<%@include file="/front-end/page-file/page-footer"%>
 	<!-- 	jquery已經引入  -->
 	<!-- 	sweetAlert已經引入   -->
 	<!-- 	boostrap4已經引入   -->
+	<script>
+	$(function(){
+		<c:if test="${param.validation=='success'}">
+		Swal.fire({
+			  position: 'top-end',
+			  icon: 'success',
+			  title: '帳號驗證成功!',
+			  showConfirmButton: false,
+			  timer: 1500
+			})
+		</c:if>
+	})
+	</script>
 
 </body>
 </html>

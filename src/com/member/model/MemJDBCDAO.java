@@ -372,5 +372,11 @@ public class MemJDBCDAO implements MemDAO_interface {
 //			System.out.println(allMem.getAddress());
 //			System.out.println();
 //		}
+	}
+
+	@Override
+	public MemVO getOneMemfromAccount(String member_account) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }

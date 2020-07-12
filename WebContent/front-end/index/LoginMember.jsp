@@ -16,28 +16,34 @@
 <title>Hello, world!</title>
 </head>
 <body>
-<%@include file="/front-end/page-file/page-nav"%>
+	<%@include file="/front-end/page-file/page-nav"%>
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1">
 		<div class="wrapper fadeInDown">
 			<div id="formContent">
 				<!-- Tabs Titles -->
 				<!-- Icon -->
+
 				<div class="fadeIn first">
 					<h1 class="text-secondary">Sign In</h1>
-					<img src="<%=request.getContextPath()%>/front-end/index/bike-img/home10.png" id="icon" alt="User Icon" />
+					<img
+						src="<%=request.getContextPath()%>/front-end/index/bike-img/home10.png"
+						id="icon" alt="User Icon" />
 				</div>
 				<!-- Login Form -->
-					<input type="text" id="login" autocomplete="off" class="fadeIn" placeholder="account" >
-					<!--errorMSG -->
-					<span class="small text-danger errorMsgCount d-block"></span>
-					<input type="text" id="password" class="fadeIn third"  placeholder="password" autocomplete="off"> 
-					<!--errorMSG -->
-					<span class="small text-danger errorMsgPws d-block"></span>
-					<input type="button" class="fadeIn submitbtn" value="login" />
+				<input type="text" id="login" autocomplete="off" class="fadeIn"
+					placeholder="account">
+				<!--errorMSG -->
+				<span class="small text-danger errorMsgCount d-block"></span> <input
+					type="text" id="password" class="fadeIn" placeholder="請輸入密碼" name="password"
+					autocomplete="new-password">
+				<!--errorMSG -->
+				<span class="small text-danger errorMsgPws d-block"></span> <input
+					type="button" class="fadeIn submitbtn" value="login" />
 				<!-- Remind Passowrd -->
 				<div id="formFooter">
 					<div id="formFooter">
-						<a class="underlineHover mx-1" href="<%=request.getContextPath()%>/front-end/index/index.jsp">返回首頁</a> 
+						<a class="underlineHover mx-1"
+							href="<%=request.getContextPath()%>/front-end/index/index.jsp">返回首頁</a>
 						<a class="underlineHover mx-1" href="#">註冊</a>
 					</div>
 				</div>
@@ -60,23 +66,23 @@
 			$.ajax({
 				type:"POST",
 				url:"<%=request.getContextPath()%>/login/memlogin.do",
-				data:{
-					action:"login",
-					member_account:login,
-					password:pass
-				},
-				dataType:"JSON",
-				success:function(data){
-					$(".errorMsgCount").text(data.errorAccount);
-					$(".errorMsgPws").text(data.errorPws);
-					if(data.location!=null){
-						window.location.href = data.location;
+					data : {
+						action : "login",
+						member_account : login,
+						password : pass
+					},
+					dataType : "JSON",
+					success : function(data) {
+						console.log(data);
+						$(".errorMsgCount").text(data.errorAccount);
+						$(".errorMsgPws").text(data.errorPws);
+						if (data.location != null) {
+							window.location.href = data.location;
+						}
 					}
-				}
+				})
 			})
-	})
-})
-		
+		})
 	</script>
 </body>
 </html>

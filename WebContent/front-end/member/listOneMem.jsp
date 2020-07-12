@@ -1,19 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="java.util.*" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <!--    CSS幫你們引入完了  你們要額外新增在自己寫-->
-
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/index/index.css">
 <link   rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-    <title>註冊</title>
+    <title>Welcome to EA101-G4</title>
 </head>
-
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
 	
+ 	
+ 	
+ 
 <div class="container mt-5">
 	<div class="row">
 		<div class="col">
@@ -26,8 +29,8 @@
 					</label> 
 					<input type="text"
 						class="col-sm-10 form-control ${errorMsgs.m_name==null?'':'is-invalid'} "
-						id="m_name" name="m_name" placeholder="請輸入姓名" autocomplete="off"
-						value="${param.m_name}">
+						id="m_name" name="m_name" readonly  autocomplete="off"
+						value="${MemVO.m_name}">
 					<!--errorMsg -->
 					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.m_name}</div>
 				</div>
@@ -36,8 +39,8 @@
 					<label for="account" class="col-sm-2 col-form-label">帳號:</label>
 					<input type="text"
 						class="col-sm-10 form-control ${errorMsgs.member_account==null?'':'is-invalid'}"
-						id="account" name="member_account" placeholder="請輸入帳號"  autocomplete="off" 
-						value="${param.member_account}">
+						id="account" name="member_account" readonly   autocomplete="off" 
+						value="${MemVO.member_account}">
 					<!--errorMsg -->
 					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.member_account}</div>
 				</div>
@@ -46,8 +49,8 @@
 					<label for="password" class="col-sm-2 col-form-label ">密碼:</label>
 					<input type="password"
 						class="col-sm-10 form-control ${errorMsgs.password==null?'':'is-invalid'}"
-						id="password" name="password" placeholder="請輸入密碼" autocomplete="new-password"
-						value="${param.password}" >
+						id="password" name="password"  autocomplete="new-password"
+						value="${MemVO.password}" >
 					<!--errorMsg -->
 					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.password}</div>
 				</div>
@@ -57,8 +60,8 @@
 					<label for="m_email" class="col-sm-2 col-form-label ">信箱:</label>
 					<input type="email"
 						class="col-sm-10 form-control ${errorMsgs.password==null?'':'is-invalid'}"
-						id="m_email" name="m_email" placeholder="請輸入信箱" autocomplete="off" autoCorrect="off"
-						value="${param.m_email}">
+						id="m_email" name="m_email" autocomplete="off" autoCorrect="off"
+						value="${MemVO.m_email}">
 					<!--errorMsg -->
 					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.m_email}</div>
 				</div>
@@ -68,8 +71,8 @@
 				<div class="form-group row">
 					<label for="gender" class="col-sm-2  col-form-label ">性別:</label>
 					<select name="gender" id="gender" class="form-control col-sm-10">
-							<option value="1" ${param.gender==1?"selected":""}>男</option>
-							<option value="2" ${param.gender==2?"selected":""}>女</option>
+							<option value="1" ${MemVO.gender==1?"selected":""}>男</option>
+							<option value="2" ${MemVO.gender==2?"selected":""}>女</option>
 					</select>
 				</div>
 				<!--gender -->
@@ -87,7 +90,7 @@
 				<!--phone -->
 				<div class="form-group row">
 					<label for="cellphone" class="col-sm-2 col-form-label ">電話:</label>
-					<input type="number" name="cellphone" value="${param.cellphone}" class="col-sm-10 form-control  ${errorMsgs.phone==null?'':'is-invalid'}" >
+					<input type="number" name="cellphone" value="${MemVO.cellphone}" class="col-sm-10 form-control  ${errorMsgs.phone==null?'':'is-invalid'}" >
 					<!--errorMsg -->
 					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.phone}</div>
 				<!--phone -->
@@ -97,7 +100,7 @@
 				<!--address -->
 				<div class="form-group row">
 					<label for="address" class="col-sm-2 col-form-label ">地址:</label>
-					<input type="text" name="address" value="${param.address}" class="col-sm-10 form-control ${errorMsgs.address==null?'':'is-invalid'}" >
+					<input type="text" name="address" value="${MemVO.address}" class="col-sm-10 form-control ${errorMsgs.address==null?'':'is-invalid'}" >
 					<!--errorMsg -->
 					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.address}</div>
 				<!--address -->
@@ -117,43 +120,34 @@
 				</div>
 
 				<div id="showImg" class="text-center">
+					<img src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${MemVO.sq_member_id}" class="img-fluid" width=300 height=300>
 				</div>
 				
-				<input type="hidden" name="validation" value="0">
-				<input type="hidden" name="action" value="insert">
-				<button type="submit" class="btn btn-outline-primary btn-block m-5">確認送出</button>
+				<input type="hidden" name="action" value="update">
+				<button type="submit" class="btn btn-outline-primary btn-block m-5">修改個人資訊</button>
 			</form>
 		</div>
 	</div>
 </div>
+ 
+ 
+ 		
 	<%@include file="/front-end/page-file/page-footer"%>
 <!-- 	jquery已經引入  -->
 <!-- 	sweetAlert已經引入   -->
 <!-- 	boostrap4已經引入   -->
+
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 	<script>
-	//成功回來寄發驗證信
-	<c:if test="${param.validation=='email'}">
-	Swal.fire({
-		  title: '請去信箱認證會員',
-		  width: 600,
-		  padding: '3em',
-		  background: '#fff url(/images/trees.png)',
-		  backdrop: `
-		    rgba(0,0,123,0.4)
-		    url("/images/nyan-cat.gif")
-		    left top
-		    no-repeat
-		  `
-		})
-	</c:if>
+	$(function(){
+		$(".fun-text").text("");  // text("")裡面自己輸入功能名稱 
 	
 	//datetimepicker
 	$('#birthday').datetimepicker({
 		timepicker: false,
 		format: 'Y-m-d', 
-		value:"${param.birthday}",
+		value:"${MemVO.birthday}",
 		maxDate:'+1970-01-01',
 	})
 	
@@ -176,7 +170,9 @@
 			}
 		}
 	});
+	});
 	</script>
 
 </body>
 </html>
+
