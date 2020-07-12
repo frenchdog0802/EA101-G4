@@ -217,6 +217,7 @@
     <h3 class="my-4">相關活動</h3>
 
 				<div class="row">
+					<c:if test="<%= list2.size()!=0%>">
 					<c:forEach var="actVO5" items="${list2}" begin="${list2.size()-4}"
 						end="${list2.size()-1}">
 						<div class="col-md-3 col-sm-6 mb-4">
@@ -228,7 +229,9 @@
 							</a>
 						</div>
 					</c:forEach>
-
+					</c:if>
+					<c:if test="<%= list2.size()==0%>">	
+					</c:if>
 				</div>
 				<!-- /.row -->
    
