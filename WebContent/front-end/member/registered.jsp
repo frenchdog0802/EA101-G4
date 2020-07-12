@@ -7,7 +7,7 @@
 <head>
 <!--    CSS幫你們引入完了  你們要額外新增在自己寫-->
 
-<link   rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
     <title>註冊</title>
 </head>
 
@@ -15,6 +15,7 @@
 	<%@include file="/front-end/page-file/page-nav"%>
 	
 <div class="container mt-5">
+ 
 	<div class="row">
 		<div class="col">
 			<form method="POST"
@@ -146,7 +147,9 @@
 		    left top
 		    no-repeat
 		  `
-		})
+		}).then((result) => {
+			window.location.href="<%=request.getContextPath()%>/front-end/index/LoginMember.jsp";
+		});
 	</c:if>
 	
 	//datetimepicker

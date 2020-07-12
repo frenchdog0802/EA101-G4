@@ -69,8 +69,8 @@ public class MemService {
 		return memVO;
 	}
 	
-	public MemVO updateMem(MemVO memVO) {
-		return memVO;
+	public void updateMem(MemVO memVO) {
+		 dao.update(memVO);
 	}
 
 	public void deleteMem(String sq_member_id) {

@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
+<jsp:useBean id="MemVO" type="com.member.model.MemVO" scope="session"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +19,9 @@
  	
  
 <div class="container mt-5">
+<c:forEach var="item" items="${errorMsgs}"> 
+${item.key} > ${item.value} <br> 
+</c:forEach>
 	<div class="row">
 		<div class="col">
 			<form method="POST"
@@ -122,7 +126,7 @@
 				<div id="showImg" class="text-center">
 					<img src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${MemVO.sq_member_id}" class="img-fluid" width=300 height=300>
 				</div>
-				
+				<input type="hidden" name="sq_member_id" value="${MemVO.sq_member_id}">
 				<input type="hidden" name="action" value="update">
 				<button type="submit" class="btn btn-outline-primary btn-block m-5">修改個人資訊</button>
 			</form>

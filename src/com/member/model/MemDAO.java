@@ -58,7 +58,7 @@ public class MemDAO implements MemDAO_interface {
 			while (rs.next()) {
 				memVO = new MemVO();
 
-				memVO.setSq_member_id(member_account);
+				memVO.setSq_member_id(rs.getString("sq_member_id"));
 				memVO.setMember_account(rs.getString("member_account"));
 				memVO.setPassword(rs.getString("password"));
 				memVO.setM_name(rs.getString("m_name"));
@@ -173,11 +173,9 @@ public class MemDAO implements MemDAO_interface {
 			pstmt.setString(12, memVO.getAddress());
 			pstmt.setInt(13, memVO.getValidation());
 			pstmt.setString(14, memVO.getSq_member_id());
-
 			pstmt.executeUpdate();
-
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occurred. " + se.getMessage());
+			se.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
