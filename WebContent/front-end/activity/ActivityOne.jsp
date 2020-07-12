@@ -216,17 +216,24 @@
     <!-- Related Projects Row -->
     <h3 class="my-4">相關活動</h3>
 
-    <div class="row">
-		<c:forEach var="actVO5" items="${list2}" begin="${list2.size()-4}" end="${list2.size()-1}">
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO5.sq_activity_id}">
-          <img id="relationimg" class="img-fluid" src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO5.sq_activity_id}'" alt="">
-        </a>
-      </div>
-		</c:forEach>
-
-    </div>
-    <!-- /.row -->
+				<div class="row">
+					<c:if test="<%= list2.size()!=0%>">
+					<c:forEach var="actVO5" items="${list2}" begin="${list2.size()-4}"
+						end="${list2.size()-1}">
+						<div class="col-md-3 col-sm-6 mb-4">
+							<a
+								href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO5.sq_activity_id}">
+								<img id="relationimg" class="img-fluid"
+								src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO5.sq_activity_id}'"
+								alt="">
+							</a>
+						</div>
+					</c:forEach>
+					</c:if>
+					<c:if test="<%= list2.size()==0%>">	
+					</c:if>
+				</div>
+				<!-- /.row -->
    
       </div>
     </div>
