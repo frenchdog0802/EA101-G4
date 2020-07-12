@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import ="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,13 +15,15 @@
 	<%@include file="/front-end/page-file/page-nav"%>
 	
  	<div class="container my-5">
- 	
+ 	<c:forEach var="item" items="${errorMsgs}"> 
+${item.key} > ${item.value} <br> 
+</c:forEach> 
 <div class="container mt-5">
 	<div class="row">
 		<div class="col">
 			<form method="POST"
 				action="<%=request.getContextPath()%>/member/mem.do"
-				enctype="multipart/form-data " autocomplete="off">
+				enctype="multipart/form-data" autocomplete="off">
 		
 				<div class="form-group row">
 					<label for="m_name" class="col-sm-2 col-form-label">姓名:
@@ -77,35 +81,38 @@
 				<!--birth -->
 				<div class="form-group row">
 					<label for="birthday" class="col-sm-2 col-form-label ">生日:</label>
-					<input type="text" class="col-sm-10 form-control" id="birthday" >
-				</div>
-				<!--errorMsg -->
+					<input type="text" class="col-sm-10 form-control ${errorMsgs.birthday==null?'':'is-invalid'}" id="birthday" name="birthday">
+					<!--errorMsg -->
 					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.birthday}</div>
 				<!--birth -->
+				</div>
+				
 				
 				<!--phone -->
 				<div class="form-group row">
 					<label for="cellphone" class="col-sm-2 col-form-label ">電話:</label>
-					<input type="number" name="cellphone" value="${param.cellphone}" class="col-sm-10 form-control" >
-				</div>
-				<!--errorMsg -->
+					<input type="number" name="cellphone" value="${param.cellphone}" class="col-sm-10 form-control  ${errorMsgs.phone==null?'':'is-invalid'}" >
+					<!--errorMsg -->
 					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.phone}</div>
 				<!--phone -->
+				</div>
+				
 				
 				<!--address -->
 				<div class="form-group row">
 					<label for="address" class="col-sm-2 col-form-label ">地址:</label>
-					<input type="text" name="address" value="${param.address}" class="col-sm-10 form-control" >
-				</div>
-				<!--errorMsg -->
+					<input type="text" name="address" value="${param.address}" class="col-sm-10 form-control ${errorMsgs.address==null?'':'is-invalid'}" >
+					<!--errorMsg -->
 					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.address}</div>
 				<!--address -->
+				</div>
+				
 
 				<div class="form-group row">
 					<p class="col-sm-2 ">上傳圖片</p>
-					<div class="custom-file col-sm-10 ">
+					<div class="custom-file col-sm-10 ${errorMsgs.m_photo==null?'':'is-invalid'}">
 						<input type="file"
-							class="custom-file-input ${errorMsgs.bike_photo==null?'':'is-invalid'}"
+							class="custom-file-input "
 							name="m_photo" id="upLoad"> <label
 							class="custom-file-label" for="upLoad" data-browse="上傳"></label>
 					</div>
@@ -132,7 +139,10 @@
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 	<script>
 	//datetimepicker
-	$('#birthday').datetimepicker()
+	$('#birthday').datetimepicker({
+		timepicker: false,
+		format: 'Y-m-d', 
+	})
 	
 	$("#upLoad").change(()=>{
 		$("#showImg").empty();

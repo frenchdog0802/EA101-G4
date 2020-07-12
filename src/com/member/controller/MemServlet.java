@@ -160,6 +160,7 @@ public class MemServlet extends HttpServlet {
 
 				java.sql.Date birthday = null;
 				try {
+					
 					birthday = java.sql.Date.valueOf(req.getParameter("birthday").trim());
 				} catch (IllegalArgumentException e) {
 					birthday = new java.sql.Date(System.currentTimeMillis());
@@ -306,13 +307,17 @@ public class MemServlet extends HttpServlet {
 
 				java.sql.Date birthday = null;
 				try {
-					birthday = java.sql.Date.valueOf(req.getParameter("birthday").trim());
+					birthday = java.sql.Date.valueOf(req.getParameter("birthday"));
+					System.out.println("birthday"+birthday);
 				} catch (IllegalArgumentException e) {
 					birthday = new java.sql.Date(System.currentTimeMillis());
+					errorMsgs.put("birthday","請輸入日期!");
+				}catch(NullPointerException nu) {
 					errorMsgs.put("birthday","請輸入日期!");
 				}
 
 				String m_email = req.getParameter("m_email").trim();
+				System.out.println("m_email"+m_email);
 				if (m_email == null || m_email.trim().length() == 0) {
 					errorMsgs.put("m_email","請輸入email");
 				}
@@ -320,6 +325,7 @@ public class MemServlet extends HttpServlet {
 				
 
 				String address = req.getParameter("address").trim();
+				System.out.println("address" + address);
 				if (address == null || address.trim().length() == 0) {
 					errorMsgs.put("address","請輸入聯絡地址");
 				}
@@ -329,8 +335,9 @@ public class MemServlet extends HttpServlet {
 				Integer gender = new Integer(req.getParameter("gender"));
 
 				Date registered = new java.sql.Date(System.currentTimeMillis());
-
-				InputStream in = req.getPart("m_photo").getInputStream();
+				
+				Part m_photor = req.getPart("m_photo");
+				InputStream in = m_photor.getInputStream();
 				byte[] m_photo = null;
 				if (in.available() == 0) {
 					if (session.getAttribute("m_photo") == null) {
@@ -346,6 +353,7 @@ public class MemServlet extends HttpServlet {
 					in.read(m_photo);
 					in.close();
 				}
+				
 
 				
 
