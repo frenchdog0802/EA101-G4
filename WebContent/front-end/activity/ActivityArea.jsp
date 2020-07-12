@@ -45,24 +45,24 @@
 				<!-- Sidebar Column -->
 				<div class="col-lg-3 mb-4">
 					<div class="list-group">
-						<a href="<%=request.getContextPath()%>/front-end/activity/Activity.jsp" class="list-group-item active">全部活動</a>
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=基隆市" class="list-group-item">基隆市</a> 
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=台北市" class="list-group-item">台北市</a> 
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=新北市" class="list-group-item">新北市</a> 
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=桃園市" class="list-group-item">桃園市</a> 
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=新竹縣" class="list-group-item">新竹縣</a>
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=苗栗縣" class="list-group-item">苗栗縣</a>
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=台中市" class="list-group-item">台中市</a>
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=彰化縣" class="list-group-item">彰化縣</a>
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=南投縣" class="list-group-item">南投縣</a>
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=雲林縣" class="list-group-item">雲林縣</a>
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=嘉義縣" class="list-group-item">嘉義縣</a>
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=台南市" class="list-group-item">台南市</a>
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=高雄市" class="list-group-item">高雄市</a>
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=屏東縣" class="list-group-item">屏東縣</a>
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=宜蘭縣" class="list-group-item">宜蘭縣</a>
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=花蓮縣" class="list-group-item">花蓮縣</a>
-						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=台東縣" class="list-group-item">台東縣</a>
+						<a href="<%=request.getContextPath()%>/front-end/activity/Activity.jsp" class="list-group-item">全部活動</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=基隆市" class="list-group-item <%=request.getParameter("area").contains("基隆市")?"active":"" %>">基隆市</a> 
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=台北市" class="list-group-item <%=request.getParameter("area").contains("台北市")?"active":"" %>">台北市</a> 
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=新北市" class="list-group-item <%=request.getParameter("area").contains("新北市")?"active":"" %>">新北市</a> 
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=桃園市" class="list-group-item <%=request.getParameter("area").contains("桃園市")?"active":"" %>">桃園市</a> 
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=新竹縣" class="list-group-item <%=request.getParameter("area").contains("新竹縣")?"active":"" %>">新竹縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=苗栗縣" class="list-group-item <%=request.getParameter("area").contains("苗栗縣")?"active":"" %>">苗栗縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=台中市" class="list-group-item <%=request.getParameter("area").contains("台中市")?"active":"" %>">台中市</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=彰化縣" class="list-group-item <%=request.getParameter("area").contains("彰化縣")?"active":"" %>">彰化縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=南投縣" class="list-group-item <%=request.getParameter("area").contains("南投縣")?"active":"" %>">南投縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=雲林縣" class="list-group-item <%=request.getParameter("area").contains("雲林縣")?"active":"" %>">雲林縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=嘉義縣" class="list-group-item <%=request.getParameter("area").contains("嘉義縣")?"active":"" %>">嘉義縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=台南市" class="list-group-item <%=request.getParameter("area").contains("台南市")?"active":"" %>">台南市</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=高雄市" class="list-group-item <%=request.getParameter("area").contains("高雄市")?"active":"" %>">高雄市</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=屏東縣" class="list-group-item <%=request.getParameter("area").contains("屏東縣")?"active":"" %>">屏東縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=宜蘭縣" class="list-group-item <%=request.getParameter("area").contains("宜蘭縣")?"active":"" %>">宜蘭縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=花蓮縣" class="list-group-item <%=request.getParameter("area").contains("花蓮縣")?"active":"" %>">花蓮縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=台東縣" class="list-group-item <%=request.getParameter("area").contains("台東縣")?"active":"" %>">台東縣</a>
 					</div>
 				</div>
 				<!-- Content Column -->
@@ -90,6 +90,9 @@
 								</div>
 							</div>
 						</c:forEach>
+						<c:if test="<%=list2.size() == 0%>">
+							<h1 >查無資料</h1>
+						</c:if>
 					</div>
 
 					<!-- Pagination -->
