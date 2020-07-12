@@ -1,5 +1,6 @@
 package com.store.model;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.*;
 
@@ -29,7 +30,8 @@ public class StoreDAO implements StoreDAO_interface{
 	public static final String DELETE = "DELETE FROM STORE_ADDRESS WHERE SQ_STORE_ADDRESS_ID=?";
 	public static final String GET_ONE = "SELECT SQ_STORE_ADDRESS_ID, STORE_NAME, STORE_ADDRESS_DETAIL, STORE_LONGITUDE, STORE_LATITUDE FROM STORE_ADDRESS WHERE SQ_STORE_ADDRESS_ID=?";
 	public static final String GET_ALL = "SELECT SQ_STORE_ADDRESS_ID, STORE_NAME, STORE_ADDRESS_DETAIL, STORE_LONGITUDE, STORE_LATITUDE FROM STORE_ADDRESS ORDER BY SQ_STORE_ADDRESS_ID";
-	
+	public static final String GET_POS = "SELECT STORE_ADDRESS_DETAIL, STORE_LONGITUDE, STORE_LATITUDE FROM STORE_ADDRESS WHERE STORE_NAME=?";
+
 	@Override
 	public void insert(StoreVO storeVO) {
 		Connection con = null;
@@ -232,5 +234,57 @@ public class StoreDAO implements StoreDAO_interface{
 		}
 		return list;
 	}
+
+	@Override
+	public List<StoreVO> getPosition(String shopName) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<StoreVO> list = new ArrayList<StoreVO>();
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_POS);		
+			pstmt.setString(1, shopName);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				StoreVO vo = new StoreVO();
+				vo.setStore_address(rs.getString("store_address_detail"));
+				vo.setLongitude(rs.getBigDecimal("store_longitude"));
+				vo.setLatitude(rs.getBigDecimal("store_latitude"));
+				list.add(vo);
+			}
+		}catch(SQLException e) {
+			throw new RuntimeException("A database error occured." + e.getMessage());
+		}finally {
+			if(rs != null) {
+				try	{
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+//	public static void main(String args[]) {
+//		StoreDAO dao = new StoreDAO();
+//		List<BigDecimal> list = dao.getPosition("昇隆");
+//		System.out.println(list.get(0) + " " + list.get(1));
+//	}
 	
 }

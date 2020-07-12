@@ -40,6 +40,9 @@ public class StoreService {
 	public List<String> getStoreName(String storeKey) {
 		return dao.getShopName(storeKey);
 	}
+	public List<StoreVO> getPosition(String shopName) {
+		return dao.getPosition(shopName);
+	}
 	public List<StoreVO> getAll(){
 		return dao.getAll();
 	}

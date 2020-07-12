@@ -62,8 +62,8 @@
 										</tr>
 									</table>
 									<div class="checkbtn mt-4">
-										<button>清空</button>
-										<button>確認</button>
+<!-- 										<button id="sClear">清空</button> -->
+										<button id="sConfirm" disabled="disabled">確認</button>
 									</div>
 								</div><div></div>
 								<div class="col-6 pt-2 pl-4">
@@ -147,26 +147,66 @@
 	<%@include file="/front-end/page-file/page-footer"%>
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 	<script src="js/aj-address.js" type="text/javascript"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8wygDormdKxQnhWGlBHvYJ7Q2HsT7F14&callback=initMap"></script>
 	<script>
+	
+	function initMap(lat, lon) {
+        var uluru = {lat: lat, lng: lon};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+	
 	$(function () {
         $('.address-zone').ajaddress();
     });
-	$(document).ready(function(){	
+	$(document).ready(function(){
+		$("#sConfirm").click(function(){
+			var name = $("#shopName").val();
+			console.log(name);
+			$.ajax({
+	        	type : "POST",		  
+	        	url  : "<%=request.getContextPath()%>/store/storeServlet.do",
+	        	dataType: 'json',
+	        	data : {
+	        		action : "getPosition",
+	        		shopName : name,
+	        	},
+	        	success : function(data){
+	        		initMap(data[0].lat, data[0].lon);
+	        		$("#taddress").val(data[0].address);
+	        	}
+	    	});
+		});
+		
 		$("#c2").change(function(){
 			var key = $(".zipcode").val();
 			console.log(key);
 			if(key != ''){
 				$.ajax({
-		        	type : "POST",
+		        	type : "POST",		  
 		        	url  : "<%=request.getContextPath()%>/store/storeServlet.do",
+		        	dataType: 'json',
 		        	data : {
 		        		action : "getShopName",
 		        		directKey : key,
 		        	},
 		        	success : function(data){
-		        		console.log(data);
+		        		let str = "";
+						if(data.length != 0){
+						for(let index = 0 ; index < data.length ; index++) { 
+							str += "<option id='shopName' value='"+data[index].name+"'>"+data[index].name+"</option>";
+		        			}
+		        		}
+						$("#c3").empty();
+  						$("#c3").append(str);
 		        	}
-		        });
+		    	});
 			}
 		});
 		$(".samemem").click(function(){
@@ -197,18 +237,21 @@
 	var c1 = document.getElementById("c1");
 	var c2 = document.getElementById("c2");
 	var c3 = document.getElementById("c3");
+	var sConfirm = document.getElementById("sConfirm");
     var address = document.getElementById("taddress");
 	$('input[name=service]').change(function(){
 		if(store.checked){
 			c1.removeAttribute('disabled');
 			c2.removeAttribute('disabled');
 			c3.removeAttribute('disabled');
+			sConfirm.removeAttribute('disabled');
 			address.setAttribute('disabled', 'disabled');
 		}
 		if(home.checked){
 			c1.setAttribute('disabled', 'disabled');
 			c2.setAttribute('disabled', 'disabled');
 			c3.setAttribute('disabled', 'disabled');
+			sConfirm.setAttribute('disabled', 'disabled');
 			address.removeAttribute('disabled');
 		}
 	});
