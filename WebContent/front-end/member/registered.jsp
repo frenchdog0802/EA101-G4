@@ -10,11 +10,15 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
     <title>註冊</title>
 </head>
-
+<style>
+.rowGray{
+    background-color: #fafafa;
+}
+</style>
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
 	
-<div class="container mt-5">
+<div class="container mt-5 rowGray" >
  
 	<div class="row">
 		<div class="col">

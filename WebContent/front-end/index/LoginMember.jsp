@@ -44,7 +44,7 @@
 					<div id="formFooter">
 						<a class="underlineHover mx-1"
 							href="<%=request.getContextPath()%>/front-end/index/index.jsp">返回首頁</a>
-						<a class="underlineHover mx-1" href="#">註冊</a>
+						<a class="underlineHover mx-1" href="<%=request.getContextPath()%>/front-end/member/registered.jsp">註冊</a>
 					</div>
 				</div>
 

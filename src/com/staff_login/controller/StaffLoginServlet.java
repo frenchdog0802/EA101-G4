@@ -11,9 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-import com.staff_login.model.StaffLoginService;
-import com.staff_login.model.StaffLoginVO;
+import com.staff.model.StaffService;
+import com.staff.model.StaffVO;
 
 
 public class StaffLoginServlet extends HttpServlet{
@@ -50,28 +49,28 @@ public class StaffLoginServlet extends HttpServlet{
 					errorMsgs.add("請輸入密碼");
 				}
 
-				StaffLoginVO staffLoginVO = new StaffLoginVO();
-				staffLoginVO.setSf_account(sf_account);
+				StaffVO StaffVO = new StaffVO();
+				StaffVO.setSf_account(sf_account);
 
 				if (!errorMsgs.isEmpty()) {
-					request.setAttribute("staffLoginVO", staffLoginVO);
+					request.setAttribute("StaffVO", StaffVO);
 					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/login/LoginMember.jsp");
 					failureView.forward(request, response);
 					return; // 程式中斷
 				}
 				/*************************** 2.開始查詢資料 *******************************/
-				StaffLoginService staffSvc = new StaffLoginService();
-				staffLoginVO = staffSvc.getOneStaff(sf_account);
-				if (staffLoginVO == null) {
+				StaffService staffSvc = new StaffService();
+				StaffVO = staffSvc.getOneStaff(sf_account);
+				if (StaffVO == null) {
 					errorMsgs.add("無此帳號");
 					System.out.println("輸入帳號錯誤");
-				} else if (!staffLoginVO.getSf_password().equals(sf_password)) {
+				} else if (!StaffVO.getSf_password().equals(sf_password)) {
 					errorMsgs.add("密碼錯誤,請重新確認");
 					System.out.println("輸入密碼錯誤,請重新確認");
 				}
 
 				else {
-					session.setAttribute("StaffLoginFilter", staffLoginVO);//// *工作1: 才在session內做已經登入過的標識
+					session.setAttribute("StaffLoginFilter", StaffVO);//// *工作1: 才在session內做已經登入過的標識
 				}
 				try {
 					String location = (String) session.getAttribute("location");
@@ -87,7 +86,7 @@ public class StaffLoginServlet extends HttpServlet{
 //				response.sendRedirect(request.getContextPath()+"/back-end/member/selectMember_page.jsp");  //*工作3: (-->如無來源網頁:則重導至login_success.jsp)
 //				
 				if (!errorMsgs.isEmpty()) {
-					request.setAttribute("LoginStaff", staffLoginVO);
+					request.setAttribute("LoginStaff", StaffVO);
 					RequestDispatcher failureView = request.getRequestDispatcher("/back-end/LoginStaff.jsp");
 					failureView.forward(request, response);
 					System.out.println("輸入錯誤,請重新確認");
