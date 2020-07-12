@@ -1,6 +1,7 @@
 package com.store.controller;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
@@ -22,6 +23,7 @@ public class storeServlet extends HttpServlet {
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html;charset=UTF-8");
 		String action = req.getParameter("action");
 		
 		if ("getShopName".equals(action)) {
@@ -31,11 +33,31 @@ public class storeServlet extends HttpServlet {
 			StoreService storeSvc = new StoreService();
 			List<String> list = storeSvc.getStoreName(storeKey);
 			JSONArray json = new JSONArray();
-			for(String str: list){
+			for(int i=0 ; i<list.size() ; i++) {
 				JSONObject jsonList = new JSONObject();
-				jsonList.put(str, str);
+				String str = list.get(i);
+				System.out.println(str);
+				jsonList.put("name", str);
 				json.put(jsonList);
 			}
+			out.print(json);
+		}
+		if ("getPosition".equals(action)) {
+	        PrintWriter out = res.getWriter();
+			String shopName = req.getParameter("shopName");
+			StoreService storeSvc = new StoreService();
+			List<StoreVO> list = storeSvc.getPosition(shopName);
+			JSONArray json = new JSONArray();
+			JSONObject jsonList = new JSONObject();
+			String address = list.get(0).getStore_address();
+			BigDecimal lon = list.get(0).getLongitude();
+			BigDecimal lat = list.get(0).getLatitude();
+			
+			jsonList.put("address", address);
+			jsonList.put("lon", lon);
+			jsonList.put("lat", lat);
+
+			json.put(jsonList);
 			out.print(json);
 		}
 	}
