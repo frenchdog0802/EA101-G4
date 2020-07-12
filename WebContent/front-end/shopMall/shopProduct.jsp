@@ -15,6 +15,15 @@
  	
  	request.setAttribute("colorList", colorList);
  	request.setAttribute("modelList", modelList);
+ 	
+ 	@SuppressWarnings("unchecked")
+	List<Shop_productVO> buylist = (List<Shop_productVO>)session.getAttribute("shoppingcar");
+	Integer size;
+	if(buylist != null){
+		size = buylist.size();
+	}else{
+		size = 0;
+	}
 %>
 
 <!DOCTYPE html>
@@ -284,6 +293,11 @@
            	this.Storage.writeData();
         }
         window.onload = function(){ 
+        	
+        	if(<%=size%> != 0){
+             	$("#shopCar").animate({right:'0px'});
+             }
+        	
         	for(var i = localStorage.length-1; i >= 0; i--){
         		var key = localStorage.key(i);
         		if(key.indexOf("<%=sq_product_id%>") != -1){
