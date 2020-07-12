@@ -1,0 +1,48 @@
+<!-- before footer -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col sidebarYellow-1 text-center">
+            <p class="h2 m-5">EA101-G4</p>
+        </div>
+    </div>
+</div>
+<!-- footer -->
+<footer id="footer-main">
+    <div class="container">
+        <div class="row">
+            <div class="col"><span class="h4 font-weight-bolder text-dark">LOGO</span></div>
+            <div class="col"><span class="h4 font-weight-bolder text-dark">LINKS</span></div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <p>uncopyright 2020. EA101</p>
+            </div>
+            <div class="col-sm-3">
+                <ul class="list-unstyled">
+                    <li><a class="text-light" href="#">home</a></li>
+                    <li><a class="text-light" href="#">what we do</a></li>
+                    <li><a class="text-light" href="#">about</a></li>
+                    <li><a class="text-light" href="#">latest</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <ul class="list-unstyled">
+                    <li><a class="text-light" href="#">facebook</a></li>
+                    <li><a class="text-light" href="#">twitter</a></li>
+                    <li><a class="text-light" href="#">youtube</a></li>
+                    <li><a class="text-light" href="#">linkedin</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- footer--end-->
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/page-file/js/nav.js"></script>
+
+
+

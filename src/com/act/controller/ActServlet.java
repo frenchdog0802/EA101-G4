@@ -12,6 +12,8 @@ import com.actjoin.model.ActJoinService;
 import com.actjoin.model.ActJoinVO;
 import com.actreport.model.ActReportService;
 import com.actreport.model.ActReportVO;
+import com.route.model.RouteService;
+import com.route.model.RouteVO;
 
 @MultipartConfig
 public class ActServlet extends HttpServlet {
@@ -99,7 +101,7 @@ public class ActServlet extends HttpServlet {
 			}
 		}
 		
-		if ("getFrontOne_For_Display".equals(action)) { //來自前台Activity.jsp的請求
+		if ("getFrontOne_For_Display".equals(action)) { //來自前台Activity.jsp的請求，用於顯示ActivityOne.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -155,6 +157,47 @@ public class ActServlet extends HttpServlet {
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("actVO", actVO);// 資料庫取出的actVO物件,存入req
 				String url = "/front-end/activity/ActivityOne.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/activity/ActivityOne.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("getFrontArea_For_Display".equals(action)) { //來自前台Activity.jsp的請求，用於顯示Activity.jsp不同地區
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				String area = req.getParameter("area");
+				
+				/*************************** 2.開始查詢資料 *****************************************/
+				RouteService routeSvc = new RouteService();
+				List<RouteVO> listroute = routeSvc.getAll();
+				ActService actSvc = new ActService();
+				ActReportService actreportSvc = new ActReportService();
+				List<ActVO> listact = actSvc.getAll();
+				List<ActVO> listresult = new LinkedList<ActVO>();
+				for(RouteVO routeVO : listroute) {
+					for(ActVO actVO2 : listact) {
+						if(area.contains(routeVO.getStartArea()) && routeVO.getSqRouteId().contains(actVO2.getSq_route_id())
+								&& actreportSvc.getOneActReportStatus(actVO2.getSq_activity_id()) != 1
+								&& (actVO2.getGp_status()==0 || actVO2.getGp_status()==1)) {
+							listresult.add(actVO2);
+						}
+					}
+				}
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("listresult", listresult);// 資料庫取出的actVO物件,存入req
+				String url = "/front-end/activity/ActivityArea.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
