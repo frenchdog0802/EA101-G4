@@ -90,6 +90,9 @@
 								</div>
 							</div>
 						</c:forEach>
+						<c:if test="<%=list2.size() == 0%>">
+							<h1 >查無資料</h1>
+						</c:if>
 					</div>
 
 					<!-- Pagination -->
