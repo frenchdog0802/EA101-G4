@@ -6,17 +6,17 @@
 		<div class="row" style="background-color: #eeeff4;">
 			<div class="col-1 leftnav">
 				<div class="liststyF">
-					<button class="btn listbtn my-3 ">
+					<button class="btn listbtn my-3" onclick="location.href='<%=request.getContextPath()%>/back-end/Shop_product/allShop_product.jsp'">
 						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/shop1.png" class="img-fluid">
 					</button>		
 				</div>
 				<div class="liststy">
-					<button class="btn listbtn my-3">
+					<button class="btn listbtn my-3" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeTypeListAll.jsp'">
 						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/Bike1.png" class="img-fluid">
 					</button>							
 				</div>
 				<div class="liststy">
-					<button class="btn listbtn my-3">
+					<button class="btn listbtn my-3" onclick="location.href='<%=request.getContextPath()%>/back-end/activity/listAllAct.jsp'">
 						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/Plan1.png" class="img-fluid">
 					</button>
 				</div>
@@ -26,7 +26,7 @@
 					</button>		
 				</div>
 				<div class="liststy">
-					<button class="btn listbtn my-3">
+					<button class="btn listbtn my-3" onclick="location.href='<%=request.getContextPath()%>/back-end/route/listAllRouDe.jsp'">
 						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/route1.png" class="img-fluid">
 					</button>			
 				</div>
