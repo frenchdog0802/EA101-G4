@@ -62,15 +62,14 @@
 						value="<%=(actVO == null) ? "請填入標題" : actVO.getAct_title()%>" />
 				</div>
 			</div>
-			<jsp:useBean id="actSvc" scope="page"
-				class="com.act.model.ActService" />
+			<jsp:useBean id="routeSvc" scope="page" class="com.route.model.RouteService" />
 			<div class="form-group row">
 				<label for="selectActRoute3" class="col-sm-2 col-form-label">活動路線</label>
 				<div class="col-sm-10">
 					<select class="custom-select" id="selectActRoute3"
 						name="sq_route_id">
-						<c:forEach var="actVO" items="${actSvc.all}">
-							<option value="${actVO.sq_route_id}">${actVO.sq_route_id}</option>
+						<c:forEach var="routeVO" items="${routeSvc.all}">
+							<option value="${routeVO.sqRouteId}">${routeVO.routeName}</option>
 						</c:forEach>
 					</select>
 				</div>

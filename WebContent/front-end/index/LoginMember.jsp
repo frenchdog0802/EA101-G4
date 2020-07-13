@@ -34,7 +34,7 @@
 					placeholder="account">
 				<!--errorMSG -->
 				<span class="small text-danger errorMsgCount d-block"></span> <input
-					type="password" id="password" class="fadeIn" placeholder="請輸入密碼" name="password"
+					type="text" id="password" class="fadeIn" placeholder="請輸入密碼" name="password"
 					autocomplete="new-password">
 				<!--errorMSG -->
 				<span class="small text-danger errorMsgPws d-block"></span> <input

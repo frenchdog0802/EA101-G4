@@ -112,6 +112,11 @@
 								</li>
 							</ul>
 						</c:forEach>
+						<c:if test="${list2.size() == 0}">
+							<div class="media-body">
+								<h1>您還沒主辦活動唷!!</h1>
+							</div>
+						</c:if>
 					</div>
 
 					<!-- Pagination -->

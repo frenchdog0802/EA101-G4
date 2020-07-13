@@ -20,17 +20,25 @@ public class StaffService {
 	}
 	
 	
-	
-	
-	public StaffVO addStaff(Integer sf_status,String sf_account,String sf_password,String sf_name) {
-		StaffVO staffVO = new StaffVO();
-		staffVO.setSf_status(sf_status);
-		staffVO.setSf_account(sf_account);
-		staffVO.setSf_password(sf_password);
-		staffVO.setSf_name(sf_name);
-		dao.insert(staffVO);
-		return staffVO;
+	//staff status
+	public String fine_status_name(Integer staff_status) {
+		String name = null;
+		
+		switch(staff_status) {
+		case 0 :
+			name="在職";
+			break;
+		case 1 :
+			name="離職";
+			break;
+		}
+		return name;
 	}
+	
+	
+	
+	
+	
 
 	public void addStaff(StaffVO staffVO) {
 		dao.insert(staffVO);
