@@ -9208,8 +9208,8 @@ Insert into ACT_FAVORITE (SQ_ACTIVITY_ID,SQ_MEMBER_ID,FAVORITE_TIME) values ('AC
 
 
 --這一段的第一個值要看活動表格的pk欄值下去改(第一筆是01第二筆是02)
-Insert into ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700008','910001','描述與事實不符',0); --這個部份的ID編號要看上面的並且一樣，用流水號會新增，這樣就錯了
-Insert into ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700009','910001','地點標示錯誤',0);
+Insert into ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_RESPONSE,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700008','910001','描述與事實不符',null,0); --這個部份的ID編號要看上面的並且一樣，用流水號會新增，這樣就錯了
+Insert into ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_RESPONSE,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700009','910001','地點標示錯誤',null,0);
 
 --------------------------------------------------------
 --  for Table MEMBER_STORE_ACTIVITY

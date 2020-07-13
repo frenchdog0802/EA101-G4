@@ -21,10 +21,11 @@ public class ActReportService {
 		return actreportVO;
 	}
 
-	public ActReportVO updateActReport(String sq_actreport_id, Integer report_status) {
+	public ActReportVO updateActReport(String sq_actreport_id, String report_response, Integer report_status) {
 
 		ActReportVO actreportVO = new ActReportVO();
 		actreportVO.setSq_activityreport_id(sq_actreport_id);
+		actreportVO.setReport_response(report_response);
 		actreportVO.setReport_status(report_status);
 		
 		dao.update(actreportVO);
