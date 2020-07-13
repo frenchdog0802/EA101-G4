@@ -12,16 +12,22 @@
 	  		</div>
 			<div class="col-11 ">
 				<div class="row" style="background-color:  #4778c7;">
-					<div class="col-lg-6 col-md-6 align-self-center">
+					<div class="col-lg-5 col-md-5 align-self-center">
 						
 					</div>
 					<div class="col-lg-1 col-md-1" style="padding-left: 3px; padding-right: 3px;">
-						<img src="image/user.png" class="img-fluid" style="margin: 0 auto;">
+						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/user.png" class="img-fluid" style="margin: 0 auto;">
 					</div>
 				 	<div class="col-lg-2 col-md-2 text-left align-self-center " style="padding-left: 0px; padding-right: 0px;">
 				 		<h5 class="pt-2">ID : </h5>
 				 	</div>
 				 	<div class="col-lg-3 col-md-3 text-left align-self-center" style="padding-left: 0px; padding-right: 0px;">
 				 		<h5 class="pt-2">NAME : </h5>
+				 	</div>
+				 	<div class="col-1 align-self-center" style="padding-left: 0px; padding-right: 0px;">
+					 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/login/stafflogin.do">
+					 		<button class="btn bg-primary" style="width: 80%;" id="logout">登出</button>
+					 		<input type="hidden" name="action" value="logout">
+					 	</FORM>	
 				 	</div>
 				</div>

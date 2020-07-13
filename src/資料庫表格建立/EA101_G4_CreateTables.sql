@@ -321,7 +321,8 @@ CREATE TABLE STAFF (
         SF_ADDRESS VARCHAR2(100) ,
         SF_PHONE VARCHAR2(40) NOT NULL,
         SF_PASSWORD VARCHAR2(15) NOT NULL,
-        SF_ACCOUNT VARCHAR2(15) NOT NULL
+        SF_ACCOUNT VARCHAR2(15) NOT NULL,
+        SF_PHOTO      BLOB 
   );
   
 CREATE TABLE FUNCTION (
@@ -579,8 +580,11 @@ CREATE TABLE bike_store(
   store_latitude       DECIMAL(17,12) NOT NULL,
   store_opentime       VARCHAR2(40)  NOT NULL,
   store_status         NUMBER(1)     NOT NULL,
-   area     VARCHAR2(40)  NOT NULL,
-  create_time           TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   area                 VARCHAR2(40)  NOT NULL,
+   store_email       VARCHAR2(200) NOT NULL,
+   store_account   VARCHAR2(200) NOT NULL,
+   store_password VARCHAR2(200) NOT NULL,
+   store_photo   BLOB,
   PRIMARY KEY(sq_bike_store_id)
 );
 

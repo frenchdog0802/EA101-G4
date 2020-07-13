@@ -13,15 +13,10 @@
     List<ActVO> listact = actSvc.getAll();
     List<ActReportVO> listreport = actreportSvc.getOneActReportForMember(sq_member_id);
     List<ActVO> list2 = new LinkedList<ActVO>();
-    ActReportVO actreportVO2 = new ActReportVO();
     for(ActVO actVO:listact){
     	for(ActReportVO actreportVO:listreport){
     		if(actVO.getSq_activity_id().contains(actreportVO.getSq_activity_id()) && sq_member_id.contains(actreportVO.getSq_member_id())){
     			list2.add(actVO);
-    			actreportVO2.setSq_activity_id(actreportVO.getSq_activity_id());
-    			actreportVO2.setReport_reason(actreportVO.getReport_reason());
-    			actreportVO2.setSq_member_id(sq_member_id);
-    			request.setAttribute("actreportVO2", actreportVO2);
     		}
     	}
     }
@@ -103,35 +98,41 @@
 										 
 										${actVO.act_description}
 										<div style="padding-left:1px">
-											<button id="actreport" class="btn btn-primary" onclick="showModal()">查看檢舉</button>
+											<input type="button" id="actreport" class="btn btn-primary" onclick="showModal()" value="查看檢舉"/>
+											<div class="modal fade" id="basicModal" tabindex="-1"
+												role="dialog" aria-labelledby="basicModal"
+												aria-hidden="true">
+												<div class="modal-dialog modal-lg">
+													<div class="modal-content">
+
+														<div class="modal-header">
+															<h2 class="modal-title" id="myModalLabel">查看檢舉</h2>
+															<button type="button" class="close" data-dismiss="modal"
+																aria-hidden="true">&times;</button>
+														</div>
+
+														<div class="modal-body">
+															<!-- =========================================以下為輸入的內容========================================== -->
+															<textarea name="report_reason" maxlength="65"
+																id="textarea1" rows=5 cols=83 style="resize: none;"
+																disabled></textarea>
+															<!-- =========================================以上為原輸入的內容========================================== -->
+														</div>
+
+														<div class="modal-footer">
+															<button type="button" class="btn btn-default"
+																data-dismiss="modal">Close</button>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</li>
 							</ul>
 						</c:forEach>
 					</div>
-					
-			<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-							
-						<div class="modal-header">
-							<h2 class="modal-title" id="myModalLabel">查看檢舉</h2>
-			                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			            </div>
-						
-						<div class="modal-body">
-			<!-- =========================================以下為輸入的內容========================================== -->
-			              <textarea name="report_reason" maxlength="65" id="textarea1" rows=5 cols=83 style="resize: none;" disabled></textarea>
-			<!-- =========================================以上為原輸入的內容========================================== -->
-						</div>
-						
-						<div class="modal-footer">
-			                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			            </div>
-					</div>
-				</div>
-			</div>
+			
 
 					<!-- Pagination -->
 					<ul class="pagination justify-content-center">

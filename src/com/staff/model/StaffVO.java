@@ -4,9 +4,32 @@ public class StaffVO implements java.io.Serializable{
 
 	private String sq_staff_id;
 	private Integer sf_status;
+	private String sf_name;
+	private String sf_email;
+	private String sf_address;
+	private String sf_phone;
+	
+	public String getSf_email() {
+		return sf_email;
+	}
+	public void setSf_email(String sf_email) {
+		this.sf_email = sf_email;
+	}
+	public String getSf_address() {
+		return sf_address;
+	}
+	public void setSf_address(String sf_address) {
+		this.sf_address = sf_address;
+	}
+	public String getSf_phone() {
+		return sf_phone;
+	}
+	public void setSf_phone(String sf_phone) {
+		this.sf_phone = sf_phone;
+	}
 	private String sf_account;
 	private String sf_password;
-	private String sf_name;
+	
 	
 	public String getSq_staff_id() {
 		return sq_staff_id;
