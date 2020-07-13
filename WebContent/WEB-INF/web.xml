@@ -167,7 +167,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Shop_productServlet</servlet-name>
-		<url-pattern>/back-end/Shop_product/shop_product.do</url-pattern>
+		<url-pattern>/shop_product.do</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

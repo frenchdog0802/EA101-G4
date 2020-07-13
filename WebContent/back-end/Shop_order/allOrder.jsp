@@ -43,7 +43,7 @@
 					    </FORM>
 					</div>
 					<div class="col-1 ml-3" style="padding: 0;">
-                        <button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back_end/Shop_order/allOrder.jsp'" style="border: 1px black solid;">
+                        <button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Shop_order/allOrder.jsp'" style="border: 1px black solid;">
                             <img src="<%=request.getContextPath()%>/back-end/backFrame/image/list.png" class="img-fluid">
                         </button>
                     </div>
@@ -76,7 +76,7 @@
     									<th id="td_9"><span>付款方式</span></th>
     									<th id="td_10"><span>狀態</span></th>
     									<th id="td_lastbtn"></th>
-    									<th id="td_lastbtn"></th>
+<!--     									<th id="td_lastbtn"></th> -->
     								</tr>
     							</thead>
 <%@ include file="page1.file" %> 
@@ -145,14 +145,14 @@
 											    <input type="hidden" name="action"	value="getOne">
 											</FORM>
 				    					</td>
-				    					<td>
-										 	<FORM METHOD="post" ACTION="shop_order.do" style="position: relative;">
-										    	<input type="submit" value="下架" style="position: absolute; opacity: 0;">
-											    <input type="image" src="<%=request.getContextPath()%>/back-end/backFrame/image/delicon.png" alt="Submit" align="right" class="img-fluid"/>
-										    	<input type="hidden" name="sq_stock_id" value="${orderVO.sq_order_id}">
-										    	<input type="hidden" name="action" value="delete">
-										    </FORM>
-										</td>          
+<!-- 				    					<td> -->
+<!-- 										 	<FORM METHOD="post" ACTION="shop_order.do" style="position: relative;"> -->
+<!-- 										    	<input type="submit" value="下架" style="position: absolute; opacity: 0;"> -->
+<%-- 											    <input type="image" src="<%=request.getContextPath()%>/back-end/backFrame/image/delicon.png" alt="Submit" align="right" class="img-fluid"/> --%>
+<%-- 										    	<input type="hidden" name="sq_stock_id" value="${orderVO.sq_order_id}"> --%>
+<!-- 										    	<input type="hidden" name="action" value="delete"> -->
+<!-- 										    </FORM> -->
+<!-- 										</td>           -->
 				    				</tr>
 				    			</c:forEach>				    					
     						</table>
