@@ -8,6 +8,8 @@ import javax.servlet.http.*;
 
 import com.shop_product.model.*;
 
+import redis.clients.jedis.Jedis;
+
 public class ShoppingServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
@@ -55,13 +57,44 @@ public class ShoppingServlet extends HttpServlet{
 				fail.forward(req, res);
 			}	
 		}						
-		if(action.equals("CHECKOUT")) {
+		if(action.equals("CHECK")) {
 			String total = req.getParameter("total");			
 			session.setAttribute("totalPrice", total);
 			String url = "/front-end/shopMall/shopPayDetail.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
 		}
+		
+		if(action.equals("toCheck")) {
+			Jedis jedis = new Jedis("localhost", 6379);
+			jedis.auth("123456");
+
+			String name = req.getParameter("tname");
+			String phone = req.getParameter("tphone");
+			String address = req.getParameter("taddress");
+			String email = req.getParameter("temail");
+			
+			HashMap<String, String> mapCus = new HashMap<String, String>();
+			for(Shop_productVO vo : buylist) {
+				mapCus.put("name", name);
+				mapCus.put("phone", phone);
+				mapCus.put("address", address);
+				mapCus.put("email", email);
+			}
+			
+			jedis.hset("customer", "name" , name);
+			jedis.hset("customer", "phone" , phone);
+			jedis.hset("customer", "address" , address);
+			jedis.hset("customer", "email" , email);		
+			jedis.close();	
+			
+			session.setAttribute("mapCus", mapCus);
+			
+			String url = "/front-end/shopMall/checkDetail.jsp";
+			RequestDispatcher rd = req.getRequestDispatcher(url);
+			rd.forward(req, res);
+		}
+		
 	}
 	private Shop_productVO getProduct(HttpServletRequest req) {
 

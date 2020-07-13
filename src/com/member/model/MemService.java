@@ -11,8 +11,14 @@ public class MemService {
 	private MemDAO_interface dao;
 
 	public MemService() {
-		dao = new MemJDBCDAO();
+		dao = new MemDAO();
 	}
+	
+	//帳號找員工
+	public MemVO getOneMemfromAccount(String member_account) {
+		return dao.getOneMemfromAccount(member_account);
+	}
+	
 
 	public MemVO addMem(String member_account, String password, String m_name, Integer gender, Date birthday,
 			String cellphone, String m_email, Integer validation, Date registered,byte[] m_photo,byte[] back_img,
@@ -59,10 +65,12 @@ public class MemService {
 		memVO.setNick_name(nick_name);
 		memVO.setAddress(address);
 		memVO.setSq_member_id(sq_member_id);
-		
 		dao.update(memVO);
-
 		return memVO;
+	}
+	
+	public void updateMem(MemVO memVO) {
+		 dao.update(memVO);
 	}
 
 	public void deleteMem(String sq_member_id) {

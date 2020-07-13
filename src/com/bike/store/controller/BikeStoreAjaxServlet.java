@@ -167,7 +167,10 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 			}
 
 			// bikeSum結果車輛數
+			
 			Integer bikeSum = allBike - failMatch;
+			bikeSum = bikeSum>0?bikeSum:0;
+			
 			BikeTypeService BikeTypeSvc = new BikeTypeService();
 			BikeTypeVO BikeTypeVO = BikeTypeSvc.findByPrimaryKey(sq_bike_type_id);
 			// VO to String
@@ -309,6 +312,7 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 		}
 		Integer Bike = BikeSvc.findStoreBikeEmpty(BikeStoreID);
 		Integer matchBike = Bike - failMatch;
+		matchBike = matchBike>0 ? matchBike: 0;
 		// System.out.println(BikeStoreVO.getBike_store_name()+":"+matchBike+"輛");
 		return matchBike;
 	}

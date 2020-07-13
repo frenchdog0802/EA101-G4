@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <!-- Required meta tags always come first -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -110,12 +110,18 @@
                         <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">會員中心</a>
                         <!--text-dark active nav-item  -->
                         <div class="dropdown-menu" aria-lablelledby="dropdownId">
-                            <a href="#" class="dropdown-item">test1</a>
+                            <a href="<%=request.getContextPath()%>/front-end/member/listOneMem.jsp" class="dropdown-item">個人資訊</a>
                             <a href="#" class="dropdown-item">test2</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-item nav-link btn-dark rounded text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sign-in</a>
+                  
+                    	  <c:if test="${empty MemVO}">
+                        	<a href="<%=request.getContextPath()%>/front-end/index/LoginMember.jsp" class="nav-item nav-link btn-dark rounded text-white" >Sign-in</a>
+                        </c:if>
+                        <c:if test="${not empty MemVO}">
+	                        	<a href="<%=request.getContextPath()%>/login/memlogin.do?action=logOut" onclick="document.getElementById('myform').submit()" class="nav-item nav-link btn-dark rounded text-white" >Log-out</a>
+                        </c:if>
                         <!--text-dark active nav-item  -->
 
                     </li>

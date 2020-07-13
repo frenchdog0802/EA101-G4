@@ -15,6 +15,15 @@
  	
  	request.setAttribute("colorList", colorList);
  	request.setAttribute("modelList", modelList);
+ 	
+ 	@SuppressWarnings("unchecked")
+	List<Shop_productVO> buylist = (List<Shop_productVO>)session.getAttribute("shoppingcar");
+	Integer size;
+	if(buylist != null){
+		size = buylist.size();
+	}else{
+		size = 0;
+	}
 %>
 
 <!DOCTYPE html>
@@ -52,23 +61,9 @@
     			</div>
     			<div class="row mt-4">
     				<div class="col-5 product_img" style="border: 1px solid black; padding-left: 10px; padding-right: 10px;">
-    					<section class="regular slider">
-						    <div>
-						    	<img src="<%=request.getContextPath()%>/showImg4?id=<%=productVO.getSq_product_id()%>" class="img-fluid">
-						    </div>
-						    <div>
-						    	<img src="image/商品二號.png" class="img-fluid">
-						    </div>
-						    <div>
-						    	<img src="image/商品二號.png" class="img-fluid">
-						    </div>
-						    <div>
-						    	<img src="image/商品二號.png" class="img-fluid">
-						    </div>
-						    <div>
-						    	<img src="image/商品二號.png" class="img-fluid">
-						    </div>
-						</section>
+						<div>
+							<img src="<%=request.getContextPath()%>/showImg4?id=<%=productVO.getSq_product_id()%>" class="img-fluid">
+						</div>
     				</div>
     				<div class="col-7">
     					<div id="product_name">
@@ -298,6 +293,11 @@
            	this.Storage.writeData();
         }
         window.onload = function(){ 
+        	
+        	if(<%=size%> != 0){
+             	$("#shopCar").animate({right:'0px'});
+             }
+        	
         	for(var i = localStorage.length-1; i >= 0; i--){
         		var key = localStorage.key(i);
         		if(key.indexOf("<%=sq_product_id%>") != -1){

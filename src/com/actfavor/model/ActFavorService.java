@@ -7,7 +7,7 @@ public class ActFavorService {
 	private ActFavorDAO_interface dao;
 
 	public ActFavorService() {
-		dao = new ActFavorJDBCDAO();
+		dao = new ActFavorDAO();
 	}
 
 	public ActFavorVO addActFavor(String sq_activity_id, String sq_member_id, Timestamp favorite_time) {

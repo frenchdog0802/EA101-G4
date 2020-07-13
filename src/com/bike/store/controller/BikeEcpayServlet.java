@@ -29,6 +29,7 @@ import com.bike.type.model.BikeTypeService;
 
 import ecpay.payment.integration.AllInOneService;
 import ecpay.payment.integration.domain.AioCheckOutOneTime;
+import redis.clients.jedis.Jedis;
 
 
 
@@ -49,8 +50,15 @@ public class BikeEcpayServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		if ("pay".equals(action)) {
-
+			
+			//創建redis連線
+			Jedis jedis = new Jedis("localhost", 6379);
+			jedis.auth("123456");
 			// 接收參數
+// 取得session會員編號
+			String memNo = "910001";
+			String memName = "peter";
+			String memPhone = "0987654321";
 			// 建立商品描述
 			String startDate = (String) session.getAttribute("startDate");
 			String endDate = (String) session.getAttribute("endDate");
@@ -104,10 +112,10 @@ public class BikeEcpayServlet extends HttpServlet {
 //			設定交易訊息
 			obj.setTradeDesc("支付信用卡");
 //			設定ReturnURL 付款完成通知回傳網址 使用  ngrok.io
-			String returnURL = "https://5637a341c2d4.ngrok.io/EA101_G4/bike/BikeEcpayServlet.do";
+			String returnURL = "https://eb6991ef1481.ngrok.io/EA101_G4/bike/BikeEcpayServlet.do";
 			obj.setReturnURL(returnURL);
 //			設定ClientBackURL Client端返回合作特店系統的按鈕連結
-			String clientBackURL = "https://5637a341c2d4.ngrok.io/EA101_G4/front-end/bike/bikeStoreList.jsp?action=payFinish";
+			String clientBackURL = "https://eb6991ef1481.ngrok.io/EA101_G4/front-end/bike/bikeStoreList.jsp?action=payFinish";
 			obj.setClientBackURL(clientBackURL);
 //			設定OrderResultURL Client端回傳付款結果網址 跟ReturnURL二選一
 //			obj.setOrderResultURL(clientBackURL);
@@ -118,7 +126,14 @@ public class BikeEcpayServlet extends HttpServlet {
 //			設定自訂回傳訊息 controller接收action
 			obj.setCustomField1("returnMsg");
 			obj.setCustomField2(startDate+"#"+endDate);
-			obj.setCustomField3(bookMap.toString());
+			
+			
+			//其他資料存入redis
+			jedis.set("bookMap",bookMap.toString());
+			jedis.set("memNo",memNo);
+			jedis.set("memName",memName);
+			jedis.set("memPhone",memPhone);
+			
 			
 
 			AllInOneService allInOneSvc = new AllInOneService();
@@ -132,11 +147,10 @@ public class BikeEcpayServlet extends HttpServlet {
 		if ("returnMsg".equals(CustomField1)) {
 
 			BikeTypeService bikeTypeSvc = new BikeTypeService();
-
-			// 取得session會員編號
-			String memNo = "910001";
-			String memName = "peter";
-			String memPhone = "0987654321";
+			//創建redis連線
+			Jedis jedis = new Jedis("localhost", 6379);
+			jedis.auth("123456");
+			
 
 //			MerchantID 特店編號                       2000132 String MerchantID = request.getParameter("MerchantID");
 //			MerchantTradeNo 特店交易編號    RT-600001
@@ -161,10 +175,13 @@ public class BikeEcpayServlet extends HttpServlet {
 	 
 	        }
 	    	
-	 
+	        
 		
 		// 接受參數回傳取需要參數
-
+	    String memNo = jedis.get("memNo");
+	    String memName = jedis.get("memName");
+	    String memPhone = jedis.get("memPhone");
+	    
 		String MerchantTradeNo = request.getParameter("MerchantTradeNo");//request.getParameter("MerchantTradeNo");
 		String StoreID = request.getParameter("StoreID");
 		Integer RtnCode = Integer.parseInt(request.getParameter("RtnCode"));
@@ -172,7 +189,7 @@ public class BikeEcpayServlet extends HttpServlet {
 		String TradeNo = request.getParameter("TradeNo");
 		
 		//map.toString
-		String CustomField3 = request.getParameter("CustomField3");
+		String CustomField3 = jedis.get("bookMap");
 		Map<String , String > bookMap =  stringToMap(CustomField3);
 		
 		//處理日期

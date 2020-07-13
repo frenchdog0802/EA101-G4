@@ -3,13 +3,26 @@ package com.shop_order_detail.model;
 import java.sql.*;
 import java.util.*;
 
-import com.shop_product.model.Shop_productVO;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 
 public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String user = "EA101_G4";
-	String password = "EA101_G4";
+//	String driver = "oracle.jdbc.driver.OracleDriver";
+//	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+//	String user = "EA101_G4";
+//	String password = "EA101_G4";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/EA101_G4");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT = "INSERT INTO SHOP_ORDER_DETAIL (SQ_ORDER_ID, SQ_PRODUCT_ID, PRODUCT_PRICE, ORDER_SUM) VALUES (?, ?, ?, ?)";
 	private static final String UPDATE = "UPDATE SHOP_ORDER_DETAIL SET PRODUCT_PRICE=?, ORDER_SUM=? WHERE SQ_ORDER_ID=? && SQ_PRODUCT_ID=?";	
@@ -22,8 +35,7 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT);
 			con.setAutoCommit(false);
 			pstmt.setString(1, shop_order_detailVO.getSq_order_id());
@@ -33,8 +45,6 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 			
 			pstmt.executeUpdate();
 			
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured." + se.getMessage());
 		}finally {
@@ -60,8 +70,7 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 						
 			pstmt.setInt(1, shop_order_detailVO.getProduct_price());
@@ -71,8 +80,6 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 			
 			pstmt.executeUpdate();
 			
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured." + se.getMessage());
 		}finally {
@@ -99,16 +106,13 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 			
 			pstmt.setString(1, sq_order_id);
 			
 			pstmt.executeUpdate();
 			
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured." + se.getMessage());
 		}finally {
@@ -137,8 +141,7 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 		Shop_order_detailVO shop_order_detailVO = null;
 		List<Shop_order_detailVO> list = new ArrayList<Shop_order_detailVO>();
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE);
 			pstmt.setString(1, sq_order_id);
 			rs = pstmt.executeQuery();
@@ -151,8 +154,6 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 				list.add(shop_order_detailVO);
 			}
 			
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured." + se.getMessage());
 		}finally {
@@ -189,8 +190,7 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 		Shop_order_detailVO shop_order_detailVO = null;
 		List<Shop_order_detailVO> list = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL);
 			rs = pstmt.executeQuery();
 			
@@ -204,8 +204,6 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 				list.add(shop_order_detailVO);
 			}
 			
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured." + se.getMessage());
 		}finally {
@@ -237,7 +235,6 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 	@Override
 	public void insert2(Shop_order_detailVO detailVO, Connection con) {
 		PreparedStatement pstmt = null;
-		System.out.println(detailVO.getSq_product_id());
 		try {
 			pstmt = con.prepareStatement(INSERT);
 			pstmt.setString(1, detailVO.getSq_order_id());

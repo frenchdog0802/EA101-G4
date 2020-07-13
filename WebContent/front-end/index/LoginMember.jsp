@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.member_login.model.*"%>
-
-<%
-	MemLoginVO memLoginVO = (MemLoginVO) request.getAttribute("memLoginVO");
-%>
 
 <!doctype html>
 <html lang="en">
@@ -20,58 +14,75 @@
 	href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="login.css">
 <title>Hello, world!</title>
-
 </head>
 <body>
-	<button type="button" class="btn btn-primary" data-toggle="modal"
-		data-target="#exampleModalCenter">Launch demo modal</button>
-	<div class="modal fade" id="exampleModalCenter" tabindex="-1"
-		style="display: none;" aria-hidden="true">
+	<%@include file="/front-end/page-file/page-nav"%>
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1">
 		<div class="wrapper fadeInDown">
 			<div id="formContent">
 				<!-- Tabs Titles -->
-
 				<!-- Icon -->
+
 				<div class="fadeIn first">
-					<h1>Login</h1>
-					<img src="<%=request.getContextPath()%>/front-end/index/bike-img/home10.png" id="icon" alt="User Icon" />
-				</div>
-				<div>
-					<c:if test="${not empty errorMsgs}">
-						<font style="color: red">請修正以下錯誤:</font>
-						<ul>
-							<c:forEach var="message" items="${errorMsgs}">
-								<li style="color: red">${message}</li>
-							</c:forEach>
-						</ul>
-					</c:if>
+					<h1 class="text-secondary">Sign In</h1>
+					<img
+						src="<%=request.getContextPath()%>/front-end/index/bike-img/home10.png"
+						id="icon" alt="User Icon" />
 				</div>
 				<!-- Login Form -->
-				<form METHOD="post" 
-					ACTION="<%=request.getContextPath()%>/login/memlogin.do">
-					<input type="text" id="login" class="fadeIn second"
-						name="member_account" placeholder="account" 
-						value="<%=(memLoginVO == null) ? "": memLoginVO.getMember_account()%>">
-					<input type="text" id="password" class="fadeIn third" name="login"
-						placeholder="password"> <input type="submit"
-						class="fadeIn fourth" name="action" value="login" required />
-				</form>
-
+				<input type="text" id="login" autocomplete="off" class="fadeIn"
+					placeholder="account">
+				<!--errorMSG -->
+				<span class="small text-danger errorMsgCount d-block"></span> <input
+					type="text" id="password" class="fadeIn" placeholder="請輸入密碼" name="password"
+					autocomplete="new-password">
+				<!--errorMSG -->
+				<span class="small text-danger errorMsgPws d-block"></span> <input
+					type="button" class="fadeIn submitbtn" value="login" />
 				<!-- Remind Passowrd -->
 				<div id="formFooter">
 					<div id="formFooter">
-						<a class="underlineHover mx-1" href="#">返回網頁</a> 
-						<a class="underlineHover mx-1" href="#">註冊</a>
+						<a class="underlineHover mx-1"
+							href="<%=request.getContextPath()%>/front-end/index/index.jsp">返回首頁</a>
+						<a class="underlineHover mx-1" href="<%=request.getContextPath()%>/front-end/member/registered.jsp">註冊</a>
 					</div>
 				</div>
 
 			</div>
 		</div>
 	</div>
+	<%@include file="/front-end/page-file/page-footer"%>
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script
 		src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
+	<script>
+	$( document ).ready(function(){
+		$("#exampleModalCenter").modal();
+		$(".submitbtn").click(function(){
+			var login = $("#login").val();
+			var pass = $("#password").val();
+			$.ajax({
+				type:"POST",
+				url:"<%=request.getContextPath()%>/login/memlogin.do",
+					data : {
+						action : "login",
+						member_account : login,
+						password : pass
+					},
+					dataType : "JSON",
+					success : function(data) {
+						console.log(data);
+						$(".errorMsgCount").text(data.errorAccount);
+						$(".errorMsgPws").text(data.errorPws);
+						if (data.location != null) {
+							window.location.href = data.location;
+						}
+					}
+				})
+			})
+		})
+	</script>
 </body>
 </html>

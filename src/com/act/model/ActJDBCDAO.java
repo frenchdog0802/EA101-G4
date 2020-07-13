@@ -464,21 +464,21 @@ public class ActJDBCDAO implements ActDAO_interface {
 
 		ActJDBCDAO dao = new ActJDBCDAO();
 
-//		byte[] pic = getPictureByteArray("C://DB_photos//NankanPark.jpg");
-//		// 新增
-//		ActVO actVO1 = new ActVO();
-//		actVO1.setSq_route_id("RP110001");
-//		actVO1.setSq_member_id("910009");
-//		actVO1.setAct_title("南崁河濱公園");
-//		actVO1.setMax_population(new Integer(20));
-//		actVO1.setMin_population(new Integer(5));
-//		actVO1.setAct_description("老人小孩皆可娛樂的場所");
-//		actVO1.setStart_time(java.sql.Date.valueOf("2020-06-01"));
-//		actVO1.setEnd_time(java.sql.Date.valueOf("2020-06-05"));
-//		actVO1.setAct_start_time(java.sql.Date.valueOf("2020-06-06"));
-//		actVO1.setAct_end_time(java.sql.Date.valueOf("2020-06-08"));
-//		actVO1.setAct_picture(pic);
-//		dao.insert(actVO1);
+		byte[] pic = getPictureByteArray("C://DB_photos//NankanPark.jpg");
+		// 新增
+		ActVO actVO1 = new ActVO();
+		actVO1.setSq_route_id("RP110001");
+		actVO1.setSq_member_id("910009");
+		actVO1.setAct_title("南崁河濱公園");
+		actVO1.setMax_population(new Integer(20));
+		actVO1.setMin_population(new Integer(5));
+		actVO1.setAct_description("老人小孩皆可娛樂的場所");
+		actVO1.setStart_time(java.sql.Date.valueOf("2020-06-01"));
+		actVO1.setEnd_time(java.sql.Date.valueOf("2020-06-05"));
+		actVO1.setAct_start_time(java.sql.Date.valueOf("2020-06-06"));
+		actVO1.setAct_end_time(java.sql.Date.valueOf("2020-06-08"));
+		actVO1.setAct_picture(pic);
+		dao.insert(actVO1);
 
 		// 修改
 //		byte[] pic2 = getPictureByteArray("C://DB_photos//green.jpg");

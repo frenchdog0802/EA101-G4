@@ -2,8 +2,6 @@ package com.shop_order_detail.model;
 
 import java.util.List;
 
-import com.shop_message.model.Shop_messageVO;
-
 public class Shop_order_detailService {
 	private Shop_order_detailDAO_interface dao;
 	public Shop_order_detailService() {

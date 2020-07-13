@@ -3,11 +3,21 @@ package com.product_stock.model;
 import java.sql.*;
 import java.util.*;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class Product_stockDAO implements Product_stockDAO_interface{
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String user = "EA101_G4";
-	String password = "EA101_G4";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/EA101_G4");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT = "INSERT INTO SHOP_PRODUCT_STOCK (SQ_STOCK_ID, SQ_PRODUCT_ID, PRODUCT_COLOR, PRODUCT_MODEL, STOCK_TOTAL)"
 			+ "VALUES (SQ_STOCK_ID.NEXTVAL, ?, ?, ?, ?)";
@@ -23,8 +33,7 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT);
 			
 			pstmt.setString(1, stockVO.getSq_product_id());
@@ -35,9 +44,6 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 			pstmt.executeUpdate();
 			pstmt.clearParameters();
 			
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-			+ e.getMessage());
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured. "
 			+ se.getMessage());
@@ -65,8 +71,7 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			
 			pstmt.setString(1, stockVO.getSq_product_id());
@@ -78,9 +83,6 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 			pstmt.executeUpdate();
 			pstmt.clearParameters();
 			
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-		+e.getMessage());
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -107,16 +109,13 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 			
 			pstmt.setString(1, sq_stock_id);
 			pstmt.executeUpdate();
 			pstmt.clearParameters();
 			
-		}catch(ClassNotFoundException e){
-			throw new RuntimeException("Cloudn't load databse driver."+e.getMessage());
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured." + se.getMessage());
 		}finally {
@@ -145,8 +144,7 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE);
 			
 			pstmt.setString(1, sq_stock_id);
@@ -162,8 +160,6 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 				product_stockVO.setStock_total(rs.getInt("stock_total"));
 			}
 			pstmt.clearParameters();
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured."+se.getMessage());
 		}finally {
@@ -200,8 +196,7 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL);
 			rs = pstmt.executeQuery();
 			
@@ -216,8 +211,6 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 				list.add(product_stockVO);
 			}
 			pstmt.clearParameters();
-		}catch(ClassNotFoundException e){
-			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured." + se.getMessage());
 		}finally {
@@ -254,8 +247,7 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, user, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_BYPID);
 			
 			pstmt.setString(1, sq_product_id);
@@ -273,8 +265,6 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 				list.add(product_stockVO);
 			}
 			pstmt.clearParameters();
-		}catch(ClassNotFoundException e){
-			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured." + se.getMessage());
 		}finally {

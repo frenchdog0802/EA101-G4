@@ -6,6 +6,8 @@
 
 <jsp:useBean id="bikeRentDetailSvc"
 	class="com.bike.rent.detail.model.BikeRentDetailService" />
+	
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

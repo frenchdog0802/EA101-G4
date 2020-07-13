@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.bike.type.model.BikeTypeService;
 import com.shop_order.model.Shop_orderService;
 import com.shop_order.model.Shop_orderVO;
 import com.shop_order_detail.model.Shop_order_detailVO;
@@ -47,7 +46,7 @@ public class ProductEcpayServlet extends HttpServlet {
 		List<Shop_productVO> buylist = (Vector<Shop_productVO>)session.getAttribute("shoppingcar");
 		System.out.println(buylist);		
 			
-		if ("pay".equals(action)) {
+		if ("cardPay".equals(action)) {
 			// 接收參數
 			// 建立商品描述
 			Jedis jedis = new Jedis("localhost", 6379);
@@ -56,6 +55,7 @@ public class ProductEcpayServlet extends HttpServlet {
 			HashMap<String, String> map = new HashMap<String, String>();
 			for(Shop_productVO vo : buylist) {
 				i++;
+				map.put("id", vo.getSq_product_id());
 				map.put("name", vo.getProduct_name());
 				map.put("price", vo.getProduct_price().toString());
 				map.put("sum", vo.getProduct_quantity().toString());
@@ -63,16 +63,7 @@ public class ProductEcpayServlet extends HttpServlet {
 				System.out.println(map.toString());
 				map.clear();
 				System.out.println(map.toString());
-			}
-			String name = request.getParameter("tname");
-			String phone = request.getParameter("tphone");
-			String address = request.getParameter("taddress");
-			String email = request.getParameter("temail");
-			jedis.hset("customer", "name" , name);
-			jedis.hset("customer", "phone" , phone);
-			jedis.hset("customer", "address" , address);
-			jedis.hset("customer", "email" , email);
-			
+			}			
 			jedis.close();			
 			
 			StringBuilder items = new StringBuilder();
@@ -100,15 +91,13 @@ public class ProductEcpayServlet extends HttpServlet {
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			String formatstr = sdf.format(date);
-			System.out.println(formatstr);
 			// 金額
 			String totalPrice = (String) session.getAttribute("totalPrice");
-			System.out.println(totalPrice);
 			// 串接金流
 			AioCheckOutOneTime obj = new AioCheckOutOneTime();
 			
 //			訂單編號
-			obj.setMerchantTradeNo("2aC9cAr9mP16");
+			obj.setMerchantTradeNo("2aC9cAr9mP27");
 					
 //			設定MerchantTradeDate 合作特店交易時間
 			obj.setMerchantTradeDate(formatstr);
@@ -119,20 +108,20 @@ public class ProductEcpayServlet extends HttpServlet {
 //			設定交易訊息
 			obj.setTradeDesc("支付信用卡");
 //			設定ReturnURL 付款完成通知回傳網址 使用  ngrok.io
-			String returnURL = "https://bc47b4021898.ngrok.io/EA101_G4/shopMall/productEcpayServlet.do";
+			String returnURL = "https://66c9ccf9158b.ngrok.io/EA101_G4/shopMall/productEcpayServlet.do";
 			obj.setReturnURL(returnURL);
 //			設定ClientBackURL Client端返回合作特店系統的按鈕連結
-			String clientBackURL = "https://bc47b4021898.ngrok.io/EA101_G4/front-end/shopMall/shoppingFinal.jsp";
+			String clientBackURL = "https://66c9ccf9158b.ngrok.io/EA101_G4/front-end/shopMall/shopMall.jsp";
 			obj.setClientBackURL(clientBackURL);
 //			設定OrderResultURL Client端回傳付款結果網址 跟ReturnURL二選一
-			obj.setOrderResultURL(clientBackURL);
+			String setOrderResultURL = "https://66c9ccf9158b.ngrok.io/EA101_G4/front-end/shopMall/shoppingFinal.jsp";
+			obj.setOrderResultURL(setOrderResultURL);
 //			設定NeedExtraPaidInfo 是否需要額外的付款資訊 
 			obj.setNeedExtraPaidInfo("N");
 //			setRedeem是否使用紅利折抵
 			obj.setRedeem("N");
 //			設定自訂回傳訊息 controller接收action
 			obj.setCustomField1("returnMsg");
-			System.out.println(String.valueOf(buylist.size()));
 			obj.setCustomField2(String.valueOf(buylist.size()));
 			
 			AllInOneService allInOneSvc = new AllInOneService();
@@ -165,69 +154,44 @@ public class ProductEcpayServlet extends HttpServlet {
 		// 接受參數回傳取需要參數
 
 		String MerchantTradeNo = request.getParameter("MerchantTradeNo");//request.getParameter("MerchantTradeNo");
-		Integer RtnCode = Integer.parseInt(request.getParameter("RtnCode"));
 		Integer TradeAmt = Integer.parseInt(request.getParameter("TradeAmt"));
+		String PaymentType = request.getParameter("PaymentType");
 		
 		String CustomField2 = request.getParameter("CustomField2");
 		int len = Integer.parseInt(CustomField2);
-		System.out.println(len);
 		
 		Jedis jedis = new Jedis("localhost", 6379);
 		jedis.auth("123456");
-		for(int j=1 ; j<= len ; j++) {
-			List<String> data = jedis.hmget("product"+j, "name", "price", "sum");
-			for (String str : data) {
-				System.out.println(str);
-			}
-		}
-		List<String> customer = jedis.hmget("customer", "name", "phone", "address", "email");
-		String cname = jedis.hget("customer", "name");
-		String cphone = jedis.hget("customer", "phone");
-		String caddress = jedis.hget("customer", "address");
-		String cemail = jedis.hget("customer", "email");
-		jedis.close();
-		System.out.println(cname);
-		// 新增到訂單
-//		Shop_orderService shop_orderSvc = new Shop_orderService();
-//		Shop_orderVO shop_orderVO = new Shop_orderVO();
-//		shop_orderVO.setSq_order_id(MerchantTradeNo);
-//		shop_orderVO.setSq_member_id(memNo);
-//		shop_orderVO.setSq_store_address_id("550001");//取貨超商編號
-//		shop_orderVO.setOrder_address("桃園市平鎮區中央路187號");//從收件人資訊取
-//		shop_orderVO.setShop_order_price(TradeAmt);
-//		shop_orderVO.setPay_mode(2);
-//		shop_orderVO.setOrder_status(0);
-		
 
-//		// 同時新增到明細
-//			List<Shop_order_detailVO> list = new ArrayList<>();
-//		// 取得購物車商品
-//			for(Shop_productVO productVO : buylist) {
-//				Shop_order_detailVO detailVO = new Shop_order_detailVO();
-//				int price = productVO.getProduct_price() * productVO.getProduct_quantity();
-//				detailVO.setSq_order_id(MerchantTradeNo);
-//				detailVO.setSq_product_id(productVO.getSq_product_id());
-//				detailVO.setProduct_price(price);
-//				detailVO.setOrder_sum(productVO.getProduct_quantity());
-//				list.add(detailVO);
-//			}
-//		shop_orderSvc.insertWithDetail(shop_orderVO, list);
+		String caddress = jedis.hget("customer", "address");
+
+		// 新增到訂單
+		Shop_orderService shop_orderSvc = new Shop_orderService();
+		Shop_orderVO shop_orderVO = new Shop_orderVO();
+		shop_orderVO.setSq_order_id(MerchantTradeNo);
+		shop_orderVO.setSq_member_id(memNo);
+		shop_orderVO.setSq_store_address_id("550001");//取貨超商編號
+		shop_orderVO.setOrder_address(caddress);//從收件人資訊取
+		shop_orderVO.setShop_order_price(TradeAmt);
+		shop_orderVO.setPay_mode(2);
+		shop_orderVO.setOrder_status(0);
+		
+		
+		List<Shop_order_detailVO> list = new ArrayList<Shop_order_detailVO>();
+		//明細資料
+		for(int j=1 ; j<= len ; j++) {
+			List<String> data = jedis.hmget("product"+j, "id", "price", "sum");
+			Shop_order_detailVO detailVO = new Shop_order_detailVO();
+			detailVO.setSq_order_id(MerchantTradeNo);
+			detailVO.setSq_product_id(jedis.hget("product"+j, "id"));
+			detailVO.setProduct_price(Integer.parseInt(jedis.hget("product"+j, "price")));
+			detailVO.setOrder_sum(Integer.parseInt(jedis.hget("product"+j, "sum")));
+			list.add(detailVO);				
+		}		
+		jedis.close();
+		shop_orderSvc.insertWithDetail(shop_orderVO, list);
 		}
 
 	}
-
-
-//	public Map<Integer , Shop_productVO> stringToMap(String MapString){
-//		int s1 = MapString.indexOf("{");
-//		String reg1 = MapString.substring(s1+1);
-//		int s2 = reg1.indexOf("}");
-//		String reg2 = reg1.substring(0,s2);
-//	
-//		Map<Integer , Shop_productVO> reconstructedUtilMap = Arrays.stream(reg2.split(","))
-//	            .map(s -> s.split("="))
-//	            .collect(Collectors.toMap(s -> s[0], s -> s[1]));
-//		
-//		return reconstructedUtilMap;
-//	}
 
 }
