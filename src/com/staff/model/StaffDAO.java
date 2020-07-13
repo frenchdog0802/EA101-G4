@@ -23,11 +23,11 @@ public class StaffDAO implements StaffDAO_interface {
 		}
 }
 	
-	private static final String INSERT_STMT = "INSERT INTO staff (sq_staff_id,sf_status,sf_name,sf_email,sf_address,sf_phone,sf_password,sf_account) VALUES (('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')), ?, ?, ?, ?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO staff (sq_staff_id,sf_status,sf_name,sf_email,sf_address,sf_phone,sf_password,sf_account,sf_photo) VALUES (('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')), ?, ?, ?, ?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM staff order by sq_staff_id";
 	private static final String GET_ONE_STMT = "SELECT * FROM staff where sq_staff_id = ?";
 	private static final String DELETE = "DELETE FROM staff where sq_staff_id = ?";
-	private static final String UPDATE = "UPDATE staff set sf_statu=?,sf_name=?,sf_email=?,sf_address=?,sf_phone=?,sf_password=?,sf_account=? where sq_staff_id = ?";
+	private static final String UPDATE = "UPDATE staff set sf_statu=?,sf_name=?,sf_email=?,sf_address=?,sf_phone=?,sf_password=?,sf_account=? , sf_photo =? where sq_staff_id = ?";
 	private static final String GET_ONE_STMT_FORM_ACCOUNT = "SELECT * FROM staff where sf_account = ?";
 	
 	
@@ -52,6 +52,7 @@ public class StaffDAO implements StaffDAO_interface {
 				staffVO.setSf_email(rs.getString("sf_email"));
 				staffVO.setSf_phone(rs.getString("sf_phone"));
 				staffVO.setSf_address(rs.getString("sf_address"));
+				staffVO.setSf_photo(rs.getBytes("sf_photo"));
 			}
 			// Handle any driver errors
 		} catch (SQLException se) {
@@ -97,6 +98,7 @@ public class StaffDAO implements StaffDAO_interface {
 			pstmt.setString(5, staffVO.getSf_phone());
 			pstmt.setString(6, staffVO.getSf_password());
 			pstmt.setString(7, staffVO.getSf_account());
+			pstmt.setBytes(8, staffVO.getSf_photo());
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occurred. " + se.getMessage());
@@ -134,7 +136,8 @@ public class StaffDAO implements StaffDAO_interface {
 			pstmt.setString(5, staffVO.getSf_phone());
 			pstmt.setString(6, staffVO.getSf_password());
 			pstmt.setString(7, staffVO.getSf_account());
-			pstmt.setString(8, staffVO.getSq_staff_id());
+			pstmt.setBytes(8, staffVO.getSf_photo());
+			pstmt.setString(9, staffVO.getSq_staff_id());
 
 			pstmt.executeUpdate();
 
@@ -216,6 +219,7 @@ public class StaffDAO implements StaffDAO_interface {
 				staffVO.setSf_email(rs.getString("sf_email"));
 				staffVO.setSf_phone(rs.getString("sf_phone"));
 				staffVO.setSf_address(rs.getString("sf_address"));
+				staffVO.setSf_photo(rs.getBytes("sf_photo"));
 			}
 			// Handle any driver errors
 		} catch (SQLException se) {
@@ -272,6 +276,7 @@ public class StaffDAO implements StaffDAO_interface {
 				staffVO.setSf_email(rs.getString("sf_email"));
 				staffVO.setSf_phone(rs.getString("sf_phone"));
 				staffVO.setSf_address(rs.getString("sf_address"));
+				staffVO.setSf_photo(rs.getBytes("sf_photo"));
 			}
 
 			// Handle any driver errors

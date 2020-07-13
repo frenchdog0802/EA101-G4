@@ -59,6 +59,15 @@
 		<servlet-name>BikeEcpayServlet</servlet-name>
 		<url-pattern>/bike/BikeEcpayServlet.do</url-pattern>
 	</servlet-mapping>
+	<!--BikeStoreDBReader -->
+	<servlet>
+		<servlet-name>BikeStoreDBReader</servlet-name>
+		<servlet-class>com.bike.store.controller.BikeStoreDBReader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BikeStoreDBReader</servlet-name>
+		<url-pattern>/bike/BikeStoreDBReader.do</url-pattern>
+	</servlet-mapping>
 	<!-- BikeStoreAjaxServlet -->
 	<servlet>
 		<servlet-name>BikeStoreAjaxServlet</servlet-name>
@@ -259,6 +268,15 @@
 		<servlet-name>ForumDBReader</servlet-name>
 		<url-pattern>/forum/ForumDBReader.do</url-pattern>
 	</servlet-mapping>
+<!-- 	StaffDBReader -->
+<servlet>
+		<servlet-name>StaffDBReader</servlet-name>
+		<servlet-class>com.staff.model.StaffDBReader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StaffDBReader</servlet-name>
+		<url-pattern>/staff/StaffDBReader.do</url-pattern>
+	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>StaffServlet</servlet-name>
@@ -318,7 +336,7 @@
 <!-- 	</filter> -->
 <!-- 	<filter-mapping> -->
 <!-- 		<filter-name>MemberLoginFilter</filter-name> -->
-<!-- 		<url-pattern>/back-end/*</url-pattern> -->
+<!-- 		<url-pattern>/front-end/route/*</url-pattern> -->
 <!-- 		<dispatcher>REQUEST</dispatcher> -->
 <!-- 		<dispatcher>FORWARD</dispatcher> -->
 <!-- 		<dispatcher>INCLUDE</dispatcher> -->

@@ -18,12 +18,11 @@
 
 <div class="row" style="background-color: white;">
 	<ul class="nav nav-tabs">
-		<li class="nav-item "><a class="nav-link active" href="#"><span
-				style="padding-bottom: 8px; border-bottom: 3px blue solid;">車種管理</span></a>
+		<li class="nav-item "><a class="nav-link" href="<%=request.getContextPath()%>/back-end/bike/bikeTypeListAll.jsp"><span>車種管理</span></a>
 		<!--在哪一個頁面就哪加active和span的style--></li>
-		<li class="nav-item "><a class="nav-link " href="#"><span>車輛管理</span></a>
+		<li class="nav-item "><a class="nav-link" href="<%=request.getContextPath()%>/back-end/bike/newBikeListAll.jsp"><span>車輛管理</span></a>
 		</li>
-		<li class="nav-item"><a class="nav-link" href="#"><span>訂單管理</span></a>
+		<li class="nav-item"><a class="nav-link active" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><span style="padding-bottom: 8px; border-bottom: 3px blue solid;">訂單管理</span></a>
 		</li>
 	</ul>
 </div>
@@ -38,6 +37,14 @@
 <!-----------backNav----------->
 <!-- --------------------------------------------------------------------------------------------->
 <div class="container-fluid mx-3">
+	<div class="row collapse" id="collapseExample">
+		<div class="col-1"></div>
+		<div class="col-6 my-1">
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/MasterEx.jsp'">MasterEx</button> 
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeRentHistory.jsp'">bikeRentHistory</button>
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeMaster.jsp'">bikeMaster</button>
+		</div>
+	</div>
 	<div class="row mt-1">
 		<form class="form-inline">
 			<div class="form-group mb-2">

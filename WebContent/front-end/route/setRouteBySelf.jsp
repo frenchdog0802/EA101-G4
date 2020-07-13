@@ -1,9 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.route.model.*"%>
+<%@ page import="com.member.model.*"%>
 
 <%
 	RouteVO rouVO = (RouteVO) request.getAttribute("rouVO");
+	MemVO memVO = (MemVO) session.getAttribute("MemVO");
 %>
 
 <!DOCTYPE html>
@@ -101,6 +103,7 @@
    routeMap = new google.maps.Map(document.getElementById("map_canvas"), {
      zoom: 10,
      center: { lat: data['results'][0].location.lat, lng: data['results'][0].location.lng }
+   	 
    });
    directionsRenderer.setMap(routeMap);
    var waypts = [];
@@ -475,6 +478,9 @@ console.log(results);
 
 <body onload="initMap()" >
 <%@include file="/front-end/page-file/page-nav"%>
+
+
+
  <div class="container">
    <!-- <div class=row> -->
     <!-- <div class="col-md-12"> -->
@@ -616,7 +622,9 @@ console.log(results);
     
     <input type="hidden" name="checkFlag" value="0">
 	<input type="hidden" name="addRoute" value="0">
+    <input type="hidden" name="sqMemberId" value="${MemVO.sq_member_id}">
     
+
     
   </div>
 </div>

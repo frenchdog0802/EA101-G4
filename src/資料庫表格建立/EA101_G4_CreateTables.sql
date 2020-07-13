@@ -321,7 +321,8 @@ CREATE TABLE STAFF (
         SF_ADDRESS VARCHAR2(100) ,
         SF_PHONE VARCHAR2(40) NOT NULL,
         SF_PASSWORD VARCHAR2(15) NOT NULL,
-        SF_ACCOUNT VARCHAR2(15) NOT NULL
+        SF_ACCOUNT VARCHAR2(15) NOT NULL,
+        SF_PHOTO      BLOB 
   );
   
 CREATE TABLE FUNCTION (
@@ -583,6 +584,7 @@ CREATE TABLE bike_store(
    store_email       VARCHAR2(200) NOT NULL,
    store_account   VARCHAR2(200) NOT NULL,
    store_password VARCHAR2(200) NOT NULL,
+   store_photo   BLOB,
   PRIMARY KEY(sq_bike_store_id)
 );
 

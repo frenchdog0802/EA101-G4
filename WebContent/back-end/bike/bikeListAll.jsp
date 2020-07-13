@@ -6,14 +6,14 @@
 <jsp:useBean id="bikeTypeSvc" scope="page" class="com.bike.type.model.BikeTypeService" />
 <jsp:useBean id="BikeVO" class="com.bike.bike.model.BikeVO" scope="request"/>
 <%
-BikeService bikeDao = new BikeService();
-List<BikeVO> list = bikeDao.getAll();
-pageContext.setAttribute("list", list);
-
-if (BikeVO.getSq_bike_type_id() != null) {
-List<BikeVO> list1 = Arrays.asList(BikeVO);
-	pageContext.setAttribute("list", list1);
-}
+	BikeService bikeDao = new BikeService();
+	List<BikeVO> list = bikeDao.getAll();
+	pageContext.setAttribute("list", list);
+	
+	if (BikeVO.getSq_bike_type_id() != null) {
+	List<BikeVO> list1 = Arrays.asList(BikeVO);
+		pageContext.setAttribute("list", list1);
+	}
 %>
 
 <!DOCTYPE html>
@@ -28,16 +28,16 @@ List<BikeVO> list1 = Arrays.asList(BikeVO);
 
 </head>
 <body>
-		<div class="container">
-			<form action="<%=request.getContextPath()%>/bike/BikeServlet.do" method="POST">
-			<div class="form-group row">
-				<label for="choose_bikeType" class="col-form-label">選擇車種</label>
-					<select  id="sq_bike_type_id" name="sq_bike_type_id">
-						<c:forEach var="bikeTypeVO" items="${bikeTypeSvc.getAll()}">
+	<div class="container">
+		<form action="<%=request.getContextPath()%>/bike/BikeServlet.do" method="POST">
+		<div class="form-group row">
+			<label for="choose_bikeType" class="col-form-label">選擇車種</label>
+				<select  id="sq_bike_type_id" name="sq_bike_type_id">
+					<c:forEach var="bikeTypeVO" items="${bikeTypeSvc.getAll()}">
 						<option value="${bikeTypeVO.sq_bike_type_id}">${bikeTypeVO.bike_type_name}</option>
 					</c:forEach>
 				</select>
-				<input type="hidden" name="action" value="choose_type">
+			<input type="hidden" name="action" value="choose_type">
 			<input type="submit" value="送出">
 		</div>
 		</form>
@@ -55,8 +55,8 @@ List<BikeVO> list1 = Arrays.asList(BikeVO);
 		<a
 		href="<%=request.getContextPath()%>/back-end/bike/addBike.jsp"
 		class="btn btn-success mt-3 mx-3">新增</a>
-	</form>
-</div>
+		</form>
+	</div>
 <div class="container-fluid mt-3">
 	<div class="table-responsive">
 		<table

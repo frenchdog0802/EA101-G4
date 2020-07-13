@@ -8,6 +8,7 @@ public class StaffVO implements java.io.Serializable{
 	private String sf_email;
 	private String sf_address;
 	private String sf_phone;
+	private byte[] sf_photo;
 	
 	public String getSf_email() {
 		return sf_email;
@@ -60,6 +61,12 @@ public class StaffVO implements java.io.Serializable{
 	}
 	public void setSf_name(String sf_name) {
 		this.sf_name = sf_name;
+	}
+	public byte[] getSf_photo() {
+		return sf_photo;
+	}
+	public void setSf_photo(byte[] sf_photo) {
+		this.sf_photo = sf_photo;
 	}
 	
 	

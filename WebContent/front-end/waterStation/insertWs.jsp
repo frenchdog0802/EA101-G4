@@ -26,8 +26,8 @@
 <title>補水站新增頁面</title>
 <style media="screen" type="text/css">
 #map {
-	height: 900px;
-	width: 1115px;
+	height: 750px;
+	width: 1920px;
 }
 
 h2 {
@@ -72,11 +72,11 @@ label {
 <body onload="initMap()" bgcolor='white'>
 	<%@include file="/front-end/page-file/page-nav"%>
 
-	<h2 style="	margin-top:20px">全台補水站</h2>
+	<h2 style="	margin-top:20px">全台補水站&租車點</h2>
 	<hr>	
 
 
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row justify-content-end">
 			<div class="permissions block">
 				<label>補水站</label><input type="checkbox" id="checkboxWs"
@@ -125,10 +125,12 @@ label {
 			if(${wsVO.addStation} === 1){
 				positionWs.push(
 					{label : '${wsVO.stationName}',
-			        lat : ${wsVO.latitude},
-			       	lng : ${wsVO.longitude}},
-			       	)
-				
+					 businessHours : '${wsVO.businessHours}',
+					 stationAddress : '${wsVO.stationAddress}',
+					 sqStationId : '${wsVO.sqStationId}',
+			         lat : ${wsVO.latitude},
+			       	 lng : ${wsVO.longitude}},
+			    )
 			}
         </c:forEach>
     console.log(positionWs);
@@ -139,8 +141,11 @@ label {
 	var positionR = [
 		<c:forEach var="BikeStoreVO" items="${bikeStoreSvc.all}" > 
 			{label : '${BikeStoreVO.bike_store_name}',
-	        lat : ${BikeStoreVO.store_latitute},
-	       	lng : ${BikeStoreVO.store_longitute}},
+			 phone : '${BikeStoreVO.phone}',
+			 location : '${BikeStoreVO.location}',
+			 sq_bike_store_id : '${BikeStoreVO.sq_bike_store_id}',
+	         lat : ${BikeStoreVO.store_latitute},
+	       	 lng : ${BikeStoreVO.store_longitute}},
         </c:forEach>
 	];
 
@@ -148,6 +153,7 @@ label {
 	    // 初始化地圖
 	    map = new google.maps.Map(document.getElementById('map'), {
 	    	zoom : 14,
+	    	gestureHandling: 'greedy',
 	        center: { lat : 24.969367,
 					  lng : 121.190733 }
 	    });
@@ -156,7 +162,6 @@ label {
 	    
 	  //map的滑鼠點擊事件
 		map.addListener('click', function(e) {
-			alert("點地圖！");
 		    // 點擊時獲取滑鼠的經緯度座標
 			var coordinate = {lat: e.latLng.lat(), lng: e.latLng.lng()};
 		    console.log("coordinate:"+coordinate);
@@ -304,13 +309,19 @@ label {
 					icon:'https://img.icons8.com/officexs/16/000000/bottle-of-water.png'
 				}));
 
-
+	console.log(positionWs[e].sqStationId);
 			var infowindow = new google.maps.InfoWindow({
-			    content: positionWs[e].label,
+			    content: '補水站名稱：'+positionWs[e].label+
+			    		 '<br>'+'營業時間：'+positionWs[e].businessHours+
+			    		 '<br>'+'地址：'+positionWs[e].stationAddress+
+						 '<br>圖片：<img id="demo" src="<%=request.getContextPath()%>/back-end/waterStation/water.stationImage?SQ_STATION_ID='+positionWs[e].sqStationId+'"'+'style="width: 150px; height: 150px">', 
+						 
+			    		 
 			    position: {
 					lat : positionWs[e].lat,
 					lng : positionWs[e].lng
 				}
+							
 			});
 			
 			addLis(markersWs,map,infowindow,e);
@@ -373,6 +384,11 @@ label {
 				
 				var infowindow = new google.maps.InfoWindow({
 				    content: positionR[e].label,
+				    content: '租車店名稱：'+positionR[e].label+
+				    		 '<br>'+'連絡電話：'+positionR[e].phone+
+				    		 '<br>'+'地址：'+positionR[e].location+
+							 '<br>圖片：<img id="demo" src="<%=request.getContextPath()%>/bike/BikeStoreDBReader.do?sq_bike_store_id='+positionR[e].sq_bike_store_id+'"'+'style="width: 150px; height: 150px">', 
+					 
 				    position: {
 						lat : positionR[e].lat,
 						lng : positionR[e].lng

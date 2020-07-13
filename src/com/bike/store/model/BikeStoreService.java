@@ -10,6 +10,10 @@ public class BikeStoreService {
 		dao = new BikeStoreDAO();
 	};
 	
+	public BikeStoreVO findByAccount(String store_account) {
+		return dao.findByAccount(store_account);
+	}
+	
 	public BikeStoreVO findByPrimaryKey(String sq_bike_store_id) {
 		return dao.findByPrimaryKey(sq_bike_store_id);
 	}
