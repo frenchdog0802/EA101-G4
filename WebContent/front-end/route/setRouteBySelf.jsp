@@ -101,6 +101,7 @@
    routeMap = new google.maps.Map(document.getElementById("map_canvas"), {
      zoom: 10,
      center: { lat: data['results'][0].location.lat, lng: data['results'][0].location.lng }
+   	 
    });
    directionsRenderer.setMap(routeMap);
    var waypts = [];
@@ -475,6 +476,9 @@ console.log(results);
 
 <body onload="initMap()" >
 <%@include file="/front-end/page-file/page-nav"%>
+
+
+
  <div class="container">
    <!-- <div class=row> -->
     <!-- <div class="col-md-12"> -->
@@ -616,7 +620,9 @@ console.log(results);
     
     <input type="hidden" name="checkFlag" value="0">
 	<input type="hidden" name="addRoute" value="0">
+    <input type="hidden" name="sqMemberId" value="${MemVO.sq_member_id}">
     
+
     
   </div>
 </div>
