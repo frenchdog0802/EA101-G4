@@ -9,6 +9,7 @@
 	if(sq_member_id==null) {
 		session.setAttribute("sq_member_id", "910003");
 	}
+	
     ActJoinService actjoinSvc = new ActJoinService();
     ActService actSvc = new ActService();
     List<ActVO> listact = actSvc.getAll();
@@ -23,7 +24,10 @@
     }
     pageContext.setAttribute("list2",list2);
 %>
-
+<%
+	java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
+	request.setAttribute("date", date);
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -96,13 +100,18 @@
 											</a>
 										</h5>
 										${actVO.act_description}
+										
 										<div class="form-inline">
-										<c:if test="${sq_member_id == actVO.sq_member_id}">
-												<input type="submit" value="主辦無法退出" class="btn btn-primary" disabled> 	
-										</c:if>
-										</div>
-										<div class="form-inline">	
-										<c:if test="${sq_member_id != actVO.sq_member_id}">
+										<c:choose>
+										<c:when test="${actVO.end_time.compareTo(date) <0 && sq_member_id != actVO.sq_member_id}">
+											<input type="submit" value="報名截止不能退出" class="btn btn-primary" disabled>
+										</c:when>
+										
+										<c:when test="${sq_member_id == actVO.sq_member_id}">
+											<input type="submit" value="主辦無法退出" class="btn btn-primary" disabled> 	
+										</c:when>
+										
+										<c:when test="${sq_member_id != actVO.sq_member_id}">
 											<FORM METHOD="post" id="form" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do">
 												<input type="hidden" id="sq_activity_id" name="sq_activity_id" value="${actVO.sq_activity_id}">
 												<input type="hidden" id="sq_member_id" name="sq_member_id" value="sq_member_id">
@@ -110,12 +119,18 @@
 												<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
 												<input type="submit" value="退出活動" class="btn btn-primary"> 	
 											</FORM>
-										</c:if>
+										</c:when>
+										</c:choose>
 										</div>
 									</div>
 								</li>
 							</ul>
 						</c:forEach>
+							<c:if test="${list2.size() == 0}">
+								<div class="media-body">
+									<h1>您還沒加入活動唷!!</h1>
+								</div>
+							</c:if>
 					</div>
 
 					<!-- Pagination -->

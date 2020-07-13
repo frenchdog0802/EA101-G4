@@ -137,8 +137,7 @@
 		    				</div>
 		    			</div>
     				</div>
-    			</div>
-    			
+    			</div>	
     		</div>
     		<div class="col-2"></div>
     	</div>
@@ -162,10 +161,9 @@
         });
       }
 	
-	$(function () {
-        $('.address-zone').ajaddress();
-    });
 	$(document).ready(function(){
+		$('.address-zone').ajaddress();
+		
 		$("#sConfirm").click(function(){
 			var name = $("#shopName").val();
 			console.log(name);

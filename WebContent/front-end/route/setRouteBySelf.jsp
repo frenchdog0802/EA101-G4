@@ -1,9 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.route.model.*"%>
+<%@ page import="com.member.model.*"%>
 
 <%
 	RouteVO rouVO = (RouteVO) request.getAttribute("rouVO");
+	MemVO memVO = (MemVO) session.getAttribute("MemVO");
 %>
 
 <!DOCTYPE html>
@@ -11,12 +13,29 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
- <meta http-equiv="pragma" content="no-cache" /> 
- <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"><!-- Bootstrap CSS -->
- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="pragma" content="no-cache" /> 
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"><!-- Bootstrap CSS -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<link type="text/css" rel="stylesheet" href="css/rcswitcher.min.css">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"> 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+<!-- Bootstrap CSS -->
+<link	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"	rel="stylesheet">
+ 
+
  <title>自訂路線頁面</title>
- <style type="text/css">
+<style media="screen" type="text/css">
   body{
     font-family: "Helvetica", "Arial","LiHei Pro","黑體-繁","微軟正黑體", sans-serif;
   }
@@ -29,6 +48,24 @@
  div.spot{
    width: 280px;
  }
+ 
+ label.b{
+	display: inline-block;
+	width: 50px;
+	color: #888;
+}
+
+.block {
+	width: 152px;
+	background: #ededed;
+	padding: 4px 10px;
+	float: left;
+	/*height: 300px;*/
+	margin: 0px 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+ 
 </style>
 
 
@@ -43,9 +80,9 @@
 <script type = "text/javascript" >
 
   var markers = [];
-
+  var map;
   function initMap() {
-    var map = new google.maps.Map(document.getElementById('map_canvas'), {
+   map = new google.maps.Map(document.getElementById('map_canvas'), {
      zoom: 13,
      center: {lat: 24.969367, lng: 121.190733}
       }); // 預設顯示地圖的座標與放大比例
@@ -56,15 +93,17 @@
 
 
   //規劃路線
+  var routeMap;
   function route(data) {
 
    var directionsService = new google.maps.DirectionsService();
    var directionsRenderer = new google.maps.DirectionsRenderer({
       suppressMarkers: true
      });
-   var routeMap = new google.maps.Map(document.getElementById("map_canvas"), {
+   routeMap = new google.maps.Map(document.getElementById("map_canvas"), {
      zoom: 10,
      center: { lat: data['results'][0].location.lat, lng: data['results'][0].location.lng }
+   	 
    });
    directionsRenderer.setMap(routeMap);
    var waypts = [];
@@ -184,7 +223,7 @@
         
         	
         	if($('#stepIntro'+i).val() === '' || typeof $('#demo'+i).attr("src") === "undefined"){
-                window.alert("Plz enter the image and intro");
+                window.alert("請輸入停留點相關圖片及介紹");
                 return false;
             }
 	          var stepIntro = $('#stepIntro'+i).val();
@@ -291,7 +330,7 @@
     //搜尋地點地址
     function showAddress(address) {
      if(address === ''){
-      window.alert("Plz enter the address");
+      window.alert("請輸入正確地址或地標");
       return false;
     }
 
@@ -314,12 +353,12 @@ console.log(results);
                 $("#addLoc").unbind("click"); //清除前次按鈕的記憶內容
                 $("#addLoc").click(function() {
                   if($("#address").val() === ''){
-                    window.alert("Plz enter the address");
+                    window.alert("請輸入正確地址或地標");
                     return false;
                   }
 
                   if($("#address").val() != address){
-                    window.alert("Plz search the location before add ");
+                    window.alert("輸入地址或地標後，請先按下搜尋再進行新增");
                     return false;
                   }
 
@@ -439,6 +478,9 @@ console.log(results);
 
 <body onload="initMap()" >
 <%@include file="/front-end/page-file/page-nav"%>
+
+
+
  <div class="container">
    <!-- <div class=row> -->
     <!-- <div class="col-md-12"> -->
@@ -470,14 +512,24 @@ console.log(results);
 
   </div>
 </div>
+
+<div class="row justify-content-end">
+	<div class="permissions block">
+		<label><b>補水站</b></label><input type="checkbox" id="checkboxWs"
+					name="access_cp" value="access_cp">
+	</div>
+	<div class="permissions block">
+		<label><b>租車點</b></label><input type="checkbox" id="checkboxRent"
+					name="manage_users" value="manage_users">
+	</div>
+</div>
+
+
 <div class="row">
   <div class="col-md-3 input-group form-group">
    <div class="spot" style="font-size: x-large" >路線規劃：
     <br>
-    
-    
- 
-    
+   
     <label class="form-inline" />地點A：
     <input name="step" class="step form-control" value="" type="text" readonly></label>
     <input name="lat" class="lat" value="" type="hidden">
@@ -570,7 +622,9 @@ console.log(results);
     
     <input type="hidden" name="checkFlag" value="0">
 	<input type="hidden" name="addRoute" value="0">
+    <input type="hidden" name="sqMemberId" value="${MemVO.sq_member_id}">
     
+
     
   </div>
 </div>
@@ -596,8 +650,185 @@ console.log(results);
 </div>
 
 <%@include file="/front-end/page-file/page-footer"%>
+<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"
+		type="text/javascript"></script>
+<script>window.jQuery || document.write('<script src="js/jquery-2.1.1.min.js"><\/script>')</script>
+<script type="text/javascript" src="js/rcswitcher.js"></script>
+<script type="text/javascript" src="js/rcswitcherR.js"></script>
 
+
+<jsp:useBean id="waterStationSvc" scope="page"
+	class="com.waterStation.model.WaterStationService" />
+	
+<jsp:useBean id="bikeStoreSvc" scope="page"
+		class="com.bike.store.model.BikeStoreService" /> 
+	
 <script>
+//補水站點
+	var markersWs = [];
+	var positionWs = [
+		<c:forEach var="wsVO" items="${waterStationSvc.all}" > 
+			{label : '${wsVO.stationName}',
+	        lat : ${wsVO.latitude},
+	       	lng : ${wsVO.longitude}},
+	    </c:forEach>
+	];
+	
+
+	//租車站點
+	var markersR = [];
+	var positionR = [
+		<c:forEach var="BikeStoreVO" items="${bikeStoreSvc.all}" > 
+			{label : '${BikeStoreVO.bike_store_name}',
+	        lat : ${BikeStoreVO.store_latitute},
+	       	lng : ${BikeStoreVO.store_longitute}},
+	    </c:forEach>
+	];
+
+	//補水站滑動式開關
+	$('#checkboxWs').rcSwitcher({
+				// reverse: true,
+				// inputs: true,
+//					width: 44,
+//					height: 16,
+//					blobOffset: 2,
+//					onText: 'YES',
+//					offText: 'NO',
+//					theme: 'dark',
+				// autoFontSize: true,
+				autoStick: true,
+
+	});
+
+	
+	//開關式的放入補水站標點
+	function goWs() {
+		clearMarkersWs();
+		for (var i = 0; i < positionWs.length; i++) {
+			addMarkerWs(i);
+		}
+	}
+
+	var markerWs = [];
+	//新增補水站標點方法
+	function addMarkerWs(e) {
+		setTimeout(function() {
+			markerWs = markersWs.push(new google.maps.Marker({
+				position : {
+					lat : positionWs[e].lat,
+					lng : positionWs[e].lng
+				},
+				map : routeMap,
+				//label: positionWs[e].label,
+				animation : google.maps.Animation.DROP,
+				icon:'https://img.icons8.com/officexs/16/000000/bottle-of-water.png'
+			}));
+
+
+		var infowindow = new google.maps.InfoWindow({
+		    content: positionWs[e].label,
+		    position: {
+				lat : positionWs[e].lat,
+				lng : positionWs[e].lng
+			}
+		});
+		
+		addLisCheckbox(markersWs,map,infowindow,e);
+		
+		
+		}, e * 0.1);
+	}
+	
+	//清除補水站標點方法
+	function clearMarkersWs() {
+		for (var i = 0; i < markersWs.length; i++) {
+			if (markersWs[i]) {
+				markersWs[i].setMap(null);
+			}
+		}
+		markersWs = [];
+	}
+	
+	//租車點滑動式開關
+	$('#checkboxRent').rcSwitcherR({
+				// reverse: true,
+				// inputs: true,
+//					width: 44,
+//					height: 16,
+//					blobOffset: 2,
+//					onText: 'YES',
+//					offText: 'NO',
+//					theme: 'dark',
+				// autoFontSize: true,
+				autoStick: true,
+
+	});
+
+	
+	//開關式的放入租車點標點
+	function goR() {
+		clearMarkersR();
+		for (var i = 0; i < positionR.length; i++) {
+			addMarkerR(i);
+		}
+	}
+	
+	var markerR = [];
+	//新增租車點標點方法
+	function addMarkerR(e) {
+
+		setTimeout(function() {
+			markerR = markersR.push(new google.maps.Marker({
+				position : {
+					lat : positionR[e].lat,
+					lng : positionR[e].lng
+				},
+				map : routeMap,
+				//label: positionWs[e].label,
+				animation : google.maps.Animation.DROP,
+				icon:'https://img.icons8.com/material-two-tone/24/000000/bike-path.png'
+			}));
+			
+			
+			var infowindow = new google.maps.InfoWindow({
+			    content: positionR[e].label,
+			    position: {
+					lat : positionR[e].lat,
+					lng : positionR[e].lng
+				}
+			});
+			
+			
+			addLisCheckbox(markersR,map,infowindow,e);
+			
+			
+		}, e * 0.1);
+
+		}
+		//清除租車點標點方法
+		function clearMarkersR() {
+			for (var i = 0; i < markersR.length; i++) {
+				if (markersR[i]) {
+					markersR[i].setMap(null);
+				}
+			}
+			markersR = [];
+		}
+		
+		function addLisCheckbox(array,routeMap,infowindow,i){
+			console.log("enter");
+			array[i].addListener("click", function() {
+	          infowindow.open(routeMap, array[i]);
+	        });
+	   	}
+
+
+
+
+
+
   function demoImg(){
       var file = $('#routeImg')[0].files[0];
       var reader = new FileReader;
@@ -610,7 +841,7 @@ console.log(results);
   function checkinfor(){
 	 
 	  if($('#routeName').val() === '' || $('#routeIntro').val() === '' || typeof $('#demo').attr("src") === "undefined" || $('#dis').val() === ''){
-          window.alert("Plz enter the RouteName, Routeimage and RouteIntro or you haven't planned a route yet");
+          window.alert("請輸入路線名稱、路線圖片及路線介紹，或是您仍未新增路線");
           return false;
       }else{
     	  
@@ -618,6 +849,8 @@ console.log(results);
       }
     	  
   }
+  
+ 
  
     
 </script>

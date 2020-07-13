@@ -13,6 +13,9 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css">
 <style>
+font-good {
+    font-size: 16px !important;
+} 
 @media ( min-width :1000px) {
 	.mydescription {
 		word-break: break-all;
@@ -37,12 +40,20 @@
 <!--分頁自己改-->
 <div class="row " style="background-color: white;">
 	<ul class="nav nav-tabs ">
-		<li class="nav-item "><a class="nav-link active " href="#"><span
-				style="padding-bottom: 8px; border-bottom: 3px blue solid;">item1</span></a>
-		<!--在哪一個頁面就哪加active和span的style--></li>
-		<li class="nav-item"><a class="nav-link" href="#"><span>item2</span></a>
+		<li class="nav-item ">
+			<a class="nav-link active" href="<%=request.getContextPath()%>/back-end/bike/bikeTypeListAll.jsp">
+				<span style="padding-bottom: 8px; border-bottom: 3px blue solid;">車種管理</span>
+			</a>
 		</li>
-		<li class="nav-item"><a class="nav-link" href="#"><span>item3</span></a>
+		<li class="nav-item ">
+			<a class="nav-link" href="<%=request.getContextPath()%>/back-end/bike/newBikeListAll.jsp">
+				<span>車輛管理</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+				<span>訂單管理</span>
+			</a>
 		</li>
 		<li class="nav-item mt-1">
 			<form class="form-inline"
@@ -64,7 +75,7 @@
 <!--分頁自己改-->
 <!-- --------------------------------------------------------------------------------------------->
 <!-----------backNav----------->
-<%@include file="/back-end/backFrame/backNav"%>
+<%@include file="/back-end/backFrame/masterBackNav"%>
 <!-----------backNav----------->
 <!-- --------------------------------------------------------------------------------------------->
 <!-- 自由發揮處 -->
@@ -84,16 +95,25 @@
 
 
 <div class="container-fluid mt-1">
+	<div class="row collapse" id="collapseExample">
+		<div class="col-1"></div>
+		<div class="col-6 my-1">
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeMaster.jsp'">訂單(未取車)</button>
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/MasterEx.jsp'">訂單(已取車,未還車)</button> 
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeRentHistory.jsp'">歷史訂單</button>
+		</div>
+	</div>	
 	<div class="table-responsive">
 		<table
-			class="table text-center table-bordered table-striped table-hover">
-			<thead class="thead-dark">
+			class="table text-center table-bordered table-striped table-hover h6" >
+			<thead class="thead-dark font-good">
 				<tr>
 					<th scope="col">圖片</th>
-					<th scope="col">車種名稱</th>
+					<th scope="col">名稱</th>
 					<th scope="col">車種標題</th>
 					<th scope="col">車種敘述</th>
 					<th scope="col">價格/天</th>
+					<th scope="col">價格/時</th>
 					<th scope="col">修改</th>
 				</tr>
 			</thead>
@@ -108,7 +128,8 @@
 						<td class="align-middle">${bikeVO.bike_type_name}</td>
 						<td class="align-middle">${bikeVO.bike_title}</td>
 						<td class="mydescription align-middle">${bikeVO.bike_description}</td>
-						<%-- 						<td class="align-middle">${bikeVO.price}</td> --%>
+						<td class="align-middle">${bikeVO.bike_daily_price}</td>
+						<td class="align-middle">${bikeVO.bike_hourly_price}</td>
 						<td class="align-middle">
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/bike/BikeTypeServlet.do"

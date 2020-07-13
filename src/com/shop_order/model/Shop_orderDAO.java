@@ -211,6 +211,7 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE);
+			pstmt.setString(1, sq_order_id);
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {

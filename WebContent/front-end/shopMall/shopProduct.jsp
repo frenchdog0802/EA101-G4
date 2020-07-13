@@ -15,6 +15,15 @@
  	
  	request.setAttribute("colorList", colorList);
  	request.setAttribute("modelList", modelList);
+ 	
+ 	@SuppressWarnings("unchecked")
+	List<Shop_productVO> buylist = (List<Shop_productVO>)session.getAttribute("shoppingcar");
+	Integer size;
+	if(buylist != null){
+		size = buylist.size();
+	}else{
+		size = 0;
+	}
 %>
 
 <!DOCTYPE html>
@@ -100,17 +109,14 @@
 	    								</select>
 	    							</td>
 	    						</tr>
-	    						<tr>
-	    							<td><span>庫存狀態 : </span></td>
-	    							<td><span class="allsecond_td">有</span></td>
-	    						</tr>
 	    					</table>
 	   					</div>
 	   					<div id="product_join">
 	   						<button class="btn bg-secondary addproduct">加入購物車</button>
-	   							<input type="hidden" name="id" value=<%=productVO.getSq_product_id()%>>
-					   			<input type="hidden" name="name" value="<%=productVO.getProduct_name()%>">
-								<input type="hidden" name="price" value="<%=productVO.getProduct_price()%>">
+	   						<input type="hidden" name="id" value=<%=productVO.getSq_product_id()%>>
+					   		<input type="hidden" name="name" value="<%=productVO.getProduct_name()%>">
+							<input type="hidden" name="price" value="<%=productVO.getProduct_price()%>">
+							
 	    					<button class="btn bg-success">加入收藏</button>
 	    				</div>
     				</div>
@@ -284,6 +290,11 @@
            	this.Storage.writeData();
         }
         window.onload = function(){ 
+        	
+        	if(<%=size%> != 0){
+             	$("#shopCar").animate({right:'0px'});
+             }
+        	
         	for(var i = localStorage.length-1; i >= 0; i--){
         		var key = localStorage.key(i);
         		if(key.indexOf("<%=sq_product_id%>") != -1){

@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>								
+    pageEncoding="UTF-8"%>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>							
 								<!-----------backHeader----------->
 <%@include file="/back-end/backFrame/backHeader"%>
 								<!-----------backHeader----------->
 <!-- --------------------------------------------------------------------------------------------->    
-  
+ 
                                <!---------放自己的CSS與title----------->
 
 <!-- --------------------------------------------------------------------------------------------->  

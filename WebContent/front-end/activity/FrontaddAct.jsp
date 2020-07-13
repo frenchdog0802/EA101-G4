@@ -50,17 +50,17 @@
 						value="<%=(actVO == null) ? "請填入標題" : actVO.getAct_title()%>" />
 				</div>
 			</div>
-			<jsp:useBean id="actSvc" scope="page"
-				class="com.act.model.ActService" />
+			<jsp:useBean id="routeSvc" scope="page" class="com.route.model.RouteService" />
 			<div class="form-group row">
 				<label for="selectActRoute3" class="col-sm-2 col-form-label">活動路線</label>
 				<div class="col-sm-10">
 					<select class="custom-select" id="selectActRoute3"
 						name="sq_route_id">
-						<c:forEach var="actVO" items="${actSvc.all}">
-							<option value="${actVO.sq_route_id}">${actVO.sq_route_id}</option>
+						<c:forEach var="routeVO" items="${routeSvc.all}">
+							<option value="${routeVO.sqRouteId}">${routeVO.routeName}</option>
 						</c:forEach>
 					</select>
+					<input type="button" id="addroute" class="btn btn-primary" value="建立路線"/>
 				</div>
 			</div>
 
@@ -269,6 +269,11 @@ $(function(){
 			$("#inputActStartTime3").val("2020-08-10");
 			$("#inputActEndTime3").val("2020-08-15");
 			$("#inputTextArea3").val("新店溪自行車道是條輕鬆悠閒的自行車道，橫跨雙北的新店溪自行車道，串連北市萬華區、中正區、文山區及新北新店區，新北市推出口袋地圖，不論吃、喝、玩等景點一目了然。");
+		});
+		
+		//建立路線按鈕
+		$("#addroute").click(function(){
+			window.location = '<%=request.getContextPath()%>/front-end/route/setRouteBySelf.jsp'
 		});
 		
 

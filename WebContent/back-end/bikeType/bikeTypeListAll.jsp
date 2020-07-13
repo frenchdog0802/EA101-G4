@@ -7,17 +7,15 @@
 
 
 <%
-
-List<BikeTypeVO> list ;
- if (BikeTypeVO.getSq_bike_type_id() != null) { 
- 	list = Arrays.asList(BikeTypeVO); 
- 	pageContext.setAttribute("list", list); 
- }else{ 
- 	BikeTypeService bikeDao = new BikeTypeService(); 
- 	list = bikeDao.getAll(); 
- 	pageContext.setAttribute("list", list); 
- } 
- 
+	List<BikeTypeVO> list ;
+	if (BikeTypeVO.getSq_bike_type_id() != null) { 
+		list = Arrays.asList(BikeTypeVO); 
+		pageContext.setAttribute("list", list); 
+	}else{ 
+		BikeTypeService bikeDao = new BikeTypeService(); 
+	 	list = bikeDao.getAll(); 
+	 	pageContext.setAttribute("list", list); 
+	} 
 %>
 
 
@@ -47,7 +45,6 @@ List<BikeTypeVO> list ;
 	</style>
 </head>
 	<body>
-
 		<div class="container-fluid">
 			<form class="form-inline"
 			ACTION="<%=request.getContextPath()%>/bike/BikeTypeServlet.do">
