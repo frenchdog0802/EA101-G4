@@ -277,6 +277,7 @@ public class StaffDAO implements StaffDAO_interface {
 				staffVO.setSf_phone(rs.getString("sf_phone"));
 				staffVO.setSf_address(rs.getString("sf_address"));
 				staffVO.setSf_photo(rs.getBytes("sf_photo"));
+				list.add(staffVO);
 			}
 
 			// Handle any driver errors
