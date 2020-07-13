@@ -18,16 +18,16 @@
 				<div class="row" style="background-color: white;">
 					<ul class="nav nav-tabs">
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>商品管理</span></a>
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/Shop_product/allShop_product.jsp"><span>商品管理</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">訂單管理</span></a>
+					    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/Shop_order/allOrder.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">訂單管理</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>廠牌管理</span></a>
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/BrandBack/BrandBack.jsp"><span>廠牌管理</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>庫存管理</span></a>
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/Product_stock/backProductStock.jsp"><span>庫存管理</span></a>
 					  </li>
 					</ul>
 				</div>
@@ -138,11 +138,11 @@
 				    						</c:if>
 				    					</td>
 				    					<td>
-				    						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop_order.do" style="position: relative;">
+				    						<FORM METHOD="post" ACTION="shop_order.do" style="position: relative;">
 											    <input type="submit" value="修改" style="position: absolute; opacity: 0;">
 											    <input type="image" src="<%=request.getContextPath()%>/back-end/backFrame/image/changeicon.png" alt="Submit" class="img-fluid"/>
 											    <input type="hidden" name="sq_stock_id"  value="${orderVO.sq_order_id}">
-											    <input type="hidden" name="action"	value="getOneForUpdate">
+											    <input type="hidden" name="action"	value="getOne">
 											</FORM>
 				    					</td>
 				    					<td>

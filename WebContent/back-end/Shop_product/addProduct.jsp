@@ -14,15 +14,18 @@
 <%@ include file="/back-end/backFrame/backBody"%>
  		<div class="row" style="background-color: white;">
 			<ul class="nav nav-tabs">
-				 <li class="nav-item">
+				<li class="nav-item">
 				   <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">商品管理</span></a>
-				 </li>
-			  <li class="nav-item">
-			    <a class="nav-link" href="#"><span>訂單管理</span></a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" href="#"><span>廠牌管理</span></a>
-			  </li>
+				</li>
+			  	<li class="nav-item">
+			    	<a class="nav-link" href="#"><span>訂單管理</span></a>
+			  	</li>
+			  	<li class="nav-item">
+			    	<a class="nav-link" href="#"><span>廠牌管理</span></a>
+			  	</li>
+			  	<li class="nav-item">
+					<a class="nav-link" href="#"><span>庫存管理</span></a>
+				</li>
 			</ul>
 		</div>
 <%@ include file="/back-end/backFrame/backNav" %>
