@@ -143,6 +143,7 @@ label {
 			{label : '${BikeStoreVO.bike_store_name}',
 			 phone : '${BikeStoreVO.phone}',
 			 location : '${BikeStoreVO.location}',
+			 sq_bike_store_id : '${BikeStoreVO.sq_bike_store_id}',
 	         lat : ${BikeStoreVO.store_latitute},
 	       	 lng : ${BikeStoreVO.store_longitute}},
         </c:forEach>
@@ -312,7 +313,7 @@ label {
 			var infowindow = new google.maps.InfoWindow({
 			    content: '補水站名稱：'+positionWs[e].label+
 			    		 '<br>'+'營業時間：'+positionWs[e].businessHours+
-			    		 '<br>'+'位於地址：'+positionWs[e].stationAddress+
+			    		 '<br>'+'地址：'+positionWs[e].stationAddress+
 						 '<br>圖片：<img id="demo" src="<%=request.getContextPath()%>/back-end/waterStation/water.stationImage?SQ_STATION_ID='+positionWs[e].sqStationId+'"'+'style="width: 150px; height: 150px">', 
 						 
 			    		 
@@ -385,8 +386,8 @@ label {
 				    content: positionR[e].label,
 				    content: '租車店名稱：'+positionR[e].label+
 				    		 '<br>'+'連絡電話：'+positionR[e].phone+
-				    		 '<br>'+'位於地址：'+positionR[e].location,
-<%-- 							 '<br>圖片：<img id="demo" src="<%=request.getContextPath()%>/back-end/waterStation/water.stationImage?SQ_STATION_ID='+positionWs[e].sqStationId+'"'+'style="width: 150px; height: 150px">',  --%>
+				    		 '<br>'+'地址：'+positionR[e].location+
+							 '<br>圖片：<img id="demo" src="<%=request.getContextPath()%>/bike/BikeStoreDBReader.do?sq_bike_store_id='+positionR[e].sq_bike_store_id+'"'+'style="width: 150px; height: 150px">', 
 					 
 				    position: {
 						lat : positionR[e].lat,
