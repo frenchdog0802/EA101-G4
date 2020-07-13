@@ -7,15 +7,15 @@
 <%@ page import="com.shop_order.model.*"%>
 
 <% 
-// 	@SuppressWarnings("unchecked")
-// 	String order_id = (String)session.getAttribute("order_id");
+	@SuppressWarnings("unchecked")
+	String order_id = (String)session.getAttribute("order_id");
 	Shop_orderService order = new Shop_orderService();
- 	Shop_orderVO storeVO = order.getOneOrder("OD500001");
+ 	Shop_orderVO storeVO = order.getOneOrder(order_id);
  	Shop_order_detailService detailSvc = new Shop_order_detailService();
-	List<Shop_order_detailVO> list = detailSvc.getOneOrder_detail("OD500001");
-	Shop_order_detailVO vo = list.get(0);
+	List<Shop_order_detailVO> list = detailSvc.getOneOrder_detail(order_id);
 	Shop_productService pSvc = new Shop_productService();
  %>   
+
  <%@ include file="/back-end/backFrame/backHeader"%>
  	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-end/Shop_order/backOrderCss.css">
     <title>訂單後台</title>
@@ -62,6 +62,7 @@
 		 		<div class="row justify-content-center">
     				<div class="col-10 divbg">
     					<div id="brandcontent">
+    					<form method="POST" action="shop_order.do" name="newOrder">
     						<table style="table-layout:fixed;">
     							<thead>
     								<tr>
@@ -95,6 +96,8 @@
 				    							<option value="3">已完成</option>
 				    							<option value="4">已退費</option>
 				    						</select>
+				    						<input type="hidden" name="orderStatus" value="">
+				    						<input type="hidden" name="orderID" value="<%=storeVO.getSq_order_id()%>">
 				    					</td>         
 				    				</tr>			    					
     						</table>
@@ -111,27 +114,34 @@
 								<th id='td_de2' style='width:10%'><span>單價</span></th>
 								<th id='td_de3' style='width:10%'><span>數量</span></th>
 							</tr>
+							<% 
+								for(int i=1 ; i<=list.size() ; i++){
+									Shop_order_detailVO vo = list.get(i-1);
+							%>
 							<tr>
 								<td>
-									<%=vo.getSq_product_id() %>							
+									<%=vo.getSq_product_id()%>							
 								</td>
 								<td>
-									<%=pSvc.getOneById(vo.getSq_product_id()).getProduct_name() %>							
+									<%=pSvc.getOneById(vo.getSq_product_id()).getProduct_name()%>							
 								</td>
 								<td>
-									<%=vo.getProduct_price() %>								
+									<%=vo.getProduct_price()%>								
 								</td>
 								<td>
-									<input type="text" id="buytotal" value="<%=vo.getOrder_sum()%>" style="width:60%;">
+									<input type="text" name="number" value="<%=vo.getOrder_sum()%>" style="width:60%;">
+									<input type="hidden" name="id" value="<%=vo.getSq_product_id()%>">
 								</td>
 							</tr>
+							<%}%>
 						</table>
+							<input type="hidden" name="len" value="<%=list.size()%>">
+							<input type="hidden" name="action" value="update">
+						</form>
 						<div class="row mt-3">
 		    				<div class="col-11"></div>
 		    				<div class="col-1">
-		    					<button class="btn btn-primary" id="saveBtn">
-		    						Save
-		    					</button>
+		    					<button class="btn btn-primary" id="saveBtn">Save</button>	
 		    				</div>
 		    			</div>
     					</div>
@@ -143,27 +153,18 @@
   	 <script>
   	 	var key = <%=storeVO.getOrder_status()%>;
   		$('#status option[value='+key+']').attr('selected', 'selected');
+  		$("input[name='orderStatus']").val($('#status').val());
+  		
+  		$('#status').change(function(){
+  			$("input[name='orderStatus']").val($('#status').val());
+  		});
+  		
   	 	$(".chose").click(function(){
   	 		var a = $(this).val();
   	 	});
+  	 	
   	 	$('#saveBtn').click(function(){
-			var a =  $("#status option:selected").val();
-			console.log(a);
-// 				$.ajax({
-// 					type :"POST",
-<%-- 					url  : "<%=request.getContextPath()%>/shop_order_detail.do", --%>
-// 					dataType: 'json',
-// 					data : {
-// 						action : "update",
-// 						order_id : "",
-// 						product_id,
-// 						price,
-// 						number,
-// 					},
-// 					success : function() {
-// 						windows.alert("保存成功");
-// 					}
-// 				});
-			});
+  	 		$("form[name='newOrder']").submit();
+		});
   	 </script>
 <%@ include file="/back-end/backFrame/backFooter" %>

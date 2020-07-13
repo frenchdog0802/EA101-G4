@@ -194,7 +194,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Shop_orderServlet</servlet-name>
-		<url-pattern>/shop_order.do</url-pattern>
+		<url-pattern>/back-end/Shop_order/shop_order.do</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
