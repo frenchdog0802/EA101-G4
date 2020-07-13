@@ -10,7 +10,7 @@ public class RouteService {
 	private RouteDAO_interface dao;
 
 	public RouteService() {
-		dao = new RouteJDBCDAO();
+		dao = new RouteDAO();
 	}
 	public List<RouteVO> getAll(){
 		return dao.getAll();

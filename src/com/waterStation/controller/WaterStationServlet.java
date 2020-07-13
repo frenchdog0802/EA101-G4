@@ -13,6 +13,7 @@ import com.waterStation.model.*;
 @MultipartConfig
 public class WaterStationServlet extends HttpServlet {
 
+
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
@@ -86,6 +87,7 @@ public class WaterStationServlet extends HttpServlet {
 		
 
 		if ("insert".equals(action)) { // 來自addWs.jsp的請求
+			System.out.println("come to insert");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -128,10 +130,11 @@ public class WaterStationServlet extends HttpServlet {
 					errorMsgs.add("國家請勿空白");
 				}
 
-				String area = req.getParameter("area").trim();
-				if (area == null || area.trim().length() == 0) {
-					errorMsgs.add("縣市請勿空白");
-				}
+				String area1 = req.getParameterValues("area")[0];
+				String area2[] = area1.split("灣");
+				String area = area2[1].substring(0, 3);
+				System.out.println(area);
+				
 				Integer checkFlag = null;
 				checkFlag = new Integer(req.getParameter("checkFlag").trim());
 
@@ -184,7 +187,7 @@ public class WaterStationServlet extends HttpServlet {
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 
-				String url = "/back-end/waterStation/listAllWs.jsp";
+				String url = "/front-end/waterStation/insertWs.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listAllWs.jsp
 				successView.forward(req, res);
 

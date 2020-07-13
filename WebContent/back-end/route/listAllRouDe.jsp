@@ -59,7 +59,7 @@ td {
 <div class="row" style="background-color: white;">
 	<ul class="nav nav-tabs">
 		<li class="nav-item"><a class="nav-link active"
-			href="<%=request.getContextPath()%>/back-end/route/listAllRou.jsp"><span
+			href="<%=request.getContextPath()%>/back-end/route/listAllRouDe.jsp"><span
 				style="padding-bottom: 8px; border-bottom: 3px blue solid;">所有路線資料</span></a>
 			<!--在哪一個頁面就哪加active和span的style--></li>
 		<li class="nav-item"><a class="nav-link active"
@@ -107,7 +107,7 @@ td {
 					style="width: 200px; height: 200px"></td>
 				<td style="text-align: left">${rouVO.routeIntroduction}</td>
 				<td><a
-					href="<%=request.getContextPath()%>/front-end/route/routeD.jsp">查看路線細節</a>
+					href="<%=request.getContextPath()%>/front-end/route/route.do?sqRouteId=${rouVO.sqRouteId}&routeName=${rouVO.routeName}&action=getOneRoute_For_Display">查看路線細節</a>
 				</td>
 
 				<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/back-end/route/route.do" name="form1">
