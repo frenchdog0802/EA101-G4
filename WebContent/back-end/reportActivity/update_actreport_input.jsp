@@ -96,25 +96,33 @@
 		<jsp:useBean id="actreportSvc" scope="page"
 			class="com.actreport.model.ActReportService" />
 		<div class="form-group row">
-			<label for="inputActivityId3" class="col-sm-2 col-form-label">活動編號<font
-				color=red><b>*</b></font></label>
+			<label for="inputActivityId3" class="col-sm-2 col-form-label">活動編號</label>
 			<div class="col-sm-10">
+				<input type="hidden" name="sq_activity_id" size="45" value="<%=actreportVO.getSq_activity_id()%>" />
 				<%=actreportVO.getSq_activity_id()%>
 			</div>
 		</div>
 		<!-- 	----此欄是會員編號,但不論前台或後台都不給改(因為已經綁定主揪者的會員編號) -->
 		<div class="form-group row">
-			<label for="inputMemberId3" class="col-sm-2 col-form-label">會員編號<font
-				color=red><b>*</b></font></label>
+			<label for="inputMemberId3" class="col-sm-2 col-form-label">會員編號</label>
 			<div class="col-sm-10">
+			<input type="hidden" name="sq_member_id" size="45" value="<%=actreportVO.getSq_member_id()%>" />
 				<%=actreportVO.getSq_member_id()%>
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="inputReportReason3" class="col-sm-2 col-form-label">檢舉原因<font
+			<label for="inputReportReason3" class="col-sm-2 col-form-label">檢舉原因</label>
+			<div class="col-sm-10">
+				<input type="hidden" name="report_reason" size="45" value="<%=actreportVO.getReport_reason()%>" />
+				<%=actreportVO.getReport_reason()%>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputReportResponse3" class="col-sm-2 col-form-label">檢舉回應<font
 				color=red><b>*</b></font></label>
 			<div class="col-sm-10">
-				<%=actreportVO.getReport_reason()%>
+				<input type="TEXT" name="report_response"
+					value="<%=actreportVO.getReport_response()%>" />
 			</div>
 		</div>
 		<div class="form-group row">

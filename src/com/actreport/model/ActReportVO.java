@@ -9,6 +9,7 @@ public class ActReportVO implements Serializable{
 	private String sq_activity_id;
 	private String sq_member_id;
 	private String report_reason;
+	private String report_response;
 	private Integer report_status;
 	
 	public ActReportVO() {
@@ -55,6 +56,14 @@ public class ActReportVO implements Serializable{
 
 	public void setReport_reason(String report_reason) {
 		this.report_reason = report_reason;
+	}
+	
+	public String getReport_response() {
+		return report_response;
+	}
+
+	public void setReport_response(String report_response) {
+		this.report_response = report_response;
 	}
 
 	public Integer getReport_status() {

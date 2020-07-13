@@ -76,57 +76,53 @@
 <%@include file="/back-end/backFrame/backNav"%>
 
 <%-- 錯誤表列 --%>
-<div class="container-fluid">
-	<div class="row mt-3">
-		<div class="col-12">
-			<c:if test="${not empty errorMsgs}">
-				<font style="color:red">請修正以下錯誤:</font>
-				<ul>
-					<c:forEach var="message" items="${errorMsgs}">
-						<li style="color:red">${message}</li>
-					</c:forEach>
-				</ul>
-			</c:if>
-			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do"  class="mb-3" >
-			        <b>輸入活動檢舉編號 (如710000):</b>
-			        <input type="text" name="sq_activityreport_id">
-			        <input type="hidden" name="action" value="getOne_For_Display">
-			        <input type="submit" value="送出">
-			    </FORM>
-			<table class="table1">
-				<tr>
-					<th>活動檢舉編號</th>
-					<th>活動編號</th>
-					<th>會員編號</th>
-					<th>檢舉原因</th>
-					<th>檢舉狀態</th>
-					<th>修改狀態</th>
-					<th>備註</th>
-				</tr>
-				<%@ include file="page1.file" %>
-				<c:forEach var="actreportVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">	
-					<tr>
-						<td>${actreportVO.sq_activityreport_id}</td>
-						<td>${actreportVO.sq_activity_id}</td>
-						<td>${actreportVO.sq_member_id}</td>
-						<td class="des">${actreportVO.report_reason}</td>
-						<td>${actreportVO.report_status}</td>
-						<td>
-						  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do" style="margin-bottom: 0px;">
-						     <input type="submit" value="修改">
-						     <input type="hidden" name="sq_activityreport_id"  value="${actreportVO.sq_activityreport_id}">
-						     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-						</td>
-						<td>
-							<p>0.檢舉未處理</p>
-							<p>1.檢舉成功</p>
-							<p>2.檢舉失敗</p>
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
-			<%@ include file="page2.file" %>
-		</div>
-	</div>
-</div>
+<c:if test="${not empty errorMsgs}">
+	<font style="color:red">請修正以下錯誤:</font>
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li style="color:red">${message}</li>
+		</c:forEach>
+	</ul>
+</c:if>
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do" >
+        <b>輸入活動檢舉編號 (如710000):</b>
+        <input type="text" name="sq_activityreport_id">
+        <input type="hidden" name="action" value="getOne_For_Display">
+        <input type="submit" value="送出">
+    </FORM>
+<table class="table1">
+	<tr>
+		<th>活動檢舉編號</th>
+		<th>活動編號</th>
+		<th>會員編號</th>
+		<th>檢舉原因</th>
+		<th>檢舉回應</th>
+		<th>檢舉狀態</th>
+		<th>修改狀態</th>
+		<th>備註</th>
+	</tr>
+	<%@ include file="page1.file" %>
+	<c:forEach var="actreportVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">	
+		<tr>
+			<td>${actreportVO.sq_activityreport_id}</td>
+			<td>${actreportVO.sq_activity_id}</td>
+			<td>${actreportVO.sq_member_id}</td>
+			<td class="des">${actreportVO.report_reason}</td>
+			<td class="des">${actreportVO.report_response}</td>
+			<td>${actreportVO.report_status}</td>
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="修改">
+			     <input type="hidden" name="sq_activityreport_id"  value="${actreportVO.sq_activityreport_id}">
+			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			</td>
+			<td>
+				<p>0.檢舉未處理</p>
+				<p>1.檢舉成功</p>
+				<p>2.檢舉失敗</p>
+			</td>
+		</tr>
+	</c:forEach>
+</table>
+<%@ include file="page2.file" %>
 <%@include file="/back-end/backFrame/backFooter"%>

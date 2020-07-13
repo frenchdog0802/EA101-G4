@@ -87,7 +87,7 @@
 						<%@ include file="page1.file"%>
 						<jsp:useBean id="actreportSvc2" class="com.actreport.model.ActReportService"/>
 						<c:forEach var="actVO" items="${list2}" begin="<%=pageIndex%>"
-							end="<%=pageIndex+rowsPerPage-1%>">
+							end="<%=pageIndex+rowsPerPage-1%>" varStatus="vs">
 							<ul class="list-unstyled">
 								<li class="media">
 									<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
@@ -99,9 +99,11 @@
 												${actVO.act_title}
 											</a>
 										</h5>
-										${actVO.act_description}
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">查看檢舉</button>
-										<div class="modal fade" id="myModal" tabindex="-1"
+										<p class="description">${actVO.act_description}</p>
+										<div class="form-inline">
+										<button type="button" id="viewDetailButton${vs.index}" class="btn btn-primary" data-toggle="modal" data-target="#myModal${vs.index}">查看檢舉</button>
+										</div>
+										<div class="modal fade" id="myModal${vs.index}" tabindex="-1"
 											role="dialog" aria-labelledby="myModalLabel">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
@@ -113,7 +115,7 @@
 														</button>
 													</div>
 													<div class="modal-body">
-														<c:forEach var="actreportVO2" items="${list3}">
+														<c:forEach var="actreportVO2" items="${list3}" varStatus="vs">
 															<c:if test="${actVO.sq_activity_id.contains(actreportVO2.sq_activity_id)}">
 																<p>${actreportVO2.report_reason}</p>
 															</c:if>
@@ -130,6 +132,9 @@
 								</li>
 							</ul>
 						</c:forEach>
+							<c:if test="${list2.size() ==0 }">
+								<h1>您還沒有收藏活動唷!!</h1>
+							</c:if>
 					</div>
 			
 

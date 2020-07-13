@@ -10,11 +10,11 @@ public class ActReportJDBCDAO implements ActReportDAO_interface {
 	String userid = "EA101_G4";
 	String passwd = "EA101_G4";
 
-	private static final String INSERT_STMT = "INSERT INTO ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID, SQ_ACTIVITY_ID, SQ_MEMBER_ID, REPORT_REASON, REPORT_STATUS) VALUES (actreport_seq.NEXTVAL, ?, ?, ?, 0)";
-	private static final String UPDATE = "UPDATE ACTIVITYREPORT set REPORT_STATUS=? where SQ_ACTIVITYREPORT_ID = ?";
-	private static final String GET_ONE_STMT = "SELECT SQ_ACTIVITYREPORT_ID, SQ_ACTIVITY_ID, SQ_MEMBER_ID, REPORT_REASON, REPORT_STATUS FROM ACTIVITYREPORT where SQ_ACTIVITYREPORT_ID = ?";
-	private static final String GET_ONE_MEMBER = "SELECT SQ_ACTIVITYREPORT_ID, SQ_ACTIVITY_ID, SQ_MEMBER_ID, REPORT_REASON, REPORT_STATUS FROM ACTIVITYREPORT where SQ_MEMBER_ID = ?";
-	private static final String GET_ALL_STMT = "SELECT SQ_ACTIVITYREPORT_ID, SQ_ACTIVITY_ID, SQ_MEMBER_ID, REPORT_REASON, REPORT_STATUS FROM ACTIVITYREPORT order by SQ_ACTIVITYREPORT_ID";
+	private static final String INSERT_STMT = "INSERT INTO ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID, SQ_ACTIVITY_ID, SQ_MEMBER_ID, REPORT_REASON, REPORT_RESPONSE,REPORT_STATUS) VALUES (actreport_seq.NEXTVAL, ?, ?, ?, null,0)";
+	private static final String UPDATE = "UPDATE ACTIVITYREPORT set REPORT_RESPONSE=?, REPORT_STATUS=? where SQ_ACTIVITYREPORT_ID = ?";
+	private static final String GET_ONE_STMT = "SELECT SQ_ACTIVITYREPORT_ID, SQ_ACTIVITY_ID, SQ_MEMBER_ID, REPORT_REASON, REPORT_RESPONSE,REPORT_STATUS FROM ACTIVITYREPORT where SQ_ACTIVITYREPORT_ID = ?";
+	private static final String GET_ONE_MEMBER = "SELECT SQ_ACTIVITYREPORT_ID, SQ_ACTIVITY_ID, SQ_MEMBER_ID, REPORT_REASON, REPORT_RESPONSE,REPORT_STATUS FROM ACTIVITYREPORT where SQ_MEMBER_ID = ?";
+	private static final String GET_ALL_STMT = "SELECT SQ_ACTIVITYREPORT_ID, SQ_ACTIVITY_ID, SQ_MEMBER_ID, REPORT_REASON, REPORT_RESPONSE,REPORT_STATUS FROM ACTIVITYREPORT order by SQ_ACTIVITYREPORT_ID";
 	private static final String GET_ONE_STATUS = "SELECT REPORT_STATUS FROM ACTIVITYREPORT where SQ_ACTIVITY_ID=?";
 
 	@Override
@@ -72,9 +72,10 @@ public class ActReportJDBCDAO implements ActReportDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
-
-			pstmt.setInt(1, actreportVO.getReport_status());
-			pstmt.setString(2, actreportVO.getSq_activityreport_id());
+			
+			pstmt.setString(1, actreportVO.getReport_response());
+			pstmt.setInt(2, actreportVO.getReport_status());
+			pstmt.setString(3, actreportVO.getSq_activityreport_id());
 
 			pstmt.executeUpdate();
 
@@ -108,7 +109,7 @@ public class ActReportJDBCDAO implements ActReportDAO_interface {
 	public List<ActReportVO> findByMemberId(String SQ_MEMBER_ID) {
 		
 		List<ActReportVO> list = new ArrayList<ActReportVO>();
-		ActReportVO actfavorVO = null;
+		ActReportVO actreportVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -126,13 +127,14 @@ public class ActReportJDBCDAO implements ActReportDAO_interface {
 			while (rs.next()) {
 
 				// empVo 也稱為 Domain01 objects
-				actfavorVO = new ActReportVO();
-				actfavorVO.setSq_activityreport_id(rs.getString("SQ_ACTIVITYREPORT_ID"));
-				actfavorVO.setSq_activity_id(rs.getString("SQ_ACTIVITY_ID"));
-				actfavorVO.setSq_member_id(rs.getString("SQ_MEMBER_ID"));
-				actfavorVO.setReport_reason(rs.getString("REPORT_REASON"));
-				actfavorVO.setReport_status(rs.getInt("REPORT_STATUS"));
-				list.add(actfavorVO);
+				actreportVO = new ActReportVO();
+				actreportVO.setSq_activityreport_id(rs.getString("SQ_ACTIVITYREPORT_ID"));
+				actreportVO.setSq_activity_id(rs.getString("SQ_ACTIVITY_ID"));
+				actreportVO.setSq_member_id(rs.getString("SQ_MEMBER_ID"));
+				actreportVO.setReport_reason(rs.getString("REPORT_REASON"));
+				actreportVO.setReport_response(rs.getString("REPORT_RESPONSE"));
+				actreportVO.setReport_status(rs.getInt("REPORT_STATUS"));
+				list.add(actreportVO);
 			}
 
 			// Handle any driver errors
@@ -194,6 +196,7 @@ public class ActReportJDBCDAO implements ActReportDAO_interface {
 				actreportVO.setSq_activity_id(rs.getString("SQ_ACTIVITY_ID"));
 				actreportVO.setSq_member_id(rs.getString("SQ_MEMBER_ID"));
 				actreportVO.setReport_reason(rs.getString("REPORT_REASON"));
+				actreportVO.setReport_response(rs.getString("REPORT_RESPONSE"));
 				actreportVO.setReport_status(rs.getInt("REPORT_STATUS"));
 
 			}
@@ -291,7 +294,7 @@ public class ActReportJDBCDAO implements ActReportDAO_interface {
 	@Override
 	public List<ActReportVO> getAll() {
 		List<ActReportVO> list = new ArrayList<ActReportVO>();
-		ActReportVO actfavorVO = null;
+		ActReportVO actreportVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -306,14 +309,15 @@ public class ActReportJDBCDAO implements ActReportDAO_interface {
 
 			while (rs.next()) {
 				// empVO 也稱為 Domain objects
-				actfavorVO = new ActReportVO();
-				actfavorVO.setSq_activityreport_id(rs.getString("SQ_ACTIVITYREPORT_ID"));
-				actfavorVO.setSq_activity_id(rs.getString("SQ_ACTIVITY_ID"));
-				actfavorVO.setSq_member_id(rs.getString("SQ_MEMBER_ID"));
-				actfavorVO.setReport_reason(rs.getString("REPORT_REASON"));
-				actfavorVO.setReport_status(rs.getInt("REPORT_STATUS"));
+				actreportVO = new ActReportVO();
+				actreportVO.setSq_activityreport_id(rs.getString("SQ_ACTIVITYREPORT_ID"));
+				actreportVO.setSq_activity_id(rs.getString("SQ_ACTIVITY_ID"));
+				actreportVO.setSq_member_id(rs.getString("SQ_MEMBER_ID"));
+				actreportVO.setReport_reason(rs.getString("REPORT_REASON"));
+				actreportVO.setReport_response(rs.getString("REPORT_RESPONSE"));
+				actreportVO.setReport_status(rs.getInt("REPORT_STATUS"));
 
-				list.add(actfavorVO); // Store the row in the list
+				list.add(actreportVO); // Store the row in the list
 			}
 
 			// Handle any driver errors
