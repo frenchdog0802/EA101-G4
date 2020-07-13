@@ -299,4 +299,10 @@ public class StaffJDBCDAO implements StaffDAO_interface {
 			System.out.println();
 		}
 	}
+
+	@Override
+	public StaffVO findByAccount(String SF_ACCOUNT) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

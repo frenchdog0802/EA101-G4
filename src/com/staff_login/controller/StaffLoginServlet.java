@@ -1,8 +1,10 @@
 package com.staff_login.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,50 +30,44 @@ public class StaffLoginServlet extends HttpServlet{
 
 		System.out.println(action);
 		HttpSession session = request.getSession();
-		if ("login".equals(action)) {// 來自LoginStaff.jsp
-
-			List<String> errorMsgs = new LinkedList<String>();
-
+		//員工登入
+		if ("staffLogin".equals(action)) {// 來自LoginStaff.jsp
+			Map<String,String> errorMsgs = new HashMap<>();
 			request.setAttribute("errorMsgs", errorMsgs);
 			String url = "";
 			
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 
-				String sf_account = request.getParameter("sf_account").trim();
+				String staffAccount = request.getParameter("staffAccount").trim();
 
-				if (sf_account == null || (sf_account.trim()).length() == 0) {
-					errorMsgs.add("請輸入帳號");
+				if (staffAccount == null || (staffAccount.trim()).length() == 0) {
+					errorMsgs.put("staffAccount","請輸入帳號");
 				}
 
-				String sf_password = request.getParameter("sf_password").trim();
-				if (sf_password == null || sf_password.trim().length() == 0) {
-					errorMsgs.add("請輸入密碼");
+				String staffPassword = request.getParameter("staffPassword").trim();
+				if (staffPassword == null || staffPassword.trim().length() == 0) {
+					errorMsgs.put("staffPassword","請輸入密碼");
 				}
 
-				StaffVO StaffVO = new StaffVO();
-				StaffVO.setSf_account(sf_account);
+		
 
 				if (!errorMsgs.isEmpty()) {
-					request.setAttribute("StaffVO", StaffVO);
-					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/login/LoginMember.jsp");
+					RequestDispatcher failureView = request.getRequestDispatcher("/back-end/LoginStaff.jsp");
 					failureView.forward(request, response);
 					return; // 程式中斷
 				}
 				/*************************** 2.開始查詢資料 *******************************/
 				StaffService staffSvc = new StaffService();
-				StaffVO = staffSvc.getOneStaff(sf_account);
+				StaffVO StaffVO = staffSvc.findByAccount(staffAccount);
 				if (StaffVO == null) {
-					errorMsgs.add("無此帳號");
-					System.out.println("輸入帳號錯誤");
-				} else if (!StaffVO.getSf_password().equals(sf_password)) {
-					errorMsgs.add("密碼錯誤,請重新確認");
-					System.out.println("輸入密碼錯誤,請重新確認");
+					errorMsgs.put("staffAccount","無此帳號");
+				} else if (!StaffVO.getSf_password().equals(staffPassword)) {
+					errorMsgs.put("staffPassword","密碼錯誤,請重新確認");
+				}else {
+					session.setAttribute("StaffVO", StaffVO);//// *工作1: 才在session內做已經登入過的標識
 				}
-
-				else {
-					session.setAttribute("StaffLoginFilter", StaffVO);//// *工作1: 才在session內做已經登入過的標識
-				}
+				
 				try {
 					String location = (String) session.getAttribute("location");
 					if (location != null) {
@@ -80,35 +76,36 @@ public class StaffLoginServlet extends HttpServlet{
 						return;
 					}
 				} catch (Exception ignored) {
-					url ="/back-end/index.jsp";
+					url ="/back-end/backIndex.jsp";
 				}
-
 //				response.sendRedirect(request.getContextPath()+"/back-end/member/selectMember_page.jsp");  //*工作3: (-->如無來源網頁:則重導至login_success.jsp)
-//				
 				if (!errorMsgs.isEmpty()) {
 					request.setAttribute("LoginStaff", StaffVO);
 					RequestDispatcher failureView = request.getRequestDispatcher("/back-end/LoginStaff.jsp");
 					failureView.forward(request, response);
-					System.out.println("輸入錯誤,請重新確認");
 					return; // 程式中斷
-
 				}
 				/*************************** 3.查詢完成,準備轉交 ********************************/
-				String url2 = "/back-end/index.jsp";// "/back-end/index.jsp"
-				RequestDispatcher successView = request.getRequestDispatcher(url2); // 成功轉交 selectMember_page.jsp
-				successView.forward(request, response);
-
+				url ="/back-end/backIndex.jsp";// "/back-end/index.jsp"
+				response.sendRedirect(url);
 			}
 
 			catch (Exception e) {
-				errorMsgs.add("無法取得資料:" + e.getMessage());
+				e.printStackTrace();
 				RequestDispatcher failureView = request.getRequestDispatcher("/back-end/LoginStaff.jsp");
 				failureView.forward(request, response);
 			}
 		}
+		
+		
+		
+		 //租車商家登入
+		if ("storeLogin".equals(action)) {}
+		
+		//登出
 		if ("logout".equals(action)) {
 			session.invalidate();
-			String url3 = "/back-end/index.jsp";
+			String url3 = "/back-end/LoginStaff.jsp";
 			RequestDispatcher successView = request.getRequestDispatcher(url3); // 成功轉交 index.jsp
 			successView.forward(request, response);
 		}
