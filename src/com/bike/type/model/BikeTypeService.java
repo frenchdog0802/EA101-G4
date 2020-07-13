@@ -30,13 +30,16 @@ public class BikeTypeService {
 	public String findBikeStatus(Integer BikeStatus) {
 		String status = null;
 		  switch(BikeStatus) { 
-          case 0: 
-        	  status =  new String("維修");
+		  case 0: 
+        	  status =  new String("正常");
         	  break; 
           case 1: 
+        	  status =  new String("維修");
+        	  break; 
+          case 2: 
         	  status =  new String("遺失"); 
               break; 
-          case 2: 
+          case 3: 
         	  status =  new String("報廢");
               break; 
       }
