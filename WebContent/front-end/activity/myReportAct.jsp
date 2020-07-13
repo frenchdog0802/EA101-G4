@@ -13,14 +13,18 @@
     List<ActVO> listact = actSvc.getAll();
     List<ActReportVO> listreport = actreportSvc.getOneActReportForMember(sq_member_id);
     List<ActVO> list2 = new LinkedList<ActVO>();
+    List<ActReportVO> list3 = new LinkedList<ActReportVO>();
+    ActReportVO actreportVO2 = new ActReportVO();
     for(ActVO actVO:listact){
     	for(ActReportVO actreportVO:listreport){
     		if(actVO.getSq_activity_id().contains(actreportVO.getSq_activity_id()) && sq_member_id.contains(actreportVO.getSq_member_id())){
     			list2.add(actVO);
+    			list3.add(actreportVO);
     		}
     	}
     }
     pageContext.setAttribute("list2",list2);
+    pageContext.setAttribute("list3", list3);
 %>
 
 
@@ -81,7 +85,7 @@
 
 					<div class="row">
 						<%@ include file="page1.file"%>
-
+						<jsp:useBean id="actreportSvc2" class="com.actreport.model.ActReportService"/>
 						<c:forEach var="actVO" items="${list2}" begin="<%=pageIndex%>"
 							end="<%=pageIndex+rowsPerPage-1%>">
 							<ul class="list-unstyled">
@@ -95,34 +99,29 @@
 												${actVO.act_title}
 											</a>
 										</h5>
-										 
 										${actVO.act_description}
-										<div style="padding-left:1px">
-											<input type="button" id="actreport" class="btn btn-primary" onclick="showModal()" value="查看檢舉"/>
-											<div class="modal fade" id="basicModal" tabindex="-1"
-												role="dialog" aria-labelledby="basicModal"
-												aria-hidden="true">
-												<div class="modal-dialog modal-lg">
-													<div class="modal-content">
-
-														<div class="modal-header">
-															<h2 class="modal-title" id="myModalLabel">查看檢舉</h2>
-															<button type="button" class="close" data-dismiss="modal"
-																aria-hidden="true">&times;</button>
-														</div>
-
-														<div class="modal-body">
-															<!-- =========================================以下為輸入的內容========================================== -->
-															<textarea name="report_reason" maxlength="65"
-																id="textarea1" rows=5 cols=83 style="resize: none;"
-																disabled></textarea>
-															<!-- =========================================以上為原輸入的內容========================================== -->
-														</div>
-
-														<div class="modal-footer">
-															<button type="button" class="btn btn-default"
-																data-dismiss="modal">Close</button>
-														</div>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">查看檢舉</button>
+										<div class="modal fade" id="myModal" tabindex="-1"
+											role="dialog" aria-labelledby="myModalLabel">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h4 class="modal-title" id="myModalLabel">檢舉內容</h4>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<c:forEach var="actreportVO2" items="${list3}">
+															<c:if test="${actVO.sq_activity_id.contains(actreportVO2.sq_activity_id)}">
+																<p>${actreportVO2.report_reason}</p>
+															</c:if>
+														</c:forEach>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default"
+															data-dismiss="modal">Close</button>
 													</div>
 												</div>
 											</div>
