@@ -109,17 +109,14 @@
 	    								</select>
 	    							</td>
 	    						</tr>
-	    						<tr>
-	    							<td><span>庫存狀態 : </span></td>
-	    							<td><span class="allsecond_td">有</span></td>
-	    						</tr>
 	    					</table>
 	   					</div>
 	   					<div id="product_join">
 	   						<button class="btn bg-secondary addproduct">加入購物車</button>
-	   							<input type="hidden" name="id" value=<%=productVO.getSq_product_id()%>>
-					   			<input type="hidden" name="name" value="<%=productVO.getProduct_name()%>">
-								<input type="hidden" name="price" value="<%=productVO.getProduct_price()%>">
+	   						<input type="hidden" name="id" value=<%=productVO.getSq_product_id()%>>
+					   		<input type="hidden" name="name" value="<%=productVO.getProduct_name()%>">
+							<input type="hidden" name="price" value="<%=productVO.getProduct_price()%>">
+							
 	    					<button class="btn bg-success">加入收藏</button>
 	    				</div>
     				</div>
