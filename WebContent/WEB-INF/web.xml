@@ -403,6 +403,7 @@
   <servlet-mapping>
   	<servlet-name>WaterStationServlet</servlet-name>
   	<url-pattern>/back-end/waterStation/water.do</url-pattern>
+  	<url-pattern>/front-end/waterStation/water.do</url-pattern>
   </servlet-mapping>
   
   <servlet>
