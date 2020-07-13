@@ -7,7 +7,7 @@ public class WaterStationService {
 	private WaterStationDAO_interface dao;
 
 	public WaterStationService() {
-		dao = new WaterStationJDBCDAO();
+		dao = new WaterStationDAO();
 	}
 
 	public void insert(String stationName, String stationAddress, Double longitude,

@@ -579,8 +579,10 @@ CREATE TABLE bike_store(
   store_latitude       DECIMAL(17,12) NOT NULL,
   store_opentime       VARCHAR2(40)  NOT NULL,
   store_status         NUMBER(1)     NOT NULL,
-   area     VARCHAR2(40)  NOT NULL,
-  create_time           TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   area                 VARCHAR2(40)  NOT NULL,
+   store_email       VARCHAR2(200) NOT NULL,
+   store_account   VARCHAR2(200) NOT NULL,
+   store_password VARCHAR2(200) NOT NULL,
   PRIMARY KEY(sq_bike_store_id)
 );
 

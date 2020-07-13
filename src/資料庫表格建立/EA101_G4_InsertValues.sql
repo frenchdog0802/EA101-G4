@@ -20,23 +20,53 @@
 
 INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,CELLPHONE,M_EMAIL,VALIDATION,
   REGISTERED,M_PHOTO,BACK_IMG,NICK_NAME,ADDRESS) 
-  VALUES(member_seq.NEXTVAL,'ASDF456456','ASDF123456','PETER','1',TO_DATE('2020-06-06','YYYY-MM-DD'),'0908168168','peter@tomcat.com','0',
-  TO_DATE('2020-06-06','YYYY-MM-DD'),NULL,NULL,'PETER15','桃園市中壢區中大路');
+  VALUES(member_seq.NEXTVAL,'123456','123456','PETER','1',TO_DATE('2020-06-06','YYYY-MM-DD'),'0908168168','peter@tomcat.com','1',
+  TO_DATE('2020-06-06','YYYY-MM-DD'),load_blob('mem1.jpg'),NULL,'PETER15','桃園市中壢區中大路');
   
   INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,CELLPHONE,M_EMAIL,VALIDATION,
   REGISTERED,M_PHOTO,BACK_IMG,NICK_NAME,ADDRESS) 
-  VALUES(member_seq.NEXTVAL,'ASDF156724','ASDF123456','DAVID','1',TO_DATE('2020-06-06','YYYY-MM-DD'),'0908168188','david@tomcat.com','0',
-  TO_DATE('2020-06-06','YYYY-MM-DD'),NULL,NULL,'大衛海鮮','桃園市中壢區中大路300號');  
+  VALUES(member_seq.NEXTVAL,'ASDF156724','ASDF123456','DAVID','1',TO_DATE('2020-06-06','YYYY-MM-DD'),'0908168188','david@tomcat.com','1',
+  TO_DATE('2020-06-06','YYYY-MM-DD'),load_blob('mem2.jpg'),NULL,'大衛海鮮','桃園市中壢區中大路300號');  
   
   INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,CELLPHONE,M_EMAIL,VALIDATION,
   REGISTERED,M_PHOTO,BACK_IMG,NICK_NAME,ADDRESS) 
-  VALUES(member_seq.NEXTVAL,'ASDF155524','ASDF123456','A-BAO','1',TO_DATE('2020-06-06','YYYY-MM-DD'),'0908168111','abao@abaom.com','0',
-  TO_DATE('2020-06-06','YYYY-MM-DD'),NULL,NULL,'船長阿寶','桃園市中壢區中大路300號');    
+  VALUES(member_seq.NEXTVAL,'ASDF155524','ASDF123456','A-BAO','1',TO_DATE('2020-06-06','YYYY-MM-DD'),'0908168111','abao@abaom.com','1',
+  TO_DATE('2020-06-06','YYYY-MM-DD'),load_blob('mem3.jpg'),NULL,'船長阿寶','桃園市中壢區中大路300號');    
 
   INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,CELLPHONE,M_EMAIL,VALIDATION,
   REGISTERED,M_PHOTO,BACK_IMG,NICK_NAME,ADDRESS) 
-  VALUES(member_seq.NEXTVAL,'ASDF151524','ASDF123456','doodoo','1',TO_DATE('2020-06-06','YYYY-MM-DD'),'0908168111','doodoo@abaom.com','0',
-  TO_DATE('2020-06-06','YYYY-MM-DD'),NULL,NULL,'doo','桃園市中壢區中大路300號');
+  VALUES(member_seq.NEXTVAL,'ASDF151524','ASDF123456','江武揚','1',TO_DATE('2020-06-06','YYYY-MM-DD'),'0908168111','doodoo@abaom.com','1',
+  TO_DATE('2020-06-06','YYYY-MM-DD'),load_blob('mem4.jpg'),NULL,'江武揚','桃園市中壢區中大路300號');
+
+  INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,CELLPHONE,M_EMAIL,VALIDATION,
+  REGISTERED,M_PHOTO,BACK_IMG,NICK_NAME,ADDRESS) 
+  VALUES(member_seq.NEXTVAL,'ASDF6666','ASDF123456','孤獨山姆','1',TO_DATE('2020-06-06','YYYY-MM-DD'),'0908168188','sam@tomcat.com','1',
+  TO_DATE('2020-06-06','YYYY-MM-DD'),load_blob('mem5.jpg'),NULL,'孤獨山姆','桃園市中壢區中大路300號');  
+  
+  INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,CELLPHONE,M_EMAIL,VALIDATION,
+  REGISTERED,M_PHOTO,BACK_IMG,NICK_NAME,ADDRESS) 
+  VALUES(member_seq.NEXTVAL,'ASDF11666','ASDF123456','寒導演','1',TO_DATE('2020-06-06','YYYY-MM-DD'),'0908168188','hau11@tomcat.com','1',
+  TO_DATE('2020-06-06','YYYY-MM-DD'),load_blob('mem6.jpg'),NULL,'譁導','桃園市中壢區中大路300號');  
+  
+  INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,CELLPHONE,M_EMAIL,VALIDATION,
+  REGISTERED,M_PHOTO,BACK_IMG,NICK_NAME,ADDRESS) 
+  VALUES(member_seq.NEXTVAL,'cc6666','ASDF123456','蕭大寶','1',TO_DATE('2020-06-06','YYYY-MM-DD'),'0908168188','hau11@tomcat.com','1',
+  TO_DATE('2020-06-06','YYYY-MM-DD'),load_blob('mem7.jpg'),NULL,'蕭大寶','桃園市中壢區中大路300號'); 
+  
+  INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,CELLPHONE,M_EMAIL,VALIDATION,
+  REGISTERED,M_PHOTO,BACK_IMG,NICK_NAME,ADDRESS) 
+  VALUES(member_seq.NEXTVAL,'cc7777','ASDF123456','周星星','1',TO_DATE('2020-06-06','YYYY-MM-DD'),'0908168188','hau11@tomcat.com','1',
+  TO_DATE('2020-06-06','YYYY-MM-DD'),load_blob('mem8.jpg'),NULL,'9527蕭大寶','桃園市中壢區中大路300號'); 
+  
+  INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,CELLPHONE,M_EMAIL,VALIDATION,
+  REGISTERED,M_PHOTO,BACK_IMG,NICK_NAME,ADDRESS) 
+  VALUES(member_seq.NEXTVAL,'cc7777','ASDF123456','唐龍','1',TO_DATE('2020-06-06','YYYY-MM-DD'),'0908168188','hau11@tomcat.com','1',
+  TO_DATE('2020-06-06','YYYY-MM-DD'),load_blob('mem9.jpg'),NULL,'唐龍','桃園市中壢區中大路300號'); 
+  
+  INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,CELLPHONE,M_EMAIL,VALIDATION,
+  REGISTERED,M_PHOTO,BACK_IMG,NICK_NAME,ADDRESS) 
+  VALUES(member_seq.NEXTVAL,'ASDF7777','ASDF123456','趙二虎','1',TO_DATE('2020-06-06','YYYY-MM-DD'),'0908168188','hau11@tomcat.com','1',
+  TO_DATE('2020-06-06','YYYY-MM-DD'),load_blob('mem10.jpg'),NULL,'趙二虎','桃園市中壢區中大路300號'); 
 
   
 --------------------------------------------------------
@@ -127,7 +157,7 @@ INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,
 --上線改成('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0'))
 -------------------------------------------------------- 
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD) 
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','蕭寶','x6815541@gmail.com','中壢平鎮中央路300號','0987654321','abao123456','abaof456852');
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','蕭寶','x6815541@gmail.com','中壢平鎮中央路300號','0987654321','123456','123456');
 
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD) 
   VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','凱農','kanof456852@gmail.com','中壢平鎮中央路300號','0987654321','kano123456','kanof456852');
@@ -3017,49 +3047,49 @@ INSERT INTO SHOP_MESSAGE VALUES(('PRM-'||LPAD(to_char(SQ_SHOP_MESSAGE_ID.NEXTVAL
 -------------
 
 INSERT INTO bike_store
-(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area)
+(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area,store_email,store_account,store_password)
 VALUES
-(sq_bike_store_id.NEXTVAL,'捷安寶-屏東東港店','屏東縣東港鎮中正路260號','08-832-6698',22.470107,120.452611,'10:30–20:30',1,'南部');
+(sq_bike_store_id.NEXTVAL,'捷安寶-屏東東港店','屏東縣東港鎮中正路260號','08-832-6698',22.470107,120.452611,'10:30–20:30',1,'南部','x681681@gmail.com','s95566','s95589');
 INSERT INTO bike_store
-(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area)
+(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area,store_email,store_account,store_password)
 VALUES
-(sq_bike_store_id.NEXTVAL,'吉美自行車出租','宜蘭縣五結鄉親河路二段23號','09-5223-9961',24.672298,121.811611,'07:00–18:00',1,'北部');
+(sq_bike_store_id.NEXTVAL,'吉美自行車出租','宜蘭縣五結鄉親河路二段23號','09-5223-9961',24.672298,121.811611,'07:00–18:00',1,'北部','q987654@gmail.com','123456','123456');
 INSERT INTO bike_store
-(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area)
+(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area,store_email,store_account,store_password)
 VALUES
-(sq_bike_store_id.NEXTVAL,'小麥町單車旅遊','高雄市鼓山區臨海二路20-3號','07-533-0070',22.622042,120.273625,'08:00–19:00',1,'南部');
+(sq_bike_store_id.NEXTVAL,'小麥町單車旅遊','高雄市鼓山區臨海二路20-3號','07-533-0070',22.622042,120.273625,'08:00–19:00',1,'南部','e987654@gmail.com','654321','654321');
 INSERT INTO bike_store
-(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area)
+(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area,store_email,store_account,store_password)
 VALUES
-(sq_bike_store_id.NEXTVAL,'都會租車','台中市石岡區豐勢路1261之1號','04-2572-2628',24.278431 ,120.768238,'08:00–18:00',1,'中部');
+(sq_bike_store_id.NEXTVAL,'都會租車','台中市石岡區豐勢路1261之1號','04-2572-2628',24.278431 ,120.768238,'08:00–18:00',1,'中部','987654@gmail.com','s565632','z654321');
 INSERT INTO bike_store
-(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area)
+(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area,store_email,store_account,store_password)
 VALUES
-(sq_bike_store_id.NEXTVAL,'慢慢租車','台南市後壁區73號','0935-033-043',23.366227,120.361005,'10:00–18:30',1,'南部');
+(sq_bike_store_id.NEXTVAL,'慢慢租車','台南市後壁區73號','0935-033-043',23.366227,120.361005,'10:00–18:30',1,'南部','addd5455@gmail.com','qwer44545','asad545454');
 INSERT INTO bike_store
-(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area)
+(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area,store_email,store_account,store_password)
 VALUES
-(sq_bike_store_id.NEXTVAL,'阿勝單車出租','花蓮縣花蓮市國聯一路152號','03-834-6522',22.792931,121.124991,'10:00–21:00',1,'東部');
+(sq_bike_store_id.NEXTVAL,'阿勝單車出租','花蓮縣花蓮市國聯一路152號','03-834-6522',22.792931,121.124991,'10:00–21:00',1,'東部','aaaa987@gmail.com','sdd5478','9875421');
 INSERT INTO bike_store
-(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area)
+(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area,store_email,store_account,store_password)
 VALUES
-(sq_bike_store_id.NEXTVAL,'捷安寶-日月潭站','南投縣魚池鄉中山路163號','04-9285-6713',23.866354,120.910849,'07:00–18:00',1,'中部');
+(sq_bike_store_id.NEXTVAL,'捷安寶-日月潭站','南投縣魚池鄉中山路163號','04-9285-6713',23.866354,120.910849,'07:00–18:00',1,'中部','q987654@gmail.com','z6547785','z53535');
 INSERT INTO bike_store
-(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area)
+(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area,store_email,store_account,store_password)
 VALUES
-(sq_bike_store_id.NEXTVAL,'美利達宏翊自行車出租','雲林縣斗六市文化路151號','05-532-6179',23.711482,120.550331,'07:00–18:00',1,'中部');
+(sq_bike_store_id.NEXTVAL,'美利達宏翊自行車出租','雲林縣斗六市文化路151號','05-532-6179',23.711482,120.550331,'07:00–18:00',1,'中部','a987654@gmail.com','z123456','a456465');
 INSERT INTO bike_store
-(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area)
+(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area,store_email,store_account,store_password)
 VALUES
-(sq_bike_store_id.NEXTVAL,'阿勝單車台東店','台東縣台東市新站路223號','0982-158-153',22.792933,121.125028,'07:00–18:00',1,'東部');
+(sq_bike_store_id.NEXTVAL,'阿勝單車台東店','台東縣台東市新站路223號','0982-158-153',22.792933,121.125028,'07:00–18:00',1,'東部','a9876541@gmail.com','a45646','z1321321');
 INSERT INTO bike_store
-(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area)
+(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area,store_email,store_account,store_password)
 VALUES
-(sq_bike_store_id.NEXTVAL,'鼻仔頭自行車出租','新北市淡水區鼻頭街16號','0953-104-308',25.166445,121.446791,'07:00–18:00',1,'北部');
+(sq_bike_store_id.NEXTVAL,'鼻仔頭自行車出租','新北市淡水區鼻頭街16號','0953-104-308',25.166445,121.446791,'07:00–18:00',1,'北部','a681543164@gmail.com','adadda46466','s95589');
 INSERT INTO bike_store
-(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area)
+(sq_bike_store_id ,bike_store_name,bike_store_location,bike_store_phone,store_latitude,store_longitude,store_opentime,store_status,area,store_email,store_account,store_password)
 VALUES
-(sq_bike_store_id.NEXTVAL,'大溪橋頭主活單車租借站','桃園市大溪區瑞安路一段273號','0933-085-326',24.886042,121.279942,'07:00–18:00',1,'北部');
+(sq_bike_store_id.NEXTVAL,'大溪橋頭主活單車租借站','桃園市大溪區瑞安路一段273號','0933-085-326',24.886042,121.279942,'07:00–18:00',1,'北部','4949494@gmail.com','7979','s46469');
 
 --------------------------------------------------------
 --  for table bike_type 車種

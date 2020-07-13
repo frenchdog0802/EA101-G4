@@ -11,7 +11,7 @@ public class RouteDetailService {
 	
 
 	public RouteDetailService() {
-		dao = new RouteDetailJDBCDAO();
+		dao = new RouteDetailDAO();
 	}
 
 	public List<RouteDetailVO> getAll() {

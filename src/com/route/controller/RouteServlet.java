@@ -95,6 +95,8 @@ public class RouteServlet extends HttpServlet {
 		try {
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			String str = req.getParameter("sqRouteId");
+			String routeName = req.getParameter("routeName");
+			System.out.println("routeName:"+routeName);
 			String sqRouteId = null;
 			sqRouteId = new String(str);
 			System.out.println("sqRouteId:"+sqRouteId);
@@ -105,6 +107,8 @@ public class RouteServlet extends HttpServlet {
 			System.out.println("name:"+rouDeVO.get(1).getSqSerialNo());
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("rouDeVO", rouDeVO); // 資料庫取出的wsVO物件,存入req
+			req.setAttribute("routeName", routeName);
+			System.out.println("routeName:"+routeName);
 			String url = "/front-end/route/routeD.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交routeD.jsp
 			successView.forward(req, res);
@@ -162,7 +166,7 @@ public class RouteServlet extends HttpServlet {
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("rouVO", rouVO); // 資料庫update成功後,正確的的rouVO物件,存入req
-				String url = "/back-end/route/listAllRou.jsp";
+				String url = "/back-end/route/listAllRouDe.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneWs.jsp
 				successView.forward(req, res);
 

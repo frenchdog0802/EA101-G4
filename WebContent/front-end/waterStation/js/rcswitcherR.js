@@ -1,14 +1,14 @@
 /**
- * JQuery rcSwitcher plugin
+ * JQuery rcSwitcherR plugin
  *
- * rcSwitcher plugin referes to 'Radio Checkbox Switcher'
+ * rcSwitcherR plugin referes to 'Radio Checkbox Switcher'
  * it let you transform radio and checkbox inputs into a nice switch button
  * without requirement of a specific html syntax, it simply takes your existed basic input 
  * and do the magic with many customizations and supports 4 themes
  *
  *
- * @package 	rcSwitcher
- * @name 		rcSwitcher
+ * @package 	rcSwitcherR
+ * @name 		rcSwitcherR
  * @version 	2.1.0
  * @author  	ahmed saad <a7mad.sa3d.2014@gmail.com><ahmedfadlshaker@gmail.com>
  * @copyright  	ahmed saad april 2015
@@ -396,10 +396,10 @@
 			
 			// Set Input To Off
 			data.$input.prop( 'checked', false );
-			clearMarkersWs();
+			clearMarkersR();
 			// Fire Event and pass data object to event handler
-			data.$input.trigger( 'turnoff.rcSwitcher', data );
-			data.$input.trigger( 'change.rcSwitcher', data, 'turnoff' );
+			data.$input.trigger( 'turnoff.rcSwitcherR', data );
+			data.$input.trigger( 'change.rcSwitcherR', data, 'turnoff' );
 
 
 
@@ -426,10 +426,10 @@
 			
 			// Set To ON
 			data.$input.prop( 'checked', true );
-			goWs();
+			goR();
 			// Fire Event and pass data object to event handler
-			data.$input.trigger( 'turnon.rcSwitcher', data );
-			data.$input.trigger( 'change.rcSwitcher', data, 'turnon' );
+			data.$input.trigger( 'turnon.rcSwitcherR', data );
+			data.$input.trigger( 'change.rcSwitcherR', data, 'turnon' );
 
 
 		},
@@ -493,7 +493,7 @@
 	 * @param  {Object} options switcher options
 	 * @return {jQ Obj}         this
 	 */
-	$.fn.rcSwitcher = function( options ){
+	$.fn.rcSwitcherR = function( options ){
 		
 
 		// Defining Properties
