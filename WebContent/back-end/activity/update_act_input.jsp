@@ -97,7 +97,7 @@
 				<select class="custom-select" id="selectActRoute3"
 					name="sq_route_id">
 					<c:forEach var="routeVO" items="${routeSvc.all}">
-						<option value="${routeVO.sqRouteId}" ${(actVO.sq_route_id==routeVO.sqRouteId)?'selected':'' }>${routeVO.sqRouteId}</option>
+						<option value="${routeVO.sqRouteId}" ${(actVO.sq_route_id==routeVO.sqRouteId)?'selected':'' }>${routeVO.routeName}</option>
 					</c:forEach>
 				</select>
 			</div>

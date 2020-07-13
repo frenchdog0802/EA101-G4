@@ -6,7 +6,7 @@
   BrandVO brandVO = (BrandVO) request.getAttribute("brandVO");
 %>
 <%@ include file="/back-end/backFrame/backHeader"%>
-		<link rel="stylesheet" type="text/css" href="addBrand.css">
+		<link rel="stylesheet" type="text/css" href="backCss/addBrand.css">
 		<title>¼tµPºÞ²z</title>
 <%@ include file="/back-end/backFrame/backBody"%>
  		<div class="row" style="background-color: white;">

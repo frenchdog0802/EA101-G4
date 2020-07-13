@@ -94,7 +94,7 @@
         <h3 class="my-3">活動細節</h3>
         <ul>
           <li>活動主辦者:${memberSvc.getOneMem(actVO.sq_member_id).m_name}</li>
-          <li>活動路線:${routeSvc.getOneRoute(actVO.sq_route_id).routeName}</li>
+          <li>活動路線:<a href="<%=request.getContextPath()%>/front-end/route/route.do?sqRouteId=${actVO.sq_route_id}&routeName=${routeSvc.getOneRoute(actVO.sq_route_id).routeName}&action=getOneRoute_For_Display">${routeSvc.getOneRoute(actVO.sq_route_id).routeName}</a></li>
           <li>上限人數:${actVO.max_population}</li>
           <li>最低開團人數:${actVO.min_population}</li>
           <li>目前參加人數:${actVO.population}</li>

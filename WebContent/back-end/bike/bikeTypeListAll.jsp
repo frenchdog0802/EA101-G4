@@ -37,12 +37,20 @@
 <!--分頁自己改-->
 <div class="row " style="background-color: white;">
 	<ul class="nav nav-tabs ">
-		<li class="nav-item "><a class="nav-link active " href="#"><span
-				style="padding-bottom: 8px; border-bottom: 3px blue solid;">item1</span></a>
-		<!--在哪一個頁面就哪加active和span的style--></li>
-		<li class="nav-item"><a class="nav-link" href="#"><span>item2</span></a>
+		<li class="nav-item ">
+			<a class="nav-link active" href="<%=request.getContextPath()%>/back-end/bike/bikeTypeListAll.jsp">
+				<span style="padding-bottom: 8px; border-bottom: 3px blue solid;">車種管理</span>
+			</a>
 		</li>
-		<li class="nav-item"><a class="nav-link" href="#"><span>item3</span></a>
+		<li class="nav-item ">
+			<a class="nav-link" href="<%=request.getContextPath()%>/back-end/bike/newBikeListAll.jsp">
+				<span>車輛管理</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+				<span>訂單管理</span>
+			</a>
 		</li>
 		<li class="nav-item mt-1">
 			<form class="form-inline"
@@ -84,6 +92,14 @@
 
 
 <div class="container-fluid mt-1">
+	<div class="row collapse" id="collapseExample">
+		<div class="col-1"></div>
+		<div class="col-6 my-1">
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/MasterEx.jsp'">MasterEx</button> 
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeRentHistory.jsp'">bikeRentHistory</button>
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeMaster.jsp'">bikeMaster</button>
+		</div>
+	</div>	
 	<div class="table-responsive">
 		<table
 			class="table text-center table-bordered table-striped table-hover">

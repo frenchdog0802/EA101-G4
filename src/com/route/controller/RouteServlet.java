@@ -25,6 +25,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.json.JSONException;
@@ -37,6 +38,7 @@ import com.routeDetail.model.RouteDetailService;
 import com.routeDetail.model.RouteDetailVO;
 import com.waterStation.model.WaterStationService;
 import com.waterStation.model.WaterStationVO;
+import com.member.model.*;
 
 
 
@@ -49,6 +51,9 @@ public class RouteServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
+		HttpSession session = req.getSession();
+		
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		if ("selectByCondition".equals(action)) {// 來自routeM.jsp的請求
@@ -187,10 +192,13 @@ public class RouteServlet extends HttpServlet {
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-//			try { 
+			try { 
 				
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				//新增至路線主表
+				MemVO memVO = (MemVO) session.getAttribute("MemVO");
+				String sqMemberId = memVO.getSq_member_id();
+				
 				String routeName = req.getParameter("routeName");
 				String routeIntroduction = req.getParameter("routeIntro");
 				String country = req.getParameterValues("country")[0];
@@ -226,6 +234,7 @@ public class RouteServlet extends HttpServlet {
 				rouVO.setDistance(distance);
 				rouVO.setCheckFlag(checkFlag);
 				rouVO.setAddRoute(addRoute);
+				rouVO.setSqMemberId(sqMemberId);
 
 				RouteService RouSvc1 = new RouteService();
 				RouSvc1.insert(routeName, distance, country, startArea, endArea, routeImage, routeIntroduction,
@@ -284,11 +293,11 @@ public class RouteServlet extends HttpServlet {
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
-//			} catch (Exception e) {
-//				errorMsgs.add("新增資料失敗:" + e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/route/setRouteBySelf.jsp");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e) {
+				errorMsgs.add("新增資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/route/setRouteBySelf.jsp");
+				failureView.forward(req, res);
+			}
 			
 			
 			
