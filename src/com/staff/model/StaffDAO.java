@@ -63,21 +63,21 @@ public class StaffDAO implements StaffDAO_interface {
 				try {
 					rs.close();
 				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+					se.printStackTrace();
 				}
 			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+					se.printStackTrace();
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace(System.err);
+					e.printStackTrace();
 				}
 			}
 		}
@@ -108,14 +108,14 @@ public class StaffDAO implements StaffDAO_interface {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+					se.printStackTrace();
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace(System.err);
+					e.printStackTrace();
 				}
 			}
 		}
@@ -150,14 +150,14 @@ public class StaffDAO implements StaffDAO_interface {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+					se.printStackTrace();
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace(System.err);
+					e.printStackTrace();
 				}
 			}
 		}
@@ -184,14 +184,14 @@ public class StaffDAO implements StaffDAO_interface {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+					se.printStackTrace();
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace(System.err);
+					e.printStackTrace();
 				}
 			}
 		}
@@ -199,6 +199,7 @@ public class StaffDAO implements StaffDAO_interface {
 
 	@Override
 	public StaffVO findByPrimaryKey(String sq_staff_id) {
+		System.out.println(sq_staff_id);
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -209,7 +210,6 @@ public class StaffDAO implements StaffDAO_interface {
 			pstmt.setString(1, sq_staff_id);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				// empVo �]�٬� Domain objects
 				staffVO = new StaffVO();
 				staffVO.setSq_staff_id(rs.getString("sq_staff_id"));
 				staffVO.setSf_status(rs.getInt("sf_status"));
@@ -230,21 +230,21 @@ public class StaffDAO implements StaffDAO_interface {
 				try {
 					rs.close();
 				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+					se.printStackTrace();
 				}
 			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+					se.printStackTrace();
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace(System.err);
+					e.printStackTrace();
 				}
 			}
 		}
@@ -289,21 +289,21 @@ public class StaffDAO implements StaffDAO_interface {
 				try {
 					rs.close();
 				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+					se.printStackTrace();
 				}
 			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+					se.printStackTrace();
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace(System.err);
+					e.printStackTrace();
 				}
 			}
 		}

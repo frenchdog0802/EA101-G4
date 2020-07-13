@@ -33,9 +33,9 @@
 	<div class="row collapse" id="collapseExample">
 		<div class="col-1"></div>
 		<div class="col-6 my-1">
-			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/MasterEx.jsp'">MasterEx</button> 
-			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeRentHistory.jsp'">bikeRentHistory</button>
-			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeMaster.jsp'">bikeMaster</button>
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeMaster.jsp'">訂單(未取車)</button>
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/MasterEx.jsp'">訂單(已取車,未還車)</button> 
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeRentHistory.jsp'">歷史訂單</button>
 		</div>
 	</div>
 	<div class="row mt-1">

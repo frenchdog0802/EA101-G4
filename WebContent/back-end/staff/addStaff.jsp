@@ -16,10 +16,10 @@
 <!--分頁自己改-->
 <div class="row" style="background-color: white;">
 	<ul class="nav nav-tabs">
-		<li class="nav-item"><a class="nav-link active" href="#"><span
+		<li class="nav-item"><a class="nav-link " href="#"><span
 				style="padding-bottom: 8px; border-bottom: 3px blue solid;">item1</span></a>
 		<!--在哪一個頁面就哪加active和span的style--></li>
-		<li class="nav-item"><a class="nav-link" href="#"><span>item2</span></a>
+		<li class="nav-item"><a class="nav-link active" href="#"><span>item2</span></a>
 		</li>
 		<li class="nav-item"><a class="nav-link" href="#"><span>item3</span></a>
 		</li>

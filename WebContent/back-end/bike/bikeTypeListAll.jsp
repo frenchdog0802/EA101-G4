@@ -13,6 +13,9 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css">
 <style>
+font-good {
+    font-size: 16px !important;
+} 
 @media ( min-width :1000px) {
 	.mydescription {
 		word-break: break-all;
@@ -95,18 +98,18 @@
 	<div class="row collapse" id="collapseExample">
 		<div class="col-1"></div>
 		<div class="col-6 my-1">
-			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/MasterEx.jsp'">MasterEx</button> 
-			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeRentHistory.jsp'">bikeRentHistory</button>
-			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeMaster.jsp'">bikeMaster</button>
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeMaster.jsp'">訂單(未取車)</button>
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/MasterEx.jsp'">訂單(已取車,未還車)</button> 
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeRentHistory.jsp'">歷史訂單</button>
 		</div>
 	</div>	
 	<div class="table-responsive">
 		<table
-			class="table text-center table-bordered table-striped table-hover">
-			<thead class="thead-dark">
+			class="table text-center table-bordered table-striped table-hover h6" >
+			<thead class="thead-dark font-good">
 				<tr>
 					<th scope="col">圖片</th>
-					<th scope="col">車種名稱</th>
+					<th scope="col">名稱</th>
 					<th scope="col">車種標題</th>
 					<th scope="col">車種敘述</th>
 					<th scope="col">價格/天</th>

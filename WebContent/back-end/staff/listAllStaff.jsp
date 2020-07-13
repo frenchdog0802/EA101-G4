@@ -19,7 +19,7 @@
 		<li class="nav-item"><a class="nav-link active" href="#"><span
 				style="padding-bottom: 8px; border-bottom: 3px blue solid;">全部員工</span></a>
 			<!--在哪一個頁面就哪加active和span的style--></li>
-		<li class="nav-item"><a class="nav-link" href="#"><span>新增員工</span></a>
+		<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/staff/addStaff.jsp"><span>新增員工</span></a>
 		</li>
 	</ul>
 </div>
@@ -59,9 +59,9 @@
 							src="<%=request.getContextPath()%>/staff/StaffDBReader.do?sq_staff_id=${staffVO.sq_staff_id}"
 							class="img-fluid"></td>
 						<td style="vertical-align:middle">
-							<form action="<%=request.getContextPath()%>/staff/staff.do">
+							<form action="<%=request.getContextPath()%>/staff/staff.do" method="POST">
 								<input type="hidden" name="sq_staff_id" value="${staffVO.sq_staff_id}">
-								<input type="hidden" name="action" value="update">
+								<input type="hidden" name="action" value="getOne_For_Update">
 								<input type="submit"  value="修改" class="btn btn-danger btn-sm">
 							</form>
 						</td>
