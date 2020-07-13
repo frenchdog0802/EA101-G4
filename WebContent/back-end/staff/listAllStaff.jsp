@@ -1,111 +1,91 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.staff.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
+<jsp:useBean id="StaffService" class="com.staff.model.StaffService" scope="page" /> 
+<jsp:useBean id="StaffVO" class="com.staff.model.StaffVO" scope="request" /> 
+								<!-----------backHeader----------->
+<!-- --------------------------------------------------------------------------------------------->    
+ 
+                               <!---------放自己的CSS與title----------->
+
+<!-- --------------------------------------------------------------------------------------------->  
+								<!-----------backBody----------->
+ <%@include file="/back-end/backFrame/backBody"%>
+								<!-----------backBody----------->
+<!-- --------------------------------------------------------------------------------------------->
+								<!--分頁自己改-->
+				<div class="row" style="background-color: white;">
+					<ul class="nav nav-tabs">
+					  <li class="nav-item">
+					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">item1</span></a><!--在哪一個頁面就哪加active和span的style-->
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>item2</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>item3</span></a>
+					  </li>
+					</ul>
+				</div>	
+								<!--分頁自己改-->
+<!-- --------------------------------------------------------------------------------------------->
+								<!-----------backNav----------->
+	<%@include file="/back-end/backFrame/backNav"%>
+								<!-----------backNav----------->
+<!-- --------------------------------------------------------------------------------------------->					
 <%
-	StaffService staffSvc = new StaffService();
-    List<StaffVO> list = staffSvc.getAll();
-    pageContext.setAttribute("list",list);
-%>
-
-
-<html>
-<head>
-<title>所有員工資料 - listAllStaff.jsp</title>
-
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 800px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-</style>
-
-</head>
-<body bgcolor='white'>
-
-<h4>此頁練習採用 EL 的寫法取值:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>所有員工資料 - listAllStaff.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/staff/selectStaff_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
-
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
-
-<table>
-	<tr>
-		<th>員工編號</th>
-		<th>員工姓名</th>
-		<th>帳號</th>
-		<th>密碼</th>
-		<th>任職情形</th>
-		<th>修改</th>
-		<th>刪除</th>
-	</tr>
-	<%@ include file="page1.file" %> 
-	<c:forEach var="staffVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		
-		<tr>
-			<td>${staffVO.sq_staff_id}</td>
-			<td>${staffVO.sf_name}</td>
-			<td>${staffVO.sf_account}</td>
-			<td>${staffVO.sf_password}</td>
-			<td>${staffVO.getSf_status()==0 ? "在職中" : "已離職"}</td>
-			
-			
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/staff/staff.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="sq_staff_id"  value="${staffVO.sq_staff_id}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/staff/staff.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
-			     <input type="hidden" name="sq_staff_id"  value="${staffVO.sq_staff_id}">
-			     <input type="hidden" name="action" value="delete"></FORM>
-			</td>
-		</tr>
-	</c:forEach>
-</table>
-<%@ include file="page2.file" %>
-
-</body>
-</html>
+StaffService StaffSvc = new StaffService();
+List<StaffVO> list = StaffSvc.getAll();
+pageContext.setAttribute("list", list);
+%>	
+	<div class="container-fluid">
+		<div class="table-responsive">
+			<table
+			class="table text-center table-bordered table-striped table-hover">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">員工編號</th>
+					<th scope="col">員工姓名</th>
+					<th scope="col">員工帳號</th>
+					<th scope="col">員工郵件</th>
+					<th scope="col">員工電話</th>
+					<th scope="col">員工地址</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%@ include file="page1.file"%>
+				<c:forEach var="staffVO" items="${list}" begin="<%=pageIndex%>"
+				end="<%=pageIndex+rowsPerPage-1%>">
+				<tr>
+					<td><img
+						src="<%=request.getContextPath()%>/photo/DBReader.do?sq_bike_type_id=${bikeVO.sq_bike_type_id}"
+						height="50%"></td>
+						<td class="align-middle">${bikeVO.bike_type_name}</td>
+						<td class="align-middle">${bikeVO.bike_title}</td>
+						<td class="mydescription align-middle">${bikeVO.bike_description}</td>
+						<td class="align-middle">${bikeVO.price}</td>
+						<td class="align-middle">
+							<FORM METHOD="post"
+							ACTION="<%=request.getContextPath()%>/bike/BikeTypeServlet.do"
+							style="margin-bottom: 0px;">
+							<input type="submit" value="修改" class="btn btn-danger ">
+							<input type="hidden" name="sq_bike_type_id"
+							value="${bikeVO.sq_bike_type_id}"> <input
+							type="hidden" name="action" value="getOne_For_Update">
+						</FORM>
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<%@ include file="page3.file"%>
+	<div class="w-100 m-3"></div>
+</div>
+</div>
+<!-- --------------------------------------------------------------------------------------------->
+								<!-----------backFooter----------->
+		<%@include file="/back-end/backFrame/backFooter"%>
+ 			
