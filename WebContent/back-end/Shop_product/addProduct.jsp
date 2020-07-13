@@ -15,16 +15,16 @@
  		<div class="row" style="background-color: white;">
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
-				   <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">商品管理</span></a>
+					<a class="nav-link active" href="<%=request.getContextPath()%>/back-end/Shop_product/allShop_product.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">商品管理</span></a>
 				</li>
-			  	<li class="nav-item">
-			    	<a class="nav-link" href="#"><span>訂單管理</span></a>
-			  	</li>
-			  	<li class="nav-item">
-			    	<a class="nav-link" href="#"><span>廠牌管理</span></a>
-			  	</li>
-			  	<li class="nav-item">
-					<a class="nav-link" href="#"><span>庫存管理</span></a>
+				<li class="nav-item">
+					<a class="nav-link" href="<%=request.getContextPath()%>/back-end/Shop_order/allOrder.jsp"><span>訂單管理</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<%=request.getContextPath()%>/back-end/BrandBack/BrandBack.jsp"><span>廠牌管理</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<%=request.getContextPath()%>/back-end/Product_stock/backProductStock.jsp"><span>庫存管理</span></a>
 				</li>
 			</ul>
 		</div>

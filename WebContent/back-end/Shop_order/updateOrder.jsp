@@ -10,9 +10,9 @@
 // 	@SuppressWarnings("unchecked")
 // 	String order_id = (String)session.getAttribute("order_id");
 	Shop_orderService order = new Shop_orderService();
- 	Shop_orderVO storeVO = order.getOneOrder("OD-500001");
+ 	Shop_orderVO storeVO = order.getOneOrder("OD500001");
  	Shop_order_detailService detailSvc = new Shop_order_detailService();
-	List<Shop_order_detailVO> list = detailSvc.getOneOrder_detail("OD-500001");
+	List<Shop_order_detailVO> list = detailSvc.getOneOrder_detail("OD500001");
 	Shop_order_detailVO vo = list.get(0);
 	Shop_productService pSvc = new Shop_productService();
  %>   
@@ -23,16 +23,16 @@
 				<div class="row" style="background-color: white;">
 					<ul class="nav nav-tabs">
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>商品管理</span></a>
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/Shop_product/allShop_product.jsp"><span>商品管理</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">訂單管理</span></a>
+					    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/Shop_order/allOrder.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">訂單管理</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>廠牌管理</span></a>
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/BrandBack/BrandBack.jsp"><span>廠牌管理</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>庫存管理</span></a>
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/Product_stock/backProductStock.jsp"><span>庫存管理</span></a>
 					  </li>
 					</ul>
 				</div>
@@ -98,19 +98,13 @@
 				    					</td>         
 				    				</tr>			    					
     						</table>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="row mt-2">
-    				<div class="col-12" style="text-align:center;">
-    					<h3>購物清單</h3>
-    				</div>
-    			</div>
-    			<hr style="width:30%; margin-top:6px; margin-bottom:6px;">
-    			<div class="row justify-content-center">
-    				<div class="col-10 divbg">
-    					<div id="brandcontent">
-    						<table style="table-layout:fixed;">
+    						<div class="row mt-2">
+			    				<div class="col-12" style="text-align:center;">
+			    					<h3>購物清單</h3>
+			    				</div>
+			    			</div>
+			    			<hr style="width:30%; margin-top:6px; margin-bottom:6px;">
+			    			<table style="table-layout:fixed;">
 	    					<tr>
 								<th id='td_de5' style='width:15%'><span>產品編號</span></th>
 								<th id='td_de1' style='width:45%'><span>產品名稱</span></th>
@@ -128,19 +122,19 @@
 									<%=vo.getProduct_price() %>								
 								</td>
 								<td>
-									<input type="text" value="<%=vo.getOrder_sum()%>" style="width:60%;">
+									<input type="text" id="buytotal" value="<%=vo.getOrder_sum()%>" style="width:60%;">
 								</td>
 							</tr>
 						</table>
-						</div>
-	    			</div>
-    			</div>
-    			<div class="row mt-3">
-    				<div class="col-10"></div>
-    				<div class="col-1">
-    					<button class="btn btn-primary">
-    						Save
-    					</button>
+						<div class="row mt-3">
+		    				<div class="col-11"></div>
+		    				<div class="col-1">
+		    					<button class="btn btn-primary" id="saveBtn">
+		    						Save
+		    					</button>
+		    				</div>
+		    			</div>
+    					</div>
     				</div>
     			</div>
 		 	</div>
@@ -148,11 +142,28 @@
      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   	 <script>
   	 	var key = <%=storeVO.getOrder_status()%>;
-  	 	console.log(key);
   		$('#status option[value='+key+']').attr('selected', 'selected');
   	 	$(".chose").click(function(){
   	 		var a = $(this).val();
-  	 		console.log(a);
   	 	});
+  	 	$('#saveBtn').click(function(){
+			var a =  $("#status option:selected").val();
+			console.log(a);
+// 				$.ajax({
+// 					type :"POST",
+<%-- 					url  : "<%=request.getContextPath()%>/shop_order_detail.do", --%>
+// 					dataType: 'json',
+// 					data : {
+// 						action : "update",
+// 						order_id : "",
+// 						product_id,
+// 						price,
+// 						number,
+// 					},
+// 					success : function() {
+// 						windows.alert("保存成功");
+// 					}
+// 				});
+			});
   	 </script>
 <%@ include file="/back-end/backFrame/backFooter" %>

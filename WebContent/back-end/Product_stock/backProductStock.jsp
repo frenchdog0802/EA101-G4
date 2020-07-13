@@ -42,7 +42,7 @@
 					    </FORM>
 					</div>
 					<div class="col-1 ml-3" style="padding: 0;">
-                        <button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back_end/BrandBack/BrandBack.jsp'" style="border: 1px black solid;">
+                        <button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Product_stock/backProductStock.jsp'" style="border: 1px black solid;">
                             <img src="<%=request.getContextPath()%>/back-end/backFrame/image/list.png" class="img-fluid">
                         </button>
                     </div>

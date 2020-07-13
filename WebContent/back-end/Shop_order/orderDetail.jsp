@@ -73,25 +73,6 @@
 		$('.changeD').click(function(){
 			$(".in_sum").attr("readonly", false); 
 		});
-		$('.saveBtn').click(function(){
-			var a = $("[name = 'product_id']").val();
-			console.log(a);
-// 				$.ajax({
-// 					type :"POST",
-<%-- 					url  : "<%=request.getContextPath()%>/shop_order_detail.do", --%>
-// 					dataType: 'json',
-// 					data : {
-// 						action : "update",
-// 						order_id : "";
-// 						product_id
-// 						price
-// 						number,
-// 					},
-// 					success : function() {
-// 						windows.alert("保存成功");
-// 					}
-// 				});
-			});
 	</script>
 </body>
 </html>

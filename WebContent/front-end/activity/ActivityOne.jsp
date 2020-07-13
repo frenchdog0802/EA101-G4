@@ -218,7 +218,7 @@
 
 				<div class="row">
 					<c:if test="<%= list2.size()!=0%>">
-					<c:forEach var="actVO5" items="${list2}" begin="${list2.size()-4}"
+					<c:forEach var="actVO5" items="${list2}" begin="${list2.size()<4?0:list2.size()-4}"
 						end="${list2.size()-1}">
 						<div class="col-md-3 col-sm-6 mb-4">
 							<a
