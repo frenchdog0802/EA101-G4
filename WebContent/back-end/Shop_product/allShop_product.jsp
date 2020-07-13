@@ -18,13 +18,16 @@
 				<div class="row" style="background-color: white;">
 					<ul class="nav nav-tabs">
 					  <li class="nav-item">
-					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">商品管理</span></a>
+					    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/Shop_product/allShop_product.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">商品管理</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>訂單管理</span></a>
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/Shop_order/allOrder.jsp"><span>訂單管理</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>廠牌管理</span></a>
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/BrandBack/BrandBack.jsp"><span>廠牌管理</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/Product_stock/backProductStock.jsp"><span>庫存管理</span></a>
 					  </li>
 					</ul>
 				</div>
@@ -40,12 +43,12 @@
 				    </FORM>
 				</div>
 				<div class="col-1 ml-3" style="padding: 0;">
-              		<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back_end/Shop_product/allShop_product.jsp'" style="border: 1px black solid;">
+              		<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Shop_product/allShop_product.jsp'" style="border: 1px black solid;">
                     	<img src="image/list.png" class="img-fluid">
                     </button>
                 </div>
                 <div class="col-1 ml-3" style="padding: 0;">
-                	<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back_end/Shop_product/addProduct.jsp'" style="border: 1px black solid;">
+                	<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Shop_product/addProduct.jsp'" style="border: 1px black solid;">
                     	<img src="image/addbrand.png" class="img-fluid">
                     </button>
                 </div>
