@@ -1,15 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.routeDetail.model.*"%>
 <%@ page import="java.util.*"%>
 
-<%
-	List<RouteDetailVO> list = (List<RouteDetailVO>) request.getAttribute("rouDeVO");
-	System.out.println("list:" + list.size());
-	pageContext.setAttribute("list", list);
-	
-	String routeName = (String)request.getAttribute("routeName");
-%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,10 +23,10 @@
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <!-- Bootstrap CSS -->
 <link	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"	rel="stylesheet">
-<title>推薦路線細節頁面</title>
+<title>補水站新增頁面</title>
 <style media="screen" type="text/css">
 #map {
-	height: 600px;
+	height: 900px;
 	width: 1115px;
 }
 
@@ -71,9 +63,6 @@ label {
 	border-radius: 4px;
 }
 
-#nameIntro {
-	font-size: x-large;
-}
 </style>
 
 </head>
@@ -83,7 +72,7 @@ label {
 <body onload="initMap()" bgcolor='white'>
 	<%@include file="/front-end/page-file/page-nav"%>
 
-	<h2 style="	margin-top:20px">${routeName}</h2>
+	<h2 style="	margin-top:20px">全台補水站</h2>
 	<hr>	
 
 
@@ -97,34 +86,15 @@ label {
 				<label>租車點</label><input type="checkbox" id="checkboxRent"
 					name="manage_users" value="manage_users">
 			</div>
+			
 		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="" id="map"></div>
 			</div>
 		</div>
-		<br>
-		<br>
-		<br>
-		<div class="row">
-			<div class="col-md-12">
-
-				<table class="table table-hover">
-					<c:forEach var="rouDeVO" items="${list}">
-						<tr>
-
-							<td><img alt=""
-								src="<%=request.getContextPath()%>/front-end/route/step.img?SQ_SERIAL_NUMBER=${rouDeVO.sqSerialNo}"
-								style="width: 400px; height: 280px"></td>
-
-							<td id="nameIntro">${rouDeVO.stepName}<br>${rouDeVO.stepIntroduction}</td>
-						</tr>
-					</c:forEach>
-
-				</table>
-			</div>
-		</div>
 	</div>
+
 
 
 	<%@include file="/front-end/page-file/page-footer"%>
@@ -143,21 +113,26 @@ label {
 		
 	<jsp:useBean id="bikeStoreSvc" scope="page"
  		class="com.bike.store.model.BikeStoreService" /> 
-		
-	<jsp:useBean id="rouDeSvc" scope="page"
-		class="com.routeDetail.model.RouteDetailService" />
 	<script>
+	
+	
 	
 	//補水站點
 	var map;
 	var markersWs = [];
-	var positionWs = [
-		<c:forEach var="wsVO" items="${waterStationSvc.all}" > 
-			{label : '${wsVO.stationName}',
-	        lat : ${wsVO.latitude},
-	       	lng : ${wsVO.longitude}},
+	var positionWs = [];
+		<c:forEach var="wsVO" items="${waterStationSvc.all}" >
+			if(${wsVO.addStation} === 1){
+				positionWs.push(
+					{label : '${wsVO.stationName}',
+			        lat : ${wsVO.latitude},
+			       	lng : ${wsVO.longitude}},
+			       	)
+				
+			}
         </c:forEach>
-	];
+    console.log(positionWs);
+	
 	
 	//租車站點
 	var markersR = [];
@@ -170,58 +145,125 @@ label {
 	];
 
 	function initMap() {
-	    // 載入路線服務與路線顯示圖層
-	    var directionsService = new google.maps.DirectionsService();
-	    var directionsDisplay = new google.maps.DirectionsRenderer();
-	    
 	    // 初始化地圖
 	    map = new google.maps.Map(document.getElementById('map'), {
 	    	zoom : 14,
 	        center: { lat : 24.969367,
 					  lng : 121.190733 }
 	    });
+	    // 在地圖上放入資訊視窗
+	    var infowindow = new google.maps.InfoWindow();
 	    
-	    // 放置路線圖層
-	    directionsDisplay.setMap(map);
+	  //map的滑鼠點擊事件
+		map.addListener('click', function(e) {
+			alert("點地圖！");
+		    // 點擊時獲取滑鼠的經緯度座標
+			var coordinate = {lat: e.latLng.lat(), lng: e.latLng.lng()};
+		    console.log("coordinate:"+coordinate);
+		    console.log(e.latLng.lat());
+		    console.log(e.latLng.lng());
+		    var geocoder = new google.maps.Geocoder();
+		    geocoder.geocode({'latLng': coordinate }, function(results, status) {
+		    	  if (status === google.maps.GeocoderStatus.OK) {
+		    	    // 如果有資料就會回傳
+		    	    if (results) {
+		    	      console.log(results[0]);
+		    	    }
+		    	  }
+		    	  // 經緯度資訊錯誤
+		    	  else {
+		    	    alert("Reverse Geocoding failed because: " + status);
+		    	  }
+				  console.log(results[0].formatted_address);
+				  
+				// 將資訊視窗的位置，設定為滑鼠的座標
+					infowindow.setPosition(coordinate);
+					// 設定資訊視窗的內容為行政區名稱
+					infowindow.setContent(
+							'<FORM METHOD="post" ACTION="water.do" name="form1"	enctype="multipart/form-data">'+
+								'<table>'+
+									'<tr>'+
+										'<td>補給站名稱：</td>'+
+										'<td><input type="TEXT" name="stationName" size="45"/></td>'+
+									'</tr>'+
+									'<tr>'+
+										'<td>補給站營業時間：</td>'+
+										'<td><input type="TEXT" name="businessHours" size="45"" /></td>'+
+									'</tr>'+
+									'<tr>'+
+										'<td>補給站照片：</td>'+
+										'<td><input id="file" type="file" name="stationImage" size="45"/>'+
+										'<br><img id="demo" style="width:150px; height:150px;"/></td>'+
+									'</tr>'+
+									'<input type="hidden" name="stationAddress" class="stationAddress" value="">'+
+									'<input type="hidden" name="longitude" class="longitude" value="">'+
+									'<input type="hidden" name="latitude" class="latitude" value="">'+
+									'<input type="hidden" name="country" value="台灣">'+
+									'<input type="hidden" name="area" class="area" value="">'+
+									'<input type="hidden" name="checkFlag" value="0">'+
+									'<input type="hidden" name="addStation" value="0">'+
+								'</table>'+					
+								'<br> <input type="hidden" name="action" value="insert"> <input	type="submit" value="送出新增">'+
+							'</FORM>'
+					);
+					
+					$(document).ready(function() {
+						console.log(results[0]['formatted_address']);
+					    $('.area').each(function() {
+			                if ($(this).val() === '') {
+			                  $(this).val(results[0]['formatted_address']);
+			                  return false;
+			                }
+			            });
+					    $('.stationAddress').each(function() {
+			                if ($(this).val() === '') {
+			                  $(this).val(results[0]['formatted_address']);
+			                  return false;
+			                }
+			            });
+					    $('.longitude').each(function() {
+			                if ($(this).val() === '') {
+			                  $(this).val(e.latLng.lng());
+			                  return false;
+			                }
+			            });
+					    $('.latitude').each(function() {
+			                if ($(this).val() === '') {
+			                  $(this).val(e.latLng.lat());
+			                  return false;
+			                }
+			            });
+					    
+					    
+					    
+					});
+					
+					// 將資訊視窗打開在地圖上
+					infowindow.open(map);
+					
+					$(document).ready(function() {
+						$('#file').change(function() {
+							var file = $('#file')[0].files[0];
+							var reader = new FileReader;
+							reader.onload = function(e) {
+								$('#demo').attr('src', e.target.result);
+							};
+							reader.readAsDataURL(file);
+						});
+					});	
+					
+		   		});	
+			 
+					
+		    });
+	
 		
-		 // 路線相關設定
-		var dbResults = [
-			<c:forEach var="rouDeVO" items="${list}">
-				{lat : ${rouDeVO.stLatitude},
-	        	lng : ${rouDeVO.stLongitude}},
-			</c:forEach>
-		]
-		var stepLen = dbResults.length;
-		var waypts = [];
-		for(var i=1; i<stepLen-1; i++){
-			waypts.push({
-				location:dbResults[i],
-				stopover:true
-			});
-		}
 		
-	    var request = {
-	    	
-	        origin:  dbResults[0] ,
-	        waypoints:waypts,
-	        destination:  dbResults[stepLen-1] ,
-	        travelMode: 'BICYCLING'
-	    };
-		 
 
-	 // 繪製路線
-	    directionsService.route(request, function (result, status) {
-	        if (status == 'OK') {
-	            // 回傳路線上每個步驟的細節
-	            console.log(result.routes[0].legs[0].steps);
-	            directionsDisplay.setDirections(result);
-	        } else {
-	            console.log(status);
-	        }
-	    });
 	}
-
-		
+	
+	
+	
 		
 		//補水站滑動式開關
 		$('#checkboxWs').rcSwitcher({
