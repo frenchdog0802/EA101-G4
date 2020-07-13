@@ -4,6 +4,7 @@
 <%@ page import="java.util.*"%>
 
 <%
+
 	List<RouteDetailVO> list = (List<RouteDetailVO>) request.getAttribute("rouDeVO");
 	System.out.println("list:" + list.size());
 	pageContext.setAttribute("list", list);
@@ -148,16 +149,23 @@ label {
 		class="com.routeDetail.model.RouteDetailService" />
 	<script>
 	
-	//補水站點
 	var map;
 	var markersWs = [];
-	var positionWs = [
-		<c:forEach var="wsVO" items="${waterStationSvc.all}" > 
-			{label : '${wsVO.stationName}',
-	        lat : ${wsVO.latitude},
-	       	lng : ${wsVO.longitude}},
+	var positionWs = [];
+		<c:forEach var="wsVO" items="${waterStationSvc.all}" >
+			if(${wsVO.addStation} === 1){
+				positionWs.push(
+					{label : '${wsVO.stationName}',
+					 businessHours : '${wsVO.businessHours}',
+					 stationAddress : '${wsVO.stationAddress}',
+					 sqStationId : '${wsVO.sqStationId}',
+			         lat : ${wsVO.latitude},
+			       	 lng : ${wsVO.longitude}},
+			    )
+			}
         </c:forEach>
-	];
+    console.log(positionWs);
+	
 	
 	//租車站點
 	var markersR = [];
@@ -191,6 +199,7 @@ label {
 	        	lng : ${rouDeVO.stLongitude}},
 			</c:forEach>
 		]
+		console.log(dbResults);
 		var stepLen = dbResults.length;
 		var waypts = [];
 		for(var i=1; i<stepLen-1; i++){
@@ -207,6 +216,7 @@ label {
 	        destination:  dbResults[stepLen-1] ,
 	        travelMode: 'BICYCLING'
 	    };
+	    console.log(request);
 		 
 
 	 // 繪製路線
@@ -223,69 +233,75 @@ label {
 
 		
 		
-		//補水站滑動式開關
-		$('#checkboxWs').rcSwitcher({
-					// reverse: true,
-					// inputs: true,
-// 					width: 44,
-// 					height: 16,
-// 					blobOffset: 2,
-// 					onText: 'YES',
-// 					offText: 'NO',
-// 					theme: 'dark',
-					// autoFontSize: true,
-					autoStick: true,
+	//補水站滑動式開關
+	$('#checkboxWs').rcSwitcher({
+				// reverse: true,
+				// inputs: true,
+//					width: 44,
+//					height: 16,
+//					blobOffset: 2,
+//					onText: 'YES',
+//					offText: 'NO',
+//					theme: 'dark',
+				// autoFontSize: true,
+				autoStick: true,
 
-		});
+	});
 
-		
-		//開關式的放入補水站標點
-		function goWs() {
-			clearMarkersWs();
-			for (var i = 0; i < positionWs.length; i++) {
-				addMarkerWs(i);
-			}
+	
+	//開關式的放入補水站標點
+	function goWs() {
+		clearMarkersWs();
+		for (var i = 0; i < positionWs.length; i++) {
+			addMarkerWs(i);
 		}
-		var a = -1;
-		var markerWs = [];
-		//新增補水站標點方法
-		function addMarkerWs(e) {
-			setTimeout(function() {
-				markerWs = markersWs.push(new google.maps.Marker({
-					position : {
-						lat : positionWs[e].lat,
-						lng : positionWs[e].lng
-					},
-					map : map,
-					//label: positionWs[e].label,
-					animation : google.maps.Animation.DROP,
-					icon:'https://img.icons8.com/officexs/16/000000/bottle-of-water.png'
-				}));
-
-
-			var infowindow = new google.maps.InfoWindow({
-			    content: positionWs[e].label,
-			    position: {
+	}
+	var a = -1;
+	var markerWs = [];
+	//新增補水站標點方法
+	function addMarkerWs(e) {
+		setTimeout(function() {
+			markerWs = markersWs.push(new google.maps.Marker({
+				position : {
 					lat : positionWs[e].lat,
 					lng : positionWs[e].lng
-				}
-			});
-			
-			addLis(markersWs,map,infowindow,e);
-			
-			
-			}, e * 0.1);
-		}
-		
-		//清除補水站標點方法
-		function clearMarkersWs() {
-			for (var i = 0; i < markersWs.length; i++) {
-				if (markersWs[i]) {
-					markersWs[i].setMap(null);
-				}
+				},
+				map : map,
+				//label: positionWs[e].label,
+				animation : google.maps.Animation.DROP,
+				icon:'https://img.icons8.com/officexs/16/000000/bottle-of-water.png'
+			}));
+
+console.log(positionWs[e].sqStationId);
+		var infowindow = new google.maps.InfoWindow({
+		    content: '補水站名稱：'+positionWs[e].label+
+		    		 '<br>'+'營業時間：'+positionWs[e].businessHours+
+		    		 '<br>'+'位於地址：'+positionWs[e].stationAddress+
+					 '<br>圖片：<img id="demo" src="<%=request.getContextPath()%>/back-end/waterStation/water.stationImage?SQ_STATION_ID='+positionWs[e].sqStationId+'"'+'style="width: 150px; height: 150px">', 
+					 
+		    		 
+		    position: {
+				lat : positionWs[e].lat,
+				lng : positionWs[e].lng
 			}
-			markersWs = [];
+						
+		});
+		
+		addLis(markersWs,map,infowindow,e);
+		
+		
+		}, e * 0.1);
+	}
+	
+	//清除補水站標點方法
+	function clearMarkersWs() {
+		for (var i = 0; i < markersWs.length; i++) {
+			if (markersWs[i]) {
+				markersWs[i].setMap(null);
+			}
 		}
+		markersWs = [];
+	}
 		
 		
 		//租車點滑動式開關
