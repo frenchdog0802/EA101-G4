@@ -157,29 +157,29 @@ INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,
 --上線改成('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0'))
 -------------------------------------------------------- 
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO) 
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','蕭寶','x6815541@gmail.com','中壢平鎮中央路300號','0987654321','123456','123456',load_blob('mem2.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','蕭寶','x6815541@gmail.com','中壢平鎮中央路300號','0987654321','123456','123456',load_blob('staff1.jpg'));
 
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO) 
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','凱農','kanof456852@gmail.com','中壢平鎮中央路300號','0987654321','kano123456','kanof456852',load_blob('mem2.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','凱農','kanof456852@gmail.com','中壢平鎮中央路300號','0987654321','kano123456','kanof456852',load_blob('staff2.jpg'));
   
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO) 
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','ZongLin','ZongLin@gmail.com','中壢平鎮中央路300號','0987654321','tn1030842','tn456852',load_blob('mem2.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','ZongLin','ZongLin@gmail.com','中壢平鎮中央路300號','0987654321','tn1030842','tn456852',load_blob('staff3.jpg'));
   
   
  INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO)
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','David','David@gmail.com','中壢平鎮中央路300號','0987654321','tn1030842','tn456852',load_blob('mem2.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','David','David@gmail.com','中壢平鎮中央路300號','0987654321','tn1030842','tn456852',load_blob('staff4.jpg'));
   
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO)
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','Tomhady','Tomhady@gmail.com','中壢平鎮中央路300號','0987654321','tom123456','tom456852',load_blob('mem2.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','Tomhady','Tomhady@gmail.com','中壢平鎮中央路300號','0987654321','tom123456','tom456852',load_blob('staff5.jpg'));
   
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO)
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','湯姆貓','tom456852@gmail.com','中壢平鎮中央路300號','0987654321','tom123456789','tom456852',load_blob('mem2.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','湯姆貓','tom456852@gmail.com','中壢平鎮中央路300號','0987654321','tom123456789','tom456852',load_blob('staff6.jpg'));
   
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO)
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','Peter','Peter@gmail.com','中壢平鎮中央路300號','0987654321','peter123456','peter456852',load_blob('mem2.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','Peter','Peter@gmail.com','中壢平鎮中央路300號','0987654321','peter123456','peter456852',load_blob('staff7.jpg'));
   
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO)
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','大衛海鮮','x6815541@gmail.com','中壢平鎮中央路300號','0987654321','david123456','david456852',load_blob('mem2.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','大衛海鮮','x6815541@gmail.com','中壢平鎮中央路300號','0987654321','david123456','david456852',load_blob('staff8.jpg'));
   
   
   --------------------------------------------------------
