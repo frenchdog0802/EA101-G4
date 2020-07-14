@@ -3,8 +3,11 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.act.model.*"%>
 <%@ page import="com.actreport.model.*"%>
+<%@ page import="com.member.model.*"%>
 <%
-	String sq_member_id = (String)session.getAttribute("sq_member_id");
+	MemVO memVO = (MemVO)session.getAttribute("MemVO");
+	String sq_member_id = memVO.getSq_member_id();
+	session.setAttribute("sq_member_id", sq_member_id);
 	if(sq_member_id==null) {
 		session.setAttribute("sq_member_id", "910003");
 	}
@@ -48,7 +51,25 @@
 	li.media{
 		width:800px;
 	}
+	.modal-footer{
+		float:left;
+		height:100px;
 	
+	}
+	#status0{
+		float:left;
+		color:#EA0000;
+	}
+	#status1{
+		float:left;
+		color:#EA0000;
+		width:400px;
+	}
+	#status2{
+		float:left;
+		color:#EA0000;
+		width:400px;
+	}
 </style>
 </head>
 <body>
@@ -121,9 +142,24 @@
 															</c:if>
 														</c:forEach>
 													</div>
-													<div class="modal-footer">
+													<div class="modal-footer" style="position:relative">
+														<c:forEach var="actreportVO2" items="${list3}" varStatus="vs">
+															<c:choose>
+															<c:when test="${actVO.sq_activity_id.contains(actreportVO2.sq_activity_id) && actreportVO2.report_status == 0}">
+																<div id="status0" style="position:absolute;left:0;top:0">檢舉狀態:尚未處理</div>
+															</c:when>
+															<c:when test="${actVO.sq_activity_id.contains(actreportVO2.sq_activity_id) && actreportVO2.report_status == 1}">
+																<div id="status1" style="position:absolute;left:0;top:0">檢舉狀態:檢舉成功</div>
+																<div id="status1" style="position:absolute;left:0;top:25%">官方回覆:${actreportVO2.report_response}</div>
+															</c:when>
+															<c:when test="${actVO.sq_activity_id.contains(actreportVO2.sq_activity_id) && actreportVO2.report_status == 2}">
+																<div id="status2" style="position:absolute;left:0;top:0">檢舉狀態:檢舉失敗</div>
+																<div id="status2" style="position:absolute;left:0;top:25%">官方回覆:${actreportVO2.report_response}</div>
+															</c:when>
+															</c:choose>
+														</c:forEach>
 														<button type="button" class="btn btn-default"
-															data-dismiss="modal">Close</button>
+															data-dismiss="modal" style="position:absolute;bottom:0;">Close</button>
 													</div>
 												</div>
 											</div>
@@ -133,7 +169,7 @@
 							</ul>
 						</c:forEach>
 							<c:if test="${list2.size() ==0 }">
-								<h1>您還沒有收藏活動唷!!</h1>
+								<h1>您沒有檢舉過活動唷!!</h1>
 							</c:if>
 					</div>
 			

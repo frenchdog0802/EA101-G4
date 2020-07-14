@@ -141,7 +141,7 @@
 				    						<FORM METHOD="post" ACTION="shop_order.do" style="position: relative;">
 											    <input type="submit" value="н╫зя" style="position: absolute; opacity: 0;">
 											    <input type="image" src="<%=request.getContextPath()%>/back-end/backFrame/image/changeicon.png" alt="Submit" class="img-fluid"/>
-											    <input type="hidden" name="sq_stock_id"  value="${orderVO.sq_order_id}">
+											    <input type="hidden" name="sq_order_id"  value="${orderVO.sq_order_id}">
 											    <input type="hidden" name="action"	value="getOne">
 											</FORM>
 				    					</td>

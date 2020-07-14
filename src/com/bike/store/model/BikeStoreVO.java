@@ -9,14 +9,14 @@ public class BikeStoreVO implements Serializable {
 	};
 	private String sq_bike_store_id;
 	private String bike_store_name;
-	private String location;
+	private String store_account;
 	private String phone;
+	private String store_email;
+	private String location;
 	private String store_opentime;
 	private Double store_longitute;
 	private Double store_latitute;
 	private Integer store_status;
-	private String store_email;
-	private String store_account;
 	private String store_password;
 	private byte[] store_photo;
 	

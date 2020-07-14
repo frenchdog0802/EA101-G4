@@ -75,7 +75,7 @@ public class MemServlet extends HttpServlet {
 
 				/*************************** 2.開始查詢資料 *****************************************/
 				MemService memSvc = new MemService();
-				MemVO memVO = memSvc.getOneMem(sq_member_id);
+				MemVO memVO = memSvc.findByPrimaryKey(sq_member_id);
 				if (memVO == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -99,36 +99,35 @@ public class MemServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-		if ("getOne_For_Update".equals(action)) { // 來自listAllMem.jsp的請求
+		if ("getOne_For_Update_back".equals(action)) { // 來自listAllMem.jsp的請求
 
-			List<String> errorMsgs = new LinkedList<String>();
+			Map<String,String> errorMsgs = new HashMap<>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
 				/*************************** 1.接收請求參數 ****************************************/
-				String sq_member_id = new String(req.getParameter("sq_member_id"));
-
+				String sq_member_id = req.getParameter("sq_member_id");
+				
 				/*************************** 2.開始查詢資料 ****************************************/
 				MemService memSvc = new MemService();
-				MemVO memVO = memSvc.getOneMem(sq_member_id);
-
+				MemVO memVO = memSvc.findByPrimaryKey(sq_member_id);
+				req.setAttribute("MemVO", memVO); // 資料庫取出的memVO物件,存入req
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-				req.setAttribute("memVO", memVO); // 資料庫取出的memVO物件,存入req
-				String url = "/back-end/member/update_member_input.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
-				successView.forward(req, res);
-
+				
+				//會員後台
+					String url = "/back-end/member/listOneMember.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+					successView.forward(req, res);
+				
 				/*************************** 其他可能的錯誤處理 **********************************/
-			} catch (Exception e) {
-				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/member/selectMember_page.jsp");
-				failureView.forward(req, res);
+			}catch(Exception ce) {
+				ce.printStackTrace();
 			}
 		}
 
-		if ("update".equals(action)) { // 來自update_member_input.jsp的請求
+		if ("update".equals(action) || "update_back".equals(action)) { // 來自update_member_input.jsp的請求
 
 			Map<String,String> errorMsgs = new HashMap<>();
 			// Store this set in the request scope, in case we need to
@@ -230,12 +229,18 @@ public class MemServlet extends HttpServlet {
 				memSvc.updateMem(memVO);
 				
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+				if("update".equals(action)) {
 				session.setAttribute("MemVO", memVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				String url = "/front-end/member/listOneMem.jsp";
-
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
-
+				}
+				
+				if("update_back".equals(action)) {
+					String url = "/back-end/member/listAllMember.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+					successView.forward(req, res);
+				}
 				/*************************** 其他可能的錯誤處理 *************************************/
 
 			} catch (Exception e) {
@@ -407,7 +412,7 @@ public class MemServlet extends HttpServlet {
 
 				/*************************** 2.開始刪除資料 ***************************************/
 				MemService memSvc = new MemService();
-				MemVO memVO = memSvc.getOneMem(sq_member_id);
+				MemVO memVO = memSvc.findByPrimaryKey(sq_member_id);
 				memSvc.deleteMem(sq_member_id);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/

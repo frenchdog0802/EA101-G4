@@ -7,6 +7,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import com.actfavor.model.ActFavorService;
 import com.actfavor.model.ActFavorVO;
+import com.member.model.MemVO;
+import com.staff.model.StaffVO;
 
 public class ActFavorServlet extends HttpServlet {
  
@@ -23,10 +25,18 @@ public class ActFavorServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		HttpSession session = req.getSession();
-		String sq_member_id = (String)session.getAttribute("sq_member_id");
-			if(sq_member_id==null) {
-				session.setAttribute("sq_member_id", "910003");
-			}
+		MemVO memVO = null;
+		String sq_member_id = null;
+		try {
+			memVO = (MemVO)session.getAttribute("MemVO");
+			sq_member_id = memVO.getSq_member_id();
+			session.setAttribute("sq_member_id", sq_member_id);
+		} catch (Exception e){
+			StaffVO staffVO = (StaffVO)session.getAttribute("StaffVO");
+			sq_member_id = staffVO.getSq_staff_id();
+			session.setAttribute("sq_member_id", sq_member_id);
+		}
+
 
         if ("insert".equals(action)) { // 來自ActivityOne.jsp的請求  
 			

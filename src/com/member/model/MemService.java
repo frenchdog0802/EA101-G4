@@ -77,10 +77,6 @@ public class MemService {
 		dao.delete(sq_member_id);
 	}
 
-	public MemVO getOneMem(String sq_member_id) {
-		return dao.findByPrimaryKey(sq_member_id);
-	}
-
 	public List<MemVO> getAll() {
 		return dao.getAll();
 	}

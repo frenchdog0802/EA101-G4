@@ -5,9 +5,11 @@
 <%@ page import="com.actjoin.model.*"%>
 <%@ page import="com.actfavor.model.*"%>
 <%@ page import="com.actreport.model.*"%>
-
+<%@ page import="com.member.model.*"%>
 <%
-	String sq_member_id = (String)session.getAttribute("sq_member_id");
+	MemVO memVO = (MemVO)session.getAttribute("MemVO");
+	String sq_member_id = memVO.getSq_member_id();
+	session.setAttribute("sq_member_id", sq_member_id);
 %>
 <%
 	java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
@@ -51,13 +53,15 @@
 	}
 	
 	#relationimg{
-		width:100%;
 		height: 255px;
 	}
 	
 	#majorimg{
 		width:100%;
 		height:472px;
+	}
+	#actrow{
+		width:100%;
 	}
 </style>
 </head>
@@ -214,9 +218,10 @@
     <!-- /.最外層row -->
 
     <!-- Related Projects Row -->
+    <div class="relativeact">
     <h3 class="my-4">相關活動</h3>
-
-				<div class="row">
+	</div>
+				<div class="row" id="actrow">
 					<c:if test="<%= list2.size()!=0%>">
 					<c:forEach var="actVO5" items="${list2}" begin="${list2.size()<4?0:list2.size()-4}"
 						end="${list2.size()-1}">

@@ -25,81 +25,11 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 	}
 	
 	private static final String INSERT = "INSERT INTO SHOP_ORDER_DETAIL (SQ_ORDER_ID, SQ_PRODUCT_ID, PRODUCT_PRICE, ORDER_SUM) VALUES (?, ?, ?, ?)";
-	private static final String UPDATE = "UPDATE SHOP_ORDER_DETAIL SET PRODUCT_PRICE=?, ORDER_SUM=? WHERE SQ_ORDER_ID=? && SQ_PRODUCT_ID=?";	
-	private static final String DELETE = "DELETE FROM SHOP_ORDER_DETAIL where SQ_ORDER_ID=? && SQ_PRODUCT_ID=?";
+	private static final String UPDATE = "UPDATE SHOP_ORDER_DETAIL SET ORDER_SUM=? WHERE SQ_ORDER_ID=? AND SQ_PRODUCT_ID=?" ;	
+	private static final String DELETE = "DELETE FROM SHOP_ORDER_DETAIL WHERE SQ_ORDER_ID=? AND SQ_PRODUCT_ID=?";
 	private static final String GET_ONE = "SELECT SQ_ORDER_ID, SQ_PRODUCT_ID, PRODUCT_PRICE, ORDER_SUM FROM SHOP_ORDER_DETAIL WHERE SQ_ORDER_ID=?";
 	private static final String GET_ALL = "SELECT SQ_ORDER_ID, SQ_PRODUCT_ID, PRODUCT_PRICE, ORDER_SUM FROM SHOP_ORDER_DETAIL ORDER BY SQ_ORDER_ID && SQ_PRODUCT_ID";
 	
-	@Override
-	public void insert(Shop_order_detailVO shop_order_detailVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT);
-			con.setAutoCommit(false);
-			pstmt.setString(1, shop_order_detailVO.getSq_order_id());
-			pstmt.setString(2, shop_order_detailVO.getSq_product_id());
-			pstmt.setInt(3, shop_order_detailVO.getProduct_price());
-			pstmt.setInt(4, shop_order_detailVO.getOrder_sum());
-			
-			pstmt.executeUpdate();
-			
-		}catch(SQLException se) {
-			throw new RuntimeException("A database error occured." + se.getMessage());
-		}finally {
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				}catch(SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if(con != null) {
-				try {
-					con.close();
-				}catch(Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-	}
-
-	@Override
-	public void update(Shop_order_detailVO shop_order_detailVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE);
-						
-			pstmt.setInt(1, shop_order_detailVO.getProduct_price());
-			pstmt.setInt(2, shop_order_detailVO.getOrder_sum());
-			pstmt.setString(3, shop_order_detailVO.getSq_order_id());
-			pstmt.setString(4, shop_order_detailVO.getSq_product_id());
-			
-			pstmt.executeUpdate();
-			
-		}catch(SQLException se) {
-			throw new RuntimeException("A database error occured." + se.getMessage());
-		}finally {
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				}catch(SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if(con != null) {
-				try {
-					con.close();
-				}catch(Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		
-	}
 
 	@Override
 	public void delete(String sq_order_id, String sq_product_id) {
@@ -233,7 +163,7 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 	}
 
 	@Override
-	public void insert2(Shop_order_detailVO detailVO, Connection con) {
+	public void insert(Shop_order_detailVO detailVO, Connection con) {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(INSERT);
@@ -257,7 +187,6 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 			}
 			throw new RuntimeException("A database error occured. "
 					+ ce.getMessage());
-			// Clean up JDBC resources
 		}finally {
 			if(pstmt != null) {
 				try {
@@ -268,6 +197,43 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 			}
 		}
 	}
+	
+	@Override
+	public void update(Shop_order_detailVO detailVO, java.sql.Connection con) {
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(UPDATE);
+			pstmt.setInt(1, detailVO.getOrder_sum());
+			pstmt.setString(2, detailVO.getSq_order_id());
+			pstmt.setString(3, detailVO.getSq_product_id());
+			
+			pstmt.executeUpdate();
+			
+		}catch(SQLException ce) {
+			ce.printStackTrace();
+			if(con != null) {
+				try {
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-deatil");
+					con.rollback();
+				}catch(SQLException cecep) {
+					throw new RuntimeException("rollback error occured. "
+							+ cecep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ ce.getMessage());
+		}finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+
 //	public static void main(String args[]) {
 //		Shop_order_detailDAO dao = new Shop_order_detailDAO();
 //		List<Shop_order_detailVO> list = dao.findByPrimaryKey("OD-500003");

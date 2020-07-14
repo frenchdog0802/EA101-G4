@@ -63,9 +63,6 @@
 					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/listAllAct.jsp"><span>活動管理</span></a><!--在哪一個頁面就哪加active和span的style-->
 					  </li>
 					  <li class="nav-item">
-					   	<a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/addAct.jsp"><span>新增活動</span></a>
-					  </li>
-					  <li class="nav-item">
 					    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/joinActivity/listAllActJoin.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">參加會員管理</span></a>
 					  </li>
 					  <li class="nav-item">
@@ -108,7 +105,7 @@
 			     <input type="submit" id="dyn_tr" value="刪除">
 			     <input type="hidden" name="sq_activity_id"  value="${actjoinVO.sq_activity_id}">
 			     <input type="hidden" name="sq_member_id"  value="${actjoinVO.sq_member_id}">
-			     <input type="hidden" name="action" value="delete"></FORM>
+			     <input type="hidden" name="action" value="delete2"></FORM>
 			</td>
 		</tr>
 	</c:forEach>
