@@ -32,7 +32,7 @@ public class StaffLoginServlet extends HttpServlet{
 		System.out.println(action);
 		HttpSession session = request.getSession();
 		
-		//員工登入
+		//員工登入1
 		if ("staffLogin".equals(action)) {
 			Map<String,String> errorMsgs = new HashMap<>();
 			request.setAttribute("errorMsgs", errorMsgs);
