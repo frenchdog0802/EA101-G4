@@ -99,7 +99,7 @@
 	<!--BikeStore Controller -->
 	<servlet>
 		<servlet-name>BikeStoreServlet</servlet-name>
-		<servlet-class>com.bike.type.controller.BikeStoreServlet</servlet-class>
+		<servlet-class>com.bike.store.controller.BikeStoreServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>BikeStoreServlet</servlet-name>
