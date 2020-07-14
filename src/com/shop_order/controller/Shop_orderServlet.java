@@ -55,9 +55,7 @@ public class Shop_orderServlet extends HttpServlet {
 		}
 	
 		if("update".equals(action)) {
-//			List<String> errorMsgs = new LinkedList<String>();
-//			req.setAttribute("errorMsgs", errorMsgs);
-//			try {
+			try {
 				String orderID = req.getParameter("orderID");
 				String orderStatus = req.getParameter("orderStatus");
 				int status = Integer.parseInt(orderStatus);
@@ -79,26 +77,17 @@ public class Shop_orderServlet extends HttpServlet {
 					list.add(vo);
 				}
 				Shop_orderService orderSvc = new Shop_orderService();
-				orderSvc.updateWithDetail(orderVO, list);
-//				if (!errorMsgs.isEmpty()) {			
-//					req.setAttribute("orderVO", orderVO); 
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/back_end/BrandBack/update.jsp");
-//					failureView.forward(req, res);
-//					return;
-//				}
-//					
-//				
+				orderSvc.updateWithDetail(orderVO, list);				
+				
 				String url = "/back-end/Shop_order/allOrder.jsp";
 				RequestDispatcher success = req.getRequestDispatcher(url);
 				success.forward(req, res);
-//				
-//			}catch(Exception e) {
-//				errorMsgs.add("修改資料失敗:" + e.getMessage());
-//				RequestDispatcher fail = req
-//						.getRequestDispatcher("/back_end/BrandBack/BrandBack.jsp");
-//				fail.forward(req, res);
-//			}
+				
+			}catch(Exception e) {
+				RequestDispatcher fail = req
+						.getRequestDispatcher("/back-end/Shop_order/updateOrder.jsp");
+				fail.forward(req, res);
+			}
 		}
 	}
 }

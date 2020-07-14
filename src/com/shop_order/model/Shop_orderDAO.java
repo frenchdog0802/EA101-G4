@@ -8,9 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.shop_order_detail.model.Shop_order_detailDAO;
-import com.shop_order_detail.model.Shop_order_detailVO;
-import com.shop_product.model.Shop_productVO;
+import com.shop_order_detail.model.*;
 
 public class Shop_orderDAO implements Shop_orderDAO_interface{
 //	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -135,19 +133,15 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 			con.setAutoCommit(false);
 			pstmt = con.prepareStatement(UPDATE);
 			
-			
-			
 			pstmt.setInt(1, orderVO.getOrder_status());
 			pstmt.setString(2, orderVO.getSq_order_id());
-			//-------------------------------------------------------------------------------------			
-			pstmt.executeUpdate();//---------------------------------------------------------------
-			//-------------------------------------------------------------------------------------			
-			Shop_order_detailDAO detailDAO = new Shop_order_detailDAO();
+			
+			pstmt.executeUpdate();
+			
+			Shop_order_detailService detailSvc = new Shop_order_detailService();
 			
 			for(Shop_order_detailVO vo : list) {
-				System.out.println("3");
-				detailDAO.update(vo, con);
-				System.out.println("4");
+				detailSvc.update(vo, con);
 			}
 			con.commit();
 			

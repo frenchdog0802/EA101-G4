@@ -3,6 +3,7 @@ package com.shop_order_detail.model;
 import java.util.List;
 
 public class Shop_order_detailService {
+	
 	private Shop_order_detailDAO_interface dao;
 	public Shop_order_detailService() {
 		dao = new Shop_order_detailDAO();
@@ -16,5 +17,9 @@ public class Shop_order_detailService {
 	}
 	public List<Shop_order_detailVO> getAll(){
 		return dao.getAll();
+	}
+	
+	public void update(Shop_order_detailVO detailVO, java.sql.Connection con) {
+		dao.update(detailVO, con);
 	}
 }
