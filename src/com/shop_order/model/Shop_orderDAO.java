@@ -29,7 +29,7 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 	
 	public static final String INSERT = "INSERT INTO SHOP_ORDER(SQ_ORDER_ID, SQ_MEMBER_ID, SQ_STORE_ADDRESS_ID, ORDER_ADDRESS, ORDER_DATE, PAY_DEADLINE, SHOP_ORDER_PRICE, PAY_MODE, ORDER_STATUS)"
 			+ "VALUES (?, ?, ?, ?, to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), to_date(to_char(sysdate+7,'yyyy-mm-dd'),'yyyy-mm-dd'), ?, ?, ?)";
-	public static final String UPDATE = "UPDATE SHOP_ORDER SET SQ_MEMBER_ID=?, SQ_STORE_ADDRESS_ID=?, ORDER_ADDRESS=?, ORDER_DATE=?, PAY_DEADLINE=?, SHOP_ORDER_PRICE=?, PAY_MODE=?, ORDER_STATUS=? WHERE SQ_ORDER_ID=?";
+	public static final String UPDATE = "UPDATE SHOP_ORDER SET ORDER_STATUS=? WHERE SQ_ORDER_ID=?";
 	public static final String DELETE = "DELETE FROM SHOP_ORDER WHERE SQ_ORDER_ID=?";
 	public static final String GET_ONE = "SELECT SQ_ORDER_ID, SQ_MEMBER_ID, SQ_STORE_ADDRESS_ID, ORDER_ADDRESS, ORDER_DATE, PAY_DEADLINE, SHOP_ORDER_PRICE, PAY_MODE, ORDER_STATUS FROM SHOP_ORDER WHERE SQ_ORDER_ID=?";
 	public static final String GET_ALL = "SELECT SQ_ORDER_ID, SQ_MEMBER_ID, SQ_STORE_ADDRESS_ID, ORDER_ADDRESS, ORDER_DATE, PAY_DEADLINE, SHOP_ORDER_PRICE, PAY_MODE, ORDER_STATUS FROM SHOP_ORDER ORDER BY SQ_ORDER_ID";
@@ -100,7 +100,7 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 				detailVO.setSq_product_id(vo.getSq_product_id());
 				detailVO.setProduct_price(vo.getProduct_price());
 				detailVO.setOrder_sum(vo.getOrder_sum());
-				detailDAO.insert2(detailVO, con);
+				detailDAO.insert(detailVO, con);
 			}
 			con.commit();
 			con.setAutoCommit(true);
@@ -126,7 +126,50 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 		}
 	}
 
-	
+	@Override
+	public void updateWithDetail(Shop_orderVO orderVO, List<Shop_order_detailVO> list) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE);
+			
+			pstmt.setString(1, orderVO.getSq_order_id());
+			pstmt.setInt(2, orderVO.getOrder_status());
+			
+			pstmt.executeUpdate();
+
+			Shop_order_detailDAO detailDAO = new Shop_order_detailDAO();
+			Shop_order_detailVO detailVO = new Shop_order_detailVO();
+			for(Shop_order_detailVO vo : list) {
+				detailVO.setSq_order_id(vo.getSq_order_id());
+				detailVO.setSq_product_id(vo.getSq_product_id());
+				detailVO.setOrder_sum(vo.getOrder_sum());
+				detailDAO.update(detailVO, con);
+			}
+			con.commit();
+			con.setAutoCommit(true);
+			
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured."
+					+ se.getMessage());
+		}finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}	
+	}
 	
 	@Override
 	public void update(Shop_orderVO sorderVO) {
@@ -339,6 +382,8 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 		}
 		return shopOrder_id;
 	}
+
+	
 	
 //	public static void main(String args[]) {
 //		Shop_orderDAO dao = new Shop_orderDAO();

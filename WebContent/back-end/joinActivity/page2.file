@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div class="col-2" style="text-align:right; padding-right:0px;">
+
   <%if (rowsPerPage<rowNumber) {%>
     <%if(pageIndex>=rowsPerPage){%>
         <A href="<%=request.getRequestURI()%>?whichPage=1">至第一頁</A>&nbsp;
@@ -11,8 +11,9 @@
         <A href="<%=request.getRequestURI()%>?whichPage=<%=pageNumber%>">至最後一頁</A>&nbsp;
     <%}%>
   <%}%>  
-</div>
-<div class="col-2"  style="text-align:center">
+
+<br><br>
+
   <%if (pageNumber>1) {%>
     <FORM METHOD="post" ACTION="<%=request.getRequestURI()%>">   
        <select size="1" name="whichPage">
@@ -23,4 +24,3 @@
        <input type="submit" value="確定" >  
     </FORM>
   <%}%>
- </div> 

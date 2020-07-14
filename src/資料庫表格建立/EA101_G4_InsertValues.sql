@@ -9208,8 +9208,8 @@ Insert into ACT_FAVORITE (SQ_ACTIVITY_ID,SQ_MEMBER_ID,FAVORITE_TIME) values ('AC
 
 
 --這一段的第一個值要看活動表格的pk欄值下去改(第一筆是01第二筆是02)
-Insert into ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700008','910001','描述與事實不符',0); --這個部份的ID編號要看上面的並且一樣，用流水號會新增，這樣就錯了
-Insert into ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700009','910001','地點標示錯誤',0);
+Insert into ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_RESPONSE,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700008','910001','描述與事實不符',null,0); --這個部份的ID編號要看上面的並且一樣，用流水號會新增，這樣就錯了
+Insert into ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_RESPONSE,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700009','910001','地點標示錯誤',null,0);
 
 --------------------------------------------------------
 --  for Table MEMBER_STORE_ACTIVITY
@@ -9437,27 +9437,27 @@ VALUES
 INSERT INTO  bike_type
 (sq_bike_type_id,bike_type_name,bike_title,bike_description,bike_photo,bike_daily_price,bike_hourly_price)
 VALUES
-(sq_bike_type_id.NEXTVAL,'公路單車','單車界的F1','它的特徵是擁有極細的輪胎和彎曲到下方的彎把。在單車體育賽事中，追求高速騎行性能而設計的一種。當然可以參加單車賽事，也可以騎著去上班。與風融為一體的快速騎行感覺，是公路單車的最大魅力也是其長處。', load_blob('bike_img_road.jpg'),450,60);
+(sq_bike_type_id.NEXTVAL,'公路單車','單車界的F1','它的特徵是擁有極細的輪胎和彎曲到下方的彎把。在單車體育賽事中，追求高速騎行性能而設計的一種。當然可以參加單車賽事，也可以騎著去上班。與風融為一體的快速騎行感覺，是公路單車的最大魅力也是其長處。', load_blob('bike_img_road1.jpg'),450,60);
 INSERT INTO  bike_type
 (sq_bike_type_id,bike_type_name,bike_title,bike_description,bike_photo,bike_daily_price,bike_hourly_price)
 VALUES
-(sq_bike_type_id.NEXTVAL,'公路越野車','具備多項功能的單車','是一款結合了公路單車和登山車兩種車型之長處的萬能單車。騎行非常流暢以及穩定。即使是崎嶇路面也能順暢行駛。此單車類型不僅適合休閒逛街騎乘，也非常適合初學者騎乘。可以依據用戶需求設定，來發揮它的全能性能。',load_blob('bike_img_cross.jpg'),300,40);
+(sq_bike_type_id.NEXTVAL,'公路越野車','具備多項功能的單車','是一款結合了公路單車和登山車兩種車型之長處的萬能單車。騎行非常流暢以及穩定。即使是崎嶇路面也能順暢行駛。此單車類型不僅適合休閒逛街騎乘，也非常適合初學者騎乘。可以依據用戶需求設定，來發揮它的全能性能。',load_blob('bike_img_cross1.jpg'),300,40);
 INSERT INTO  bike_type
 (sq_bike_type_id,bike_type_name,bike_title,bike_description,bike_photo,bike_daily_price,bike_hourly_price)
 VALUES
-(sq_bike_type_id.NEXTVAL,'登山車','不受任何地形限制的高性能單車','正如其名，是為了能順暢的行駛在山岳地帶或崎嶇路面而設計的一款單車，並充分發揮其疾馳的性能。輪胎寬厚，所以造成的路面阻力也大，在平整的路面上可能速度不是很快，但是不必受道路的崎嶇不平限制，可以說也是一款非常值得信賴的公路騎行單車。',load_blob('bike_img_mountain.jpg'),300,40);
+(sq_bike_type_id.NEXTVAL,'登山車','不受任何地形限制的高性能單車','正如其名，是為了能順暢的行駛在山岳地帶或崎嶇路面而設計的一款單車，並充分發揮其疾馳的性能。輪胎寬厚，所以造成的路面阻力也大，在平整的路面上可能速度不是很快，但是不必受道路的崎嶇不平限制，可以說也是一款非常值得信賴的公路騎行單車。',load_blob('bike_img_mountain1.jpg'),300,40);
 INSERT INTO  bike_type
 (sq_bike_type_id,bike_type_name,bike_title,bike_description,bike_photo,bike_daily_price,bike_hourly_price)
 VALUES
-(sq_bike_type_id.NEXTVAL,'小徑車','依據生活習慣來享受小徑車的樂趣','小徑單車有大約20英寸的輪胎。騎行非常輕便，適合要頻繁停車的日常騎車逛街的用戶。設計是自由型，可以折疊的款式，便於收納。依據個人生活習慣來調整的車型。不適合段差大和崎嶇不平的道路。',load_blob('bike_img_mini.jpg'),400,50);
+(sq_bike_type_id.NEXTVAL,'小徑車','依據生活習慣來享受小徑車的樂趣','小徑單車有大約20英寸的輪胎。騎行非常輕便，適合要頻繁停車的日常騎車逛街的用戶。設計是自由型，可以折疊的款式，便於收納。依據個人生活習慣來調整的車型。不適合段差大和崎嶇不平的道路。',load_blob('bike_img_mini1.jpg'),400,50);
 INSERT INTO  bike_type
 (sq_bike_type_id,bike_type_name,bike_title,bike_description,bike_photo,bike_daily_price,bike_hourly_price)
 VALUES
-(sq_bike_type_id.NEXTVAL,'城市單車','最常見的單車 ， 俗稱：媽媽車。','這是最常見的單車類型。一般用於購物、通勤或上學。在日常生活中，是一款實用性非常高的單車，特別適合女性和年長者。而且，單車種類非常豐富，從價格便宜的款式到時尚款式，適應不同需求。',load_blob('bike_img_city.jpg'),200,30);
+(sq_bike_type_id.NEXTVAL,'城市單車','最常見的單車 ， 俗稱：媽媽車。','這是最常見的單車類型。一般用於購物、通勤或上學。在日常生活中，是一款實用性非常高的單車，特別適合女性和年長者。而且，單車種類非常豐富，從價格便宜的款式到時尚款式，適應不同需求。',load_blob('bike_img_city1.jpg'),200,30);
 INSERT INTO  bike_type
 (sq_bike_type_id,bike_type_name,bike_title,bike_description,bike_photo,bike_daily_price,bike_hourly_price)
 VALUES
-(sq_bike_type_id.NEXTVAL,'電動單車','爬坡也可以很順暢','正如其名，借用電力作為前進動力的單車。騎單車載小孩或騎單車爬坡時，借用電力使你的行駛更加輕鬆。萬一電池沒電時，也可以和一般的單車一樣踩踏前行。',load_blob('bike_img_auto.jpg'),500,65);
+(sq_bike_type_id.NEXTVAL,'電動單車','爬坡也可以很順暢','正如其名，借用電力作為前進動力的單車。騎單車載小孩或騎單車爬坡時，借用電力使你的行駛更加輕鬆。萬一電池沒電時，也可以和一般的單車一樣踩踏前行。',load_blob('bike_img_auto1.jpg'),500,65);
 
 
 --------------------------------------------------------

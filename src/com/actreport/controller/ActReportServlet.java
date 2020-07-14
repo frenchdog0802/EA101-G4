@@ -121,7 +121,13 @@ public class ActReportServlet extends HttpServlet {
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String sq_activityreport_id = new String(req.getParameter("sq_activityreport_id"));
+				String sq_activity_id = new String(req.getParameter("sq_activity_id"));
+				String report_reason = new String(req.getParameter("report_reason"));
 				Integer report_status = null;
+				String report_response = req.getParameter("report_response").trim();
+				if(report_response.matches("null") || report_response.trim().length() == 0) {
+					errorMsgs.add("檢舉回應請勿空白");
+				}
 				String report_statusReg = "^[(0-2)]{1,1}$";
 				try {
 					report_status = new Integer(req.getParameter("report_status").trim());
@@ -135,6 +141,10 @@ public class ActReportServlet extends HttpServlet {
 
 				ActReportVO actreportVO = new ActReportVO();
 				actreportVO.setSq_activityreport_id(sq_activityreport_id);
+				actreportVO.setSq_activity_id(sq_activity_id);
+				actreportVO.setSq_member_id(sq_member_id);
+				actreportVO.setReport_reason(report_reason);
+				actreportVO.setReport_response(report_response);
 				actreportVO.setReport_status(report_status);				
 
 				// Send the use back to the form, if there were errors
@@ -148,7 +158,7 @@ public class ActReportServlet extends HttpServlet {
 				
 				/***************************2.開始修改資料*****************************************/
 				ActReportService actreportSvc = new ActReportService();
-				actreportVO = actreportSvc.updateActReport(sq_activityreport_id, report_status);
+				actreportVO = actreportSvc.updateActReport(sq_activityreport_id, report_response, report_status);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("actreportVO", actreportVO); // 資料庫update成功後,正確的的actVO物件,存入req
@@ -185,7 +195,6 @@ public class ActReportServlet extends HttpServlet {
 	            	errorMsgs.add("檢舉理由: 請勿空白");
 	            }
 				
-				
 				ActReportVO actreportVO = new ActReportVO();
 				actreportVO.setSq_activity_id(sq_activity_id);
 				actreportVO.setSq_member_id(sq_member_id);
@@ -211,46 +220,6 @@ public class ActReportServlet extends HttpServlet {
 				
 				/***************************其他可能的錯誤處理**********************************/
 			
-		}
-        
-        if ("getReportOutput".equals(action)) { // 來自listAllAct.jsp的請求
-
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-			
-			try {
-				/***************************1.接收請求參數****************************************/
-				//從前台送活動編號過來
-				String sq_activity_id = new String(req.getParameter("sq_activity_id"));
-				
-				/***************************2.開始查詢資料****************************************/
-				ActReportService actreportSvc = new ActReportService();
-				List<ActReportVO> reportlist = actreportSvc.getAll();
-				List<String> newlist = new ArrayList<String>();
-				Map<String, String> reportdata = new LinkedHashMap<>();
-				for(ActReportVO reportVO:reportlist) {
-					if(reportVO.getSq_activity_id().contains(sq_activity_id)
-						&&reportVO.getSq_member_id().contains(sq_member_id)) {
-						newlist.add(reportVO.getSq_activity_id());
-						newlist.add(sq_member_id);
-					}
-				}
-								
-				/***************************3.查詢完成,準備轉交(Send the Success view)************/
-				req.setAttribute("reportlist", reportlist);         // 資料庫取出的actVO物件,存入req
-				String url = "/back-end/reportActivity/update_actreport_input.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_act_input.jsp
-				successView.forward(req, res);
-
-				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e) {
-				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/reportActivity/listAllActReport.jsp");
-				failureView.forward(req, res);
-			}
 		}
 	}
 }

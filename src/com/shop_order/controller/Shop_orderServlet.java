@@ -7,6 +7,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
 import com.shop_order.model.*;
+import com.shop_order_detail.model.Shop_order_detailVO;
 
 @MultipartConfig
 public class Shop_orderServlet extends HttpServlet {
@@ -18,7 +19,7 @@ public class Shop_orderServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		HttpSession session = req.getSession();
-		
+		System.out.println(action);
 		if("delete".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -41,7 +42,7 @@ public class Shop_orderServlet extends HttpServlet {
 		if("getOne".equals(action)) {
 			try {
 				String sq_order_id = req.getParameter("sq_order_id");				
-					
+				System.out.println(sq_order_id);
 				session.setAttribute("order_id", sq_order_id);
 				String url = "/back-end/Shop_order/updateOrder.jsp";
 				RequestDispatcher success = req.getRequestDispatcher(url);
@@ -53,18 +54,33 @@ public class Shop_orderServlet extends HttpServlet {
 			}
 		}
 	
-//		if("update".equals(action)) {
+		if("update".equals(action)) {
 //			List<String> errorMsgs = new LinkedList<String>();
 //			req.setAttribute("errorMsgs", errorMsgs);
 //			try {
-//				String sq_order_id = req.getParameter("sq_order_id");				
-//				String name = req.getParameter("name");				
-//				String phone = req.getParameter("phone");				
-//				String address = req.getParameter("address");				
-//				String brand_detail = req.getParameter("detail");			
-//				Shop_orderVO orderVO = new Shop_orderVO();
-//				
-//				
+				String orderID = req.getParameter("orderID");
+				String orderStatus = req.getParameter("orderStatus");
+				int status = Integer.parseInt(orderStatus);
+				String[] id = req.getParameterValues("id"); 			
+				String[] number = req.getParameterValues("number");
+				int len = Integer.parseInt(req.getParameter("len"));
+				
+				Shop_orderVO orderVO = new Shop_orderVO();
+				orderVO.setSq_order_id(orderID);
+				orderVO.setOrder_status(status);
+				
+				List<Shop_order_detailVO> list = new ArrayList<Shop_order_detailVO>();
+				for(int i=0 ; i<len ;i++) {
+					Shop_order_detailVO vo = new Shop_order_detailVO();
+					vo.setSq_order_id(orderID);
+					vo.setSq_product_id(id[i]);
+					int num = Integer.parseInt(number[i]);
+					vo.setOrder_sum(num);
+					list.add(vo);
+				}
+				
+				Shop_orderService orderSvc = new Shop_orderService();
+				orderSvc.updateWithDetail(orderVO, list);
 //				if (!errorMsgs.isEmpty()) {			
 //					req.setAttribute("orderVO", orderVO); 
 //					RequestDispatcher failureView = req
@@ -74,9 +90,9 @@ public class Shop_orderServlet extends HttpServlet {
 //				}
 //					
 //				
-//				String url = "/back_end/BrandBack/BrandBack.jsp";
-//				RequestDispatcher success = req.getRequestDispatcher(url);
-//				success.forward(req, res);
+				String url = "/back-end/Shop_order/allOrder.jsp";
+				RequestDispatcher success = req.getRequestDispatcher(url);
+				success.forward(req, res);
 //				
 //			}catch(Exception e) {
 //				errorMsgs.add("修改資料失敗:" + e.getMessage());
@@ -84,6 +100,6 @@ public class Shop_orderServlet extends HttpServlet {
 //						.getRequestDispatcher("/back_end/BrandBack/BrandBack.jsp");
 //				fail.forward(req, res);
 //			}
-//		}
+		}
 	}
 }

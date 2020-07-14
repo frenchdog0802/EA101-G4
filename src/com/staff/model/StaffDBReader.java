@@ -32,8 +32,6 @@ public class StaffDBReader extends HttpServlet {
 			StaffService StaffService = new StaffService();
 			byte[] baos = StaffService.findByPrimaryKey(sq_staff_id).getSf_photo();
 			out.write(baos);
-			System.out.println(baos);
-
 		} catch (Exception e) {
 			System.out.println("staff沒圖片");
 		}finally {

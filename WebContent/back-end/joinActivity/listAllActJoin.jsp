@@ -57,20 +57,20 @@
 </style>
 
 <%@include file="/back-end/backFrame/backBody"%>
-				<div class="row" style="background-color: white;">
+<div class="row" style="background-color: white;">
 					<ul class="nav nav-tabs">
-						<li class="nav-item">
-						    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/listAllAct.jsp"><span>活動管理</span></a><!--在哪一個頁面就哪加active和span的style-->
-						</li>
-						<li class="nav-item">
-						   	<a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/addAct.jsp"><span>新增活動</span></a>
-						</li>
-						<li class="nav-item">
-						    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/joinActivity/listAllActJoin.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">參加會員管理</span></a>
-						</li>
-						<li class="nav-item">
-						    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/reportActivity/listAllActReport.jsp"><span>檢舉活動管理</span></a>
-						</li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/listAllAct.jsp"><span>活動管理</span></a><!--在哪一個頁面就哪加active和span的style-->
+					  </li>
+					  <li class="nav-item">
+					   	<a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/addAct.jsp"><span>新增活動</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/joinActivity/listAllActJoin.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">參加會員管理</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/reportActivity/listAllActReport.jsp"><span>檢舉活動管理</span></a>
+					  </li>
 					</ul>
 				</div>	
 <%@include file="/back-end/backFrame/backNav"%>
@@ -83,44 +83,35 @@
 		</c:forEach>
 	</ul>
 </c:if>
-<div class="container-fluid">
-	<div class="row mt-3">
-		<div class="col-12">
-			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do" >
-		        <b>輸入活動編號 (如ACT-700001):</b>
-		        <input type="text" name="sq_activity_id">
-		        <input type="hidden" name="action" value="getOne_For_Display">
-		        <input type="submit" value="送出">
-		    </FORM>
-			<table class="table1">
-				<tr>
-					<th>活動編號</th>
-					<th>會員編號</th>
-					<th>報名時間</th>
-					
-				</tr>
-				<%@ include file="page1.file" %>
-				
-				<c:forEach var="actjoinVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">	
-					<tr>
-						<td>${actjoinVO.sq_activity_id}</td>
-						<td>${actjoinVO.sq_member_id}</td>
-						<td>${actjoinVO.join_time}</td>
-						<td>
-						  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do" style="margin-bottom: 0px;">
-						     <input type="submit" id="dyn_tr" value="刪除">
-						     <input type="hidden" name="sq_activity_id"  value="${actjoinVO.sq_activity_id}">
-						     <input type="hidden" name="sq_member_id"  value="${actjoinVO.sq_member_id}">
-						     <input type="hidden" name="action" value="delete"></FORM>
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
-	</div>
-	<div class="row mt-2">
-		<div class="col-8"></div>
-		<%@ include file="page2.file" %>
-	</div>
-</div>
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do" >
+        <b>輸入活動編號 (如ACT-700001):</b>
+        <input type="text" name="sq_activity_id">
+        <input type="hidden" name="action" value="getOne_For_Display">
+        <input type="submit" value="送出">
+    </FORM>
+<table class="table1">
+	<tr>
+		<th>活動編號</th>
+		<th>會員編號</th>
+		<th>報名時間</th>
+		
+	</tr>
+	<%@ include file="page1.file" %>
+	
+	<c:forEach var="actjoinVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">	
+		<tr>
+			<td>${actjoinVO.sq_activity_id}</td>
+			<td>${actjoinVO.sq_member_id}</td>
+			<td>${actjoinVO.join_time}</td>
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do" style="margin-bottom: 0px;">
+			     <input type="submit" id="dyn_tr" value="刪除">
+			     <input type="hidden" name="sq_activity_id"  value="${actjoinVO.sq_activity_id}">
+			     <input type="hidden" name="sq_member_id"  value="${actjoinVO.sq_member_id}">
+			     <input type="hidden" name="action" value="delete"></FORM>
+			</td>
+		</tr>
+	</c:forEach>
+</table>
+<%@ include file="page2.file" %>
 <%@include file="/back-end/backFrame/backFooter"%>
