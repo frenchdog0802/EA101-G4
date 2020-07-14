@@ -94,8 +94,8 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 			pstmt.executeUpdate();
 
 			Shop_order_detailDAO detailDAO = new Shop_order_detailDAO();
-			Shop_order_detailVO detailVO = new Shop_order_detailVO();
 			for(Shop_order_detailVO vo : list) {
+				Shop_order_detailVO detailVO = new Shop_order_detailVO();
 				detailVO.setSq_order_id(vo.getSq_order_id());
 				detailVO.setSq_product_id(vo.getSq_product_id());
 				detailVO.setProduct_price(vo.getProduct_price());
@@ -132,23 +132,25 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
+			con.setAutoCommit(false);
 			pstmt = con.prepareStatement(UPDATE);
 			
-			pstmt.setString(1, orderVO.getSq_order_id());
-			pstmt.setInt(2, orderVO.getOrder_status());
 			
-			pstmt.executeUpdate();
-
+			
+			pstmt.setInt(1, orderVO.getOrder_status());
+			pstmt.setString(2, orderVO.getSq_order_id());
+			//-------------------------------------------------------------------------------------			
+			pstmt.executeUpdate();//---------------------------------------------------------------
+			//-------------------------------------------------------------------------------------			
 			Shop_order_detailDAO detailDAO = new Shop_order_detailDAO();
-			Shop_order_detailVO detailVO = new Shop_order_detailVO();
+			
 			for(Shop_order_detailVO vo : list) {
-				detailVO.setSq_order_id(vo.getSq_order_id());
-				detailVO.setSq_product_id(vo.getSq_product_id());
-				detailVO.setOrder_sum(vo.getOrder_sum());
-				detailDAO.update(detailVO, con);
+				System.out.println("3");
+				detailDAO.update(vo, con);
+				System.out.println("4");
 			}
 			con.commit();
-			con.setAutoCommit(true);
+			
 			
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured."
@@ -163,6 +165,7 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 			}
 			if(con != null) {
 				try {
+					con.setAutoCommit(true);
 					con.close();
 				}catch(Exception e) {
 					e.printStackTrace(System.err);

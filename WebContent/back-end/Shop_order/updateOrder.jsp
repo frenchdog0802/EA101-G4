@@ -130,7 +130,7 @@
 								</td>
 								<td>
 									<input type="text" name="number" value="<%=vo.getOrder_sum()%>" style="width:60%;">
-									<input type="hidden" name="id" value="<%=vo.getSq_product_id()%>">
+									<input type="hidden" name="productID" value="<%=vo.getSq_product_id()%>">
 								</td>
 							</tr>
 							<%}%>
