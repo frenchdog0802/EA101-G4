@@ -157,29 +157,29 @@ INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,
 --上線改成('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0'))
 -------------------------------------------------------- 
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO) 
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','蕭寶','x6815541@gmail.com','中壢平鎮中央路300號','0987654321','123456','123456',load_blob('staff1.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','蕭寶','x6815541@gmail.com','中壢平鎮中央路300號','0987654321','123456','123456',load_blob('mem2.jpg'));
 
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO) 
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','凱農','kanof456852@gmail.com','中壢平鎮中央路300號','0987654321','kano123456','kanof456852',load_blob('staff2.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','凱農','kanof456852@gmail.com','中壢平鎮中央路300號','0987654321','kano123456','kanof456852',load_blob('mem2.jpg'));
   
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO) 
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','ZongLin','ZongLin@gmail.com','中壢平鎮中央路300號','0987654321','tn1030842','tn456852',load_blob('staff3.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','ZongLin','ZongLin@gmail.com','中壢平鎮中央路300號','0987654321','tn1030842','tn456852',load_blob('mem2.jpg'));
   
   
  INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO)
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','David','David@gmail.com','中壢平鎮中央路300號','0987654321','tn1030842','tn456852',load_blob('staff4.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','David','David@gmail.com','中壢平鎮中央路300號','0987654321','tn1030842','tn456852',load_blob('mem2.jpg'));
   
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO)
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','Tomhady','Tomhady@gmail.com','中壢平鎮中央路300號','0987654321','tom123456','tom456852',load_blob('staff5.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','Tomhady','Tomhady@gmail.com','中壢平鎮中央路300號','0987654321','tom123456','tom456852',load_blob('mem2.jpg'));
   
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO)
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','湯姆貓','tom456852@gmail.com','中壢平鎮中央路300號','0987654321','tom123456789','tom456852',load_blob('staff6.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','湯姆貓','tom456852@gmail.com','中壢平鎮中央路300號','0987654321','tom123456789','tom456852',load_blob('mem2.jpg'));
   
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO)
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','Peter','Peter@gmail.com','中壢平鎮中央路300號','0987654321','peter123456','peter456852',load_blob('staff7.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','Peter','Peter@gmail.com','中壢平鎮中央路300號','0987654321','peter123456','peter456852',load_blob('mem2.jpg'));
   
   INSERT INTO STAFF (SQ_STAFF_ID,SF_STATUS,SF_NAME,SF_EMAIL,SF_ADDRESS,SF_PHONE,SF_ACCOUNT,SF_PASSWORD,SF_PHOTO)
-  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','大衛海鮮','x6815541@gmail.com','中壢平鎮中央路300號','0987654321','david123456','david456852',load_blob('staff8.jpg'));
+  VALUES(('STF'||'-'||RPAD(to_char(staff_seq.NEXTVAL), 6, '0')),'0','大衛海鮮','x6815541@gmail.com','中壢平鎮中央路300號','0987654321','david123456','david456852',load_blob('mem2.jpg'));
   
   
   --------------------------------------------------------
@@ -366,101 +366,101 @@ STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION)
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110004', '蓮池潭風景區 ', 120.296553, 
- 22.678774, null, null);
+ 22.678774, load_blob('r4_1.jpg'), '舊稱蓮花潭，位於高雄市左營區東側，南鄰龜山、北接半屏山，潭面面積約42公頃，源於高屏溪。蓮池潭周邊潭水因遍植荷花，在清領時期就名列鳳山八景，稱「泮水荷香」，現因湖畔半屏山特殊造型與龍虎塔遠近倒映水中，而以「蓮潭夕照」聞名。入夜後的蓮池潭，水霧濛濛，景色若隱若現，予人難以言喻的神秘感。潭上亭台樓閣林立，潭畔遍植垂柳，景緻秀麗。由南而北風景點分別有舊城、龍虎塔、五里亭、春秋閣、啟明堂、孔廟等，吸引各地遊客前往，假日更是絡繹不絕。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110004', '原生植物園', 120.301206, 
- 22.680714, null, null); 
+ 22.680714, load_blob('r4_2.jpg'), '位於左營區的原生植物園，是全國第一座以原生植物為主題的公園，佔地4.66公頃的園區以最接近大自然的生態工法建造而成，結合了高低起伏地型和舊曹公圳原有水渠，打造出猶如大自然生態縮影的風貌。流水淙淙的水生植物區、熱帶植物區、季風雨林、珊瑚礁區…讓人身歷其境、印象深刻。目前園區有45科60多種臺灣原生植物，每一株植物都附有詳細解說，就像活生生的植物圖書館。更有兒童遊憩區及生態解說中心，漫遊在綠意生態中，寓教於樂，是集休閒與教育功能的最佳去處。'); 
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110004', '微笑公園', 120.309916, 
- 22.672409, null, null);
+ 22.672409, load_blob('r4_3.jpg'), '左營有一座會微笑的公園，便是為在博愛三路與至真路口的「微笑公園」，主要是因著它是一個長條帶狀如「S」型的公園，猶如笑臉，Smile的S而得名（姆，怎麼有點牽強），但不管它笑不笑，微笑公園最大的亮點是在每年5~7月，正式俗稱「黃金雨」的阿勃勒盛開的時節，春天則有成片的風鈴木，在微笑公園便可以看見怒放的黃花，當微風吹來，花葉片片落下，不管是阿勃勒或是風鈴木，乍看之下頗有下黃金雨的錯覺呢~');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110004', '河堤社區', 120.316361, 
- 22.665454, null, null);
+ 22.665454, load_blob('r4_4.jpg'), '在明誠路濱愛河的兩岸，近年來此地成為了一個新興的住宅社區，放眼望去可以望見高樓圍在愛河的兩旁，高雄市政府當局也配合此地的發展開闢河堤公園、家庭汙水接管及周邊道路等措施，河堤公園成為北高雄最美麗的公園。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110004', '愛河之心', 120.303027, 
- 22.652576, null, null);
+ 22.652576, load_blob('r4_5.jpg'), '結合水陸觀光、滯洪池與生態整治的「愛河之心」，耗資了一億七千萬打造，位於高雄市博愛一路和同盟一路的愛河中上游，愛河之心是由東湖與西湖構成，兩湖中間興建一座橋貫通，形狀好似一個心形。這裡的自行車道與美麗的湖岸景色，已經是高雄市人的優質休閒空間。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110004', '光之塔', 120.293573, 
- 22.651628, null, null);
+ 22.651628, load_blob('r4_6.jpg'), '「光之塔」位於三民區同盟路與自立路口的三民一號公園內，是一座矗立在社區旁的台電高架鐵塔，為了提升社區的環境美感，讓鐵塔融入社區，於是以資源再利用的觀念將鐵塔建構為特殊的公共藝術，讓原本突兀的鐵塔有了新生命，更成為了三民區特殊的地標以及當地居民重要的休憩點。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110004', '客家文物館', 120.294251, 
- 22.650351, null, null);
+ 22.650351, load_blob('r4_7.jpg'), '位於三民區二號公園內的高雄市客家文物館，面積廣達 8 百坪，是台灣最大的客家博物館。其設計參考大陸的客家建築，為紅瓦琉璃、三合院式建築。館內展示重點以客家文物為主，並不定期舉辦客家文化活動，以研究客家傳統風俗。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110004', '中都窯廠', 120.29186, 
- 22.641983, null, null);
+ 22.641983, load_blob('r4_8.jpg'), '中都唐榮磚窯廠曾以生產高級耐火磚聞名，前身為創建於1899年的鮫島煉瓦工場。1985年，不敵時代與環保等因素要拆除的舊廠房，由於保留了二座高聳的煙囪、八卦窯、三座倒焰窯、實驗窯、隧道窯、日治時期磚造事務所等設備，無異是一座活生生的磚窯歷史博物館，不但見證了百年來工業經濟發展的軌跡，紅磚建築的結構、質地、磚飾也提供建築美學上的價值與範例，因此在2003年後陸續列為市定及國定古蹟，也是高雄第一座古蹟文化園區。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110004', '高雄音樂館', 120.279185, 
- 22.62729, null, null);
+ 22.62729, load_blob('r4_9.jpg'), '坐落在高雄鹽埕區歷史博物館後方的高雄市立音樂館，成立於民國89年（西元2000年）11月，館內設施齊全，市內演奏廳及戶外演奏廣場各具特色，音樂館並有高雄市國樂團及高雄市交響樂團兩大樂團進駐。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110004', '真愛碼頭', 120.283133, 
- 22.61905, null, null);  
+ 22.61905, load_blob('r4_10.jpg'), '真愛碼頭(12號碼頭)位於愛河的出海口處，碼頭有兩座雪白風帆分別對著高雄市區及旗津渡輪碼頭，象徵高雄市與海港對話，為了融入節約能源的概念，兩座風帆皆有太陽能發電板及發電量顯示器的裝置，除了兩座獨具特色的雪白風帆之外，真愛碼頭另設置真愛咖啡、觀景休憩高架木棧平台以及周遭的植栽綠化景觀。');  
 
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110005', '觀海公園', 121.464146, 
- 25.123575, null, null);
+ 25.123575, load_blob('r5_1.jpg'), '觀海公園占地遼闊，園內設施包含網球場、籃球場、兒童遊具、自行車道等設施，公園南側緊鄰淡水河邊關渡碼頭，可眺望關渡大橋。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110005', '關渡大橋', 121.457204, 
- 25.125654, null, null);
+ 25.125654, load_blob('r5_2.jpg'), '「關渡大橋」是銜接新北市八里區與臺北市北投區關渡的重要交通樞紐，鮮紅色的外觀，讓關渡大橋成為當地的一大地標，設有觀景步道，可在橋上細賞淡水河岸風情。橋上的夜間景觀照明，讓淡水、八里沿岸的美景可以在夜色中呈現，有如淡水河面閃爍的星光。自行車道與汽車道分開，單車遊客可以悠閒的在這裡欣賞風景。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110005', '竹圍碼頭', 121.456624, 
- 25.136954, null, null);
+ 25.136954, load_blob('r5_3.jpg'), '從竹圍捷運站出來後，步行五分鐘左右就可看到新北市金色水岸自行車道往淡水老街方向一定會經過的竹圍碼頭站，之前可以在搭乘渡輪前往龍形碼頭，也有金龍餐廳提供的接送渡輪，但目前暫停營運。竹圍碼頭附近還有不少可供車友休憩喝水的地方，涼亭座位、樹蔭底下或是河岸階梯，都是休憩好選擇！自行車騎累了，可以在此享受靜謐時光，觀賞淡水河的靜態之美，獲得充分休息後繼續上路喔！');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110005', '紅樹林自然保留區', 121.454941, 
- 25.156343, null, null);
+ 25.156343, load_blob('r5_4.jpg'), '從竹圍到竿蓁，面積廣達76公頃的水筆仔純林，為水筆仔分布最北界全世界面積最大的一塊。紅樹科植物因其樹皮和木材呈紅色而得名，主要生長在熱帶和亞熱帶的河口和海濱，本區的紅樹林全屬水筆仔，為一種胎生的常綠喬木，所謂水筆仔，便是因其胎生苗形似筆桿而得名。出捷運紅樹林站後，沿外竿蓁林的50號巷子進入，即可來到紅樹林沼澤區，園區內有招潮蟹、彈塗魚等活躍其間，每年9月中旬至次年3月中旬，還有鷺鷥類、鷸類等水鳥，可說是豐富而便利的自然生態教室。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110005', '淡水老街', 121.445023, 
- 25.168947, null, null);
+ 25.168947, load_blob('r5_5.jpg'), '「淡水老街」不僅早已是全台知名熱門景點，同時也吸引不少外國人慕名而來。這裡街道兩旁林立熱鬧商店，有濃濃古早味的餅舖、雜貨店，也有賣潮流服飾、玩具，當然還有最吸引人的人氣美食如阿給、魚丸，另外還有古蹟可參觀，怎麼玩都不會膩。淡水老街分成外側靠淡水河岸的部分(金色水岸步道)與內側的老街，四處可見此區著名的古早味現烤蛋糕、烤魷魚、阿婆鐵蛋、魚酥、巨無霸冰淇淋還有淡水魚丸等等，都是來到此地必吃不可的美食。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110005', '漁人碼頭', 121.412545, 
- 25.184054, null, null);
+ 25.184054, load_blob('r5_6.jpg'), '淡水漁人碼頭位於新北市淡水區淡水河出海口右岸，舊名淡水第二漁港，完成於民國76年，近年在行政院農委會漁業署與新北市政府的聯合推動下，將漁港功能多元化，讓漁人碼頭搖身一變，成為一個兼具遊憩功能的港區公園。漁人碼頭為一浮動碼頭，有別於傳統結構的固定碼頭，可隨海水漲退潮而上下浮動，可同時容納150艘漁船停泊，相當壯觀。沿防波堤架高舖設的原木棧道，長約320公尺，是眺望海景與落日的絶佳場地。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110005', '淡海新市鎮', 121.43323, 
- 25.199476, null, null);
+ 25.199476, load_blob('r5_7.jpg'), '淡海新市鎮兼具山河海景觀，兼以淡水區原本濃厚的慢活、人文居住特質，其介於繁榮市區與低人口密度的三芝、石門、金山等，復能帶給住民平日工作、閒暇遊憩的均衡生活方式，由於這些難得特色，目前除了當地人移居需求外，淡海新市鎮已成為所謂的台北客(房地產界用以泛指平日以台北市區為生活、工作區域的中產階級居民)作為假日或近退休閑居階段的住宅選擇之一。');
  
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110006', '向山眺望平台', 120.901798, 
- 23.852882, null, null);
+ 23.852882, load_blob('r6_1.jpg'), '為一座10米高，以邵族「杵」的意象為設計概念的懸臂式觀景平台，鋼材打造的特殊構造可承載數十人，演繹出工程的結構美學。懸臂由岸邊漸漸傾斜伸向日月潭，除了提供更佳的視野，也營造一種俯衝入潭的錯覺。平台表面採用簍空的格柵，讓遊客體驗步行在樹梢及日月潭水面上的刺激感，並可盡情眺望拉魯島、涵碧半島及水社壩的美麗風光。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110006', '向山落羽松', 120.902147, 
- 23.853478, null, null);
+ 23.853478, load_blob('r6_2.jpg'), '向山遊客中心是秋日賞落羽松的熱門景點之一，近日湖畔旁的兩排落羽松轉色中，微風徐徐吹拂，吹起湖上波紋，枝葉隨風擺動，金黃落羽松與湖光山色相互輝映，景色詩情畫意，一旁的愛心花圃小花們也盛放著，很適合戀人拍美照，套個濾鏡美上加美。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110006', '永結同心橋', 120.902071, 
- 23.854627, null, null);
+ 23.854627, load_blob('r6_3.jpg'), '永結、同心橋鄰近向山遊客中心，為水社至向山的自行車道行經景點。永結橋長約54公尺，設計上主要考量到自行車騎乘的流暢性，順應著湖面勾引流暢的弧形橋面穿越山溝；同心橋設計構想起於日月潭邵族四手網之造型，另因同心橋特別搭配白色系橋樑主體來呼應婚紗色調，搭配鄰近婚紗廣場的同心橋，成為新人拍攝婚紗的熱門景點之一。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110006', '向山觀景臺', 120.902842, 
- 23.854693, null, null);
+ 23.854693, load_blob('r6_4.jpg'), '到日月潭想一次就將拉魯島、慈恩塔與水社壩盡收眼底，那麼即將在下個月在向山遊客中心啟用的「向山自行車道觀景台」就能完成所有遊客的心願，不但近可欣賞日月潭動人景緻，觀景台特殊的設計還能上下搖動，增加賞景樂趣。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110006', '水社壩', 120.901826, 
- 23.862151, null, null);
+ 23.862151, load_blob('r6_5.jpg'), '日月潭水社壩堰堤公園是日月潭唯一的出口，是為疏通日月潭與明潭之間的水量所建。水社壩或許不是日月潭為人所熟知的景點名稱，但是青山綠水的景緻總是吸引大批遊客駐足欣賞，沿著岸邊的木造步道漫步，潭水波光粼粼，雲霧間隱約露臉的層層山嵐，晚間滿天星斗倒映在湖面上，如畫般的景致令人心曠神怡，成為許多攝影師捕捉美景的首選地點。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110006', '日月潭調整池-餘水吐', 120.904196, 
- 23.862642, null, null);
+ 23.862642, load_blob('r6_6.jpg'), '用來排放日月潭多餘的水至水里溪，日月潭附近居民稱之為「天井」。溢水吐形狀成圓狀塔形，類似漏斗一樣只要潭水超過滿水位，就會自動流到溢水吐內排放!!');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110006', '湖畔自行車道', 120.923215, 
- 23.872445, null, null);
+ 23.872445, load_blob('r6_7.jpg'), '短暫休憩後再出發，時而下坡再上坡，迎風吹拂。途經日月潭纜車站，抬頭仰望天空除了可見纜車來回穿梭外，冬天時節這裡盛開粉色櫻花很是漂亮；中午時，可選擇於伊達邵商圈覓食，品嘗最道地的邵族美食，也可在此將補給品補齊後，再次上路出發! 來到慈恩塔與玄奘寺時，因位於高處可在此眺望並俯瞰日月潭美麗的潭景。經玄光寺停車場大彎坡後，一路下坡至頭社，此路段請留意並注意騎乘安全。最後自頭社返回向山遊客中心路線，坡度十分陡峭，為屬高強度。');
 
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
@@ -9208,8 +9208,8 @@ Insert into ACT_FAVORITE (SQ_ACTIVITY_ID,SQ_MEMBER_ID,FAVORITE_TIME) values ('AC
 
 
 --這一段的第一個值要看活動表格的pk欄值下去改(第一筆是01第二筆是02)
-Insert into ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_RESPONSE,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700008','910001','描述與事實不符',null,0); --這個部份的ID編號要看上面的並且一樣，用流水號會新增，這樣就錯了
-Insert into ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_RESPONSE,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700009','910001','地點標示錯誤',null,0);
+Insert into ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700008','910001','描述與事實不符',0); --這個部份的ID編號要看上面的並且一樣，用流水號會新增，這樣就錯了
+Insert into ACTIVITYREPORT (SQ_ACTIVITYREPORT_ID,SQ_ACTIVITY_ID,SQ_MEMBER_ID,REPORT_REASON,REPORT_STATUS) values (actreport_seq.NEXTVAL,'ACT-700009','910001','地點標示錯誤',0);
 
 --------------------------------------------------------
 --  for Table MEMBER_STORE_ACTIVITY
@@ -9437,27 +9437,27 @@ VALUES
 INSERT INTO  bike_type
 (sq_bike_type_id,bike_type_name,bike_title,bike_description,bike_photo,bike_daily_price,bike_hourly_price)
 VALUES
-(sq_bike_type_id.NEXTVAL,'公路單車','單車界的F1','它的特徵是擁有極細的輪胎和彎曲到下方的彎把。在單車體育賽事中，追求高速騎行性能而設計的一種。當然可以參加單車賽事，也可以騎著去上班。與風融為一體的快速騎行感覺，是公路單車的最大魅力也是其長處。', load_blob('bike_img_road1.jpg'),450,60);
+(sq_bike_type_id.NEXTVAL,'公路單車','單車界的F1','它的特徵是擁有極細的輪胎和彎曲到下方的彎把。在單車體育賽事中，追求高速騎行性能而設計的一種。當然可以參加單車賽事，也可以騎著去上班。與風融為一體的快速騎行感覺，是公路單車的最大魅力也是其長處。', load_blob('bike_img_road.jpg'),450,60);
 INSERT INTO  bike_type
 (sq_bike_type_id,bike_type_name,bike_title,bike_description,bike_photo,bike_daily_price,bike_hourly_price)
 VALUES
-(sq_bike_type_id.NEXTVAL,'公路越野車','具備多項功能的單車','是一款結合了公路單車和登山車兩種車型之長處的萬能單車。騎行非常流暢以及穩定。即使是崎嶇路面也能順暢行駛。此單車類型不僅適合休閒逛街騎乘，也非常適合初學者騎乘。可以依據用戶需求設定，來發揮它的全能性能。',load_blob('bike_img_cross1.jpg'),300,40);
+(sq_bike_type_id.NEXTVAL,'公路越野車','具備多項功能的單車','是一款結合了公路單車和登山車兩種車型之長處的萬能單車。騎行非常流暢以及穩定。即使是崎嶇路面也能順暢行駛。此單車類型不僅適合休閒逛街騎乘，也非常適合初學者騎乘。可以依據用戶需求設定，來發揮它的全能性能。',load_blob('bike_img_cross.jpg'),300,40);
 INSERT INTO  bike_type
 (sq_bike_type_id,bike_type_name,bike_title,bike_description,bike_photo,bike_daily_price,bike_hourly_price)
 VALUES
-(sq_bike_type_id.NEXTVAL,'登山車','不受任何地形限制的高性能單車','正如其名，是為了能順暢的行駛在山岳地帶或崎嶇路面而設計的一款單車，並充分發揮其疾馳的性能。輪胎寬厚，所以造成的路面阻力也大，在平整的路面上可能速度不是很快，但是不必受道路的崎嶇不平限制，可以說也是一款非常值得信賴的公路騎行單車。',load_blob('bike_img_mountain1.jpg'),300,40);
+(sq_bike_type_id.NEXTVAL,'登山車','不受任何地形限制的高性能單車','正如其名，是為了能順暢的行駛在山岳地帶或崎嶇路面而設計的一款單車，並充分發揮其疾馳的性能。輪胎寬厚，所以造成的路面阻力也大，在平整的路面上可能速度不是很快，但是不必受道路的崎嶇不平限制，可以說也是一款非常值得信賴的公路騎行單車。',load_blob('bike_img_mountain.jpg'),300,40);
 INSERT INTO  bike_type
 (sq_bike_type_id,bike_type_name,bike_title,bike_description,bike_photo,bike_daily_price,bike_hourly_price)
 VALUES
-(sq_bike_type_id.NEXTVAL,'小徑車','依據生活習慣來享受小徑車的樂趣','小徑單車有大約20英寸的輪胎。騎行非常輕便，適合要頻繁停車的日常騎車逛街的用戶。設計是自由型，可以折疊的款式，便於收納。依據個人生活習慣來調整的車型。不適合段差大和崎嶇不平的道路。',load_blob('bike_img_mini1.jpg'),400,50);
+(sq_bike_type_id.NEXTVAL,'小徑車','依據生活習慣來享受小徑車的樂趣','小徑單車有大約20英寸的輪胎。騎行非常輕便，適合要頻繁停車的日常騎車逛街的用戶。設計是自由型，可以折疊的款式，便於收納。依據個人生活習慣來調整的車型。不適合段差大和崎嶇不平的道路。',load_blob('bike_img_mini.jpg'),400,50);
 INSERT INTO  bike_type
 (sq_bike_type_id,bike_type_name,bike_title,bike_description,bike_photo,bike_daily_price,bike_hourly_price)
 VALUES
-(sq_bike_type_id.NEXTVAL,'城市單車','最常見的單車 ， 俗稱：媽媽車。','這是最常見的單車類型。一般用於購物、通勤或上學。在日常生活中，是一款實用性非常高的單車，特別適合女性和年長者。而且，單車種類非常豐富，從價格便宜的款式到時尚款式，適應不同需求。',load_blob('bike_img_city1.jpg'),200,30);
+(sq_bike_type_id.NEXTVAL,'城市單車','最常見的單車 ， 俗稱：媽媽車。','這是最常見的單車類型。一般用於購物、通勤或上學。在日常生活中，是一款實用性非常高的單車，特別適合女性和年長者。而且，單車種類非常豐富，從價格便宜的款式到時尚款式，適應不同需求。',load_blob('bike_img_city.jpg'),200,30);
 INSERT INTO  bike_type
 (sq_bike_type_id,bike_type_name,bike_title,bike_description,bike_photo,bike_daily_price,bike_hourly_price)
 VALUES
-(sq_bike_type_id.NEXTVAL,'電動單車','爬坡也可以很順暢','正如其名，借用電力作為前進動力的單車。騎單車載小孩或騎單車爬坡時，借用電力使你的行駛更加輕鬆。萬一電池沒電時，也可以和一般的單車一樣踩踏前行。',load_blob('bike_img_auto1.jpg'),500,65);
+(sq_bike_type_id.NEXTVAL,'電動單車','爬坡也可以很順暢','正如其名，借用電力作為前進動力的單車。騎單車載小孩或騎單車爬坡時，借用電力使你的行駛更加輕鬆。萬一電池沒電時，也可以和一般的單車一樣踩踏前行。',load_blob('bike_img_auto.jpg'),500,65);
 
 
 --------------------------------------------------------
