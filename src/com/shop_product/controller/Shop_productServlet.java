@@ -87,7 +87,7 @@ public class Shop_productServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {			
 					req.setAttribute("productVO", productVO); 
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back_end/Shop_product/addProduct.jsp");
+							.getRequestDispatcher("/back-end/Shop_product/addProduct.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -103,7 +103,7 @@ public class Shop_productServlet extends HttpServlet {
 			}catch(Exception e){
 				errorMsgs.add(e.getMessage());
 				e.printStackTrace();
-				RequestDispatcher fail = req.getRequestDispatcher("/back_end/Shop_product/addProduct.jsp");
+				RequestDispatcher fail = req.getRequestDispatcher("/back-end/Shop_product/addProduct.jsp");
 				fail.forward(req, res);
 			}
 		}
@@ -114,13 +114,13 @@ public class Shop_productServlet extends HttpServlet {
 				Shop_productService productSvc = new Shop_productService();
 				productSvc.deleteProduct(sq_product_id);
 				
-				String url = "/back_end/Shop_product/allShop_product.jsp";
+				String url = "/back-end/Shop_product/allShop_product.jsp";
 				RequestDispatcher success = req.getRequestDispatcher(url);
 				success.forward(req, res);
 			}catch(Exception e) {
 				errorMsgs.add("刪除失敗" + e.getMessage());
 				e.printStackTrace();
-				RequestDispatcher fail = req.getRequestDispatcher("/back_end/Shop_product/allShop_product.jsp");
+				RequestDispatcher fail = req.getRequestDispatcher("/back-end/Shop_product/allShop_product.jsp");
 				fail.forward(req, res);
 			}
 		}
@@ -137,19 +137,19 @@ public class Shop_productServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("sq_product_id", sq_product_id); 
 					RequestDispatcher fail = req
-							.getRequestDispatcher("/back_end/BrandBack/noData.jsp");
+							.getRequestDispatcher("/back-end/BrandBack/noData.jsp");
 					fail.forward(req, res);
 					return;
 				}
 				req.setAttribute("productVO", productVO);
-				String url = "/back_end/Shop_product/getProduct.jsp";
+				String url = "/back-end/Shop_product/getProduct.jsp";
 				RequestDispatcher success = req.getRequestDispatcher(url);
 				success.forward(req, res);
 			}catch(Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
 				e.printStackTrace();
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back_end/Shop_product/allShop_product.jsp");
+						.getRequestDispatcher("/back-end/Shop_product/allShop_product.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -168,7 +168,7 @@ public class Shop_productServlet extends HttpServlet {
 				}
 				
 				req.setAttribute("product_kind_name", product_kind_name);
-				String url = "/back_end/Shop_product/getProductBykind.jsp";				
+				String url = "/back-end/Shop_product/getProductBykind.jsp";				
 				RequestDispatcher success = req.getRequestDispatcher(url);
 				success.forward(req, res);
 				
@@ -176,7 +176,7 @@ public class Shop_productServlet extends HttpServlet {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
 				e.printStackTrace();
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back_end/Shop_product/allShop_product.jsp");
+						.getRequestDispatcher("/back-end/Shop_product/allShop_product.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -190,7 +190,7 @@ public class Shop_productServlet extends HttpServlet {
 				Shop_productVO productVO = productSvc.getOneById(sq_product_id);
 				
 				req.setAttribute("productVO", productVO);         
-				String url = "/back_end/Shop_product/updateProduct.jsp";
+				String url = "/back-end/Shop_product/updateProduct.jsp";
 				RequestDispatcher success = req.getRequestDispatcher(url);
 				success.forward(req, res);
 
@@ -198,7 +198,7 @@ public class Shop_productServlet extends HttpServlet {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
 				e.printStackTrace();
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back_end/Shop_product/allShop_product.jsp");
+						.getRequestDispatcher("/back-end/Shop_product/allShop_product.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -277,14 +277,14 @@ public class Shop_productServlet extends HttpServlet {
 				productVO = product.updateShop_product(sq_product_id, brand, kind_name, name, price, pic, detail, addDate, material, status);
 				session.removeAttribute("pic");
 				
-				String url = "/back_end/Shop_product/allShop_product.jsp";
+				String url = "/back-end/Shop_product/allShop_product.jsp";
 				RequestDispatcher success = req.getRequestDispatcher(url);
 				success.forward(req, res);
 				
 			}catch(Exception e){
 				errorMsgs.add(e.getMessage());
 				e.printStackTrace();
-				RequestDispatcher fail = req.getRequestDispatcher("/back_end/Shop_product/updateProduct.jsp");
+				RequestDispatcher fail = req.getRequestDispatcher("/back-end/Shop_product/updateProduct.jsp");
 				fail.forward(req, res);
 			}
 		}

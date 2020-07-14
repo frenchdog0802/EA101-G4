@@ -161,10 +161,9 @@
         });
       }
 	
-	$(function () {
-        $('.address-zone').ajaddress();
-    });
 	$(document).ready(function(){
+		$('.address-zone').ajaddress();
+		
 		$("#sConfirm").click(function(){
 			var name = $("#shopName").val();
 			console.log(name);

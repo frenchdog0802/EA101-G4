@@ -176,7 +176,7 @@
 				   					</td>
 				   					<td>${productVO.product_status}</td>              
 				    				<td>
-				    					<FORM METHOD="post" ACTION="product.do" style="position: relative;">
+				    					<FORM METHOD="post" ACTION="shop_product.do" style="position: relative;">
 										    <input type="submit" value="­×§ï" style="position: absolute; opacity: 0;">
 										    <input type="image" src="image/changeicon.png" alt="Submit" align="right" class="img-fluid"/>
 										    <input type="hidden" name="sq_product_id"  value="${productVO.sq_product_id}">
@@ -184,7 +184,7 @@
 										</FORM>
 				    				</td>
 				    				<td>
-										 <FORM METHOD="post" ACTION="product.do" style="position: relative;">
+										 <FORM METHOD="post" ACTION="shop_product.do" style="position: relative;">
 										   	<input type="submit" value="§R°£" style="position: absolute; opacity: 0;">
 										   	<input type="image" src="image/delicon.png" alt="Submit" align="right" class="img-fluid"/>
 									    	<input type="hidden" name="sq_product_id" value="${productVO.sq_product_id}">

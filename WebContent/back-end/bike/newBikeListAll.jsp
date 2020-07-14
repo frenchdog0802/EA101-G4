@@ -31,18 +31,27 @@ List<BikeVO> list1 = Arrays.asList(BikeVO);
 								<!--分頁自己改-->
 			<div class="row" style="background-color: white;">
 				<ul class="nav nav-tabs">
-					<li class="nav-item "><a class="nav-link" href="<%=request.getContextPath()%>/back-end/bike/bikeTypeListAll.jsp"><span>車種管理</span></a>
-					<!--在哪一個頁面就哪加active和span的style--></li>
-					<li class="nav-item "><a class="nav-link active" href="<%=request.getContextPath()%>/back-end/bike/newBikeListAll.jsp"><span style="padding-bottom: 8px; border-bottom: 3px blue solid;">車輛管理</span></a>
-					</li>
-					<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><span>訂單管理</span></a>
-					</li>
+					<li class="nav-item ">
+					<a class="nav-link" href="<%=request.getContextPath()%>/back-end/bike/bikeTypeListAll.jsp">
+						<span>車種管理</span>
+					</a>
+				</li>
+				<li class="nav-item ">
+					<a class="nav-link active" href="<%=request.getContextPath()%>/back-end/bike/newBikeListAll.jsp">
+						<span  style="padding-bottom: 8px; border-bottom: 3px blue solid;">車輛管理</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+						<span>訂單管理</span>
+					</a>
+				</li>
 				</ul>
 			</div>
 								<!--分頁自己改-->
 <!-- --------------------------------------------------------------------------------------------->
 								<!-----------backNav----------->
-	<%@include file="/back-end/backFrame/backNav"%>
+<%@include file="/back-end/backFrame/masterBackNav"%>
 								<!-----------backNav----------->
 <!-- --------------------------------------------------------------------------------------------->				
 <!-- 	<div class="container"> -->
@@ -60,6 +69,7 @@ List<BikeVO> list1 = Arrays.asList(BikeVO);
 <!-- 		</form> -->
 <!-- 	</div> -->
 	<div class="container-fluid">
+	
 		<div class="row collapse" id="collapseExample">
 			<div class="col-1"></div>
 			<div class="col-6 my-1">
@@ -68,6 +78,7 @@ List<BikeVO> list1 = Arrays.asList(BikeVO);
 			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeRentHistory.jsp'">歷史訂單</button>
 			</div>
 		</div>	
+			
 		<form class="form-inline"
 		ACTION="<%=request.getContextPath()%>/bike/BikeServlet.do">
 		<div class="form-group mx-sm-3 mt-3">
@@ -113,7 +124,7 @@ List<BikeVO> list1 = Arrays.asList(BikeVO);
 </div>
 </div>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
+<%-- <script src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script> --%>
 
 <script>
 	$(function(){
