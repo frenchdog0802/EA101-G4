@@ -3,9 +3,11 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.act.model.*"%>
 <%@ page import="com.actjoin.model.*"%>
+<%@ page import="com.member.model.*"%>
 <jsp:useBean id="actreportSvc" class="com.actreport.model.ActReportService"/>
 <%
-	String sq_member_id = (String)session.getAttribute("sq_member_id");
+	MemVO memVO = (MemVO)session.getAttribute("MemVO");
+	String sq_member_id = memVO.getSq_member_id();
 	if(sq_member_id==null) {
 		session.setAttribute("sq_member_id", "910003");
 	}

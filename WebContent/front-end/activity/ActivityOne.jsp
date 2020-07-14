@@ -5,9 +5,10 @@
 <%@ page import="com.actjoin.model.*"%>
 <%@ page import="com.actfavor.model.*"%>
 <%@ page import="com.actreport.model.*"%>
-
+<%@ page import="com.member.model.*"%>
 <%
-	String sq_member_id = (String)session.getAttribute("sq_member_id");
+	MemVO memVO = (MemVO)session.getAttribute("MemVO");
+	String sq_member_id = memVO.getSq_member_id();
 %>
 <%
 	java.sql.Date date = new java.sql.Date(System.currentTimeMillis());

@@ -12,6 +12,7 @@ import com.actjoin.model.ActJoinService;
 import com.actjoin.model.ActJoinVO;
 import com.actreport.model.ActReportService;
 import com.actreport.model.ActReportVO;
+import com.member.model.MemVO;
 import com.route.model.RouteService;
 import com.route.model.RouteVO;
 
@@ -29,10 +30,11 @@ public class ActServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		HttpSession session = req.getSession();
-		String sq_member_id = (String)session.getAttribute("sq_member_id");
-			if(sq_member_id==null) {
-				session.setAttribute("sq_member_id", "910003");
-			}
+		MemVO memVO = (MemVO)session.getAttribute("MemVO");
+		String sq_member_id = memVO.getSq_member_id();
+		if(sq_member_id==null) {
+			session.setAttribute("sq_member_id", "910003");
+		}
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
