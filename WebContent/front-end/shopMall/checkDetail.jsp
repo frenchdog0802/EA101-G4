@@ -68,7 +68,7 @@
 					  					</tr>
 					  					<tr>
 						    				<td class="takedt_t" style="border-right: 1px #cccccc solid;"><span>配送方式</span></td>
-						    				<td class="takedt_td">未做</td>
+						    				<td class="takedt_td"><%= mapCus.get("paymode")%></td>
 						    			</tr>
 						   				<tr>
 						    				<td class="takedt_t" style="border-right: 1px #cccccc solid;"><span>收件地址</span></td>

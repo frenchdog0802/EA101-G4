@@ -27,9 +27,9 @@
 							<div class="row">
 								<div class="col-6 choshop pl-5 mt-3" id="choshop">
 									<form class="pl-4">
-										<input type="radio" name="service" id="home" class="mb-2" checked="true"> 
+										<input type="radio" name="service" id="home" value="home" class="mb-2" checked="true"> 
 										<label for="home">宅配到點</label><br>
-										<input type="radio" name="service" id="store" class="mb-2"> 
+										<input type="radio" name="service" id="store" value="store" class="mb-2"> 
 										<label for="store">超商取貨</label><br>
 									</form>
 									<table class="address-zone">
@@ -65,7 +65,7 @@
 <!-- 										<button id="sClear">清空</button> -->
 										<button id="sConfirm" disabled="disabled">確認</button>
 									</div>
-								</div><div></div>
+								</div>
 								<div class="col-6 pt-2 pl-4">
 									<div id="map" style="height: 250px;width: 80%;"></div>
 								</div>
@@ -126,8 +126,8 @@
 					    					<div class="pt-2 pl-3 pb-2" style="background-color: #cccccc;">
 					    						<div class="finalbtn">
 					    							<button class="btn bg-secondary">上一步</button>
-					<!-- 			    				<button class="btn bg-secondary">下一步</button> -->												
-								    				<input type="submit" value="下一步">
+								    				<button class="btn bg-secondary">下一步</button>			
+								    				<input type="hidden" name="paymode" id="paymode" value="">									
 								    				<input type="hidden" name="action" value="toCheck">								    			
 								    			</div>
 							    			</div>
@@ -145,7 +145,7 @@
  		
 	<%@include file="/front-end/page-file/page-footer"%>
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-	<script src="js/aj-address.js" type="text/javascript"></script>
+	<script src="<%=request.getContextPath()%>/front-end/shopMall/js/aj-address.js" type="text/javascript"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8wygDormdKxQnhWGlBHvYJ7Q2HsT7F14&callback=initMap"></script>
 	<script>
 	
@@ -162,10 +162,19 @@
       }
 	
 	$(document).ready(function(){
+		
+		var a = $('input[name=service]:checked').val();
+		$('#paymode').val(a);
+		console.log($('#paymode').val());
+		$('input[name=service]').change(function(){
+			var b = $('input[name=service]:checked').val();
+			$('#paymode').val(b);
+		});
+		
 		$('.address-zone').ajaddress();
 		
 		$("#sConfirm").click(function(){
-			var name = $("#shopName").val();
+			var name = $("#c3").val();
 			console.log(name);
 			$.ajax({
 	        	type : "POST",		  
@@ -178,6 +187,7 @@
 	        	success : function(data){
 	        		initMap(data[0].lat, data[0].lon);
 	        		$("#taddress").val(data[0].address);
+	        		console.log($("input[name=taddress]").val());
 	        	}
 	    	});
 		});
@@ -236,21 +246,20 @@
 	var c2 = document.getElementById("c2");
 	var c3 = document.getElementById("c3");
 	var sConfirm = document.getElementById("sConfirm");
-    var address = document.getElementById("taddress");
 	$('input[name=service]').change(function(){
 		if(store.checked){
 			c1.removeAttribute('disabled');
 			c2.removeAttribute('disabled');
 			c3.removeAttribute('disabled');
 			sConfirm.removeAttribute('disabled');
-			address.setAttribute('disabled', 'disabled');
+			$('#taddress').attr('readonly', true);
 		}
 		if(home.checked){
 			c1.setAttribute('disabled', 'disabled');
 			c2.setAttribute('disabled', 'disabled');
 			c3.setAttribute('disabled', 'disabled');
 			sConfirm.setAttribute('disabled', 'disabled');
-			address.removeAttribute('disabled');
+			$('#taddress').attr('readonly', false);
 		}
 	});
 	

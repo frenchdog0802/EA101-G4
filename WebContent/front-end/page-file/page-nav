@@ -70,8 +70,8 @@
                         <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">揪團活動</a>
                         <!--text-dark active nav-item  -->
                         <div class="dropdown-menu" aria-lablelledby="dropdownId">
-                            <a href="#" class="dropdown-item">test1</a>
-                            <a href="#" class="dropdown-item">test2</a>
+                            <a href="<%=request.getContextPath()%>/front-end/activity/Activity.jsp" class="dropdown-item">活動列表</a>
+                            <a href="<%=request.getContextPath()%>/front-end/activity/FrontaddAct.jsp" class="dropdown-item">建立活動</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown navhover">
@@ -111,7 +111,7 @@
                         <!--text-dark active nav-item  -->
                         <div class="dropdown-menu" aria-lablelledby="dropdownId">
                             <a href="<%=request.getContextPath()%>/front-end/member/listOneMem.jsp" class="dropdown-item">個人資訊</a>
-                            <a href="#" class="dropdown-item">test2</a>
+                            <a href="<%=request.getContextPath()%>/front-end/activity/Actmanagement.jsp" class="dropdown-item">活動管理</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
