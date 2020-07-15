@@ -167,13 +167,15 @@ label {
     console.log(positionWs);
 	
 	
-	//租車站點
-	var markersR = [];
+    var markersR = [];
 	var positionR = [
 		<c:forEach var="BikeStoreVO" items="${bikeStoreSvc.all}" > 
 			{label : '${BikeStoreVO.bike_store_name}',
-	        lat : ${BikeStoreVO.store_latitute},
-	       	lng : ${BikeStoreVO.store_longitute}},
+			 phone : '${BikeStoreVO.phone}',
+			 location : '${BikeStoreVO.location}',
+			 sq_bike_store_id : '${BikeStoreVO.sq_bike_store_id}',
+	         lat : ${BikeStoreVO.store_latitute},
+	       	 lng : ${BikeStoreVO.store_longitute}},
         </c:forEach>
 	];
 
@@ -269,7 +271,8 @@ label {
 				map : map,
 				//label: positionWs[e].label,
 				animation : google.maps.Animation.DROP,
-				icon:'https://img.icons8.com/officexs/16/000000/bottle-of-water.png'
+//				icon:'https://img.icons8.com/officexs/16/000000/bottle-of-water.png'
+				icon:'https://img.icons8.com/ultraviolet/40/000000/bottle-of-water.png'
 			}));
 
 console.log(positionWs[e].sqStationId);
@@ -341,12 +344,18 @@ console.log(positionWs[e].sqStationId);
 					map : map,
 					//label: positionWs[e].label,
 					animation : google.maps.Animation.DROP,
-					icon:'https://img.icons8.com/material-two-tone/24/000000/bike-path.png'
+// 					icon:'https://img.icons8.com/material-two-tone/24/000000/bike-path.png'
+					icon:'https://img.icons8.com/ios/50/000000/bicycle.png'
 				}));
 				
 				
 				var infowindow = new google.maps.InfoWindow({
 				    content: positionR[e].label,
+				    content: '租車店名稱：'+positionR[e].label+
+				    		 '<br>'+'連絡電話：'+positionR[e].phone+
+				    		 '<br>'+'地址：'+positionR[e].location+
+							 '<br>圖片：<img id="demo" src="<%=request.getContextPath()%>/bike/BikeStoreDBReader.do?sq_bike_store_id='+positionR[e].sq_bike_store_id+'"'+'style="width: 150px; height: 150px">', 
+					 
 				    position: {
 						lat : positionR[e].lat,
 						lng : positionR[e].lng

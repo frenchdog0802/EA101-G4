@@ -184,18 +184,11 @@ label {
 				// 將資訊視窗的位置，設定為滑鼠的座標
 					infowindow.setPosition(coordinate);
 					
-					var checkSubmitFlg = false;
-					function checkSubmit(){
-						if(checkSubmitFlg ==true){ 
-							return false; //當表單被提交過一次後checkSubmitFlg將變為true,根據判斷將無法進行提交。
-						}
-						checkSubmitFlg ==true;
-						return true;
-					}
+
 					
 					// 設定資訊視窗的內容為行政區名稱
 					infowindow.setContent(
-							'<FORM METHOD="post" ACTION="water.do" name="form1"	enctype="multipart/form-data">'+
+							'<FORM METHOD="post" ACTION="water.do" name="form1" onsubmit="return checkSubmit()" enctype="multipart/form-data">'+
 								'<table>'+
 									'<tr>'+
 										'<td>補給站名稱：</td>'+
@@ -277,6 +270,14 @@ label {
 
 	}
 	
+	var checkSubmitFlg = false;
+	function checkSubmit(){
+		if(checkSubmitFlg ==true){ 
+			return false; //當表單被提交過一次後checkSubmitFlg將變為true,根據判斷將無法進行提交。
+		}
+		checkSubmitFlg ==true;
+		return true;
+	}
 	
 	
 		
@@ -316,7 +317,8 @@ label {
 					map : map,
 					//label: positionWs[e].label,
 					animation : google.maps.Animation.DROP,
-					icon:'https://img.icons8.com/officexs/16/000000/bottle-of-water.png'
+// 					icon:'https://img.icons8.com/officexs/16/000000/bottle-of-water.png'
+					icon:'https://img.icons8.com/ultraviolet/40/000000/bottle-of-water.png'
 				}));
 
 	console.log(positionWs[e].sqStationId);
@@ -388,7 +390,8 @@ label {
 					map : map,
 					//label: positionWs[e].label,
 					animation : google.maps.Animation.DROP,
-					icon:'https://img.icons8.com/material-two-tone/24/000000/bike-path.png'
+// 					icon:'https://img.icons8.com/material-two-tone/24/000000/bike-path.png'
+					icon:'https://img.icons8.com/ios/50/000000/bicycle.png'
 				}));
 				
 				
