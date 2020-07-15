@@ -6,8 +6,7 @@
 QuestionVO questionVo = (QuestionVO) request.getAttribute("questionVo");
 %>
 
-<html>
-<head>
+<%@include file="/back-end/backFrame/backHeader"%>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>員工資料新增 - addQus.jsp</title>
 
@@ -42,16 +41,21 @@ QuestionVO questionVo = (QuestionVO) request.getAttribute("questionVo");
     padding: 1px;
   }
 </style>
-
-</head>
-<body bgcolor='white'>
-
-<table id="table-1">
-	<tr><td>
-		 <h3>員工資料新增 - addQus.jsp</h3></td><td>
-		 <h4><a href="<%=request.getContextPath()%>/question/select_pageQus.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
+<%@include file="/back-end/backFrame/backBody"%>
+<div class="row" style="background-color: white;">
+					<ul class="nav nav-tabs">
+					  <li class="nav-item">
+					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">item1</span></a><!--在哪一個頁面就哪加active和span的style-->
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>item2</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>item3</span></a>
+					  </li>
+					</ul>
+				</div>	
+<%@include file="/back-end/backFrame/backNav"%>				
 
 <h3>資料新增:</h3>
 
@@ -85,10 +89,4 @@ QuestionVO questionVo = (QuestionVO) request.getAttribute("questionVo");
 <br>
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="送出新增"></FORM>
-</body>
-
-
-
-
-
-</html>
+<%@include file="/back-end/backFrame/backFooter"%>
