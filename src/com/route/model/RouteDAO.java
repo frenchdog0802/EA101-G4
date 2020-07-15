@@ -40,7 +40,7 @@ public class RouteDAO implements RouteDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO ROUTE_PLAN(SQ_ROUTE_ID, SQ_MEMBER_ID, ROUTE_NAME, DISTANCE, COUNTRY, START_AREA, END_AREA, ROUTE_IMAGE, ROUTE_INTRODUCTION,CHECK_FLAG, ADD_ROUTE) VALUES (('RP'||LPAD(to_char(route_plan_sequence.NEXTVAL), 6, '0')),?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM ROUTE_PLAN  ORDER BY SQ_ROUTE_ID";
 	private static final String GET_ONE_STMT = "SELECT SQ_ROUTE_ID, SQ_MEMBER_ID, SQ_STAFF_ID, ROUTE_NAME, DISTANCE, COUNTRY, START_AREA, END_AREA, ROUTE_IMAGE, ROUTE_INTRODUCTION, INSERT_TIMESTAMP, UPDATE_TIMESTAMP, MODIFY_ID, CHECK_FLAG, ADD_ROUTE FROM ROUTE_PLAN WHERE SQ_ROUTE_ID =?";
-	private static final String GET_Area_ByStartArea_STMT = "SELECT SQ_ROUTE_ID, ROUTE_NAME, DISTANCE, COUNTRY, START_AREA, END_AREA, ROUTE_IMAGE, ROUTE_INTRODUCTION FROM ROUTE_PLAN WHERE START_AREA IN ";
+	private static final String GET_Area_ByStartArea_STMT = "SELECT SQ_ROUTE_ID, ROUTE_NAME, DISTANCE, COUNTRY, START_AREA, END_AREA, ROUTE_IMAGE, ROUTE_INTRODUCTION, ADD_ROUTE FROM ROUTE_PLAN WHERE START_AREA IN ";
 	private static final String GET_Route_ByMemId = "SELECT SQ_ROUTE_ID, ROUTE_NAME, DISTANCE, COUNTRY, START_AREA, END_AREA, ROUTE_IMAGE, ROUTE_INTRODUCTION FROM ROUTE_PLAN WHERE SQ_MEMBER_ID=?";
 	private static final String GET_RouteID_ByRouteName = "SELECT SQ_ROUTE_ID FROM ROUTE_PLAN WHERE ROUTE_NAME=?";
 	
@@ -438,6 +438,7 @@ System.out.println(routeVO.getSqMemberId());
 //				Blob blob = rs.getBlob("ROUTE_IMAGE");
 //				routeVO.setRouteImage(blobToByteArr(blob));
 				routeVO.setRouteIntroduction(rs.getString("ROUTE_INTRODUCTION"));
+				routeVO.setAddRoute(rs.getInt("ADD_ROUTE"));
 				routeVO.setSqRouteId(rs.getString("SQ_ROUTE_ID"));
 				list.add(routeVO);
 			}
