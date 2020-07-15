@@ -2,7 +2,17 @@
 	pageEncoding="UTF-8"%>
 
 <%@ page import ="java.util.*" %>
+<%@ page import = "com.frontIndex.model.*"%>
+<%@ page import = "com.act.model.*"%>
+<%@ page import = "com.route.model.*"%>
+<%@ page import = "com.shop_product.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	FrontIndexService indexSvc = new FrontIndexService();
+	List<ActVO> actList = indexSvc.getFourAct();
+	List<RouteVO> routeList = indexSvc.getFourRoute();
+	List<Shop_productVO> productList = indexSvc.getFourProduct();
+%>
 <html>
 <head>
 <!-- Required meta tags always come first -->
@@ -24,6 +34,12 @@
 @import
 	url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&display=swap')
 	;
+.imgDiv{
+	height:100%; 
+	display:table-cell; 
+	vertical-align: middle; 
+	text-align:center;
+}
 </style>
 
 <link rel="stylesheet"
@@ -196,134 +212,101 @@
 	<div class="container-fluid">
 		<div class="row">
 			<!-- sidebar-left -->
-			<div class="col-2 ">
-				<div class="row sidebarYellow-1 ">
-					<div class="col m-5 py-5">
-						<h2 class="h2 font-weight-bold mt-5">北台灣</h2>
-						<p class="small">台北、新北、基隆、桃園、新竹、苗栗</p>
-						<a href="#" class="btn btn-outline-dark mb-5  "> <span
-							class="small">查看北台灣路線</span>
-						</a>
-					</div>
+			<div class="col-lg-2 col-sm-12 sidebarYellow-1 py-5">
+				<div class="m-5 py-5" style="text-align:center;">
+					<h2 class="h2 font-weight-bold mt-5">最新活動</h2>
+					<hr>
+					<a href="#" class="btn btn-outline-dark mb-5"> <span
+						class="small">查看所有活動</span>
+					</a>
 				</div>
-				<div class="row sidebarYellow-2 ">
-					<div class="col m-5 py-5">
-						<h2 class="h2 font-weight-bold mt-5">中台灣</h2>
-						<p class="small">台中、彰化、南投、雲林</p>
-						<a href="#" class="btn btn-outline-dark mb-5 "> <span
-							class="small">查看中台灣路線</span>
-						</a>
+			</div>	
+			<div class="col-lg-10 col-md-6 col-sm-12">
+				<div class="row h-100 px-3 pt-4">
+					<%for(int i=0;i<actList.size(); i++){%>
+					<div class="col-lg-3 col-md-6 col-sm-12">
+						<div class="row" style="height:75%;">
+							<div class="col-12" style="height:100%; display:table;">
+								<div class="imgDiv">
+									<img src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='<%=actList.get(i).getSq_activity_id()%>'" class="img-thumbnail" 
+									 alt="">
+								</div>
+							</div>
+						</div>
+						<div class="row" style="height:25%;">
+							<div class="col-12">
+								<h5><%=actList.get(i).getAct_title() %></h5>
+								<span>開始時間 : <%=actList.get(i).getAct_start_time() %></span>
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="row sidebarYellow-1 ">
-					<div class="col m-5 py-5">
-						<h2 class="h2 font-weight-bold mt-5">南台灣</h2>
-						<p class="small">嘉義、台南、高雄、屏東</p>
-						<a href="#" class="btn btn-outline-dark mb-5 "> <span
-							class="small">查看南台灣路線</span>
-						</a>
-					</div>
-				</div>
-				<div class="row sidebarYellow-2 ">
-					<div class="col m-5 py-5">
-						<h2 class="h2 font-weight-bold mt-5">東台灣</h2>
-						<p class="small">宜蘭、花蓮、台東</p>
-						<a href="#" class="btn btn-outline-dark mb-5 "> <span
-							class="small">查看東台灣路線</span>
-						</a>
-					</div>
+					<%}%>
 				</div>
 			</div>
-
-			<!-- sidebar-right -->
-			<div class="col-10 ">
-				<div class="row ">
-					<div class="col  ">
-						<img src="首頁img/2.jpg" class="img-thumbnail mt-4 mb-1" alt="">
-						<h5>lorem</h5>
-						<span>Lorem ipsum dolor.</span>
-					</div>
-					<div class="col ">
-						<img src="首頁img/3.jpg" class="img-thumbnail mt-4 mb-1" alt="">
-						<h5 class="">lorem</h5>
-						<span>Lorem ipsum dolor.</span>
-					</div>
-					<div class="col ">
-						<img src="首頁img/4.jpg" class="img-thumbnail mt-4 mb-1" alt="">
-						<h5 class="">lorem</h5>
-						<span>Lorem ipsum dolor.</span>
-					</div>
-					<div class="col ">
-						<img src="首頁img/5.jpg" class="img-thumbnail mt-4 mb-1" alt="">
-						<h5 class="">lorem</h5>
-						<span>Lorem ipsum dolor.</span>
-					</div>
+		</div>
+		<div class="row">
+			<!-- sidebar-left -->
+			<div class="col-lg-2 col-sm-12 sidebarYellow-2 py-5">
+				<div class="m-5 py-5" style="text-align:center;">
+					<h2 class="h2 font-weight-bold mt-5">最新路線</h2>
+					<hr>
+					<a href="#" class="btn btn-outline-dark mb-5 "> <span
+						class="small">查看所有路線</span>
+					</a>
 				</div>
-				<div class="row rowGray my-5 ">
-					<div class="col my-4">
-						<img src="首頁img/6.jpg" class="img-thumbnail mb-1" alt="">
-						<h5 class="">lorem</h5>
-						<span>Lorem ipsum dolor.</span>
+			</div>	
+			<div class="col-lg-10 col-md-6 col-sm-12 rowGray">
+				<div class="row h-100 px-3 pt-4">
+					<%for(int i=0;i<routeList.size(); i++){%>
+						<div class="col-lg-3 col-md-6 col-sm-12">
+						<div class="row" style="height:75%;">
+							<div class="col-12" style="height:100%; display:table;">
+								<div class="imgDiv">
+								<img src="<%=request.getContextPath()%>/back-end/route/route.img?SQ_ROUTE_ID=<%=routeList.get(i).getSqRouteId()%>" class="img-thumbnail" 
+								 alt="">
+							</div>
+							</div>
+						</div>
+						<div class="row" style="height:25%;">
+							<div class="col-12">
+							<h5><%=routeList.get(i).getRouteName()%></h5>
+							<span style="margin-right:10px;">開始地點 : <%=routeList.get(i).getStartArea()%></span>
+							<span style="margin-left:10px;">結束地點 : <%=routeList.get(i).getEndArea()%></span>
+						</div>
+						</div>
 					</div>
-					<div class="col my-4">
-						<img src="首頁img/7.jpg" class="img-thumbnail mb-1" alt="">
-						<h5 class="">lorem</h5>
-						<span>Lorem ipsum dolor.</span>
-					</div>
-					<div class="col my-4">
-						<img src="首頁img/8.jpg" class="img-thumbnail mb-1" alt="">
-						<h5 class="">lorem</h5>
-						<span>Lorem ipsum dolor.</span>
-					</div>
-					<div class="col my-4">
-						<img src="首頁img/9.jpg" class="img-thumbnail mb-1" alt="">
-						<h5 class="">lorem</h5>
-						<span>Lorem ipsum dolor.</span>
-					</div>
+					<%}%>
 				</div>
-				<div class="row my-5">
-					<div class="col ">
-						<img src="首頁img/18.jpg" class="img-thumbnail mb-1" alt="">
-						<h5 class="">lorem</h5>
-						<span>Lorem ipsum dolor.</span>
-					</div>
-					<div class="col ">
-						<img src="首頁img/11.jpg" class="img-thumbnail mb-1" alt="">
-						<h5 class="">lorem</h5>
-						<span>Lorem ipsum dolor.</span>
-					</div>
-					<div class="col">
-						<img src="首頁img/12.jpg" class="img-thumbnail mb-1" alt="">
-						<h5 class="">lorem</h5>
-						<span>Lorem ipsum dolor.</span>
-					</div>
-					<div class="col">
-						<img src="首頁img/13.jpg" class="img-thumbnail mb-1" alt="">
-						<h5 class="">lorem</h5>
-						<span>Lorem ipsum dolor.</span>
-					</div>
+			</div>
+		</div>
+		<div class="row">
+			<!-- sidebar-left -->
+			<div class="col-lg-2 col-sm-12 sidebarYellow-1 py-5">
+				<div class="m-5 py-5" style="text-align:center;">
+					<h2 class="h2 font-weight-bold mt-5">最新商品</h2>
+					<hr>
+					<a href="#" class="btn btn-outline-dark mb-5"> <span class="small">前往商城</span></a>
 				</div>
-				<div class="row rowGray mb-5">
-					<div class="col ">
-						<img src="首頁img/14.jpg" class="img-thumbnail mb-1" alt="">
-						<h5 class="">lorem</h5>
-						<span>Lorem ipsum dolor.</span>
+			</div>				
+			<div class="col-lg-10 col-md-6 col-sm-12">
+				<div class="row h-100 px-3 pt-4">
+					<%for(int i=0;i<actList.size(); i++){%>
+					<div class="col-lg-3 col-md-6 col-sm-12">
+						<div class="row" style="height:75%;">
+							<div class="col-12" style="height:100%; display:table;">
+								<div class="imgDiv">
+									<img src="<%=request.getContextPath()%>/showImg4?id=<%=productList.get(i).getSq_product_id()%>" class="img-thumbnail" style="width:80%;" alt="">
+								</div>
+							</div>
+						</div>
+						<div class="row" style="height:25%;">
+							<div class="col-12">
+								<h5><%=productList.get(i).getProduct_name()%></h5>
+								<span>價格 : <%=productList.get(i).getProduct_price()%></span>
+							</div>
+						</div>
 					</div>
-					<div class="col ">
-						<img src="首頁img/15.jpg" class="img-thumbnail mb-1" alt="">
-						<h5 class="">lorem</h5>
-						<span>Lorem ipsum dolor.</span>
-					</div>
-					<div class="col ">
-						<img src="首頁img/16.jpg" class="img-thumbnail mb-1" alt="">
-						<h5 class="">lorem</h5>
-						<span>Lorem ipsum dolor.</span>
-					</div>
-					<div class="col ">
-						<img src="首頁img/17.jpg" class="img-thumbnail mb-1" alt="">
-						<h5 class="">lorem</h5>
-						<span>Lorem ipsum dolor.</span>
-					</div>
+					<%}%>
 				</div>
 			</div>
 		</div>
