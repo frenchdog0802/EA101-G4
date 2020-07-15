@@ -31,93 +31,109 @@
 </head>
 <body>
 	<!-- 導覽列 -->
-	<div class="row ">
-		<div class="col">
-			<nav class="navbar navbar-expand-lg navbar-dark font-weight-bold">
-				<h1 class="navbar-brand">
-					<!-- 導覽列圖片 -->
-					<!-- <img src="https://img.icons8.com/ios/50/000000/cycling-bmx.png" /> -->
-					<img src="bike-img/home10.png" />
-				</h1>
-				<button data-toggle="collapse" class="navbar-toggler"
-					data-target="#submenu">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse justify-content-lg-end"
-					id="submenu">
-					<ul class="nav navbar-nav">
-						<li class="nav-item dropdown navhover"><a href="#"
-							class="nav-link dropdown-toggle text-dark" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">最新消息</a> <!--text-dark active nav-item  -->
-							<div class="dropdown-menu" aria-lablelledby="dropdownId">
-								<a href="#" class="dropdown-item">test1</a> <a href="#"
-									class="dropdown-item">test2</a>
-							</div></li>
-						<li class="nav-item dropdown navhover"><a href="#"
-							class="nav-link dropdown-toggle text-dark" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">購物商城</a> <!--text-dark active nav-item  -->
-							<div class="dropdown-menu" aria-lablelledby="dropdownId">
-								<a href="#" class="dropdown-item">test1</a> <a href="#"
-									class="dropdown-item">test2</a>
-							</div></li>
-						<li class="nav-item dropdown navhover"><a href="#"
-							class="nav-link dropdown-toggle text-dark" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">我要租車</a> <!--text-dark active nav-item  -->
-							<div class="dropdown-menu" aria-lablelledby="dropdownId">
-								<a href="#" class="dropdown-item">test1</a> <a href="#"
-									class="dropdown-item">test2</a>
-							</div></li>
-						<li class="nav-item dropdown navhover"><a href="#"
-							class="nav-link dropdown-toggle text-dark" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">揪團活動</a> <!--text-dark active nav-item  -->
-							<div class="dropdown-menu" aria-lablelledby="dropdownId">
-								<a href="#" class="dropdown-item">test1</a> <a href="#"
-									class="dropdown-item">test2</a>
-							</div></li>
-						<li class="nav-item dropdown navhover"><a href="#"
-							class="nav-link dropdown-toggle text-dark" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">路線規劃</a> <!--text-dark active nav-item  -->
-							<div class="dropdown-menu" aria-lablelledby="dropdownId">
-								<a href="#" class="dropdown-item">test1</a> <a href="#"
-									class="dropdown-item">test2</a>
-							</div></li>
-						<li class="nav-item dropdown navhover"><a href="#"
-							class="nav-link dropdown-toggle text-dark" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">討論區</a> <!--text-dark active nav-item  -->
-							<div class="dropdown-menu" aria-lablelledby="dropdownId">
-								<a href="#" class="dropdown-item">test1</a> <a href="#"
-									class="dropdown-item">test2</a>
-							</div></li>
-						<li class="nav-item dropdown navhover"><a href="#"
-							class="nav-link dropdown-toggle text-dark" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">FAQ</a> <!--text-dark active nav-item  -->
-							<div class="dropdown-menu" aria-lablelledby="dropdownId">
-								<a href="#" class="dropdown-item">test1</a> <a href="#"
-									class="dropdown-item">test2</a>
-							</div></li>
-						<li class="nav-item dropdown navhover"><a href="#"
-							class="nav-link dropdown-toggle text-dark" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">騎乘小叮嚀</a> <!--text-dark active nav-item  -->
-							<div class="dropdown-menu" aria-lablelledby="dropdownId">
-								<a href="#" class="dropdown-item">test1</a> <a href="#"
-									class="dropdown-item">test2</a>
-							</div></li>
-						<li class="nav-item dropdown navhover"><a href="#"
-							class="nav-link dropdown-toggle text-dark" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">會員中心</a> <!--text-dark active nav-item  -->
-							<div class="dropdown-menu" aria-lablelledby="dropdownId">
-								<a href="#" class="dropdown-item">test1</a> <a href="#"
-									class="dropdown-item">test2</a>
-							</div></li>
-						<li class="nav-item dropdown"><a href="#"
-							class="nav-item nav-link btn-dark rounded text-white"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sign-in</a>
-							<!--text-dark active nav-item  --></li>
-					</ul>
-				</div>
-			</nav>
-		</div>
-	</div>
+ <div class="row ">
+    <div class="col">
+        <nav class="navbar navbar-expand-lg navbar-dark font-weight-bold page-nav" >
+            <h1 class="navbar-brand">
+                <!-- 導覽列圖片 -->
+                <!-- <img src="https://img.icons8.com/ios/50/000000/cycling-bmx.png" /> -->
+                <img src="<%=request.getContextPath()%>/front-end/page-file/img/home10.png" />
+            </h1>
+            <button data-toggle="collapse" class="navbar-toggler" data-target="#submenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-lg-end" id="submenu">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item dropdown navhover">
+                        <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">最新消息</a>
+                        <!--text-dark active nav-item  -->
+                        <div class="dropdown-menu" aria-lablelledby="dropdownId">
+                            <a href="#" class="dropdown-item">test1</a>
+                            <a href="#" class="dropdown-item">test2</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown navhover">
+                        <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">購物商城</a>
+                        <!--text-dark active nav-item  -->
+                        <div class="dropdown-menu" aria-lablelledby="dropdownId">
+                            <a href="#" class="dropdown-item">test1</a>
+                            <a href="#" class="dropdown-item">test2</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown navhover">
+                        <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">我要租車</a>
+                        <!--text-dark active nav-item  -->
+                        <div class="dropdown-menu" aria-lablelledby="dropdownId">
+                            <a href="#" class="dropdown-item">test1</a>
+                            <a href="#" class="dropdown-item">test2</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown navhover">
+                        <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">揪團活動</a>
+                        <!--text-dark active nav-item  -->
+                        <div class="dropdown-menu" aria-lablelledby="dropdownId">
+                            <a href="<%=request.getContextPath()%>/front-end/activity/Activity.jsp" class="dropdown-item">活動列表</a>
+                            <a href="<%=request.getContextPath()%>/front-end/activity/FrontaddAct.jsp" class="dropdown-item">建立活動</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown navhover">
+                        <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">路線規劃</a>
+                        <!--text-dark active nav-item  -->
+                        <div class="dropdown-menu" aria-lablelledby="dropdownId">
+                            <a href="<%=request.getContextPath()%>/front-end/route/routeM.jsp" class="dropdown-item">推薦路線</a>
+                            <a href="<%=request.getContextPath()%>/front-end/waterStation/insertWs.jsp" class="dropdown-item">補水站&租車點</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown navhover">
+                        <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">討論區</a>
+                        <!--text-dark active nav-item  -->
+                        <div class="dropdown-menu" aria-lablelledby="dropdownId">
+                            <a href="#" class="dropdown-item">test1</a>
+                            <a href="#" class="dropdown-item">test2</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown navhover">
+                        <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">FAQ</a>
+                        <!--text-dark active nav-item  -->
+                        <div class="dropdown-menu" aria-lablelledby="dropdownId">
+                            <a href="#" class="dropdown-item">test1</a>
+                            <a href="#" class="dropdown-item">test2</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown navhover">
+                        <a href="#" class="nav-link dropdown-toggle text-dark"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">騎乘小叮嚀</a>
+                        <!--text-dark active nav-item  -->
+                        <div class="dropdown-menu" aria-lablelledby="dropdownId">
+                            <a href="#" class="dropdown-item">test1</a>
+                            <a href="#" class="dropdown-item">test2</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown navhover">
+                        <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">會員中心</a>
+                        <!--text-dark active nav-item  -->
+                        <div class="dropdown-menu" aria-lablelledby="dropdownId">
+                            <a href="<%=request.getContextPath()%>/front-end/member/listOneMem.jsp" class="dropdown-item">個人資訊</a>
+                            <a href="<%=request.getContextPath()%>/front-end/activity/Actmanagement.jsp" class="dropdown-item">活動管理</a>
+                            <a href="<%=request.getContextPath()%>/front-end/route/listMyRoute.jsp" class="dropdown-item">我的路線</a>
+                            <a href="<%=request.getContextPath()%>/front-end/waterStation/listMyWs.jsp" class="dropdown-item">我的補水站</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                  
+                    	  <c:if test="${empty MemVO}">
+                        	<a href="<%=request.getContextPath()%>/front-end/index/LoginMember.jsp" class="nav-item nav-link btn-dark rounded text-white" >Sign-in</a>
+                        </c:if>
+                        <c:if test="${not empty MemVO}">
+	                        	<a href="<%=request.getContextPath()%>/login/memlogin.do?action=logOut" onclick="document.getElementById('myform').submit()" class="nav-item nav-link btn-dark rounded text-white" >Log-out</a>
+                        </c:if>
+                        <!--text-dark active nav-item  -->
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
 	<!-- nav--end -->
 
 	<!-- carousel -->

@@ -79,7 +79,7 @@
 
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="<%=request.getContextPath()%>/front-end/index/index.html">Home</a>
+        <a href="<%=request.getContextPath()%>/front-end/index/index.jsp">Home</a>
       </li>
       <li class="breadcrumb-item active">${actVO.act_title}</li>
     </ol>

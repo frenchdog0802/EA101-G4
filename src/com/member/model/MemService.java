@@ -82,6 +82,10 @@ public class MemService {
 	}
 	public MemVO findByPrimaryKey(String sq_member_id){
 		return dao.findByPrimaryKey(sq_member_id);
-	};
+	}
+	
+	public MemVO getOneMem(String sq_member_id){
+		return dao.findByPrimaryKey(sq_member_id);
+	}
 		
 }
