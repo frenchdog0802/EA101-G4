@@ -19,11 +19,11 @@ public class QuestionJNDIDAO implements QuestionDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/EA101_G4");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-	}
+}
 
 	private static final String INSERT_STMT = "INSERT INTO QUESTION (QUESTION_TITLE,QUESTION_DESCRIPTION) VALUES (?, ?)";
 	private static final String GET_ALL_STMT = "SELECT SQ_QUESTION_ID  , QUESTION_TITLE, QUESTION_DESCRIPTION  FROM QUESTION";
