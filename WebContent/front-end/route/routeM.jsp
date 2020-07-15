@@ -141,8 +141,8 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 //起始畫面，selectAll
-	function appendCard(routeName, startArea, sqRouteId, routeIntroduction){
-		var routeIntroductionSplit = routeIntroduction.substring(0,80);
+	function appendCard(routeName, startArea, distance, sqRouteId, routeIntroduction){
+		var routeIntroductionSplit = routeIntroduction.substring(0,70);
 		var containerAll = document.getElementById('card-container');
 		//生成div
 		var div = document.createElement('div');
@@ -160,6 +160,10 @@ $(document).ready(function(){
 				<div class = "inner">
 					<span>位於縣市：</span>
 					<span class="startArea">`+startArea+`</span>
+				</div>
+				<div class = "inner">
+					<span>總距離(公里)：</span>
+					<span class="distance">`+distance+`</span>
 				</div>
  				
 				<div class = "inner">
@@ -304,7 +308,7 @@ $(document).ready(function(){
 	<c:forEach var="routeVO" items="${list}">
 		<script type="text/javascript">
 			if(${routeVO.addRoute} === 1){
-				appendCard(`${routeVO.routeName}`, `${routeVO.startArea}`, `${routeVO.sqRouteId}`,
+				appendCard(`${routeVO.routeName}`, `${routeVO.startArea}`, `${routeVO.distance}`, `${routeVO.sqRouteId}`,
 						`${routeVO.routeIntroduction}`);
 				
 				document.getElementById('${routeVO.sqRouteId}').src = 
@@ -346,13 +350,14 @@ $(document).ready(function(){
 									var res = obj.rouVO[i];
 									routeName = res.routeName;
 									startArea = res.startArea;
+									distance = res.distance;
 									sqRouteId = res.sqRouteId;
 									addRoute = res.addRoute;
 									console.log(sqRouteId);
 									routeIntroduction = res.routeIntroduction;
 									//在Card-container上新增元素
 									if(addRoute === 1){
-										appendCard(routeName, startArea, sqRouteId, routeIntroduction);
+										appendCard(routeName, startArea, distance, sqRouteId, routeIntroduction);
 										document.getElementById(sqRouteId).src = 
 											"<%=request.getContextPath() %>/front-end/route/route.img?SQ_ROUTE_ID="+sqRouteId;
 										
