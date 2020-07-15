@@ -24,6 +24,8 @@
 		</li>
 		<li class="nav-item"><a class="nav-link active" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><span style="padding-bottom: 8px; border-bottom: 3px blue solid;">訂單管理</span></a>
 		</li>
+		<li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/bike/BikeStoreServlet.do?action=bikeStoreOwner&sq_bike_store_id=${BikeStoreVO.sq_bike_store_id}" ><span>店家資訊</span></a>
+		</li>
 	</ul>
 </div>
 

@@ -49,9 +49,17 @@
 					</div>
 
 					<div class="form-group row">
-						<label for="bikePrice" class="col-sm-2 col-form-label">價格</label>
-						<input type="number" class="col-sm-10 form-control ${errorMsgs.price==null?'':'is-invalid'}" id="bikePrice"
-							name="price" placeholder="價格" value="${BikeTypeVO.price}">
+						<label for="bike_daily_price" class="col-sm-2 col-form-label">價格/天</label>
+						<input type="number" class="col-sm-10 form-control ${errorMsgs.bike_daily_price==null?'':'is-invalid'}" id="bikePrice"
+							name="bike_daily_price" placeholder="價格" value="${BikeTypeVO.bike_daily_price}">
+						<!--errorMsg -->
+						<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.bike_daily_price}</div>
+					</div>
+					
+					<div class="form-group row">
+						<label for="bike_hourly_price" class="col-sm-2 col-form-label">價格/時</label>
+						<input type="number" class="col-sm-10 form-control ${errorMsgs.bike_hourly_price==null?'':'is-invalid'}" id="bikePrice"
+							name="bike_hourly_price" placeholder="價格" value="${BikeTypeVO.bike_hourly_price}">
 						<!--errorMsg -->
 						<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.price}</div>
 					</div>

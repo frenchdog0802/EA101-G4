@@ -34,6 +34,7 @@
 <!-- --------------------------------------------------------------------------------------------->
 <div class="container mt-5">
 
+
 	<div class="row">
 		<div class="col">
 			<form method="POST"
@@ -54,10 +55,10 @@
 				<div class="form-group row">
 					<label for="area" class="col-sm-2 col-form-label">請選擇區域</label>
 					<select class="col-sm-10 form-control" name="area">
+						<option value="北部" ${param.area==北部?'selected':''}>北部</option>
 						<option value="東部" ${param.area==東部?'selected':''}>東部</option>
 						<option value="南部" ${param.area==南部?'selected':''}>南部</option>
 						<option value="西部" ${param.area==西部?'selected':''}>西部</option>
-						<option value="北部" ${param.area==北部?'selected':''}>北部</option>
 					</select>
 				</div>
 	
@@ -116,20 +117,24 @@
 				<div class="form-group row">
 					<label for="store_status" class="col-sm-2 col-form-label">店家狀態</label>
 					<select class="col-sm-10 form-control" name="store_status">
-						<option value="0" ${param.store_status==0?'selected':''}>休息</option>
 						<option value="1" ${param.store_status==1?'selected':''}>開店</option>
+						<option value="0" ${param.store_status==0?'selected':''}>休息</option>
 						<option value="2" ${param.store_status==2?'selected':''}>歇業</option>
 					</select>
 				</div>
-
+<!-- 				store_photo -->
 				<div class="form-group row">
 					<p class="col-sm-2 ">上傳圖片</p>
-					<div class="custom-file col-sm-10 ">
-						<input type="file" class="custom-file-input" name="bike_photo"
-							id="upLoad"> <label class="custom-file-label"
+					<div
+						class="custom-file col-sm-10 ${errorMsgs.store_photo==null?'':'is-invalid'}">
+						<input type="file" class="custom-file-input " name="store_photo"
+							id="upLoad"> <label class="custom-file-label" 
 							for="upLoad" data-browse="上傳"></label>
 					</div>
+					<!--errorMsg -->
+					<span class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.store_photo}</span>
 				</div>
+
 				<div id="showImg" class="text-center"></div>
 				
 				<input type="hidden" name="action" value="insert">
