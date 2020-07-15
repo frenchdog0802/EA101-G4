@@ -465,106 +465,106 @@ STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION)
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110007', '東石自然教育生態展示館', 120.160791, 
- 23.508978, null, null);
+ 23.508978, load_blob('r7_1.jpg'), '展示館內除設有旅客服務中心、視聽中心、自行車租賃中心、藝術走廊、農漁產業展示館及貝殼DIY創意館外，二樓更有史料及農村、漁村器物展覽、溼地生態導覽介，陳列展示了東石鄉早期農、漁、鹽及養殖業等等的生產工具，以及人文歷史、自然生態照片、知名藝術家之畫作墨寶等資料，可以讓訪客起懷舊之緒念、發思古之幽情，是進行一趟知性、感性兼備的文化之旅的好所在。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110007', '北堤濕地', 120.13011, 
- 23.519444, null, null);
+ 23.519444, load_blob('r7_2.jpg'), '鰲鼓濕地森林園區位於嘉義縣東石鄉，與東石漁港對望，整體範圍約1,600公頃，由台糖東石農場與鰲鼓農場(合計1,300公頃)，以及部分私有地組成。過去政府為發展農業，築起約10公里的堤防，著手開發鰲鼓海埔新生地；50年代後，轉交予台糖公司負責經營，並將該地作為甘蔗、稻米、及畜牧生產等農業使用。隨著台灣產業結構的演變，蔗田面積逐漸減少，最終因地層下陷導致海水倒灌、土壤鹽化，沿海土壤逐漸濕地化，反而成為台灣西南沿海候鳥遷移及水鳥棲息的重要地點。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110007', '南堤濕地', 120.134706,
- 23.489531, null, null);
+ 23.489531, load_blob('r7_3.jpg'), '鰲鼓濕地森林園區位於嘉義縣東石鄉，與東石漁港對望，整體範圍約1,600公頃，由台糖東石農場與鰲鼓農場(合計1,300公頃)，以及部分私有地組成。過去政府為發展農業，築起約10公里的堤防，著手開發鰲鼓海埔新生地；50年代後，轉交予台糖公司負責經營，並將該地作為甘蔗、稻米、及畜牧生產等農業使用。隨著台灣產業結構的演變，蔗田面積逐漸減少，最終因地層下陷導致海水倒灌、土壤鹽化，沿海土壤逐漸濕地化，反而成為台灣西南沿海候鳥遷移及水鳥棲息的重要地點。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110007', '笨港口港口宮', 120.185833, 
- 23.495576, null, null);
+ 23.495576, load_blob('r7_4.jpg'), '笨港口港口宮奉祀天上聖母，其地址在嘉義縣東石鄉港口村8鄰蚶子寮5號，是由先民林楷自中國湄洲奉請媽祖渡海來臺，在笨港口登陸後至蚶仔寮一株柳樹下休息，要啟程時裝在竹籠的媽祖卻擔提不起，經聖諭指示要在此地施化救世（相傳此地為「鯉魚吉穴」），於清康熙廿三年(1684年)，招集六莊村十一角頭建草廟，初期取名為「笨港天后行宮」(笨港口天后宮)。在清同治十年（1871年）廣東縣丞五品銜謝龍光渡台赴任敬獻「保障天南」一匾同時，易宮名為「港口宮」。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110007', '東石自然教育生態展示館', 120.160791, 
- 23.508978, null, null);
+ 23.508978, load_blob('r7_1.jpg'), '展示館內除設有旅客服務中心、視聽中心、自行車租賃中心、藝術走廊、農漁產業展示館及貝殼DIY創意館外，二樓更有史料及農村、漁村器物展覽、溼地生態導覽介，陳列展示了東石鄉早期農、漁、鹽及養殖業等等的生產工具，以及人文歷史、自然生態照片、知名藝術家之畫作墨寶等資料，可以讓訪客起懷舊之緒念、發思古之幽情，是進行一趟知性、感性兼備的文化之旅的好所在。');
  
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110008', '安平老街', 120.161783, 
- 23.000736, null, null);
+ 23.000736, load_blob('r8_1.jpg'), '有著台灣第一街稱號的安平老街，是300多年前荷蘭人在安平建立的第一條街道，早期街道的設計都僅供人與推車通行，因此街廓並不是很寬。許多遊客來到安平也都必然進到這條古老的街道，擁擠熱鬧的人潮是安平老街的常態，似乎不這樣也不像安平老街，街上各式老店林立，不管是國內外遊客總在老街上穿梭尋寶，偶而抬頭看看街道上的老屋還能發現幾尊安座在屋頂的風獅爺，或是在門楣上的劍獅，也是走逛安平老街的樂趣。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110008', '安平古堡', 120.160621, 
- 23.001498, null, null);
+ 23.001498, load_blob('r8_2.jpg'), '17世紀初荷蘭人以軍商結合的隊伍，於1624年占領今日安平，並建熱蘭遮城為其防禦要塞，全部工程完成於1634年。1662年鄭成功取荷蘭城後，改稱安平鎮，改內城為內府，臺人因此稱其為王城。清領時代，因台江陸浮失卻其重要性，加上清兵破壞熱蘭遮城建億載金城，故日漸荒廢。日治後重建，二戰後乃稱「安平古堡」。目前真正的荷蘭時期遺跡僅存古堡前方外城南城垣的磚牆。老榕盤根，無限滄桑，見證著盡400年來的台江的歷史。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110008', '安平樹屋', 120.159809, 
- 23.003864, null, null);
+ 23.003864, load_blob('r8_3.jpg'), '樹屋位於德記洋行後面，原是德記洋行的倉庫，大約建於十九世紀末及日治初期，此處曾做為「大日本鹽業株式會社」出張所倉庫，現況規模即為日本人增建。經百餘年歲月滄桑後，倉庫牆面滿佈榕樹盤據的氣根，高聳的榕樹茂密的樹冠彷彿成為倉庫的屋頂，也讓安平樹屋擁有難得一見的外觀及神秘氣息，形成特有的屋樹共生奇景，類似吳哥窟大樹盤纏著「塔普倫寺」。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110008', '安平小砲台', 120.158527, 
- 22.999501, null, null);
+ 22.999501, load_blob('r8_4.jpg'), '安平小砲台位於台南市安平區、昔日台灣城殘蹟西側，砲台護城石堤呈狹長狀南北延伸；安平小砲台包括砲台主體及北面的護城石堤：安平砲台主體位在水池公園旁，為花崗石、卵石砌成，南北西面有有六個磚造雉堞，現在所見的砲已非原物；北面的石堤以咾咕石、三合土填築而成，留有射口且設有柵門擋水，現為國家第三級古蹟，是目前保存最完整的清代早期「中國式」砲台，有別於億載金城的西式近代砲台。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110008', '安億橋', 120.163569, 
- 22.998052, null, null);
+ 22.998052, load_blob('r8_5.jpg'), '位於台南安平的安億橋橫跨著運河的兩端，連接著新舊安平的交通，橋邊沿途景觀幽美，逛完安平老街，沿著平生路往運河邊走，欣賞美麗的水景風光，舒服的享受一場安平漫步之旅吧。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110008', '安平運河沿岸自行車道', 120.175755, 
- 22.997423, null, null);
+ 22.997423, load_blob('r8_6.jpg'), '『安平運河沿岸自行車道』位於台南市的安平區，單車道路線從"望月橋"開始，沿著"安平運河"一路欣賞河岸風光前進，至"安億橋"後單車道路線一分為二，往右走可探尋古蹟美食、往左走則能飽覽自然風光。台南市安平區一帶，可說是集結各級古蹟、自然生態、特產小吃、歷史人文等多元豐富內涵觀光勝地，想要一次玩遍安平，最好的方式就是利用騎腳踏車，即健康環保又能滿載而歸。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110008', '安平旅遊資訊中心', 120.16136, 
- 23.000361, null, null);
+ 23.000361, load_blob('r8_7.jpg'), '旅遊服務中心所在位置分別提供有「旅遊景點資訊」、「交通食宿資訊」、「解說導覽資訊」、「遊程諮詢」、「文宣、地圖索取」、「旅遊圖書查閱」、「放大鏡、老花眼鏡出借」、「行動電話緊急充電」等服務，並提供租任腳踏車服務。');
 
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110009', '新竹南寮舊漁港', 120.929017, 
- 24.849829, null, null);
+ 24.849829, load_blob('r9_1.jpg'), '新竹近海魚業產量豐富，四季皆有不同魚群，更成為釣魚發燒友的天堂，週末假日處處可見成堆的釣友在此釣魚。自民國93年起，市府大力開發沿海十七公里觀光帶，不段的增加休閒設施，提供市民優質的休憩場所，變更港區範圍釋出商業用地等等，前途發展極度被看好。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110009', '看海公園', 120.918513, 
- 24.83631, null, null);
+ 24.83631, load_blob('r9_2.jpg'), '看海公園名列新竹海八景之一，位於環保教育館北側，與海天一線看海區一樣，原是垃圾填起之高地，後期經過市府的重置整理，今日己成為民眾最優質的看海休憩場所，看海公園的西側，豎立著鯉魚旗，這也為當地新增設的地標，自新竹漁港遠眺，就會看到隨風飄逸的鯉魚旗，正熱情的向您打招呼，等您親臨這愜意的休憩區。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110009', '海天一線看海區', 120.915106, 
- 24.832617, null, null);
+ 24.832617, load_blob('r9_3.jpg'), '海天一線看海區擁有良好之眺望海景條件，此地高出海平面約20公尺，除了可以看到貝聿銘建築師以傳統產業玻璃的特色，設計的環保局辦公大樓外牆，每日傍晚時分，您會看到大批的遊客躺在草坪上，靜觀大海，流連忘返。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
- values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110009', '港南運河', 120.909979, 
- 24.823433, null, null);
+ values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110009', '港南運河公園', 120.909979, 
+ 24.823433, load_blob('r9_4.jpg'), '港南濱海運河公園 是新竹熱門親子景點之一，適合當作是17公里海岸線上的中繼站。港南濱海運河公園設有大型攀爬遊具、極限飛輪、平衡木、彈性床等遊具，還有很夯的Pushbike滑步車賽道，運河公園旁有涼亭供家長休息遮陽，傍晚時分還能走道堤防欣賞夕陽日落美景。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110009', '紅樹林公園', 120.917763, 
- 24.807929, null, null);
+ 24.807929, load_blob('r9_5.jpg'), '新竹香山的紅樹林生態公園，位在新竹17公里海岸線自行車道旁，有洗手間、看海區，適合中途停留補水休息，走過彩虹橋就可以到水資源環保公園，距離很近。 紅樹林生態公園整體不是很大，園區內有許多種類植物，還有多款果實可以採集，相當適合植物教學、生態教學。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110009', '海山漁港觀海平台', 120.903313, 
- 24.764636, null, null);
+ 24.764636, load_blob('r9_6.jpg'), '海山漁港將會以觀光休閒漁業做為發展的方向與目標，期盼未來能成為海濱休閒旅遊的重要據點。站在約有一層樓高的觀海平台可觀看到香山濕地的全貌，還可觀察溼地蚵寮與海濱風光，有別於新竹漁港的人聲鼎沸，海山漁港帶來的是一種完全不同的靜謐風情。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110009', '南港賞鳥區', 120.89483, 
- 24.742531, null, null);
+ 24.742531, load_blob('r9_7.jpg'), '南港賞鳥區是一處小而美的生態區，一年四季都有不同候鳥進駐，寧靜的湖面經常可見小水鴨悠游其中。堤防內側的數個水塘，是由廢棄漁塭自然形成，已成為野鳥覓食後休憩的場所，因此也成為賞鳥的好去處。在新竹鳥會的調查紀錄資料中，這裡除了有大量的鷺科、燕科、文鳥科等鳥種出沒之外，秋冬交接時，還有數量可觀的雁鴨科鳥種，包括小水鴨、尖尾鴨、綠頭鴨等，而魚鷹、澤鵟、遊隼、紅隼等猛禽也偶而可見。');
  
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110010', '捷運新店站', 121.538131, 
- 24.958196, null, null);
+ 24.958196, load_blob('r10_1.jpg'), '車站位於北宜路西側，與北新路的銜接處南側；車站代碼為G01。站名取自現有地名及台汽新店站名「新店」，該地臨近著名的碧潭風景區。另外為了與鄰近之新店區公所站作區別，當地民眾經常根據台汽客運站時代的舊名以「新店總站」稱呼之。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110010', '碧潭風景區', 121.536497, 
- 24.955988, null, null);
+ 24.955988, load_blob('r10_2.jpg'), '碧潭為臺灣昔日八大景之一，風景秀麗，位於捷運新店總站附近，交通甚為便利，為臺北都會區民眾假日旅遊休憩的好去處。新店溪流經碧潭出現曲流、岩壁及丘陵，碧潭因河岸寬廣，水色澄碧、平靜如潭而得其名，適宜划船、游泳、釣魚等活動，景致十分宜人。早年前考試院長孫科曾在潭西岸的懸崖巨石上題有「碧潭」二字，巨石頂上民間居民蓋有亭台，名為碧亭，將潭西山壁點綴地秀麗不凡。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110010', '新店溪陽光橋', 121.521627, 
- 24.978435, null, null);
+ 24.978435, load_blob('r10_3.jpg'), '「陽光橋」是新北市第一座，以人為本，兼具造型、夜間光雕的人行、自行車行跨河景觀橋，其於100年11月19日正式揭綵啟用通車。「陽光橋」打破全台跨距最大的鋼構橋梁紀錄，河中不落橋墩，跨距長達245公尺，全長315公尺，為單拱肋斜鋼拱吊索橋，以琴弦般之鋼索及五個拱圈支撐橋面，突顯陽光橋的婉約。並榮獲第13屆國家建築金質獎。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110010', '陽光運動公園', 121.520332, 
- 24.976989, null, null);
+ 24.976989, load_blob('r10_4.jpg'), '位於碧潭左岸的「陽光運動公園」占地約20公頃，是一處很受親子家庭喜愛的河濱運動公園。園區內主要運動設施有自行車道、沙灘排球場、直排輪競速場、四百公尺跑道、越野自行車競技場和兒童遊戲區等。此地是都會區中難得可讓親子悠閒共遊、一起騎自行車的好去處，夏日來玩請定時補充防曬與水分。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110010', '綠寶石河濱公園', 121.50496, 
- 25.015255, null, null);
+ 25.015255, load_blob('r10_5.jpg'), '雙和區為全台人口密度最高的地方，而綠寶石運動河濱公園寓意是在人口稠密的都市中，廣闊綠地如同寶石一樣珍貴。永和綠寶石河濱公園占地遼闊，包含停車場、寵物公園、籃球場、溜冰場、網球場、排球場、羽球場、足球場、腳踏車越野練習場、棒球場、行人徒步區、休閒廣場、觀光苗圃區、槌球場、景觀步道與低水護岸。身在喧囂卻想獲得片刻舒緩的時候，來趟綠寶石運動河濱公園吧！讓心靈重新洗滌一遍，恢復成璀璨耀眼的寶石光芒。');
 INSERT into ROUTE_PLAN_DETAIL(SQ_SERIAL_NUMBER,	SQ_ROUTE_ID, STEP_NAME, STEP_LONGITUDE,
 STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION) 
  values ('RD'||LPAD(to_char(route_plan_detail_sequence.NEXTVAL), 6, '0'), 'RP110010', '江子翠河口景觀河濱公園', 121.469904, 
- 25.036628, null, null);
+ 25.036628, load_blob('r10_6.jpg'), '「江子翠河口景觀河濱公園」位於新店溪與大漢溪的交界處，從華江橋至板橋鐵路這一段共佔地70公頃的大漢溪畔旁，廣大的綠地是週末親子共遊的絕佳地點。公園內設置有多種設施，不僅有腳踏車道、籃球場、排球場、棒(壘)球場等等設施，絕對是您週末踩自行車追風，或運動汗水淋漓的絕佳所在！');
 
 --------------------------------------------------------
 --  for Table WATER_STATION
