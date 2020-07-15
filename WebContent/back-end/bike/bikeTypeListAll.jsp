@@ -97,7 +97,7 @@ font-good {
 		</div>
 		<input type="hidden" name="action" value="getOne_For_Display">
 		<input type="submit" class="btn btn-primary mt-3 " value="查詢"></input> <a
-			href="<%=request.getContextPath()%>/back-end/bikeType/addBikeType.jsp"
+			href="<%=request.getContextPath()%>/back-end/bike/addBikeType.jsp"
 			class="btn btn-success mt-3  mx-3">新增</a>
 	</form>
 </div>
@@ -123,7 +123,7 @@ font-good {
 					<tr>
 						<td><img
 							src="<%=request.getContextPath()%>/photo/DBReader.do?sq_bike_type_id=${bikeVO.sq_bike_type_id}"
-							height="50%"></td>
+							height=100 width=100></td>
 						<td class="align-middle">${bikeVO.bike_type_name}</td>
 						<td class="align-middle">${bikeVO.bike_title}</td>
 						<td class="mydescription align-middle">${bikeVO.bike_description}</td>

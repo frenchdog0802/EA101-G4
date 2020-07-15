@@ -4,25 +4,35 @@
 <%@ page import="com.bike.type.model.*"%>
 <jsp:useBean id="BikeTypeVO" class="com.bike.type.model.BikeTypeVO"  scope="request"/>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<%@include file="/back-end/backFrame/backHeader"%>
+								<!-----------backHeader----------->
+<!-- --------------------------------------------------------------------------------------------->    
+ 
+                               <!---------放自己的CSS與title----------->
 
-<!-- Bootstrap CSS -->
-
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css">
-
-
-
-<title>Update here</title>
-</head>
-<body>
-	<a href="<%=request.getContextPath()%>/back-end/bikeType/bikeTypeListAll.jsp" class="btn btn-primary btn-lg" aria-label="Left Align">
-  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true">回上一頁</span>
-</a>
+<!-- --------------------------------------------------------------------------------------------->  
+								<!-----------backBody----------->
+ <%@include file="/back-end/backFrame/backBody"%>
+								<!-----------backBody----------->
+<!-- --------------------------------------------------------------------------------------------->
+								<!--分頁自己改-->
+				<div class="row" style="background-color: white;">
+					<ul class="nav nav-tabs">
+					  <li class="nav-item">
+					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">item1</span></a><!--在哪一個頁面就哪加active和span的style-->
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>item2</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>item3</span></a>
+					  </li>
+					</ul>
+				</div>	
+								<!--分頁自己改-->
+<!-- --------------------------------------------------------------------------------------------->
+								<!-----------backNav----------->
+	<%@include file="/back-end/backFrame/backNav"%>
 	<div class="container mt-5">
 		<div class="row">
 			<div class="col">
@@ -61,7 +71,7 @@
 						<input type="number" class="col-sm-10 form-control ${errorMsgs.bike_hourly_price==null?'':'is-invalid'}" id="bikePrice"
 							name="bike_hourly_price" placeholder="價格" value="${BikeTypeVO.bike_hourly_price}">
 						<!--errorMsg -->
-						<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.price}</div>
+						<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.bike_hourly_price}</div>
 					</div>
 
 					<div class="form-group row">
@@ -115,5 +125,4 @@
 			}
 		});
 	</script>
-</body>
-</html>
+		<%@include file="/back-end/backFrame/backFooter"%>

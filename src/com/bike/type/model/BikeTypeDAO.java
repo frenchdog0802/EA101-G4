@@ -101,8 +101,7 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-
-			
+		
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
@@ -125,7 +124,7 @@ public class BikeTypeDAO implements BikeTypeDAO_interface {
 			pstmt.setInt(6, BikeTypeVO.getBike_hourly_price());
 						
 			// set sqBiketypeId
-			pstmt.setString(6, BikeTypeVO.getSq_bike_type_id());
+			pstmt.setString(7, BikeTypeVO.getSq_bike_type_id());
 
 			// executeUpdate
 			pstmt.executeUpdate();
