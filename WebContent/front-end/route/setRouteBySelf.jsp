@@ -188,7 +188,7 @@
   
   	function changeSetImg(i){
 	  $("#stepImgFinal"+i).trigger("click");
-	  window.addEventListener('click', function() {
+	  window.addEventListener('mouseout', function() {
 	      showImg(i);
 	    });
 	  return false;

@@ -70,7 +70,7 @@ public class StaffLoginServlet extends HttpServlet{
 						return;
 					}
 				} catch (Exception ignored) {
-					url ="/back-end/backIndex.jsp";
+					url ="/back-end/index/backIndex.jsp";
 				}
 //				response.sendRedirect(request.getContextPath()+"/back-end/member/selectMember_page.jsp");  //*工作3: (-->如無來源網頁:則重導至login_success.jsp)
 				if (!errorMsgs.isEmpty()) {
@@ -80,7 +80,7 @@ public class StaffLoginServlet extends HttpServlet{
 					return; // 程式中斷
 				}
 				/*************************** 3.查詢完成,準備轉交 ********************************/
-				url =request.getContextPath()+"/back-end/backIndex.jsp";// "/back-end/index.jsp"
+				url =request.getContextPath()+"/back-end/index/backIndex.jsp";// "/back-end/index.jsp"
 				response.sendRedirect(url);
 			}
 			catch (Exception e) {

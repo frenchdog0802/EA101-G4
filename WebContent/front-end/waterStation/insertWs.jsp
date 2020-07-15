@@ -153,7 +153,6 @@ label {
 	    // 初始化地圖
 	    map = new google.maps.Map(document.getElementById('map'), {
 	    	zoom : 14,
-	    	gestureHandling: 'greedy',
 	        center: { lat : 24.969367,
 					  lng : 121.190733 }
 	    });

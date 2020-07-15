@@ -26,7 +26,7 @@
   				</button>
   			</div>
 	        <div class="col-2 mx-4 my-2">
-	        	<button class="btn" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeTypeListAll.jsp'">
+	        	<button class="btn" onclick="location.href='<%=request.getContextPath()%>/back-end/bikeStore/bikeStoreListAll.jsp'">
 	            	<img src="image/indexBike.png" class="img-fluid">
 	          	</button>
 	        </div>
@@ -52,13 +52,13 @@
 	            	<img src="image/indexMessage.png" class="img-fluid">
 	          	</button>
 	        </div>
-	        <div class="col-2 mx-4 my-2">
+	        <div class="col-2 mx-4 my-2" onclick="location.href='<%=request.getContextPath()%>/back-end/member/listAllMember.jsp'">
 	          	<button class="btn">
 	            	<img src="image/indexMember.png" class="img-fluid">
 	          	</button>
 	        </div>
 	        <div class="col-2 mx-4 my-2">
-	          	<button class="btn">
+	          	<button class="btn" onclick="location.href='<%=request.getContextPath()%>/back-end/staff/listAllStaff.jsp'">
 	            	<img src="image/indexWorker.png" class="img-fluid">
 	          	</button>
 	        </div>

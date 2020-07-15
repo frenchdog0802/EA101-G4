@@ -42,7 +42,7 @@
 
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a
-					href="<%=request.getContextPath()%>/front-end/activity/Activity.jsp">Home</a>
+					href="<%=request.getContextPath()%>/front-end/index/index.jsp">Home</a>
 				</li>
 				<li class="breadcrumb-item active">活動列表</li>
 			</ol>

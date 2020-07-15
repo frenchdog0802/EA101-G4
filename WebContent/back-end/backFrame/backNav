@@ -11,7 +11,7 @@
 					</button>		
 				</div>
 				<div class="liststy">
-					<button class="btn listbtn my-3" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeTypeListAll.jsp'">
+					<button class="btn listbtn my-3" onclick="location.href='<%=request.getContextPath()%>/back-end/bikeStore/bikeStoreListAll.jsp'">
 						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/Bike1.png" class="img-fluid">
 					</button>							
 				</div>
@@ -36,12 +36,12 @@
 					</button>		
 				</div>
 				<div class="liststy">
-					<button class="btn listbtn my-3">
+					<button class="btn listbtn my-3" onclick="location.href='<%=request.getContextPath()%>/back-end/member/listAllMember.jsp'">
 						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/customer.png" class="img-fluid">
 					</button>		
 				</div>
 				<div class="liststy">
-					<button class="btn listbtn my-3">
+					<button class="btn listbtn my-3" onclick="location.href='<%=request.getContextPath()%>/back-end/staff/listAllStaff.jsp'">
 						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/member.png" class="img-fluid">
 					</button>		
 				</div>
