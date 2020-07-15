@@ -33,8 +33,6 @@ public class BikeStoreDBReader extends HttpServlet {
 			BikeStoreService BikeStoreService = new BikeStoreService();
 			byte[] baos = BikeStoreService.findByPrimaryKey(sq_bike_store_id).getStore_photo();
 			out.write(baos);
-			System.out.println(baos);
-
 		} catch (Exception e) {
 			System.out.println("沒圖片");
 		}finally {

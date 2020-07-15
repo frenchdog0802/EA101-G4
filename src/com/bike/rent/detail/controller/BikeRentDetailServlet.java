@@ -346,7 +346,7 @@ public class BikeRentDetailServlet extends HttpServlet {
 					singleExtraCost = dailyPrice * (int)untilDays;
 				}else {
 					singleExtraCost = 0;
-					untilHour = 0;
+					untilHour = 1;
 					untilDays = 0;
 				}
 				int hours = (int)untilHour%24; 

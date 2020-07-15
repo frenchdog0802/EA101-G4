@@ -55,13 +55,11 @@ public class Shop_orderServlet extends HttpServlet {
 		}
 	
 		if("update".equals(action)) {
-//			List<String> errorMsgs = new LinkedList<String>();
-//			req.setAttribute("errorMsgs", errorMsgs);
-//			try {
+			try {
 				String orderID = req.getParameter("orderID");
 				String orderStatus = req.getParameter("orderStatus");
 				int status = Integer.parseInt(orderStatus);
-				String[] id = req.getParameterValues("id"); 			
+				String[] id = req.getParameterValues("productID"); 			
 				String[] number = req.getParameterValues("number");
 				int len = Integer.parseInt(req.getParameter("len"));
 				
@@ -74,32 +72,22 @@ public class Shop_orderServlet extends HttpServlet {
 					Shop_order_detailVO vo = new Shop_order_detailVO();
 					vo.setSq_order_id(orderID);
 					vo.setSq_product_id(id[i]);
-					int num = Integer.parseInt(number[i]);
+					Integer num = Integer.parseInt(number[i]);
 					vo.setOrder_sum(num);
 					list.add(vo);
 				}
-				
 				Shop_orderService orderSvc = new Shop_orderService();
-				orderSvc.updateWithDetail(orderVO, list);
-//				if (!errorMsgs.isEmpty()) {			
-//					req.setAttribute("orderVO", orderVO); 
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/back_end/BrandBack/update.jsp");
-//					failureView.forward(req, res);
-//					return;
-//				}
-//					
-//				
+				orderSvc.updateWithDetail(orderVO, list);				
+				
 				String url = "/back-end/Shop_order/allOrder.jsp";
 				RequestDispatcher success = req.getRequestDispatcher(url);
 				success.forward(req, res);
-//				
-//			}catch(Exception e) {
-//				errorMsgs.add("修改資料失敗:" + e.getMessage());
-//				RequestDispatcher fail = req
-//						.getRequestDispatcher("/back_end/BrandBack/BrandBack.jsp");
-//				fail.forward(req, res);
-//			}
+				
+			}catch(Exception e) {
+				RequestDispatcher fail = req
+						.getRequestDispatcher("/back-end/Shop_order/updateOrder.jsp");
+				fail.forward(req, res);
+			}
 		}
 	}
 }

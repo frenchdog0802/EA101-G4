@@ -73,19 +73,26 @@ public class ShoppingServlet extends HttpServlet{
 			String phone = req.getParameter("tphone");
 			String address = req.getParameter("taddress");
 			String email = req.getParameter("temail");
-			
-			HashMap<String, String> mapCus = new HashMap<String, String>();
-			for(Shop_productVO vo : buylist) {
-				mapCus.put("name", name);
-				mapCus.put("phone", phone);
-				mapCus.put("address", address);
-				mapCus.put("email", email);
+			String paymodeN = req.getParameter("paymode");
+			System.out.println(paymodeN);
+			String paymode="";
+			if(paymodeN.equals("home")) {
+				paymode = "宅配到府";
+			}else {
+				paymode = "超商取貨";
 			}
-			
+			HashMap<String, String> mapCus = new HashMap<String, String>();
+			mapCus.put("name", name);
+			mapCus.put("phone", phone);
+			mapCus.put("address", address);
+			mapCus.put("email", email);
+			mapCus.put("paymode", paymode);
+				
 			jedis.hset("customer", "name" , name);
 			jedis.hset("customer", "phone" , phone);
 			jedis.hset("customer", "address" , address);
-			jedis.hset("customer", "email" , email);		
+			jedis.hset("customer", "email" , email);
+			jedis.hset("customer", "paymode" , paymode);
 			jedis.close();	
 			
 			session.setAttribute("mapCus", mapCus);

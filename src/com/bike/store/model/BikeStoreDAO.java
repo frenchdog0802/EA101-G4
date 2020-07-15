@@ -35,7 +35,7 @@ public class BikeStoreDAO implements BikeStoreDAO_interface {
 			+ "VALUES(sq_bike_store_id.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 	// Update
-	public static String UPDATE_STMT = "UPDATE bike_store SET  bike_store_name = ?,bike_store_location = ?,bike_store_phone = ?,store_longitude = ?,store_latitude= ?,store_opentime = ?,store_status = ?,area= ? ,store_email=?,store_accoun?,store_password? ,store_photo=? WHERE sq_bike_store_id = ?";
+	public static String UPDATE_STMT = "UPDATE bike_store SET  bike_store_name = ?,bike_store_location = ?,bike_store_phone = ?,store_longitude = ?,store_latitude= ?,store_opentime = ?,store_status = ?,area= ? ,store_email=?,store_account=?,store_password=? ,store_photo=? WHERE sq_bike_store_id = ?";
 
 	// delete
 	public static String DELETE_STMT = "DELETE FROM bike_store WHERE sq_bike_store_id = ?";
@@ -147,7 +147,7 @@ public class BikeStoreDAO implements BikeStoreDAO_interface {
 			con = ds.getConnection();
 			
 			pstmt = con.prepareStatement(UPDATE_STMT);
-
+			
 			pstmt.setString(1, BikeStoreVO.getBike_store_name());
 			pstmt.setString(2, BikeStoreVO.getLocation());
 			pstmt.setString(3, BikeStoreVO.getPhone());
@@ -163,6 +163,7 @@ public class BikeStoreDAO implements BikeStoreDAO_interface {
 			pstmt.setString(13, BikeStoreVO.getSq_bike_store_id());
 
 			pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -25,8 +25,8 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 	}
 	
 	private static final String INSERT = "INSERT INTO SHOP_ORDER_DETAIL (SQ_ORDER_ID, SQ_PRODUCT_ID, PRODUCT_PRICE, ORDER_SUM) VALUES (?, ?, ?, ?)";
-	private static final String UPDATE = "UPDATE SHOP_ORDER_DETAIL SET ORDER_SUM=? WHERE SQ_ORDER_ID=? && SQ_PRODUCT_ID=?";	
-	private static final String DELETE = "DELETE FROM SHOP_ORDER_DETAIL where SQ_ORDER_ID=? && SQ_PRODUCT_ID=?";
+	private static final String UPDATE = "UPDATE SHOP_ORDER_DETAIL SET ORDER_SUM=? WHERE SQ_ORDER_ID=? AND SQ_PRODUCT_ID=?" ;	
+	private static final String DELETE = "DELETE FROM SHOP_ORDER_DETAIL WHERE SQ_ORDER_ID=? AND SQ_PRODUCT_ID=?";
 	private static final String GET_ONE = "SELECT SQ_ORDER_ID, SQ_PRODUCT_ID, PRODUCT_PRICE, ORDER_SUM FROM SHOP_ORDER_DETAIL WHERE SQ_ORDER_ID=?";
 	private static final String GET_ALL = "SELECT SQ_ORDER_ID, SQ_PRODUCT_ID, PRODUCT_PRICE, ORDER_SUM FROM SHOP_ORDER_DETAIL ORDER BY SQ_ORDER_ID && SQ_PRODUCT_ID";
 	
@@ -187,7 +187,6 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 			}
 			throw new RuntimeException("A database error occured. "
 					+ ce.getMessage());
-			// Clean up JDBC resources
 		}finally {
 			if(pstmt != null) {
 				try {
@@ -200,17 +199,18 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 	}
 	
 	@Override
-	public void update(Shop_order_detailVO detailVO, Connection con) {
+	public void update(Shop_order_detailVO detailVO, java.sql.Connection con) {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(UPDATE);
-			pstmt.setString(1, detailVO.getSq_order_id());
-			pstmt.setString(2, detailVO.getSq_product_id());
-			pstmt.setInt(3, detailVO.getOrder_sum());
+			pstmt.setInt(1, detailVO.getOrder_sum());
+			pstmt.setString(2, detailVO.getSq_order_id());
+			pstmt.setString(3, detailVO.getSq_product_id());
 			
 			pstmt.executeUpdate();
 			
 		}catch(SQLException ce) {
+			ce.printStackTrace();
 			if(con != null) {
 				try {
 					System.err.print("Transaction is being ");
@@ -223,7 +223,6 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 			}
 			throw new RuntimeException("A database error occured. "
 					+ ce.getMessage());
-			// Clean up JDBC resources
 		}finally {
 			if(pstmt != null) {
 				try {

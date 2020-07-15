@@ -102,7 +102,7 @@ pageEncoding="UTF-8"%>
 							<div class="col ">
 								<div class="row">
 									<div class="col text-center ">
-										<img src="" class="img-thumbnail" id="bike-img" alt=""/>
+										<img src="" width=350 height=255 class="img-thumbnail" id="bike-img" alt=""/>
 									</div>
 								</div>
 

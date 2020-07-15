@@ -1,115 +1,188 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.member.model.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>			
 <%@ page import="java.util.*"%>
-<%-- 此頁暫練習採用 Script 的寫法取值 --%>
+								<!-----------backHeader----------->
+<%@include file="/back-end/backFrame/backHeader"%>
+								<!-----------backHeader----------->
+<!-- --------------------------------------------------------------------------------------------->    
+ <link   rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<!-- --------------------------------------------------------------------------------------------->  
+								<!-----------backBody----------->
+ <%@include file="/back-end/backFrame/backBody"%>
+								<!-----------backBody----------->
+<!-- --------------------------------------------------------------------------------------------->
+								<!--分頁自己改-->
+				<div class="row" style="background-color: white;">
+					<ul class="nav nav-tabs">
+					  <li class="nav-item">
+					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">item1</span></a><!--在哪一個頁面就哪加active和span的style-->
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>item2</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>item3</span></a>
+					  </li>
+					</ul>
+				</div>	
+								<!--分頁自己改-->
+<!-- --------------------------------------------------------------------------------------------->
+								<!-----------backNav----------->
+	<%@include file="/back-end/backFrame/backNav"%>
+								<!-----------backNav----------->
+<!-- --------------------------------------------------------------------------------------------->					
 
-<%
-MemVO memVO = (MemVO) request.getAttribute("memVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
-%>
-
-<html>
-<head>
-<title>會員資料 - listOneMember.jsp</title>
-
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 600px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-</style>
-
-</head>
-<body bgcolor='white'>
-
-<h4>此頁暫練習採用 Script 的寫法取值:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>員工資料 - ListOneMember.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/member/selectMember_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
-
-<table>
-	<tr>
-		<th>會員編號</th>
-		<th>頭像</th>
-		<th>姓名</th>
-<!-- 		<th>帳號</th> -->
-<!-- 		<th>密碼</th> -->
-		<th>性別</th>
-		<th>生日</th>
-		<th>暱稱</th>
-		<th>e-mail</th>
-		<th>電話</th>
-		<th>聯絡地址</th>
-		<th>驗證狀態</th>
-		<th>註冊時間</th>
-		<th>簽名檔圖</th>
-		<th>修改</th>
-		<th>刪除</th>
+ 
+<div class="container mt-5">
+	<div class="row">
+		<div class="col">
+			<form method="POST"
+				action="<%=request.getContextPath()%>/member/mem.do"
+				enctype="multipart/form-data" autocomplete="off">
 		
-	</tr>
-	
-	<tr>
-			<td>${memVO.sq_member_id}</td>
-			<td><img src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${memVO.sq_member_id}"
-						width="100"></td>
-			<td>${memVO.m_name}</td>
-<%-- 			<td>${memVO.member_account}</td> --%>
-<%-- 			<td>${memVO.password}</td> --%>
-			<td>${memVO.getGender()==1 ? "男" : "女"}</td>
-			<td>${memVO.birthday}</td>
-			<td>${memVO.nick_name}</td>
-			<td>${memVO.m_email}</td>
-			<td>${memVO.cellphone}</td> 
-			<td>${memVO.address}</td>
-			<td>${memVO.getValidation()==0 ? "尚未驗證" : "已驗證"}</td>
-			<td>${memVO.registered}</td>
-			<div><td><img src="<%=request.getContextPath()%>/member/DBReader2.do?sq_member_id=${memVO.sq_member_id}"
-						width="100"></td><div>
-			
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/mem.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="sq_member_id"  value="${memVO.sq_member_id}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/mem.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
-			     <input type="hidden" name="sq_member_id"  value="${memVO.sq_member_id}">
-			     <input type="hidden" name="action" value="delete"></FORM>
-			</td>
-	</tr>
-	
-</table>
+				<div class="form-group row">
+					<label for="m_name" class="col-sm-2 col-form-label">姓名:
+					</label> 
+					<input type="text"
+						class="col-sm-10 form-control ${errorMsgs.m_name==null?'':'is-invalid'} "
+						id="m_name" name="m_name" readonly  autocomplete="off"
+						value="${MemVO.m_name}">
+					errorMsg
+					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.m_name}</div>
+				</div>
 
-</body>
-</html>
+				<div class="form-group row">
+					<label for="account" class="col-sm-2 col-form-label">帳號:</label>
+					<input type="text"
+						class="col-sm-10 form-control ${errorMsgs.member_account==null?'':'is-invalid'}"
+						id="account" name="member_account" readonly   autocomplete="off" 
+						value="${MemVO.member_account}">
+					<!--errorMsg -->
+					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.member_account}</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="password" class="col-sm-2 col-form-label ">密碼:</label>
+					<input type="password"
+						class="col-sm-10 form-control ${errorMsgs.password==null?'':'is-invalid'}"
+						id="password" name="password"  autocomplete="new-password"
+						value="${MemVO.password}" >
+					<!--errorMsg -->
+					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.password}</div>
+				</div>
+
+				<!--email -->
+				<div class="form-group row">
+					<label for="m_email" class="col-sm-2 col-form-label ">信箱:</label>
+					<input type="email"
+						class="col-sm-10 form-control ${errorMsgs.password==null?'':'is-invalid'}"
+						id="m_email" name="m_email" autocomplete="off" autoCorrect="off"
+						value="${MemVO.m_email}">
+					<!--errorMsg -->
+					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.m_email}</div>
+				</div>
+				<!--email -->
+				
+				<!--gender -->
+				<div class="form-group row">
+					<label for="gender" class="col-sm-2  col-form-label ">性別:</label>
+					<select name="gender" id="gender" class="form-control col-sm-10">
+							<option value="1" ${MemVO.gender==1?"selected":""}>男</option>
+							<option value="2" ${MemVO.gender==2?"selected":""}>女</option>
+					</select>
+				</div>
+				<!--gender -->
+				
+				<!--birth -->
+				<div class="form-group row">
+					<label for="birthday" class="col-sm-2 col-form-label ">生日:</label>
+					<input type="text" class="col-sm-10 form-control ${errorMsgs.birthday==null?'':'is-invalid'}" id="birthday" name="birthday">
+					<!--errorMsg -->
+					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.birthday}</div>
+				<!--birth -->
+				</div>
+				
+				
+				<!--phone -->
+				<div class="form-group row">
+					<label for="cellphone" class="col-sm-2 col-form-label ">電話:</label>
+					<input type="number" name="cellphone" value="${MemVO.cellphone}" class="col-sm-10 form-control  ${errorMsgs.phone==null?'':'is-invalid'}" >
+					<!--errorMsg -->
+					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.phone}</div>
+				<!--phone -->
+				</div>
+				
+				
+				<!--address -->
+				<div class="form-group row">
+					<label for="address" class="col-sm-2 col-form-label ">地址:</label>
+					<input type="text" name="address" value="${MemVO.address}" class="col-sm-10 form-control ${errorMsgs.address==null?'':'is-invalid'}" >
+					<!--errorMsg -->
+					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.address}</div>
+				<!--address -->
+				</div>
+				
+
+				<div class="form-group row">
+					<p class="col-sm-2 ">上傳圖片</p>
+					<div class="custom-file col-sm-10 ${errorMsgs.m_photo==null?'':'is-invalid'}">
+						<input type="file"
+							class="custom-file-input "
+							name="m_photo" id="upLoad"> <label
+							class="custom-file-label" for="upLoad" data-browse="上傳"></label>
+					</div>
+					<!--errorMsg -->
+					<span class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.m_photo}</span>
+				</div>
+
+				<div id="showImg" class="text-center">
+					<img src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${MemVO.sq_member_id}" class="img-fluid" width=300 height=300>
+				</div>
+				<input type="hidden" name="sq_member_id" value="${MemVO.sq_member_id}">
+				<input type="hidden" name="action" value="update_back">
+				<button type="submit" class="btn btn-outline-primary btn-block m-5">修改個人資訊</button>
+			</form>
+		</div>
+	</div>
+</div>
+ 
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+	<script>
+	$(function(){
+		$(".fun-text").text("");  // text("")裡面自己輸入功能名稱 
+	
+	//datetimepicker
+	$('#birthday').datetimepicker({
+		timepicker: false,
+		format: 'Y-m-d', 
+		value:"${MemVO.birthday}",
+		maxDate:'+1970-01-01',
+	})
+	
+	$("#upLoad").change(()=>{
+		$("#showImg").empty();
+		var files = $("#upLoad")[0].files;
+		if(files != null & files.length > 0){
+			var file = files[0];
+			if(file.type.indexOf('image') != -1){
+				$(".custom-file-label").text(file.name);
+				var reader = new FileReader();
+				reader.addEventListener('load',(e)=>{
+					var result = e.target.result;
+					var img = document.createElement("img");
+					img.src = result;
+					img.classList.add("img-fluid");
+					$("#showImg").append(img);
+				})
+				reader.readAsDataURL(file);
+			}
+		}
+	});
+	});
+	</script>
+<!-- --------------------------------------------------------------------------------------------->
+								<!-----------backFooter----------->
+		<%@include file="/back-end/backFrame/backFooter"%>
+ 			
