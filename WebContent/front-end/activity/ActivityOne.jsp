@@ -54,6 +54,7 @@
 	
 	#relationimg{
 		height: 255px;
+		width:100%;
 	}
 	
 	#majorimg{
