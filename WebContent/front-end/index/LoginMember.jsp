@@ -61,10 +61,11 @@ input[type=text],input[type=password] {
 				</div>
 				<!-- Login Form -->
 				<input type="text" id="login" autocomplete="off" class="fadeIn"
-					placeholder="請輸入帳號">
+					placeholder="請輸入帳號"  >
 				<!--errorMSG -->
-				<span class="small text-danger errorMsgCount d-block"></span> <input
-					type="password" id="pwd" class="fadeIn" placeholder="請輸入密碼" name="password"
+				<span class="small text-danger errorMsgCount d-block"></span> 
+				<input
+					type="password" id="password" class="fadeIn" placeholder="請輸入密碼"  
 					autocomplete="new-password">
 				<!--errorMSG -->
 				<span class="small text-danger errorMsgPws d-block"></span> <input
@@ -88,7 +89,7 @@ input[type=text],input[type=password] {
 	<script
 		src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.min.js"></script>
 	<script>
-	$( document ).ready(function(){
+	$(document).ready(function(){
 		$("#exampleModalCenter").modal();
 		$(".submitbtn").click(function(){
 			var login = $("#login").val();
@@ -103,7 +104,7 @@ input[type=text],input[type=password] {
 					},
 					dataType : "JSON",
 					success : function(data) {
-						console.log(data);
+						console.log(data)
 						$(".errorMsgCount").text(data.errorAccount);
 						$(".errorMsgPws").text(data.errorPws);
 						if (data.location != null) {
