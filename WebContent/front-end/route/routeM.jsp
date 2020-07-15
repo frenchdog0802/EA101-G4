@@ -310,7 +310,7 @@ $(document).ready(function(){
 				document.getElementById('${routeVO.sqRouteId}').src = 
 					"<%=request.getContextPath() %>/front-end/route/route.img?SQ_ROUTE_ID=${routeVO.sqRouteId}";
 			}	
-			</script>
+		</script>
 
 	</c:forEach>
 
@@ -338,22 +338,25 @@ $(document).ready(function(){
 							//將文字轉成JSON
 							var obj = JSON.parse(xhr.responseText);
 							//取得各項參數
+							console.log(obj);
 // 							console.log(Object.keys(obj.rouVO).length);
-							var routeName, startArea, sqRouteId, routeIntroduction;
+							var routeName, startArea, sqRouteId, routeIntroduction, addRoute;
 							for(i=0; i<Object.keys(obj.rouVO).length; i++){
 								if(obj && obj.rouVO && obj.rouVO[i]) {
 									var res = obj.rouVO[i];
 									routeName = res.routeName;
 									startArea = res.startArea;
 									sqRouteId = res.sqRouteId;
+									addRoute = res.addRoute;
 									console.log(sqRouteId);
 									routeIntroduction = res.routeIntroduction;
 									//在Card-container上新增元素
-									appendCard(routeName, startArea, sqRouteId, routeIntroduction);
-									document.getElementById(sqRouteId).src = 
-										"<%=request.getContextPath() %>/front-end/route/route.img?SQ_ROUTE_ID="+sqRouteId;
-									
-									
+									if(addRoute === 1){
+										appendCard(routeName, startArea, sqRouteId, routeIntroduction);
+										document.getElementById(sqRouteId).src = 
+											"<%=request.getContextPath() %>/front-end/route/route.img?SQ_ROUTE_ID="+sqRouteId;
+										
+									}
 								}else {
 									alert('AJAX Error! Status Code: ' + xhr.status);
 								}			

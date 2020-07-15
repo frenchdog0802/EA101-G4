@@ -169,7 +169,7 @@
           '</div>'+
           '</div>'+
           '<div class="Data-Items" style="float: left; width: 25%;">'+
-          '<input id=stepImg'+i+' type="file" onclick="return changeSetImg('+i+')" onchange="showImg('+i+')" name="stepImg" size="45"/>'+
+          '<input id=stepImg'+i+' type="file" style="width:70px;" onclick="return changeSetImg('+i+')" onchange="showImg('+i+')" name="stepImg" size="45"/>'+
           '<img id=demo'+i+' style="width:150px; height:150px;"/>'+
           '<textarea class="stepIntro" id=stepIntro'+i+'></textarea><br />'+
           '<button type="button" onclick="setVal('+i+')">送出</button>'+
@@ -723,7 +723,8 @@ console.log(results);
 				map : routeMap,
 				//label: positionWs[e].label,
 				animation : google.maps.Animation.DROP,
-				icon:'https://img.icons8.com/officexs/16/000000/bottle-of-water.png'
+//				icon:'https://img.icons8.com/officexs/16/000000/bottle-of-water.png'
+				icon:'https://img.icons8.com/ultraviolet/40/000000/bottle-of-water.png'
 			}));
 
 
@@ -788,7 +789,8 @@ console.log(results);
 				map : routeMap,
 				//label: positionWs[e].label,
 				animation : google.maps.Animation.DROP,
-				icon:'https://img.icons8.com/material-two-tone/24/000000/bike-path.png'
+//				icon:'https://img.icons8.com/material-two-tone/24/000000/bike-path.png'
+				icon:'https://img.icons8.com/ios/50/000000/bicycle.png'
 			}));
 			
 			
