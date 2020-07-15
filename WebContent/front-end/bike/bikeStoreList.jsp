@@ -28,7 +28,7 @@ if("payFinish".equals(action)){
 </head>
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
-
+	
 	<div class="container mt-3">
 		<div class="row">
 			<div class="col">
