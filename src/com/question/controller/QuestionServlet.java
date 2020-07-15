@@ -134,7 +134,7 @@ public class QuestionServlet extends HttpServlet {
 				
 				questionVo.setSq_question_id(sq_question_id);
 				questionVo.setQuestion_title(question_title);
-				questionVo.setQuestion_desciption(question_desciption);
+				questionVo.setQuestion_description(question_desciption);
 				
 
 				// Send the use back to the form, if there were errors
@@ -191,7 +191,7 @@ public class QuestionServlet extends HttpServlet {
 				
 				
 				questionVo.setQuestion_title(question_title);
-				questionVo.setQuestion_desciption(question_desciption);
+				questionVo.setQuestion_description(question_desciption);
 				
 				
 				// Send the use back to the form, if there were errors

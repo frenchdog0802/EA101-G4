@@ -7,7 +7,7 @@ public class QuestionService {
 	private QuestionDAO_interface dao;
 
 	public QuestionService() {
-		dao = new QuestionJDBCDAO();
+		dao = new QuestionDAO();
 	}
 
 	public QuestionVO addQus(String question_title, String question_desciption) {
@@ -15,7 +15,7 @@ public class QuestionService {
 		QuestionVO questionVo = new QuestionVO();
 
 		questionVo.setQuestion_title(question_title);
-		questionVo.setQuestion_desciption(question_desciption);
+		questionVo.setQuestion_description(question_desciption);
 		
 		dao.insert(questionVo);
 
@@ -28,7 +28,7 @@ public class QuestionService {
 		QuestionVO questionVo = new QuestionVO();
 
 		questionVo.setQuestion_title(question_title);
-		questionVo.setQuestion_desciption(question_desciption);
+		questionVo.setQuestion_description(question_desciption);
 		questionVo.setSq_question_id(sq_question_id);
 		
 		dao.update(questionVo);

@@ -3,7 +3,7 @@ package com.question.model;
 public class QuestionVO {
 	private String sq_question_id;
 	private String question_title;
-	private String question_desciption;
+	private String question_description;
 	
 	
 	public String getSq_question_id() {
@@ -18,11 +18,11 @@ public class QuestionVO {
 	public void setQuestion_title(String question_title) {
 		this.question_title = question_title;
 	}
-	public String getQuestion_desciption() {
-		return question_desciption;
+	public String getQuestion_description() {
+		return question_description;
 	}
-	public void setQuestion_desciption(String question_desciption) {
-		this.question_desciption = question_desciption;
+	public void setQuestion_description(String question_desciption) {
+		this.question_description = question_desciption;
 	}
 	
 	

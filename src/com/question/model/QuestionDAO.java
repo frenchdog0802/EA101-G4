@@ -25,7 +25,7 @@ public class QuestionDAO implements QuestionDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO QUESTION (QUESTION_TITLE,QUESTION_DESCIPTION) VALUES (?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO QUESTION (QUESTION_TITLE,QUESTION_DESCRIPTION) VALUES (?, ?)";
 	private static final String GET_ALL_STMT = "SELECT SQ_QUESTION_ID  , QUESTION_TITLE, QUESTION_DESCRIPTION  FROM QUESTION";
 	private static final String GET_ONE_STMT = "SELECT SQ_QUESTION_ID  , QUESTION_TITLE, QUESTION_DESCRIPTION  FROM QUESTION where SQ_QUESTION_ID = ?";
 	
@@ -45,7 +45,7 @@ public class QuestionDAO implements QuestionDAO_interface {
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, questionVo.getQuestion_title());
-			pstmt.setString(2, questionVo.getQuestion_desciption());
+			pstmt.setString(2, questionVo.getQuestion_description());
 
 			pstmt.executeUpdate();
 
@@ -85,7 +85,7 @@ public class QuestionDAO implements QuestionDAO_interface {
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, questionVo.getQuestion_title());
-			pstmt.setString(2, questionVo.getQuestion_desciption());
+			pstmt.setString(2, questionVo.getQuestion_description());
 			pstmt.setString(3, questionVo.getSq_question_id());
 
 			pstmt.executeUpdate();
@@ -191,9 +191,9 @@ public class QuestionDAO implements QuestionDAO_interface {
 			while (rs.next()) {
 				
 				questionVo = new QuestionVO();
-				questionVo.setSq_question_id(rs.getString("sq_question_id"));
-				questionVo.setQuestion_title(rs.getString("question_title"));
-				questionVo.setQuestion_desciption(rs.getString("question_desciption"));
+				questionVo.setSq_question_id(rs.getString("SQ_QUESTION_ID"));
+				questionVo.setQuestion_title(rs.getString("QUESTION_TITLE"));
+				questionVo.setQuestion_description(rs.getString("QUESTION_DESCRIPTION"));
 			}
 
 			// Handle any SQL errors
@@ -245,9 +245,9 @@ public class QuestionDAO implements QuestionDAO_interface {
 
 			while (rs.next()) {
 				questionVo = new QuestionVO();
-				questionVo.setSq_question_id(rs.getString("sq_question_id"));
-				questionVo.setQuestion_title(rs.getString("question_title"));
-				questionVo.setQuestion_desciption(rs.getString("question_desciption"));
+				questionVo.setSq_question_id(rs.getString("SQ_QUESTION_ID"));
+				questionVo.setQuestion_title(rs.getString("QUESTION_TITLE"));
+				questionVo.setQuestion_description(rs.getString("QUESTION_DESCRIPTION"));
 				list.add(questionVo); // Store the row in the list
 			}
 

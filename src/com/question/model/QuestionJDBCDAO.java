@@ -14,15 +14,15 @@ public class QuestionJDBCDAO implements QuestionDAO_interface{
 	String userid = "EA101_G4";
 	String passwd = "EA101_G4";
 
-	private static final String INSERT_STMT = "INSERT INTO QUESTION (SQ_QUESTION_ID,QUESTION_TITLE,QUESTION_DESCIPTION) VALUES (sq_QUESTION.NEXTVAL, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT SQ_QUESTION_ID  , QUESTION_TITLE, QUESTION_DESCIPTION  FROM QUESTION";
-	private static final String GET_ONE_STMT = "SELECT SQ_QUESTION_ID  , QUESTION_TITLE, QUESTION_DESCIPTION  FROM QUESTION where SQ_QUESTION_ID = ?";
+	private static final String INSERT_STMT = "INSERT INTO QUESTION (SQ_QUESTION_ID,QUESTION_TITLE,QUESTION_DESCRIPTION) VALUES (sq_QUESTION.NEXTVAL, ?, ?)";
+	private static final String GET_ALL_STMT = "SELECT SQ_QUESTION_ID  , QUESTION_TITLE, QUESTION_DESCRIPTION  FROM QUESTION";
+	private static final String GET_ONE_STMT = "SELECT SQ_QUESTION_ID  , QUESTION_TITLE, QUESTION_DESCRIPTION  FROM QUESTION where SQ_QUESTION_ID = ?";
 	
 	
 	//private static final String DELETE_EMPs = "DELETE FROM TIPS where TIPS_DESCIPTION = ?";
 	private static final String DELETE_QUESTION = "DELETE FROM QUESTION where SQ_QUESTION_ID = ?";	
 	
-	private static final String UPDATE = "UPDATE QUESTION set QUESTION_TITLE=?, QUESTION_DESCIPTION=? where SQ_QUESTION_ID = ?";
+	private static final String UPDATE = "UPDATE QUESTION set QUESTION_TITLE=?, QUESTION_DESCRIPTION=? where SQ_QUESTION_ID = ?";
 
 	public void insert(QuestionVO questionVo) {
 
@@ -37,7 +37,7 @@ public class QuestionJDBCDAO implements QuestionDAO_interface{
 
 			
 			pstmt.setString(1, questionVo.getQuestion_title());
-			pstmt.setString(2, questionVo.getQuestion_desciption());
+			pstmt.setString(2, questionVo.getQuestion_description());
 
 			pstmt.executeUpdate();
 
@@ -83,7 +83,7 @@ public class QuestionJDBCDAO implements QuestionDAO_interface{
 
 			
 			pstmt.setString(1, questionVo.getQuestion_title());
-			pstmt.setString(2, questionVo.getQuestion_desciption());
+			pstmt.setString(2, questionVo.getQuestion_description());
 			pstmt.setString(3, questionVo.getSq_question_id());
 			
 			pstmt.executeUpdate();
@@ -201,7 +201,7 @@ public class QuestionJDBCDAO implements QuestionDAO_interface{
 		QuestionVO questionVo3 = dao.findByPrimaryKey("310010");
 		System.out.print(questionVo3.getSq_question_id() + ",");
 		System.out.print(questionVo3.getQuestion_title() + ",");
-		System.out.println(questionVo3.getQuestion_desciption());
+		System.out.println(questionVo3.getQuestion_description());
 		System.out.println("---------------------");
 
 		// 查詢部門
@@ -239,7 +239,7 @@ public class QuestionJDBCDAO implements QuestionDAO_interface{
 				questionVo = new QuestionVO();
 				questionVo.setSq_question_id(rs.getString("sq_question_id"));
 				questionVo.setQuestion_title(rs.getString("question_title"));
-				questionVo.setQuestion_desciption(rs.getString("question_desciption"));
+				questionVo.setQuestion_description(rs.getString("question_desciption"));
 			}
 
 			// Handle any driver errors
@@ -297,7 +297,7 @@ public class QuestionJDBCDAO implements QuestionDAO_interface{
 				questionVo = new QuestionVO();
 				questionVo.setSq_question_id(rs.getString("sq_question_id"));
 				questionVo.setQuestion_title(rs.getString("question_title"));
-				questionVo.setQuestion_desciption(rs.getString("question_desciption"));
+				questionVo.setQuestion_description(rs.getString("question_desciption"));
 				list.add(questionVo); // Store the row in the list
 			}
 
