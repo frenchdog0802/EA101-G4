@@ -40,6 +40,11 @@
 	vertical-align: middle; 
 	text-align:center;
 }
+
+img.img-thumbnail{
+	height:300px;
+	width:100%;
+}
 </style>
 
 <link rel="stylesheet"
