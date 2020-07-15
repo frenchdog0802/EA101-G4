@@ -30,7 +30,6 @@ public class BikeServlet extends HttpServlet {
 
 			try {
 				String sq_bike_store_id = request.getParameter("sq_bike_store_id");
-				String sq_bike_id = "620001";// request.getParameter("sq_bike_id");之後直接jsp改抓session的value
 				String sq_bike_type_id = request.getParameter("sq_bike_type_id");
 				Integer bike_status = Integer.parseInt(request.getParameter("bike_status"));
 
@@ -41,7 +40,7 @@ public class BikeServlet extends HttpServlet {
 				BikeVO.setBike_status(bike_status);
 				BikeSvc.insert(BikeVO);
 
-				RequestDispatcher success = request.getRequestDispatcher("/back-end/bike/bikeListAll.jsp");
+				RequestDispatcher success = request.getRequestDispatcher("/back-end/bike/newBikeListAll.jsp");
 				success.forward(request, response);
 			} catch (Exception ce) {
 				ce.printStackTrace();
@@ -58,7 +57,7 @@ public class BikeServlet extends HttpServlet {
 				BikeVO bikeVO = bikeSvc.findByPrimaryKey(sq_bike_id);
 
 				request.setAttribute("BikeVO", bikeVO);
-				RequestDispatcher successView = request.getRequestDispatcher("/back-end/bike/bikeListAll.jsp");
+				RequestDispatcher successView = request.getRequestDispatcher("/back-end/bike/newBikeListAll.jsp");
 				successView.forward(request, response);
 			} catch (Exception ce) {
 				ce.printStackTrace();
