@@ -11,7 +11,7 @@ public class WaterStationService {
 	}
 
 	public void insert(String stationName, String stationAddress, Double longitude,
-			Double latitude, String country, String area, byte[] stationImage, String businessHours, Integer checkFlag, Integer addStation) {
+			Double latitude, String country, String area, byte[] stationImage, String businessHours, String insertBy , Integer checkFlag, Integer addStation) {
 		WaterStationVO wsVO = new WaterStationVO();
 		wsVO.setStationName(stationName);
 		wsVO.setStationAddress(stationAddress);
@@ -21,6 +21,7 @@ public class WaterStationService {
 		wsVO.setArea(area);
 		wsVO.setStationImage(stationImage);
 		wsVO.setBusinessHours(businessHours);
+		wsVO.setInsertBy(insertBy);
 		wsVO.setCheckFlag(checkFlag);
 		wsVO.setAddStation(addStation);
 
