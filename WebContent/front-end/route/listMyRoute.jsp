@@ -6,11 +6,11 @@
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-	MemVO memVO = (MemVO) session.getAttribute("MemVO");
 	RouteService routeSvc = new RouteService();
 	List<RouteVO> list = routeSvc.getAll();
 	pageContext.setAttribute("list", list);
 %>
+
 
 
 
@@ -22,7 +22,8 @@
 <meta content="width=device-width, initial-scale=1, shrink-to-fit=no"
 	name="viewport">
 <title>所有路線資料 - listAllRou.jsp</title>
-<link href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css"
+	rel="stylesheet">
 <script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
 <style>
 table#table-1 h4 {
@@ -67,58 +68,54 @@ td {
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
 
-<div class="row" style="background-color: white;">
-
-</div>
+	<div class="row" style="background-color: white;"></div>
 
 
-<center>
+	<center>
 
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
+		<table style="text-align: center">
+			<tr>
+				<th style="width: 100px">路線編號</th>
+				<th style="width: 100px">路線名稱</th>
+				<th style="width: 100px">路線總距離(公里)</th>
+				<th>路線圖片</th>
+				<th style="width: 370px">路線簡介</th>
+				<th style="width: 100px">路線細節</th>
+				<th>審核狀態</th>
+				<th>上架狀態</th>
+
+			</tr>
+
+			<c:forEach var="rouVO" items="${list}">
+
+				<c:if test="${sessionScope.MemVO.sq_member_id == rouVO.sqMemberId }">
+					<tr>
+						<td>${rouVO.sqRouteId}</td>
+						<td>${rouVO.routeName}</td>
+						<td>${rouVO.distance}</td>
+						<td><img alt=""
+							src="<%=request.getContextPath()%>/back-end/route/route.img?SQ_ROUTE_ID=${rouVO.sqRouteId}"
+							style="width: 200px; height: 200px"></td>
+						<td style="text-align: left">${rouVO.routeIntroduction}</td>
+						<td><a
+							href="<%=request.getContextPath()%>/front-end/route/route.do?sqRouteId=${rouVO.sqRouteId}&routeName=${rouVO.routeName}&action=getOneRoute_For_Display">查看路線細節</a>
+						</td>
+						<td>
+							<c:if test="${rouVO.checkFlag == 0}">未審核</c:if>
+							<c:if test="${rouVO.checkFlag == 1}">審核通過</c:if>
+							<c:if test="${rouVO.checkFlag == 2}">審核未通過</c:if>
+						</td>
+
+						<td>
+							<c:if test="${rouVO.addRoute == 0}">未上架</c:if>
+							<c:if test="${rouVO.addRoute == 1}">已上架</c:if>
+						</td>
+						
+					</tr>
+				</c:if>
 			</c:forEach>
-		</ul>
-	</c:if>
+		</table>
 
-	<table style="text-align:center">
-		<tr>
-			<th style="width: 100px">路線編號</th>
-			<th style="width: 100px">路線名稱</th>
-			<th style="width: 100px">路線總距離</th>
-			<th>路線圖片</th>
-			<th style="width: 370px">路線簡介</th>
-			<th style="width: 100px">路線細節 </th>
-			<th>審核狀態</th>
-			<th>上架狀態</th>
-
-		</tr>
-		<%@ include file="pages/page1.file"%>
-		<c:forEach var="rouVO" items="${list}" begin="<%=pageIndex%>"
-			end="<%=pageIndex+rowsPerPage-1%>">
-			<c:if test="${memVO.sq_member_id == rouVO.sqMemberId}">
-				<tr>
-					<td>${rouVO.sqRouteId}</td>
-					<td>${rouVO.routeName}</td>
-					<td>${rouVO.distance}</td>
-					<td><img alt=""
-						src="<%=request.getContextPath()%>/back-end/route/route.img?SQ_ROUTE_ID=${rouVO.sqRouteId}"
-						style="width: 200px; height: 200px"></td>
-					<td style="text-align: left">${rouVO.routeIntroduction}</td>
-					<td><a
-						href="<%=request.getContextPath()%>/front-end/route/route.do?sqRouteId=${rouVO.sqRouteId}&routeName=${rouVO.routeName}&action=getOneRoute_For_Display">查看路線細節</a>
-					</td>
-					<td>${rouVO.checkFlag}</td>
-					<td>${rouVO.addRoute}</td>
-					
-				</tr>
-			</c:if>
-		</c:forEach>
-	</table>
-	<%@ include file="pages/page2.file"%>
-	<%@include file="/front-end/page-file/page-footer"%>
+		<%@include file="/front-end/page-file/page-footer"%>
 </body>
 </html>

@@ -6,7 +6,6 @@
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-	MemVO memVO = (MemVO) session.getAttribute("MemVO");
 	WaterStationService waterStationSvc = new WaterStationService();
 	List<WaterStationVO> list = waterStationSvc.getAll();
 	pageContext.setAttribute("list", list);
@@ -20,7 +19,8 @@
 <meta content="width=device-width, initial-scale=1, shrink-to-fit=no"
 	name="viewport">
 <title>所有路線資料 - listAllRou.jsp</title>
-<link href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css"
+	rel="stylesheet">
 <script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
 <style>
 table#table-1 h4 {
@@ -63,62 +63,69 @@ td {
 
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
-<div class="row" style="background-color: white;">
-	
-</div>
+	<div class="row" style="background-color: white;"></div>
 
-<center>
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
+	<center>
+		<%-- 錯誤表列 --%>
+		<c:if test="${not empty errorMsgs}">
+			<font style="color: red">請修正以下錯誤:</font>
+			<ul>
+				<c:forEach var="message" items="${errorMsgs}">
+					<li style="color: red">${message}</li>
+				</c:forEach>
+			</ul>
+		</c:if>
+
+		<table style="text-align: center">
+			<tr>
+				<th>補給站編號</th>
+				<th>補給站名稱</th>
+				<th>補給站地址</th>
+				<th>經度</th>
+				<th>緯度</th>
+				<th>國家</th>
+				<th>縣市</th>
+				<th>圖片</th>
+				<th>營業時間</th>
+				<th>審核狀態</th>
+				<th>上架狀態</th>
+
+			</tr>
+
+			<c:forEach var="wsVO" items="${list}">
+
+				<c:if test="${sessionScope.MemVO.sq_member_id == wsVO.insertBy}">
+					<tr>
+						<td>${wsVO.sqStationId}</td>
+						<td>${wsVO.stationName}</td>
+						<td>${wsVO.stationAddress}</td>
+						<td>${wsVO.longitude}</td>
+						<td>${wsVO.latitude}</td>
+						<td>${wsVO.country}</td>
+						<td>${wsVO.area}</td>
+
+						<td><img alt=""
+							src="<%=request.getContextPath()%>/back-end/waterStation/water.stationImage?SQ_STATION_ID=${wsVO.sqStationId}"
+							style="width: 150px; height: 150px"> <%--    ${memVO.mPic} 圖片記憶體位置 --%>
+						</td>
+						<td>${wsVO.businessHours}</td>
+
+						<td>
+							<c:if test="${wsVO.checkFlag == 0}">未審核</c:if> 
+							<c:if test="${wsVO.checkFlag == 1}">審核通過</c:if> 
+							<c:if test="${wsVO.checkFlag == 2}">審核未通過</c:if>
+						</td>		
+
+						<td>
+							<c:if test="${wsVO.addStation == 0}">未上架</c:if> 
+							<c:if test="${wsVO.addStation == 1}">已上架</c:if>
+						</td>
+
+
+					</tr>
+				</c:if>
 			</c:forEach>
-		</ul>
-	</c:if>
-	
-	<table style="text-align:center">
-		<tr>
-			<th>補給站編號</th>
-			<th>補給站名稱</th>
-			<th>補給站地址</th>
-			<th>經度</th>
-			<th>緯度</th>
-			<th>國家</th>
-			<th>縣市</th>
-			<th>圖片</th>
-			<th>營業時間</th>
-			<th>審核狀態</th>
-			<th>上架狀態</th>
-
-		</tr>
-		<%@ include file="pages/page1.file"%>
-		<c:forEach var="wsVO" items="${list}" begin="<%=pageIndex%>"
-			end="<%=pageIndex+rowsPerPage-1%>">
-			<c:if test="${memVO.sq_member_id == wsVO.insertBy}">
-				<tr>
-					<td>${wsVO.sqStationId}</td>
-					<td>${wsVO.stationName}</td>
-					<td>${wsVO.stationAddress}</td>
-					<td>${wsVO.longitude}</td>
-					<td>${wsVO.latitude}</td>
-					<td>${wsVO.country}</td>
-					<td>${wsVO.area}</td>
-	
-					<td><img alt=""
-						src="<%=request.getContextPath()%>/back-end/waterStation/water.stationImage?SQ_STATION_ID=${wsVO.sqStationId}"
-						style="width: 150px; height: 150px"> <%--    ${memVO.mPic} 圖片記憶體位置 --%>
-					</td>
-					<td>${wsVO.businessHours}</td>
-					<td>${wsVO.checkFlag}</td>
-					<td>${wsVO.addStation}</td>
-	
-				</tr>
-			</c:if>
-		</c:forEach>
-	</table>
-	<%@ include file="pages/page2.file"%>
-	<%@include file="/front-end/page-file/page-footer"%>
+		</table>
+		<%@include file="/front-end/page-file/page-footer"%>
 </body>
 </html>

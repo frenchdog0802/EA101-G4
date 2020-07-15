@@ -99,10 +99,10 @@ public class WaterStationServlet extends HttpServlet {
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 
-//				MemVO memVO = (MemVO) session.getAttribute("MemVO");
-//				String insertBy = memVO.getSq_member_id();
+				MemVO memVO = (MemVO) session.getAttribute("MemVO");
+				String insertBy = memVO.getSq_member_id();
 				
-				String insertBy = "910002";
+//				String insertBy = "910002";
 
 				String stationName = req.getParameter("stationName");
 				String stationNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";

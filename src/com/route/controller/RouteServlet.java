@@ -52,7 +52,7 @@ public class RouteServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
-//		HttpSession session = req.getSession();
+		HttpSession session = req.getSession();
 		
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
@@ -196,10 +196,10 @@ public class RouteServlet extends HttpServlet {
 				
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				//新增至路線主表
-//				MemVO memVO = (MemVO) session.getAttribute("MemVO");
-//				String sqMemberId = memVO.getSq_member_id();
+				MemVO memVO = (MemVO) session.getAttribute("MemVO");
+				String sqMemberId = memVO.getSq_member_id();
 				
-				String sqMemberId = "910003";
+//				String sqMemberId = "910003";
 				
 				String routeName = req.getParameter("routeName");
 				String routeIntroduction = req.getParameter("routeIntro");
