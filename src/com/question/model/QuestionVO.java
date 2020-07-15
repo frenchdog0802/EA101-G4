@@ -21,8 +21,8 @@ public class QuestionVO {
 	public String getQuestion_description() {
 		return question_description;
 	}
-	public void setQuestion_description(String question_desciption) {
-		this.question_description = question_desciption;
+	public void setQuestion_description(String question_description) {
+		this.question_description = question_description;
 	}
 	
 	

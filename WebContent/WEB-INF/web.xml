@@ -441,6 +441,34 @@
   	<servlet-name>WaterStationImgServlet</servlet-name>
   	<url-pattern>/back-end/waterStation/water.stationImage</url-pattern>
   </servlet-mapping>
+  <!--怡蘋 -->
+  <servlet>
+		<servlet-name>QuestionServlet</servlet-name>
+		<servlet-class>com.question.controller.QuestionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QuestionServlet</servlet-name>
+		<url-pattern>/question/question.do</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>TipsServlet</servlet-name>
+		<servlet-class>com.tips.controller.TipsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TipsServlet</servlet-name>
+		<url-pattern>/tips/tips.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DBGifReaderfromtips</servlet-name>
+		<servlet-class>com.tips.controller.DBGifReader2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DBGifReaderfromtips</servlet-name>
+		<url-pattern>/tips/DBGifReader2.do</url-pattern>
+	</servlet-mapping>
 
 	<!-- 連線池 -->
 	<resource-ref>
