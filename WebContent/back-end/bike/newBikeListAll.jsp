@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
+<%@ page import="java.util.stream.Collectors"%>
 <%@ page import="com.bike.bike.model.*"%>
+<%@ page import="com.bike.store.model.*"%>
 
 <jsp:useBean id="bikeTypeSvc" scope="page"
 	class="com.bike.type.model.BikeTypeService" />
@@ -11,7 +13,17 @@
 <%
 	BikeService bikeDao = new BikeService();
 	List<BikeVO> list = bikeDao.getAll();
-	pageContext.setAttribute("list", list);
+	
+	
+	//獲取店家編號 
+	BikeStoreVO BikeStoreVO = (BikeStoreVO) session.getAttribute("BikeStoreVO");
+	String sq_bike_store_id = BikeStoreVO.getSq_bike_store_id();
+	List<BikeVO> storeBikeVOList = list.stream()
+							.filter(e->e.getSq_bike_store_id().equals(sq_bike_store_id))
+							.collect(Collectors.toList());
+							
+	
+	pageContext.setAttribute("list", storeBikeVOList);
 
 	if (BikeVO.getSq_bike_type_id() != null) {
 		List<BikeVO> list1 = Arrays.asList(BikeVO);
@@ -109,7 +121,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<%@ include file="/back-end/bike/page1.file"%>
+				<%@ include file="/back-end/bike/pagebike.file"%>
 				<c:forEach var="bikeVO" items="${list}" begin="<%=pageIndex%>"
 					end="<%=pageIndex+rowsPerPage-1%>">
 					<tr>
