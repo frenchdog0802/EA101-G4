@@ -226,10 +226,10 @@ img.img-thumbnail{
 					</a>
 				</div>
 			</div>	
-			<div class="col-lg-10 col-md-6 col-sm-12">
+			<div class="col-lg-10 col-md-12 ">
 				<div class="row h-100 px-3 pt-4">
 					<%for(int i=0;i<actList.size(); i++){%>
-					<div class="col-lg-3 col-md-6 col-sm-12">
+					<div class="col-lg-3 col-md-12 ">
 						<div class="row" style="height:75%;">
 							<div class="col-12" style="height:100%; display:table;">
 								<div class="imgDiv">
@@ -260,10 +260,10 @@ img.img-thumbnail{
 					</a>
 				</div>
 			</div>	
-			<div class="col-lg-10 col-md-6 col-sm-12 rowGray">
+			<div class="col-lg-10 col-md-12  rowGray">
 				<div class="row h-100 px-3 pt-4">
 					<%for(int i=0;i<routeList.size(); i++){%>
-						<div class="col-lg-3 col-md-6 col-sm-12">
+						<div class="col-lg-3 col-md-12 ">
 						<div class="row" style="height:75%;">
 							<div class="col-12" style="height:100%; display:table;">
 								<div class="imgDiv">
@@ -293,10 +293,10 @@ img.img-thumbnail{
 					<a href="#" class="btn btn-outline-dark mb-5"> <span class="small">前往商城</span></a>
 				</div>
 			</div>				
-			<div class="col-lg-10 col-md-6 col-sm-12">
+			<div class="col-lg-10 col-md-12 ">
 				<div class="row h-100 px-3 pt-4">
 					<%for(int i=0;i<actList.size(); i++){%>
-					<div class="col-lg-3 col-md-6 col-sm-12">
+					<div class="col-lg-3 col-md-12 ">
 						<div class="row" style="height:75%;">
 							<div class="col-12" style="height:100%; display:table;">
 								<div class="imgDiv">
