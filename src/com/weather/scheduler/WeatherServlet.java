@@ -111,12 +111,12 @@ public class WeatherServlet extends HttpServlet {
 			int WeatherCount = 0;
 			for (int i = 0; i < WeatherList.length(); i++) {
 				String areaStr = area.getString(areaCount);
-				String WeatherStr = WeatherList.getString(WeatherCount);
-				String parameterNameStr = parameterNameList.getString(WeatherCount);
-				String parameterValueStr = parameterValueList.getString(WeatherCount);
 				if (areaList.contains(areaStr)) {
 					areaS.add(areaStr);
 					for (int k = 0; k < date.length(); k++) {
+						String WeatherStr = WeatherList.getString(WeatherCount);
+						String parameterNameStr = parameterNameList.getString(WeatherCount);
+						String parameterValueStr = parameterValueList.getString(WeatherCount);
 						WeatherListS.add(WeatherStr);
 						parameterNameListS.add(parameterNameStr);
 						parameterValueListS.add(parameterValueStr);
@@ -124,8 +124,8 @@ public class WeatherServlet extends HttpServlet {
 					}
 					areaCount++;
 				} else {
-					i += 6;
-					WeatherCount += 6;
+					i += 7;
+					WeatherCount += 7;
 					areaCount++;
 				}
 
@@ -174,7 +174,7 @@ public class WeatherServlet extends HttpServlet {
 			}
 		};
 		Calendar cal = new GregorianCalendar(2020,Calendar.JULY,1,19,00,00);
-		timer.schedule(task, cal.getTime(),1000*60*60*24);
+		timer.scheduleAtFixedRate(task, cal.getTime(),1000*60*60*24);
 	}
 	
 	@Override

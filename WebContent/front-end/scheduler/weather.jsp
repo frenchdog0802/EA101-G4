@@ -117,6 +117,7 @@ pageEncoding="UTF-8"%>
 				},
 				dataType : "JSON",
 				success : function(data) {
+					console.log(data);
 					handleAjaxData(data);
 
 				},
