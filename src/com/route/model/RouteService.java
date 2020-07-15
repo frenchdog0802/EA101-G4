@@ -33,11 +33,12 @@ public class RouteService {
 		dao.delete(sqRouteId);
 	}
 
-	public RouteVO insert(String routeName, Double distance, String country, String startArea, 
+	public RouteVO insert(String routeName, String sqMemberId, Double distance, String country, String startArea, 
 			String endArea, byte[] routeImage, String routeIntroduction, 
 			 Integer checkFlag, Integer addRoute) {
 		RouteVO routeVO = new RouteVO();
 		routeVO.setRouteName(routeName);
+		routeVO.setSqMemberId(sqMemberId);
 		routeVO.setDistance(distance);
 		routeVO.setCountry(country);
 		routeVO.setStartArea(startArea);

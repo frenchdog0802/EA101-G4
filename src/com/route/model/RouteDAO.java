@@ -37,7 +37,7 @@ public class RouteDAO implements RouteDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO ROUTE_PLAN(SQ_ROUTE_ID,ROUTE_NAME, DISTANCE, COUNTRY, START_AREA, END_AREA, ROUTE_IMAGE, ROUTE_INTRODUCTION,CHECK_FLAG, ADD_ROUTE) VALUES (('RP'||LPAD(to_char(route_plan_sequence.NEXTVAL), 6, '0')),?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO ROUTE_PLAN(SQ_ROUTE_ID, SQ_MEMBER_ID, ROUTE_NAME, DISTANCE, COUNTRY, START_AREA, END_AREA, ROUTE_IMAGE, ROUTE_INTRODUCTION,CHECK_FLAG, ADD_ROUTE) VALUES (('RP'||LPAD(to_char(route_plan_sequence.NEXTVAL), 6, '0')),?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM ROUTE_PLAN  ORDER BY SQ_ROUTE_ID";
 	private static final String GET_ONE_STMT = "SELECT SQ_ROUTE_ID, SQ_MEMBER_ID, SQ_STAFF_ID, ROUTE_NAME, DISTANCE, COUNTRY, START_AREA, END_AREA, ROUTE_IMAGE, ROUTE_INTRODUCTION, INSERT_TIMESTAMP, UPDATE_TIMESTAMP, MODIFY_ID, CHECK_FLAG, ADD_ROUTE FROM ROUTE_PLAN WHERE SQ_ROUTE_ID =?";
 	private static final String GET_Area_ByStartArea_STMT = "SELECT SQ_ROUTE_ID, ROUTE_NAME, DISTANCE, COUNTRY, START_AREA, END_AREA, ROUTE_IMAGE, ROUTE_INTRODUCTION FROM ROUTE_PLAN WHERE START_AREA IN ";
@@ -55,20 +55,22 @@ public class RouteDAO implements RouteDAO_interface {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
-
+System.out.println(routeVO.getSqMemberId());
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-
-			pstmt.setString(1, routeVO.getRouteName());
-			pstmt.setDouble(2, routeVO.getDistance());
-			pstmt.setString(3, routeVO.getCountry());
-			pstmt.setString(4, routeVO.getStartArea());
-			pstmt.setString(5, routeVO.getEndArea());
-			pstmt.setBytes(6, routeVO.getRouteImage());
-			pstmt.setString(7, routeVO.getRouteIntroduction());
-			pstmt.setInt(8, routeVO.getCheckFlag());
-			pstmt.setInt(9, routeVO.getAddRoute());
+			
+			pstmt.setString(1, routeVO.getSqMemberId());
+			pstmt.setString(2, routeVO.getRouteName());
+			
+			pstmt.setDouble(3, routeVO.getDistance());
+			pstmt.setString(4, routeVO.getCountry());
+			pstmt.setString(5, routeVO.getStartArea());
+			pstmt.setString(6, routeVO.getEndArea());
+			pstmt.setBytes(7, routeVO.getRouteImage());
+			pstmt.setString(8, routeVO.getRouteIntroduction());
+			pstmt.setInt(9, routeVO.getCheckFlag());
+			pstmt.setInt(10, routeVO.getAddRoute());
 
 			pstmt.executeUpdate();
 			

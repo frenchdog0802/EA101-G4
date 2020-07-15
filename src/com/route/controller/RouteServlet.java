@@ -52,7 +52,7 @@ public class RouteServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
-		HttpSession session = req.getSession();
+//		HttpSession session = req.getSession();
 		
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
@@ -196,8 +196,10 @@ public class RouteServlet extends HttpServlet {
 				
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				//新增至路線主表
-				MemVO memVO = (MemVO) session.getAttribute("MemVO");
-				String sqMemberId = memVO.getSq_member_id();
+//				MemVO memVO = (MemVO) session.getAttribute("MemVO");
+//				String sqMemberId = memVO.getSq_member_id();
+				
+				String sqMemberId = "910003";
 				
 				String routeName = req.getParameter("routeName");
 				String routeIntroduction = req.getParameter("routeIntro");
@@ -227,6 +229,7 @@ public class RouteServlet extends HttpServlet {
 				RouteVO rouVO = new RouteVO();
 
 				rouVO.setRouteName(routeName);
+				rouVO.setSqMemberId(sqMemberId);
 				rouVO.setRouteIntroduction(routeIntroduction);
 				rouVO.setCountry(country);
 				rouVO.setStartArea(startArea);
@@ -234,10 +237,9 @@ public class RouteServlet extends HttpServlet {
 				rouVO.setDistance(distance);
 				rouVO.setCheckFlag(checkFlag);
 				rouVO.setAddRoute(addRoute);
-				rouVO.setSqMemberId(sqMemberId);
 
 				RouteService RouSvc1 = new RouteService();
-				RouSvc1.insert(routeName, distance, country, startArea, endArea, routeImage, routeIntroduction,
+				RouSvc1.insert(routeName, sqMemberId, distance, country, startArea, endArea, routeImage, routeIntroduction,
 						checkFlag, addRoute);
 
 				//新增至路線細節表格
@@ -247,8 +249,8 @@ public class RouteServlet extends HttpServlet {
 				String sqRouteId = rouVO2.getSqRouteId();
 				String[] stepName = req.getParameterValues("step");
 				
-				String[] stLongitude = req.getParameterValues("lat");
-				String[] stLatitude = req.getParameterValues("lng");
+				String[] stLongitude = req.getParameterValues("lng");
+				String[] stLatitude = req.getParameterValues("lat");
 				String[] stepIntroduction = req.getParameterValues("stepIntro");
 				String[] stepImage = req.getParameterValues("stepImg");
 				
