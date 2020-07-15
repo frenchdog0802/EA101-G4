@@ -47,7 +47,15 @@
 		
 	//init table
 	$.ajax({
-		
+		url:"",
+		type:"POST",
+		data:{
+			action:"memberOrderInit"
+		},
+		dataType:"JSON",
+		success:function(data){
+			
+		}
 	})
 	});
 	</script>

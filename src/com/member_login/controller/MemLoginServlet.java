@@ -50,7 +50,6 @@ public class MemLoginServlet extends HttpServlet {
 					returnMsgs.put("errorAccount", "請輸入帳號");
 				}
 				String password = request.getParameter("password").trim();
-				System.out.println(password);
 				if (password == null || password.trim().length() == 0) {
 					returnMsgs.put("errorPws", "請輸入密碼");
 				}
@@ -101,9 +100,9 @@ public class MemLoginServlet extends HttpServlet {
 				return;
 			}
 			catch (Exception e) {
-//				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/login/LoginMember.jsp");
-				failureView.forward(request, response);
+				returnMsgs.put("無法取得資料:" , e.getMessage());
+				JSONObject resJson = new JSONObject(returnMsgs);
+				out.println(resJson);
 			}
 		}
 		
