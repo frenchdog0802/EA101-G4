@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css">
 	<title>Insert Bike</title>
 	
- <%@include file="/back-end/backFrame/backBody"%>
+ <%@include file="/back-end/backFrame/masterBackBody"%>
  
  				<div class="row" style="background-color: white;">
 					<ul class="nav nav-tabs">
@@ -32,7 +32,7 @@
 								<!--分頁自己改-->
 <!-- --------------------------------------------------------------------------------------------->
 								<!-----------backNav----------->
-	<%@include file="/back-end/backFrame/backNav"%>
+	<%@include file="/back-end/backFrame/masterBackNav"%>
  
 	<div class="container-fluid mt-5">
 		<form method="POST" action="<%=request.getContextPath()%>/bike/BikeServlet.do">
