@@ -108,12 +108,17 @@ public class ShoppingServlet extends HttpServlet{
 		String name = req.getParameter("name");
 		String price = req.getParameter("price");
 		String quantity = req.getParameter("quantity");
+		String model = req.getParameter("model");
+		String color = req.getParameter("color");
 		
 		Shop_productVO product = new Shop_productVO();
 		product.setSq_product_id(id);
 		product.setProduct_name(name);
 		product.setProduct_price(Integer.parseInt(price));
 		product.setProduct_quantity(Integer.parseInt(quantity));
+		product.setProduct_color(color);
+		product.setProduct_model(model);
+		
 		return product;
 	}
 }

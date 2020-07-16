@@ -75,25 +75,42 @@ INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,
 --'TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0')
   INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
   VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910002','單車蘭嶼環島野營五天四夜',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'5','台灣有六大離島可以騎單車，澎湖、金門、馬祖、綠島、蘭嶼、小琉球，龜山島跟基隆嶼開放登島了但不能騎車，所以台灣環島完下一個目標就是環離島。蘭嶼環島一圈約有37公里，整個島分為六個部落：東清、野銀、紅頭、椰油、朗島和漁人部落，每個部落都是一個自主單元，並沒有一個跨部落的領導人。為了因應現行行政體系，蘭嶼部落還是有選出一個鄉長，但僅有名義上的領導權，部落依然各自為政，如遇紛爭仍以傳統方式解決。詳細介紹：https://bit.ly/2SUrJoi',
-  NULL,'0');
+  load_blob('theme1.jpg'),'0');
   
   INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
   VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910002','新北福隆 - 舊草嶺環狀線單車道',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'2','本文同步發表於 https://carlming.net/?p=1672 地址：新北市貢寮區福隆街（起點:福隆火車站）開放時間：08:00-17:30（17:00開始清場）注意事項：平日開放步行，假日僅供自行車進入！全路線禁止汽機車通行！景點特色：無敵海景 / 懷舊隧道 / 安全車道 /平坦順暢 / 漁村風光 租車位置：火車站旁或台二線靠福隆街口 停車資訊：車站旁路小建議有租車停出租處，無租車者自行備單車可停福隆海水浴場或台２線福隆國小旁空地停車５０元，龜壽谷街單車沿路線至隧道口也有零星可以停車',
-  NULL,'0');
+  load_blob('theme2.jpg'),'0');
   
   INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
   VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910002','臺灣的屋脊 - 山線四日之旅',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'1','從台灣的中心點「埔里鎮」出發，穿過台灣最有名的自行車環湖公路「日月潭」，一路從台21省騎到台灣最高峰的聖山「玉山」的入口"塔塔加"，也是整個新中横公路的最高點，接著一路下滑經過台灣最知名的日出景點「阿里山」，最後接回到這座存留著歷史文化與小吃聞名的城市「嘉義」。全長194公里，總爬升3059公尺，是個能穿過幾個台灣最具有代表性的景點與公路路線。如果說台灣人心目中騎單車的聖地是位於最高海拔公路的武嶺牌樓。那這條山路則是條能經過玉山國家公園的高海拔路線，雖公路的海拔不及合歡山武嶺高，但沿路所經過的景點卻都是一級景點代表，且景色變化多端優美又壯麗。這回在年未十二月安排中南部四日行，我會在埔里當地小逛與嘉義知名的太平36彎公路騎乘，最後移動到台灣舊時代的首府「台南」結束。在這篇四日的遊記中，我會在小鎮、鄉間、環湖、小型山道、高海拔公路與熱鬧的城市間進行遊走，我認為這是我在台灣在最中短天數的旅程中，騎過最全面也是最能看見台灣的集各種精華一面的中南部之旅。',
-  NULL,'0');
+  load_blob('theme3.jpg'),'0');
   
   INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
-  VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910002','屏東大武山及老七佳吊橋單車行',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'1','又是一段自謔行程今天行程由高雄-台88-竹田-萬巒-佳平-大武山(泰武)-佳興-義林-古義-丹林-餉潭-南和-老七佳吊橋-力里-七佳-枋寮-林邊-潮州坐火車回家，詳請看本次行程影片紀錄',
-  NULL,'0');
+  VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910004','屏東大武山及老七佳吊橋單車行',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'1','又是一段自謔行程今天行程由高雄-台88-竹田-萬巒-佳平-大武山(泰武)-佳興-義林-古義-丹林-餉潭-南和-老七佳吊橋-力里-七佳-枋寮-林邊-潮州坐火車回家，詳請看本次行程影片紀錄',
+  load_blob('theme4.jpg'),'0');
   
   INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
-  VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910002','請問桃園跨經國路印象大橋車道何時通行？',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'1','如題， 請問是否有人知道桃園跨經國路的印象大橋自行車道預計何時啟用通行？另外，若啟用，請問目前是否真可由 龜山沿南崁溪順順騎 22 公里到南崁溪出海口竹圍漁港？ 還是目前仍是有許多斷點的不建議路線？',
-  NULL,'0');
+  VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910003','請問桃園跨經國路印象大橋車道何時通行？',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'1','如題， 請問是否有人知道桃園跨經國路的印象大橋自行車道預計何時啟用通行？另外，若啟用，請問目前是否真可由 龜山沿南崁溪順順騎 22 公里到南崁溪出海口竹圍漁港？ 還是目前仍是有許多斷點的不建議路線？',
+ load_blob('theme5.jpg'),'0');
   
-  
+  INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
+  VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910005','環島的感想與經驗分享',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'1','去年4月份的時候一個人完成了環島，雖然過了一年多，但是哪份很特殊的經驗一直讓我印象深刻就此分享一下個人的想法，雖然不一定完全正確，不過希望能提供點幫助給想要一個人去環島的人
+	1. 騎便宜的登山車的優點理由:登山車比較適合裝後貨架載行李，不用背包包在身上，背行李在身上又悶又熱，且長距離騎乘負擔比較重，肩膀很痠、皮膚容易發炎，其次，巧克力胎比較不容易爆胎(刺到照樣爆)但機率很低，雖然比不上公路車輕快，但也比較安心再來，一個人環島的時候，會有很多機會要丟下車子去上廁所，7-11、加油站、公廁等
+	便宜的登山車(大約1萬左右) 被偷的機率比較低，萬一真的被偷了也比較不心疼，大不了再買一台繼續騎單人環島的感想與經驗分享 我的做法是，買一個比較大的上管馬鞍包，把皮包手機貴重物品放裡面，人車分離時把上管包帶走，安心去嗯嗯!2.盡量簡化行李，最好能減輕重量到5kg以下，非必要的物品都不帶，爬坡時真的會想把整包行李都丟掉! 原本想說一個人去會無聊，帶著Ipad可以解悶，後來發現還好沒帶!! 因為根本沒啥時間可以玩，風景看不完，環島是很美好的事，沒必要把時間浪費在小小螢幕上，而且手機+Ipad+充電器就要1公斤了，還要載著騎10幾天，不划算。3.一定要騎到墾丁在往上騎到旭海，真的太美了! 
+	4.逆時針騎比較接近大海，尤其是東海岸，真的很漂亮，不可錯過!5.鞋子穿護趾運動涼鞋還不賴只要帶一雙鞋子就好，騎車、逛街、雨天騎車都方便，因為是硬底所以很適合騎單車，雨水也會從鞋底流出不用擔心雨天鞋子會裝水，放一個晚上就會乾，晴天騎車也很透氣免穿襪子，很適合穿去環島，旅館內未必會有準備拖鞋，有你也不敢穿，因為很多都沒洗的! 把腳跟的部位拆掉就可以當拖鞋穿了。6.找一天休息，如果時間允許的話最好是第4天或第5天休息一天不騎車，因為就算平常有在騎車的人，連續幾天操勞也會累，若能休息個一天讓體力恢復，隔天一定精神百倍騎不累，若身上有些病痛也能大幅舒緩目前只有想到這些了，希望能提供有用的資訊給想去還沒去的車友，這是我的倒B字型環島，謝謝收看',
+	load_blob('theme6.jpg'),'0');
+ 
+  INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
+  VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910004',' 苗栗西湖 - 西湖鄉自導式自行車道 ● 西伯朗大道及金城武樹，平坦順暢安全的田野路徑',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'1','【 苗栗西湖 - 西湖鄉自導式自行車道 】本文同步發表於:https://carlming.net/?p=1681 地址：苗栗縣西湖鄉土牛溝22號（起點:僑文國小 or 台一線與苗33交界口開始）開放時間：24h，但建議白天，晚上看起來沿路無路燈注意事項：週邊幾乎無商店，水要帶齊，另怕夜總會的朋友會在119縣道上有一小段景點特色：田野風光 / 舒適無車 / 西伯朗大道金城武樹 /平坦順暢 租車位置：沿路好像沒有看到租車店，但有看到一家人騎著四輪有頂蓬的車，推測可能老街有，但還是建議自己帶車停車資訊：僑文國小有平台假日沒人應該可停，或台1線上都蠻多空間，國道三號底下也有些停車空間，這次我沒發現所以停在飛龍大橋旁本次路線：飛龍大橋>國三底>苗33>苗34-4>119縣道>苗35>苗33回>飛龍大橋',
+ 	load_blob('theme7.jpg'),'0');
+ 
+ INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
+  VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910005','屏東大武山及老七佳吊橋單車行',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'1',
+  '今天行程由高雄-台88-竹田-萬巒-佳平-大武山(泰武)-佳興-義林-古義-丹林-餉潭-南和-老七佳吊橋-力里-七佳-枋寮-林邊-潮州坐火車回家接下來前往萬巒吊橋--位於東港溪的一座3D彩繪吊橋，不過近日在整修喔（從4月9號起），所以吊橋是封閉的，有要前往的再自己注意一下，一旁的東港溪自行車道相當不錯，這次只騎一小段而已',load_blob('theme7.jpg'),'0');
+ 	
+ 	INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
+  VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910004',' 苗栗西湖 - 西湖鄉自導式自行車道 ● 西伯朗大道及金城武樹，平坦順暢安全的田野路徑',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'1','【 苗栗西湖 - 西湖鄉自導式自行車道 】本文同步發表於:https://carlming.net/?p=1681 地址：苗栗縣西湖鄉土牛溝22號（起點:僑文國小 or 台一線與苗33交界口開始）開放時間：24h，但建議白天，晚上看起來沿路無路燈注意事項：週邊幾乎無商店，水要帶齊，另怕夜總會的朋友會在119縣道上有一小段景點特色：田野風光 / 舒適無車 / 西伯朗大道金城武樹 /平坦順暢 租車位置：沿路好像沒有看到租車店，但有看到一家人騎著四輪有頂蓬的車，推測可能老街有，但還是建議自己帶車停車資訊：僑文國小有平台假日沒人應該可停，或台1線上都蠻多空間，國道三號底下也有些停車空間，這次我沒發現所以停在飛龍大橋旁本次路線：飛龍大橋>國三底>苗33>苗34-4>119縣道>苗35>苗33回>飛龍大橋',
+ 	load_blob('theme7.jpg'),'0');
   --------------------------------------------------------
 --FOR TABLE FORUM_THEME_REPORT VALUES
 -------------------------------------------------------- 
@@ -131,8 +148,16 @@ INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,
   VALUES(('FM'||'-'||RPAD(to_char(FORUM_MESSAGE_ID_seq.NEXTVAL), 6, '0')),'TM-400004','910002','謝謝分享 這個地方真的很棒 有機會一定去朝聖',TO_DATE('2020-06-06 22:00','YYYY-MM-DD HH24:MI'),'0');
 
   INSERT INTO FORUM_MESSAGE (SQ_FORUM_MESSAGE_ID,SQ_THEME_ID,SQ_MEMBER_ID,MESSAGE_DETAIL,MESSAGE_TIME,MESSAGE_DISPLAY_STATUS) 
-  VALUES(('FM'||'-'||RPAD(to_char(FORUM_MESSAGE_ID_seq.NEXTVAL), 6, '0')),'TM-400005','910002','謝謝分享666大家一起返鄉投票 高雄人加油',TO_DATE('2020-06-06 22:00','YYYY-MM-DD HH24:MI'),'0');
+  VALUES(('FM'||'-'||RPAD(to_char(FORUM_MESSAGE_ID_seq.NEXTVAL), 6, '0')),'TM-400005','910002','謝謝分享',TO_DATE('2020-06-06 22:00','YYYY-MM-DD HH24:MI'),'0');
   
+  INSERT INTO FORUM_MESSAGE (SQ_FORUM_MESSAGE_ID,SQ_THEME_ID,SQ_MEMBER_ID,MESSAGE_DETAIL,MESSAGE_TIME,MESSAGE_DISPLAY_STATUS) 
+  VALUES(('FM'||'-'||RPAD(to_char(FORUM_MESSAGE_ID_seq.NEXTVAL), 6, '0')),'TM-400005','910002','謝謝您的分享，很實用的經驗',TO_DATE('2020-06-06 22:00','YYYY-MM-DD HH24:MI'),'0');
+  
+  INSERT INTO FORUM_MESSAGE (SQ_FORUM_MESSAGE_ID,SQ_THEME_ID,SQ_MEMBER_ID,MESSAGE_DETAIL,MESSAGE_TIME,MESSAGE_DISPLAY_STATUS) 
+  VALUES(('FM'||'-'||RPAD(to_char(FORUM_MESSAGE_ID_seq.NEXTVAL), 6, '0')),'TM-400006','910005','謝謝您的分享，很實用的經驗，值得參考',TO_DATE('2020-06-06 22:00','YYYY-MM-DD HH24:MI'),'0');
+  
+  INSERT INTO FORUM_MESSAGE (SQ_FORUM_MESSAGE_ID,SQ_THEME_ID,SQ_MEMBER_ID,MESSAGE_DETAIL,MESSAGE_TIME,MESSAGE_DISPLAY_STATUS) 
+  VALUES(('FM'||'-'||RPAD(to_char(FORUM_MESSAGE_ID_seq.NEXTVAL), 6, '0')),'TM-400006','910005','謝謝您的分享，很實用的經驗，值得參考',TO_DATE('2020-06-06 22:00','YYYY-MM-DD HH24:MI'),'0');
   
    --------------------------------------------------------
 --FOR TABLE FORUM_MESSAGE_REPORT VALUES

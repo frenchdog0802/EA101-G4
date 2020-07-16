@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 
 public class ForumDAO implements ForumDAO_interface {
 
+	
 	private static DataSource ds = null;
 	static {
 		try {
@@ -23,7 +24,8 @@ public class ForumDAO implements ForumDAO_interface {
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-	}
+}
+	
 	private static final String INSERT_STMT =
 			"INSERT INTO forum (sq_theme_id,sq_member_id,theme_name,theme_time,reponse_sum,theme_detial,theme_pic,theme_display_status) VALUES (('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0')), ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
@@ -93,12 +95,10 @@ public class ForumDAO implements ForumDAO_interface {
 
 			pstmt.setString(1, forumVO.getSq_member_id());
 			pstmt.setString(2, forumVO.getTheme_name());
-			pstmt.setDate(3, forumVO.getTheme_time());
-			pstmt.setInt(4, forumVO.getReponse_sum());
-			pstmt.setString(5, forumVO.getTheme_detial());
-			pstmt.setBytes(6, forumVO.getTheme_pic());
-			pstmt.setInt(7, forumVO.getTheme_display_status());
-			pstmt.setString(8, forumVO.getSq_theme_id());
+			pstmt.setString(3, forumVO.getTheme_detial());
+			pstmt.setBytes(4, forumVO.getTheme_pic());
+			pstmt.setInt(5, forumVO.getTheme_display_status());
+			pstmt.setString(6, forumVO.getSq_theme_id());
 
 			pstmt.executeUpdate();
 
@@ -327,5 +327,80 @@ public class ForumDAO implements ForumDAO_interface {
 		}
 		return list;
 	}
+	
+//	public static void main(String[] args) {
+//
+//		ForumJDBCDAO dao = new ForumJDBCDAO();
+//		ForumVO forumVO = new ForumVO();
+
+		// 新增
+//		forumVO.setSq_member_id("910001");
+//		forumVO.setTheme_name("hello world");
+//		forumVO.setTheme_time(java.sql.Date.valueOf("2000-01-01"));
+//		forumVO.setReponse_sum(0);
+//		forumVO.setTheme_detial("safsasgdsgsadg");
+//		forumVO.setTheme_pic(null);
+//		forumVO.setTheme_display_status(0);
+//		dao.insert(forumVO);
+//		System.out.println("新增");
+//		
+
+		// 修改
+//		ForumVO forumVO1 = new ForumVO();
+//		forumVO1.setSq_theme_id("TM-400006");
+//		forumVO1.setSq_member_id("910001");
+//		forumVO1.setTheme_name("hello worldasfsaf");
+//		forumVO1.setTheme_time(java.sql.Date.valueOf("2000-01-01"));
+//		forumVO1.setReponse_sum(0);
+//		forumVO1.setTheme_detial("123464987safsasgdsgsadg");
+//		forumVO1.setTheme_pic(null);
+//		forumVO1.setTheme_display_status(0);
+//		dao.update(forumVO1);
+//		
+
+		// 查詢
+//		ForumVO forumVO2 = dao.findByPrimaryKey("TM-400004");
+//
+//		System.out.print(forumVO2.getSq_theme_id() + ",");
+//		System.out.print(forumVO2.getSq_member_id() + ",");
+//		System.out.print(forumVO2.getTheme_name() + ",");
+//		System.out.print(forumVO2.getTheme_time() + ",");
+//		System.out.print(forumVO2.getReponse_sum() + ",");
+//		System.out.print(forumVO2.getTheme_detial() + ",");
+//		System.out.print(forumVO2.getTheme_pic() + ",");
+//		System.out.println(forumVO2.getTheme_display_status() + ",");
+//		System.out.println("---------------------");
+//		
+//		
+//		
+//		List<ForumVO> list = dao.getAll();
+//		for(ForumVO allForum : list ) {
+//			System.out.print(allForum.getSq_theme_id() + ",");
+//			System.out.print(allForum.getSq_member_id() + ",");
+//			System.out.print(allForum.getTheme_name() + ",");
+//			System.out.print(allForum.getTheme_time() + ",");
+//			System.out.print(allForum.getReponse_sum() + ",");
+//			System.out.print(allForum.getTheme_detial() + ",");
+//			System.out.print(allForum.getTheme_pic()+ ",");
+//			System.out.println(allForum.getTheme_display_status());
+//			System.out.println();
+//		}
+
+//		List<ForumVO> list = dao.getThemebySq_member_id("910002");
+//		for (ForumVO allForum : list) {
+//			System.out.print(allForum.getSq_theme_id() + ",");
+//			System.out.print(allForum.getSq_member_id() + ",");
+//			System.out.print(allForum.getTheme_name() + ",");
+//			System.out.print(allForum.getTheme_time() + ",");
+//			System.out.print(allForum.getReponse_sum() + ",");
+//			System.out.print(allForum.getTheme_detial() + ",");
+//			System.out.print(allForum.getTheme_pic() + ",");
+//			System.out.println(allForum.getTheme_display_status());
+//			System.out.println();
+
+//		}
+//	}
+
+	
 
 }

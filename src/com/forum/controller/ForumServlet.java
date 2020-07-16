@@ -36,7 +36,7 @@ public class ForumServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		HttpSession session = req.getSession();
 
-//		System.out.println(action);
+		System.out.println(action);
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -148,6 +148,7 @@ public class ForumServlet extends HttpServlet {
 				String sq_theme_id = new String(req.getParameter("sq_theme_id"));
 				System.out.println("getOne_For_Update getsq_theme_id =" + sq_theme_id);
 				/*************************** 2.開始查詢資料 ****************************************/
+				
 				ForumService forumSvc = new ForumService();
 				ForumVO forumVO = forumSvc.getOneTheme(sq_theme_id);
 				System.out.println("forumVO.getSq_theme_id=" + forumVO.getSq_theme_id());
@@ -216,7 +217,7 @@ public class ForumServlet extends HttpServlet {
 				}
 
 				Integer theme_display_status = new Integer(req.getParameter("theme_display_status").trim());
-				;
+				
 				System.out.println("update gettheme_display_status=" + theme_display_status);
 
 				ForumVO forumVO = new ForumVO();
@@ -227,6 +228,16 @@ public class ForumServlet extends HttpServlet {
 				forumVO.setTheme_pic(theme_pic);
 				forumVO.setTheme_display_status(theme_display_status);
 
+				System.out.println("forum-----------");
+				System.out.println("sq_theme_id=" + sq_theme_id);
+				System.out.println("sq_member_id=" + sq_member_id);
+				System.out.println("theme_name=" + theme_name);
+				System.out.println("theme_detial=" + theme_detial);
+				System.out.println("theme_pic=" + theme_pic);
+				System.out.println("theme_display_status=" + theme_display_status);
+				
+				
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("update_Theme_input", forumVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -241,6 +252,16 @@ public class ForumServlet extends HttpServlet {
 						theme_display_status);
 				session.removeAttribute("theme_pic");
 
+
+				System.out.println("forum-----------");
+				System.out.println("sq_theme_id="+sq_theme_id);
+				System.out.println("sq_member_id="+sq_member_id);
+				System.out.println("theme_name="+theme_name);
+				System.out.println("theme_detial="+theme_detial);
+				System.out.println("theme_pic="+theme_pic);
+				System.out.println("theme_display_status="+theme_display_status);
+				
+				
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("listOneTheme", forumVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				String url2 = "/front-end/forum/listOneTheme.jsp";
@@ -287,10 +308,9 @@ public class ForumServlet extends HttpServlet {
 					errorMsgs.add("主題內容請勿空白");
 				}
 				
-				Integer theme_display_status = Integer.parseInt(req.getParameter("theme_display_status").trim());
-				;
-				System.out.println(req.getParameter("theme_display_status"));
-				System.out.println(theme_display_status);
+				Integer theme_display_status = new  Integer(req.getParameter("theme_display_status").trim());
+				
+				System.out.println(req.getParameter("theme_display_status="+theme_display_status));
 				
 
 				InputStream in = req.getPart("theme_pic").getInputStream();
@@ -320,10 +340,19 @@ public class ForumServlet extends HttpServlet {
 				forumVO.setTheme_detial(theme_detial);
 				forumVO.setTheme_pic(theme_pic);
 				forumVO.setTheme_display_status(theme_display_status);
-
+				
+//				System.out.println("forum-----------");
+//				System.out.println("sq_theme_id=" + sq_theme_id);
+//				System.out.println("sq_member_id=" + sq_member_id);
+//				System.out.println("theme_name=" + theme_name);
+//				System.out.println("theme_detial=" + theme_detial);
+//				System.out.println("theme_pic=" + theme_pic);
+//				System.out.println("theme_display_status=" + theme_display_status);
+				
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("update_Theme_input", forumVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					req.setAttribute("updateListOne", forumVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/forum/updateListOne.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
@@ -334,7 +363,8 @@ public class ForumServlet extends HttpServlet {
 				forumVO = forumSvc.updateTheme(sq_theme_id, sq_member_id, theme_name, theme_detial, theme_pic,
 						theme_display_status);
 				session.removeAttribute("theme_pic");
-
+				
+				
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("updateListOne", forumVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				String url2 = "/back-end/forum/listAllForum.jsp";
@@ -342,11 +372,13 @@ public class ForumServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url2); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 
+				
+				
 				/*************************** 其他可能的錯誤處理 *************************************/
 
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/forum/listAllForum.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/forum/updateListOne.jsp");
 				failureView.forward(req, res);
 			}
 		}

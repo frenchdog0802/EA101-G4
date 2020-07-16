@@ -205,6 +205,15 @@
 		<servlet-name>StoreServlet</servlet-name>
 		<url-pattern>/store/storeServlet.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CollectionServlet</servlet-name>
+		<servlet-class>com.product_collection.controller.Product_CollectionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CollectionServlet</servlet-name>
+		<url-pattern>/collectionServlet.do</url-pattern>
+	</servlet-mapping>
 
 	<!-- 筑峰 -->
 	<servlet>
@@ -507,7 +516,7 @@
 		<url-pattern>/back-end/bikeStore/*</url-pattern>
 		<url-pattern>/back-end/bikeType/*</url-pattern>
 		<url-pattern>/back-end/BrandBack/*</url-pattern>
-		<url-pattern>/back-end/forum/*</url-pattern>
+ 		<url-pattern>/back-end/forum/*</url-pattern> 
 		<url-pattern>/back-end/joinActivity/*</url-pattern>
 		<url-pattern>/back-end/member/*</url-pattern>
 		<url-pattern>/back-end/question/*</url-pattern>

@@ -259,7 +259,6 @@ public class Shop_productServlet extends HttpServlet {
 					errorMsgs.add("名稱欄位只能是中、英文字母、數字和_,請長度必須在2到10之間");
 				}
 				Integer status = Integer.parseInt(req.getParameter("status"));
-				System.out.println(status);
 				
 				Shop_productVO productVO = new Shop_productVO();
 				productVO.setSq_product_id(sq_product_id);
@@ -288,7 +287,6 @@ public class Shop_productServlet extends HttpServlet {
 				fail.forward(req, res);
 			}
 		}
-		System.out.println(action);
 		if("getByKind".equals(action)) {
 	        PrintWriter out = res.getWriter();
 			String kind = req.getParameter("product_kind_name");
@@ -297,7 +295,7 @@ public class Shop_productServlet extends HttpServlet {
 			JSONArray json = new JSONArray();
 			for(Shop_productVO vo: list){
 				JSONObject jsonList = new JSONObject();
-				System.out.println( vo.getProduct_name());
+
 				jsonList.put("name", vo.getProduct_name());
 				jsonList.put("id", vo.getSq_product_id());
 				jsonList.put("price", vo.getProduct_price());
@@ -310,7 +308,7 @@ public class Shop_productServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			
 			try {
 				
 				/***************************1.將輸入資料轉為Map**********************************/ 
