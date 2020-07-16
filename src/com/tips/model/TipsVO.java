@@ -3,7 +3,7 @@ package com.tips.model;
 public class TipsVO {
 	private String sq_tips_id;
 	private byte[] tips_picture;
-	private String tips_desciption;
+	private String tips_description;
 	private String tips_title;
 	
 	
@@ -20,11 +20,11 @@ public class TipsVO {
 	public void setTips_picture(byte[] tips_picture) {
 		this.tips_picture = tips_picture;
 	}
-	public String getTips_desciption() {
-		return tips_desciption;
+	public String getTips_description() {
+		return tips_description;
 	}
-	public void setTips_desciption(String tips_desciption) {
-		this.tips_desciption = tips_desciption;
+	public void setTips_description(String tips_description) {
+		this.tips_description = tips_description;
 	}
 	public String getTips_title() {
 		return tips_title;

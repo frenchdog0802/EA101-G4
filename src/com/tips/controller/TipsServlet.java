@@ -137,8 +137,8 @@ public class TipsServlet extends HttpServlet {
 				
 				
 				
-				String tips_desciption = req.getParameter("tips_desciption").trim();
-				if (tips_desciption == null || tips_desciption.trim().length() == 0) {
+				String tips_description = req.getParameter("tips_description").trim();
+				if (tips_description == null || tips_description.trim().length() == 0) {
 					errorMsgs.add("內容請勿空白");
 				}	
 				
@@ -152,7 +152,7 @@ public class TipsServlet extends HttpServlet {
 				TipsVO tipsVo = new TipsVO();
 				tipsVo.setSq_tips_id(sq_tips_id);
 				tipsVo.setTips_picture(tips_picture);
-				tipsVo.setTips_desciption(tips_desciption);
+				tipsVo.setTips_description(tips_description);
 				tipsVo.setTips_title(tips_title);
 				
 				// Send the use back to the form, if there were errors
@@ -166,7 +166,7 @@ public class TipsServlet extends HttpServlet {
 				
 				/***************************2.開始修改資料*****************************************/
 				TipsService tipsSvc = new TipsService();
-				tipsVo = tipsSvc.updateTips(sq_tips_id, tips_picture, tips_desciption, tips_title);
+				tipsVo = tipsSvc.updateTips(sq_tips_id, tips_picture, tips_description, tips_title);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("tipsVo", tipsVo); // 資料庫update成功後,正確的的empVO物件,存入req
@@ -200,8 +200,8 @@ public class TipsServlet extends HttpServlet {
 				in.close();
 				
 				
-				String tips_desciption = req.getParameter("tips_desciption").trim();
-				if (tips_desciption == null || tips_desciption.trim().length() == 0) {
+				String tips_description = req.getParameter("tips_description").trim();
+				if (tips_description == null || tips_description.trim().length() == 0) {
 					errorMsgs.add("內容請勿空白");
 				}	
 				
@@ -215,7 +215,7 @@ public class TipsServlet extends HttpServlet {
 				TipsVO tipsVo = new TipsVO();
 				
 				tipsVo.setTips_picture(tips_picture);
-				tipsVo.setTips_desciption(tips_desciption);
+				tipsVo.setTips_description(tips_description);
 				tipsVo.setTips_title(tips_title);
 
 				// Send the use back to the form, if there were errors
@@ -229,7 +229,7 @@ public class TipsServlet extends HttpServlet {
 				
 				/***************************2.開始新增資料***************************************/
 				TipsService tipsSvc = new TipsService();
-				tipsVo = tipsSvc.addTips(tips_picture, tips_desciption, tips_title);
+				tipsVo = tipsSvc.addTips(tips_picture, tips_description, tips_title);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/tips/listAllTips.jsp";
