@@ -59,7 +59,7 @@ if("payFinish".equals(action)){
 			<div class="col-4">
 				<div class="form-group row mt-1">
 					<div>
-						<input type="text" class="form-control search " placeholder="搜尋店家" 
+						<input type="search" class="light-table-filter form-control" data-table="order-table" placeholder="搜尋店家" 
 						id="Search">
 					</div>
 				</div>
@@ -71,7 +71,7 @@ if("payFinish".equals(action)){
 		<div class="row">
 			<div class="table-responsive">
 				<table
-				class="table table-striped table-hover text-center table-bordered ">
+				class="table table-striped table-hover text-center table-bordered order-table">
 				<thead class="thead-light">
 					<tr>
 						<th scope="col">店家</th>
@@ -101,7 +101,6 @@ if("payFinish".equals(action)){
 </div>
 
 <%@include file="/front-end/page-file/page-footer"%>
-
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 <script>
@@ -248,6 +247,49 @@ if("payFinish".equals(action)){
 				timepicker : true,
 				step : 60
 			})
+			
+			//searchTables
+			  'use strict';
+
+			  // 建立 LightTableFilter
+			  var LightTableFilter = (function(Arr) {
+
+			    var _input;
+
+			    // 資料輸入事件處理函數
+			    function _onInputEvent(e) {
+			      _input = e.target;
+			      var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+			      Arr.forEach.call(tables, function(table) {
+			        Arr.forEach.call(table.tBodies, function(tbody) {
+			          Arr.forEach.call(tbody.rows, _filter);
+			        });
+			      });
+			    }
+
+			    // 資料篩選函數，顯示包含關鍵字的列，其餘隱藏
+			    function _filter(row) {
+			      var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+			      row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+			    }
+
+			    return {
+			      // 初始化函數
+			      init: function() {
+			        var inputs = document.getElementsByClassName('light-table-filter');
+			        Arr.forEach.call(inputs, function(input) {
+			          input.oninput = _onInputEvent;
+			        });
+			      }
+			    };
+			  })(Array.prototype);
+
+			  // 網頁載入完成後，啟動 LightTableFilter
+			  document.addEventListener('readystatechange', function() {
+			    if (document.readyState === 'complete') {
+			      LightTableFilter.init();
+			    }
+			  });
 		});
 	
 		//sweetAlertPayfinish

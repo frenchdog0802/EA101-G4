@@ -18,7 +18,18 @@
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
 	
-<div class="container mt-5 rowGray" >
+<div class="container mt-3 rowGray" >
+		<!-- Page Heading/Breadcrumbs -->
+			<h1 class="mt-4 mb-2">
+				註冊會員
+			</h1>
+
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a
+					href="<%=request.getContextPath()%>/front-end/index/index.jsp">Home</a>
+				</li>
+				<li class="breadcrumb-item active">註冊會員</li>
+			</ol>
  
 	<div class="row">
 		<div class="col">

@@ -98,6 +98,16 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 					bsa.setEmpty_bike(bikeSvc.findStoreBikeEmpty(BikeStoreVO.getSq_bike_store_id()));
 					BikeStoreReturnList.add(bsa);
 				}
+				if("全臺".equals(area)) {
+					BikeStoreAreaModel bsa = new BikeStoreAreaModel();
+					bsa.setBike_store_name(BikeStoreVO.getBike_store_name());
+					bsa.setLocation(BikeStoreVO.getLocation());
+					bsa.setPhone(BikeStoreVO.getPhone());
+					bsa.setStore_opentime(BikeStoreVO.getStore_opentime());
+					// 找出空車
+					bsa.setEmpty_bike(bikeSvc.findStoreBikeEmpty(BikeStoreVO.getSq_bike_store_id()));
+					BikeStoreReturnList.add(bsa);
+				}
 			}
 			map.put("returnValue", BikeStoreReturnList);
 			JSONObject responseJSONObject = new JSONObject(map);

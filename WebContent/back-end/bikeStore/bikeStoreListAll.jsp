@@ -66,7 +66,6 @@
 						</td>
 					</tr>
 				</c:forEach>
-
 			</tbody>
 		</table>
 		<%@ include file="/back-end/bikeStore/page3.file"%>
