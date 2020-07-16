@@ -382,5 +382,21 @@ public class Shop_productServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		if("searchByText".equals(action)) {
+			String text = req.getParameter("searchText");
+			PrintWriter out = res.getWriter();
+			Shop_productService productSvc = new Shop_productService();
+			List<Shop_productVO> list  = productSvc.getSearchByText(text);
+			JSONArray json = new JSONArray();
+			for(Shop_productVO vo: list){
+				JSONObject jsonList = new JSONObject();
+				jsonList.put("name", vo.getProduct_name());
+				jsonList.put("id", vo.getSq_product_id());
+				jsonList.put("price", vo.getProduct_price());
+				json.put(jsonList);
+			}
+			out.print(json);
+		}
 	}
 }
