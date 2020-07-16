@@ -293,7 +293,7 @@ console.log(positionWs[e].sqStationId);
 		addLis(markersWs,map,infowindow,e);
 		
 		
-		}, e * 0.1);
+		}, e * 1);
 	}
 	
 	//清除補水站標點方法

@@ -62,7 +62,7 @@ public class QuestionServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("questionVo", questionVo); // 資料庫取出的empVO物件,存入req
-				String url = "/question/listOneQus.jsp";
+				String url = "/back-end/question/listOneQus.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 				successView.forward(req, res);
 
@@ -93,7 +93,7 @@ public class QuestionServlet extends HttpServlet {
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("questionVo", questionVo);         // 資料庫取出的empVO物件,存入req
-				String url = "/question/update_qus_input.jsp";
+				String url = "/back-end/question/update_qus_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 				successView.forward(req, res);
 
@@ -154,7 +154,7 @@ public class QuestionServlet extends HttpServlet {
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("questionVo", questionVo); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/question/listOneQus.jsp";
+				String url = "/back-end/question/listOneQus.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 
@@ -210,7 +210,7 @@ public class QuestionServlet extends HttpServlet {
 				questionVo = qusSvc.addQus(question_title, question_description);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/question/listAllQus.jsp";
+				String url = "/back-end/question/listAllQus.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
 				
@@ -240,7 +240,7 @@ public class QuestionServlet extends HttpServlet {
 				qusSvc.deleteQus(sq_question_id);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/question/listAllQus.jsp";
+				String url = "/back-end/question/listAllQus.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				

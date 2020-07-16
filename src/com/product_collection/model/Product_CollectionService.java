@@ -7,10 +7,7 @@ public class Product_CollectionService {
 	public Product_CollectionService(){
 		dao = new Product_CollectionDAO();
 	}
-	public void addCollection(String sq_member_id, String sq_product_id) {
-		Product_CollectionVO collectionVO = new Product_CollectionVO();
-		collectionVO.setSq_member_id(sq_member_id);
-		collectionVO.setSq_product_id(sq_product_id);
+	public void addCollection(Product_CollectionVO collectionVO) {
 		dao.addCollection(collectionVO);
 	}
 	public void deleteCollection(String sq_member_id, String sq_product_id) {

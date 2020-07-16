@@ -97,7 +97,7 @@ public class ProductEcpayServlet extends HttpServlet {
 			AioCheckOutOneTime obj = new AioCheckOutOneTime();
 			
 //			訂單編號
-			obj.setMerchantTradeNo("2aC9cAr9mP27");
+			obj.setMerchantTradeNo("2aC9cAr9mP28");
 					
 //			設定MerchantTradeDate 合作特店交易時間
 			obj.setMerchantTradeDate(formatstr);
@@ -108,10 +108,10 @@ public class ProductEcpayServlet extends HttpServlet {
 //			設定交易訊息
 			obj.setTradeDesc("支付信用卡");
 //			設定ReturnURL 付款完成通知回傳網址 使用  ngrok.io
-			String returnURL = "https://66c9ccf9158b.ngrok.io/EA101_G4/shopMall/productEcpayServlet.do";
+			String returnURL = "https://f66e2935b3b4.ngrok.io/EA101_G4/shopMall/productEcpayServlet.do";
 			obj.setReturnURL(returnURL);
 //			設定ClientBackURL Client端返回合作特店系統的按鈕連結
-			String clientBackURL = "https://66c9ccf9158b.ngrok.io/EA101_G4/front-end/shopMall/shopMall.jsp";
+			String clientBackURL = "https://f66e2935b3b4.ngrok.io/EA101_G4/front-end/shopMall/shopMall.jsp";
 			obj.setClientBackURL(clientBackURL);
 //			設定OrderResultURL Client端回傳付款結果網址 跟ReturnURL二選一
 			String setOrderResultURL = "https://66c9ccf9158b.ngrok.io/EA101_G4/front-end/shopMall/shoppingFinal.jsp";

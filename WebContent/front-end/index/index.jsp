@@ -221,7 +221,7 @@ img.img-thumbnail{
 				<div class="m-5 py-5" style="text-align:center;">
 					<h2 class="h2 font-weight-bold mt-5">最新活動</h2>
 					<hr>
-					<a href="#" class="btn btn-outline-dark mb-5"> <span
+					<a href="<%=request.getContextPath()%>/front-end/activity/Activity.jsp" class="btn btn-outline-dark mb-5"> <span
 						class="small">查看所有活動</span>
 					</a>
 				</div>
@@ -276,7 +276,7 @@ img.img-thumbnail{
 							<div class="col-12">
 							<h5><%=routeList.get(i).getRouteName()%></h5>
 							<span style="margin-right:10px;">開始地點 : <%=routeList.get(i).getStartArea()%></span>
-							<span style="margin-left:10px;">結束地點 : <%=routeList.get(i).getEndArea()%></span>
+							<span style="margin-left:10px;">騎乘長度 : <%=routeList.get(i).getDistance()%>公里</span>
 						</div>
 						</div>
 					</div>

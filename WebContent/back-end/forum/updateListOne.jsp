@@ -27,8 +27,7 @@
 
 <!-- Bootstrap core CSS -->
 
-<link
-	href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap.min.css"
+<link href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 
 <!-- Custom styles for this template -->

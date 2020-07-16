@@ -76,8 +76,8 @@ TipsVO tipsVo = (TipsVO) request.getAttribute("tipsVo");
 	</tr>
 	<tr>
 		<td>內容描述:</td>
-		<td><input type="TEXT" name="tips_desciption" size="45"
-			 value="<%= (tipsVo==null)? "請輸入內容描述" : tipsVo.getTips_desciption()%>" /></td>
+		<td><input type="TEXT" name="tips_description" size="45"
+			 value="<%= (tipsVo==null)? "請輸入內容描述" : tipsVo.getTips_description()%>" /></td>
 	</tr>
 	<tr>
 		<td>內容主題:</td>
