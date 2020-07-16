@@ -23,6 +23,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/index/index.css">
 
 <title>主題資料修改</title>
 
@@ -66,7 +67,10 @@ input[type="file"] {
 </head>
 
 <body>
-
+<%@include file="/front-end/page-file/page-nav"%>
+	
+ 	<div class="container my-5">
+ 	
 
 
 	<!-- Page Content -->
@@ -193,20 +197,30 @@ input[type="file"] {
 	<!-- /.container -->
 
 	<!-- Footer -->
-	<footer class="py-5 bg-dark">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Your
-				Website 2020</p>
+	
 		</div>
-		<!-- /.container -->
-	</footer>
+ 
+ 
+ 		
+	<%@include file="/front-end/page-file/page-footer"%>
+
+	
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="<%=request.getContextPath()%>/vendor/jquery/jquery.min.js"></script>
 	<script
 		src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+<script>
+	$(function(){
+		$(".fun-text").text("修改主題");  // text("")裡面自己輸入功能名稱 
+	});
+	</script>
+
+
 </body>
+
+
 <script>
 	function readURL(input) {
 		if (input.files && input.files[0]) {

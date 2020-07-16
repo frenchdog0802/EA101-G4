@@ -38,6 +38,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/index/index.css">
 
 <title>Modern Business - Start Bootstrap Template</title>
 
@@ -70,7 +71,9 @@ body {
 </head>
 
 <body>
-
+<%@include file="/front-end/page-file/page-nav"%>
+	
+ 	<div class="container my-5">
 
 
 	<!-- Page Content -->
@@ -211,6 +214,17 @@ body {
 	<script
 		src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+	</div>
+ 
+ 
+ 		
+	<%@include file="/front-end/page-file/page-footer"%>
+	
+	<script>
+	$(function(){
+		$(".fun-text").text("討論區");  // text("")裡面自己輸入功能名稱 
+	});
+	</script>
 </body>
 
 </html>
