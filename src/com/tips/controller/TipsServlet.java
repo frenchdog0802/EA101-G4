@@ -76,24 +76,23 @@ public class TipsServlet extends HttpServlet {
 		}
 		
 		
-		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
+		if ("getOne_For_Update_back".equals(action)) { // 來自listAllEmp.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			
 			try {
 				/***************************1.接收請求參數****************************************/
 				String sq_tips_id = new String(req.getParameter("sq_tips_id"));
 				
 				/***************************2.開始查詢資料****************************************/
 				TipsService tipsSvc = new TipsService();
-				TipsVO tipsVo = tipsSvc.getOneTips("sq_tips_id");
+				TipsVO tipsVo = tipsSvc.getOneTips(sq_tips_id);
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("tipsVo", tipsVo);         // 資料庫取出的empVO物件,存入req
-				String url = "/tips/update_tips_input.jsp";
+				String url = "/back-end/tips/update_tips_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 				successView.forward(req, res);
 
@@ -101,7 +100,7 @@ public class TipsServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/tips/listAllTips.jsp");
+						.getRequestDispatcher("/back-end/tips/listAllTips.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -113,78 +112,44 @@ public class TipsServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-		
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String sq_tips_id = new String(req.getParameter("sq_tips_id").trim());
-				
-				
-				
-				byte[] tips_picture = null;
-				Part part = req.getPart("tips_picture");
-				InputStream in = part.getInputStream();
-
-				if (in.available() > 0) { //如果有新增圖片就用新增的
-					tips_picture = new byte[in.available()];
-					in.read(tips_picture);
-					in.close();
-				} else {  //如果沒有新增的就保持原本資料庫的圖片
-					TipsService tipsSvc = new TipsService();
-					TipsVO tipsVo = tipsSvc.getOneTips(sq_tips_id);
-//					tips_picture = tipsVo.getTips_picture();
-				}
-				
-				
-				
 				
 				String tips_description = req.getParameter("tips_description").trim();
 				if (tips_description == null || tips_description.trim().length() == 0) {
 					errorMsgs.add("內容請勿空白");
 				}	
 				
-				String tips_title = req.getParameter("tips_title").trim();
-				if (tips_title == null || tips_title.trim().length() == 0) {
-					errorMsgs.add("標題請勿空白");
-				}
-				
-				
-
-				TipsVO tipsVo = new TipsVO();
-				tipsVo.setSq_tips_id(sq_tips_id);
-				tipsVo.setTips_description(tips_description);
-//				tipsVo.setTips_title(tips_title);
 				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("tipsVo", tipsVo); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/tips/update_tips_input.jsp");
+							.getRequestDispatcher("/back-end/tips/update_tips_input.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
-				
+				TipsService TipsSvc = new TipsService();
+				TipsVO tipsVo = TipsSvc.getOneTips(sq_tips_id);
+				tipsVo.setTips_description(tips_description);
+				TipsSvc.updateTips(tipsVo);
 				/***************************2.開始修改資料*****************************************/
-				TipsService tipsSvc = new TipsService();
-//				tipsVo = tipsSvc.updateTips(sq_tips_id, tips_picture, tips_description, tips_title);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("tipsVo", tipsVo); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/tips/listOneTips.jsp";
+				String url = "/back-end/tips/listAllTips.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理*************************************/
 			} catch (Exception e) {
-				errorMsgs.add("修改資料失敗:"+e.getMessage());
+				e.printStackTrace();
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/tips/update_tips_input.jsp");
+						.getRequestDispatcher("/back-end/tips/update_tips_input.jsp");
 				failureView.forward(req, res);
 			}
 		}
-
         if ("insert".equals(action)) { // 來自addEmp.jsp的請求  
-			
-			List<String> errorMsgs = new LinkedList<String>();
+			Map<String,String> errorMsgs = new HashMap<>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -192,30 +157,18 @@ public class TipsServlet extends HttpServlet {
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				
-				Part part = req.getPart("tips_picture");
-				InputStream in = part.getInputStream();
-				byte[] tips_picture = new byte[in.available()];
-				in.read(tips_picture);
-				in.close();
-				
-				
 				String tips_description = req.getParameter("tips_description").trim();
 				if (tips_description == null || tips_description.trim().length() == 0) {
-					errorMsgs.add("內容請勿空白");
+					errorMsgs.put("tips_description","內容請勿空白");
 				}	
 				
-				String tips_title = req.getParameter("tips_title").trim();
-				if (tips_title == null || tips_title.trim().length() == 0) {
-					errorMsgs.add("標題請勿空白");
-				}
-				
+				Integer tips_title = new Integer(req.getParameter("tips_title"));
 				
 
 				TipsVO tipsVo = new TipsVO();
 				
-//				tipsVo.setTips_picture(tips_picture);
 				tipsVo.setTips_description(tips_description);
-//				tipsVo.setTips_title(tips_title);
+				tipsVo.setTips_title(tips_title);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -228,7 +181,7 @@ public class TipsServlet extends HttpServlet {
 				
 				/***************************2.開始新增資料***************************************/
 				TipsService tipsSvc = new TipsService();
-//				tipsVo = tipsSvc.addTips(tips_picture, tips_description, tips_title);
+				tipsSvc.addTips(tipsVo);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/tips/listAllTips.jsp";
@@ -237,7 +190,7 @@ public class TipsServlet extends HttpServlet {
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
+				e.printStackTrace();
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/tips/addTips.jsp");
 				failureView.forward(req, res);

@@ -1,97 +1,70 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.tips.model.*"%>
+<%@ page import="com.member.model.*"%>
+<%@ page import="java.util.*"%>
+				
+								<!-----------backHeader----------->
+<%@include file="/back-end/backFrame/backHeader"%>
+								<!-----------backHeader----------->
+<!-- --------------------------------------------------------------------------------------------->    
+ 
+                               <!---------放自己的CSS與title----------->
 
-<%
-TipsVO tipsVo = (TipsVO) request.getAttribute("tipsVo"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-%>
-
-<html>
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>員工資料修改 - update_tips_input.jsp</title>
-
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
-</style>
-
-</head>
-<body bgcolor='white'>
-
-<table id="table-1">
-	<tr><td>
-		 <h3>提示資料修改 - update_tips_input.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/tips/select_pageTips.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
-
-<h3>資料修改:</h3>
-
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
-
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/tips/tips.do" name="form1">
-<table>
-	<tr>
-		<td>內容編號:<font color=red><b>*</b></font></td>
-		<td><%=tipsVo.getSq_tips_id()%></td>
-	</tr>
-	<tr>
-		<td>圖片:</td>
-		<td><input type="IMAGE" name="tips_picture" size="45" value="<%=tipsVo.getTips_picture()%>" /></td>
-	</tr>
-	<tr>
-		<td>描述:</td>
-		<td><input type="TEXT" name="tips_description" size="45"	value="<%=tipsVo.getTips_description()%>" /></td>
-	</tr>
-		<tr>
-		<td>主題:</td>
-		<td><input type="TEXT" name="tips_title" size="45"	value="<%=tipsVo.getTips_title()%>" /></td>
-	</tr>
+<!-- --------------------------------------------------------------------------------------------->  
+								<!-----------backBody----------->
+ <%@include file="/back-end/backFrame/backBody"%>
+								<!-----------backBody----------->
+<!-- --------------------------------------------------------------------------------------------->
+								<!--分頁自己改-->
+				<div class="row" style="background-color: white;">
+					<ul class="nav nav-tabs">
+					  <li class="nav-item">
+					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">item1</span></a><!--在哪一個頁面就哪加active和span的style-->
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>item2</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>item3</span></a>
+					  </li>
+					</ul>
+				</div>	
+								<!--分頁自己改-->
+<!-- --------------------------------------------------------------------------------------------->
+								<!-----------backNav----------->
+	<%@include file="/back-end/backFrame/backNav"%>
+								<!-----------backNav----------->
+<!-- --------------------------------------------------------------------------------------------->					
+		<div class="container mt-5">
 	
-</table>
-<br>
-<input type="hidden" name="action" value="update">
-<input type="hidden" name="sq_tips_id" value="<%=tipsVo.getSq_tips_id()%>">
-<input type="submit" value="送出修改"></FORM>
-</body>
-
-
-
-
-</html>
+	<div class="row">
+		<div class="col">
+			<form action="<%=request.getContextPath()%>/tips/tips.do" method="POST">
+				<div class="form-group row">
+					<label for="tips_title" class="col-form-label col-md-2">小叮嚀標題</label> 
+					<select id="tips_title" class="form-control col-md-10" name="tips_title">
+						<option value="1" ${tipsVo.tips_title==1?'selected':''}>法規資訊</option>
+						<option value="2" ${tipsVo.tips_title==2?'selected':''}>自行車道規劃認識</option>
+						<option value="3" ${tipsVo.tips_title==3?'selected':''}>單車裝備</option>
+						<option value="4" ${tipsVo.tips_title==4?'selected':''}>行前準備</option>
+						<option value="5" ${tipsVo.tips_title==5?'selected':''}>單車安全小常識</option>
+						<option value="6" ${tipsVo.tips_title==6?'selected':''}>全台單車驛站</option>
+					</select>
+				</div>
+				<div class="form-group row">
+					<label for="tips_description" class="col-form-label col-md-2">小叮嚀內容</label> 
+					<textarea name="tips_description" rows="4" cols="100" class="form-control col-md-10" id="tips_description">${tipsVo.tips_description}</textarea>
+				</div>
+				<input type="hidden" value="${tipsVo.sq_tips_id}" name="sq_tips_id">
+				<input type="hidden" value="update" name="action">
+				<button type="submit" class="btn btn-primary btn-block mt-5">修改小叮嚀</button>
+			</form>
+		</div>
+	</div>
+</div>
+		
+<!-- --------------------------------------------------------------------------------------------->
+								<!-----------backFooter----------->
+		<%@include file="/back-end/backFrame/backFooter"%>
+ 			

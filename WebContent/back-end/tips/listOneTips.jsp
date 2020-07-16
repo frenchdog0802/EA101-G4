@@ -64,7 +64,6 @@ TipsVO tipsVo = (TipsVO) request.getAttribute("tipsVo"); //EmpServlet.java(Concr
 	</tr>
 	<tr>
 		<td><%=tipsVo.getSq_tips_id()%></td>
-		<td><%=tipsVo.getTips_picture()%></td>
 		<td><%=tipsVo.getTips_description()%></td>
 		<td><%=tipsVo.getTips_title()%></td>
 		<td><img src="<%=request.getContextPath()%>/tips/DBGifReader2?SQ_TIPS_ID='${tipsVO.sq_tips_id}'" width=100% height="100"></td>

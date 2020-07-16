@@ -1,113 +1,95 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.tips.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
-
-<%
-    TipsService tipsSvc = new TipsService();
-    List<TipsVO> list = tipsSvc.getAll();
-    pageContext.setAttribute("list",list);
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>		
+<%@ page import="com.tips.model.*"%>	
+<%@ page import="java.util.*"%>			
+								<!-----------backHeader----------->
+<%@include file="/back-end/backFrame/backHeader"%>
+<jsp:useBean id="tipSvc" class="com.tips.model.TipsService"/>
+								<!-----------backHeader----------->
+<!-- --------------------------------------------------------------------------------------------->    
+ <%
+	TipsService tipSvc1 = new TipsService();
+	List<TipsVO> list = tipSvc1.getAll();
+	pageContext.setAttribute("list", list);
 %>
 
-
-<html>
-<head>
-<title>所有提示資料 - listAllTips.jsp</title>
-
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
+table{
+    table-layout : fixed;
+}
 
-<style>
-  table {
-	width: 800px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-</style>
+table tbody tr td,table tbody tr th{
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+.f-th{
+width:100px;
+}
+.s-th{
+width:200px}
 
-</head>
-<body bgcolor='white'>
+</style>	
+                               <!---------放自己的CSS與title----------->
 
-<h4>此頁練習採用 EL 的寫法取值:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>所有提示資料 - listAllTips.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/tips/select_pageTips.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
-
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
-
-<table>
-	<tr>
-		<th>內容編號</th>
-		<th>圖片</th>
-		<th>描述</th>
-		<th>主題</th>
-		
-		
-	</tr>
-	<%@ include file="page1.file" %> 
-	<c:forEach var="tipsVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		
-		<tr>
-			<td>${tipsVO.sq_tips_id}</td>
-			<td>${tipsVO.tips_picture}</td>
-			<td>${tipsVO.tips_description}</td>
-			<td>${tipsVO.tips_title}</td>
-			
-			<td>
-				<img src="<%=request.getContextPath()%>/tips/DBGifReader2.do?SQ_TIPS_ID=${tipsVO.sq_tips_id}" width=100px height="100px">
-			</td>
-			<td>${tipsVo.gp_status}</td>
-			
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/tips/tips.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="sq_tips_id"  value="${tipsVO.sq_tips_id}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/tips/tips.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
-			     <input type="hidden" name="sq_tips_id"  value="${tipsVO.sq_tips_id}">
-			     <input type="hidden" name="action" value="delete"></FORM>
-			</td>
-		</tr>
-	</c:forEach>
-</table>
-<%@ include file="page2.file" %>
-
-</body>
-</html>
+<!-- --------------------------------------------------------------------------------------------->  
+								<!-----------backBody----------->
+ <%@include file="/back-end/backFrame/backBody"%>
+								<!-----------backBody----------->
+<!-- --------------------------------------------------------------------------------------------->
+								<!--分頁自己改-->
+				<div class="row" style="background-color: white;">
+					<ul class="nav nav-tabs">
+					  <li class="nav-item">
+					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">item1</span></a><!--在哪一個頁面就哪加active和span的style-->
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>item2</span></a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#"><span>item3</span></a>
+					  </li>
+					</ul>
+				</div>	
+								<!--分頁自己改-->
+<!-- --------------------------------------------------------------------------------------------->
+								<!-----------backNav----------->
+	<%@include file="/back-end/backFrame/backNav"%>
+								<!-----------backNav----------->
+<!-- --------------------------------------------------------------------------------------------->					
+			<div class="container-fluid">
+	<div class="table-responsive">
+		<table class="table text-center table-bordered table-striped table-hover">
+			<thead>
+				<tr class="table-info">
+					<th class="s-th" scope="col">分類標題</th>
+					<th scope="col">內容</th>
+					<th class="f-th" scope="col">修改</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%@ include file="/back-end/tips/page1.file"%>
+				<c:forEach var="tipsVO" items="${list}" begin="<%=pageIndex%>"
+					end="<%=pageIndex+rowsPerPage-1%>">
+					<tr>
+						<td >${tipSvc.findByTitleStr(tipsVO.tips_title)}</td>
+						<td >${tipsVO.tips_description}</td>
+						<td style="vertical-align:middle">
+							<form action="<%=request.getContextPath()%>/tips/tips.do" method="POST">
+								<input type="hidden" name="sq_tips_id" value="${tipsVO.sq_tips_id}">
+								<input type="hidden" name="action" value="getOne_For_Update_back">
+								<input type="submit"  value="修改" class="btn btn-danger btn-sm">
+							</form>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<%@ include file="/back-end/tips/page3.file"%>
+	</div>
+</div>
+<!-- --------------------------------------------------------------------------------------------->
+								<!-----------backFooter----------->
+		<%@include file="/back-end/backFrame/backFooter"%>
+ 			
