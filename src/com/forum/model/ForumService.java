@@ -14,7 +14,7 @@ public class ForumService {
 	private ForumDAO_interface dao;
 
 	public ForumService() {
-		dao = new ForumJDBCDAO();
+		dao = new ForumDAO();
 	}
 	public ForumVO addForum(String sq_member_id, String theme_name, Date theme_time, Integer reponse_sum,
 			String theme_detial,byte[] theme_pic, Integer theme_display_status) {
