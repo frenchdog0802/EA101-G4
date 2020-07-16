@@ -94,6 +94,7 @@ input[type=text],input[type=password] {
 		$(".submitbtn").click(function(){
 			var login = $("#login").val();
 			var pass = $("#password").val();
+			var url='';
 			$.ajax({
 				type:"POST",
 				url:"<%=request.getContextPath()%>/login/memlogin.do",
@@ -104,11 +105,13 @@ input[type=text],input[type=password] {
 					},
 					dataType : "JSON",
 					success : function(data) {
-						console.log(data)
 						$(".errorMsgCount").text(data.errorAccount);
 						$(".errorMsgPws").text(data.errorPws);
-						if (data.location != null) {
-							window.location.href = data.location;
+						console.log(data.location)
+						url=data.location;
+					},complete:function(){
+						if (url) {
+							window.location.href = url;
 						}
 					}
 				})
