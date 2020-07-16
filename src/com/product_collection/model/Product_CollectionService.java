@@ -1,0 +1,22 @@
+package com.product_collection.model;
+
+import java.util.List;
+
+public class Product_CollectionService {
+	private Product_CollectionDAO_interface dao;
+	public Product_CollectionService(){
+		dao = new Product_CollectionDAO();
+	}
+	public void addCollection(String sq_member_id, String sq_product_id) {
+		Product_CollectionVO collectionVO = new Product_CollectionVO();
+		collectionVO.setSq_member_id(sq_member_id);
+		collectionVO.setSq_product_id(sq_product_id);
+		dao.addCollection(collectionVO);
+	}
+	public void deleteCollection(String sq_member_id, String sq_product_id) {
+		dao.deleteCollection(sq_member_id, sq_product_id);
+	}
+	public List<Product_CollectionVO> getAllCollection(){
+		return dao.getAllCollection();
+	}
+}
