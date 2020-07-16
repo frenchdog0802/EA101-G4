@@ -52,13 +52,17 @@ img.img-thumbnail{
 </head>
 <body>
 	<!-- 導覽列 -->
+ 
+ <!-- 導覽列 -->
  <div class="row ">
     <div class="col">
         <nav class="navbar navbar-expand-lg navbar-dark font-weight-bold page-nav" >
             <h1 class="navbar-brand">
                 <!-- 導覽列圖片 -->
                 <!-- <img src="https://img.icons8.com/ios/50/000000/cycling-bmx.png" /> -->
+                <a href="<%=request.getContextPath()%>/front-end/index/index.jsp"> 
                 <img src="<%=request.getContextPath()%>/front-end/page-file/img/home10.png" />
+                </a>
             </h1>
             <button data-toggle="collapse" class="navbar-toggler" data-target="#submenu">
                 <span class="navbar-toggler-icon"></span>
@@ -69,8 +73,7 @@ img.img-thumbnail{
                         <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">最新消息</a>
                         <!--text-dark active nav-item  -->
                         <div class="dropdown-menu" aria-lablelledby="dropdownId">
-                            <a href="#" class="dropdown-item">test1</a>
-                            <a href="#" class="dropdown-item">test2</a>
+                        <a href="<%=request.getContextPath()%>/front-end/scheduler/weather.jsp" class="dropdown-item">天氣預報</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown navhover">
@@ -82,12 +85,8 @@ img.img-thumbnail{
                         </div>
                     </li>
                     <li class="nav-item dropdown navhover">
-                        <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">我要租車</a>
-                        <!--text-dark active nav-item  -->
-                        <div class="dropdown-menu" aria-lablelledby="dropdownId">
-                            <a href="#" class="dropdown-item">test1</a>
-                            <a href="#" class="dropdown-item">test2</a>
-                        </div>
+                        <a href="<%=request.getContextPath()%>/front-end/bike/bikeStoreList.jsp" class="nav-link  text-dark"  aria-haspopup="true" aria-expanded="false">我要租車</a>
+                       
                     </li>
                     <li class="nav-item dropdown navhover">
                         <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">揪團活動</a>
@@ -109,15 +108,15 @@ img.img-thumbnail{
                         <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">討論區</a>
                         <!--text-dark active nav-item  -->
                         <div class="dropdown-menu" aria-lablelledby="dropdownId">
-                            <a href="<%=request.getContextPath()%>/front-end/forum/listMemberTheme.jsp" class="dropdown-item">討論區列表</a>
+                            <a href="#" class="dropdown-item">test1</a>
                             <a href="#" class="dropdown-item">test2</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown navhover">
-                        <a href="<%=request.getContextPath()%>/front-end/qAndA/FAQ.jsp" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">FAQ</a>
+                        <a href="<%=request.getContextPath()%>/front-end/qAndA/FAQ.jsp" class="nav-link  text-dark"  >FAQ</a>
                     </li>
                     <li class="nav-item dropdown navhover">
-                        <a href="<%=request.getContextPath()%>/front-end/qAndA/TIPS.jsp" class="nav-link dropdown-toggle text-dark"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">騎乘小叮嚀</a>
+                        <a href="<%=request.getContextPath()%>/front-end/qAndA/TIPS.jsp" class="nav-link text-dark"  >騎乘小叮嚀</a>
                     </li>
                     <li class="nav-item dropdown navhover">
                         <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">會員中心</a>
@@ -127,6 +126,7 @@ img.img-thumbnail{
                             <a href="<%=request.getContextPath()%>/front-end/activity/Actmanagement.jsp" class="dropdown-item">活動管理</a>
                             <a href="<%=request.getContextPath()%>/front-end/route/listMyRoute.jsp" class="dropdown-item">我的路線</a>
                             <a href="<%=request.getContextPath()%>/front-end/waterStation/listMyWs.jsp" class="dropdown-item">我的補水站</a>
+                            <a href="<%=request.getContextPath()%>/front-end/bike/memberOrder.jsp" class="dropdown-item">租車訂單</a>
                             <a href="<%=request.getContextPath()%>/front-end/member/goodCollection.jsp" class="dropdown-item">收藏商品</a>
                         </div>
                     </li>
@@ -139,7 +139,6 @@ img.img-thumbnail{
 	                        	<a href="<%=request.getContextPath()%>/login/memlogin.do?action=logOut" onclick="document.getElementById('myform').submit()" class="nav-item nav-link btn-dark rounded text-white" >Log-out</a>
                         </c:if>
                         <!--text-dark active nav-item  -->
-
                     </li>
                 </ul>
             </div>

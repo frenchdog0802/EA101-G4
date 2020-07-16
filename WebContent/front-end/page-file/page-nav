@@ -88,10 +88,10 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown navhover">
-                        <a href="<%=request.getContextPath()%>/front-end/qAndA/FAQ.jsp" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">FAQ</a>
+                        <a href="<%=request.getContextPath()%>/front-end/qAndA/FAQ.jsp" class="nav-link  text-dark"  >FAQ</a>
                     </li>
                     <li class="nav-item dropdown navhover">
-                        <a href="<%=request.getContextPath()%>/front-end/qAndA/TIPS.jsp" class="nav-link dropdown-toggle text-dark"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">騎乘小叮嚀</a>
+                        <a href="<%=request.getContextPath()%>/front-end/qAndA/TIPS.jsp" class="nav-link text-dark"  >騎乘小叮嚀</a>
                     </li>
                     <li class="nav-item dropdown navhover">
                         <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">會員中心</a>
