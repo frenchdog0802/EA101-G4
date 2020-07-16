@@ -8,7 +8,7 @@
 <%
 	ForumVO forumVO = (ForumVO) request.getAttribute("addTheme");
 
-	MemLoginVO memLoginVO = (MemLoginVO) session.getAttribute("memLoginVO");
+	MemVO MemVO = (MemVO) session.getAttribute("MemVO");
 	MemVO memVO = (MemVO) request.getAttribute("memVO");
 %>
 
@@ -28,10 +28,10 @@
 
 <!-- Bootstrap core CSS -->
 
-<link href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/front-end/forum/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="<%=request.getContextPath()%>/css/modern-business.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/front-end/forum/css/modern-business.css" rel="stylesheet">
 
 <style>
 body {
@@ -122,7 +122,7 @@ input[type="file"] {
 							<input type="hidden" name="reponse_sum" value="0"> <input
 								type="hidden" name="theme_display_status" value="0"> <input
 								type="hidden" name="sq_member_id"
-								value="${memLoginVO.sq_member_id}"> <input type="hidden"
+								value="${MemVO.sq_member_id}"> <input type="hidden"
 								name="action" value="insert">
 								
 								
@@ -153,15 +153,15 @@ input[type="file"] {
 			<!-- Search Widget -->
 
 			<div class="card my-4">
-				<div class="p-3 mb-2 bg-info text-white">發文者:${memLoginVO.nick_name}</div>
+				<div class="p-3 mb-2 bg-info text-white">發文者:${MemVO.nick_name}</div>
 				<div class="card-body">
 					<div class="row">
 						<ul class="list-unstyled mb-0">
 							<img id="member_avatar"
 								src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${memVO.sq_member_id}"
 								style="height: 100px;">
-							<div for="member_id">會員編號：${memLoginVO.sq_member_id}</div>
-							<div  for="m_email">E-mail：${memLoginVO.m_email}</div>
+							<div for="member_id">會員編號：${MemVO.sq_member_id}</div>
+							<div  for="m_email">E-mail：${MemVO.m_email}</div>
 <%-- 							<li for="theme_name">性別：${memVO.getGender()==1 ? "男" : "女"}</li> --%>
 								
 							
@@ -190,8 +190,8 @@ input[type="file"] {
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="<%=request.getContextPath()%>/vendor/jquery/jquery.min.js"></script>
-	<script src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="<%=request.getContextPath()%>/front-end/forum/vendor/jquery/jquery.min.js"></script>
+	<script src="<%=request.getContextPath()%>/front-end/forum/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 <script>

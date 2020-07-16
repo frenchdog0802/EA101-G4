@@ -7,10 +7,7 @@
 <%@ page import="com.member.model.*"%>
 
 <%
-	ForumVO forumVO = (ForumVO) request.getAttribute("forumVO");
-
-MemVO memLoginVO = (MemVO) session.getAttribute("memVO");
-	MemVO memVO = (MemVO) request.getAttribute("memVO");
+	
 
 	ForumService forumSvc = new ForumService();
 	List<ForumVO> list = forumSvc.getAll();
@@ -22,7 +19,7 @@ MemVO memLoginVO = (MemVO) session.getAttribute("memVO");
 %>
 
 <jsp:useBean id="memberSvc" scope="page"	class="com.member.model.MemService" />
-<jsp:useBean id="allforumSvc" scope="page"	class="com.forum.model.ForumService" />
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -118,7 +115,7 @@ body {
 									</c:if>
 								</c:forEach>
 								&nbsp 發布時間: <a href=" ">${forumVO.theme_time}</a>
-								<c:forEach var="allforumpost" items="${allforumSvc.all}">
+								<c:forEach var="allforumpost" items="${list}">
 <%-- 									<c:if test="${allforumpost.sq_theme_id == forumVO.sq_theme_id}"> --%>
 <!--  								&nbsp 回應數: ${allforumpost.reponse_sum} -->
 <%--  								</c:if> --%>
@@ -144,15 +141,17 @@ body {
 
 			<!-- Sidebar Widgets Column -->
 			<div class="col-md-4">
-				<div class="p-3 mb-2 bg-info text-white">我的資訊:${memLoginVO.nick_name}</div>
+				<div class="p-3 mb-2 bg-info text-white">我的資訊:${MemVO.nick_name}</div>
 				<div class="card-body">
 					<div class="row">
 						<ul class="list-unstyled mb-0">
 							<img id="member_avatar"
-								src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${memLoginVO.sq_member_id}"
+								src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${MemVO.sq_member_id}"
 								style="height: 100px;">
 							<div for="theme_member">
-								會員編號：<%=memLoginVO.getSq_member_id()%>
+<%-- 								會員編號：<%=memLoginVO.getSq_member_id()%> --%>
+								會員編號：${MemVO.sq_member_id}
+								
 								</div>
 
 						</ul>
@@ -169,7 +168,7 @@ body {
 							<input type="hidden" class="form-control"
 								placeholder="Search for..."><span
 								class="input-group-append"> <input type="hidden"
-								name="sq_member_id" value="<%=memLoginVO.getSq_member_id()%>">
+								name="sq_member_id" value="${MemVO.sq_member_id}">
 								<input type="hidden" name="action"
 								value="getMember_Theme_Display"> <!-- 								<button class="btn btn-secondary" type="submit">我的主題</button> -->
 								<a
