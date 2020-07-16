@@ -269,7 +269,7 @@
 		<url-pattern>/member/MemSessionBackImg.do</url-pattern>
 	</servlet-mapping>
 	
-	<servlet>
+<servlet>
 		<servlet-name>ForumDBReader</servlet-name>
 		<servlet-class>com.forum.model.ForumDBReader</servlet-class>
 	</servlet>
@@ -277,6 +277,8 @@
 		<servlet-name>ForumDBReader</servlet-name>
 		<url-pattern>/forum/ForumDBReader.do</url-pattern>
 	</servlet-mapping>
+	
+
 <!-- 	StaffDBReader -->
 <servlet>
 		<servlet-name>StaffDBReader</servlet-name>
@@ -305,6 +307,15 @@
 		<url-pattern>/forum/forum.do</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>ForumMessageServlet</servlet-name>
+		<servlet-class>com.forum_message.controller.ForumMessageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ForumMessageServlet</servlet-name>
+		<url-pattern>/forum/forum_message.do</url-pattern>
+	</servlet-mapping>
+
 	<!-- login前台登入使用 -->
 	<servlet>
 		<servlet-name>MemLoginServlet</servlet-name>

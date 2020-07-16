@@ -9,25 +9,20 @@
 <%
 	ForumVO forumVO = (ForumVO) request.getAttribute("forumVO");
 
-	MemVO memLoginVO = (MemVO) session.getAttribute("MemVO");
-	
+MemVO memLoginVO = (MemVO) session.getAttribute("memVO");
 	MemVO memVO = (MemVO) request.getAttribute("memVO");
-	
+
 	ForumService forumSvc = new ForumService();
 	List<ForumVO> list = forumSvc.getAll();
 	pageContext.setAttribute("list", list);
-	 
-	 MemService memSvc = new MemService();
-	 List<MemVO> listmem = memSvc.getAll();
-	 pageContext.setAttribute("listmem",listmem);
-	 
-	 
-	
-	
+
+	MemService memSvc = new MemService();
+	List<MemVO> listmem = memSvc.getAll();
+	pageContext.setAttribute("listmem", listmem);
 %>
 
-<jsp:useBean id="memberSvc" scope="page" class="com.member.model.MemService" />
-<jsp:useBean id="allforumSvc" scope="page" class="com.forum.model.ForumService" />
+<jsp:useBean id="memberSvc" scope="page"	class="com.member.model.MemService" />
+<jsp:useBean id="allforumSvc" scope="page"	class="com.forum.model.ForumService" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,15 +34,14 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/index/index.css">
 
 <title>Modern Business - Start Bootstrap Template</title>
 
 <!-- Bootstrap core CSS -->
-<link href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="<%=request.getContextPath()%>//css/modern-business.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/bootstrap-components/css/modern-business.css" rel="stylesheet">
 
 <style>
 body {
@@ -72,9 +66,7 @@ body {
 </head>
 
 <body>
-<%@include file="/front-end/page-file/page-nav"%>
-	
- 	<div class="container my-5">
+
 
 
 	<!-- Page Content -->
@@ -112,26 +104,25 @@ body {
 									ACTION="<%=request.getContextPath()%>/forum/forum.do"
 									style="margin-bottom: 0px;">
 									<input type="hidden" name="sq_theme_id"
-										value="${forumVO.sq_theme_id}"> 
-									<input type="hidden"
-										name="action" value="getOne_For_Display"> 
-									<input
+										value="${forumVO.sq_theme_id}"> <input type="hidden"
+										name="action" value="getOne_For_Display"> <input
 										class="btn btn-primary" type="submit" value="Read More">
 
 								</FORM>
 							</div>
 							<div class="card-footer text-muted">
-							<c:forEach var="memberVOpost" items="${memberSvc.all}">
-							<c:if test="${memberVOpost.sq_member_id == forumVO.sq_member_id}">
-							<strong>${memberVOpost.nick_name}</strong>
-							</c:if>
-							</c:forEach>
+								<c:forEach var="memberVOpost" items="${memberSvc.all}">
+									<c:if
+										test="${memberVOpost.sq_member_id == forumVO.sq_member_id}">
+										<strong>${memberVOpost.nick_name}</strong>
+									</c:if>
+								</c:forEach>
 								&nbsp 發布時間: <a href=" ">${forumVO.theme_time}</a>
 								<c:forEach var="allforumpost" items="${allforumSvc.all}">
-								<c:if test="${allforumpost.sq_theme_id == forumVO.sq_theme_id}">
- 								&nbsp 回應數: ${allforumpost.reponse_sum}
- 								</c:if>
- 								</c:forEach>
+<%-- 									<c:if test="${allforumpost.sq_theme_id == forumVO.sq_theme_id}"> --%>
+<!--  								&nbsp 回應數: ${allforumpost.reponse_sum} -->
+<%--  								</c:if> --%>
+								</c:forEach>
 							</div>
 						</div>
 					</c:if>
@@ -146,51 +137,69 @@ body {
 
 					<a id="meminsert" class="btn btn-info"
 						href="<%=request.getContextPath()%>/front-end/forum/addTheme.jsp">我要發布</a>
-				
+
 				</ul>
 
 			</div>
 
 			<!-- Sidebar Widgets Column -->
 			<div class="col-md-4">
-					<div class="p-3 mb-2 bg-info text-white">我的資訊:${memLoginVO.nick_name}</div>
-					<div class="card-body">
-						<div class="row">
-							<ul class="list-unstyled mb-0">
-								<img id="member_avatar"
-									src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${memLoginVO.sq_member_id}"
-									style="height: 100px;">
-								<div for="theme_member">
-									會員編號：<%=memLoginVO.getSq_member_id()%></div>
-								
-							</ul>
-						</div>
+				<div class="p-3 mb-2 bg-info text-white">我的資訊:${memLoginVO.nick_name}</div>
+				<div class="card-body">
+					<div class="row">
+						<ul class="list-unstyled mb-0">
+							<img id="member_avatar"
+								src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${memLoginVO.sq_member_id}"
+								style="height: 100px;">
+							<div for="theme_member">
+								會員編號：<%=memLoginVO.getSq_member_id()%>
+								</div>
+
+						</ul>
 					</div>
+				</div>
 
 
 				<!-- Search Widget -->
-<%-- 				<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/forum/forum.do"> --%>
+				<%-- 				<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/forum/forum.do"> --%>
 				<div class="card mb-4">
-					<h5 class="card-header">Search</h5>
+					<h5 class="card-header">主題搜尋</h5>
 					<div class="card-body">
 						<div class="input-group">
 							<input type="hidden" class="form-control"
 								placeholder="Search for..."><span
-								class="input-group-append">
-								<input type="hidden"
-										name="sq_member_id" value="<%=memLoginVO.getSq_member_id()%>"> 
-								<input type="hidden"
-										name="action" value="getMember_Theme_Display"> 
-<!-- 								<button class="btn btn-secondary" type="submit">我的主題</button> -->
-								<a href="<%=request.getContextPath()%>/front-end//forum/listMemberTheme.jsp"><button class="btn btn-secondary">我的主題</button></a>
-								
+								class="input-group-append"> <input type="hidden"
+								name="sq_member_id" value="<%=memLoginVO.getSq_member_id()%>">
+								<input type="hidden" name="action"
+								value="getMember_Theme_Display"> <!-- 								<button class="btn btn-secondary" type="submit">我的主題</button> -->
+								<a
+								href="<%=request.getContextPath()%>/front-end//forum/listMemberTheme.jsp"><button
+										class="btn btn-secondary">我的主題</button></a>
+
 							</span>
 						</div>
 					</div>
+					
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/forum/forum.do">
+					<div class="card-body">
+						<div class="input-group">
+								<span class="input-group-append"> 
+								<select size="1" name="sq_member_id">
+								<c:forEach var="listmemall" items="${listmem}">
+									<option value="${listmemall.sq_member_id}">${listmemall.nick_name}
+								</c:forEach>
+								</select>
+								<input type="hidden" name="action"	value="getMember_Theme_Display"> 								
+								<button	type="submit" class="btn btn-secondary">送出</button>
+							</span>
+						</div>
+					</div>
+					</FORM>
+					
 				</div>
-<!-- 				</FORM> -->
+				<!-- 				</FORM> -->
 				<!-- Categories Widget -->
-				
+
 
 
 			</div>
@@ -215,17 +224,6 @@ body {
 	<script
 		src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-	</div>
- 
- 
- 		
-	<%@include file="/front-end/page-file/page-footer"%>
-	
-	<script>
-	$(function(){
-		$(".fun-text").text("討論區");  // text("")裡面自己輸入功能名稱 
-	});
-	</script>
 </body>
 
 </html>
