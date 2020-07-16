@@ -228,6 +228,13 @@ public class ForumServlet extends HttpServlet {
 				forumVO.setTheme_pic(theme_pic);
 				forumVO.setTheme_display_status(theme_display_status);
 
+				System.out.println("forum-----------");
+				System.out.println("sq_theme_id=" + sq_theme_id);
+				System.out.println("sq_member_id=" + sq_member_id);
+				System.out.println("theme_name=" + theme_name);
+				System.out.println("theme_detial=" + theme_detial);
+				System.out.println("theme_pic=" + theme_pic);
+				System.out.println("theme_display_status=" + theme_display_status);
 				
 				
 				

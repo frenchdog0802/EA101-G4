@@ -95,12 +95,10 @@ public class ForumDAO implements ForumDAO_interface {
 
 			pstmt.setString(1, forumVO.getSq_member_id());
 			pstmt.setString(2, forumVO.getTheme_name());
-			pstmt.setDate(3, forumVO.getTheme_time());
-			pstmt.setInt(4, forumVO.getReponse_sum());
-			pstmt.setString(5, forumVO.getTheme_detial());
-			pstmt.setBytes(6, forumVO.getTheme_pic());
-			pstmt.setInt(7, forumVO.getTheme_display_status());
-			pstmt.setString(8, forumVO.getSq_theme_id());
+			pstmt.setString(3, forumVO.getTheme_detial());
+			pstmt.setBytes(4, forumVO.getTheme_pic());
+			pstmt.setInt(5, forumVO.getTheme_display_status());
+			pstmt.setString(6, forumVO.getSq_theme_id());
 
 			pstmt.executeUpdate();
 
