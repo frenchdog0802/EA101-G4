@@ -157,7 +157,7 @@
     				<div class="col-8">
     					<div class="row products-range product">
     						<c:forEach var="productVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-			    				<div class="col-xs-6 col-sm-4 col-md-3 pdzero productprice" data-price="${productVO.product_price}">
+			    				<div class="col-xs-6 col-sm-4 col-md-3 pdzero productprice collection" data-price="${productVO.product_price}">
 				    				<div id="sample">
 				    					<div class="list-img">
 				    						<div class="list-img2">
@@ -174,15 +174,15 @@
 					   							$${productVO.product_price}元
 					   						</div>
 					   						<div class="list-boxs mt-2">
-					   							<button class="btn bg-secondary" id="addCollection">加入收藏</button>
+					   							<button class="btn bg-secondary addCollection">加入收藏</button>
 <!-- 				    							<button class="btn bg-secondary addproduct">放入購物車</button> -->
 				    						</div>
 				    					</div>
 				    				</div>
 				    				<input type="hidden" name="product_id" value="${productVO.sq_product_id}">
 					    			<input type="hidden" name="product_name" value="${productVO.product_name}">
-					    			<%if(memVO.getSq_member_id() != null){%>
-					    				<input type="hidden" name="member_id" value="<%=memVO.getSq_member_id()%>">
+					    			<%if(memVO != null){%>
+					    			<input type="hidden" name="member_id" value="<%=memVO.getSq_member_id()%>">
 					    			<%}%>
 			    				</div>
 		    				</c:forEach>		    				
@@ -207,18 +207,23 @@
 	
     <script>
   		$(document).ready(function() {
-  			$("#addCollection").click(function() {
+  			$(".addCollection").click(function() {
+  				
+  				console.log($("input[name=product_id]", $(this).parents(".collection")).val());
+  				console.log($("input[name=product_name]", $(this).parents(".collection")).val()); 				 				
+  				console.log($("input[name=member_id]", $(this).parents(".product")).val());
+  				
   				<%if(memVO == null){%>
   					alert("請先登入會員");
   				<%}else{%>
 	  		        $.ajax({
 	  		        	type : "POST",
-	  		        	url  : "<%=request.getContextPath()%>/collection.do",
+	  		        	url  : "<%=request.getContextPath()%>/collectionServlet.do",
 	  		        	data : {
 	  		        		action : "addCollection",
-	  		        		product_id : $("input[name=product_id]").val(),
-	  		        		product_name : $("input[name=product_name]").val(),
-							member_id : $("input[name=memeber_id]").val(),
+	  		        		product_id : $("input[name=product_id]", $(this).parents(".collection")).val(),
+	  		        		product_name : $("input[name=product_name]", $(this).parents(".collection")).val(),
+							member_id : $("input[name=member_id]", $(this).parents(".collection")).val(),
 	  		        	},
 	  		        	success : function(){
 	  		        		alert("已加入收藏");
