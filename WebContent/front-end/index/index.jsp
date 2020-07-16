@@ -109,7 +109,7 @@ img.img-thumbnail{
                         <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">討論區</a>
                         <!--text-dark active nav-item  -->
                         <div class="dropdown-menu" aria-lablelledby="dropdownId">
-                            <a href="#" class="dropdown-item">test1</a>
+                            <a href="<%=request.getContextPath()%>/front-end/forum/listMemberTheme.jsp" class="dropdown-item">討論區列表</a>
                             <a href="#" class="dropdown-item">test2</a>
                         </div>
                     </li>
@@ -268,7 +268,7 @@ img.img-thumbnail{
 						<div class="row" style="height:75%;">
 							<div class="col-12" style="height:100%; display:table;">
 								<div class="imgDiv">
-								<img src="<%=request.getContextPath()%>/back-end/route/route.img?SQ_ROUTE_ID=<%=routeList.get(i).getSqRouteId()%>" class="img-thumbnail" 
+								<img src="<%=request.getContextPath()%>/front-end/route/route.img?SQ_ROUTE_ID=<%=routeList.get(i).getSqRouteId()%>" class="img-thumbnail" 
 								 alt="">
 							</div>
 							</div>
