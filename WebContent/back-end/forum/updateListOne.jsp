@@ -7,8 +7,10 @@
 
 <%
 	ForumVO forumVO = (ForumVO) request.getAttribute("updateListOne");
+
 	MemLoginVO memLoginVO = (MemLoginVO) session.getAttribute("memLoginVO");
 	MemVO memVO = (MemVO) request.getAttribute("memVO");
+	
 %>
 
 
@@ -27,12 +29,11 @@
 
 <!-- Bootstrap core CSS -->
 
-<link
-	href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap.min.css"
+<link href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css"
 	rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="<%=request.getContextPath()%>/css/modern-business.css"
+<link href="<%=request.getContextPath()%>/bootstrap-components/css/modern-business.css"
 	rel="stylesheet">
 
 <style>
@@ -64,9 +65,12 @@ input[type="file"] {
 </style>
 </head>
 
+<%@include file="/back-end/backFrame/backHeader"%>
+<%@include file="/back-end/backFrame/backBody"%>
 <body>
 
 
+<%@include file="/back-end/backFrame/backNav"%>
 
 	<!-- Page Content -->
 	<div class="container">
@@ -79,7 +83,7 @@ input[type="file"] {
 		
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a
-				href="<%=request.getContextPath()%>/front-end/forum/listAllTheme.jsp">討論區</a>
+				href="<%=request.getContextPath()%>/back-end/forum/listAllForum.jsp">討論區管理</a>
 			</li>
 			<li class="breadcrumb-item active">修改主題</li>
 		</ol>
@@ -105,10 +109,10 @@ input[type="file"] {
 
 					<div class="input">
 					<label>主題顯示狀態</label>
-<!-- 					<select name="theme_display_status"> -->
-<%-- 						<option value="0" ${forumVO.theme_display_status eq 0 ? "selected" : "" }>顯示</option> --%>
-<%-- 						<option value="1" ${forumVO.theme_display_status ne 1 ? "selected" : "" }>隱藏</option> --%>
-<!-- 					</select> -->
+					<select name="theme_display_status">
+						<option value="0" ${forumVO.theme_display_status == 0 ? "selected" : "" }>顯示</option>
+						<option value="1" ${forumVO.theme_display_status == 1 ? "selected" : "" }>封存</option>
+					</select>
 					<img class="card-img-top" height="200"
 								src="<%=request.getContextPath()%>/forum/ForumDBReader.do?sq_theme_id=${forumVO.sq_theme_id}">
 <!-- 						<img id="theme_pic" class="img-fluid rounded" src="#"> -->
@@ -120,7 +124,7 @@ input[type="file"] {
 
 							<div class="form-group">
 
-								<label for="theme_name">主題:</label> <input type="TEXT"
+								<label for="theme_name">主題:</label> <input type="text"
 									name="theme_name"	value="<%=forumVO.getTheme_name()%>"/>
 							</div>
 							
@@ -129,17 +133,17 @@ input[type="file"] {
 							<div class="form-group">
 								<textarea class="form-control" height="auto" rows="16" name="theme_detial"><%=forumVO.getTheme_detial()%></textarea>
 							</div>
-							<input type="hidden" name="sq_theme_id" value="<%=forumVO.getSq_theme_id()%>">
-							<input type="hidden" name="reponse_sum" value="<%=forumVO.getReponse_sum()%>"> 
+							<input type="text" name="sq_theme_id" value="<%=forumVO.getSq_theme_id()%>">
+<%-- 							<input type="hidden" name="reponse_sum" value="<%=forumVO.getReponse_sum()%>">  --%>
 
-							<div class="form-group">
-								<label for="theme_display_status">狀態碼：</label> <input type="TEXT"
-									name="theme_display_status"	value="<%=forumVO.getTheme_display_status()%>"/>
-							</div>
+<!-- 							<div class="form-group"> -->
+<!-- 								<label for="theme_display_status">狀態碼：</label> <input type="TEXT" -->
+<%-- 									name="theme_display_status"	value="<%=forumVO.getTheme_display_status()%>"/> --%>
+<!-- 							</div> -->
 
 							<input
-								type="hidden" name="sq_member_id" value="<%=forumVO.getSq_member_id()%>"> 
-								<input type="hidden" name="action" value="updateByStaff">
+								type="text" name="sq_member_id" value="<%=forumVO.getSq_member_id()%>"> 
+								<input type="hidden" name="action" value="update">
 
 
 							<div class="card mb-4">
@@ -174,7 +178,7 @@ input[type="file"] {
 
 			Categories Widget
 			<div class="card my-4">
-				<div class="p-3 mb-2 bg-info text-white">樓主:${memVO.nick_name}</div>
+				<div class="p-3 mb-2 bg-info text-white">發文者:${memVO.nick_name}</div>
 				<div class="card-body">
 					<div class="row">
 						<ul class="list-unstyled mb-0">
@@ -200,18 +204,12 @@ input[type="file"] {
 	<!-- /.container -->
 
 	<!-- Footer -->
-	<footer class="py-5 bg-dark">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Your
-				Website 2020</p>
-		</div>
-		<!-- /.container -->
-	</footer>
+	<%@include file="/back-end/backFrame/backFooter"%>	
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="<%=request.getContextPath()%>/vendor/jquery/jquery.min.js"></script>
 	<script
-		src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		src="<%=request.getContextPath()%>/bootstrap-components/js/bootstrap.bundle.min.js"></script>
 
 </body>
 <script>

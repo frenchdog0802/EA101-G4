@@ -9,7 +9,8 @@
 <%
 	ForumVO forumVO = (ForumVO) request.getAttribute("forumVO");
 
-	MemLoginVO memLoginVO = (MemLoginVO) session.getAttribute("MemVO");
+	MemVO memLoginVO = (MemVO) session.getAttribute("MemVO");
+	
 	MemVO memVO = (MemVO) request.getAttribute("memVO");
 	
 	ForumService forumSvc = new ForumService();
@@ -43,10 +44,10 @@
 <title>Modern Business - Start Bootstrap Template</title>
 
 <!-- Bootstrap core CSS -->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="css/modern-business.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>//css/modern-business.css" rel="stylesheet">
 
 <style>
 body {

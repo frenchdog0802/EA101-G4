@@ -77,7 +77,7 @@ TipsVO tipsVo = (TipsVO) request.getAttribute("tipsVo"); //EmpServlet.java (Conc
 	</tr>
 	<tr>
 		<td>描述:</td>
-		<td><input type="TEXT" name="tips_desciption" size="45"	value="<%=tipsVo.getTips_desciption()%>" /></td>
+		<td><input type="TEXT" name="tips_description" size="45"	value="<%=tipsVo.getTips_description()%>" /></td>
 	</tr>
 		<tr>
 		<td>主題:</td>

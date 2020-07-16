@@ -325,34 +325,6 @@
 		<url-pattern>/login/stafflogin.do</url-pattern>
 	</servlet-mapping>
 
-	<!-- filter使用 -->
-<!-- 	<filter> -->
-<!-- 		<filter-name>SetCharacterEncodingFilter</filter-name> -->
-<!-- 		<filter-class>com.filter.SetCharacterEncodingFilter</filter-class> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>encoding</param-name> -->
-<!-- 			<param-value>UTF-8</param-value> -->
-<!-- 		</init-param> -->
-<!-- 	</filter> -->
-<!-- 	<filter-mapping> -->
-<!-- 		<filter-name>SetCharacterEncodingFilter</filter-name> -->
-<!-- 		<url-pattern>/*</url-pattern> -->
-<!-- 	</filter-mapping> -->
-
-<!-- 	<filter> -->
-<!-- 		<filter-name>MemberLoginFilter</filter-name> -->
-<!-- 		<filter-class>com.filter.MemberLoginFilter</filter-class> -->
-<!-- 	</filter> -->
-<!-- 	<filter-mapping> -->
-<!-- 		<filter-name>MemberLoginFilter</filter-name> -->
-<!-- 		<url-pattern>/front-end/route/*</url-pattern> -->
-<!-- 		<dispatcher>REQUEST</dispatcher> -->
-<!-- 		<dispatcher>FORWARD</dispatcher> -->
-<!-- 		<dispatcher>INCLUDE</dispatcher> -->
-<!-- 		<dispatcher>ERROR</dispatcher> -->
-<!-- 		<dispatcher>ASYNC</dispatcher> -->
-<!-- 	</filter-mapping> -->
-	
 	
 		
 	<!-- 宗霖 -->
@@ -486,6 +458,81 @@
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 	</resource-ref>
+	
+	<!-- 	filter前台使用 -->
+	<filter>
+		<filter-name>SetCharacterEncodingFilter</filter-name>
+		<filter-class>com.filter.SetCharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SetCharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>MemberLoginFilter</filter-name>
+		<filter-class>com.filter.MemberLoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>MemberLoginFilter</filter-name>
+<!-- 		bike -->
+		<url-pattern>/front-end/bike/rentMaster.jsp</url-pattern>
+		<url-pattern>/front-end/bike/memberOrder.jsp</url-pattern>
+		
+<!-- 		activity -->
+		<url-pattern>/front-end/activity/Actmanagement.jsp</url-pattern>
+		<url-pattern>/front-end/activity/FrontaddAct.jsp</url-pattern>
+<!-- 		shop -->
+		<url-pattern>/front-end/shopMall/shopPayDetail.jsp</url-pattern>
+		<url-pattern>/front-end/member/goodCollection.jsp.jsp</url-pattern>
+<!-- 		route -->
+		<url-pattern>/front-end/route/setRouteBySelf.jsp</url-pattern>
+		<url-pattern>/front-end/waterStation/insertWs.jsp</url-pattern>
+<!-- member -->
+		<url-pattern>/front-end/member/listOneMem.jsp</url-pattern>
+<!-- 		討論區 -->
+		<url-pattern>/front-end/forum/*</url-pattern>
+		
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+	
+	<!-- 	filter後台使用 -->
+	<filter>
+		<filter-name>staffLoginFilter</filter-name>
+		<filter-class>com.filter.StaffLoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>staffLoginFilter</filter-name>
+		<url-pattern>/back-end/activity/*</url-pattern>
+		<url-pattern>/back-end/bike/*</url-pattern>
+		<url-pattern>/back-end/bikeStore/*</url-pattern>
+		<url-pattern>/back-end/bikeType/*</url-pattern>
+		<url-pattern>/back-end/BrandBack/*</url-pattern>
+		<url-pattern>/back-end/forum/*</url-pattern>
+		<url-pattern>/back-end/joinActivity/*</url-pattern>
+		<url-pattern>/back-end/member/*</url-pattern>
+		<url-pattern>/back-end/question/*</url-pattern>
+		<url-pattern>/back-end/resportActivity/*</url-pattern>
+		<url-pattern>/back-end/route/*</url-pattern>
+		<url-pattern>/back-end/Shop_order/*</url-pattern>
+		<url-pattern>/back-end/Shop_product/*</url-pattern>
+		<url-pattern>/back-end/staff/*</url-pattern>
+		<url-pattern>/back-end/tips/*</url-pattern>
+		<url-pattern>/back-end/waterStation/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
 
 
 

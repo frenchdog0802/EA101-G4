@@ -84,7 +84,7 @@
 		<tr>
 			<td>${tipsVO.sq_tips_id}</td>
 			<td>${tipsVO.tips_picture}</td>
-			<td>${tipsVO.tips_desciption}</td>
+			<td>${tipsVO.tips_description}</td>
 			<td>${tipsVO.tips_title}</td>
 			
 			<td>

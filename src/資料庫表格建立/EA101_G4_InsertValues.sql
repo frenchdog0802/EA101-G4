@@ -9647,7 +9647,7 @@ INSERT INTO QUESTION VALUES (sq_QUESTION.NEXTVAL,'Q10:我的身高適合那種�
 
 
 
-INSERT INTO TIPS(SQ_TIPS_ID,TIPS_PICTURE,TIPS_TITLE,TIPS_DESCRIPTION) VALUES (sq_TIPS.NEXTVAL ,load_blob('tip1.jpg'), '法規資訊', 
+INSERT INTO TIPS(SQ_TIPS_ID,TIPS_TITLE,TIPS_DESCRIPTION) VALUES (sq_TIPS.NEXTVAL, 1, 
 '道路交通管理處罰條例 
 第3條
 本條例所用名詞釋義如下：
@@ -9688,17 +9688,17 @@ INSERT INTO TIPS(SQ_TIPS_ID,TIPS_PICTURE,TIPS_TITLE,TIPS_DESCRIPTION) VALUES (sq
 第6條
 駕駛人行駛自行車時，自行車前後不得有人攀附站立，以維行車安全。');
 
-INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL ,load_blob('tip2.jpg'), '自行車道規劃認識', 
+INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL ,2, 
 '由【交通部運輸研究所】所出版之「自行車道系統規劃設計參考手冊」於99 年提出第一版初稿，經東部自行車路網示範計畫督導協調推動小組多次會議研商及至交通部部務會報提報，並邀集產官學進行研討暨參考國外相關規定後，於100 年提出第二版修訂，嗣後經101 年整併既有法規條文，於102年提出第三版修訂。
 本手冊主要在提供推動單位在自行車道之規劃、設置、安全防護與管理上，有較為一致之標準，以保障民眾騎乘使用之安全；另外考慮自行車道之設置原即包容多元思維，因此也建議在涉及地區景觀特色之設計、資訊說明提供等部分宜由設置者發揮創意，使各地自行車道之佈設更具地方吸引力與便利性。');
 
-INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL ,load_blob('tip3.jpg'), '單車裝備', 
+INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL ,3, 
 '單車服
 安全帽
 前、後燈
 水壺架
 車架馬鞍袋');
-INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL , load_blob('tip4.jpg') , '行前準備', 
+INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL ,4, 
 '一、生活用品:
 現金、零錢/信用卡/提款卡
 身分證/健保卡
@@ -9723,7 +9723,7 @@ INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL , load_blob('tip4.jpg') , '行前準備
 3.長途旅遊的行李請盡量精簡，托運之行李以21吋為主，個人
 貴重物品請隨身保管，勿放置於托運行李中。
 4.運動酸痛是必然的，請記得攜帶酸痛外敷藥品。（推薦藥品：普拿疼酸痛藥膏）');
-INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL , load_blob('tip6.jpg'), '單車安全小常識', 
+INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL , 5, 
 '正確騎乘技巧
 1.手肘手臂要微彎
 2.背部腰部成弓狀
@@ -9750,7 +9750,7 @@ INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL , load_blob('tip6.jpg'), '單車安全�
 5.表明你的行進動向，就如開車一樣變換車道。
 6.注意力分配 前30~40% 後70%~60%。
 7.回到柏油路上時，注意路面高低落差。');
-INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL , load_blob('tip7.jpg') , '全臺單車驛站', 
+INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL ,6, 
 '臺北市
 大同區	大橋派出所	臺北市大同區延平北路 3 段 2 號	02-25945524
 萬華區	漢中街派出所	臺北市漢中街 122 號	02-23312790

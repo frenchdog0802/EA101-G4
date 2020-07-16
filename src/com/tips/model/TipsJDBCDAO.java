@@ -18,15 +18,15 @@ public class TipsJDBCDAO implements TipsDAO_interface {
 	String passwd = "EA101_G4";
 
 	private static final String INSERT_STMT = 
-		"INSERT INTO TIPS (SQ_TIPS_ID,TIPS_PICTURE,TIPS_TITLE ,TIPS_DESCIPTION) VALUES (sq_TIPS.NEXTVAL, ?, ?,?)";
+		"INSERT INTO TIPS (SQ_TIPS_ID,TIPS_PICTURE,TIPS_TITLE ,TIPS_DESCRIPTION) VALUES (sq_TIPS.NEXTVAL, ?, ?,?)";
 	private static final String GET_ALL_STMT = 
-		"SELECT SQ_TIPS_ID,TIPS_PICTURE,TIPS_TITLE ,TIPS_DESCIPTION FROM TIPS";
+		"SELECT SQ_TIPS_ID,TIPS_PICTURE,TIPS_TITLE ,TIPS_DESCRIPTION FROM TIPS";
 	private static final String GET_ONE_STMT = 
-		"SELECT SQ_TIPS_ID,TIPS_PICTURE,TIPS_TITLE ,TIPS_DESCIPTION FROM TIPS where SQ_TIPS_ID = ?";
+		"SELECT SQ_TIPS_ID,TIPS_PICTURE,TIPS_TITLE ,TIPS_DESCRIPTION FROM TIPS where SQ_TIPS_ID = ?";
 	private static final String DELETE = 
-		"DELETE FROM TIPS where TIPS_DESCIPTION = ?";
+		"DELETE FROM TIPS where TIPS_DESCRIPTION = ?";
 	private static final String UPDATE = 
-		"UPDATE TIPS set TIPS_PICTURE=?, TIPS_TITLE=?, TIPS_DESCIPTION=? where SQ_TIPS_ID = ?";
+		"UPDATE TIPS set TIPS_PICTURE=?, TIPS_TITLE=?, TIPS_DESCRIPTION=? where SQ_TIPS_ID = ?";
 
 
 	@Override
@@ -42,7 +42,7 @@ public class TipsJDBCDAO implements TipsDAO_interface {
 
 			pstmt.setBytes(1, tipsVo.getTips_picture());
 			pstmt.setString(2, tipsVo.getTips_title());
-			pstmt.setString(3, tipsVo.getTips_desciption());
+			pstmt.setString(3, tipsVo.getTips_description());
 						
 
 			pstmt.executeUpdate();
@@ -89,7 +89,7 @@ public class TipsJDBCDAO implements TipsDAO_interface {
 
 			pstmt.setBytes(1, tipsVo.getTips_picture());
 			pstmt.setString(2, tipsVo.getTips_title());
-			pstmt.setString(3, tipsVo.getTips_desciption());
+			pstmt.setString(3, tipsVo.getTips_description());
 
 			pstmt.executeUpdate();
 
@@ -185,10 +185,10 @@ public class TipsJDBCDAO implements TipsDAO_interface {
 			while (rs.next()) {
 				
 				tipsVo = new TipsVO();
-				tipsVo.setSq_tips_id(rs.getString("sq_tips_id"));
-				tipsVo.setTips_picture(rs.getBytes("tips_picture"));
-				tipsVo.setTips_title(rs.getString("tips_title"));
-				tipsVo.setTips_desciption(rs.getString("tips_desciption"));
+				tipsVo.setSq_tips_id(rs.getString("SQ_TIPS_ID"));
+				tipsVo.setTips_picture(rs.getBytes("TIPS_PICTURE"));
+				tipsVo.setTips_title(rs.getString("TIPS_TITLE"));
+				tipsVo.setTips_description(rs.getString("TIPS_DESCRIPTION"));
 				
 				byte[] pic = rs.getBytes("tips_picture");
 				readPicture(pic);
@@ -242,7 +242,7 @@ public class TipsJDBCDAO implements TipsDAO_interface {
 //		tipsVo1.setSq_tips_id("320007");
 //		tipsVo1.setTips_picture(pic);
 //		tipsVo1.setTips_title("道路救援");
-//		tipsVo1.setTips_desciption("腳踏車在路上故障可撥打道路救援電話。");
+//		tipsVo1.setTips_description("腳踏車在路上故障可撥打道路救援電話。");
 //		dao.insert(tipsVo1);
 		
 		
@@ -254,7 +254,7 @@ public class TipsJDBCDAO implements TipsDAO_interface {
 //		tipsVo2.setSq_tips_id("320007");
 //		tipsVo2.setTips_picture(null);
 //		tipsVo2.setTips_title("道路救援2?");
-//		tipsVo2.setTips_desciption("腳踏車在路上故障可撥打道路救援電話。2");
+//		tipsVo2.setTips_description("腳踏車在路上故障可撥打道路救援電話。2");
 //		dao.update(tipsVo2);
 //
 //		// 刪除
@@ -265,7 +265,7 @@ public class TipsJDBCDAO implements TipsDAO_interface {
 //		System.out.print(tipsVo3.getSq_tips_id() + ",");
 //		System.out.print(tipsVo3.getTips_picture() + ",");
 //		System.out.print(tipsVo3.getTips_title() + ",");
-//		System.out.println(tipsVo3.getTips_desciption());
+//		System.out.println(tipsVo3.getTips_description());
 //		System.out.println("---------------------");
 //
 //		// 查詢
@@ -274,7 +274,7 @@ public class TipsJDBCDAO implements TipsDAO_interface {
 			System.out.print(aEmp.getSq_tips_id() + ",");
 			System.out.print(aEmp.getTips_picture() + ",");
 			System.out.print(aEmp.getTips_title() + ",");
-			System.out.print(aEmp.getTips_desciption() + ",");
+			System.out.print(aEmp.getTips_description() + ",");
 			System.out.println();
 		}
 	}
@@ -300,10 +300,10 @@ public class TipsJDBCDAO implements TipsDAO_interface {
 			while (rs.next()) {
 				
 				tipsVo = new TipsVO();
-				tipsVo.setSq_tips_id(rs.getString("sq_tips_id"));
-				tipsVo.setTips_picture(rs.getBytes("tips_picture"));
-				tipsVo.setTips_title(rs.getString("tips_title"));
-				tipsVo.setTips_desciption(rs.getString("tips_desciption"));
+				tipsVo.setSq_tips_id(rs.getString("SQ_TIPS_ID"));
+				tipsVo.setTips_picture(rs.getBytes("TIPS_PICTURE"));
+				tipsVo.setTips_title(rs.getString("TIPS_TITLE"));
+				tipsVo.setTips_description(rs.getString("TIPS_DESCRIPTION"));
 				
 //				byte[] pic = rs.getBytes("tips_picture");
 //				readPicture2(pic);
