@@ -52,6 +52,13 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String action = request.getParameter("action");
+		
+		if("findBookList".equals(action)) {
+			LinkedHashMap<String, Integer> bookMap  = (LinkedHashMap<String, Integer>)session.getAttribute("bookMap");
+			//寫到這裡要轉成中文
+			JSONObject resobj = new JSONObject(bookMap);
+			out.println(resobj);
+		}
 
 		if ("searchDate".equals(action)) {
 			String startDate = request.getParameter("startDate");
@@ -221,7 +228,6 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 			}
 			bookMap.put(selectBikeType ,parseIntQuantity );
 			session.setAttribute("bookMap", bookMap);
-
 		}
 
 		// 結帳前確認

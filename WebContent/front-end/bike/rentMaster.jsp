@@ -10,8 +10,9 @@
 	scope="page" />
 <jsp:useBean id="BikeTypeSvc"
 	class="com.bike.type.model.BikeTypeService" scope="page" />
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6rP6bwx68xLETAOegitESvzeU9Pp5biA"></script>
-	
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6rP6bwx68xLETAOegitESvzeU9Pp5biA"></script>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,15 +36,54 @@
 	width: 100% !important;
 	height: 100% !important;
 }
+
+.btn-cart {
+	background-color: transparent;
+	position: relative;
+}
+
+.btn-cart>.badge {
+	position: absolute;
+}
 </style>
 </head>
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
 	<div class="container mt-3">
 		<!-- Page Heading/Breadcrumbs -->
-		<h1 class="mt-4 mb-3">車種選擇</h1>
+		<span class="mt-4 mb-3 h1">車種選擇</span>
+		<!-- 		選購清單 -->
+		<div class="dropdown d-inline-block float-right">
+			<button class="btn btn-cart btn-info" type="button"
+				id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				我的清單 <span class="badge badge-pill badge-danger">2</span>
+			</button>
+			<div class="dropdown-menu dropup"
+				style="min-width: 300px;">
+				<div class="px-4 py-3">
+					<div class="h6">已選購商品</div>
+					<table class="table table-sm" style="font-size:16px">
+						<tr>
+							<td><a href="#"> <i class="far fa-trash-alt"></i>
+							</a></td>
+							<td >金牌西裝</td>
+							<td>1 件</td>
+							<td>$ 520</td>
+						</tr>
+						<tr>
+							<td><a href="#"> <i class="far fa-trash-alt"></i>
+							</a></td>
+							<td>金牌女裝</td>
+							<td>1 件</td>
+							<td>$ 480</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
 
-		<ol class="breadcrumb">
+		<!-- 		選購清單 -->
+		<ol class="breadcrumb mt-2">
 			<li class="breadcrumb-item"><a
 				href="<%=request.getContextPath()%>/front-end/bike/memberOrder.jsp">Home</a>
 			</li>
@@ -59,12 +99,10 @@
 				<div class="row">
 					<div class="col">
 						<!--Google map-->
-						<div id="map" style="height:200px;">
-							
-						</div>
+						<div id="map" style="height: 200px;"></div>
 					</div>
 				</div>
-				<div class="row mt-3">
+				<div class="row mt-2">
 					<div class="col">
 						<div class="card">
 							<div class="card-header p-4 text-center">
@@ -88,9 +126,8 @@
 
 								<li class="list-group-item">目前車種<span
 									class="float-right text-danger">剩餘:<span class="bikeSum"></span>台
-								</span></li>
-
-
+								</span>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -105,7 +142,6 @@
 					method="post">
 					<div class="row">
 						<div class="col">
-
 							<div class="form-group">
 								<select class="form-control selectBikeType"
 									name="selectBikeType">
@@ -149,8 +185,6 @@
 									class="float-right bike_daily_price"></span></li>
 							</ul>
 
-
-
 							<div class="row">
 								<div class="col text-center">
 									<button type="button" class="btn btn-dark btn-add">加入清單</button>
@@ -167,7 +201,10 @@
 		</div>
 	</div>
 
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<%@include file="/front-end/page-file/page-footer"%>
+
 	<!-- 	基本的jquery已經引入  需要datetimepicker再自己引入 -->
 
 	<script>
@@ -176,7 +213,20 @@
 						initMap() ;
 		$(".fun-text").text("選擇車種");  // text("")裡面自己輸入功能名稱
 		
-		
+		//我的清單
+		$(".btn-cart").click(function(){
+			$.ajax({
+				type:"POST",
+				url:"<%=request.getContextPath()%>/bike/BikeStoreAjaxServlet.do",
+				data:{
+					action:"findBookList",
+				},
+				dataType:"JSON",
+				success:function(data){
+					console.log(data);
+				}
+			})
+		})
 		//選擇車輛.change
 		$(".selectBikeType").change(function(){
 			var bikeTypeId = $(this).val();
@@ -225,9 +275,9 @@
 				success:function(data){
 				//錯誤處理
 				$(".parseIntQuantity").text(data.parseIntQuantity);
-				},
-				error:function(){
-					$(".parseIntQuantity").text('');
+			},
+			error:function(){
+				$(".parseIntQuantity").text('');
 					//sweetAlert
 					Swal.fire(
 						'成功!',
@@ -241,21 +291,21 @@
 	});
 					var map;
 					function initMap(){
-					  var position = {
-					    lat: ${BikeStoreVO.store_latitute},
-					    lng: ${BikeStoreVO.store_longitute}
-					  };
-					  var map = new google.maps.Map(document.getElementById('map'), {
-					    zoom: 18,
-					    center: position
-					  });
-					  var marker = new google.maps.Marker({
-					    position: position,
-					    map: map
-					  });
+						var position = {
+							lat: ${BikeStoreVO.store_latitute},
+							lng: ${BikeStoreVO.store_longitute}
+						};
+						var map = new google.maps.Map(document.getElementById('map'), {
+							zoom: 18,
+							center: position
+						});
+						var marker = new google.maps.Marker({
+							position: position,
+							map: map
+						});
 					}
 
-</script>
+				</script>
 
 </body>
 </html>

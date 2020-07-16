@@ -133,6 +133,10 @@ if("payFinish".equals(action)){
 					}); 
 					$("tbody").empty();
 					$("tbody").append(str);
+				},complete:function(){
+					//ajax submit data
+					mouse_click_submit();
+					mouse_hover();
 				}
 			})
 		});
@@ -165,51 +169,20 @@ if("payFinish".equals(action)){
 								var storeName = tbody.rows[i].cells[0].innerText;
 								tbody.rows[i].cells[4].innerHTML =data[storeName];
 						}
+					},complete:function(){
+						//ajax submit data
+						mouse_click_submit();
+						mouse_hover();
 					}
 				})
 			})
 
 			
 
-			//ajax submit data
-			$("#tbody tr").click(function(e){
-				var sq_bike_store_id = $(this).find("input").val();
-				var startDate = $('#startDate').val();
-				var endDate = $('#endDate').val();
-				var matchBike = $(this).find("th").eq(4).text();
-				
-				//錯誤處理
-				if(startDate=='' || endDate==''){
-					alert("請先輸入日期");
-					return;
-				}
-		
-				$.ajax({
-					type:"POST",
-					url:"<%=request.getContextPath()%>/bike/BikeStoreAjaxServlet.do",
-					data:{
-						action:"confirm",
-						sq_bike_store_id : sq_bike_store_id,
-						startDate:startDate,
-						endDate :endDate,
-						matchBike : matchBike,
-					},
-					success:function(data){
-						window.location.href = data;
-					}
-						
-				});
-			});
 			
 			
 			
-			//table hover
-			$("#tbody tr").hover(function(){
-				$(this).css('cursor', 'pointer');
-				$(this).css('color', 'blue');
-			},function(){
-				$(this).css('color', 'inherit');
-			})
+			
 
 				
 			
@@ -290,6 +263,49 @@ if("payFinish".equals(action)){
 			    }
 			  });
 		});
+	
+	function mouse_click_submit(){
+		//ajax submit data
+		$("#tbody tr").click(function(e){
+			var sq_bike_store_id = $(this).find("input").val();
+			var startDate = $('#startDate').val();
+			var endDate = $('#endDate').val();
+			var matchBike = $(this).find("th").eq(4).text();
+			
+			//錯誤處理
+			if(startDate=='' || endDate==''){
+				alert("請先輸入日期");
+				return;
+			}
+	
+			$.ajax({
+				type:"POST",
+				url:"<%=request.getContextPath()%>/bike/BikeStoreAjaxServlet.do",
+				data:{
+					action:"confirm",
+					sq_bike_store_id : sq_bike_store_id,
+					startDate:startDate,
+					endDate :endDate,
+					matchBike : matchBike,
+				},
+				success:function(data){
+					window.location.href = data;
+				}
+					
+			});
+		});
+	}
+	
+	function mouse_hover(){
+
+		//table hover
+		$("#tbody tr").hover(function(){
+			$(this).css('cursor', 'pointer');
+			$(this).css('color', 'blue');
+		},function(){
+			$(this).css('color', 'inherit');
+		})
+	}
 	
 		//sweetAlertPayfinish
 	<%
