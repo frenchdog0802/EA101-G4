@@ -53,7 +53,6 @@ if("payFinish".equals(action)){
 					href="#" class=" nav-item nav-link " data-toggle="pill">中部</a> <a
 					href="#" class=" nav-item nav-link " data-toggle="pill">南部</a> <a
 					href="#" class=" nav-item nav-link " data-toggle="pill">東部</a>
-
 				</nav>
 			</div>
 			<div class="col-4">

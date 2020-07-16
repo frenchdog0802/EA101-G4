@@ -10,12 +10,11 @@ public class TipsService {
 		dao = new TipsDAO();
 	}
 
-	public TipsVO addTips(byte[] tips_picture, String tips_description,
-			String tips_title) {
+	public TipsVO addTips(String tips_description,
+			Integer tips_title) {
 
 		TipsVO tipsVo = new TipsVO();
 
-		tipsVo.setTips_picture(tips_picture);
 		tipsVo.setTips_description(tips_description);
 		tipsVo.setTips_title(tips_title);
 		dao.insert(tipsVo);
@@ -23,13 +22,12 @@ public class TipsService {
 		return tipsVo;
 	}
 
-	public TipsVO updateTips(String sq_tips_id, byte[] tips_picture, String tips_description,
-			String tips_title) {
+	public TipsVO updateTips(String sq_tips_id,  String tips_description,
+			Integer tips_title) {
 
 		TipsVO tipsVo = new TipsVO();
 
 		tipsVo.setSq_tips_id(sq_tips_id);
-		tipsVo.setTips_picture(tips_picture);
 		tipsVo.setTips_description(tips_description);
 		tipsVo.setTips_title(tips_title);
 		dao.update(tipsVo);
@@ -48,4 +46,12 @@ public class TipsService {
 	public List<TipsVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public List<TipsVO> findByTitle(Integer tips_title) {
+		return dao.findByTitle(tips_title);
+	}
+		
+	
+	
+
 }

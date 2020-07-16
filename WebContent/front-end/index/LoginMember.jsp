@@ -78,7 +78,6 @@ input[type=text],input[type=password] {
 						<a class="underlineHover mx-1" href="<%=request.getContextPath()%>/front-end/member/registered.jsp">註冊</a>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -107,12 +106,9 @@ input[type=text],input[type=password] {
 					success : function(data) {
 						$(".errorMsgCount").text(data.errorAccount);
 						$(".errorMsgPws").text(data.errorPws);
-						console.log(data.location)
-						url=data.location;
-					},complete:function(){
-						if (url) {
-							window.location.href = url;
-						}
+						//url
+						//data.location 
+						window.location.href =data.location;
 					}
 				})
 			})
