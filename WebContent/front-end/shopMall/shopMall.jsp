@@ -278,10 +278,9 @@
   				});
   			});
   			$('#conditionSrh').click(function(){
-  				console.log($('#priceSrh').val());
   				$.ajax({
   					type :"POST",
-  					url  : "<%=request.getContextPath()%>/product.do",
+  					url  : "<%=request.getContextPath()%>/shop_product.do",
   					dataType: 'json',
   					data : {
 						action : "listEmps_ByCompositeQuery",

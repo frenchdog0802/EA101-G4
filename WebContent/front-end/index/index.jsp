@@ -77,8 +77,8 @@ img.img-thumbnail{
                         <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">購物商城</a>
                         <!--text-dark active nav-item  -->
                         <div class="dropdown-menu" aria-lablelledby="dropdownId">
-                            <a href="#" class="dropdown-item">test1</a>
-                            <a href="#" class="dropdown-item">test2</a>
+                       		<a href="<%=request.getContextPath()%>/front-end/shopMall/shopMall.jsp" class="dropdown-item">商城首頁</a>
+                            <a href="<%=request.getContextPath()%>/front-end/shopMall/shoppingCar.jsp" class="dropdown-item">購物車</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown navhover">
@@ -137,6 +137,7 @@ img.img-thumbnail{
                             <a href="<%=request.getContextPath()%>/front-end/activity/Actmanagement.jsp" class="dropdown-item">活動管理</a>
                             <a href="<%=request.getContextPath()%>/front-end/route/listMyRoute.jsp" class="dropdown-item">我的路線</a>
                             <a href="<%=request.getContextPath()%>/front-end/waterStation/listMyWs.jsp" class="dropdown-item">我的補水站</a>
+                            <a href="<%=request.getContextPath()%>/front-end/member/goodCollection.jsp" class="dropdown-item">收藏商品</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -239,7 +240,7 @@ img.img-thumbnail{
 							</div>
 						</div>
 						<div class="row" style="height:25%;">
-							<div class="col-12">
+							<div class="col-12" style="text-align:center;">
 								<h5><%=actList.get(i).getAct_title() %></h5>
 								<span>開始時間 : <%=actList.get(i).getAct_start_time() %></span>
 							</div>
@@ -273,7 +274,7 @@ img.img-thumbnail{
 							</div>
 						</div>
 						<div class="row" style="height:25%;">
-							<div class="col-12">
+							<div class="col-12"  style="text-align:center;">
 							<h5><%=routeList.get(i).getRouteName()%></h5>
 							<span style="margin-right:10px;">開始地點 : <%=routeList.get(i).getStartArea()%></span>
 							<span style="margin-left:10px;">騎乘長度 : <%=routeList.get(i).getDistance()%>公里</span>
@@ -305,7 +306,7 @@ img.img-thumbnail{
 							</div>
 						</div>
 						<div class="row" style="height:25%;">
-							<div class="col-12">
+							<div class="col-12" style="text-align:center;">
 								<h5><%=productList.get(i).getProduct_name()%></h5>
 								<span>價格 : <%=productList.get(i).getProduct_price()%></span>
 							</div>

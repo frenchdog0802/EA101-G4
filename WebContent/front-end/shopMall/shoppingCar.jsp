@@ -47,7 +47,7 @@
 	    							<td class="detail_td">商品明細</td>
 									<td class="num_td">數量</td>
 									<td class="price_td">商品單價</td>
-									<td class="store_td">庫存</td>
+									<td class="store_td">顏色/型號</td>
 	   								<td class="change_td">修改</td>
 	   							</tr>
 	   						</tbody>
@@ -66,7 +66,11 @@
 								<td class="pro_name"><%=order.getProduct_name()%></td>
 								<td class="pro_quan"><input type="text" name="quantity" value="<%= order.getProduct_quantity()%>"></td>
 								<td class="pro_price"><%=order.getProduct_price()%></td>
-								<td class="pro_yn">有</td>
+								<td class="pro_yn">
+									<% if(order.getProduct_color() != "" && order.getProduct_model() != ""){%>
+										<%=order.getProduct_color()%>/<%=order.getProduct_model() %>
+									<%}%>
+								</td>
 								<td class="pro_del">
 								<form name="deleteForm" action="<%=request.getContextPath()%>/shopping.do" method="POST">
 									<button class="btn bg-primary">移除</button>
@@ -82,13 +86,13 @@
     							}
     						}else{
     					%>    					
-    					<div style="text-align: center; border: 1px solid black; width: 100%; height:200px; display:table;">
+    					<div style="text-align: center; border: 1px solid black; width: 100%; height:200px; display:table; margin-top:5px;">
     						<div style="height:100%; display:table-cell; vertical-align: middle; text-align:center;">
     							<h3>購物車內無商品</h3>
     						</div>
 	    				</div> 
     					<%}%>
-    					<div class="row mt-1 pt-2 pr-3 car_sel">
+    					<div class="row mt-1 pt-2 car_sel" style="margin-right:0px; margin-left:0px;">
     						<div class="col-3 car_price">
     							<span>總額 : </span>
 								<span><%=total%></span>
@@ -141,10 +145,3 @@
 
 </body>
 </html>
-
-
-
------------------------------------------------------------------------------------------------------------------
-
-1.照上面步驟放位子(直接複製程式碼到自己jsp頁面即可)
-2.jquery記得打入名稱

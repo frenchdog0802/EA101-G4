@@ -8,7 +8,8 @@
 <%
 	MemVO memVO = (MemVO)session.getAttribute("MemVO");
 	Product_CollectionService collectionSvc = new Product_CollectionService();
-	List<Product_CollectionVO> collectionList = collectionSvc.getAllCollection();
+	String sq_member_id = memVO.getSq_member_id();
+	List<Product_CollectionVO> collectionList = collectionSvc.getCollection(sq_member_id);
 	pageContext.setAttribute("collectionList", collectionList);
 %>
 <!DOCTYPE html>
@@ -26,22 +27,27 @@
  		<div class="container-fluid">
  			<div class="row justify-content-center">
  				<div class="col-10">
- 					<c:forEach var="collectionVO" items="${collectionList}">
- 					<div class="row collection" name="${collectionVO.sq_product_id}">	
- 						<div class="col-2">
- 							<img src="<%=request.getContextPath()%>/showImg4?id=${collectionVO.sq_product_id}" class="img-fluid"/>
+ 					<div class="row collection h-100" name="${collectionVO.sq_product_id}">
+ 					<c:forEach var="collectionVO" items="${collectionList}">						
+ 						<div class="col-4 my-2">
+ 							<div style="height:70%; text-align: center;">							
+ 								<img src="<%=request.getContextPath()%>/showImg4?id=${collectionVO.sq_product_id}" class="img-fluid mb-4"/>
+ 							</div>
+ 							<div style="text-align: center; height:10%;">
+ 								${collectionVO.product_name}
+ 							</div>
+ 							<div style="text-align: center; height:10%;">
+ 								${collectionVO.collection_date}
+ 							</div>	
+ 							<div style="text-align: center; height:10%;">						
+ 								<button class="btn bg-primary deleteCollection">移除收藏</button>
+ 								<input type="hidden" name="action" value="deleteCollection">
+ 								<input type="hidden" name="product_id" value="${collectionVO.sq_product_id}">
+ 								<input type="hidden" name="member_id" value="${collectionVO.sq_member_id}">
+ 							</div>
  						</div>
- 						<div class="col-10">
- 							${collectionVO.sq_member_id}
- 							${collectionVO.product_name}
- 							${collectionVO.collection_date}
- 							<button class="btn bg-primary deleteCollection">移除收藏</button>
- 							<input type="hidden" name="action" value="deleteCollection">
- 							<input type="hidden" name="product_id" value="${collectionVO.sq_product_id}">
- 							<input type="hidden" name="member_id" value="${collectionVO.sq_member_id}">
- 						</div>
- 					</div>	
  					</c:forEach>
+ 					</div>						
  				</div>
  			</div>
  		</div>
@@ -54,7 +60,7 @@
 
 	<script>
 	$(function(){
-		$(".fun-text").text("");  // text("")裡面自己輸入功能名稱 
+		$(".fun-text").text("收藏商品");  // text("")裡面自己輸入功能名稱 
 	});
 	$(".deleteCollection").click(function() {
   		console.log($("input[name=product_id]", $(this).parents(".collection")).val());				 				

@@ -10,7 +10,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Emp2;
+import jdbc.util.CompositeQuery.CompositeQuery_shopMall;
 
 public class Shop_productDAO implements Shop_productDAO_interface{
 //	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -368,7 +368,7 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 		try {
 			con = ds.getConnection();
 			String finalSQL = "select * from shop_product "
-			          + jdbcUtil_CompositeQuery_Emp2.get_WhereCondition(map)
+			          + CompositeQuery_shopMall.get_WhereCondition(map)
 			          + "order by sq_product_id";
 			pstmt = con.prepareStatement(finalSQL);				
 			rs = pstmt.executeQuery();

@@ -26,7 +26,7 @@ public class Product_CollectionDAO implements Product_CollectionDAO_interface{
 	
 	private static final String INSERT = "INSERT INTO PRODUCT_COLLECTION (SQ_MEMBER_ID, SQ_PRODUCT_ID, PRODUCT_NAME, COLLECTION_DATE) VALUES (?, ?, ?, to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'))";
 	private static final String DELETE = "DELETE FROM PRODUCT_COLLECTION WHERE SQ_MEMBER_ID=? AND SQ_PRODUCT_ID=?";
-	private static final String GET_ALL = "SELECT * FROM PRODUCT_COLLECTION ORDER BY SQ_MEMBER_ID";
+	private static final String GET_ALL = "SELECT * FROM PRODUCT_COLLECTION WHERE SQ_MEMBER_ID=?";
 	@Override
 	public void addCollection(Product_CollectionVO collectionVO) {
 		Connection con = null;
@@ -63,7 +63,7 @@ public class Product_CollectionDAO implements Product_CollectionDAO_interface{
 	}
 
 	@Override
-	public List<Product_CollectionVO> getAllCollection() {
+	public List<Product_CollectionVO> getCollection(String sq_member_id) {
 		List<Product_CollectionVO> list = new ArrayList<Product_CollectionVO>();
 		Product_CollectionVO collectionVO =null;
 		Connection con = null;
@@ -72,14 +72,15 @@ public class Product_CollectionDAO implements Product_CollectionDAO_interface{
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL);
+			pstmt.setString(1, sq_member_id);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				collectionVO = new Product_CollectionVO();
 				collectionVO.setSq_member_id(rs.getString("sq_member_id"));
 				collectionVO.setSq_product_id(rs.getString("sq_product_id"));
+				collectionVO.setProduct_name(rs.getString("product_name"));
 				collectionVO.setCollection_date(rs.getDate("collection_date"));
-
 				
 				list.add(collectionVO);
 			}

@@ -13,7 +13,7 @@ public class Product_CollectionService {
 	public void deleteCollection(String sq_member_id, String sq_product_id) {
 		dao.deleteCollection(sq_member_id, sq_product_id);
 	}
-	public List<Product_CollectionVO> getAllCollection(){
-		return dao.getAllCollection();
+	public List<Product_CollectionVO> getCollection(String sq_member_id){
+		return dao.getCollection(sq_member_id);
 	}
 }

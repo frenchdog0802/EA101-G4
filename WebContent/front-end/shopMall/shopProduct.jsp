@@ -52,15 +52,15 @@
 						<input type="search" id="search" placeholder="Search..." />
 						<button type="button" class="icon"> <img src="image/search.png" class="img-fluid"></button>
 					</div>
-					<div class="col-4 mt-2" style="padding-right: 0;">
-						<span>熱門搜尋 : </span>
-						<span>xxx</span>
-						<span>xxx</span>
-						<span>xxx</span>
-					</div>
+<!-- 					<div class="col-4 mt-2" style="padding-right: 0;"> -->
+<!-- 						<span>熱門搜尋 : </span> -->
+<!-- 						<span>xxx</span> -->
+<!-- 						<span>xxx</span> -->
+<!-- 						<span>xxx</span> -->
+<!-- 					</div> -->
     			</div>
     			<div class="row mt-4">
-    				<div class="col-5 product_img" style="border: 1px solid black; padding-left: 10px; padding-right: 10px;">
+    				<div class="col-5 product_img" style="padding-left: 10px; padding-right: 10px;">
 						<div>
 							<img src="<%=request.getContextPath()%>/showImg4?id=<%=productVO.getSq_product_id()%>" class="img-fluid">
 						</div>
@@ -85,7 +85,7 @@
 	    								<select id="color" style="margin-left: 10px;">
 	    								<% if(colorList.size() <= 1){%>
 	    									<c:forEach var="color" items="${colorList}">
-	    										<option value="${color}">單一顏色</option>
+	    										<option value="">單一顏色</option>
 	    									</c:forEach>
 	    								<%}else{%>
 	    									<c:forEach var="color" items="${colorList}">

@@ -9,7 +9,7 @@ package jdbc.util.CompositeQuery;
 
 import java.util.*;
 
-public class jdbcUtil_CompositeQuery_Emp2 {
+public class CompositeQuery_shopMall {
 
 	public static String get_aCondition_For_Oracle(String columnName, String value) {
 
@@ -56,7 +56,7 @@ public class jdbcUtil_CompositeQuery_Emp2 {
 //		map.put("action", new String[] { "getXXX" }); // 注意Map裡面會含有action的key
 //
 //		String finalSQL = "select * from emp2 "
-//				          + jdbcUtil_CompositeQuery_Emp2.get_WhereCondition(map)
+//				          + CompositeQuery_shopMall.get_WhereCondition(map)
 //				          + "order by empno";
 //		System.out.println("●●finalSQL = " + finalSQL);
 //
