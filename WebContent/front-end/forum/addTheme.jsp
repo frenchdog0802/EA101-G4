@@ -8,7 +8,7 @@
 <%
 	ForumVO forumVO = (ForumVO) request.getAttribute("addTheme");
 
-	MemLoginVO memLoginVO = (MemLoginVO) session.getAttribute("memLoginVO");
+	MemVO memLoginVO = (MemVO) session.getAttribute("MemVO");
 	MemVO memVO = (MemVO) request.getAttribute("memVO");
 %>
 
@@ -27,12 +27,16 @@
 <title>PAPAGO新增主題</title>
 
 <!-- Bootstrap core CSS -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/index/index.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/front-end/index/index.css">
 
-<link href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="<%=request.getContextPath()%>/css/modern-business.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/modern-business.css"
+	rel="stylesheet">
 
 <style>
 body {
@@ -64,141 +68,142 @@ input[type="file"] {
 </head>
 
 <body>
-<%@include file="/front-end/page-file/page-nav"%>
-	
- 	<div class="container my-5">
+	<%@include file="/front-end/page-file/page-nav"%>
+
+	<div class="container my-5">
 
 
-	<!-- Page Content -->
-	<div class="container">
+		<!-- Page Content -->
+		<div class="container">
 
-		<!-- Page Heading/Breadcrumbs -->
-		<h1 class="mt-4 mb-3">
-			PAPAGO <small> <a href="#">新增主題</a>
-			</small>
-		</h1>
+			<!-- Page Heading/Breadcrumbs -->
+			<h1 class="mt-4 mb-3">
+				PAPAGO <small> <a href="#">新增主題</a>
+				</small>
+			</h1>
 
-		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a
-				href="<%=request.getContextPath()%>/front-end/forum/listAllTheme.jsp">討論區</a>
-			</li>
-			<li class="breadcrumb-item active">新增主題</li>
-		</ol>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a
+					href="<%=request.getContextPath()%>/front-end/forum/listAllTheme.jsp">討論區</a>
+				</li>
+				<li class="breadcrumb-item active">新增主題</li>
+			</ol>
 
-		<div class="row">
+			<div class="row">
 
-			<!-- Post Content Column -->
-			<div class="col-lg-8">
-				<div>
-					<c:if test="${not empty errorMsgs}">
-						<strong>請修正以下錯誤:</strong>
-						<ul>
-							<c:forEach var="message" items="${errorMsgs}">
-								<li style="color: red">${message}</li>
-							</c:forEach>
-						</ul>
-					</c:if>
-				</div>
-				<!-- Preview Image -->
-				<form action="<%=request.getContextPath()%>/forum/forum.do"
-					method="post" name="form1" enctype="multipart/form-data">
-
-					<div class="input">
-						<img id="theme_pic" class="img-fluid rounded" src="#">
+				<!-- Post Content Column -->
+				<div class="col-lg-8">
+					<div>
+						<c:if test="${not empty errorMsgs}">
+							<strong>請修正以下錯誤:</strong>
+							<ul>
+								<c:forEach var="message" items="${errorMsgs}">
+									<li style="color: red">${message}</li>
+								</c:forEach>
+							</ul>
+						</c:if>
 					</div>
-					<!-- Comments Form -->
-					<div class="card my-4">
-						<h5 class="card-header">發表新主題</h5>
-						<div class="card-body">
+					<!-- Preview Image -->
+					<form action="<%=request.getContextPath()%>/forum/forum.do"
+						method="post" name="form1" enctype="multipart/form-data">
 
-							<div class="form-group">
+						<div class="input">
+							<img id="theme_pic" class="img-fluid rounded" src="#">
+						</div>
+						<!-- Comments Form -->
+						<div class="card my-4">
+							<h5 class="card-header">發表新主題</h5>
+							<div class="card-body">
 
-								<label for="theme_name">主題:</label> <input type="TEXT"
-									name="theme_name"
-									value="<%=(forumVO == null) ? "" : forumVO.getTheme_name()%>" />
-							</div>
-							
+								<div class="form-group">
 
-							<div class="form-group">
-								<textarea class="form-control" rows="16" name="theme_detial">內容:<%=(forumVO == null) ? "" : forumVO.getTheme_detial()%></textarea>
-							</div>
-							<input type="hidden" name="reponse_sum" value="0"> <input
-								type="hidden" name="theme_display_status" value="0"> <input
-								type="hidden" name="sq_member_id"
-								value="${memLoginVO.sq_member_id}"> <input type="hidden"
-								name="action" value="insert">
-								
-								
-							<div class="card mb-4">
-								<h5 class="card-header">上傳圖片</h5>
-								<div class="card-body">
-									<div class="input-group">
-										<span class="inpug-group-append"> <label
-											for="file-upload" class="custom-file-upload"> <i
-												class="fa fa-cloud-upload"></i> 選擇圖片
-										</label> <input id="file-upload" type="file" name="theme_pic" />
-										</span>
+									<label for="theme_name">主題:</label> <input type="TEXT"
+										name="theme_name"
+										value="<%=(forumVO == null) ? "" : forumVO.getTheme_name()%>" />
+								</div>
+
+
+								<div class="form-group">
+									<textarea class="form-control" rows="16" name="theme_detial">內容:<%=(forumVO == null) ? "" : forumVO.getTheme_detial()%></textarea>
+								</div>
+								<input type="hidden" name="reponse_sum" value="0"> <input
+									type="hidden" name="theme_display_status" value="0"> <input
+									type="hidden" name="sq_member_id"
+									value="${memLoginVO.sq_member_id}"> <input
+									type="hidden" name="action" value="insert">
+
+
+								<div class="card mb-4">
+									<h5 class="card-header">上傳圖片</h5>
+									<div class="card-body">
+										<div class="input-group">
+											<span class="inpug-group-append"> <label
+												for="file-upload" class="custom-file-upload"> <i
+													class="fa fa-cloud-upload"></i> 選擇圖片
+											</label> <input id="file-upload" type="file" name="theme_pic" />
+											</span>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="submit" class="btn btn-primary">Submit</button>
+
+							</div>
+					</form>
+				</div>
+
+			</div>
+
+			<!-- Sidebar Widgets Column -->
+			<div class="col-md-4">
+
+				<!-- Search Widget -->
+
+				<div class="card my-4">
+					<div class="p-3 mb-2 bg-info text-white">發文者:${memLoginVO.nick_name}</div>
+					<div class="card-body">
+						<div class="row">
+							<ul class="list-unstyled mb-0">
+								<img id="member_avatar"
+									src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${memVO.sq_member_id}"
+									style="height: 100px;">
+								<div for="member_id">會員編號：${memLoginVO.sq_member_id}</div>
+								<div for="m_email">E-mail：${memLoginVO.m_email}</div>
+								<%-- 							<li for="theme_name">性別：${memVO.getGender()==1 ? "男" : "女"}</li> --%>
+
+
+							</ul>
+
 
 						</div>
-				</form>
-			</div>
-
-		</div>
-
-		<!-- Sidebar Widgets Column -->
-		<div class="col-md-4">
-
-			<!-- Search Widget -->
-
-			<div class="card my-4">
-				<div class="p-3 mb-2 bg-info text-white">發文者:${memLoginVO.nick_name}</div>
-				<div class="card-body">
-					<div class="row">
-						<ul class="list-unstyled mb-0">
-							<img id="member_avatar"
-								src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${memVO.sq_member_id}"
-								style="height: 100px;">
-							<div for="member_id">會員編號：${memLoginVO.sq_member_id}</div>
-							<div  for="m_email">E-mail：${memLoginVO.m_email}</div>
-<%-- 							<li for="theme_name">性別：${memVO.getGender()==1 ? "男" : "女"}</li> --%>
-								
-							
-						</ul>
-
-
 					</div>
 				</div>
+
 			</div>
 
 		</div>
-
-	</div>
-	<!-- /.row -->
+		<!-- /.row -->
 
 	</div>
 	<!-- /.container -->
 
 	<!-- Footer -->
 	</div>
- 
- 
- 		
+
+
+
 	<%@include file="/front-end/page-file/page-footer"%>
 
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="<%=request.getContextPath()%>/vendor/jquery/jquery.min.js"></script>
-	<script src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<script>
-	$(function(){
-		$(".fun-text").text("新增主題");  // text("")裡面自己輸入功能名稱 
-	});
+		$(function() {
+			$(".fun-text").text("新增主題"); // text("")裡面自己輸入功能名稱 
+		});
 	</script>
 
 </body>

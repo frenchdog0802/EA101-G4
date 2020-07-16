@@ -9,7 +9,8 @@
 <%
 	ForumVO forumVO = (ForumVO) request.getAttribute("forumVO");
 
-	MemLoginVO memLoginVO = (MemLoginVO) session.getAttribute("MemVO");
+	MemVO memLoginVO = (MemVO) session.getAttribute("MemVO");
+	
 	MemVO memVO = (MemVO) request.getAttribute("memVO");
 	
 	ForumService forumSvc = new ForumService();
