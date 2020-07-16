@@ -39,7 +39,7 @@
     			<div class="row">
     				<div class="col-1"></div>
 					<div class="col-1 pdzero" style="text-align:center; padding-left:0; padding-right:0;">
-						<button class="btn bg-primary" onclick="location.href='javascript:window.location.reload()'" style="color:white; width:100%;">商城首頁
+						<button class="btn bg-primary" onclick="location.href='javascript:window.location.reload()'" style="color:white; width:100%;">全部商品
 						</button>
 					</div>
 					<div class="col-1 btn-group" style="text-align:center;">
@@ -48,8 +48,8 @@
 						</button>
 					</div>
     				<div class="col-6 searchbtn" style="padding-left: 0;"> 
-						<input type="search" id="search" placeholder="Search..." />
-						<button type="button" class="icon"> <img src="image/search.png" class="img-fluid"></button>
+						<input type="search" id="search" name="searchByText" value="" placeholder="Search..." />
+						<button type="button" class="icon" id="searchBtn"> <img src="image/search.png" class="img-fluid"></button>
 					</div>
 					<div class="col-3 mt-1" style="padding-right: 0;">
 <!-- 						<span>熱門搜尋: </span> -->
@@ -207,12 +207,54 @@
 	
     <script>
   		$(document).ready(function() {
-  			$(".addCollection").click(function() {
-  				
-  				console.log($("input[name=product_id]", $(this).parents(".collection")).val());
-  				console.log($("input[name=product_name]", $(this).parents(".collection")).val()); 				 				
-  				console.log($("input[name=member_id]", $(this).parents(".product")).val());
-  				
+  			$("#searchBtn").click(function(){
+  				var text = $("input[name=searchByText]").val();
+  				$.ajax({
+  		        	type : "POST",
+  		        	url  : "<%=request.getContextPath()%>/shop_product.do",
+  		        	dataType: 'json',
+  		        	data : {
+  		        		action : "searchByText",
+  		        		searchText : $("input[name=searchByText]").val(),
+  		        	},
+  		        	success : function(data) {
+							console.log(data);
+							let str = "";
+							if(data.length != 0){
+						for(let index = 0 ; index < data.length ; index++) { 
+							str += 
+			    				 "<div class='col-xs-6 col-sm-4 col-md-3 pdzero'>"+
+			    				 		"<div id='sample'>"+
+			    				 		"<div class='list-img'>"+
+			    				 			"<div class='list-img2'>"+
+				    				 				"<img src='<%=request.getContextPath()%>/showImg4?id=" + data[index].id + "' class='img-fluid'>"+
+			    				 			"</div>"+
+				    			 		"</div>"+
+				    			 		"<div class='listbox'>"+
+				    			 			"<div class='list-boxs'>"+
+				    			 				"<span class='mb-1'>" + data[index].name + "</span>"+
+				    			 			"</div>"+
+				    			 			"<div class='list-boxs'>"+
+				    							"<span>" + data[index].price + "元</span>"+
+				    			 			"</div>"+
+				    			 			"<div class='list-boxs mt-2'>"+
+				    			 				"<button class='btn bg-secondary'>加入收藏</button>"+
+				    			 			"</div>"+
+				    			 		"</div>"+
+				    			 	"</div>"+
+			    				 "</div>";
+							}
+						}else {
+								str += "<div class='col-12 pdzero' style='text-align: center;'>"+
+							 	"<img src='<%=request.getContextPath()%>/front-end/shopMall/image/noData.png'>"+
+								"</div>";
+						}
+						$(".product").empty();
+						$(".product").append(str);
+					}
+  		        });
+  			});
+  			$(".addCollection").click(function() {							
   				<%if(memVO == null){%>
   					alert("請先登入會員");
   				<%}else{%>

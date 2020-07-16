@@ -37,8 +37,7 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 	private static final String GET_ALL = "SELECT SQ_PRODUCT_ID, SQ_BRAND_ID, PRODUCT_KIND_NAME, PRODUCT_NAME,PRODUCT_PRICE, PRODUCT_PIC, PRODUCT_DETAIL,"
 			+ "ADD_DATE, PRODUCT_MATERIAL, PRODUCT_STATUS FROM SHOP_PRODUCT ORDER BY SQ_PRODUCT_ID";
 	private static final String GET_BY_KIND = "SELECT SQ_PRODUCT_ID, SQ_BRAND_ID, PRODUCT_KIND_NAME, PRODUCT_NAME,PRODUCT_PRICE, PRODUCT_PIC, PRODUCT_DETAIL, "
-			+ "ADD_DATE, PRODUCT_MATERIAL, PRODUCT_STATUS FROM SHOP_PRODUCT WHERE PRODUCT_KIND_NAME=?";	
-			
+			+ "ADD_DATE, PRODUCT_MATERIAL, PRODUCT_STATUS FROM SHOP_PRODUCT WHERE PRODUCT_KIND_NAME=?";			
 			
 	public void insert(Shop_productVO productVO) {
 		Connection con = null;
@@ -381,6 +380,56 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 				shop_productVO.setProduct_price(rs.getInt("product_price"));
 				
 				list.add(shop_productVO);
+			}
+			pstmt.clearParameters();
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured."+se.getMessage());
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<Shop_productVO> getSearchByText(String text) {
+		List<Shop_productVO> list = new ArrayList<Shop_productVO>();
+		Shop_productVO shop_productVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL);				
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				shop_productVO = new Shop_productVO();
+				shop_productVO.setSq_product_id(rs.getString("sq_product_id"));
+				shop_productVO.setProduct_name(rs.getString("product_name"));
+				shop_productVO.setProduct_price(rs.getInt("product_price"));
+				if(rs.getString("product_name").indexOf(text) != -1) {
+					list.add(shop_productVO);
+				}
 			}
 			pstmt.clearParameters();
 		}catch(SQLException se) {

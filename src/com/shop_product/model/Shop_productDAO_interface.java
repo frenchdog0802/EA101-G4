@@ -10,4 +10,5 @@ public interface Shop_productDAO_interface {
 	public List<Shop_productVO> findByKindName(String product_kind_name);
     public List<Shop_productVO> getAll();
     public List<Shop_productVO> getAll(Map<String, String[]> map);
+    public List<Shop_productVO> getSearchByText(String text);
 }

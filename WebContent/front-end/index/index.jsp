@@ -114,20 +114,10 @@ img.img-thumbnail{
                         </div>
                     </li>
                     <li class="nav-item dropdown navhover">
-                        <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">FAQ</a>
-                        <!--text-dark active nav-item  -->
-                        <div class="dropdown-menu" aria-lablelledby="dropdownId">
-                            <a href="#" class="dropdown-item">test1</a>
-                            <a href="#" class="dropdown-item">test2</a>
-                        </div>
+                        <a href="<%=request.getContextPath()%>/front-end/qAndA/FAQ.jsp" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">FAQ</a>
                     </li>
                     <li class="nav-item dropdown navhover">
-                        <a href="#" class="nav-link dropdown-toggle text-dark"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">騎乘小叮嚀</a>
-                        <!--text-dark active nav-item  -->
-                        <div class="dropdown-menu" aria-lablelledby="dropdownId">
-                            <a href="#" class="dropdown-item">test1</a>
-                            <a href="#" class="dropdown-item">test2</a>
-                        </div>
+                        <a href="<%=request.getContextPath()%>/front-end/qAndA/TIPS.jsp" class="nav-link dropdown-toggle text-dark"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">騎乘小叮嚀</a>
                     </li>
                     <li class="nav-item dropdown navhover">
                         <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">會員中心</a>
@@ -256,7 +246,7 @@ img.img-thumbnail{
 				<div class="m-5 py-5" style="text-align:center;">
 					<h2 class="h2 font-weight-bold mt-5">最新路線</h2>
 					<hr>
-					<a href="#" class="btn btn-outline-dark mb-5 "> <span
+					<a href="<%=request.getContextPath()%>/front-end/route/routeM.jsp" class="btn btn-outline-dark mb-5 "> <span
 						class="small">查看所有路線</span>
 					</a>
 				</div>
@@ -291,7 +281,7 @@ img.img-thumbnail{
 				<div class="m-5 py-5" style="text-align:center;">
 					<h2 class="h2 font-weight-bold mt-5">最新商品</h2>
 					<hr>
-					<a href="#" class="btn btn-outline-dark mb-5"> <span class="small">前往商城</span></a>
+					<a href="<%=request.getContextPath()%>/front-end/shopMall/shopMall.jsp" class="btn btn-outline-dark mb-5"> <span class="small">前往商城</span></a>
 				</div>
 			</div>				
 			<div class="col-lg-10 col-md-12 ">

@@ -88,20 +88,10 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown navhover">
-                        <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">FAQ</a>
-                        <!--text-dark active nav-item  -->
-                        <div class="dropdown-menu" aria-lablelledby="dropdownId">
-                            <a href="#" class="dropdown-item">test1</a>
-                            <a href="#" class="dropdown-item">test2</a>
-                        </div>
+                        <a href="<%=request.getContextPath()%>/front-end/qAndA/FAQ.jsp" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">FAQ</a>
                     </li>
                     <li class="nav-item dropdown navhover">
-                        <a href="#" class="nav-link dropdown-toggle text-dark"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">騎乘小叮嚀</a>
-                        <!--text-dark active nav-item  -->
-                        <div class="dropdown-menu" aria-lablelledby="dropdownId">
-                            <a href="#" class="dropdown-item">test1</a>
-                            <a href="#" class="dropdown-item">test2</a>
-                        </div>
+                        <a href="<%=request.getContextPath()%>/front-end/qAndA/TIPS.jsp" class="nav-link dropdown-toggle text-dark"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">騎乘小叮嚀</a>
                     </li>
                     <li class="nav-item dropdown navhover">
                         <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">會員中心</a>
