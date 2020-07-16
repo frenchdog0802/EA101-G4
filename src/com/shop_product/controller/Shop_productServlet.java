@@ -288,8 +288,8 @@ public class Shop_productServlet extends HttpServlet {
 				fail.forward(req, res);
 			}
 		}
+		System.out.println(action);
 		if("getByKind".equals(action)) {
-			HashMap<String, String> map = new HashMap<>();
 	        PrintWriter out = res.getWriter();
 			String kind = req.getParameter("product_kind_name");
 			Shop_productService productSvc = new Shop_productService();
@@ -297,6 +297,7 @@ public class Shop_productServlet extends HttpServlet {
 			JSONArray json = new JSONArray();
 			for(Shop_productVO vo: list){
 				JSONObject jsonList = new JSONObject();
+				System.out.println( vo.getProduct_name());
 				jsonList.put("name", vo.getProduct_name());
 				jsonList.put("id", vo.getSq_product_id());
 				jsonList.put("price", vo.getProduct_price());

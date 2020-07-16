@@ -5,6 +5,7 @@ import java.util.Date;
 public class Product_CollectionVO {
 	private String sq_member_id;
 	private String sq_product_id;
+	private String product_name;
 	private Date collection_date;
 	
 	public String getSq_member_id() {
@@ -24,5 +25,11 @@ public class Product_CollectionVO {
 	}
 	public void setCollection_date(Date collection_date) {
 		this.collection_date = collection_date;
+	}
+	public String getProduct_name() {
+		return product_name;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
 	}
 }

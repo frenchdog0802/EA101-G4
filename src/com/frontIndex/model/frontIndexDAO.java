@@ -28,9 +28,9 @@ public class frontIndexDAO implements FrontIndexDAO_interface{
 		}
 	}
 	
-	private static final String GET_ACT = "SELECT ROWNUM, t.* FROM (SELECT * FROM ACTIVITY ORDER BY SQ_ACTIVITY_ID DESC) t WHERE ROWNUM <= 4";
-	private static final String GET_PRODUCT = "SELECT ROWNUM, t.* FROM (SELECT * FROM SHOP_PRODUCT ORDER BY SQ_PRODUCT_ID DESC) t WHERE ROWNUM <= 4";
-	private static final String GET_ROUTE = "SELECT ROWNUM, t.* FROM (SELECT * FROM ROUTE_PLAN ORDER BY SQ_ROUTE_ID DESC) t WHERE ROWNUM <= 4";
+	private static final String GET_ACT = "SELECT ROWNUM, t.* FROM (SELECT * FROM ACTIVITY WHERE GP_STATUS = 1 ORDER BY SQ_ACTIVITY_ID DESC) t WHERE ROWNUM <= 4";
+	private static final String GET_PRODUCT = "SELECT ROWNUM, t.* FROM (SELECT * FROM SHOP_PRODUCT WHERE PRODUCT_STATUS = 1 ORDER BY SQ_PRODUCT_ID DESC) t WHERE ROWNUM <= 4";
+	private static final String GET_ROUTE = "SELECT ROWNUM, t.* FROM (SELECT * FROM ROUTE_PLAN WHERE ADD_ROUTE = 1 ORDER BY SQ_ROUTE_ID DESC) t WHERE ROWNUM <= 4";
 
 	@Override
 	public List<ActVO> getTopFourAct() {
@@ -145,7 +145,7 @@ public class frontIndexDAO implements FrontIndexDAO_interface{
 				routeVO.setSqRouteId(rs.getString("sq_route_id"));
 				routeVO.setRouteName(rs.getString("route_name"));
 				routeVO.setStartArea(rs.getString("start_area"));
-				routeVO.setEndArea(rs.getString("end_area"));
+				routeVO.setDistance(rs.getDouble("distance"));
 				list.add(routeVO);
 			}
 

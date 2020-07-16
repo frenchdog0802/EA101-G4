@@ -25,7 +25,6 @@ public class ShoppingServlet extends HttpServlet{
 				String delete = req.getParameter("del");
 				int d = Integer.parseInt(delete);
 				buylist.remove(d);
-				
 				String url = "/front-end/shopMall/shoppingCar.jsp";
 				session.setAttribute("shoppingcar", buylist);	
 				RequestDispatcher rd = req.getRequestDispatcher(url);
@@ -45,7 +44,7 @@ public class ShoppingServlet extends HttpServlet{
 				}else {
 					if (buylist.contains(aproduct)) {
 						Shop_productVO innerProduct = buylist.get(buylist.indexOf(aproduct));
-						innerProduct.setProduct_quantity(innerProduct.getProduct_quantity() + 1);
+						innerProduct.setProduct_quantity(innerProduct.getProduct_quantity() + aproduct.getProduct_quantity());
 					} else {
 						buylist.add(aproduct);
 					}
@@ -108,12 +107,13 @@ public class ShoppingServlet extends HttpServlet{
 		String id = req.getParameter("id");
 		String name = req.getParameter("name");
 		String price = req.getParameter("price");
+		String quantity = req.getParameter("quantity");
 		
 		Shop_productVO product = new Shop_productVO();
 		product.setSq_product_id(id);
 		product.setProduct_name(name);
 		product.setProduct_price(Integer.parseInt(price));
-		
+		product.setProduct_quantity(Integer.parseInt(quantity));
 		return product;
 	}
 }

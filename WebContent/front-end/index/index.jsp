@@ -276,7 +276,7 @@ img.img-thumbnail{
 							<div class="col-12">
 							<h5><%=routeList.get(i).getRouteName()%></h5>
 							<span style="margin-right:10px;">開始地點 : <%=routeList.get(i).getStartArea()%></span>
-							<span style="margin-left:10px;">結束地點 : <%=routeList.get(i).getEndArea()%></span>
+							<span style="margin-left:10px;">騎乘長度 : <%=routeList.get(i).getDistance()%>公里</span>
 						</div>
 						</div>
 					</div>
