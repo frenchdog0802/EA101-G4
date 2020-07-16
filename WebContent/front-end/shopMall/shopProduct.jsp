@@ -109,6 +109,14 @@
 	    								</select>
 	    							</td>
 	    						</tr>
+	    						<tr>
+	    							<td style="width:40%;"><span>數量選擇 :</span></td>
+	    							<td>
+	    								<input id="min" name="" type="button" value="-" style="width:20%;">
+										<input id="num" name="num" type="text" value="1" readonly="true" onchange="setTotal();" style="width:25%;">
+										<input id="add" name="" type="button" value="+" style="width:20%;">
+	    							</td>	    							
+	    						</tr>
 	    					</table>
 	   					</div>
 	   					<div id="product_join">
@@ -193,6 +201,35 @@
 	<%@include file="/front-end/page-file/page-footer"%>
 	<script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
 	<script>
+		function setTotal(){
+			var t = $("#num");
+			if(/\D/.test(t.val())){//檢查使用者輸入的值是否是數字
+				alert("請您輸入正確的數量！");
+				t.val(1);
+			}else {//如果輸入合法			
+				if(t.val() > 9){
+					confirm("一次最多購買10件");
+					$("#add").attr("disabled","true");
+				}
+			}
+		}
+		 
+		$(function(){ //這裡是加減按鈕都啟用的情況
+			var t = $("#num"); 
+			$("#add").click(function(){		
+				t.val(parseInt(t.val())+1)
+				setTotal();
+			})
+			$("#min").click(function(){
+				if(t.val()>1){
+					t.val(parseInt(t.val())-1);
+					$("#add").removeAttr("disabled");
+				}
+				else{
+					alert("至少購買一件哦！");
+				}
+			})
+		});
 		$(document).on('ready', function() {
 			$(".regular").slick({
 		    	dots: true,
@@ -203,6 +240,7 @@
 		        focusOnSelect: true
 			});
 		});
+		//將商品加到購物車
 		$(document).ready(function() {
 			$(".addproduct").click(function() {
   		        $.ajax({
@@ -215,6 +253,7 @@
   		        		price : $("input[name=price]").val(),
   		        		color : $("#color").val(),
   		        		model : $("#model").val(),
+  		        		quantity : $("#num").val(),
   		        	},
   		        	success : function(){
   		        		if($("#shopCar").css("right") != 0){
@@ -224,9 +263,11 @@
   		        });
   		    });
 		});
+		//標題
 		$(function(){
-			$(".fun-text").text("商品");  // text("")裡面自己輸入功能名稱 
+			$(".fun-text").text("商城商品");  // text("")裡面自己輸入功能名稱 
 		});
+		//留言人姓名
         var Storage =
         {
             saveData:function(){   
@@ -246,6 +287,7 @@
                 }
             },
             writeData:function(){
+            	//在留言板加入留言
                 var dataHtml = "", data = "";                    
                     for(var i = localStorage.length-1; i >= 0; i--){
                     	var key = localStorage.key(i);
@@ -271,9 +313,11 @@
 		        	}
                 document.getElementById("comment").innerHTML = dataHtml;
             },
+            //刪除留言內容
             clearMessage:function(){
               	$("#detailMessage").val("");
             },
+            //留言板取得日期
             getDateTime:function(){
                 var isZero = function(num){
                     if(num < 10){
@@ -285,25 +329,19 @@
                 return d.getFullYear() + "-" + isZero(d.getMonth() + 1) + "-" + isZero(d.getDate()) + " " + isZero(d.getHours()) + ":" + isZero(d.getMinutes()) + ":" + isZero(d.getSeconds());
             }            
         }
+		//刪除留言
         function delete1(key) {
         	localStorage.removeItem(key);
            	this.Storage.writeData();
         }
         window.onload = function(){ 
-        	
+        	//右側購物車圖示
         	if(<%=size%> != 0){
              	$("#shopCar").animate({right:'0px'});
              }
-        	
-        	for(var i = localStorage.length-1; i >= 0; i--){
-        		var key = localStorage.key(i);
-        		if(key.indexOf("<%=sq_product_id%>") != -1){
-        			console.log(key);       			      			
-        		}
-        	}
+
         	Storage.writeData();
          	// localStorage.clear();
-
             document.getElementById("postBt").onclick = function(){Storage.saveData();}
             document.getElementById("clearBt").onclick = function(){Storage.clearData();}
         }

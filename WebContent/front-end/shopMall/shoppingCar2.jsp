@@ -2,35 +2,42 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.shop_product.model.*"%>
 <%@ page import="java.util.*"%>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<!--    CSS幫你們引入完了  你們要額外新增在自己寫-->
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/index/index.css">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/shopMall/shoppingCarCss.css">
     <title>購物車</title>
-</head>
-<body>
-	<%@include file="/front-end/page-file/page-nav"%>
-	<% 
+
+  </head>
+  <body>
+  	<% 
   	 	@SuppressWarnings("unchecked")
   		Vector<Shop_productVO> buylist = (Vector<Shop_productVO>) session.getAttribute("shoppingcar");
   		Integer total = 0;
   	%>
- 	<div class="container-fluid my-5">
- 		<div class="row mt-3 pl-3 pr-3">
+    <div class="container">
+    	<div class="row mt-3 pl-3 pr-3">
     		<div class="col-1"></div>
     		<div class=" col-10">
     			<div class="row">
-					<div class="col-1" style="padding-left: 0; padding-right: 0; padding-top:5px;">
-						<button onclick="location.href='<%=request.getContextPath()%>/front-end/shopMall/shopMall.jsp'" class="btn btn-primary" style="width:100%;">商城</button>
+					<div class="col-1" style="padding-left: 0; padding-right: 0;">
+						<button onclick="location.href='<%=request.getContextPath()%>/front-end/shopMall/shopMall.jsp'" class="btn btn-primary">商城</button>
 					</div>
     				<div class="col-7 searchbtn mt-1">
 						<input type="search" id="search" placeholder="Search..." />
 						<button type="button" class="icon"> <img src="image/search.png" class="img-fluid"></button>
 					</div>
 					<div class="col-4 mt-2" style="padding-right: 0;">
-
+<!-- 						<span>熱門搜尋 : </span> -->
+<!-- 						<span>xxx</span> -->
+<!-- 						<span>xxx</span> -->
+<!-- 						<span>xxx</span> -->
 					</div>
     			</div>
 
@@ -82,10 +89,8 @@
     							}
     						}else{
     					%>    					
-    					<div style="text-align: center; border: 1px solid black; width: 100%; height:200px; display:table;">
-    						<div style="height:100%; display:table-cell; vertical-align: middle; text-align:center;">
-    							<h3>購物車內無商品</h3>
-    						</div>
+    					<div style="text-align: center; border: 1px solid black; width: 100%;">
+	    						尚未選購商品
 	    				</div> 
     					<%}%>
     					<div class="row mt-1 pt-2 pr-3 car_sel">
@@ -96,7 +101,7 @@
     						<div class="col-6"></div>
 	    					<div class="col-3 shopcar_btn">
 	    						<form method="POST" action="<%=request.getContextPath()%>/shopping.do">
-	    							<button class="btn bg-success mb-2" id="checkBtn">下一步</button>
+	    							<button class="btn bg-success mb-2">下一步</button>
 	    							<% session.setAttribute("shoppingcar", buylist); %>
 	    							<input type="hidden" name="total" value="<%=total%>">
 	    							<input type="hidden" name="action" value="CHECK">
@@ -107,44 +112,22 @@
     			</div>
     		</div>
     		<div class="col-1"></div>
-    	</div>	
- 	</div>
- 
- 
- 		
-	<%@include file="/front-end/page-file/page-footer"%>
-<!-- 	jquery已經引入  -->
-<!-- 	sweetAlert已經引入   -->
-<!-- 	boostrap4已經引入   -->
-
-
-	<script>
-		$(function(){
-			$(".fun-text").text("");  // text("")裡面自己輸入功能名稱 
-		});
-		function checkResult() {
-	        var list = [];
-	        var chked = document.querySelectorAll("[type=checkbox]:checked");
-	        for (var i = 0; i < chked.length; i++) {
-	            list.push(chked[i].value);
-	        }
-	        document.querySelector(".result").innerHTML = list.join(', ') || "none";
-	    }
-		$(document).ready(function(){
-			<% if(buylist == null || buylist.size() == 0){%>
-			$("#checkBtn").attr("disabled", "true");
-			<%}else{%>
-				$("#checkBtn").removeAttr("disabled");
-			<%}%>
-		});
-	</script>
-
-</body>
+    	</div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script>
+        function checkResult() {
+            var list = [];
+            var chked = document.querySelectorAll("[type=checkbox]:checked");
+            for (var i = 0; i < chked.length; i++) {
+                list.push(chked[i].value);
+            }
+            document.querySelector(".result").innerHTML = list.join(', ') || "none";
+        }
+    </script>
+  </body>
 </html>
-
-
-
------------------------------------------------------------------------------------------------------------------
-
-1.照上面步驟放位子(直接複製程式碼到自己jsp頁面即可)
-2.jquery記得打入名稱
