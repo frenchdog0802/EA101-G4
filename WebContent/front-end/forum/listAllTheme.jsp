@@ -9,14 +9,12 @@
 <%
 	ForumVO forumVO = (ForumVO) request.getAttribute("forumVO");
 
-	MemLoginVO memLoginVO = (MemLoginVO) session.getAttribute("memLoginVO");
+	MemLoginVO memLoginVO = (MemLoginVO) session.getAttribute("MemVO");
 	MemVO memVO = (MemVO) request.getAttribute("memVO");
 	
 	ForumService forumSvc = new ForumService();
 	List<ForumVO> list = forumSvc.getAll();
 	pageContext.setAttribute("list", list);
-	
-	
 	 
 	 MemService memSvc = new MemService();
 	 List<MemVO> listmem = memSvc.getAll();
