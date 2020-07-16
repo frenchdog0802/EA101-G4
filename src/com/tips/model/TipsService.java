@@ -7,30 +7,30 @@ public class TipsService {
 	private TipsDAO_interface dao;
 
 	public TipsService() {
-		dao = new TipsJDBCDAO();
+		dao = new TipsDAO();
 	}
 
-	public TipsVO addTips(byte[] tips_picture, String tips_desciption,
+	public TipsVO addTips(byte[] tips_picture, String tips_description,
 			String tips_title) {
 
 		TipsVO tipsVo = new TipsVO();
 
 		tipsVo.setTips_picture(tips_picture);
-		tipsVo.setTips_desciption(tips_desciption);
+		tipsVo.setTips_description(tips_description);
 		tipsVo.setTips_title(tips_title);
 		dao.insert(tipsVo);
 
 		return tipsVo;
 	}
 
-	public TipsVO updateTips(String sq_tips_id, byte[] tips_picture, String tips_desciption,
+	public TipsVO updateTips(String sq_tips_id, byte[] tips_picture, String tips_description,
 			String tips_title) {
 
 		TipsVO tipsVo = new TipsVO();
 
 		tipsVo.setSq_tips_id(sq_tips_id);
 		tipsVo.setTips_picture(tips_picture);
-		tipsVo.setTips_desciption(tips_desciption);
+		tipsVo.setTips_description(tips_description);
 		tipsVo.setTips_title(tips_title);
 		dao.update(tipsVo);
 

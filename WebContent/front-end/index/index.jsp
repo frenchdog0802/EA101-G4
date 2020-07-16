@@ -221,7 +221,7 @@ img.img-thumbnail{
 				<div class="m-5 py-5" style="text-align:center;">
 					<h2 class="h2 font-weight-bold mt-5">最新活動</h2>
 					<hr>
-					<a href="#" class="btn btn-outline-dark mb-5"> <span
+					<a href="<%=request.getContextPath()%>/front-end/activity/Activity.jsp" class="btn btn-outline-dark mb-5"> <span
 						class="small">查看所有活動</span>
 					</a>
 				</div>
