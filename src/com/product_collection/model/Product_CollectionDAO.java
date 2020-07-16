@@ -24,9 +24,9 @@ public class Product_CollectionDAO implements Product_CollectionDAO_interface{
 		}
 	}
 	
-	private static final String INSERT = "INSERT INTO PRODUCT_COLLECTION (SQ_MEMBER_ID, SQ_PRODUCT_ID, COLLECTION_DATE) VALUES (?, ?, to_date(to_char(sysdate,'yyyy-mm-dd'))";
+	private static final String INSERT = "INSERT INTO PRODUCT_COLLECTION (SQ_MEMBER_ID, SQ_PRODUCT_ID, PRODUCT_NAME, COLLECTION_DATE) VALUES (?, ?, ?, to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'))";
 	private static final String DELETE = "DELETE FROM PRODUCT_COLLECTION WHERE SQ_MEMBER_ID=? AND SQ_PRODUCT_ID=?";
-	private static final String GET_ALL = "SELECT * FROM PRODUCT_COLLECTION ORDER BY SQ_PRODUCT_ID";
+	private static final String GET_ALL = "SELECT * FROM PRODUCT_COLLECTION ORDER BY SQ_MEMBER_ID";
 	@Override
 	public void addCollection(Product_CollectionVO collectionVO) {
 		Connection con = null;
@@ -35,10 +35,10 @@ public class Product_CollectionDAO implements Product_CollectionDAO_interface{
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT);
-			
+
 			pstmt.setString(1, collectionVO.getSq_member_id());
 			pstmt.setString(2, collectionVO.getSq_product_id());
-						
+			pstmt.setString(3, collectionVO.getProduct_name());			
 			pstmt.executeUpdate();
 			
 		}catch(SQLException se) {

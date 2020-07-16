@@ -267,7 +267,7 @@ img.img-thumbnail{
 						<div class="row" style="height:75%;">
 							<div class="col-12" style="height:100%; display:table;">
 								<div class="imgDiv">
-								<img src="<%=request.getContextPath()%>/back-end/route/route.img?SQ_ROUTE_ID=<%=routeList.get(i).getSqRouteId()%>" class="img-thumbnail" 
+								<img src="<%=request.getContextPath()%>/front-end/route/route.img?SQ_ROUTE_ID=<%=routeList.get(i).getSqRouteId()%>" class="img-thumbnail" 
 								 alt="">
 							</div>
 							</div>
