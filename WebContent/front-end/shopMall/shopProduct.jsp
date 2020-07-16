@@ -60,7 +60,7 @@
 <!-- 					</div> -->
     			</div>
     			<div class="row mt-4">
-    				<div class="col-5 product_img" style="padding-left: 10px; padding-right: 10px;">
+    				<div class="col-5 product_img" style="padding-left: 10px; padding-right: 10px; border: 1px solid black;">
 						<div>
 							<img src="<%=request.getContextPath()%>/showImg4?id=<%=productVO.getSq_product_id()%>" class="img-fluid">
 						</div>
@@ -129,8 +129,8 @@
 	    				</div>
     				</div>
     			</div>
-    			<div class="row mb-3">
-    				<div class="col-12" style="border: 1px solid black; margin-top: 20px;">
+    			<div class="row mb-5">
+    				<div class="col-12" style="margin-top: 20px;">
     					<div class="mt-2">
     						<h3>商品介紹</h3>
     						<hr>
@@ -140,8 +140,8 @@
     					</div>
     				</div>
     			</div>
-    			<div class="row">
-    				<div class="col-12 product_infor mb-2 pb-3" style="border: 1px black solid;">
+    			<div class="row mb-5">
+    				<div class="col-12 product_infor mb-3 pb-3">
     					<div>
     						<h3>商品資訊</h3>
     						<hr>
@@ -159,7 +159,7 @@
     				</div>
     			</div>
     			<div class="row">
-    				<div class="col-12 pb-3 mb-3" style="border: 1px black solid;">
+    				<div class="col-12 pb-3 mb-3">
     					<div>
     						<span>留言</span>
     						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-left: 20px; margin-top: 5px;">

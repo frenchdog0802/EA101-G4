@@ -63,4 +63,7 @@ public class Shop_productService {
 	public List<Shop_productVO> getAll(Map<String, String[]> map) {
 		return dao.getAll(map);
 	}
+	public List<Shop_productVO> getSearchByText(String text){
+		return dao.getSearchByText(text);
+	}
 }

@@ -27,7 +27,7 @@
  		<div class="container-fluid">
  			<div class="row justify-content-center">
  				<div class="col-10">
- 					<div class="row collection h-100" name="${collectionVO.sq_product_id}">
+ 					<div class="row collection h-100">
  					<c:forEach var="collectionVO" items="${collectionList}">						
  						<div class="col-4 my-2">
  							<div style="height:70%; text-align: center;">							
@@ -40,13 +40,13 @@
  								${collectionVO.collection_date}
  							</div>	
  							<div style="text-align: center; height:10%;">						
- 								<button class="btn bg-primary deleteCollection">移除收藏</button>
+ 								<button class="btn bg-primary deleteCollection" value="${collectionVO.sq_product_id}">移除收藏</button>
  								<input type="hidden" name="action" value="deleteCollection">
- 								<input type="hidden" name="product_id" value="${collectionVO.sq_product_id}">
- 								<input type="hidden" name="member_id" value="${collectionVO.sq_member_id}">
+<%--  								<input type="hidden" name="product_id" value="${collectionVO.sq_product_id}"> --%>
  							</div>
  						</div>
  					</c:forEach>
+ 					<input type="hidden" name="member_id" value="${collectionVO.sq_member_id}">
  					</div>						
  				</div>
  			</div>
@@ -63,22 +63,23 @@
 		$(".fun-text").text("收藏商品");  // text("")裡面自己輸入功能名稱 
 	});
 	$(".deleteCollection").click(function() {
-  		console.log($("input[name=product_id]", $(this).parents(".collection")).val());				 				
-  		console.log($("input[name=member_id]", $(this).parents(".collection")).val());
-		var a = $("input[name=product_id]", $(this).parents(".collection")).val();
-	  	$.ajax({
-	  		type : "POST",
-	  		url  : "<%=request.getContextPath()%>/collectionServlet.do",
-	  		data : {
-	  		    action : "deleteCollection",
-	  		    product_id : $("input[name=product_id]", $(this).parents(".collection")).val(),
-				member_id : $("input[name=member_id]", $(this).parents(".collection")).val(),
-	  		},
-	  		success : function(){
-	  			$("div[name="+ a +"]").empty();
-	  			alert("已移除收藏");
-	  		}
-		});
+  		console.log($(this).val());				 				
+//   		console.log($("input[name=member_id]", $(this).parents(".collection")).val());
+// 		var a = $("input[name=product_id]", $(this).parents(".collection")).val();
+// 		console.log(a);
+// 	  	$.ajax({
+// 	  		type : "POST",
+<%-- 	  		url  : "<%=request.getContextPath()%>/collectionServlet.do", --%>
+// 	  		data : {
+// 	  		    action : "deleteCollection",
+// 	  		    product_id : $("input[name=product_id]", $(this).parents(".collection")).val(),
+// 				member_id : $("input[name=member_id]", $(this).parents(".collection")).val(),
+// 	  		},
+// 	  		success : function(){
+// 	  			$("div[name="+ a +"]").empty();
+// 	  			alert("已移除收藏");
+// 	  		}
+// 		});
 	});
 
 	</script>

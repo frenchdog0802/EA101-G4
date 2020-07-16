@@ -32,13 +32,15 @@
 <%@include file="/back-end/backFrame/backNav"%>
 <!-----------backNav----------->
 <!-- --------------------------------------------------------------------------------------------->
-<div class="container mt-3">
+
+<div class="container mt-5">
+	
 	<div class="row">
 		<div class="col">
-			<form>
-				<div class="form-group">
-					<label for="tips_title">小叮嚀標題</label> 
-					<select id="tips_title" name="tips_title">
+			<form action="<%=request.getContextPath()%>/tips/tips.do" method="POST">
+				<div class="form-group row">
+					<label for="tips_title" class="col-form-label col-md-2">小叮嚀標題</label> 
+					<select id="tips_title" class="form-control col-md-10" name="tips_title">
 						<option value="1">法規資訊</option>
 						<option value="2">自行車道規劃認識</option>
 						<option value="3">單車裝備</option>
@@ -47,17 +49,12 @@
 						<option value="6">全台單車驛站</option>
 					</select>
 				</div>
-				<div class="form-group">
-					<label for="tips_description col-2">小叮嚀內容</label> 
-					<textarea name="tips_description" class="form-control col-10" id="tips_description">
-				</textarea>
+				<div class="form-group row">
+					<label for="tips_description" class="col-form-label col-md-2">小叮嚀內容</label> 
+					<textarea name="tips_description" class="form-control col-md-10" id="tips_description"></textarea>
 				</div>
-				<div class="form-group form-check">
-					<input type="checkbox" class="form-check-input" id="exampleCheck1">
-					<label class="form-check-label" for="exampleCheck1">Check
-						me out</label>
-				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<input type="hidden" value="insert" name="action">
+				<button type="submit" class="btn btn-primary btn-block mt-5">Submit</button>
 			</form>
 		</div>
 	</div>

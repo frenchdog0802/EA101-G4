@@ -73,7 +73,6 @@
 		}
 		#product_name{
 			padding-left: 10px;
-			border: 1px solid black;
 			font-size: 25px;
 		}
 		.product_img{
@@ -100,7 +99,6 @@
 			padding-right: 5px;
 			text-align: center;
 			margin-top: 20px;
-			border: 1px black solid;
 		}
 		#product_join button{
 			width: 100%;
@@ -118,7 +116,7 @@
 		#product_infor1{
 			width: 35%;
 			float: left;
-			border-right: 1px black solid
+/* 			border-right: 1px black solid */
 		}
 		#product_infor2{
 			width: 65%;
@@ -126,7 +124,7 @@
 			padding-left: 20px;
 		}
 		.cus_message{ 
-			border: 1px black solid; 
+/* 			border: 1px black solid;  */
 			padding: 10px; 
 		}
 		.slider {
