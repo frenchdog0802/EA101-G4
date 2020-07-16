@@ -4,6 +4,7 @@
 <html lang="en">
 
 <head>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/index/index.css">
 
 <meta charset="utf-8">
 <meta name="viewport"
@@ -22,6 +23,10 @@
 </head>
 
 <body>
+<%@include file="/front-end/page-file/page-nav"%>
+	
+ 	<div class="container my-5">
+ 	
 
 	<!-- Navigation -->
 	<nav
@@ -244,15 +249,20 @@
 
 	</div>
 	<!-- /.container -->
+	
+	
+	</div>
+ 
+ 
+ 		
+	<%@include file="/front-end/page-file/page-footer"%>
+ 	
 
-	<!-- Footer -->
-	<footer class="py-5 bg-dark">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Your
-				Website 2020</p>
-		</div>
-		<!-- /.container -->
-	</footer>
+	<script>
+	$(function(){
+		$(".fun-text").text("");  // text("")裡面自己輸入功能名稱 
+	});
+	</script>
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="vendor/jquery/jquery.min.js"></script>
