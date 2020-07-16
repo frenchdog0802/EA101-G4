@@ -516,7 +516,7 @@
 		<url-pattern>/back-end/bikeStore/*</url-pattern>
 		<url-pattern>/back-end/bikeType/*</url-pattern>
 		<url-pattern>/back-end/BrandBack/*</url-pattern>
-		<url-pattern>/back-end/forum/*</url-pattern>
+ 		<url-pattern>/back-end/forum/*</url-pattern> 
 		<url-pattern>/back-end/joinActivity/*</url-pattern>
 		<url-pattern>/back-end/member/*</url-pattern>
 		<url-pattern>/back-end/question/*</url-pattern>
