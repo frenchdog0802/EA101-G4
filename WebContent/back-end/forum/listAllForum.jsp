@@ -11,7 +11,7 @@
 %>
 
 <%@include file="/back-end/backFrame/backHeader"%>
-<title>所有討論區資料 - listAllForum.jsp</title>
+<title>討論區資料 - listAllForum.jsp</title>
 
 
 <style>
@@ -57,7 +57,7 @@ td {
 	<ul class="nav nav-tabs">
 		<li class="nav-item">
 			<a class="nav-link" href="<%=request.getContextPath()%>/back-end/forum/listAllForum.jsp">
-				<span>所有討論區</span>
+				<span>後台討論區資料 </span>
 			</a>
 		</li>
 		<li class="nav-item">
@@ -97,7 +97,7 @@ td {
 				<%@ include file="pages/page1.file"%>
 				<c:forEach var="forumVO" items="${list}" begin="<%=pageIndex%>"
 					end="<%=pageIndex+rowsPerPage-1%>">
-				
+				 
 				<tr>
 					<td>${forumVO.sq_theme_id}</td>
 					<td>${forumVO.sq_member_id}</td>
@@ -107,14 +107,26 @@ td {
 					<td>
 						<img alt=""
 							src="<%=request.getContextPath()%>/forum/ForumDBReader.do?sq_theme_id=${forumVO.sq_theme_id}"
-							style="width: 150px; height: 150px"> <%--    ${memVO.mPic} 圖片記憶體位置 --%>
+							style="width: 150px; height: 150px"> 
 					</td>
-					<td>${forumVO.theme_display_status}</td>
+					<td>${forumVO.theme_display_status == 0 ? "顯示中" : "封存"}</td>
 					<td>
-					  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/forum/forum.do" style="margin-bottom: 0px;">
-					     <input type="submit" value="修改">
+					  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/forum/forum.do">
+					  
+					  
 					     <input type="hidden" name="sq_theme_id"  value="${forumVO.sq_theme_id}">
-					     <input type="hidden" name="action"	value="getOne_For_Update_Staff"></FORM>
+					     <input type="hidden" name="sq_member_id"  value="${forumVO.sq_member_id}">
+					     <input type="hidden" name="theme_name"  value="${forumVO.theme_name}">
+					     <input type="hidden" name="theme_detial"  value="${forumVO.theme_detial}">
+					     <input type="hidden" name="theme_display_status"  value="${forumVO.theme_display_status}">
+					     
+					     
+					     
+					     <input type="hidden" name="action"	value="getOne_For_Update_Staff">
+					     
+					     
+					     <input type="submit" value="修改">
+					     </FORM>
 					</td>
 				</tr>
 				</c:forEach>
