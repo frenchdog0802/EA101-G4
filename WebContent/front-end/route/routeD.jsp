@@ -114,7 +114,7 @@ label {
 					<c:forEach var="rouDeVO" items="${list}">
 						<tr>
 
-							<td><img alt=""
+							<td style="width: 400px"><img alt=""
 								src="<%=request.getContextPath()%>/front-end/route/step.img?SQ_SERIAL_NUMBER=${rouDeVO.sqSerialNo}"
 								style="width: 400px; height: 280px"></td>
 
