@@ -35,7 +35,7 @@
 		<div class="container-fluid">
 			<div class="row mt-3">
             	<div class="col-3 searchbtn mt-1 ml-3">
-					<FORM METHOD="post" ACTION="product.do" style="position: relative;">
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop_product.do" style="position: relative;">
 						<input type="text" name="sq_product_id" id="search" placeholder="輸入產品編號 (如510001):"/>
 						<input type="hidden" name="action"	value="getOneById">
 						<input type="submit" value="送出" style="position: absolute; opacity: 0;" class="icon">
@@ -54,7 +54,7 @@
                 </div>
                 <div class="col-3">
                 	<jsp:useBean id="shop_productService" scope="page" class="com.shop_product.model.Shop_productService" />  
-					<FORM METHOD="post" ACTION="product.do" class="mt-2">
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop_product.do" class="mt-2">
 						<b>選擇產品編號:</b>
 						<select size="1" name="product_kind_name">
 								<option value="登山車">登山車
@@ -176,7 +176,7 @@
 				   					</td>
 				   					<td>${productVO.product_status}</td>              
 				    				<td>
-				    					<FORM METHOD="post" ACTION="shop_product.do" style="position: relative;">
+				    					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop_product.do" style="position: relative;">
 										    <input type="submit" value="修改" style="position: absolute; opacity: 0;">
 										    <input type="image" src="image/changeicon.png" alt="Submit" align="right" class="img-fluid"/>
 										    <input type="hidden" name="sq_product_id"  value="${productVO.sq_product_id}">
@@ -184,7 +184,7 @@
 										</FORM>
 				    				</td>
 				    				<td>
-										 <FORM METHOD="post" ACTION="shop_product.do" style="position: relative;">
+										 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop_product.do" style="position: relative;">
 										   	<input type="submit" value="刪除" style="position: absolute; opacity: 0;">
 										   	<input type="image" src="image/delicon.png" alt="Submit" align="right" class="img-fluid"/>
 									    	<input type="hidden" name="sq_product_id" value="${productVO.sq_product_id}">

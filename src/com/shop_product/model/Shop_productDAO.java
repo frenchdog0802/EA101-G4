@@ -10,6 +10,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.product_stock.model.*;
+
+
 import jdbc.util.CompositeQuery.CompositeQuery_shopMall;
 
 public class Shop_productDAO implements Shop_productDAO_interface{
@@ -38,8 +41,9 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 			+ "ADD_DATE, PRODUCT_MATERIAL, PRODUCT_STATUS FROM SHOP_PRODUCT ORDER BY SQ_PRODUCT_ID";
 	private static final String GET_BY_KIND = "SELECT SQ_PRODUCT_ID, SQ_BRAND_ID, PRODUCT_KIND_NAME, PRODUCT_NAME,PRODUCT_PRICE, PRODUCT_PIC, PRODUCT_DETAIL, "
 			+ "ADD_DATE, PRODUCT_MATERIAL, PRODUCT_STATUS FROM SHOP_PRODUCT WHERE PRODUCT_KIND_NAME=?";			
-			
-	public void insert(Shop_productVO productVO) {
+	private static final String GET_CURRENTKEY = "select sq_product_id from (select * from shop_product order by sq_product_id desc ) where rownum=1";		
+	
+	public void insert(Shop_productVO productVO, List<Product_stockVO> stockList) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -66,22 +70,36 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 			pstmt.setClob(7,clob2);
 			
 			pstmt.executeUpdate();
+			con.commit();
+			
+			Product_stockDAO stockDAO = new Product_stockDAO();
+			for(Product_stockVO vo : stockList) {
+				Product_stockVO stockVO = new Product_stockVO();
+				stockVO.setSq_product_id(vo.getSq_product_id());
+				stockVO.setProduct_model(vo.getProduct_model());
+				stockVO.setProduct_color(vo.getProduct_color());
+				stockVO.setStock_total(vo.getStock_total());
+				stockDAO.insert(stockVO, con);
+			}
+			con.commit();
+			con.setAutoCommit(true);
 			
 		}catch(SQLException se) {
-			throw new RuntimeException("Couldn't load database driver" + se.getMessage());
+			throw new RuntimeException("A database error occured."
+					+ se.getMessage());
 		}finally {
 			if(pstmt != null) {
 				try {
 					pstmt.close();
 				}catch(SQLException se) {
 					se.printStackTrace(System.err);
-				}		
+				}
 			}
 			if(con != null) {
 				try {
 					con.close();
-				}catch(Exception se){
-					se.printStackTrace(System.err);
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -458,5 +476,35 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 			}
 		}
 		return list;
+	}
+
+	public String getCurrentKey() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		String sq_product_id = null;
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_CURRENTKEY);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				sq_product_id= rs.getString("sq_product_id");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (con != null) {
+				try {
+					rs.close();
+					pstmt.close();
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return sq_product_id;
 	}
 }

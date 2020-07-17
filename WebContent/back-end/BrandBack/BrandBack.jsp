@@ -102,7 +102,7 @@
                                                        		</button>
                                                     	</div>
                                                 	<div class="modal-body">
-                                                    	<img src="/EA101G4/showImg?id=${brandVO.sq_brand_id}" class="img-fluid">
+                                                    	<img src="<%=request.getContextPath()%>/showImg?id=${brandVO.sq_brand_id}" class="img-fluid">
                                                 	</div>
                                                     	<div class="modal-footer">
                                                        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

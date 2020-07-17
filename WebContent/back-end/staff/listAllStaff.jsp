@@ -26,7 +26,7 @@
 <!--分頁自己改-->
 <%@include file="/back-end/backFrame/backNav"%>
 <!-- 自由發揮處 -->
-<div class="container-fluid ">
+<div class="container-fluid mt-2">
 	<div class="table-responsive">
 		<table
 			class="table text-center table-bordered table-striped table-hover">

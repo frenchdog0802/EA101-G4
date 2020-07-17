@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-----------backHeader----------->
 <%@include file="/back-end/backFrame/backHeader"%>
-<<jsp:useBean id="BikeStoreSvc"
+<jsp:useBean id="BikeStoreSvc"
 	class="com.bike.store.model.BikeStoreService" />
 <!-----------backHeader----------->
 <!-- --------------------------------------------------------------------------------------------->

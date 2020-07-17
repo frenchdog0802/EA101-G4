@@ -74,7 +74,6 @@ public class Shop_productServlet extends HttpServlet {
 				
 				String material = req.getParameter("material");
 				
-				
 				Shop_productVO productVO = new Shop_productVO();
 				productVO.setProduct_name(name);
 				productVO.setProduct_kind_name(kind_name);
@@ -83,7 +82,7 @@ public class Shop_productServlet extends HttpServlet {
 				productVO.setProduct_pic(pic);
 				productVO.setProduct_detail(detail);
 				productVO.setProduct_material(material);
-				
+					
 				if (!errorMsgs.isEmpty()) {			
 					req.setAttribute("productVO", productVO); 
 					RequestDispatcher failureView = req
@@ -91,12 +90,32 @@ public class Shop_productServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
+								
+				//增加商品庫存
+				String[] color = req.getParameterValues("color");
+				String[] model = req.getParameterValues("color");
+				String[] stockNum = req.getParameterValues("stockNum");
 				
+				Shop_productDAO productDAO = new Shop_productDAO();
+				String product_id = productDAO.getCurrentKey();//取得目前最大的訂單編號
+				Integer newID = Integer.parseInt(product_id)+1;
+				String id = newID.toString();
+				System.out.println(id);
+				
+				List<Product_stockVO> stockList = new ArrayList<Product_stockVO>();
+				for(int i=0 ; i<stockNum.length; i++) {
+					Product_stockVO stockVO = new Product_stockVO();
+					stockVO.setSq_product_id(id);
+					stockVO.setProduct_model(model[i]);
+					stockVO.setProduct_color(color[i]);
+					stockVO.setStock_total(Integer.parseInt(stockNum[i]));
+					stockList.add(stockVO);
+				}
 				Shop_productService product = new Shop_productService();
-				productVO = product.addShop_product(brand, kind_name, name, price, pic, detail, material);
+				product.addShop_product(productVO, stockList);
 				session.removeAttribute("pic");
 				
-				String url = "/back_end/Shop_product/allShop_product.jsp";
+				String url = "/back-end/Shop_product/allShop_product.jsp";
 				RequestDispatcher success = req.getRequestDispatcher(url);
 				success.forward(req, res);
 				
@@ -162,7 +181,7 @@ public class Shop_productServlet extends HttpServlet {
 				List<Shop_productVO> list = productSvc.findByKindName(product_kind_name);
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("product_kind_name", product_kind_name); 
-					RequestDispatcher fail = req.getRequestDispatcher("/back_end/BrandBack/noData.jsp");
+					RequestDispatcher fail = req.getRequestDispatcher("/back-end/BrandBack/noData.jsp");
 					fail.forward(req, res);
 					return;
 				}

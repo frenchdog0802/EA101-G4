@@ -23,16 +23,11 @@ public class Product_CollectionServlet extends HttpServlet{
 		String action = req.getParameter("action");
 		res.setContentType("text/html;charset=UTF-8");
 		HttpSession session = req.getSession();
-		System.out.println(action);
 		if("addCollection".equals(action)) {
 			String member_id = req.getParameter("member_id");
 			String product_name = req.getParameter("product_name");
 			String product_id = req.getParameter("product_id");
-			
-			System.out.println(member_id);
-			System.out.println(product_name);
-			System.out.println(product_id);
-			
+
 			Product_CollectionVO collectionVO = new Product_CollectionVO();
 			collectionVO.setSq_member_id(member_id);
 			collectionVO.setSq_product_id(product_id);

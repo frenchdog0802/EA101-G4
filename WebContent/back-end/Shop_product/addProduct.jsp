@@ -40,7 +40,7 @@
 				    </FORM>
 				</div>
 				<div class="col-1 ml-3" style="padding: 0;">
-              		<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back_end/Shop_product/allShop_product.jsp'" style="border: 1px black solid;">
+              		<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Shop_product/allShop_product.jsp'" style="border: 1px black solid;">
                     	<img src="image/list.png" class="img-fluid">
                     </button>
                 </div>
@@ -82,7 +82,7 @@
     	<div class="row mb-3">
     		<div class="col-2"></div>
     		<div class="col-8">
-			<FORM method="post" action="product.do" enctype="multipart/form-data" id="formid">
+			<FORM method="post" action="<%=request.getContextPath()%>/shop_product.do" enctype="multipart/form-data" id="formid">
 				<table>
 					<tr>
 						<td>產品名稱 :</td>						
@@ -103,7 +103,7 @@
 								<option value="外套/風衣">外套/風衣
 								<option value="雨衣/雨褲">雨衣/雨褲
 								<option value="太陽眼鏡">太陽眼鏡
-								<option value="手套/袖套">手套/袖套"
+								<option value="手套/袖套">手套/袖套
 								<option value="口罩/脖圍/帽套">口罩/脖圍/帽套
 								<option value="安全帽">安全帽
 								<option value="打氣筒">打氣筒
@@ -127,6 +127,16 @@
 						</td>
 					</tr>
 					<tr>
+						<td>
+							輸入型號 : <input type="text" name="model" style="width:7%; text-align:center;">
+							&nbsp;
+							輸入顏色 : <input type="text" name="color" style="width:7%; text-align:center; ">
+							&nbsp; 
+							輸入數量 : <input type="text" name="stockNum" style="width:7%; text-align:center; ">
+							<button type='button' class="btn bg-primary ml-2" id="styleAdd">增加</button>
+						</td>
+					</tr>
+					<tr id="addPic">
 						<td>加入圖片 :</td>	
 					</tr>
 					<tr>
@@ -178,6 +188,24 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script>
+		$("#styleAdd").click(function(){
+			let str = "<tr>"+
+						"<td class='addstyle' value='123'>"+
+								"輸入型號 : <input type='text' name='model' style='width:7%; text-align:center;'>"+
+								"&nbsp;"+
+								"輸入顏色 : <input type='text' name='color' style='width:7%; text-align:center;'>"+
+								"&nbsp;"+
+								"輸入數量 : <input type='text' name='stockNum' style='width:7%; text-align:center;'>"+
+							"<button type='button' class='btn bg-success ml-2 styleDel' id='styleDel'>移除</button>"+
+						"</td>"+
+					  "</tr>";
+					  console.log('456');
+			$("#addPic").before(str);
+			
+			$(".styleDel").click(function(){
+				$(this).parent(".addstyle").remove();
+			});
+		});
 		function upload(){
 			document.getElementById('take').value = document.getElementById('give').value;
 			document.getElementById('formid').submit();

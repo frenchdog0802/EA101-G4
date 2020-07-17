@@ -27,7 +27,7 @@
 					</div>
     				<div class="col-7 searchbtn mt-1">
 						<input type="search" id="search" placeholder="Search..." />
-						<button type="button" class="icon"> <img src="image/search.png" class="img-fluid"></button>
+						<button type="button" class="icon"><img src="image/search.png" class="img-fluid"></button>
 					</div>
 					<div class="col-4 mt-2" style="padding-right: 0;">
 

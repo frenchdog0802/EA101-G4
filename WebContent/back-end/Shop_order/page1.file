@@ -31,4 +31,3 @@
          }
     } 
 %>
-<b>全部共:<font color=red><%=rowNumber%></font>筆</b>

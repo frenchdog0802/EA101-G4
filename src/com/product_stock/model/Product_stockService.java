@@ -10,16 +10,9 @@ public class Product_stockService {
 	public Product_stockService() {
 		dao = new Product_stockDAO();
 	}
-public Product_stockVO addStock(String sq_product_id, String product_color, String product_model, Integer stock_total) {
-		
-		Product_stockVO product_stockVO = new Product_stockVO();
-		product_stockVO.setSq_product_id(sq_product_id);
-		product_stockVO.setProduct_color(product_color);
-		product_stockVO.setProduct_model(product_model);
-		product_stockVO.setStock_total(stock_total);
-		dao.insert(product_stockVO);
-		
-		return product_stockVO;
+public void addStock(Product_stockVO stockVO, java.sql.Connection con) {
+	
+		dao.insert(stockVO, con);
 	}
 	
 	public Product_stockVO updateStock(String sq_stock_id, String sq_product_id, String product_color, String product_model, Integer stock_total) {

@@ -4,7 +4,7 @@
 		</div>
 		</div>
 		<div class="row" style="background-color: #eeeff4;">
-			<div class="col-1 leftnav">
+			<div class="col-1 leftnav" style="padding-left:0px; padding-right:0px">
 				<div class="liststyF">
 					<button class="btn listbtn my-3" onclick="location.href='<%=request.getContextPath()%>/back-end/Shop_product/allShop_product.jsp'">
 						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/shop1.png" class="img-fluid">
@@ -21,7 +21,7 @@
 					</button>
 				</div>
 				<div class="liststy">
-					<button class="btn listbtn my-3">
+					<button class="btn listbtn my-3" onclick="location.href='<%=request.getContextPath()%>/back-end/tips/listAllTips.jsp'">
 						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/web1.png" class="img-fluid">
 					</button>		
 				</div>
@@ -45,7 +45,7 @@
 						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/member.png" class="img-fluid">
 					</button>		
 				</div>
-				<div style="height: 300px;"></div>
+				<div style="height: 200px;"></div>
 			</div>				
 		 	<div class="col-11">
 				<div class="row">

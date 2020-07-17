@@ -46,11 +46,6 @@
                             <img src="<%=request.getContextPath()%>/back-end/backFrame/image/list.png" class="img-fluid">
                         </button>
                     </div>
-                    <div class="col-1 ml-3" style="padding: 0;">
-                        <button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back_end/BrandBack/addBrand.jsp'" style="border: 1px black solid;">
-                            <img src="<%=request.getContextPath()%>/back-end/backFrame/image/addbrand.png" class="img-fluid">
-                        </button>
-                    </div>
                     <div class="col-3">
                     	<jsp:useBean id="brandService" scope="page" class="com.brand.model.BrandService" />  
 						<FORM METHOD="post" ACTION="brand.do" class="mt-2">

@@ -5,7 +5,7 @@
    <body>
    	<div class="container-fluid"> 
 	  	<div class="row" style="background-color: #2f323b;">
-	  		<div class="col-1 home"	>
+	  		<div class="col-1 home"	style="padding-left:0px; padding-right:0px">
 	  			<button class="btn btn-block homebtn" onclick="location.href='<%=request.getContextPath()%>/back-end/index/backIndex.jsp'">
 					<img src="<%=request.getContextPath()%>/back-end/backFrame/image/house1.png" class="img-fluid" style="width: 80%;">
 				</button>

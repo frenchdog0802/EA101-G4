@@ -41,15 +41,15 @@ width:200px}
 								<!--分頁自己改-->
 				<div class="row" style="background-color: white;">
 					<ul class="nav nav-tabs">
-					  <li class="nav-item">
-					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">item1</span></a><!--在哪一個頁面就哪加active和span的style-->
-					  </li>
-					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>item2</span></a>
-					  </li>
-					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>item3</span></a>
-					  </li>
+					  	<li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/back-end/tips/listAllTips.jsp"><span
+						style="padding-bottom: 8px; border-bottom: 3px blue solid;">小叮嚀總覽</span></a>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/tips/addTips.jsp"><span>新增小叮嚀</span></a>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/question/listAllQus.jsp"><span>Q&A總覽</span></a>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/question/addQus.jsp"><span>新增Q&A</span></a>
+						</li>
 					</ul>
 				</div>	
 								<!--分頁自己改-->
@@ -58,7 +58,7 @@ width:200px}
 	<%@include file="/back-end/backFrame/backNav"%>
 								<!-----------backNav----------->
 <!-- --------------------------------------------------------------------------------------------->					
-			<div class="container-fluid">
+			<div class="container-fluid mt-3">
 	<div class="table-responsive">
 		<table class="table text-center table-bordered table-striped table-hover">
 			<thead>
