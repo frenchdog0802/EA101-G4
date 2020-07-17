@@ -225,59 +225,64 @@ public class Shop_productServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
-				String sq_product_id = req.getParameter("sq_product_id");
+				String sq_product_id = req.getParameter("productID");
+				System.out.println(sq_product_id);
 				String name = req.getParameter("name");
-				String nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
-				if(name == null || name.trim().length() == 0) {
-					errorMsgs.add("名稱欄請勿空白");
-				}else if(!name.trim().matches(nameReg)) {
-					errorMsgs.add("名稱欄位只能是中、英文字母、數字和_,請長度必須在2到10之間");
-				}
+				System.out.println(name);
+//				String nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+//				if(name == null || name.trim().length() == 0) {
+//					errorMsgs.add("名稱欄請勿空白");
+//				}else if(!name.trim().matches(nameReg)) {
+//					errorMsgs.add("名稱欄位只能是中、英文字母、數字和_,請長度必須在2到10之間");
+//				}
 				String kind_name = req.getParameter("kind_name");
+				System.out.println(kind_name);
 				String brand = req.getParameter("brand");
-				
+				System.out.println(brand);
 				Integer price = Integer.parseInt(req.getParameter("price").trim());
-				String pricestr = String.valueOf(price);
-				String priceReg = "^(0|[1-9][0-9]*)$";
-				if(pricestr == null || pricestr.trim().length() == 0) {
-					errorMsgs.add("價格欄請勿空白");
-				}else if(!pricestr.trim().matches(priceReg)){
-					errorMsgs.add("價格欄位請輸入數字");
-				}
+				System.out.println(price);
+//				String priceReg = "^(0|[1-9][0-9]*)$";
+//				if(pricestr == null || pricestr.trim().length() == 0) {
+//					errorMsgs.add("價格欄請勿空白");
+//				}else if(!pricestr.trim().matches(priceReg)){
+//					errorMsgs.add("價格欄位請輸入數字");
+//				}
 
 				Part part = req.getPart("pic");
 				byte[] pic = null;
 				if(part.getSize() == 0) {
-					BrandService brandSrc = new BrandService();
-					BrandVO brandVO = brandSrc.getOneBrand(sq_product_id);
-					pic = brandVO.getBrand_sign();
+					Shop_productService productSrc = new Shop_productService();
+					Shop_productVO productVO = productSrc.getOneById(sq_product_id);
+					pic = productVO.getProduct_pic();
 				}else {
 					InputStream in = part.getInputStream();
 					pic = new byte[in.available()];
 					in.read(pic);
 					in.close();
 				}
-								
+				System.out.println(part);
+				
 				java.sql.Date addDate = null;
-				try {
-					addDate = java.sql.Date.valueOf(req.getParameter("addDate").trim());
-				} catch (IllegalArgumentException e) {
-					addDate = new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("gg");
-				}
+				Shop_productService productSvc = new Shop_productService();
+				addDate = productSvc.getOneById(sq_product_id).getAdd_date();			
+				System.out.println(addDate);
+				
 				String detail = req.getParameter("detail");
-				if(detail == null || detail.trim().length() == 0) {
-					errorMsgs.add("名稱欄請勿空白");
-				}else if(!detail.trim().matches(nameReg)) {
-					errorMsgs.add("名稱欄位只能是中、英文字母、數字和_,請長度必須在2到10之間");
-				}
+				System.out.println(detail);
+//				if(detail == null || detail.trim().length() == 0) {
+//					errorMsgs.add("名稱欄請勿空白");
+//				}else if(!detail.trim().matches(nameReg)) {
+//					errorMsgs.add("名稱欄位只能是中、英文字母、數字和_,請長度必須在2到10之間");
+//				}
 				String material = req.getParameter("material");
-				if(material == null || material.trim().length() == 0) {
-					errorMsgs.add("名稱欄請勿空白");
-				}else if(!material.trim().matches(nameReg)) {
-					errorMsgs.add("名稱欄位只能是中、英文字母、數字和_,請長度必須在2到10之間");
-				}
+				System.out.println(material);
+//				if(material == null || material.trim().length() == 0) {
+//					errorMsgs.add("名稱欄請勿空白");
+//				}else if(!material.trim().matches(nameReg)) {
+//					errorMsgs.add("名稱欄位只能是中、英文字母、數字和_,請長度必須在2到10之間");
+//				}
 				Integer status = Integer.parseInt(req.getParameter("status"));
+				System.out.println(status);
 				
 				Shop_productVO productVO = new Shop_productVO();
 				productVO.setSq_product_id(sq_product_id);
@@ -290,6 +295,14 @@ public class Shop_productServlet extends HttpServlet {
 				productVO.setProduct_detail(detail);
 				productVO.setProduct_material(material);
 				productVO.setProduct_status(status);
+				
+				if (!errorMsgs.isEmpty()) {			
+					req.setAttribute("productVO", productVO); 
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/back-end/Shop_product/updateProduct.jsp");
+					failureView.forward(req, res);
+					return;
+				}
 				
 				Shop_productService product = new Shop_productService();
 				productVO = product.updateShop_product(sq_product_id, brand, kind_name, name, price, pic, detail, addDate, material, status);

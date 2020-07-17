@@ -33,7 +33,7 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 	private static final String INSERT_STMT = "INSERT INTO SHOP_PRODUCT (sq_product_id, sq_brand_id, product_kind_name, product_name, product_price, product_pic,"
 			+ " product_detail, add_date, product_material, product_status) VALUES (SQ_PRODUCT_ID.NEXTVAL,?,?,?,?,?,?,to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),?,0)";
 	private static final String UPDATE = "UPDATE SHOP_PRODUCT SET sq_brand_id=?, product_kind_name=?, product_name=?, product_price=?, product_pic=?,"
-			+ " product_detail=?, add_date=?, product_material=?, product_status=? WHERE sq_product_id";
+			+ " product_detail=?, add_date=?, product_material=?, product_status=? WHERE sq_product_id=?";
 	private static final String DELETE = "DELETE FROM SHOP_PRODUCT WHERE SQ_PRODUCT_ID=? ";
 	private static final String GET_ONE = "SELECT SQ_PRODUCT_ID, SQ_BRAND_ID, PRODUCT_KIND_NAME, PRODUCT_NAME,PRODUCT_PRICE, PRODUCT_PIC, PRODUCT_DETAIL, "
 			+ "ADD_DATE, PRODUCT_MATERIAL, PRODUCT_STATUS FROM SHOP_PRODUCT WHERE SQ_PRODUCT_ID=?";
@@ -361,6 +361,7 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 		}
 		return list;
 	}
+
 
 	@Override
 	public List<Shop_productVO> getAll(Map<String, String[]> map) {

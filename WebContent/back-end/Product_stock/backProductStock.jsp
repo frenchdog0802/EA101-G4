@@ -11,7 +11,7 @@
  %>   
  <jsp:useBean id="productSvc" scope="page" class="com.shop_product.model.Shop_productService" />	
  <%@ include file="/back-end/backFrame/backHeader"%>
- 	<link rel="stylesheet" type="text/css" href="backProductStockCss.css">
+ 	<link rel="stylesheet" href="<%=request.getContextPath()%>/back-end/Product_stock/backProductStockCss.css">
     <title>庫存後台</title>
  <%@ include file="/back-end/backFrame/backBody"%>
 				<div class="row" style="background-color: white;">
@@ -34,7 +34,7 @@
 			<div class="container-fluid">
 				<div class="row mt-3">
                     <div class="col-3 searchbtn mt-1 ml-3">
-						<FORM METHOD="post" ACTION="stockServlet.do" style="position: relative;">
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/stockServlet.do" style="position: relative;">
 							<input type="text" name="sq_brand_id" id="search" placeholder="輸入員工編號 (如560001):"/>
 							<input type="hidden" name="action"	value="getOne">
 							<input type="submit" value="送出" style="position: absolute; opacity: 0;" class="icon">
@@ -46,19 +46,24 @@
                             <img src="<%=request.getContextPath()%>/back-end/backFrame/image/list.png" class="img-fluid">
                         </button>
                     </div>
-                    <div class="col-3">
-                    	<jsp:useBean id="brandService" scope="page" class="com.brand.model.BrandService" />  
-						<FORM METHOD="post" ACTION="stockServlet.do" class="mt-2">
-						    <b>選擇庫存編號:</b>
-						    <select size="1" name="sq_brand_id">
-							    <c:forEach var="stockVO" items="${list}" > 
-							         <option value="${stockVO.sq_stock_id}">${stockVO.sq_stock_id}
-							    </c:forEach>   
-						    </select>
-						    <input type="hidden" name="action" value="getOne">
-						    <input type="submit" value="送出">
-						</FORM>	
+                    <div class="col-1 ml-3" style="padding: 0;">
+                        <button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Product_stock/addProductStock.jsp'" style="border: 1px black solid;">
+                            <img src="<%=request.getContextPath()%>/back-end/backFrame/image/addbrand.png" class="img-fluid">
+                        </button>
                     </div>
+<!--                     <div class="col-3"> -->
+<%--                     	<jsp:useBean id="stockService" scope="page" class="com.product_stock.model.Product_stockService" />   --%>
+<%-- 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/stockServlet.do" class="mt-2"> --%>
+<!-- 						    <b>選擇庫存編號:</b> -->
+<!-- 						    <select size="1" name="sq_product_id"> -->
+<%-- 							    <c:forEach var="stockVO" items="${list}" >  --%>
+<%-- 							         <option value="${stockVO.sq_stock_id}">${stockVO.sq_stock_id} --%>
+<%-- 							    </c:forEach>    --%>
+<!-- 						    </select> -->
+<!-- 						    <input type="hidden" name="action" value="getOne"> -->
+<!-- 						    <input type="submit" value="送出"> -->
+<!-- 						</FORM>	 -->
+<!--                     </div> -->
                 </div>
 		 		<div class="row mt-3 justify-content-center">
     				<div class="col-12 divbg">
@@ -86,7 +91,7 @@
 				    					<td>${stockVO.product_model}</td>
 				    					<td>${stockVO.stock_total}</td>     
 				    					<td>
-				    						<FORM METHOD="post" ACTION="stockServlet.do" style="position: relative;">
+				    						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/stockServlet.do" style="position: relative;">
 											    <input type="submit" value="修改" style="position: absolute; opacity: 0;">
 											    <input type="image" src="<%=request.getContextPath()%>/back-end/backFrame/image/changeicon.png" alt="Submit" align="right" class="img-fluid"/>
 											    <input type="hidden" name="sq_stock_id"  value="${stockVO.sq_stock_id}">
@@ -94,7 +99,7 @@
 											</FORM>
 				    					</td>
 				    					<td>
-										 	<FORM METHOD="post" ACTION="stockServlet.do" style="position: relative;">
+										 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/stockServlet.do" style="position: relative;">
 										    	<input type="submit" value="修改" style="position: absolute; opacity: 0;">
 											    <input type="image" src="<%=request.getContextPath()%>/back-end/backFrame/image/delicon.png" alt="Submit" align="right" class="img-fluid"/>
 										    	<input type="hidden" name="sq_stock_id" value="${stockVO.sq_stock_id}">
