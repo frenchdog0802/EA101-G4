@@ -504,7 +504,7 @@
 	<filter-mapping>
 		<filter-name>MemberLoginFilter</filter-name>
 <!-- 		bike -->
-		<url-pattern>/front-end/bike/rentMaster.jsp</url-pattern>
+		<url-pattern>/front-end/bike/detail.jsp</url-pattern>
 		<url-pattern>/front-end/bike/memberOrder.jsp</url-pattern>
 		
 <!-- 		activity -->
