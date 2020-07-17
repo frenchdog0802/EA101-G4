@@ -10,7 +10,7 @@ public class ForumMessageService {
 	private ForumMessage_interface dao;
 
 	public ForumMessageService() {
-		dao = new ForumMessageJDBCDAO();
+		dao = new ForumMessageDAO();
 	}
 
 	public ForumMessageVO addForumMessage(String sq_theme_id, String sq_member_id,
