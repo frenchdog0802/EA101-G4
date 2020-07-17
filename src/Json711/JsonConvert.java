@@ -19,14 +19,16 @@ public class JsonConvert {
         ArrayList<String> list = new ArrayList<String>(); 
         list.add("admin");
         //讀取json檔案
-        String area[] = {"基隆市"};
-//      "台北市","基隆市","新北市","宜蘭縣","新竹市","新竹縣","桃園市","苗栗縣","台中市","彰化縣","南投縣","嘉義市","嘉義縣","雲林縣"
-//		,"台南市","高雄市","屏東縣","台東縣","花蓮縣","澎湖縣","金門縣","連江縣"
+        String area[] = {"基隆市",
+      "台北市","基隆市","新北市","宜蘭縣","新竹市","新竹縣","桃園市","苗栗縣","台中市","彰化縣","南投縣","嘉義市","嘉義縣","雲林縣"
+		,"台南市","高雄市","屏東縣","台東縣","花蓮縣","澎湖縣","金門縣","連江縣"};
         for(int a=0 ;a<area.length;a++) {       
 //        String filename = "D:\\EA101G4\\EA101G4_workspace\\git\\src\\Json711" + area[a] +".json";//路徑因人而異
-        String filename ="C:\\G4_Project\\git\\EA101-G4\\src\\Json711\\"+area[a]+".json";//路徑因人而異
+        String filename ="C:/G4_Project/git/EA101-G4/src/Json711/"+area[a]+".json";//路徑因人而異
         try {
+        	System.out.println(filename);
             BufferedReader br = new BufferedReader(new FileReader(filename));
+            
             String str=null;
             
             String data="";
