@@ -38,17 +38,17 @@
 							<input type="text" name="sq_brand_id" id="search" placeholder="輸入員工編號 (如520001):"/>
 							<input type="hidden" name="action"	value="getOne">
 							<input type="submit" value="送出" style="position: absolute; opacity: 0;" class="icon">
-							<img src="image/search.png" class="img-fluid icon" >
+							<img src="<%=request.getContextPath()%>/back-end/backFrame/image/search.png" class="img-fluid icon" >
 					    </FORM>
 					</div>
 					<div class="col-1 ml-3" style="padding: 0;">
                         <button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/BrandBack/BrandBack.jsp'" style="border: 1px black solid;">
-                            <img src="image/list.png" class="img-fluid">
+                            <img src="<%=request.getContextPath()%>/back-end/backFrame/image/list.png" class="img-fluid">
                         </button>
                     </div>
                     <div class="col-1 ml-3" style="padding: 0;">
                         <button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/BrandBack/addBrand.jsp'" style="border: 1px black solid;">
-                            <img src="image/addbrand.png" class="img-fluid">
+                            <img src="<%=request.getContextPath()%>/back-end/backFrame/image/addbrand.png" class="img-fluid">
                         </button>
                     </div>
                     <div class="col-3">

@@ -9,7 +9,7 @@
 %>
 
 <%@ include file="/back-end/backFrame/backHeader"%>
-		<link rel="stylesheet" type="text/css" href="addBrand.css">
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-end/Shop_product/addBrand.css">
 		<title>廠牌管理</title>
 <%@ include file="/back-end/backFrame/backBody"%>
  		<div class="row" style="background-color: white;">
@@ -36,17 +36,17 @@
 						<input type="text" name="sq_product_id" id="search" placeholder="輸入產品編號 (如510001):"/>
 						<input type="hidden" name="action"	value="getOne">
 						<input type="submit" value="送出" style="position: absolute; opacity: 0;" class="icon">
-						<img src="image/search.png" class="img-fluid icon" >
+						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/search.png" class="img-fluid icon" >
 				    </FORM>
 				</div>
 				<div class="col-1 ml-3" style="padding: 0;">
               		<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Shop_product/allShop_product.jsp'" style="border: 1px black solid;">
-                    	<img src="image/list.png" class="img-fluid">
+                    	<img src="<%=request.getContextPath()%>/back-end/backFrame/image/list.png" class="img-fluid">
                     </button>
                 </div>
                 <div class="col-1 ml-3" style="padding: 0;">
                 	<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Shop_product/addProduct.jsp'" style="border: 1px black solid;">
-                    	<img src="image/addbrand.png" class="img-fluid">
+                    	<img src="<%=request.getContextPath()%>/back-end/backFrame/image/addbrand.png" class="img-fluid">
                     </button>
                 </div>
                 <div class="col-3">
@@ -157,8 +157,8 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="hidden" id="take" name="detail">
-							<textarea rows="5" id="give" style="width:100%"><%= (productVO==null)? "" : productVO.getProduct_detail()%></textarea>
+							<input type="hidden" id="take2" name="detail">
+							<textarea rows="5" id="give2" style="width:100%"><%= (productVO==null)? "" : productVO.getProduct_detail()%></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -166,15 +166,16 @@
 						<jsp:useBean id="productSvc" scope="page" class="com.shop_product.model.Shop_productService" />
 							<select size="1" name="status">
 								<option value="0">未上架	
-								<option value="1">已上架
+								<option value="1" selected>已上架
 								<option value="2">缺貨中						
 							</select>
 						</td>
 					</tr>
 				</table>
 				<div style="text-align: right;">
-				<input type="hidden" name="action" value="update">
-				<input type="submit" value="送出修改" onclick="upload()" style="text-align: right;">
+					<input type="submit" value="送出修改" onclick="upload()" style="text-align: right;">
+					<input type="hidden" name="action" value="updateProduct">
+					<input type="hidden" name="productID" value="<%=productVO.getSq_product_id()%>">
 				</div>
 			</FORM>
 			</div>
@@ -186,6 +187,7 @@
 	<script>
 		function upload(){
 			document.getElementById('take').value = document.getElementById('give').value;
+			document.getElementById('take2').value = document.getElementById('give2').value;
 			document.getElementById('formid').submit();
 		}
 		function readURL(input) {

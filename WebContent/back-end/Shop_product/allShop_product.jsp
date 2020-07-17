@@ -12,7 +12,7 @@
 %>
 <jsp:useBean id="brandSvc" scope="page" class="com.brand.model.BrandService" />	
 <%@ include file="/back-end/backFrame/backHeader"%>
- 	<link rel="stylesheet" type="text/css" href="backProduct.css">
+ 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-end/Shop_product/backProduct.css">
     <title>商品後台</title>
 <%@ include file="/back-end/backFrame/backBody"%>
 				<div class="row" style="background-color: white;">
@@ -39,17 +39,17 @@
 						<input type="text" name="sq_product_id" id="search" placeholder="輸入產品編號 (如510001):"/>
 						<input type="hidden" name="action"	value="getOneById">
 						<input type="submit" value="送出" style="position: absolute; opacity: 0;" class="icon">
-						<img src="image/search.png" class="img-fluid icon" >
+						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/search.png" class="img-fluid icon" >
 				    </FORM>
 				</div>
 				<div class="col-1 ml-3" style="padding: 0;">
               		<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Shop_product/allShop_product.jsp'" style="border: 1px black solid;">
-                    	<img src="image/list.png" class="img-fluid">
+                    	<img src="<%=request.getContextPath()%>/back-end/backFrame/image/list.png" class="img-fluid">
                     </button>
                 </div>
                 <div class="col-1 ml-3" style="padding: 0;">
                 	<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Shop_product/addProduct.jsp'" style="border: 1px black solid;">
-                    	<img src="image/addbrand.png" class="img-fluid">
+                    	<img src="<%=request.getContextPath()%>/back-end/backFrame/image/addbrand.png" class="img-fluid">
                     </button>
                 </div>
                 <div class="col-3">
@@ -95,7 +95,7 @@
     								<th id="td_mertail"><span>材質</span></th>
     								<th id="td_status"><span>狀態</span></th>
     								<th id="td_btn"></th>
-    								<th id="td_btn"></th>
+<!--     								<th id="td_btn"></th> -->
     							</tr>
     						</thead>
 <%@ include file="page1.file" %> 		
@@ -178,19 +178,19 @@
 				    				<td>
 				    					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop_product.do" style="position: relative;">
 										    <input type="submit" value="修改" style="position: absolute; opacity: 0;">
-										    <input type="image" src="image/changeicon.png" alt="Submit" align="right" class="img-fluid"/>
+										    <input type="image" src="<%=request.getContextPath()%>/back-end/backFrame/image/changeicon.png" alt="Submit" class="img-fluid"/>
 										    <input type="hidden" name="sq_product_id"  value="${productVO.sq_product_id}">
 										    <input type="hidden" name="action"	value="getOneForUpdate">
 										</FORM>
 				    				</td>
-				    				<td>
-										 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop_product.do" style="position: relative;">
-										   	<input type="submit" value="刪除" style="position: absolute; opacity: 0;">
-										   	<input type="image" src="image/delicon.png" alt="Submit" align="right" class="img-fluid"/>
-									    	<input type="hidden" name="sq_product_id" value="${productVO.sq_product_id}">
-									    	<input type="hidden" name="action" value="delete">
-									    </FORM>
-									</td>
+<!-- 				    				<td> -->
+<%-- 										 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop_product.do" style="position: relative;"> --%>
+<!-- 										   	<input type="submit" value="刪除" style="position: absolute; opacity: 0;"> -->
+<!-- 										   	<input type="image" src="image/delicon.png" alt="Submit" align="right" class="img-fluid"/> -->
+<%-- 									    	<input type="hidden" name="sq_product_id" value="${productVO.sq_product_id}"> --%>
+<!-- 									    	<input type="hidden" name="action" value="delete"> -->
+<!-- 									    </FORM> -->
+<!-- 									</td> -->
 				    			</tr>
 				    		</c:forEach>			
     					</table>

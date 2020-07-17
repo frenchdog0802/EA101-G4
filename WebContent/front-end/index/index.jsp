@@ -85,8 +85,11 @@ img.img-thumbnail{
                         </div>
                     </li>
                     <li class="nav-item dropdown navhover">
-                        <a href="<%=request.getContextPath()%>/front-end/bike/bikeStoreList.jsp" class="nav-link  text-dark"  aria-haspopup="true" aria-expanded="false">我要租車</a>
-                       
+                        <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">我要租車</a>
+                        <!--text-dark active nav-item  -->
+                        <div class="dropdown-menu" aria-lablelledby="dropdownId">
+                            <a href="<%=request.getContextPath()%>/front-end/bike/bikeStoreList.jsp" class="dropdown-item">預約租車</a>
+                        </div>
                     </li>
                     <li class="nav-item dropdown navhover">
                         <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">揪團活動</a>
@@ -108,8 +111,7 @@ img.img-thumbnail{
                         <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">討論區</a>
                         <!--text-dark active nav-item  -->
                         <div class="dropdown-menu" aria-lablelledby="dropdownId">
-                            <a href="<%=request.getContextPath()%>/front-end/forum/listAllTheme.jsp" class="dropdown-item">test1</a>
-                            <a href="#" class="dropdown-item">test2</a>
+                            <a href="<%=request.getContextPath()%>/front-end/forum/listAllTheme.jsp" class="dropdown-item">文章列表</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown navhover">
