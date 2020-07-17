@@ -8,7 +8,7 @@
 <%
 	ForumVO forumVO = (ForumVO) request.getAttribute("updateListOne");
 
-	MemLoginVO memLoginVO = (MemLoginVO) session.getAttribute("memLoginVO");
+	
 	MemVO memVO = (MemVO) request.getAttribute("memVO");
 	
 %>
@@ -108,13 +108,13 @@ input[type="file"] {
 					method="post" name="form1" enctype="multipart/form-data">
 
 					<div class="input">
-<!-- 					<label>主題顯示狀態</label> -->
-<!-- 					<select name="theme_display_status"> -->
-<%-- 						<option value="0" ${forumVO.theme_display_status == 0 ? "selected" : "" }>顯示</option> --%>
-<%-- 						<option value="1" ${forumVO.theme_display_status == 1 ? "selected" : "" }>封存</option> --%>
-<!-- 					</select> -->
+					<label>主題顯示狀態</label>
+					<select name="theme_display_status">
+						<option value="0" ${forumVO.theme_display_status == 0 ? "selected" : "" }>顯示</option>
+						<option value="1" ${forumVO.theme_display_status == 1 ? "selected" : "" }>封存</option>
+					</select>
 					<img class="card-img-top" height="200"
-								src="<%=request.getContextPath()%>/forum/ForumDBReader.do?sq_theme_id=${forumVO.sq_theme_id}">
+							src="<%=request.getContextPath()%>/forum/ForumDBReader.do?sq_theme_id=${forumVO.sq_theme_id}">
 <!-- 						<img id="theme_pic" class="img-fluid rounded" src="#"> -->
 					</div>
 					<!-- Comments Form -->
@@ -136,10 +136,10 @@ input[type="file"] {
 							<input type="text" name="sq_theme_id" value="<%=forumVO.getSq_theme_id()%>">
 							<input type="hidden" name="reponse_sum" value="<%=forumVO.getReponse_sum()%>"> 
 
-							<div class="form-group">
-								<label for="theme_display_status">狀態碼：</label> <input type="TEXT"
-									name="theme_display_status"	value="<%=forumVO.getTheme_display_status()%>"/>
-							</div>
+<!-- 							<div class="form-group"> -->
+<!-- 								<label for="theme_display_status">狀態碼：</label> <input type="TEXT" -->
+<%-- 									name="theme_display_status"	value="<%=forumVO.getTheme_display_status()%>"/> --%>
+<!-- 							</div> -->
 
 							<input
 								type="text" name="sq_member_id" value="<%=forumVO.getSq_member_id()%>"> 
@@ -178,12 +178,12 @@ input[type="file"] {
 
 			Categories Widget
 			<div class="card my-4">
-				<div class="p-3 mb-2 bg-info text-white">發文者:${memVO.nick_name}</div>
+				<div class="p-3 mb-2 bg-info text-white">發文者:${Theme_memVO.nick_name}</div>
 				<div class="card-body">
 					<div class="row">
 						<ul class="list-unstyled mb-0">
 							<img id="member_avatar"
-								src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${forumVO.sq_member_id}"
+								src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${Theme_memVO.sq_member_id}"
 								style="height: 100px;">
 							<div for="theme_name">會員編號：${forumVO.sq_member_id}</div>
  							

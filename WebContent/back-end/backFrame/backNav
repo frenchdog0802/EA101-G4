@@ -31,7 +31,7 @@
 					</button>			
 				</div>
 				<div class="liststy">
-					<button class="btn listbtn my-3">
+					<button class="btn listbtn my-3" onclick="location.href='<%=request.getContextPath()%>/back-end/forum/listAllForum.jsp'">
 						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/mail.png" class="img-fluid">
 					</button>		
 				</div>
