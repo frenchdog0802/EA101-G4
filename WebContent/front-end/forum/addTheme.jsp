@@ -103,9 +103,12 @@ input[type="file"] {
 				<form action="<%=request.getContextPath()%>/forum/forum.do"
 					method="post" name="form1" enctype="multipart/form-data">
 
-<!-- 					<div class="input"> -->
-<!-- 						<img id="theme_pic" class="img-fluid rounded" src="#"> -->
-<!-- 					</div> -->
+					<div class="input">
+						<img id="theme_pic" class="img-fluid rounded" >
+						
+<!-- 						<input id="routeImg" class="routeImg" type="file" name="routeImg" onchange="demoImg()" size="45"/> -->
+<!--     <img id="demo" style="width:170px; height:100px;"/> -->
+					</div>
 					<!-- Comments Form -->
 					<div class="card my-4">
 						<h5 class="card-header">發表新主題</h5>

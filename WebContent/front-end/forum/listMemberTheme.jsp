@@ -9,7 +9,7 @@
 <%
 	ForumVO forumVO = (ForumVO) request.getAttribute("forumVO");
 
-MemVO memLoginVO = (MemVO) session.getAttribute("MemVO");
+	MemVO memLoginVO = (MemVO) session.getAttribute("MemVO");
 	MemVO memVO = (MemVO) request.getAttribute("memVO");
 	
 	ForumService forumSvc = new ForumService();
@@ -161,16 +161,15 @@ body {
 
 			<!-- Sidebar Widgets Column -->
 			<div class="col-md-4">
-					<div class="p-3 mb-2 bg-info text-white">我的資訊:${memLoginVO.nick_name}</div>
+					<div class="p-3 mb-2 bg-info text-white">我的資訊:<%=memLoginVO.getNick_name()%></div>
 					<div class="card-body">
 						<div class="row">
 							<ul class="list-unstyled mb-0">
 								<img id="member_avatar"
-									src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${memLoginVO.sq_member_id}"
+									src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=<%=memLoginVO.getSq_member_id()%>"
 									style="height: 100px;">
 								<div for="theme_member">
 									會員編號：<%=memLoginVO.getSq_member_id()%></div>
-								
 							</ul>
 						</div>
 					</div>
