@@ -72,7 +72,6 @@ INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,
 --------------------------------------------------------
 --FOR TABLE  FORUM VALUES
 -------------------------------------------------------- 
---'TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0')
 INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
   VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910002','單車蘭嶼環島野營五天四夜',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'5','台灣有六大離島可以騎單車，澎湖、金門、馬祖、綠島、蘭嶼、小琉球，龜山島跟基隆嶼開放登島了但不能騎車，所以台灣環島完下一個目標就是環離島。蘭嶼環島一圈約有37公里，整個島分為六個部落：東清、野銀、紅頭、椰油、朗島和漁人部落，每個部落都是一個自主單元，並沒有一個跨部落的領導人。為了因應現行行政體系，蘭嶼部落還是有選出一個鄉長，但僅有名義上的領導權，部落依然各自為政，如遇紛爭仍以傳統方式解決。詳細介紹：https://bit.ly/2SUrJoi',
   load_blob('theme1.jpg'),0);
