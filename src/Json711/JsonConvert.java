@@ -25,7 +25,9 @@ public class JsonConvert {
         for(int a=0 ;a<area.length;a++) {       
 //        String filename = "D:\\EA101G4\\EA101G4_workspace\\git\\src\\Json711" + area[a] +".json";//路徑因人而異
 
+
         String filename ="C:/G4_Project/git/EA101-G4/src/Json711/"+area[a]+".json";//路徑因人而異
+
 
         try {
         	System.out.println(filename);
