@@ -79,14 +79,14 @@ public class ProductEcpayServlet extends HttpServlet {
 			String shopOrder_id = Shop_orderSvc.getCurrentKey();//取得目前最大的訂單編號
 			String sq_rent_idNum = null;
 			String sq_rent_idStr = null;
-			int j = shopOrder_id.indexOf("D");
+			int j = shopOrder_id.indexOf("-");
 			sq_rent_idStr = shopOrder_id.substring(0, j + 1);
 			sq_rent_idNum = Integer.toString(new Integer(shopOrder_id.substring(j + 1)) + 1);
 			StringBuilder sb = new StringBuilder();// 串接回來
 			sb.append(sq_rent_idStr);
 			sb.append(sq_rent_idNum);
 			shopOrder_id = sb.toString();
-	
+			
 			// 交易日期
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -98,7 +98,7 @@ public class ProductEcpayServlet extends HttpServlet {
 			
 //			訂單編號
 
-			obj.setMerchantTradeNo(shopOrder_id);
+			obj.setMerchantTradeNo("XOKFJURSD45");
 					
 //			設定MerchantTradeDate 合作特店交易時間
 			obj.setMerchantTradeDate(formatstr);
@@ -109,13 +109,13 @@ public class ProductEcpayServlet extends HttpServlet {
 //			設定交易訊息
 			obj.setTradeDesc("支付信用卡");
 //			設定ReturnURL 付款完成通知回傳網址 使用  ngrok.io
-			String returnURL = "https://f663d4c89a43.ngrok.io/EA101_G4/shopMall/productEcpayServlet.do";
+			String returnURL = "https://c026ef40ab5a.ngrok.io/EA101_G4/shopMall/productEcpayServlet.do";
 			obj.setReturnURL(returnURL);
 //			設定ClientBackURL Client端返回合作特店系統的按鈕連結
-			String clientBackURL = "https://f663d4c89a43.ngrok.io/EA101_G4/front-end/shopMall/shopMall.jsp";
+			String clientBackURL = "https://c026ef40ab5a.ngrok.io/EA101_G4/front-end/shopMall/shopMall.jsp";
 			obj.setClientBackURL(clientBackURL);
 //			設定OrderResultURL Client端回傳付款結果網址 跟ReturnURL二選一
-			String setOrderResultURL = "https://66c9ccf9158b.ngrok.io/EA101_G4/front-end/shopMall/shoppingFinal.jsp";
+			String setOrderResultURL = "https://c026ef40ab5a.ngrok.io/EA101_G4/front-end/shopMall/shoppingFinal.jsp";
 			obj.setOrderResultURL(setOrderResultURL);
 //			設定NeedExtraPaidInfo 是否需要額外的付款資訊 
 			obj.setNeedExtraPaidInfo("N");

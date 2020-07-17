@@ -25,7 +25,8 @@ public class JsonConvert {
         for(int a=0 ;a<area.length;a++) {       
 //        String filename = "D:\\EA101G4\\EA101G4_workspace\\git\\src\\Json711" + area[a] +".json";//路徑因人而異
 
-        String filename = "C:\\G4project\\Git\\EA101-G4\\src\\Json711\\" + area[a] +".json";//路徑因人而異
+        String filename = "./G4project/Git/EA101-G4/src/Json711/" + area[a] +".json";//路徑因人而異
+        System.out.println(filename);
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(filename));
