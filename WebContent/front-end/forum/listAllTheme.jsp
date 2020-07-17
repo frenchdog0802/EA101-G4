@@ -36,6 +36,7 @@
 
 <!-- Bootstrap core CSS -->
 <link href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/index/index.css">
 
 <!-- Custom styles for this template -->
 <link href="<%=request.getContextPath()%>/bootstrap-components/css/modern-business.css" rel="stylesheet">
@@ -63,7 +64,9 @@ body {
 </head>
 
 <body>
-
+<%@include file="/front-end/page-file/page-nav"%>
+	
+ 	<div class="container my-5">
 
 
 	<!-- Page Content -->
@@ -210,19 +213,21 @@ body {
 	<!-- /.container -->
 
 	<!-- Footer -->
-	<footer class="py-5 bg-dark">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Your
-				Website 2020</p>
-		</div>
-		<!-- /.container -->
-	</footer>
+	</div>
+ 
+ 
+ 		
+	<%@include file="/front-end/page-file/page-footer"%>
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="<%=request.getContextPath()%>/vendor/jquery/jquery.min.js"></script>
 	<script
 		src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<script>
+	$(function(){
+		$(".fun-text").text("");  // text("")裡面自己輸入功能名稱 
+	});
+	</script>
 </body>
 
 </html>

@@ -108,7 +108,7 @@ img.img-thumbnail{
                         <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">討論區</a>
                         <!--text-dark active nav-item  -->
                         <div class="dropdown-menu" aria-lablelledby="dropdownId">
-                            <a href="#" class="dropdown-item">test1</a>
+                            <a href="<%=request.getContextPath()%>/front-end/forum/listAllTheme.jsp" class="dropdown-item">test1</a>
                             <a href="#" class="dropdown-item">test2</a>
                         </div>
                     </li>

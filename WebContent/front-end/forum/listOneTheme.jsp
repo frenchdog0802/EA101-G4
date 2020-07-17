@@ -54,6 +54,9 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css">
 
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/index/index.css">
+
+
 <!--  Custom styles for this template  -->
 <link href="<%=request.getContextPath()%>/front-end/forum/css/modern-business.css"
 	rel="stylesheet">
@@ -81,7 +84,9 @@
 </head>
 
 <body>
-
+<%@include file="/front-end/page-file/page-nav"%>
+	
+ 	<div class="container my-5">
  	 Page Content  
  	<div class="container"> 
 		 Page Heading/Breadcrumbs  
@@ -246,19 +251,16 @@
  			</div> 
 
  		</div> 
- 		 /.row 
+<!--  		 /.row  -->
 
  	</div> 
- 	 /.container  
+<!--  	 /.container   -->
 
- 	 Footer  
- 	<footer class="py-5 bg-dark"> 
- 		<div class="container"> 
- 			<p class="m-0 text-center text-white">Copyright &copy; Your 
- 				Website 2020</p> 
- 		</div> 
- 		 /.container  
- 	</footer> 
+ 	</div>
+ 
+ 
+ 		
+	<%@include file="/front-end/page-file/page-footer"%>
 
  	 Bootstrap core JavaScript  
  	<script src="<%=request.getContextPath()%>/front-end/forum/vendor/jquery/jquery.min.js"></script> 
@@ -271,6 +273,11 @@
  			console.log(a);
 		};
 </script> 
+<script>
+	$(function(){
+		$(".fun-text").text("檢視文章");  // text("")裡面自己輸入功能名稱 
+	});
+	</script>
  </body> 
 
  </html> 
