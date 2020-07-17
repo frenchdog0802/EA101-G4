@@ -214,7 +214,16 @@
 		<servlet-name>CollectionServlet</servlet-name>
 		<url-pattern>/collectionServlet.do</url-pattern>
 	</servlet-mapping>
-
+	
+	<servlet>
+		<servlet-name>Product_StockServlet</servlet-name>
+		<servlet-class>com.product_stock.controller.Product_stockServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Product_StockServlet</servlet-name>
+		<url-pattern>/stockServlet.do</url-pattern>
+	</servlet-mapping>
+	
 	<!-- 筑峰 -->
 	<servlet>
 		<servlet-name>MemServlet</servlet-name>

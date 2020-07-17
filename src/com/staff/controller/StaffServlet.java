@@ -105,7 +105,6 @@ public class StaffServlet extends HttpServlet{
 			try {
 				/*************************** 1.接收請求參數 ****************************************/
 				String sq_staff_id =req.getParameter("sq_staff_id");
-				System.out.println(sq_staff_id);
 				/*************************** 2.開始查詢資料 ****************************************/
 				StaffService staffSvc = new StaffService();
 				StaffVO staffVO = staffSvc.findByPrimaryKey(sq_staff_id);
