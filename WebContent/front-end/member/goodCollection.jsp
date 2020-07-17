@@ -55,8 +55,6 @@
 <!-- 	jquery已經引入  -->
 <!-- 	sweetAlert已經引入   -->
 <!-- 	boostrap4已經引入   -->
-
-
 	<script>
 	$(function(){
 		$(".fun-text").text("收藏商品");  // text("")裡面自己輸入功能名稱 

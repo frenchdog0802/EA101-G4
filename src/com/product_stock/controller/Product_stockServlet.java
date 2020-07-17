@@ -1,4 +1,4 @@
-package com.proudct_stock.controller;
+package com.product_stock.controller;
 
 import java.io.*;
 import java.util.*;
@@ -7,6 +7,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
 import com.brand.model.*;
+import com.product_stock.model.Product_stockService;
 
 @MultipartConfig
 public class Product_stockServlet extends HttpServlet {
@@ -86,17 +87,17 @@ public class Product_stockServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
-				String sq_brand_id = new String(req.getParameter("sq_brand_id"));
-				BrandService brandService = new BrandService();
-				brandService.deleteBrand(sq_brand_id);
+				String sq_stock_id = new String(req.getParameter("sq_stock_id"));
+				Product_stockService stockSvc = new Product_stockService();
+				stockSvc.deleteStock(sq_stock_id);
 				
-				String url = "/back_end/BrandBack/BrandBack.jsp";
+				String url = "/back-end/Product_stock/backProductStock.jsp";
 				RequestDispatcher success = req.getRequestDispatcher(url);
 				success.forward(req, res);
 			}catch(Exception e) {
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back_end/BrandBack/BrandBack.jsp");
+						.getRequestDispatcher("/back-end/Product_stock/backProductStock.jsp");
 				failureView.forward(req, res);
 			}
 		}
