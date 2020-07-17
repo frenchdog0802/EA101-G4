@@ -108,11 +108,11 @@ input[type="file"] {
 					method="post" name="form1" enctype="multipart/form-data">
 
 					<div class="input">
-					<label>主題顯示狀態</label>
-					<select name="theme_display_status">
-						<option value="0" ${forumVO.theme_display_status == 0 ? "selected" : "" }>顯示</option>
-						<option value="1" ${forumVO.theme_display_status == 1 ? "selected" : "" }>封存</option>
-					</select>
+<!-- 					<label>主題顯示狀態</label> -->
+<!-- 					<select name="theme_display_status"> -->
+<%-- 						<option value="0" ${forumVO.theme_display_status == 0 ? "selected" : "" }>顯示</option> --%>
+<%-- 						<option value="1" ${forumVO.theme_display_status == 1 ? "selected" : "" }>封存</option> --%>
+<!-- 					</select> -->
 					<img class="card-img-top" height="200"
 								src="<%=request.getContextPath()%>/forum/ForumDBReader.do?sq_theme_id=${forumVO.sq_theme_id}">
 <!-- 						<img id="theme_pic" class="img-fluid rounded" src="#"> -->
@@ -134,12 +134,12 @@ input[type="file"] {
 								<textarea class="form-control" height="auto" rows="16" name="theme_detial"><%=forumVO.getTheme_detial()%></textarea>
 							</div>
 							<input type="text" name="sq_theme_id" value="<%=forumVO.getSq_theme_id()%>">
-<%-- 							<input type="hidden" name="reponse_sum" value="<%=forumVO.getReponse_sum()%>">  --%>
+							<input type="hidden" name="reponse_sum" value="<%=forumVO.getReponse_sum()%>"> 
 
-<!-- 							<div class="form-group"> -->
-<!-- 								<label for="theme_display_status">狀態碼：</label> <input type="TEXT" -->
-<%-- 									name="theme_display_status"	value="<%=forumVO.getTheme_display_status()%>"/> --%>
-<!-- 							</div> -->
+							<div class="form-group">
+								<label for="theme_display_status">狀態碼：</label> <input type="TEXT"
+									name="theme_display_status"	value="<%=forumVO.getTheme_display_status()%>"/>
+							</div>
 
 							<input
 								type="text" name="sq_member_id" value="<%=forumVO.getSq_member_id()%>"> 
