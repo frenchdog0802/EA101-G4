@@ -75,24 +75,27 @@ INSERT INTO MEMBER (SQ_MEMBER_ID,MEMBER_ACCOUNT,PASSWORD,M_NAME,GENDER,BIRTHDAY,
 --'TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0')
   INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
   VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910002','單車蘭嶼環島野營五天四夜',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'5','台灣有六大離島可以騎單車，澎湖、金門、馬祖、綠島、蘭嶼、小琉球，龜山島跟基隆嶼開放登島了但不能騎車，所以台灣環島完下一個目標就是環離島。蘭嶼環島一圈約有37公里，整個島分為六個部落：東清、野銀、紅頭、椰油、朗島和漁人部落，每個部落都是一個自主單元，並沒有一個跨部落的領導人。為了因應現行行政體系，蘭嶼部落還是有選出一個鄉長，但僅有名義上的領導權，部落依然各自為政，如遇紛爭仍以傳統方式解決。詳細介紹：https://bit.ly/2SUrJoi',
-  NULL,'0');
+  NULL,load_blob('theme1.jpg'));
   
   INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
   VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910002','新北福隆 - 舊草嶺環狀線單車道',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'2','本文同步發表於 https://carlming.net/?p=1672 地址：新北市貢寮區福隆街（起點:福隆火車站）開放時間：08:00-17:30（17:00開始清場）注意事項：平日開放步行，假日僅供自行車進入！全路線禁止汽機車通行！景點特色：無敵海景 / 懷舊隧道 / 安全車道 /平坦順暢 / 漁村風光 租車位置：火車站旁或台二線靠福隆街口 停車資訊：車站旁路小建議有租車停出租處，無租車者自行備單車可停福隆海水浴場或台２線福隆國小旁空地停車５０元，龜壽谷街單車沿路線至隧道口也有零星可以停車',
-  NULL,'0');
+  NULL,load_blob('theme2.jpg'));
   
   INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
   VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910002','臺灣的屋脊 - 山線四日之旅',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'1','從台灣的中心點「埔里鎮」出發，穿過台灣最有名的自行車環湖公路「日月潭」，一路從台21省騎到台灣最高峰的聖山「玉山」的入口"塔塔加"，也是整個新中横公路的最高點，接著一路下滑經過台灣最知名的日出景點「阿里山」，最後接回到這座存留著歷史文化與小吃聞名的城市「嘉義」。全長194公里，總爬升3059公尺，是個能穿過幾個台灣最具有代表性的景點與公路路線。如果說台灣人心目中騎單車的聖地是位於最高海拔公路的武嶺牌樓。那這條山路則是條能經過玉山國家公園的高海拔路線，雖公路的海拔不及合歡山武嶺高，但沿路所經過的景點卻都是一級景點代表，且景色變化多端優美又壯麗。這回在年未十二月安排中南部四日行，我會在埔里當地小逛與嘉義知名的太平36彎公路騎乘，最後移動到台灣舊時代的首府「台南」結束。在這篇四日的遊記中，我會在小鎮、鄉間、環湖、小型山道、高海拔公路與熱鬧的城市間進行遊走，我認為這是我在台灣在最中短天數的旅程中，騎過最全面也是最能看見台灣的集各種精華一面的中南部之旅。',
-  NULL,'0');
+  NULL,load_blob('theme3.jpg'));
   
   INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
   VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910002','屏東大武山及老七佳吊橋單車行',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'1','又是一段自謔行程今天行程由高雄-台88-竹田-萬巒-佳平-大武山(泰武)-佳興-義林-古義-丹林-餉潭-南和-老七佳吊橋-力里-七佳-枋寮-林邊-潮州坐火車回家，詳請看本次行程影片紀錄',
-  NULL,'0');
+  NULL,load_blob('theme4.jpg'));
   
   INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
   VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910002','請問桃園跨經國路印象大橋車道何時通行？',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'1','如題， 請問是否有人知道桃園跨經國路的印象大橋自行車道預計何時啟用通行？另外，若啟用，請問目前是否真可由 龜山沿南崁溪順順騎 22 公里到南崁溪出海口竹圍漁港？ 還是目前仍是有許多斷點的不建議路線？',
-  NULL,'0');
+  NULL,load_blob('theme5.jpg'));
   
+  INSERT INTO FORUM (SQ_THEME_ID,SQ_MEMBER_ID,THEME_NAME,THEME_TIME,REPONSE_SUM,THEME_DETIAL,THEME_PIC,THEME_DISPLAY_STATUS) 
+  VALUES('TM'||'-'||LPAD(to_char(theme_seq.NEXTVAL), 6, '0'),'910002','請問桃園跨經國路印象大橋車道何時通行？',TO_DATE('2020-06-06 21:00','YYYY-MM-DD HH24:MI'),'1','如題， 請問是否有人知道桃園跨經國路的印象大橋自行車道預計何時啟用通行？另外，若啟用，請問目前是否真可由 龜山沿南崁溪順順騎 22 公里到南崁溪出海口竹圍漁港？ 還是目前仍是有許多斷點的不建議路線？',
+  NULL,load_blob('theme6.jpg'));
   
   --------------------------------------------------------
 --FOR TABLE FORUM_THEME_REPORT VALUES
@@ -570,6 +573,41 @@ STEP_LATITUDE , STEP_IMAGE, STEP_INTRODUCTION)
 --  for Table WATER_STATION
 --------------------------------------------------------
 
+<<<<<<< HEAD
+DROP TABLE TIPS;
+DROP TABLE QUESTION;
+DROP TABLE bike_rent_detail;
+DROP TABLE bike;
+DROP TABLE bike_rent_master;
+DROP TABLE bike_store;
+DROP TABLE bike_type;
+DROP TABLE MEMBER_STORE_PRODUCT;
+DROP TABLE SHOP_REPORT;
+DROP TABLE PRODUCT_COLLECTION;
+DROP TABLE SHOP_MESSAGE;
+DROP TABLE SHOP_ORDER_DETAIL;
+DROP TABLE SHOP_ORDER;
+DROP TABLE SHOP_PRODUCT_STOCK;
+DROP TABLE SHOP_PRODUCT;
+DROP TABLE BRAND;
+DROP TABLE STORE_ADDRESS;
+DROP TABLE MEMBER_STORE_ACTIVITY;
+DROP TABLE ACTIVITYREPORT;
+DROP TABLE ACT_FAVORITE;
+DROP TABLE JOINED_ACT_DETAIL;
+DROP TABLE ACTIVITY;
+DROP TABLE ROUTE_PLAN_DETAIL;
+DROP TABLE ROUTE_PLAN;
+DROP TABLE WATER_STATION;
+DROP TABLE FORUM_MESSAGE_REPORT;
+DROP TABLE FORUM_MESSAGE;
+DROP TABLE FORUM_THEME_REPORT;
+DROP TABLE FORUM;
+DROP TABLE STAFF;
+DROP TABLE AUTHORITY;
+DROP TABLE FUNCTION;
+DROP TABLE MEMBER;
+=======
 
 INSERT into WATER_STATION (SQ_STATION_ID, STATION_NAME,	STATION_ADDRESS, LONGITUDE,	LATITUDE, 
  COUNTRY, AREA, STATION_IMAGE, BUSINESS_HOURS ,
@@ -9138,6 +9176,7 @@ INSERT into WATER_STATION (SQ_STATION_ID, STATION_NAME, STATION_ADDRESS, LONGITU
    MODIFY_ID, INSERT_BY, CHECK_FLAG, ADD_STATION) values ('WS'||LPAD(to_char(water_station_sequence.NEXTVAL), 6, '0'), '7-11來鑫店', '新北市烏來區忠治里堰堤9號11號','121.547283','24.870267',
  '台灣', '新北市', load_blob('w7-11.png'), '00:00-24:00' , null, '910006', 1, 1); 
  
+>>>>>>> 56aeda6aa46aeafcb0817868434eec06ce799338
 
 --------------------------------------------------------
 --  for Table ACTIVITY
@@ -9252,11 +9291,61 @@ INSERT INTO STORE_ADDRESS VALUES(SQ_STORE_ADDRESS_ID.NEXTVAL, '松山', '台北�
 
 
 
+<<<<<<< HEAD
+CREATE TABLE PRODUCT_COLLECTION (
+     SQ_MEMBER_ID VARCHAR2(15) NOT NULL,
+     SQ_PRODUCT_ID VARCHAR2(15) NOT NULL,
+     PRODUCT_NAME  VARCHAR2(60) NOT NULL,
+     COLLECTION_DATE DATE NOT NULL,
+     CONSTRAINT COLLECTION_MEMBER_ID_FK FOREIGN KEY (SQ_MEMBER_ID) REFERENCES MEMBER (SQ_MEMBER_ID),
+     CONSTRAINT COLLECTION_PRODUCT_ID_FK FOREIGN KEY (SQ_PRODUCT_ID) REFERENCES SHOP_PRODUCT (SQ_PRODUCT_ID),
+     CONSTRAINT COLLECTION_PK PRIMARY KEY(SQ_MEMBER_ID, SQ_PRODUCT_ID)
+);
+
+CREATE TABLE SHOP_MESSAGE(
+      SQ_SHOP_MESSAGE_ID      VARCHAR2(40) NOT NULL,
+      SQ_PRODUCT_ID           VARCHAR2(40) NOT NULL,
+      SHOP_MESSAGE_DETAIL     CLOB         NOT NULL,
+      SHOP_MESSAGE_TIME       TIMESTAMP    NOT NULL,
+      SHOP_MESSAGE_STATUS      NUMBER(1)    NOT NULL,
+      CONSTRAINT MESSAGE_ID_PK   PRIMARY KEY(SQ_SHOP_MESSAGE_ID),
+      CONSTRAINT MESSAGE_PRODUCT_ID_FK FOREIGN KEY(SQ_PRODUCT_ID) REFERENCES SHOP_PRODUCT(SQ_PRODUCT_ID)
+);
+COMMENT ON COLUMN SHOP_MESSAGE.SHOP_MESSAGE_STATUS IS '0:顯示 1:隱藏';
+
+
+CREATE TABLE MEMBER_STORE_PRODUCT (
+        SQ_MEMBER_ID VARCHAR2(40) NOT NULL,
+        SQ_PRODUCT_ID VARCHAR2(40) NOT NULL,
+        STORE_DATE DATE,
+        PRIMARY KEY (SQ_MEMBER_ID,SQ_PRODUCT_ID),
+        FOREIGN KEY (SQ_MEMBER_ID) REFERENCES MEMBER(SQ_MEMBER_ID),
+        FOREIGN KEY (SQ_PRODUCT_ID) REFERENCES SHOP_PRODUCT(SQ_PRODUCT_ID)
+  );
+  
+CREATE TABLE bike_store(
+  sq_bike_store_id     VARCHAR2(40)  NOT NULL,
+  bike_store_name      VARCHAR2(200) NOT NULL,
+  bike_store_location  VARCHAR2(200) NOT NULL,
+  bike_store_phone     VARCHAR2(40)  NOT NULL,
+  store_longitude       DECIMAL(17,12) NOT NULL,
+  store_latitude       DECIMAL(17,12) NOT NULL,
+  store_opentime       VARCHAR2(40)  NOT NULL,
+  store_status         NUMBER(1)     NOT NULL,
+   area                 VARCHAR2(40)  NOT NULL,
+   store_email       VARCHAR2(200) NOT NULL,
+   store_account   VARCHAR2(200) NOT NULL,
+   store_password VARCHAR2(200) NOT NULL,
+   store_photo   BLOB,
+  PRIMARY KEY(sq_bike_store_id)
+);
+=======
 INSERT INTO BRAND VALUES(SQ_BRAND_ID.NEXTVAL, 'BTWIN', '02-1234568','桃園市中壢區中央路115號',load_blob('btwin-logo.jpg'),'來自法國里爾的 B’TWIN 是歐洲銷量第一，世界銷量第三的專業自行車品牌。1976 年起，我們設計了一系列以最高性價比為準則的自行車，將我們的夢想付諸實現。對卓越品質的苛求，從那時起就成為 B’TWIN 的指導原則。');
 INSERT INTO BRAND VALUES(SQ_BRAND_ID.NEXTVAL, 'GIANT', '02-1234567','桃園市桃園區捷安路123號',load_blob('giant_logo.jpg'),'巨大機械於1972年在臺中縣大甲鎮成立，1981年創立「捷安特」品牌，並成立「捷安特股份有限公司」負責業務銷售，在全球的生產工廠有臺灣、荷蘭及中國大陸，每年生產近500萬台各式自行車。 在通路方面，已於西歐各國、美國、日本、澳洲、加拿大、台灣及中國大陸等地，建立了自有品牌全球行銷網。');
 INSERT INTO BRAND VALUES(SQ_BRAND_ID.NEXTVAL, 'MERIDA', '02-7654321','台北市八德區美利達路123號',load_blob('merida_logo.jpg'),'美利達工業股份有限公司為臺灣自行車設計、製造和銷售的公司，於1972年9月29日由曾鼎煌創建。現於中國大陸、日本、美國、歐洲等多個國家和地區設有子公司及工廠。');
 INSERT INTO BRAND VALUES(SQ_BRAND_ID.NEXTVAL, 'VAN RYSEL', '02-4567812', '100台北市中正區重慶南路一段122號', load_blob('van_logo.jpg'), 'Van Rysel Ultra將作為高端競技公路車的品牌，Van Rysel在弗拉芒語中翻譯為「來自里爾」。這是迪卡儂為了展示他們從廉價自行車到以性能為導向的品牌形象轉型的一個標誌。');
 INSERT INTO BRAND VALUES(SQ_BRAND_ID.NEXTVAL, 'ROCKRIDER', '02-6549872', '104台北市中山區八德路二段232號', load_blob('rockrider_logo.png'), 'Rockrider是法國迪卡濃（Decathlon）運動品超市的自有自行車品牌，為迪卡濃專業生產的高質量登山車及相關配件。');
+>>>>>>> 56aeda6aa46aeafcb0817868434eec06ce799338
 
 
 --------------------------------------------------------------------------------
@@ -9656,158 +9745,25 @@ INSERT INTO TIPS(SQ_TIPS_ID,TIPS_TITLE,TIPS_DESCRIPTION) VALUES (sq_TIPS.NEXTVAL
 人行道：指為專供行人通行之騎樓、走廊，及劃設供行人行走之地面道路，與人行天橋及人行地下道。
 行人穿越道：指在道路上以標線劃設，供行人穿越道路之地方。
 標誌：指管制道路交通，表示警告、禁制、指示，而以文字或圖案繪製之標牌。
-第72條
-慢車未經核准，擅自變更裝置，或不依規定保持煞車、鈴號、燈光及反光裝置等安全設備之良好與完整者，處慢車所有人新臺幣一百八十元罰鍰，並責令限期安裝或改正。
-第75條
-慢車駕駛人，駕車在鐵路平交道有第五十四條各款情形之一者，處新臺幣一千二百元以上二千四百元以下罰鍰。
-道路交通安全規則
-第115-1條
-電動輔助自行車及電動自行車，應經檢測及型式審驗合格，並粘貼審驗合格標章後，始得行駛道路。
-第119條
-慢車不得擅自變更裝置，並應保持煞車、鈴號、燈光及反光裝置等安全設備之良好與完整。電動輔助自行車及電動自行車之安全設備，應符合電動輔助自行車及電動自行車安全檢測基準三輪以上慢車，其安全設備應符合直轄市、縣(市)政府依道路交通管理處罰條例第六十九條第三項授權另定之管理辦法規定。
-慢車擅自加裝補助引擎或馬達行駛者，依汽車之拼裝車輛處理。
-第127條
-慢車不得牽引其他車輛或攀附汽車隨行。
-第128條
-慢車有燈光設備者，應保持良好與完整，在夜間行駛應開啟燈光。
- 臺北市自行車管理規則
-第3條
-本規則用詞定義如下：
-道路：指本市行政區域內所有公路、街道、巷衖、廣場及河川高灘地等供公眾通行之地方。
-自行車：指腳踏自行車、電動輔助自行車及電動自行車。
-駕駛人：指自行車之駕駛人。
-自行車專用道：指設有自行車專用車道線或標誌之道路。
-人車共用道：指設有行人及自行車專用標誌之道路。
-第4條
-為保障市民財產安全、降低失竊風險與利於查竊，本市得建立自行車自願性登記制度。
-前項自行車自願性登記制度作業要點由本市監理處另定之。
-第5條
-駕駛人行駛自行車前，應調整座墊高度，並檢視輪胎胎壓、前後煞車效能及鈴號、燈光
-和反光裝置等各項配備之完整與功能良好。自行車頭燈顏色應為白色或淡黃色，尾燈顏
-色應為紅色。為改善自行車騎乘安全，駕駛人行駛時宜配戴頭盔(安全帽)。
-第6條
-駕駛人行駛自行車時，自行車前後不得有人攀附站立，以維行車安全。');
+');
 
 INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL ,2, 
 '由【交通部運輸研究所】所出版之「自行車道系統規劃設計參考手冊」於99 年提出第一版初稿，經東部自行車路網示範計畫督導協調推動小組多次會議研商及至交通部部務會報提報，並邀集產官學進行研討暨參考國外相關規定後，於100 年提出第二版修訂，嗣後經101 年整併既有法規條文，於102年提出第三版修訂。
 本手冊主要在提供推動單位在自行車道之規劃、設置、安全防護與管理上，有較為一致之標準，以保障民眾騎乘使用之安全；另外考慮自行車道之設置原即包容多元思維，因此也建議在涉及地區景觀特色之設計、資訊說明提供等部分宜由設置者發揮創意，使各地自行車道之佈設更具地方吸引力與便利性。');
 
-INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL ,3, 
-'單車服
-安全帽
-前、後燈
-水壺架
-車架馬鞍袋');
-INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL ,4, 
-'一、生活用品:
-現金、零錢/信用卡/提款卡
-身分證/健保卡
-盥洗用具
-個人醫藥品（特殊藥品、酸痛藥膏）
-防曬乳液
-二、通訊用品:
-手機/充電器/電池
-行動電源/備用電源
-三、人身用品:
-安全帽
-水壺
-雨衣/雨褲
-自行車衣、車褲（長短不拘）
-個人防護用具（護膝、護腕等）
-防風太陽眼鏡
-防滑、吸震手套
-出遊貼心小叮嚀
-1.舒適、排汗、適合的運動。
-2.單車活動是長久的，請考量攜帶物品的實用性。
-並以個人必需品、輕便、體積小、旅途中不易購買為主要之考量重點。
-3.長途旅遊的行李請盡量精簡，托運之行李以21吋為主，個人
-貴重物品請隨身保管，勿放置於托運行李中。
-4.運動酸痛是必然的，請記得攜帶酸痛外敷藥品。（推薦藥品：普拿疼酸痛藥膏）');
-INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL , 5, 
-'正確騎乘技巧
-1.手肘手臂要微彎
-2.背部腰部成弓狀
-3.手臂手腕要打直
-4.坐墊高度要適當
-5.膝蓋位置要正確
-正確剎車技巧
-1.適當的剎車距離
-多利用點煞的方式；切記不要長時間持續按住煞車，因為會使煞車塊過熱，造成煞車力降低，發生危險！
-2.剎車技巧
-雙手同時剎車，只煞後輪容易打滑，只煞前輪容易造成翻車。
-正確騎乘觀念
-1.隨時補充熱量，才有持續運動的動力，千萬別讓自己處於飢餓的狀態。
-2.隨時補充水份，別等感覺口渴了才喝。
-3.適當的休息，每15-20公里休息一次，記得舒緩身體。
-4.預防抽筋，多補充含鈉、鉀成分的食物或飲料。 (如：香蕉)
-5.要防曬，別因麻煩而不預防，這是防曬傷不是防曬黑的。
-6.保持下檔的乾淨及清爽。
-騎乘安全須知
-1.專心騎乘！
-2.養成熱身運動，以防運動傷害。(循序漸進,確保安全)
-3.尊重路權！靠路邊騎乘。
-4.注意後方來車及停在路邊的車子。
-5.表明你的行進動向，就如開車一樣變換車道。
-6.注意力分配 前30~40% 後70%~60%。
-7.回到柏油路上時，注意路面高低落差。');
-INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL ,6, 
-'臺北市
-大同區	大橋派出所	臺北市大同區延平北路 3 段 2 號	02-25945524
-萬華區	漢中街派出所	臺北市漢中街 122 號	02-23312790
-新北市
-板橋區	沙崙派出所	新北市板橋區溪北路 111 號	02-26812741, 02-26867087
-新莊區	新莊分局	新北市新莊區中正路 150 號	02-29924034, 02-29928918
-基隆市
-仁愛區	第一分局	基隆市仁愛區仁五路22號	02-24222741
-桃園市
-桃園區	武陵派出所	桃園市桃園區復興路135號	03-3364224
-中壢區	青埔派出所	桃園市中壢區青埔路一段67號	03-4531356
-新竹縣
-橫山鄉	借問站 全家橫山致豐店	新竹縣橫山鄉大肚村 12 鄰中豐路二段 112-2 號	03-5931649
-新埔鎮	新埔派出所	新竹縣新埔鎮中正路 475 號	03-5882034
-新竹市
-北區	借問站 新竹市十七公里海岸風景區旅遊服務中心	新竹市南寮街 261 號	03-5360350
-東區	第二分局	新竹市光復路二段 798 號	03-5728750#1,03-5728748(勤務指揮中心 24H)
-苗栗縣
-苗栗市	苗栗分局	苗栗縣苗栗市勝利里金鳳街109號	037-320059
-頭屋鄉	頭屋分駐所	苗栗縣頭屋鄉頭屋村中山街17號	037-253103
-臺中市
-大里區	成功派出所	臺中市大里區成功路 9 號	04-24950763
-豐原區	翁子派出所	臺中市豐原區豐勢路二段 10 號	04-25226021, 04-25275594
-彰化縣
-花壇鄉	三家派出所	彰化縣花壇鄉三春村彰員路 109 號	04-7862454
-芬園鄉	芬園分駐所	彰化縣芬園鄉彰南路四段 175 號	049-2522419
-南投縣
-南投市	中興派出所	南投縣南投市光華里光華路115號	049-2332544
-南投市	永清派出所	南投縣南投市營南里南營路745號	049-2325314
-雲林縣
-林內鄉	林內分駐所	雲林縣林內鄉中山路1號	05-5892404
-荊桐鄉	饒平派出所	雲林縣莿桐鄉饒平村饒平179號	05-5842034
-嘉義縣
-民雄郷	民雄分局	嘉義縣民雄郷東榮村民族路 21 號	05-2262014
-朴子市	朴子分局	嘉義縣朴子市光復路 33 號	05-3793584
-嘉義市
-西區	北鎮派出所	嘉義市西區北港路 280 號	05-2322732
-東區	興安派出所	嘉義市東區吳鳳南路 367 號	05-2224593
-臺南市
-柳營區	果毅派出所	臺南市柳營區神農里 296 號	06-6231514
-安平區	借問站 DOGA 香酥脆椒	臺南市安平區安平路 556 號	06-2218995
-高雄市
-燕巢區	燕巢分駐所	高雄市燕巢區中民路585號	07-6161402
-三民區	三民第一分局	高雄市三民區同盟一路367號	07-3118675
-屏東縣
-內埔鄉	借問站 7-11水門門市	屏東縣內埔鄉水門村忠孝路289號	08-7995113
-竹田鄉	竹田分駐所	屏東縣竹田鄉竹田村中正路111號	08-7710734
-宜蘭縣
-蘇澳鎮	港邊派出所	宜蘭縣蘇澳鎮港邊里濱海路一段195號	03-9905608
-三星鄉	大洲派出所	宜蘭縣三星鄉上將路2段468號	03-9573517
-花蓮縣
-豐濱鄉	借問站 芭崎賣店	花蓮縣豐濱鄉芭崎48號	0916-005943
-富里鄉	借問站 富里鄉農會	花蓮縣富里鄉羅山村東湖9鄰6號	03-8821705
-臺東縣
-成功鎮	借問站 7-11 欣功門市	臺東縣成功鎮三民里大同路 70 號	089-854201
-關山鎮	借問站 7-11 關山門市	臺東縣關山鎮和平路 4 號 4 之 1 號 1 樓	089-812792
-');
+
+INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL ,3, '單車服');
+
+INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL ,4, '現金、零錢/信用卡/提款卡');
+
+INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL , 5, '1.手肘手臂要微彎');
+
+INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL ,6, '大同區	大橋派出所	臺北市大同區延平北路 3 段 2 號	02-25945524');
+
+INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL ,6, '大同區	大橋派出所	臺北市大同區延平北路 3 段 2 號	02-25945524');
+
+INSERT INTO TIPS VALUES (sq_TIPS.NEXTVAL ,6, '大同區	大橋派出所	臺北市大同區延平北路 3 段 2 號	02-25945524');
+
 
 COMMIT;
   
