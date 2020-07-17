@@ -56,27 +56,14 @@
 		<div class="dropdown d-inline-block float-right">
 			<button class="btn btn-cart btn-info" type="button"
 				id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				我的清單 <span class="badge badge-pill badge-danger">2</span>
+				我的清單 <span class="badge badge-pill badge-danger list-add">0</span>
 			</button>
 			<div class="dropdown-menu dropup"
 				style="min-width: 300px;">
 				<div class="px-4 py-3">
 					<div class="h6">已選購商品</div>
-					<table class="table table-sm" style="font-size:16px">
-						<tr>
-							<td><a href="#"> <i class="far fa-trash-alt"></i>
-							</a></td>
-							<td >金牌西裝</td>
-							<td>1 件</td>
-							<td>$ 520</td>
-						</tr>
-						<tr>
-							<td><a href="#"> <i class="far fa-trash-alt"></i>
-							</a></td>
-							<td>金牌女裝</td>
-							<td>1 件</td>
-							<td>$ 480</td>
-						</tr>
+					<table class="table table-sm table-list" style="font-size:16px">
+						
 					</table>
 				</div>
 			</div>
@@ -224,6 +211,21 @@
 				dataType:"JSON",
 				success:function(data){
 					console.log(data);
+					var str ;
+					for(var key in data){
+						str+=
+							`  
+							<tr>
+							<td>${"${key}"}</td>
+ 							<td>${"${data[key]}"} 件</td>
+ 							<td><button class="btn btn-sm btn-danger float-right">X</button></td>
+							</tr>
+						`
+						};
+	
+					$(".table-list").html(str);
+				},complete:function(){
+					
 				}
 			})
 		})
@@ -261,6 +263,7 @@
 		//預設第一台車種.change
 		$(".selectBikeType").prop("selectedIndex", 1).change();
 		
+		var count =0;
 		//加入清單
 		$(".btn-add").click(function(){
 			$.ajax({
@@ -278,6 +281,10 @@
 			},
 			error:function(){
 				$(".parseIntQuantity").text('');
+				
+				//清單數字加總count
+				count++
+				$(".list-add").text(count);
 					//sweetAlert
 					Swal.fire(
 						'成功!',
