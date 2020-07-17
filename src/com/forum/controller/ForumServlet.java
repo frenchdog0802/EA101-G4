@@ -36,21 +36,14 @@ public class ForumServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		HttpSession session = req.getSession();
 
-//		System.out.println(action);
-
-		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
+		if ("getOne_For_Display".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String sq_theme_id = req.getParameter("sq_theme_id");
-//			System.out.println(str);
 
-				System.out.println(sq_theme_id);
-//			 Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/forum/listAllTheme.jsp");
 					failureView.forward(req, res);
@@ -61,7 +54,6 @@ public class ForumServlet extends HttpServlet {
 
 				ForumService forumSvc = new ForumService();
 				ForumVO forumVO = forumSvc.getOneTheme(sq_theme_id);
-//			System.out.println("forumVO == null=" + forumVO == null);
 				if (forumVO == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -92,7 +84,6 @@ public class ForumServlet extends HttpServlet {
 				req.setAttribute("Theme_memVO", memVO);
 				req.setAttribute("listOneTheme", forumVO); // 資料庫取出的empVO物件,存入req
 
-				System.out.println(forumVO.getSq_theme_id());
 				String url2 = "/front-end/forum/listOneTheme.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url2); // 成功轉交 listOne.jsp
 				successView.forward(req, res);
@@ -104,8 +95,9 @@ public class ForumServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		
 		if ("getOne_For_Update".equals(action)) { // 來自listoneTheme.jsp的請求
-
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
