@@ -143,7 +143,7 @@ input[type="file"] {
 
 							<input
 								type="text" name="sq_member_id" value="<%=forumVO.getSq_member_id()%>"> 
-								<input type="hidden" name="action" value="update">
+								<input type="hidden" name="action" value="updateByStaff">
 
 
 							<div class="card mb-4">

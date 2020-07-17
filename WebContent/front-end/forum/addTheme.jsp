@@ -101,7 +101,8 @@ input[type="file"] {
 					method="post" name="form1" enctype="multipart/form-data">
 
 					<div class="input">
-						<img id="theme_pic" class="img-fluid rounded" src="#">
+						<img class="card-img-top" height="200"
+								src="<%=request.getContextPath()%>/forum/ForumDBReader.do?sq_theme_id=${forumVO.sq_theme_id}">
 					</div>
 					<!-- Comments Form -->
 					<div class="card my-4">
