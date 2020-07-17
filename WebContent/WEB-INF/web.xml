@@ -510,9 +510,7 @@
 		
 <!-- 		activity -->
 		<url-pattern>/front-end/activity/Actmanagement.jsp</url-pattern>
-		<url-pattern>/front-end/activity/ActivityOne.jsp</url-pattern>
 		<url-pattern>/front-end/activity/FrontaddAct.jsp</url-pattern>
-		<url-pattern>/front-end/activity/ActivityArea.jsp</url-pattern>
 <!-- 		shop -->
 		<url-pattern>/front-end/shopMall/shopPayDetail.jsp</url-pattern>
 		<url-pattern>/front-end/member/goodCollection.jsp.jsp</url-pattern>
