@@ -33,7 +33,7 @@
 
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a
-					href="<%=request.getContextPath()%>/front-end/index/index.html">Home</a>
+					href="<%=request.getContextPath()%>/front-end/index/index.jsp">Home</a>
 				</li>
 				<li class="breadcrumb-item active">自行車問答集</li>
 			</ol>
