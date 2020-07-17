@@ -73,21 +73,7 @@ zip["連江縣"] = {'南竿':209,'北竿':210,'莒光':211,'東引':212};
                 var countySelectText = $("option:selected", this).text();
                 
                 if(zip[citySelectText] != null && zip[citySelectText][countySelectText] != null){
-                    zipcode.val(citySelectText+countySelectText);
-//                    var key = citySelectText+countySelectText;
-//                    console.log(key);
-//                    $.ajax({
-//      		        	type : "POST",
-//      		        	url  : "<%=request.getContextPath()%>/storeServlet.do",
-//      		        	data : {
-//      		        		action : "getShopName",
-//      		        		directKey : key,
-//      		        	},
-//      		        	success : function(data){
-//      		        		console.log(data);
-//      		        	}
-//      		        });
-                    
+                    zipcode.val(citySelectText+countySelectText);          
 	            }else {
 	            	zipcode.val("");
 	            }

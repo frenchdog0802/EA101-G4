@@ -107,7 +107,8 @@ if("payFinish".equals(action)){
 	$.datetimepicker.setLocale('zh');
 	$(function(){
 		$(".fun-text").text("預約租車");
-		
+		mouse_click_submit();
+		mouse_hover();
 		//ajax SearchArea
 		$(".nav-area>a").click(function() {
 			var area = $(this).text();
