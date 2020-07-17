@@ -119,15 +119,18 @@
 				color=red><b>*</b></font></label>
 			<div class="col-sm-10">
 				<input type="TEXT" name="report_response"
-					value="<%=actreportVO.getReport_response()%>" />
+					value="<%=(actreportVO.getReport_response()==null) ? "" : actreportVO.getReport_response()%>" />
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="inputReportStatusReason3" class="col-sm-2 col-form-label">檢舉狀態<font
 				color=red><b>*</b></font></label>
 			<div class="col-sm-10">
-				<input type="TEXT" name="report_status"
+				<input type="TEXT" name="report_status" id="report_status"
 					value="<%=actreportVO.getReport_status()%>" />
+					0.「檢舉未處理」
+					1.「檢舉成功」
+					2.「檢舉失敗」
 			</div>
 		</div>
 

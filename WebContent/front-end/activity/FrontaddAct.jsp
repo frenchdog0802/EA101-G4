@@ -211,8 +211,8 @@ $(function(){
 		  },
 		  validateOnBlur: true,
 		  timepicker:false,
-		  scrollMonth : false,
-		  scrollInput : false
+			  scrollMonth : false,
+			  scrollInput : false
 		 });
 });
 	//當日期有輸入資料時解索下一格日期資料

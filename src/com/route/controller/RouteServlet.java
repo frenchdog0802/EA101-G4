@@ -289,30 +289,20 @@ public class RouteServlet extends HttpServlet {
 				
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-
+				
 				String url = "/front-end/route/routeM.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交routeM.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
-				errorMsgs.add("新增資料失敗:" + e.getMessage());
+				e.printStackTrace();
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/route/setRouteBySelf.jsp");
 				failureView.forward(req, res);
 			}
-			
-			
-			
-			
 		}
 
 		System.out.println("out of servlet");
-		
-		
-		
-
-		
-		
 	}
 	
 
