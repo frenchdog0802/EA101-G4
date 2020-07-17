@@ -94,7 +94,7 @@
 										    	<div class="modal-body">
 										     		<div class="finalbtn" style="text-align: center;">
 										     			<form method="POST" action="<%=request.getContextPath()%>/shopMall/productEcpayServlet.do">
-								    						<button class="btn bg-secondary mb-2" style="width: 50%;" name="action"  value="storePay">超商付款</button>
+<!-- 								    						<button class="btn bg-secondary mb-2" style="width: 50%;" name="action"  value="storePay">超商付款</button> -->
 											    			<button class="btn bg-secondary mt-2" style="width: 50%;" name="action"  value="cardPay">信用卡支付</button>
 											    		</form>
 											    	</div>
