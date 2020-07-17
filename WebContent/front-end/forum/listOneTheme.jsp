@@ -10,7 +10,7 @@
 
 <%
 	ForumVO forumVO = (ForumVO) request.getAttribute("listOneTheme");
-	MemVO MemVO = (MemVO) session.getAttribute("memVO");
+	MemVO MemVO = (MemVO) session.getAttribute("MemVO");
 	MemVO Theme_memVO = (MemVO) request.getAttribute("Theme_memVO");
 	
 	ForumMessageService allmessageSvc = new ForumMessageService();
@@ -32,7 +32,7 @@
 
 
 
-  ${forumVO.sq_theme_id == null}  
+<%--   ${forumVO.sq_theme_id == null}   --%>
  <jsp:useBean id="memberSvc" scope="page" class="com.member.model.MemService" /> 
  <jsp:useBean id="allforumSvc" scope="page" class="com.forum.model.ForumService" /> 
 
@@ -87,9 +87,9 @@
 <%@include file="/front-end/page-file/page-nav"%>
 	
  	<div class="container my-5">
- 	 Page Content  
+ 	 
  	<div class="container"> 
-		 Page Heading/Breadcrumbs  
+		 
  		<h1 class="mt-4 mb-3"> 
  			<small><a href="#"><%=(forumVO == null) ? "標題" : forumVO.getTheme_name()%></a> 
  			</small> 
@@ -116,26 +116,26 @@
 
  		<div class="row"> 
 
- 			 Post Content Column  
+<!--  			 Post Content Column   -->
  			<div class="col-lg-8"> 
 
- 				Preview Image 
+<!--  				Preview Image  -->
  				<img class="card-img-top" height="200" 
  					src="<%=request.getContextPath()%>/forum/ForumDBReader.do?sq_theme_id=<%=forumVO.getSq_theme_id()%>"> 
  				<hr> 
 
- 				Date/Time 
+<!--  				Date/Time  -->
  				<p>Posted on <%=(forumVO == null) ? " " :forumVO.getTheme_time()%></p> 
 
  				<hr> 
 
- 				Post Content 
+<!--  				Post Content  -->
  				<p class="lead"><%=(forumVO == null) ? "主題內文" : forumVO.getTheme_detial()%></p> 
 
 
  				<hr> 
 
- 				Comments Form 
+<!--  				Comments Form  -->
  				<div class="card my-4"> 
  					<h5 class="card-header">Leave a 
  						Comment:&nbsp ${MemVO.nick_name}</h5> 
@@ -155,7 +155,7 @@
  								<input type="hidden" name="sq_theme_id" 
  									value="<%=forumVO.getSq_theme_id()%>" />  
  									<input type="hidden" 
- 									name="sq_member_id" value="$(MemVO.Sq_member_id)" /> 
+ 									name="sq_member_id" value="<%=MemVO.getSq_member_id() %>" /> 
  								<textarea name="message_detail" class="form-control" rows="3"></textarea> 
  							</div> 
  							<input type="hidden" name="action" value="insert"> 
@@ -164,32 +164,32 @@
  					</div> 
  				</div> 
 
- 				Single Comment 
+<!--  				Single Comment  -->
   					<form METHOD="post"	ACTION="<%=request.getContextPath()%>/forum/forum_message.do">			  
-<%--  				<c:forEach var="forumMessageVO" items="${list2}">  --%>
+ 					<c:forEach var="forumMessageVO" items="${list2}"> 
 <%--   					<c:if test="${forumMessageVO.message_display_status eq 0}">   --%>
 <%--   						<c:if test="${forumVO.sq_theme_id == forumMessageVO.sq_theme_id}">   --%>
-<!--  							<div class="shadow-sm mb-5 bg-white rounded row" id="message">  -->
-<!--  							<div class="col-11">  -->
+ 							<div class="shadow-sm mb-5 bg-white rounded row" id="message"> 
+ 							<div class="col-11"> 
 							
 						
-<%--  								<c:forEach var="listmember" items="${memberSvc.all}">  --%>
-<%--  								<c:if test="${listmember.sq_member_id == forumMessageVO.sq_member_id}">  --%>
+ 								<c:forEach var="listmember" items="${memberSvc.all}"> 
+ 								<c:if test="${listmember.sq_member_id == forumMessageVO.sq_member_id}"> 
 								
-<%--  								<img src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${listmember.sq_member_id}"  --%>
-<!--  									width="50" class="rounded-circle">  -->
-<%--   								${listmember.nick_name}：  --%>
-<%--   								</c:if>  --%>
-<%--   								</c:forEach>  --%>
-<%--   								<c:if test="${forumMessageVO.message_display_status eq 0}">   --%>
+ 								<img src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${listmember.sq_member_id}" 
+ 									width="50" class="rounded-circle"> 
+  								${listmember.nick_name}： 
+  								</c:if> 
+  								</c:forEach> 
+  								<c:if test="${forumMessageVO.message_display_status eq 0}">  
 <%--   									<h5 class="mt-0">${forumMessageVO.sq_member_id}</h5>   --%>
-<%--  									<P>${forumMessageVO.message_detail}</P>  --%>
-<%--  									</c:if>  --%>
-<%--  									<c:if test="${forumMessageVO.message_display_status eq 1}">   --%>
-<!--  									<P>該留言遭管理員屏蔽</P>  -->
-<%--  									</c:if>  --%>
-<!--  									<hr>  -->
-<!--  								</div>  -->
+ 									<P>${forumMessageVO.message_detail}</P> 
+ 									</c:if> 
+ 									<c:if test="${forumMessageVO.message_display_status eq 1}">  
+ 									<P>該留言遭管理員屏蔽</P> 
+ 									</c:if> 
+ 									<hr> 
+ 								</div> 
 <!--   								<div class="col-1" role="group">   -->
 								
 <!--       							<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   -->
@@ -203,16 +203,17 @@
      							 
 <!--       						    </div>   -->
 <!--   								</div>  -->
-<!--  							</div>					  -->
-<%--  				</c:forEach>  --%>
+  							</div>		
+			  
+ 				</c:forEach> 
   				</form>  
  			</div> 
 
- 			 Sidebar Widgets Column  
+<!--  			 Sidebar Widgets Column   -->
  			<div class="col-md-4"> 
 
 
- 				Side Widget 
+<!--  				Side Widget  -->
  				<div class="card my-4"> 
 				
  					<div class="p-3 mb-2 bg-info text-white">發文者:${Theme_memVO.nick_name}</div> 
@@ -230,19 +231,19 @@
  					</div> 
 
 
- 					Search Widget 
- 					<div class="card mb-4"> 
- 						<h5 class="card-header">Search</h5> 
- 						<div class="card-body"> 
- 							<div class="input-group"> 
- 								<input type="text" class="form-control" 
- 									placeholder="Search for..."> <span 
- 									class="inpug-group-append"> 
- 									<button class="btn btn-secondary" type="button">Go!</button> 
- 								</span> 
- 							</div> 
- 						</div> 
- 					</div> 
+<!--  					Search Widget  -->
+<!--  					<div class="card mb-4">  -->
+<!--  						<h5 class="card-header">Search</h5>  -->
+<!--  						<div class="card-body">  -->
+<!--  							<div class="input-group">  -->
+<!--  								<input type="text" class="form-control"  -->
+<!--  									placeholder="Search for..."> <span  -->
+<!--  									class="inpug-group-append">  -->
+<!--  									<button class="btn btn-secondary" type="button">Go!</button>  -->
+<!--  								</span>  -->
+<!--  							</div>  -->
+<!--  						</div>  -->
+<!--  					</div>  -->
 
 
  				</div> 

@@ -182,21 +182,21 @@ body {
 						</div>
 					</div>
 					
-					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/forum/forum.do">
-					<div class="card-body">
-						<div class="input-group">
-								<span class="input-group-append"> 
-								<select size="1" name="sq_member_id">
-								<c:forEach var="listmemall" items="${listmem}">
-									<option value="${listmemall.sq_member_id}">${listmemall.nick_name}
-								</c:forEach>
-								</select>
-								<input type="hidden" name="action"	value="getMember_Theme_Display"> 								
-								<button	type="submit" class="btn btn-secondary">送出</button>
-							</span>
-						</div>
-					</div>
-					</FORM>
+<%-- 					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/forum/forum.do"> --%>
+<!-- 					<div class="card-body"> -->
+<!-- 						<div class="input-group"> -->
+<!-- 								<span class="input-group-append">  -->
+<!-- 								<select size="1" name="sq_member_id"> -->
+<%-- 								<c:forEach var="listmemall" items="${listmem}"> --%>
+<%-- 									<option value="${listmemall.sq_member_id}">${listmemall.nick_name} --%>
+<%-- 								</c:forEach> --%>
+<!-- 								</select> -->
+<!-- 								<input type="hidden" name="action"	value="getMember_Theme_Display"> 								 -->
+<!-- 								<button	type="submit" class="btn btn-secondary">送出</button> -->
+<!-- 							</span> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					</FORM> -->
 					
 				</div>
 				<!-- 				</FORM> -->
