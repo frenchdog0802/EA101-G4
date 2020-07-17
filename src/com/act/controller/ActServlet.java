@@ -129,9 +129,15 @@ public class ActServlet extends HttpServlet {
 				/*************************** 2.開始查詢資料 *****************************************/
 				ActService actSvc = new ActService();
 				ActVO actVO = actSvc.getOneAct(sq_activity_id);
-				ActJoinService actjoinSvc = new ActJoinService();
-				int i = actjoinSvc.getOneJoinPeople(sq_activity_id); //查詢參加人數秀在ActivityOne.jsp
+				ActJoinService actjoinSvc = new ActJoinService();//查詢參加人數秀在ActivityOne.jsp
+				int i = actjoinSvc.getOneJoinPeople(sq_activity_id); 
 				actVO.setPopulation(i);
+				
+				if(i >= actVO.getMin_population()) {     //當參加人數大於等於最低人數，狀態改為成團
+					actSvc.joinExceedAct(sq_activity_id);
+				} else {
+					actSvc.joinBelowAct(sq_activity_id); //當參加人數小於最低人數，狀態改為未成團
+				}                                        //其實設立監聽器去做改變，效率會比較好
 				
 				ActJoinVO actjoinVO = new ActJoinVO();	//判斷是否參加過活動
 				List<ActJoinVO> list = actjoinSvc.getAll(); 

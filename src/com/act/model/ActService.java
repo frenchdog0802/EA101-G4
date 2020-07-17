@@ -74,6 +74,14 @@ public class ActService {
 		dao.cancel(sq_activity_id);
 	}
 	
+	public void joinExceedAct(String sq_activity_id) {
+		dao.joinExceed(sq_activity_id);
+	}
+	
+	public void joinBelowAct(String sq_activity_id) {
+		dao.joinBelow(sq_activity_id);
+	}
+	
 	public void deleteAct(String sq_activity_id) {
 		dao.delete(sq_activity_id);
 	}
