@@ -285,6 +285,10 @@ public class ActServlet extends HttpServlet {
 					min_population = 1;
 					errorMsgs.add("最低人數請填數字.");
 				}
+				
+				if(min_population > max_population) {
+					errorMsgs.add("最低人數不得超過上限人數");
+				}
 
 				java.sql.Date start_time = null;
 				try {
@@ -433,6 +437,10 @@ public class ActServlet extends HttpServlet {
 			} catch (NumberFormatException e) {
 				min_population = 1;
 				errorMsgs.add("下限人數請填數字.");
+			}
+			
+			if(min_population > max_population) {
+				errorMsgs.add("最低人數不得超過上限人數");
 			}
 
 			java.sql.Date start_time = null;

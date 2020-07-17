@@ -48,7 +48,7 @@
 	    		</button>
 	        </div>
 	        <div class="col-2 mx-4 my-2">
-	        	<button class="btn">
+	        	<button class="btn"  onclick="location.href='<%=request.getContextPath()%>/back-end/forum/listAllForum.jsp'">
 	            	<img src="image/indexMessage.png" class="img-fluid">
 	          	</button>
 	        </div>
