@@ -113,7 +113,6 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 			
 			pstmt.setString(1, sq_stock_id);
 			pstmt.executeUpdate();
-			pstmt.clearParameters();
 			
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured." + se.getMessage());
