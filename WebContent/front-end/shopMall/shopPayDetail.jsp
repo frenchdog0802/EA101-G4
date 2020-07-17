@@ -3,10 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.member.model.*"%>
 <%@ page import="java.util.*"%>
-<% 
-	MemService memSvc = new MemService();
-	MemVO memVO = memSvc.findByPrimaryKey("910002");
-%>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -95,28 +92,28 @@
 				    						<td class="takedt_t"><span>收件人 :</span></td>
 				    						<td class="takedt_td">
 				    							<input type="text" id="tname" name="tname" value="">
-				    							<input type="hidden" id="name" value="<%=memVO.getM_name()%>">
+				    							<input type="hidden" id="name" value="${MemVO.m_name}">
 				    						</td>
 				    					</tr>
 				    					<tr>
 				    						<td class="takedt_t"><span>連絡電話 :</span></td>
 				    						<td class="takedt_td">
 				    							<input type="text" id="tphone" name="tphone" value="">
-				    							<input type="hidden" id="phone" value="<%=memVO.getCellphone()%>">
+				    							<input type="hidden" id="phone" value="${MemVO.cellphone}">
 				    						</td>
 				    					</tr>
 				    					<tr>
 				    						<td class="takedt_t"><span>Email :</span></td>
 				    						<td class="takedt_td">
 				    							<input type="text" id="temail" name="temail" value="">
-				    							<input type="hidden" id="email" value="<%=memVO.getM_email()%>">
+				    							<input type="hidden" id="email" value="${MemVO.m_email}">
 				    						</td>
 				    					</tr>
 				    					<tr>
 				    						<td class="takedt_t"><span>收件地址 :</span></td>
 				    						<td class="takedt_td">
 				    							<input type="text" id="taddress" name="taddress" value="">
-				    							<input type="hidden" id="address" value="<%=memVO.getAddress()%>">
+				    							<input type="hidden" id="address" value="${MemVO.address}">
 				    						</td>
 				    					</tr>
 				    				</table>			    				

@@ -280,7 +280,7 @@ console.log(positionWs[e].sqStationId);
 		    content: '補水站名稱：'+positionWs[e].label+
 		    		 '<br>'+'營業時間：'+positionWs[e].businessHours+
 		    		 '<br>'+'位於地址：'+positionWs[e].stationAddress+
-					 '<br>圖片：<img id="demo" src="<%=request.getContextPath()%>/back-end/waterStation/water.stationImage?SQ_STATION_ID='+positionWs[e].sqStationId+'"'+'style="width: 150px; height: 150px">', 
+					 '<br>圖片：<img id="demo" src="<%=request.getContextPath()%>/front-end/waterStation/water.stationImage?SQ_STATION_ID='+positionWs[e].sqStationId+'"'+'style="width: 150px; height: 150px">', 
 					 
 		    		 
 		    position: {

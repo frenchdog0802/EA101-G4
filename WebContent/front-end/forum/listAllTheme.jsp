@@ -56,6 +56,10 @@ body {
 	text-overflow: ellipsis;
 }
 
+body {
+    padding-top: -56px;
+}
+
 /* #meminsert { */
 /* 	position: absolute; */
 /* 	left: 750px; */

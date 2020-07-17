@@ -445,6 +445,7 @@
   <servlet-mapping>
   	<servlet-name>WaterStationImgServlet</servlet-name>
   	<url-pattern>/back-end/waterStation/water.stationImage</url-pattern>
+  	<url-pattern>/front-end/waterStation/water.stationImage</url-pattern>
   </servlet-mapping>
   <!--怡蘋 -->
   <servlet>

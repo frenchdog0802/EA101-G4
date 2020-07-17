@@ -24,10 +24,13 @@ public class JsonConvert {
 //		,"台南市","高雄市","屏東縣","台東縣","花蓮縣","澎湖縣","金門縣","連江縣"
         for(int a=0 ;a<area.length;a++) {       
 //        String filename = "D:\\EA101G4\\EA101G4_workspace\\git\\src\\Json711" + area[a] +".json";//路徑因人而異
+
         String filename = "C:\\G4project\\Git\\EA101-G4\\src\\Json711\\" + area[a] +".json";//路徑因人而異
+
         try {
             BufferedReader br = new BufferedReader(new FileReader(filename));
             String str=null;
+            
             String data="";
             while((str=br.readLine())!=null) {
                 data=data+str+"\n";

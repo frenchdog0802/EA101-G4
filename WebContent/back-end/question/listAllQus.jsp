@@ -13,20 +13,15 @@
 <title>所有員工資料 - listAllQus.jsp</title>
 
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
+  table{
+    table-layout : fixed;
+}
+
+table tbody tr td,table tbody tr th{
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
 </style>
 
 <style>
@@ -71,15 +66,17 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
-<table>
-	<tr>
+<div class="container-fluid mt-3">
+<table class="table text-center table-bordered table-striped table-hover">
+<thead>
+	<tr class="table-info">
 		<th>問題編號</th>
 		<th>問題標題</th>
 		<th>問題回答</th>
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>
+	</thead>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="questionVo" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
@@ -103,5 +100,6 @@
 		</tr>
 	</c:forEach>
 </table>
-<%@ include file="page2.file" %>
+</div>
+<%@ include file="page3.file" %>
 <%@include file="/back-end/backFrame/backFooter"%>
