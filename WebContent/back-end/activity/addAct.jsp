@@ -181,7 +181,7 @@ $(function(){
 	  minDate:'-1970-01-01',
 	  validateOnBlur: true,
 	  timepicker:false,
-	  scrollMonth : false,
+	  scrollMonth : false, //日期禁止使用滾輪給值
 	  scrollInput : false
 	 });
 	 
@@ -195,7 +195,7 @@ $(function(){
 	  },
 	  validateOnBlur: true,
 	  timepicker:false,
-	  scrollMonth : false,
+	  scrollMonth : false, //日期禁止使用滾輪給值
 	  scrollInput : false
 	 });
 	 
@@ -209,7 +209,7 @@ $(function(){
 		  },
 		  validateOnBlur: true,
 		  timepicker:false,
-		  scrollMonth : false,
+		  scrollMonth : false, //日期禁止使用滾輪給值
 		  scrollInput : false
 		 });
 	 
@@ -222,11 +222,11 @@ $(function(){
 		  },
 		  validateOnBlur: true,
 		  timepicker:false,
-		  scrollMonth : false,
+		  scrollMonth : false, //日期禁止使用滾輪給值
 		  scrollInput : false
 		 });
 });
-	//當日期有輸入資料時解索下一格日期資料
+	//當日期有輸入資料時解鎖下一格日期資料
 	$("#inputStartTime3").change(function myfunction1(){		
 		if(!($(this).val() == "")){
 			$("#inputEndTime3").prop('readonly', false);

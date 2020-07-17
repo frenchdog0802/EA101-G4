@@ -49,4 +49,5 @@ public class ActReportService {
 	public List<ActReportVO> getAll() {
 		return dao.getAll();
 	}
+	
 }
