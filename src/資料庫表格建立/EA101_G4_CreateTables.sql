@@ -211,7 +211,7 @@ CREATE SEQUENCE FUNCTION_NUM_seq
 --------------------------------------------------------
 --  DROP TABLE
 --------------------------------------------------------
-
+DROP TABLE PRODUCT_COLLECTION;
 DROP TABLE TIPS;
 DROP TABLE QUESTION;
 DROP TABLE bike_rent_detail;
