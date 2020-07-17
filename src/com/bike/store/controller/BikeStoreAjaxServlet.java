@@ -55,8 +55,21 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 		
 		if("findBookList".equals(action)) {
 			LinkedHashMap<String, Integer> bookMap  = (LinkedHashMap<String, Integer>)session.getAttribute("bookMap");
+			
+			LinkedHashMap<String, Integer> returnMap = new LinkedHashMap<>();
+			
 			//寫到這裡要轉成中文
-			JSONObject resobj = new JSONObject(bookMap);
+			try {
+			BikeTypeService BikeTypeSvc = new BikeTypeService();
+			for (Map.Entry<String, Integer> entry : bookMap.entrySet()) {    
+				    String bikeTypeName = BikeTypeSvc.findByPrimaryKey(entry.getKey()).getBike_type_name() ;
+				    Integer quantity = entry.getValue();
+				    returnMap.put(bikeTypeName ,quantity );
+				  }    
+			}catch(Exception ce) {
+				System.out.println("暫時沒資料");
+			}
+			JSONObject resobj = new JSONObject(returnMap);
 			out.println(resobj);
 		}
 
