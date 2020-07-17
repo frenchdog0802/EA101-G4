@@ -74,6 +74,7 @@ public class ProductEcpayServlet extends HttpServlet {
 			}
 			System.out.println(items.toString());
 			// 取得訂單編號+1
+<<<<<<< HEAD
 //			Shop_orderService Shop_orderSvc = new Shop_orderService();
 //			String shopOrder_id = Shop_orderSvc.getCurrentKey();//取得目前最大的訂單編號
 //			String sq_rent_idNum = null;
@@ -86,6 +87,20 @@ public class ProductEcpayServlet extends HttpServlet {
 //			sb.append(sq_rent_idNum);
 //			shopOrder_id = sb.toString();
 			
+=======
+			Shop_orderService Shop_orderSvc = new Shop_orderService();
+			String shopOrder_id = Shop_orderSvc.getCurrentKey();//取得目前最大的訂單編號
+			String sq_rent_idNum = null;
+			String sq_rent_idStr = null;
+			int j = shopOrder_id.indexOf("D");
+			sq_rent_idStr = shopOrder_id.substring(0, j + 1);
+			sq_rent_idNum = Integer.toString(new Integer(shopOrder_id.substring(j + 1)) + 1);
+			StringBuilder sb = new StringBuilder();// 串接回來
+			sb.append(sq_rent_idStr);
+			sb.append(sq_rent_idNum);
+			shopOrder_id = sb.toString();
+	
+>>>>>>> 85f75fd51f23558fc66b4395be3bfaf3368e1f6c
 			// 交易日期
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -96,7 +111,11 @@ public class ProductEcpayServlet extends HttpServlet {
 			AioCheckOutOneTime obj = new AioCheckOutOneTime();
 			
 //			訂單編號
+<<<<<<< HEAD
 			obj.setMerchantTradeNo("AHSDIH46");
+=======
+			obj.setMerchantTradeNo(shopOrder_id);
+>>>>>>> 85f75fd51f23558fc66b4395be3bfaf3368e1f6c
 					
 //			設定MerchantTradeDate 合作特店交易時間
 			obj.setMerchantTradeDate(formatstr);

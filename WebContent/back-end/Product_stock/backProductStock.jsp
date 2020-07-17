@@ -11,7 +11,11 @@
  %>   
  <jsp:useBean id="productSvc" scope="page" class="com.shop_product.model.Shop_productService" />	
  <%@ include file="/back-end/backFrame/backHeader"%>
+<<<<<<< HEAD
  	<link rel="stylesheet" href="<%=request.getContextPath()%>/back-end/Product_stock/backProductStockCss.css">
+=======
+ 	<link rel="stylesheet" href="<%=request.getContextPath()%>/back-end/Product_stock/stockCss/backProductStockCss.css">
+>>>>>>> 85f75fd51f23558fc66b4395be3bfaf3368e1f6c
     <title>®w¦s«á¥x</title>
  <%@ include file="/back-end/backFrame/backBody"%>
 				<div class="row" style="background-color: white;">
