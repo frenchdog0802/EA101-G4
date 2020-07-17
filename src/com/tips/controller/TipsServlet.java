@@ -40,7 +40,7 @@ public class TipsServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/tips/select_pageTips.jsp");
+							.getRequestDispatcher("/back-end/tips/select_pageTips.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -55,14 +55,14 @@ public class TipsServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/tips/select_pageTips.jsp");
+							.getRequestDispatcher("/back-end/tips/select_pageTips.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("tipsVo", tipsVo); // 資料庫取出的empVO物件,存入req
-				String url = "/tips/listOneTips.jsp";
+				String url = "/back-end/tips/listOneTips.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 				successView.forward(req, res);
 
@@ -70,7 +70,7 @@ public class TipsServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/tips/select_pageTips.jsp");
+						.getRequestDispatcher("/back-end/tips/select_pageTips.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -174,7 +174,7 @@ public class TipsServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("tipsVo", tipsVo); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/tips/addTips.jsp");
+							.getRequestDispatcher("/back-end/tips/addTips.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -184,7 +184,7 @@ public class TipsServlet extends HttpServlet {
 				tipsSvc.addTips(tipsVo);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/tips/listAllTips.jsp";
+				String url = "/back-end/tips/listAllTips.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
 				
@@ -192,7 +192,7 @@ public class TipsServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/tips/addTips.jsp");
+						.getRequestDispatcher("/back-end/tips/addTips.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -214,7 +214,7 @@ public class TipsServlet extends HttpServlet {
 				tipsSvc.deleteTips(sq_tips_id);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/tips/listAllTips.jsp";
+				String url = "/back-end/tips/listAllTips.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				
@@ -222,7 +222,7 @@ public class TipsServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/tips/listAllTips.jsp");
+						.getRequestDispatcher("/back-end/tips/listAllTips.jsp");
 				failureView.forward(req, res);
 			}
 		}

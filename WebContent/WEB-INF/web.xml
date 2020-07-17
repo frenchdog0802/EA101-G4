@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="4.0">
 	<display-name>EA101_G4</display-name>
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>/front-end/index/index.jsp</welcome-file>
 		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 		<welcome-file>default.html</welcome-file>
@@ -510,7 +510,9 @@
 		
 <!-- 		activity -->
 		<url-pattern>/front-end/activity/Actmanagement.jsp</url-pattern>
+		<url-pattern>/front-end/activity/ActivityOne.jsp</url-pattern>
 		<url-pattern>/front-end/activity/FrontaddAct.jsp</url-pattern>
+		<url-pattern>/front-end/activity/ActivityArea.jsp</url-pattern>
 <!-- 		shop -->
 		<url-pattern>/front-end/shopMall/shopPayDetail.jsp</url-pattern>
 		<url-pattern>/front-end/member/goodCollection.jsp.jsp</url-pattern>
@@ -537,9 +539,9 @@
 	<filter-mapping>
 		<filter-name>staffLoginFilter</filter-name>
 		<url-pattern>/back-end/activity/*</url-pattern>
-		<url-pattern>/back-end/bike/*</url-pattern>
-		<url-pattern>/back-end/bikeStore/*</url-pattern>
-		<url-pattern>/back-end/bikeType/*</url-pattern>
+<!-- 		<url-pattern>/back-end/bike/*</url-pattern> -->
+<!-- 		<url-pattern>/back-end/bikeStore/*</url-pattern> -->
+<!-- 		<url-pattern>/back-end/bikeType/*</url-pattern> -->
 		<url-pattern>/back-end/BrandBack/*</url-pattern>
  		<url-pattern>/back-end/forum/*</url-pattern> 
 		<url-pattern>/back-end/joinActivity/*</url-pattern>

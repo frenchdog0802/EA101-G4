@@ -97,12 +97,13 @@ public class StaffLoginServlet extends HttpServlet{
 			Map<String,String> errorMsgs = new HashMap<>();
 			request.setAttribute("errorMsgs", errorMsgs);
 			String url = "";
-			try {
+//			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String storeAccount = request.getParameter("storeAccount").trim();
 				if (storeAccount == null || (storeAccount.trim()).length() == 0) {
 					errorMsgs.put("storeAccount","請輸入帳號");
 				}
+				
 				String storePassword = request.getParameter("storePassword").trim();
 				if (storePassword == null || storePassword.trim().length() == 0) {
 					errorMsgs.put("storePassword","請輸入密碼");
@@ -122,16 +123,6 @@ public class StaffLoginServlet extends HttpServlet{
 				}else {
 					session.setAttribute("BikeStoreVO", BikeStoreVO);//// *工作1: 才在session內做已經登入過的標識
 				}
-				try {
-					String location = (String) session.getAttribute("location");
-					if (location != null) {
-						session.removeAttribute("location"); // *工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
-						response.sendRedirect(location);
-						return;
-					}
-				} catch (Exception ignored) {
-					url ="/back-end/backIndex.jsp";
-				}
 //				response.sendRedirect(request.getContextPath()+"/back-end/member/selectMember_page.jsp");  //*工作3: (-->如無來源網頁:則重導至login_success.jsp)
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = request.getRequestDispatcher("/back-end/LoginStaff.jsp");
@@ -142,12 +133,12 @@ public class StaffLoginServlet extends HttpServlet{
 				url =request.getContextPath()+"/back-end/bike/bikeMaster.jsp";// "/back-end/index.jsp"
 				response.sendRedirect(url);
 			}
-			catch (Exception e) {
-				e.printStackTrace();
-				RequestDispatcher failureView = request.getRequestDispatcher("/back-end/LoginStaff.jsp");
-				failureView.forward(request, response);
-			}
-		}
+//			catch (Exception e) {
+//				e.printStackTrace();
+//				RequestDispatcher failureView = request.getRequestDispatcher("/back-end/LoginStaff.jsp");
+//				failureView.forward(request, response);
+//			}
+//		}
 		
 		//登出
 		if ("logout".equals(action)) {

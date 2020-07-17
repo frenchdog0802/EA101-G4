@@ -15,12 +15,9 @@ import com.shop_product.model.Shop_productVO;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.Vector;
 
 import ecpay.payment.integration.AllInOneService;

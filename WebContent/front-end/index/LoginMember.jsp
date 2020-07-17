@@ -111,7 +111,9 @@ input[type=text]:placeholder, input[type=password]:placeholder {
   									$(".errorMsgPws").text(data.errorPws);
   									//url
   									//data.location 
-  									window.location.href = data.location;
+  									if(data.location != null){
+  										window.location.href = data.location;
+  									}
   								}
   							})
   					}
@@ -140,8 +142,9 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 						$(".errorMsgPws").text(data.errorPws);
 						//url
 						//data.location 
-						window.location.href = data.location;
-					}
+						if(data.location != null){
+								window.location.href = data.location;
+							}					}
 				})
 			})
 		})
