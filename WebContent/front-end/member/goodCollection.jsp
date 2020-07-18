@@ -40,7 +40,7 @@
  								${collectionVO.collection_date}
  							</div>	
  							<div style="text-align: center; height:10%;">						
- 								<button class="btn bg-primary deleteCollection" value="${collectionVO.sq_product_id}">移除收藏</button>
+ 								<button class="btn bg-primary deleteCollection" value="${collectionVO.sq_product_id}" style="color:white;">移除收藏</button>
  								<input type="hidden" name="action" value="deleteCollection">
  								<input type="hidden" name="member_id" value="${collectionVO.sq_member_id}">
  							</div>
@@ -72,7 +72,23 @@
 	  		},
 	  		success : function(){
 	  			$("div[name="+ a +"]").remove();
-	  			alert("已移除收藏");
+	  			Swal.fire({
+	  			  title: 'Are you sure?',
+	  			  text: "You won't be able to revert this!",
+	  			  icon: 'warning',
+	  			  showCancelButton: true,
+	  			  confirmButtonColor: '#3085d6',
+	  			  cancelButtonColor: '#d33',
+	  			  confirmButtonText: 'Yes, delete it!'
+	  			}).then((result) => {
+	  			  if (result.value) {
+	  			    Swal.fire(
+	  			      'Deleted!',
+	  			      'Your file has been deleted.',
+	  			      'success'
+	  			    )
+	  			  }
+	  			})
 	  		}
 		});
 	});

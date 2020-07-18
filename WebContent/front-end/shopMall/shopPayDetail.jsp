@@ -158,8 +158,7 @@
         });
       }
 	
-	$(document).ready(function(){
-		
+	$(document).ready(function(){	
 		var a = $('input[name=service]:checked').val();
 		$('#paymode').val(a);
 		console.log($('#paymode').val());
