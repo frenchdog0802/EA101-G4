@@ -135,9 +135,12 @@ public class ActReportServlet extends HttpServlet {
 				String report_reason = new String(req.getParameter("report_reason"));
 				Integer report_status = null;
 				String report_response = req.getParameter("report_response").trim();
-				if(report_response.matches("null") || report_response.trim().length() == 0) {
-					errorMsgs.add("檢舉回應請勿空白");
-				}
+				String report_responseReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,65}$";
+				if(!report_response.trim().matches(report_responseReg)) { //以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("檢舉回應: 只能是中、英文字母、數字和_ , 且長度必需在1到65之間");
+	            } else if(report_response.matches("null") || report_response.trim().length() == 0) {
+	            	errorMsgs.add("檢舉回應請勿空白");
+	            }
 				String report_statusReg = "^[(0-2)]{1,1}$";
 				try {
 					report_status = new Integer(req.getParameter("report_status").trim());

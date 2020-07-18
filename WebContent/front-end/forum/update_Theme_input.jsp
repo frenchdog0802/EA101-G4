@@ -107,11 +107,11 @@ input[type="file"] {
 					method="post" name="form1" enctype="multipart/form-data">
 
 					<div class="input">
-					<label>主題顯示狀態</label>
-					<select name="theme_display_status">
-						<option value="0" ${forumVO.theme_display_status eq 0 ? "selected" : "" }>顯示</option>
-						<option value="1" ${forumVO.theme_display_status ne 1 ? "selected" : "" }>隱藏</option>
-					</select>
+<!-- 					<label>主題顯示狀態</label> -->
+<!-- 					<select name="theme_display_status"> -->
+<%-- 						<option value="0" ${forumVO.theme_display_status eq 0 ? "selected" : "" }>顯示</option> --%>
+<%-- 						<option value="1" ${forumVO.theme_display_status ne 1 ? "selected" : "" }>隱藏</option> --%>
+<!-- 					</select> -->
 					<img class="card-img-top" height="200"
 					src="<%=request.getContextPath()%>/forum/ForumDBReader.do?sq_theme_id=<%=forumVO.getSq_theme_id()%>">
 					</div>

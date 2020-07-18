@@ -79,7 +79,8 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-
+<div class="row">
+		<div class="col">
 	<form METHOD="post"
 		ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do"
 		name="form1">
@@ -118,7 +119,7 @@
 			<label for="inputReportResponse3" class="col-sm-2 col-form-label">檢舉回應<font
 				color=red><b>*</b></font></label>
 			<div class="col-sm-10">
-				<input type="TEXT" name="report_response"
+				<input type="TEXT" name="report_response" class="col-sm-10 form-control"
 					value="<%=(actreportVO.getReport_response()==null) ? "" : actreportVO.getReport_response()%>" />
 			</div>
 		</div>
@@ -126,8 +127,8 @@
 			<label for="inputReportStatusReason3" class="col-sm-2 col-form-label">檢舉狀態<font
 				color=red><b>*</b></font></label>
 			<div class="col-sm-10">
-				<input type="TEXT" name="report_status" id="report_status"
-					value="<%=actreportVO.getReport_status()%>" />
+				<input type="TEXT" name="report_status" id="report_status" class="col-sm-10 form-control"
+value="<%=actreportVO.getReport_status()%>" />
 					0.「檢舉未處理」
 					1.「檢舉成功」
 					2.「檢舉失敗」
@@ -145,5 +146,7 @@
 			</div>
 		</div>
 	</form>
+		</div>
+	</div>
 </div>
 <%@include file="/back-end/backFrame/backFooter"%>

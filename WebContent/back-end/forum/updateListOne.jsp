@@ -114,7 +114,7 @@ input[type="file"] {
 						<option value="1" ${forumVO.theme_display_status == 1 ? "selected" : "" }>封存</option>
 					</select>
 					<img class="card-img-top" height="200"
-							src="<%=request.getContextPath()%>/forum/ForumDBReader.do?sq_theme_id=${forumVO.sq_theme_id}">
+							src="<%=request.getContextPath()%>/forum/ForumDBReader.do?sq_theme_id=<%=forumVO.getSq_theme_id()%>">
 <!-- 						<img id="theme_pic" class="img-fluid rounded" src="#"> -->
 					</div>
 					<!-- Comments Form -->
@@ -176,18 +176,18 @@ input[type="file"] {
 			<!-- Search Widget -->
 
 
-			Categories Widget
+			
 			<div class="card my-4">
 				<div class="p-3 mb-2 bg-info text-white">發文者:${Theme_memVO.nick_name}</div>
 				<div class="card-body">
 					<div class="row">
 						<ul class="list-unstyled mb-0">
 							<img id="member_avatar"
-								src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${Theme_memVO.sq_member_id}"
+								src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=<%=forumVO.getSq_member_id()%>"
 								style="height: 100px;">
-							<div for="theme_name">會員編號：${forumVO.sq_member_id}</div>
+							<div for="theme_name">會員編號：<%=forumVO.getSq_member_id()%></div>
  							
-							<li><a href="#">Freebies</a></li>
+							
 						</ul>
 
 

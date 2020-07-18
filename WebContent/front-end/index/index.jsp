@@ -45,6 +45,20 @@ img.img-thumbnail{
 	height:300px;
 	width:100%;
 }
+@media (max-width: 600px) {
+  .carousel-item{
+  width:100%; 
+  height: 500px !important;
+}
+.carousel-item>img{
+  position: absolute;
+  top: -9999px;
+  bottom: -9999px;
+  left: -9999px;
+  right: -9999px;
+  margin: auto;
+  height: 100%;
+}
 </style>
 
 <link rel="stylesheet"

@@ -28,10 +28,15 @@
 
 <!-- Bootstrap core CSS -->
 
-<link href="<%=request.getContextPath()%>/front-end/forum/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="<%=request.getContextPath()%>/front-end/forum/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="<%=request.getContextPath()%>/front-end/forum/css/modern-business.css" rel="stylesheet">
+<link
+	href="<%=request.getContextPath()%>/front-end/forum/css/modern-business.css"
+	rel="stylesheet">
+	<script src="<%=request.getContextPath()%>/front-end/forum/ckeditor/ckeditor.js"></script>
 
 <style>
 body {
@@ -60,12 +65,11 @@ input[type="file"] {
 	padding: 6px 12px;
 	cursor: pointer;
 }
-
 </style>
 </head>
 
 <body>
-<%@include file="/front-end/page-file/page-nav"%>
+	<%@include file="/front-end/page-file/page-nav"%>
 
 
 
@@ -104,10 +108,10 @@ input[type="file"] {
 					method="post" name="form1" enctype="multipart/form-data">
 
 					<div class="input">
-						<img id="theme_pic" class="img-fluid rounded" >
-						
-<!-- 						<input id="routeImg" class="routeImg" type="file" name="routeImg" onchange="demoImg()" size="45"/> -->
-<!--     <img id="demo" style="width:170px; height:100px;"/> -->
+						<img id="theme_pic" class="img-fluid rounded">
+
+						<!-- 						<input id="routeImg" class="routeImg" type="file" name="routeImg" onchange="demoImg()" size="45"/> -->
+						<!--     <img id="demo" style="width:170px; height:100px;"/> -->
 					</div>
 					<!-- Comments Form -->
 					<div class="card my-4">
@@ -120,20 +124,28 @@ input[type="file"] {
 									name="theme_name"
 									value="<%=(forumVO == null) ? "" : forumVO.getTheme_name()%>" />
 							</div>
-							
+
 
 							<div class="form-group">
-								<textarea class="form-control" rows="16" name="theme_detial">內容:<%=(forumVO == null) ? "" : forumVO.getTheme_detial()%></textarea>
+								<textarea class="form-control" id="editor1" rows="16"
+									name="theme_detial">內容:<%=(forumVO == null) ? "" : forumVO.getTheme_detial()%></textarea>
+
+								<script>
+									CKEDITOR.replace('editor1', {
+										width : '85%',
+										language : 'zh'
+									});
+								</script>
+
 							</div>
 							<input type="hidden" name="reponse_sum" value="0"> <input
 								type="hidden" name="theme_display_status" value="0"> <input
-								type="hidden" name="sq_member_id"
-								value="${MemVO.sq_member_id}"> <input type="hidden"
-								name="action" value="insert">
-								
-								
+								type="hidden" name="sq_member_id" value="${MemVO.sq_member_id}">
+							<input type="hidden" name="action" value="insert">
+
+
 							<div class="card mb-4">
-								<h5 class="card-header">上傳圖片</h5>
+								<h5 class="card-header">上傳封面圖片</h5>
 								<div class="card-body">
 									<div class="input-group">
 										<span class="inpug-group-append"> <label
@@ -159,18 +171,17 @@ input[type="file"] {
 			<!-- Search Widget -->
 
 			<div class="card my-4">
-				<div class="p-3 mb-2 bg-info text-white">發文者:${MemVO.nick_name}</div>
+				<div class="p-3 mb-2 bg-info text-white">發文者:<%=MemVO.getNick_name()%></div>
 				<div class="card-body">
 					<div class="row">
 						<ul class="list-unstyled mb-0">
 							<img id="member_avatar"
-								src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${memVO.sq_member_id}"
+								src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=<%=MemVO.getSq_member_id()%>"
 								style="height: 100px;">
 							<div for="member_id">會員編號：${MemVO.sq_member_id}</div>
-							<div  for="m_email">E-mail：${MemVO.m_email}</div>
-<%-- 							<li for="theme_name">性別：${memVO.getGender()==1 ? "男" : "女"}</li> --%>
-								
+							<div for="m_email">E-mail：${MemVO.m_email}</div>
 							
+
 						</ul>
 
 
@@ -196,8 +207,10 @@ input[type="file"] {
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="<%=request.getContextPath()%>/front-end/forum/vendor/jquery/jquery.min.js"></script>
-	<script src="<%=request.getContextPath()%>/front-end/forum/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/front-end/forum/vendor/jquery/jquery.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/front-end/forum/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 <script>
