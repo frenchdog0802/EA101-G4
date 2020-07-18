@@ -25,6 +25,12 @@ h4 {
 	color: blue;
 	display: inline;
 }
+.des{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
 </style>
 
 <style>
