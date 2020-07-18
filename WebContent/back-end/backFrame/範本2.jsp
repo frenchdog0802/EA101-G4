@@ -4,8 +4,10 @@
 				
 								<!-----------backHeader----------->
 <%@ page import="com.staff.model.*"%>
+<%@ page import="com.bike.store.model.*"%>
 <% 
 	StaffVO staffVO = (StaffVO)session.getAttribute("StaffVO");
+	BikeStoreVO bikeStoreVO = (BikeStoreVO)session.getAttribute("BikeStoreVO");
 %>
 <!doctype html>
  <html lang="en">

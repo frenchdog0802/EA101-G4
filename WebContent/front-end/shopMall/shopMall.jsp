@@ -76,7 +76,7 @@
 		    				</div>
 		    				<jsp:useBean id="brandService" scope="page" class="com.brand.model.BrandService" />  
 		    				<div class="col-2 pt-2 ">
-		    					<select class="form-control" id="brandSrh">
+		    					<select class="form-control srh" id="brandSrh">
 		    						<option value="" style="display: none">品牌</option>
 									<c:forEach var="brandVO" items="${brandService.all}" > 
 										<option value="${brandVO.sq_brand_id}">${brandVO.brand_name}
@@ -85,7 +85,7 @@
 		    				</div>
 		    				
 		    				<div class="col-2 pt-2">
-		    					<select class="form-control" id="priceSrh">
+		    					<select class="form-control srh" id="priceSrh">
 		    						<option value="" style="display: none">價格區間</option>
 									<option value="5000">5000&nbsp;&uarr;</option>
 									<option value="1000">1000 ~ 5000</option>
@@ -95,15 +95,27 @@
 		    				</div>
 		    				<jsp:useBean id="productService" scope="page" class="com.shop_product.model.Shop_productService" />  
 							<div class="col-2 pt-2">
-		    					<select class="form-control" id="kindSrh">
+		    					<select class="form-control srh" id="kindSrh">
 		    						<option value="" style="display: none">種類</option>
-									<c:forEach var="productVO" items="${productService.all}" > 
-										<option value="${productVO.product_kind_name}">${productVO.product_kind_name}
-									</c:forEach> 
+									<option value="登山">登山車
+									<option value="公路">公路車
+									<option value="混和路面型">混和路面型
+									<option value="騎行服">騎行服
+									<option value="外套/風衣">外套/風衣
+									<option value="雨衣/雨褲">雨衣/雨褲
+									<option value="太陽眼鏡">太陽眼鏡
+									<option value="手套/袖套">手套/袖套
+									<option value="口罩/勃圍/帽套">口罩/勃圍/帽套
+									<option value="安全帽">安全帽
+									<option value="打氣筒">打氣筒
+									<option value="水壺/水壺架">水壺/水壺架
+									<option value="外胎/內胎">外胎/內胎
+									<option value="坐墊">坐墊
+									<option value="維修保養工具">維修保養工具
 								</select>
 		    				</div>
 		    				<div class="col-1 pdzero">
-		    					<button id="conditionSrh" class="btn bg-success">搜尋</button>
+		    					<button id="srhClear" class="btn bg-success" onclick="location.href='javascript:window.location.reload()'">清除搜尋</button>
 		    				</div>
 		    				<div class="col-2 pdzero" style="background-color: white;"></div>
 		    			</div>
@@ -175,7 +187,6 @@
 					   						</div>
 					   						<div class="list-boxs mt-2">
 					   							<button class="btn bg-secondary addCollection">加入收藏</button>
-<!-- 				    							<button class="btn bg-secondary addproduct">放入購物車</button> -->
 				    						</div>
 				    					</div>
 				    				</div>
@@ -268,7 +279,11 @@
 							member_id : $("input[name=member_id]", $(this).parents(".collection")).val(),
 	  		        	},
 	  		        	success : function(){
-	  		        		alert("已加入收藏");
+	  		        		Swal.fire(
+	  		        			  'Good job!',
+	  		        			  '已成功加入收藏',
+	  		        			  'success'
+	  		        			)
 	  		        	}
 	  		        });
   		        <%}%>
@@ -319,7 +334,7 @@
   					}
   				});
   			});
-  			$('#conditionSrh').click(function(){
+  			$('.srh').change(function(){
   				$.ajax({
   					type :"POST",
   					url  : "<%=request.getContextPath()%>/shop_product.do",

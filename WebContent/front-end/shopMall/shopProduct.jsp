@@ -3,8 +3,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.shop_product.model.*"%>
 <%@ page import="com.product_stock.model.*"%>
+<%@ page import="com.member.model.*" %>
 <%@ page import="java.util.*"%>
 <%
+	MemVO memVO = (MemVO)session.getAttribute("MemVO");
+
 	String sq_product_id = request.getParameter("id");
 	Shop_productService productSvc = new Shop_productService();
  	Shop_productVO productVO = productSvc.getOneById(sq_product_id);
@@ -31,8 +34,6 @@
 <head>
 <!--    CSS幫你們引入完了  你們要額外新增在自己寫-->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/shopMall/slick/slick.css">
- 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/shopMall/slick/slick-theme.css">
     <title>shop_product</title>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/shopMall/shopProductCss.css">
 </head>
@@ -42,13 +43,13 @@
  	<div class="container my-5">
 		<div class="container-fluid">
     	<div class="row">
-    		<div class="col-1"></div>
-    		<div class="col-10">
+    		<div class="col-12 px-4 py-4" style="background-color: #ecf0f1; border-radius: 20px;">
     			<div class="row">
-					<div class="col-1" style="padding-left: 0; padding-right: 0;">
-						<button class="btn" onclick="location.href='<%=request.getContextPath()%>/front-end/shopMall/shopMall.jsp'">商城</button>
+    				<div class="col-1"></div>
+					<div class="col-1" style="padding-left: 0; padding-right: 0; text-align:center;">
+						<button class="btn bg-primary mt-1" style="width:80px;" onclick="location.href='<%=request.getContextPath()%>/front-end/shopMall/shopMall.jsp'">商城</button>
 					</div>
-    				<div class="col-7 searchbtn mt-1" style="padding-left: 0; padding-right: 0;">
+    				<div class="col-7 searchbtn mt-1 pl-3" style="padding-left: 0; padding-right: 0;">
 						<input type="search" id="search" placeholder="Search..." />
 						<button type="button" class="icon"> <img src="image/search.png" class="img-fluid"></button>
 					</div>
@@ -60,10 +61,8 @@
 <!-- 					</div> -->
     			</div>
     			<div class="row mt-4">
-    				<div class="col-5 product_img" style="padding-left: 10px; padding-right: 10px; border: 1px solid black;">
-						<div>
-							<img src="<%=request.getContextPath()%>/showImg4?id=<%=productVO.getSq_product_id()%>" class="img-fluid">
-						</div>
+    				<div class="col-5 product_img" style="padding-left: 10px; padding-right: 10px;">
+						<img src="<%=request.getContextPath()%>/showImg4?id=<%=productVO.getSq_product_id()%>" class="img-fluid">
     				</div>
     				<div class="col-7">
     					<div id="product_name">
@@ -120,12 +119,14 @@
 	    					</table>
 	   					</div>
 	   					<div id="product_join">
-	   						<button class="btn bg-secondary addproduct">加入購物車</button>
+	   						<button class="btn bg-secondary addproduct mr-2" style="float:left;">加入購物車</button>
 	   						<input type="hidden" name="id" value=<%=productVO.getSq_product_id()%>>
 					   		<input type="hidden" name="name" value="<%=productVO.getProduct_name()%>">
 							<input type="hidden" name="price" value="<%=productVO.getProduct_price()%>">
-							
-	    					<button class="btn bg-success">加入收藏</button>
+							<%if(memVO != null){%>
+					    		<input type="hidden" name="member_id" value="<%=memVO.getSq_member_id()%>">
+					    	<%}%>					
+	    					<button class="btn bg-success ml-2 addCollection" style="float:left;">加入收藏</button>
 	    				</div>
     				</div>
     			</div>
@@ -140,7 +141,7 @@
     					</div>
     				</div>
     			</div>
-    			<div class="row mb-5">
+    			<div class="row mb-3">
     				<div class="col-12 product_infor mb-3 pb-3">
     					<div>
     						<h3>商品資訊</h3>
@@ -161,10 +162,13 @@
     			<div class="row">
     				<div class="col-12 pb-3 mb-3">
     					<div>
-    						<span>留言</span>
-    						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-left: 20px; margin-top: 5px;">
-								我要留言
-							</button>
+    						<div >
+    							<h3 style="display: inline-block; margin-bottom:0px;">留言</h3>
+    							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-left: 20px; margin-top: 5px; display:inline-block;">
+									我要留言
+								</button>								
+    						</div>
+    						<hr>
 							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							  <div class="modal-dialog">
 							    <div class="modal-content">
@@ -185,13 +189,11 @@
 							    </div>
 							  </div>
 							</div>
-    						<hr>
     					</div>
     					<div id="comment"></div>
     				</div>				
     			</div>
     		</div>
-    		<div class="col-1"></div>
     		</div>
     	</div>
  	</div>
@@ -199,7 +201,6 @@
 		<a href="<%=request.getContextPath()%>/front-end/shopMall/shoppingCar.jsp"><img src="image/cart.png" class="img-fluid"></a>
 	</div>		
 	<%@include file="/front-end/page-file/page-footer"%>
-	<script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		function setTotal(){
 			var t = $("#num");
@@ -230,18 +231,33 @@
 				}
 			})
 		});
-		$(document).on('ready', function() {
-			$(".regular").slick({
-		    	dots: true,
-		        infinite: true,
-		        slidesToShow: 1,
-		        slidesToScroll: 1,
-		        centerMode: true,
-		        focusOnSelect: true
-			});
-		});
 		//將商品加到購物車
 		$(document).ready(function() {
+			
+			$(".addCollection").click(function() {	
+  				<%if(memVO == null){%>
+  					alert("請先登入會員");
+  				<%}else{%>
+	  		        $.ajax({
+	  		        	type : "POST",
+	  		        	url  : "<%=request.getContextPath()%>/collectionServlet.do",
+	  		        	data : {
+	  		        		action : "addCollection",
+	  		        		product_id : $("input[name=id]").val(),
+	  		        		product_name : $("input[name=name]").val(),
+							member_id : $("input[name=member_id]").val(),
+	  		        	},
+	  		        	success : function(){
+	  		        		Swal.fire(
+	  		        			  'Good job!',
+	  		        			  '已成功加入收藏',
+	  		        			  'success'
+	  		        			)
+	  		        	}
+	  		        });
+  		        <%}%>
+  		    });
+			
 			$(".addproduct").click(function() {
   		        $.ajax({
   		        	type : "POST",
@@ -293,7 +309,7 @@
                     	var key = localStorage.key(i);
 						data = localStorage.getItem(key).split("|");
 		        		if(key.indexOf("<%=sq_product_id%>") != -1){
-                   		dataHtml +=`<div class="cus_message mb-2">
+                   		dataHtml +=`<div class="cus_message mb-2" style="border:1px black solid;">
 			    						<table>
 			    							<tr>
 			    								<td style="width: 20%; text-align: center; border-right: 1px black solid; ">

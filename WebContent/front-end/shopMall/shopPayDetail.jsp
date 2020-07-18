@@ -60,7 +60,7 @@
 									</table>
 									<div class="checkbtn mt-4">
 <!-- 										<button id="sClear">清空</button> -->
-										<button id="sConfirm" disabled="disabled">確認</button>
+<!-- 										<button id="sConfirm" disabled="disabled">確認</button> -->
 									</div>
 								</div>
 								<div class="col-6 pt-2 pl-4">
@@ -158,8 +158,7 @@
         });
       }
 	
-	$(document).ready(function(){
-		
+	$(document).ready(function(){	
 		var a = $('input[name=service]:checked').val();
 		$('#paymode').val(a);
 		console.log($('#paymode').val());
@@ -170,7 +169,7 @@
 		
 		$('.address-zone').ajaddress();
 		
-		$("#sConfirm").click(function(){
+		$("#c3").change(function(){
 			var name = $("#c3").val();
 			console.log(name);
 			$.ajax({

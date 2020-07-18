@@ -223,7 +223,7 @@ img.img-thumbnail{
 	<div class="container-fluid">
 		<div class="row">
 			<!-- sidebar-left -->
-			<div class="col-lg-2 col-sm-12 sidebarYellow-1 py-5">
+			<div class="col-lg-2 col-sm-12 sidebarYellow-1 py-5" style="text-align:center;">
 				<div class="m-5 py-5" style="text-align:center;">
 					<h2 class="h2 font-weight-bold mt-5">最新活動</h2>
 					<hr>

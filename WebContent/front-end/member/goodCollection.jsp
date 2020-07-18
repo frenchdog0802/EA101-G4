@@ -40,7 +40,7 @@
  								${collectionVO.collection_date}
  							</div>	
  							<div style="text-align: center; height:10%;">						
- 								<button class="btn bg-primary deleteCollection" value="${collectionVO.sq_product_id}">移除收藏</button>
+ 								<button class="btn bg-primary deleteCollection" value="${collectionVO.sq_product_id}" style="color:white;">移除收藏</button>
  								<input type="hidden" name="action" value="deleteCollection">
  								<input type="hidden" name="member_id" value="${collectionVO.sq_member_id}">
  							</div>
@@ -71,8 +71,23 @@
 				member_id : $("input[name=member_id]", $(this).parents(".collection")).val(),
 	  		},
 	  		success : function(){
-	  			$("div[name="+ a +"]").remove();
-	  			alert("已移除收藏");
+	  			Swal.fire({
+	  			  title: '確定移除收藏?',
+	  			  icon: 'warning',
+	  			  showCancelButton: true,
+	  			  confirmButtonColor: '#3085d6',
+	  			  cancelButtonColor: '#d33',
+	  			  confirmButtonText: '確認移除!'
+	  			}).then((result) => {
+	  			  if (result.value) {
+	  				$("div[name="+ a +"]").remove();
+	  			    Swal.fire(
+	  			      'Deleted!',
+	  			      'Your file has been deleted.',
+	  			      'success'
+	  			    )
+	  			  }
+	  			})
 	  		}
 		});
 	});
