@@ -216,8 +216,8 @@ public class ForumServlet extends HttpServlet {
 					in.close();
 				}
 
-				Integer theme_display_status = new Integer(req.getParameter("theme_display_status").trim());
-				
+//				Integer theme_display_status = new Integer(req.getParameter("theme_display_status").trim());
+				int theme_display_status = 0;
 				System.out.println("update gettheme_display_status=" + theme_display_status);
 
 				ForumVO forumVO = new ForumVO();
