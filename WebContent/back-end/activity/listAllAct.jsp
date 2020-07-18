@@ -35,11 +35,6 @@
   	word-break:break-all;
   }
   
-  .des {
-  	overflow:hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-  }
 </style>
 <%@include file="/back-end/backFrame/backBody"%>
 <div class="row" style="background-color: white;">
@@ -99,7 +94,7 @@
 			<tbody>
 				<%@ include file="page1.file"%>
 				<c:forEach var="actVO" items="${list}" begin="<%=pageIndex%>"
-					end="<%=pageIndex+rowsPerPage-1%>">
+					end="<%=pageIndex+rowsPerPage-1%>" varStatus="vs">
 					<tr>
 						<td style="vertical-align: middle">${actVO.sq_activity_id}</td>
 						<td style="vertical-align: middle">${actVO.sq_route_id}</td>
@@ -112,7 +107,27 @@
 						<td style="vertical-align: middle">${actVO.end_time}</td>
 						<td style="vertical-align: middle">${actVO.act_start_time}</td>
 						<td style="vertical-align: middle">${actVO.act_end_time}</td>
-						<td class="des" style="vertical-align: middle">${actVO.act_description}</td>
+						<td class="des" style="vertical-align: middle">
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter${vs.index}">查看</button>
+                                        <div class="modal fade" id="exampleModalCenter${vs.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        	<div class="modal-dialog modal-dialog-centered" role="document">
+                                            	<div class="modal-content">
+                                                	<div class="modal-header">
+                                                     	<h5 class="modal-title" id="exampleModalCenterTitle">活動描述</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        	<span aria-hidden="true">&times;</span>
+                                                       	</button>
+                                                    </div>
+	                                                <div class="modal-body" style="text-align:left;">
+	                                                	<span>${actVO.act_description}</span>
+	                                                </div>
+	                                                <div class="modal-footer" style="text-align: center;">
+	                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	                                                </div>
+                                           		</div>
+                                            </div>
+                                        </div>
+						</td>
 						<td style="vertical-align: middle"><img
 							src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'"
 							width=100% height="100"></td>
