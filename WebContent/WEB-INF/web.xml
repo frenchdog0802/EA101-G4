@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="4.0">
 	<display-name>EA101_G4</display-name>
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>/front-end/index/index.jsp</welcome-file>
 		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 		<welcome-file>default.html</welcome-file>
