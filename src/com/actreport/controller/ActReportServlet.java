@@ -135,9 +135,9 @@ public class ActReportServlet extends HttpServlet {
 				String report_reason = new String(req.getParameter("report_reason"));
 				Integer report_status = null;
 				String report_response = req.getParameter("report_response").trim();
-				String report_responseReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,65}$";
+				String report_responseReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_!?)]{1,65}$";
 				if(!report_response.trim().matches(report_responseReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("檢舉回應: 只能是中、英文字母、數字和_ , 且長度必需在1到65之間");
+					errorMsgs.add("檢舉回應: 只能是中、英文字母、數字和_!? , 且長度必需在1到65之間");
 	            } else if(report_response.matches("null") || report_response.trim().length() == 0) {
 	            	errorMsgs.add("檢舉回應請勿空白");
 	            }
@@ -199,14 +199,14 @@ public class ActReportServlet extends HttpServlet {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String sq_activity_id = req.getParameter("sq_activity_id");
 				String report_reason = new String(req.getParameter("report_reason").trim());
-				String report_reasonReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,65}$";
+				String report_reasonReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_?!)]{1,65}$";
 				if (report_reason == null || report_reason.trim().length() == 0) {
 					errorMsgs.add("檢舉理由: 請勿空白");
 				} else if(!report_reason.trim().matches(report_reasonReg)) { //以下練習正則(規)表示式(regular-expression)
 					errorMsgs.add("檢舉理由: 只能是中、英文字母、數字和_ , 且長度必需在1到65之間");
 	            } else if(report_reason.trim().matches("請填入檢舉理由")) {
 	            	errorMsgs.add("檢舉理由: 請勿空白");
-	            }
+	            } 
 				
 				ActReportVO actreportVO = new ActReportVO();
 				actreportVO.setSq_activity_id(sq_activity_id);
