@@ -14,28 +14,12 @@
 <title>所有活動的參加會員資料 - listAllActjoin.jsp</title>
 
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
   table {
 	width: 100%;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	table-layout : fixed;
   }
   table, th, td {
     border: 1px solid #CCCCFF;
@@ -44,7 +28,7 @@
     padding: 5px;
     text-align: center;
   }
-  .table1 {
+  .table {
   	table-layout:fixed;
   	word-break:break-all;
   }
@@ -84,31 +68,46 @@
         <b>輸入活動編號 (如ACT-700001):</b>
         <input type="text" name="sq_activity_id">
         <input type="hidden" name="action" value="getOne_For_Display">
-        <input type="submit" value="送出">
+        <input type="submit" value="送出" class="btn btn-danger btn-sm">
     </FORM>
-<table class="table1">
-	<tr>
-		<th>活動編號</th>
-		<th>會員編號</th>
-		<th>報名時間</th>
-		
-	</tr>
-	<%@ include file="page1.file" %>
-	
-	<c:forEach var="actjoinVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">	
-		<tr>
-			<td>${actjoinVO.sq_activity_id}</td>
-			<td>${actjoinVO.sq_member_id}</td>
-			<td>${actjoinVO.join_time}</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do" style="margin-bottom: 0px;">
-			     <input type="submit" id="dyn_tr" value="刪除">
-			     <input type="hidden" name="sq_activity_id"  value="${actjoinVO.sq_activity_id}">
-			     <input type="hidden" name="sq_member_id"  value="${actjoinVO.sq_member_id}">
-			     <input type="hidden" name="action" value="delete2"></FORM>
-			</td>
-		</tr>
-	</c:forEach>
-</table>
-<%@ include file="page2.file" %>
+<div class="container-fluid mt-3">
+	<div class="table-responsive">
+		<table
+			class="table text-center table-bordered table-striped table-hover">
+			<thead>
+				<tr class="table-info">
+					<th>活動編號</th>
+					<th>會員編號</th>
+					<th>報名時間</th>
+					<th>刪除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%@ include file="page1.file"%>
+
+				<c:forEach var="actjoinVO" items="${list}" begin="<%=pageIndex%>"
+					end="<%=pageIndex+rowsPerPage-1%>">
+					<tr>
+						<td style="vertical-align: middle">${actjoinVO.sq_activity_id}</td>
+						<td style="vertical-align: middle">${actjoinVO.sq_member_id}</td>
+						<td style="vertical-align: middle">${actjoinVO.join_time}</td>
+						<td style="vertical-align: middle">
+							<FORM METHOD="post"
+								ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do"
+								style="margin-bottom: 0px;">
+								<input type="submit" id="dyn_tr" value="刪除"
+									class="btn btn-danger btn-sm"> <input type="hidden"
+									name="sq_activity_id" value="${actjoinVO.sq_activity_id}">
+								<input type="hidden" name="sq_member_id"
+									value="${actjoinVO.sq_member_id}"> <input type="hidden"
+									name="action" value="delete2">
+							</FORM>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<%@ include file="page3.file"%>
+	</div>
+</div>
 <%@include file="/back-end/backFrame/backFooter"%>

@@ -27,7 +27,7 @@
 	<servlet>
 		<servlet-name>WeatherServlet</servlet-name>
 		<servlet-class>com.weather.scheduler.WeatherServlet</servlet-class>
-<!-- 		<load-on-startup>10</load-on-startup> 上限開起-->
+		<load-on-startup>10</load-on-startup> 
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>WeatherServlet</servlet-name>
@@ -510,9 +510,7 @@
 		
 <!-- 		activity -->
 		<url-pattern>/front-end/activity/Actmanagement.jsp</url-pattern>
-		<url-pattern>/front-end/activity/ActivityOne.jsp</url-pattern>
 		<url-pattern>/front-end/activity/FrontaddAct.jsp</url-pattern>
-		<url-pattern>/front-end/activity/ActivityArea.jsp</url-pattern>
 <!-- 		shop -->
 		<url-pattern>/front-end/shopMall/shopPayDetail.jsp</url-pattern>
 		<url-pattern>/front-end/member/goodCollection.jsp.jsp</url-pattern>

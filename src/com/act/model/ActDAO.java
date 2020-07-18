@@ -31,6 +31,8 @@ public class ActDAO implements ActDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO ACTIVITY (SQ_ACTIVITY_ID,SQ_ROUTE_ID,SQ_MEMBER_ID,ACT_TITLE,MAX_POPULATION,MIN_POPULATION,ACT_DESCRIPTION,START_TIME,END_TIME,ACT_START_TIME,ACT_END_TIME,ACT_PICTURE,GP_STATUS) VALUES ( 'ACT'||'-'||LPAD(to_char(activity_seq.NEXTVAL), 6, '0'),?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
 	private static final String UPDATE = "UPDATE ACTIVITY set SQ_ROUTE_ID=?, SQ_MEMBER_ID=?,ACT_TITLE=?, MAX_POPULATION=?, MIN_POPULATION=?, ACT_DESCRIPTION=?, START_TIME=?, END_TIME=?, ACT_START_TIME=?, ACT_END_TIME=?, ACT_PICTURE=?, GP_STATUS=? where SQ_ACTIVITY_ID = ?";
 	private static final String CANCEL = "UPDATE ACTIVITY set GP_STATUS=2 where SQ_ACTIVITY_ID = ?";
+	private static final String JOINEXCEED = "UPDATE ACTIVITY set GP_STATUS=0 where SQ_ACTIVITY_ID = ?";
+	private static final String JOINBELOW = "UPDATE ACTIVITY set GP_STATUS=1 where SQ_ACTIVITY_ID = ?";
 	private static final String DELETE = "UPDATE ACTIVITY set GP_STATUS=3 where SQ_ACTIVITY_ID = ?";
 	private static final String GET_ONE_STMT = "SELECT SQ_ACTIVITY_ID, SQ_ROUTE_ID, SQ_MEMBER_ID, ACT_TITLE, MAX_POPULATION, MIN_POPULATION, ACT_DESCRIPTION, to_char(START_TIME,'yyyy-mm-dd') START_TIME, to_char(END_TIME,'yyyy-mm-dd') END_TIME, to_char(ACT_START_TIME,'yyyy-mm-dd') ACT_START_TIME, to_char(ACT_END_TIME,'yyyy-mm-dd') ACT_END_TIME, ACT_PICTURE, GP_STATUS FROM ACTIVITY where SQ_ACTIVITY_ID = ?";
 	private static final String GET_ALL_STMT = "SELECT SQ_ACTIVITY_ID, SQ_ROUTE_ID, SQ_MEMBER_ID, ACT_TITLE, MAX_POPULATION, MIN_POPULATION, ACT_DESCRIPTION, to_char(START_TIME,'yyyy-mm-dd') START_TIME, to_char(END_TIME,'yyyy-mm-dd') END_TIME, to_char(ACT_START_TIME,'yyyy-mm-dd') ACT_START_TIME, to_char(ACT_END_TIME,'yyyy-mm-dd') ACT_END_TIME, ACT_PICTURE, GP_STATUS FROM ACTIVITY order by SQ_ACTIVITY_ID";
@@ -145,6 +147,82 @@ public class ActDAO implements ActDAO_interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(CANCEL);
+
+			pstmt.setString(1, SQ_ACTIVITY_ID);
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		}  catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
+	@Override
+	public void joinExceed(String SQ_ACTIVITY_ID) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(JOINEXCEED);
+
+			pstmt.setString(1, SQ_ACTIVITY_ID);
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		}  catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
+	@Override
+	public void joinBelow(String SQ_ACTIVITY_ID) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(JOINBELOW);
 
 			pstmt.setString(1, SQ_ACTIVITY_ID);
 

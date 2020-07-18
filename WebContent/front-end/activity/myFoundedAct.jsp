@@ -9,9 +9,7 @@
 	MemVO memVO = (MemVO)session.getAttribute("MemVO");
 	String sq_member_id = memVO.getSq_member_id();
 	session.setAttribute("sq_member_id", sq_member_id);
-	if(sq_member_id==null) {
-		session.setAttribute("sq_member_id", "910003");
-	}
+	
     ActJoinService actjoinSvc = new ActJoinService();
     ActService actSvc = new ActService();
     List<ActVO> listact = actSvc.getAll();

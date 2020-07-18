@@ -15,28 +15,12 @@
 <title>所有活動檢舉資料 - listAllActReport.jsp</title>
 
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
   table {
 	width: 100%;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	table-layout : fixed;
   }
   table, th, td {
     border: 1px solid #CCCCFF;
@@ -45,15 +29,9 @@
     padding: 5px;
     text-align: center;
   }
-  .table1 {
+  .table {
   	table-layout:fixed;
   	word-break:break-all;
-  }
-  
-  .des {
-  	overflow:hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
   }
 </style>
 <%@include file="/back-end/backFrame/backBody"%>
@@ -85,41 +63,103 @@
         <b>輸入活動檢舉編號 (如710000):</b>
         <input type="text" name="sq_activityreport_id">
         <input type="hidden" name="action" value="getOne_For_Display">
-        <input type="submit" value="送出">
+        <input type="submit" value="送出" class="btn btn-danger btn-sm">
     </FORM>
-<table class="table1">
-	<tr>
-		<th>活動檢舉編號</th>
-		<th>活動編號</th>
-		<th>會員編號</th>
-		<th>檢舉原因</th>
-		<th>檢舉回應</th>
-		<th>檢舉狀態</th>
-		<th>修改狀態</th>
-		<th>備註</th>
-	</tr>
-	<%@ include file="page1.file" %>
-	<c:forEach var="actreportVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">	
-		<tr>
-			<td>${actreportVO.sq_activityreport_id}</td>
-			<td>${actreportVO.sq_activity_id}</td>
-			<td>${actreportVO.sq_member_id}</td>
-			<td class="des">${actreportVO.report_reason}</td>
-			<td class="des">${actreportVO.report_response}</td>
-			<td>${actreportVO.report_status}</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="sq_activityreport_id"  value="${actreportVO.sq_activityreport_id}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-			</td>
-			<td>
-				<p>0.檢舉未處理</p>
-				<p>1.檢舉成功</p>
-				<p>2.檢舉失敗</p>
-			</td>
-		</tr>
-	</c:forEach>
-</table>
-<%@ include file="page2.file" %>
+<div class="container-fluid mt-3">
+	<div class="table-responsive">
+		<table
+			class="table text-center table-bordered table-striped table-hover">
+			<thead>
+				<tr class="table-info">
+					<th>活動檢舉編號</th>
+					<th>活動編號</th>
+					<th>會員編號</th>
+					<th>檢舉原因</th>
+					<th>檢舉回應</th>
+					<th>檢舉狀態</th>
+					<th>修改狀態</th>
+					<th>備註</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%@ include file="page1.file"%>
+				<c:forEach var="actreportVO" items="${list}" begin="<%=pageIndex%>"
+					end="<%=pageIndex+rowsPerPage-1%>" varStatus="vs">
+					<tr>
+						<td style="vertical-align: middle">${actreportVO.sq_activityreport_id}</td>
+						<td style="vertical-align: middle">${actreportVO.sq_activity_id}</td>
+						<td style="vertical-align: middle">${actreportVO.sq_member_id}</td>
+						<td class="des" style="vertical-align: middle">
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#exampleModalCenter${vs.index}">查看</button>
+							<div class="modal fade" id="exampleModalCenter${vs.index}"
+								tabindex="-1" role="dialog"
+								aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalCenterTitle">檢舉原因</h5>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body" style="text-align: left;">
+											<span>${actreportVO.report_reason}</span>
+										</div>
+										<div class="modal-footer" style="text-align: center;">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Close</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>
+						<td class="des" style="vertical-align: middle">
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#exampleModalCenter1${vs.index}">查看</button>
+							<div class="modal fade" id="exampleModalCenter1${vs.index}"
+								tabindex="-1" role="dialog"
+								aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalCenterTitle">檢舉回應</h5>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body" style="text-align: left;">
+											<span>${actreportVO.report_response}</span>
+										</div>
+										<div class="modal-footer" style="text-align: center;">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Close</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>
+						<td style="vertical-align: middle">${actreportVO.report_status}</td>
+						<td style="vertical-align: middle">
+							<FORM METHOD="post"
+								ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do"
+								style="margin-bottom: 0px;">
+								<input type="submit" value="修改" class="btn btn-danger btn-sm">
+								<input type="hidden" name="sq_activityreport_id"
+									value="${actreportVO.sq_activityreport_id}"> <input
+									type="hidden" name="action" value="getOne_For_Update">
+							</FORM>
+						</td>
+						<td style="vertical-align: middle">0.檢舉未處理<br> 1.檢舉成功<br>
+							2.檢舉失敗<br>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<%@ include file="page3.file"%>
+	</div>
+</div>
 <%@include file="/back-end/backFrame/backFooter"%>

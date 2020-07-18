@@ -14,22 +14,6 @@
 <%@include file="/back-end/backFrame/backHeader"%>
 <title>所有活動資料 - listAllAct.jsp</title>
 
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
 
 <style>
   table {
@@ -37,6 +21,7 @@
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	table-layout : fixed;
   }
   table, th, td {
     border: 1px solid #CCCCFF;
@@ -45,16 +30,11 @@
     padding: 5px;
     text-align: center;
   }
-  .table1 {
+  .table {
   	table-layout:fixed;
   	word-break:break-all;
   }
   
-  .des {
-  	overflow:hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-  }
 </style>
 <%@include file="/back-end/backFrame/backBody"%>
 <div class="row" style="background-color: white;">
@@ -84,69 +64,102 @@
         <b>輸入活動編號 (如ACT-700001):</b>
         <input type="text" name="sq_activity_id">
         <input type="hidden" name="action" value="getOne_For_Display">
-        <input type="submit" value="送出">
+        <input type="submit" value="送出" class="btn btn-danger btn-sm">
 </FORM>
-    
-<table class="table1">
-	<tr>
-		<th>活動編號</th>
-		<th>路線編號</th>
-		<th>會員編號</th>
-		<th>活動標題</th>
-		<th>上限人數</th>
-		<th>最低人數</th>
-		<th>參加人數</th>
-		<th>報名起始時間</th>
-		<th>報名結束時間</th>
-		<th>活動開始時間</th>
-		<th>活動結束時間</th>
-		<th>活動說明</th>
-		<th>活動圖片</th>
-		<th>成團狀態</th>
-		<th>修改</th>
-		<th>下架</th>
-		<th>備註</th>
-	</tr>
-	<%@ include file="page1.file" %>
-	<c:forEach var="actVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">	
-		<tr>
-			<td>${actVO.sq_activity_id}</td>
-			<td>${actVO.sq_route_id}</td>
-			<td>${actVO.sq_member_id}</td>
-			<td>${actVO.act_title}</td>
-			<td>${actVO.max_population}</td>
-			<td>${actVO.min_population}</td> 
-			<td>${actjoinSvc.getOneJoinPeople(actVO.sq_activity_id)}</td>
-			<td>${actVO.start_time}</td>
-			<td>${actVO.end_time}</td>
-			<td>${actVO.act_start_time}</td>
-			<td>${actVO.act_end_time}</td>
-			<td class="des">${actVO.act_description}</td>
-			<td>
-				<img src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'" width=100% height="100">
-			</td>
-			<td>${actVO.gp_status}</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActServlet.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="sq_activity_id"  value="${actVO.sq_activity_id}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActServlet.do" style="margin-bottom: 0px;">
-			     <input type="submit" id="dyn_tr" value="下架">
-			     <input type="hidden" name="sq_activity_id"  value="${actVO.sq_activity_id}">
-			     <input type="hidden" name="action" value="delete"></FORM>
-			</td>
-			<td>
-				<p>0.成團</p>
-				<p>1.未成團</p>
-				<p>2.取消揪團</p>
-				<p>3.人數已滿</p>
-				<p>4.下架</p>
-			</td>
-		</tr>
-	</c:forEach>
-</table>
-<%@ include file="page2.file" %>
+<div class="container-fluid mt-3">
+	<div class="table-responsive">
+		<table
+			class="table text-center table-bordered table-striped table-hover">
+			<thead>
+				<tr class="table-info">
+					<th>活動編號</th>
+					<th>路線編號</th>
+					<th>會員編號</th>
+					<th>活動標題</th>
+					<th>上限人數</th>
+					<th>最低人數</th>
+					<th>參加人數</th>
+					<th>報名起始時間</th>
+					<th>報名結束時間</th>
+					<th>活動開始時間</th>
+					<th>活動結束時間</th>
+					<th>活動說明</th>
+					<th>活動圖片</th>
+					<th>成團狀態</th>
+					<th>修改</th>
+					<th>下架</th>
+					<th>備註</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%@ include file="page1.file"%>
+				<c:forEach var="actVO" items="${list}" begin="<%=pageIndex%>"
+					end="<%=pageIndex+rowsPerPage-1%>" varStatus="vs">
+					<tr>
+						<td style="vertical-align: middle">${actVO.sq_activity_id}</td>
+						<td style="vertical-align: middle">${actVO.sq_route_id}</td>
+						<td style="vertical-align: middle">${actVO.sq_member_id}</td>
+						<td style="vertical-align: middle">${actVO.act_title}</td>
+						<td style="vertical-align: middle">${actVO.max_population}</td>
+						<td style="vertical-align: middle">${actVO.min_population}</td>
+						<td style="vertical-align: middle">${actjoinSvc.getOneJoinPeople(actVO.sq_activity_id)}</td>
+						<td style="vertical-align: middle">${actVO.start_time}</td>
+						<td style="vertical-align: middle">${actVO.end_time}</td>
+						<td style="vertical-align: middle">${actVO.act_start_time}</td>
+						<td style="vertical-align: middle">${actVO.act_end_time}</td>
+						<td class="des" style="vertical-align: middle">
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter${vs.index}">查看</button>
+                                        <div class="modal fade" id="exampleModalCenter${vs.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        	<div class="modal-dialog modal-dialog-centered" role="document">
+                                            	<div class="modal-content">
+                                                	<div class="modal-header">
+                                                     	<h5 class="modal-title" id="exampleModalCenterTitle">活動描述</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        	<span aria-hidden="true">&times;</span>
+                                                       	</button>
+                                                    </div>
+	                                                <div class="modal-body" style="text-align:left;">
+	                                                	<span>${actVO.act_description}</span>
+	                                                </div>
+	                                                <div class="modal-footer" style="text-align: center;">
+	                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	                                                </div>
+                                           		</div>
+                                            </div>
+                                        </div>
+						</td>
+						<td style="vertical-align: middle"><img
+							src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'"
+							width=100% height="100"></td>
+						<td style="vertical-align: middle">${actVO.gp_status}</td>
+						<td style="vertical-align: middle">
+							<FORM METHOD="post"
+								ACTION="<%=request.getContextPath()%>/act/ActServlet.do"
+								style="margin-bottom: 0px;">
+								<input type="submit" value="修改" class="btn btn-danger btn-sm">
+								<input type="hidden" name="sq_activity_id"
+									value="${actVO.sq_activity_id}"> <input type="hidden"
+									name="action" value="getOne_For_Update">
+							</FORM>
+						</td>
+						<td style="vertical-align: middle">
+							<FORM METHOD="post"
+								ACTION="<%=request.getContextPath()%>/act/ActServlet.do"
+								style="margin-bottom: 0px;">
+								<input type="submit" id="dyn_tr" value="下架"
+									class="btn btn-danger btn-sm"> <input type="hidden"
+									name="sq_activity_id" value="${actVO.sq_activity_id}">
+								<input type="hidden" name="action" value="delete">
+							</FORM>
+						</td>
+						<td style="vertical-align: middle">0.成團<br> 1.未成團<br> 2.取消揪團<br> 3.人數已滿<br>
+							4.下架<br>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<%@ include file="page3.file"%>
+	</div>
+</div>
 <%@include file="/back-end/backFrame/backFooter"%>

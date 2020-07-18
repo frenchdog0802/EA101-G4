@@ -33,15 +33,7 @@ public class ActServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		MemVO memVO = null;
 		String sq_member_id = null;
-		try {
-			memVO = (MemVO)session.getAttribute("MemVO");
-			sq_member_id = memVO.getSq_member_id();
-			session.setAttribute("sq_member_id", sq_member_id);
-		} catch (Exception e){
-			StaffVO staffVO = (StaffVO)session.getAttribute("StaffVO");
-			sq_member_id = staffVO.getSq_staff_id();
-			session.setAttribute("sq_member_id", sq_member_id);
-		}
+		
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -49,7 +41,9 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			StaffVO staffVO = (StaffVO)session.getAttribute("StaffVO");
+			sq_member_id = staffVO.getSq_staff_id();
+			session.setAttribute("sq_member_id", sq_member_id);
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String str = req.getParameter("sq_activity_id");
@@ -116,7 +110,16 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			try{
+				memVO = (MemVO)session.getAttribute("MemVO");
+				sq_member_id = memVO.getSq_member_id();
+				session.setAttribute("sq_member_id", sq_member_id);
+			}catch(Exception e) {
+				session.setAttribute("location", req.getContextPath() +"/act/ActServlet.do?"+req.getQueryString());
+				res.sendRedirect(req.getContextPath() +"/front-end/index/LoginMember.jsp");
+				return;
+			}
+			
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String str = req.getParameter("sq_activity_id");
@@ -126,9 +129,15 @@ public class ActServlet extends HttpServlet {
 				/*************************** 2.開始查詢資料 *****************************************/
 				ActService actSvc = new ActService();
 				ActVO actVO = actSvc.getOneAct(sq_activity_id);
-				ActJoinService actjoinSvc = new ActJoinService();
-				int i = actjoinSvc.getOneJoinPeople(sq_activity_id); //查詢參加人數秀在ActivityOne.jsp
+				ActJoinService actjoinSvc = new ActJoinService();//查詢參加人數秀在ActivityOne.jsp
+				int i = actjoinSvc.getOneJoinPeople(sq_activity_id); 
 				actVO.setPopulation(i);
+				
+				if(i >= actVO.getMin_population()) {     //當參加人數大於等於最低人數，狀態改為成團
+					actSvc.joinExceedAct(sq_activity_id);
+				} else {
+					actSvc.joinBelowAct(sq_activity_id); //當參加人數小於最低人數，狀態改為未成團
+				}                                        //其實設立監聽器去做改變，效率會比較好
 				
 				ActJoinVO actjoinVO = new ActJoinVO();	//判斷是否參加過活動
 				List<ActJoinVO> list = actjoinSvc.getAll(); 
@@ -183,7 +192,7 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String area = req.getParameter("area");
@@ -224,7 +233,9 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			StaffVO staffVO = (StaffVO)session.getAttribute("StaffVO");
+			sq_member_id = staffVO.getSq_staff_id();
+			session.setAttribute("sq_member_id", sq_member_id);
 			try {
 				/*************************** 1.接收請求參數 ****************************************/
 				String sq_activity_id = new String(req.getParameter("sq_activity_id"));
@@ -253,7 +264,9 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			StaffVO staffVO = (StaffVO)session.getAttribute("StaffVO");
+			sq_member_id = staffVO.getSq_staff_id();
+			session.setAttribute("sq_member_id", sq_member_id);
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String sq_activity_id = req.getParameter("sq_activity_id").trim();
@@ -407,7 +420,9 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			memVO = (MemVO)session.getAttribute("MemVO");
+			sq_member_id = memVO.getSq_member_id();
+			session.setAttribute("sq_member_id", sq_member_id);
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			String act_title = new String(req.getParameter("act_title").trim());
 			String sq_route_id = req.getParameter("sq_route_id").trim();
@@ -541,7 +556,9 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			memVO = (MemVO)session.getAttribute("MemVO");
+			sq_member_id = memVO.getSq_member_id();
+			session.setAttribute("sq_member_id", sq_member_id);
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			String act_title = new String(req.getParameter("act_title").trim());
 			String sq_route_id = req.getParameter("sq_route_id").trim();
@@ -671,7 +688,9 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			memVO = (MemVO)session.getAttribute("MemVO");
+			sq_member_id = memVO.getSq_member_id();
+			session.setAttribute("sq_member_id", sq_member_id);
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
 				String sq_activity_id = req.getParameter("sq_activity_id");
@@ -699,7 +718,9 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			StaffVO staffVO = (StaffVO)session.getAttribute("StaffVO");
+			sq_member_id = staffVO.getSq_staff_id();
+			session.setAttribute("sq_member_id", sq_member_id);
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
 				String sq_activity_id = req.getParameter("sq_activity_id");
