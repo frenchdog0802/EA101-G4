@@ -60,7 +60,7 @@
 									</table>
 									<div class="checkbtn mt-4">
 <!-- 										<button id="sClear">清空</button> -->
-										<button id="sConfirm" disabled="disabled">確認</button>
+<!-- 										<button id="sConfirm" disabled="disabled">確認</button> -->
 									</div>
 								</div>
 								<div class="col-6 pt-2 pl-4">
@@ -169,7 +169,7 @@
 		
 		$('.address-zone').ajaddress();
 		
-		$("#sConfirm").click(function(){
+		$("#c3").change(function(){
 			var name = $("#c3").val();
 			console.log(name);
 			$.ajax({

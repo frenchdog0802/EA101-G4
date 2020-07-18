@@ -122,7 +122,10 @@
 	   						<button class="btn bg-secondary addproduct mr-2" style="float:left;">加入購物車</button>
 	   						<input type="hidden" name="id" value=<%=productVO.getSq_product_id()%>>
 					   		<input type="hidden" name="name" value="<%=productVO.getProduct_name()%>">
-							<input type="hidden" name="price" value="<%=productVO.getProduct_price()%>">							
+							<input type="hidden" name="price" value="<%=productVO.getProduct_price()%>">
+							<%if(memVO != null){%>
+					    		<input type="hidden" name="member_id" value="<%=memVO.getSq_member_id()%>">
+					    	<%}%>					
 	    					<button class="btn bg-success ml-2 addCollection" style="float:left;">加入收藏</button>
 	    				</div>
     				</div>
@@ -231,29 +234,29 @@
 		//將商品加到購物車
 		$(document).ready(function() {
 			
-			$(".addCollection").click(function() {							
-				<%if(memVO == null){%>
-					alert("請先登入會員");
-				<%}else{%>
-  		        $.ajax({
-  		        	type : "POST",
-  		        	url  : "<%=request.getContextPath()%>/collectionServlet.do",
-  		        	data : {
-  		        		action : "addCollection",
-  		        		product_id : $("input[name=product_id]", $(this).parents(".collection")).val(),
-  		        		product_name : $("input[name=product_name]", $(this).parents(".collection")).val(),
-						member_id : $("input[name=member_id]", $(this).parents(".collection")).val(),
-  		        	},
-  		        	success : function(){
-  		        		Swal.fire(
-  		        			  'Good job!',
-  		        			  '已成功加入收藏',
-  		        			  'success'
-  		        			)
-  		        	}
-  		        });
-		        <%}%>
-		    });
+			$(".addCollection").click(function() {	
+  				<%if(memVO == null){%>
+  					alert("請先登入會員");
+  				<%}else{%>
+	  		        $.ajax({
+	  		        	type : "POST",
+	  		        	url  : "<%=request.getContextPath()%>/collectionServlet.do",
+	  		        	data : {
+	  		        		action : "addCollection",
+	  		        		product_id : $("input[name=id]").val(),
+	  		        		product_name : $("input[name=name]").val(),
+							member_id : $("input[name=member_id]").val(),
+	  		        	},
+	  		        	success : function(){
+	  		        		Swal.fire(
+	  		        			  'Good job!',
+	  		        			  '已成功加入收藏',
+	  		        			  'success'
+	  		        			)
+	  		        	}
+	  		        });
+  		        <%}%>
+  		    });
 			
 			$(".addproduct").click(function() {
   		        $.ajax({
