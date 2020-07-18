@@ -108,8 +108,8 @@
 						<td style="vertical-align: middle">${actVO.act_start_time}</td>
 						<td style="vertical-align: middle">${actVO.act_end_time}</td>
 						<td class="des" style="vertical-align: middle">
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter${vs.index}">查看</button>
-                                        <div class="modal fade" id="exampleModalCenter${vs.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter1${vs.index}">查看</button>
+                                        <div class="modal fade" id="exampleModalCenter1${vs.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         	<div class="modal-dialog modal-dialog-centered" role="document">
                                             	<div class="modal-content">
                                                 	<div class="modal-header">
@@ -128,9 +128,25 @@
                                             </div>
                                         </div>
 						</td>
-						<td style="vertical-align: middle"><img
-							src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'"
-							width=100% height="100"></td>
+						<td style="vertical-align: middle"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2${vs.index}">圖片</button>
+                                        <div class="modal fade" id="exampleModalCenter2${vs.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        	<div class="modal-dialog modal-dialog-centered" role="document">
+                                            	<div class="modal-content">
+                                                	<div class="modal-header">
+                                                     	<h5 class="modal-title" id="exampleModalCenterTitle">活動圖片</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        	<span aria-hidden="true">&times;</span>
+                                                       	</button>
+                                                    </div>
+	                                                <div class="modal-body">
+	                                                	<img src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO.sq_activity_id}'" class="img-fluid">
+	                                                </div>
+	                                                <div class="modal-footer">
+	                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	                                                </div>
+                                           		</div>
+                                            </div>
+                                        </div></td>
 						<td style="vertical-align: middle">${actVO.gp_status}</td>
 						<td style="vertical-align: middle">
 							<FORM METHOD="post"
