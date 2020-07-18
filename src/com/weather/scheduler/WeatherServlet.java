@@ -125,8 +125,8 @@ public class WeatherServlet extends HttpServlet {
 					}
 					areaCount++;
 				} else {
-					i += 6;
-					WeatherCount += 6;
+					i += 7;
+					WeatherCount += 7;
 					areaCount++;
 				}
 
