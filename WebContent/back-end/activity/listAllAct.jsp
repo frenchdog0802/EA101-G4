@@ -51,6 +51,13 @@
 					</ul>
 				</div>	
 <%@include file="/back-end/backFrame/backNav"%>
+
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActServlet.do" >
+        <b>輸入活動編號 (如ACT-700001):</b>
+        <input type="text" name="sq_activity_id">
+        <input type="hidden" name="action" value="getOne_For_Display">
+        <input type="submit" value="送出" class="btn btn-danger btn-sm">
+</FORM>
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -60,12 +67,6 @@
 		</c:forEach>
 	</ul>
 </c:if>
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActServlet.do" >
-        <b>輸入活動編號 (如ACT-700001):</b>
-        <input type="text" name="sq_activity_id">
-        <input type="hidden" name="action" value="getOne_For_Display">
-        <input type="submit" value="送出" class="btn btn-danger btn-sm">
-</FORM>
 <div class="container-fluid mt-3">
 	<div class="table-responsive">
 		<table

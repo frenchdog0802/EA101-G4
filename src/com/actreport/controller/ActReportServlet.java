@@ -54,7 +54,7 @@ public class ActReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/reportActivity/select_ActReportpage.jsp");
+							.getRequestDispatcher("/back-end/reportActivity/listAllActReport.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -69,7 +69,7 @@ public class ActReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/reportActivity/select_ActReportpage.jsp");
+							.getRequestDispatcher("/back-end/reportActivity/listAllActReport.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -84,7 +84,7 @@ public class ActReportServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/reportActivity/select_ActReportpage.jsp");
+						.getRequestDispatcher("/back-end/reportActivity/listAllActReport.jsp");
 				failureView.forward(req, res);
 			}
 		}

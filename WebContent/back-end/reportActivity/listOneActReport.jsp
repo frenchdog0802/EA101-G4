@@ -67,33 +67,42 @@
 				</div>	
 <%@include file="/back-end/backFrame/backNav"%>
 
-<table class="table1">
-	<tr>
-		<th>活動檢舉編號</th>
-		<th>活動編號</th>
-		<th>會員編號</th>
-		<th>檢舉原因</th>
-		<th>檢舉狀態</th>
-		<th>修改狀態</th>
-		<th>備註</th>
-	</tr>
-	<tr>
-		<td><%=actreportVO.getSq_activityreport_id()%></td>
-		<td><%=actreportVO.getSq_activity_id()%></td>
-		<td><%=actreportVO.getSq_member_id()%></td>
-		<td class="des"><%=actreportVO.getReport_reason()%></td>
-		<td><%=actreportVO.getReport_status()%></td>
-		<td>
-			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do" style="margin-bottom: 0px;">
-			<input type="submit" value="修改">
-			<input type="hidden" name="sq_activityreport_id"  value="${actreportVO.sq_activityreport_id}">
-			<input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-		</td>
-		<td>
-			<p>0.檢舉未處理</p>
-			<p>1.檢舉成功</p>
-			<p>2.檢舉失敗</p>
-		</td>
-	</tr>
-</table>
+<div class="container-fluid mt-3">
+	<div class="table-responsive">
+		<table
+			class="table text-center table-bordered table-striped table-hover">
+			<thead>
+				<tr class="table-info">
+					<th>活動檢舉編號</th>
+					<th>活動編號</th>
+					<th>會員編號</th>
+					<th>檢舉原因</th>
+					<th>檢舉狀態</th>
+					<th>修改狀態</th>
+					<th>備註</th>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle"><%=actreportVO.getSq_activityreport_id()%></td>
+					<td style="vertical-align: middle"><%=actreportVO.getSq_activity_id()%></td>
+					<td style="vertical-align: middle"><%=actreportVO.getSq_member_id()%></td>
+					<td class="des" style="vertical-align: middle"><%=actreportVO.getReport_reason()%></td>
+					<td style="vertical-align: middle"><%=actreportVO.getReport_status()%></td>
+					<td style="vertical-align: middle">
+						<FORM METHOD="post"
+							ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do"
+							style="margin-bottom: 0px;">
+							<input type="submit" value="修改" class="btn btn-danger btn-sm">
+							<input type="hidden" name="sq_activityreport_id"
+								value="${actreportVO.sq_activityreport_id}"> <input
+								type="hidden" name="action" value="getOne_For_Update">
+						</FORM>
+					</td>
+					<td style="vertical-align: middle">0.檢舉未處理<br> 1.檢舉成功<br>
+						2.檢舉失敗<br>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
 <%@include file="/back-end/backFrame/backFooter"%>

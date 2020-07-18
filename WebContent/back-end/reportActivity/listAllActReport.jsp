@@ -50,21 +50,27 @@
 				</div>	
 <%@include file="/back-end/backFrame/backNav"%>
 
+
+<FORM METHOD="post"
+	ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do">
+	<b>輸入活動檢舉編號 (如710000):</b> <input type="text"
+		name="sq_activityreport_id"> <input type="hidden"
+		name="action" value="getOne_For_Display"> <input type="submit"
+		value="送出" class="btn btn-danger btn-sm">
+</FORM>
+.
+
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
+	<font style="color: red">請修正以下錯誤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
+			<li style="color: red">${message}</li>
 		</c:forEach>
 	</ul>
 </c:if>
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do" >
-        <b>輸入活動檢舉編號 (如710000):</b>
-        <input type="text" name="sq_activityreport_id">
-        <input type="hidden" name="action" value="getOne_For_Display">
-        <input type="submit" value="送出" class="btn btn-danger btn-sm">
-    </FORM>
+
+
 <div class="container-fluid mt-3">
 	<div class="table-responsive">
 		<table
