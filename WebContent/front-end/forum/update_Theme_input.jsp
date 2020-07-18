@@ -192,18 +192,15 @@ input[type="file"] {
 
 	</div>
 	<!-- /.container -->
-
-	<!-- Footer -->
+	
 	</div>
- 
- 
+ 		
  		
 	<%@include file="/front-end/page-file/page-footer"%>
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="<%=request.getContextPath()%>/vendor/jquery/jquery.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script	src="<%=request.getContextPath()%>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
@@ -212,7 +209,6 @@ input[type="file"] {
 		$(".fun-text").text("");  // text("")裡面自己輸入功能名稱 
 	});
 	</script>
-
 
 <script>
 	function readURL(input) {
@@ -226,6 +222,7 @@ input[type="file"] {
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
+	
 	$("#m_photo_id").change(function() {
 		readURL(this);
 	});

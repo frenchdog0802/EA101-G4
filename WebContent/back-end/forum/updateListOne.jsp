@@ -72,6 +72,8 @@ input[type="file"] {
 
 <%@include file="/back-end/backFrame/backNav"%>
 
+ <jsp:useBean id="memberSvc" scope="page" class="com.member.model.MemService" /> 
+
 	<!-- Page Content -->
 	<div class="container">
 
@@ -133,7 +135,8 @@ input[type="file"] {
 							<div class="form-group">
 								<textarea class="form-control" height="auto" rows="16" name="theme_detial"><%=forumVO.getTheme_detial()%></textarea>
 							</div>
-							<input type="text" name="sq_theme_id" value="<%=forumVO.getSq_theme_id()%>">
+<!-- 							<label>主題編號:</label> -->
+							<input type="hidden" name="sq_theme_id" value="<%=forumVO.getSq_theme_id()%>">
 							<input type="hidden" name="reponse_sum" value="<%=forumVO.getReponse_sum()%>"> 
 
 <!-- 							<div class="form-group"> -->
@@ -141,13 +144,14 @@ input[type="file"] {
 <%-- 									name="theme_display_status"	value="<%=forumVO.getTheme_display_status()%>"/> --%>
 <!-- 							</div> -->
 
+<!-- 							<label>會員編號:</label> -->
 							<input
-								type="text" name="sq_member_id" value="<%=forumVO.getSq_member_id()%>"> 
+								type="hidden" name="sq_member_id" value="<%=forumVO.getSq_member_id()%>"> 
 								<input type="hidden" name="action" value="updateByStaff">
 
 
 							<div class="card mb-4">
-								<h5 class="card-header">上傳圖片</h5>
+								<h5 class="card-header">上傳封面圖片</h5>
 								<div class="card-body">
 									<div class="input-group">
 										<span class="inpug-group-append"> <label
@@ -178,7 +182,17 @@ input[type="file"] {
 
 			
 			<div class="card my-4">
-				<div class="p-3 mb-2 bg-info text-white">發文者:${Theme_memVO.nick_name}</div>
+			
+				<div class="p-3 mb-2 bg-info text-white">發文者:
+				<c:forEach var="listmember" items="${memberSvc.all}"> 
+ 								<c:if test="${listmember.sq_member_id == forumVO.sq_member_id}"> 								
+  								${listmember.nick_name}： 
+  								</c:if> 
+  								</c:forEach> 
+				</div>
+				
+				
+				
 				<div class="card-body">
 					<div class="row">
 						<ul class="list-unstyled mb-0">
