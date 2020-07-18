@@ -78,10 +78,10 @@
 
 				<!--status -->
 				<div class="form-group row">
-					<label for="sf_phone" class="col-sm-2 col-form-label ">員工狀態:</label>
+					<label for="sf_status" class="col-sm-2 col-form-label ">員工狀態:</label>
 					<select name="sf_status">
-						<option value="${StaffVO.sf_status==0?'selected':''}">在職</option>
-						<option value="${StaffVO.sf_status==1?'selected':''}">離職</option>
+						<option value="0" ${StaffVO.sf_status==0?'selected':''}>在職</option>
+						<option value="1" ${StaffVO.sf_status==1?'selected':''}>離職</option>
 					</select>
 					<!--status -->
 				</div>

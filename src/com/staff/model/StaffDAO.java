@@ -27,7 +27,7 @@ public class StaffDAO implements StaffDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT * FROM staff order by sq_staff_id";
 	private static final String GET_ONE_STMT = "SELECT * FROM staff where sq_staff_id = ?";
 	private static final String DELETE = "DELETE FROM staff where sq_staff_id = ?";
-	private static final String UPDATE = "UPDATE staff set sf_statu=?,sf_name=?,sf_email=?,sf_address=?,sf_phone=?,sf_password=?,sf_account=? , sf_photo =? where sq_staff_id = ?";
+	private static final String UPDATE = "UPDATE staff set sf_status=?,sf_name=?,sf_email=?,sf_address=?,sf_phone=?,sf_password=?,sf_account=? , sf_photo =? where sq_staff_id = ?";
 	private static final String GET_ONE_STMT_FORM_ACCOUNT = "SELECT * FROM staff where sf_account = ?";
 	
 	

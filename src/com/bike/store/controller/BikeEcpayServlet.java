@@ -124,10 +124,11 @@ public class BikeEcpayServlet extends HttpServlet {
 //			設定交易訊息
 			obj.setTradeDesc("支付信用卡");
 //			設定ReturnURL 付款完成通知回傳網址 使用  ngrok.io
-			String returnURL = "https://f663d4c89a43.ngrok.io/EA101_G4/bike/BikeEcpayServlet.do";
+			String returnURL = "http://ea101g4.tk/EA101_G4/bike/BikeEcpayServlet.do";
 			obj.setReturnURL(returnURL);
 //			設定ClientBackURL Client端返回合作特店系統的按鈕連結
-			String clientBackURL = "https://f663d4c89a43.ngrok.io/EA101_G4/front-end/bike/bikeStoreList.jsp?action=payFinish";
+			
+			String clientBackURL = "http://ea101g4.tk/EA101_G4/front-end/bike/bikeStoreList.jsp?action=payFinish";
 			obj.setClientBackURL(clientBackURL);
 //			設定OrderResultURL Client端回傳付款結果網址 跟ReturnURL二選一
 //			obj.setOrderResultURL(clientBackURL);

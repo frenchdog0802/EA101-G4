@@ -83,9 +83,9 @@
 
 
 <div class="container login-container">
-	<div class="row mb-3">
+	<div class="row m-3">
 		<div class="offset-md-5 col">
-		<img src="<%=request.getContextPath()%>/back-end/member/images/back1.gif" class="img-fluid">
+		<img src="<%=request.getContextPath()%>/back-end/images/back1.gif" class="img-fluid">
 		</div>
 	</div>
 	<div class="row">
