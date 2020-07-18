@@ -1,108 +1,68 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.tips.model.*"%>
 
-<%
-TipsVO tipsVo = (TipsVO) request.getAttribute("tipsVo");
-%>
+<!-----------backHeader----------->
+<%@include file="/back-end/backFrame/backHeader"%>
+<!-----------backHeader----------->
+<!-- --------------------------------------------------------------------------------------------->
 
-<html>
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>提示新增 - addTipsEmp.jsp</title>
+<!---------放自己的CSS與title----------->
 
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
-</style>
-
-</head>
-<body bgcolor='white'>
-
-<table id="table-1">
-	<tr><td>
-		 <h3>提示新增 - addTips.jsp</h3></td><td>
-		 <h4><a href="<%=request.getContextPath()%>/tips/select_pageTips.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
-
-<h3>資料新增:</h3>
-
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
+<!-- --------------------------------------------------------------------------------------------->
+<!-----------backBody----------->
+<%@include file="/back-end/backFrame/backBody"%>
+<!-----------backBody----------->
+<!-- --------------------------------------------------------------------------------------------->
+<!--分頁自己改-->
+<div class="row" style="background-color: white;">
+	<ul class="nav nav-tabs">
+		<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/tips/listAllTips.jsp"><span
+			>小叮嚀總覽</span></a>
+		</li>
+		<li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/back-end/tips/addTips.jsp">
+		<span style="padding-bottom: 8px; border-bottom: 3px blue solid;">新增小叮嚀</span></a>
+		</li>
+		<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/question/listAllQus.jsp"><span>Q&A總覽</span></a>
+		</li>
+		<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/question/addQus.jsp"><span>新增Q&A</span></a>
+		</li>
 	</ul>
-</c:if>
+</div>
+<!--分頁自己改-->
+<!-- --------------------------------------------------------------------------------------------->
+<!-----------backNav----------->
+<%@include file="/back-end/backFrame/backNav"%>
+<!-----------backNav----------->
+<!-- --------------------------------------------------------------------------------------------->
 
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/tips/tips.do" name="form1" enctype="multipart/form-data">
-<table>
-	<tr>
-		<td>內容圖片:</td>
-		<td>
-			<input type="file" name="tips_picture" accept=".jpg,.png,.jpeg" onchange="loadImageFile(event)">
-			<img id="image" src="" >
-		</td>
-	</tr>
-	<tr>
-		<td>內容描述:</td>
-		<td><input type="TEXT" name="tips_desciption" size="45"
-			 value="<%= (tipsVo==null)? "請輸入內容描述" : tipsVo.getTips_desciption()%>" /></td>
-	</tr>
-	<tr>
-		<td>內容主題:</td>
-		<td><input type="TEXT" name="tips_title" size="45"
-			 value="<%= (tipsVo==null)? "請輸入主題名稱" : tipsVo.getTips_title()%>" /></td>
-	</tr>
+<div class="container mt-5">
 	
+	<div class="row">
+		<div class="col">
+			<form action="<%=request.getContextPath()%>/tips/tips.do" method="POST">
+				<div class="form-group row">
+					<label for="tips_title" class="col-form-label col-md-2">小叮嚀標題</label> 
+					<select id="tips_title" class="form-control col-md-10" name="tips_title">
+						<option value="1">法規資訊</option>
+						<option value="2">自行車道規劃認識</option>
+						<option value="3">單車裝備</option>
+						<option value="4">行前準備</option>
+						<option value="5">單車安全小常識</option>
+						<option value="6">全台單車驛站</option>
+					</select>
+				</div>
+				<div class="form-group row">
+					<label for="tips_description" class="col-form-label col-md-2">小叮嚀內容</label> 
+					<textarea name="tips_description" class="form-control col-md-10" id="tips_description"></textarea>
+				</div>
+				<input type="hidden" value="insert" name="action">
+				<button type="submit" class="btn btn-primary btn-block mt-5">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
 
-</table>
-<br>
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增"></FORM>
-</body>
-
-<script>
-
-//圖片預覽
-function loadImageFile(event){ 
-		var image = document.getElementById('image'); 
-		image.src = URL.createObjectURL(event.target.files[0]);
-		image.width = 250;
-		image.height = 150;
-	};
-</script>
-
-
-
-</html>
+<!-- --------------------------------------------------------------------------------------------->
+<!-----------backFooter----------->
+<%@include file="/back-end/backFrame/backFooter"%>

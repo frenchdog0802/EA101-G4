@@ -6,11 +6,14 @@
 QuestionVO questionVo = (QuestionVO) request.getAttribute("questionVo"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
 
-<html>
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<%@include file="/back-end/backFrame/backHeader"%>
 <title>問題資料修改 - update_qus_input.jsp</title>
-
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/modern-business.css" rel="stylesheet">
 <style>
   table#table-1 {
 	background-color: #CCCCFF;
@@ -42,64 +45,85 @@ QuestionVO questionVo = (QuestionVO) request.getAttribute("questionVo"); //EmpSe
     padding: 1px;
   }
 </style>
-
-</head>
-<body bgcolor='white'>
-
-<table id="table-1">
-	<tr><td>
-		 <h3>問題資料修改 - update_qus_input.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/question/select_pageQus.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
-
-<h3>資料修改:</h3>
-
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
+<%@include file="/back-end/backFrame/backBody"%>
+<div class="row" style="background-color: white;">
+	<ul class="nav nav-tabs">
+		<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/tips/listAllTips.jsp">
+			<span>小叮嚀總覽</span></a>
+		</li>
+		<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/tips/addTips.jsp"><span>新增小叮嚀</span></a>
+		</li>
+		<li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/back-end/question/listAllQus.jsp">
+		<span style="padding-bottom: 8px; border-bottom: 3px blue solid;">Q&A總覽</span></a>
+		</li>
+		<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/question/addQus.jsp"><span>新增Q&A</span></a>
+		</li>
 	</ul>
-</c:if>
+</div>
+<%@include file="/back-end/backFrame/backNav"%>
+<div class="container my-5">
+	<h3>資料修改:</h3>
 
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/question/question.do" name="form1">
-<table>
-	<tr>
-		<td>問題編號:<font color=red><b>*</b></font></td>
-		<td><%=questionVo.getSq_question_id()%></td>
-	</tr>
-	<tr>
-		<td>問題標題:</td>
-		<td><input type="TEXT" name="question_title" size="45" value="<%=questionVo.getQuestion_title()%>" /></td>
-	</tr>
-	<tr>
-		<td>問題回答:</td>
-		<td><input type="TEXT" name="question_description" size="45"	value="<%=questionVo.getQuestion_description()%>" /></td>
-	</tr>
-	
+	<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 
-<%-- 	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" /> --%>
-<!-- 	<tr> -->
-<!-- 		<td>部門:<font color=red><b>*</b></font></td> -->
-<!-- 		<td><select size="1" name="deptno"> -->
-<%-- 			<c:forEach var="deptVO" items="${deptSvc.all}"> --%>
-<%-- 				<option value="${deptVO.deptno}" ${(empVO.deptno==deptVO.deptno)?'selected':'' } >${deptVO.dname} --%>
-<%-- 			</c:forEach> --%>
-<!-- 		</select></td> -->
-<!-- 	</tr> -->
+	<form METHOD="post"
+		ACTION="<%=request.getContextPath()%>/question/question.do"
+		name="form1">
 
-</table>
-<br>
-<input type="hidden" name="action" value="update">
-<input type="hidden" name="sq_question_id" value="<%=questionVo.getSq_question_id()%>">
-<input type="submit" value="送出修改"></FORM>
-</body>
+		<div class="form-group row">
+			<label for="inputActivityId3" class="col-sm-2 col-form-label">問題編號<font
+				color=red><b>*</b></font></label>
+			<div class="col-sm-10">
+				<%=questionVo.getSq_question_id()%>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputQuestionTitle3" class="col-sm-2 col-form-label">問題標題</label>
+			<div class="col-sm-10">
+				<input type="TEXT" name="question_title" class="form-control"
+					id="inputQuestionTitle3"
+					value="<%=questionVo.getQuestion_title()%>" />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputQuestionDescription3"
+				class="col-sm-2 col-form-label">問題回答</label>
+			<div class="col-sm-10">
+				<input type="TEXT" name="question_description" class="form-control"
+					id="inputQuestionDescription3"
+					value="<%=questionVo.getQuestion_description()%>" />
+			</div>
+		</div>
 
 
+		<%-- 	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" /> --%>
+		<!-- 	<tr> -->
+		<!-- 		<td>部門:<font color=red><b>*</b></font></td> -->
+		<!-- 		<td><select size="1" name="deptno"> -->
+		<%-- 			<c:forEach var="deptVO" items="${deptSvc.all}"> --%>
+		<%-- 				<option value="${deptVO.deptno}" ${(empVO.deptno==deptVO.deptno)?'selected':'' } >${deptVO.dname} --%>
+		<%-- 			</c:forEach> --%>
+		<!-- 		</select></td> -->
+		<!-- 	</tr> -->
 
 
-
-</html>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label"></label>
+			<div class="col-sm-10">
+				<input type="hidden" name="action" value="update"> <input
+					type="hidden" name="sq_question_id"
+					value="<%=questionVo.getSq_question_id()%>"> <input
+					type="submit" value="送出修改" class="btn btn-primary">
+			</div>
+		</div>
+	</form>
+</div>
+<%@include file="/back-end/backFrame/backFooter"%>

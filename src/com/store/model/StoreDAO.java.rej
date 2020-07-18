@@ -1,0 +1,9 @@
+diff a/src/com/store/model/StoreDAO.java b/src/com/store/model/StoreDAO.java	(rejected hunks)
+@@ -234,6 +234,7 @@
+ 		ResultSet rs = null;
+ 		List<StoreVO> list = new ArrayList<StoreVO>();
+ 		try {
++			con = ds.getConnection();
+ 			pstmt = con.prepareStatement(GET_POS);		
+ 			pstmt.setString(1, shopName);
+ 			rs = pstmt.executeQuery();

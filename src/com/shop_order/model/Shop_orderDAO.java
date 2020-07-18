@@ -31,7 +31,7 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 	public static final String DELETE = "DELETE FROM SHOP_ORDER WHERE SQ_ORDER_ID=?";
 	public static final String GET_ONE = "SELECT SQ_ORDER_ID, SQ_MEMBER_ID, SQ_STORE_ADDRESS_ID, ORDER_ADDRESS, ORDER_DATE, PAY_DEADLINE, SHOP_ORDER_PRICE, PAY_MODE, ORDER_STATUS FROM SHOP_ORDER WHERE SQ_ORDER_ID=?";
 	public static final String GET_ALL = "SELECT SQ_ORDER_ID, SQ_MEMBER_ID, SQ_STORE_ADDRESS_ID, ORDER_ADDRESS, ORDER_DATE, PAY_DEADLINE, SHOP_ORDER_PRICE, PAY_MODE, ORDER_STATUS FROM SHOP_ORDER ORDER BY SQ_ORDER_ID";
-	private static final String GET_CURRENTKEY = "select sq_product_id from (select * from shop_prder order by order_date desc ) where rownum=1";
+	private static final String GET_CURRENTKEY = "select sq_order_id from (select * from shop_order order by order_date desc ) where rownum=1";
 	
 	public void insert(Shop_orderVO shop_orderVO) {
 		Connection con = null;

@@ -6,89 +6,83 @@
 QuestionVO questionVo = (QuestionVO) request.getAttribute("questionVo");
 %>
 
-<html>
-<head>
+<%@include file="/back-end/backFrame/backHeader"%>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>員工資料新增 - addQus.jsp</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/modern-business.css" rel="stylesheet">
 
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
+<%@include file="/back-end/backFrame/backBody"%>
+<div class="row" style="background-color: white;">
+					<ul class="nav nav-tabs">
+					   	<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/tips/listAllTips.jsp"><span
+						>小叮嚀總覽</span></a>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/tips/addTips.jsp">
+						<span >新增小叮嚀</span></a>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/question/listAllQus.jsp"><span>Q&A總覽</span></a>
+						</li>
+						<li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/back-end/question/addQus.jsp">
+						<span style="padding-bottom: 8px; border-bottom: 3px blue solid;">新增Q&A</span></a>
+						</li>
+					</ul>
+				</div>	
+<%@include file="/back-end/backFrame/backNav"%>
+<div class="container my-5">
+	<h3>FAQ新增:</h3>
 
-<style>
-  table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
-</style>
+	<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 
-</head>
-<body bgcolor='white'>
+	<FORM METHOD="post"
+		ACTION="<%=request.getContextPath()%>/question/question.do"
+		name="form1">
+		<div class="form-group row">
+			<label for="inputQuestionTitle3" class="col-sm-2 col-form-label">問題標題</label>
+			<div class="col-sm-10">
 
-<table id="table-1">
-	<tr><td>
-		 <h3>員工資料新增 - addQus.jsp</h3></td><td>
-		 <h4><a href="<%=request.getContextPath()%>/question/select_pageQus.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
-
-<h3>資料新增:</h3>
-
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
-
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/question/question.do" name="form1">
-<table>
-	<tr>
-		<td>問題標題:</td>
-		<td><input type="TEXT" name="question_title" size="45" 
-			 value="<%= (questionVo==null)? "請輸入標題" : questionVo.getQuestion_title()%>" /></td>
-	</tr>
-	<tr>
-		<td>問題回答:</td>
-		<td><input type="TEXT" name="question_description" size="45"
-			 value="<%= (questionVo==null)? "請輸入問題" : questionVo.getQuestion_description()%>" /></td>
-	</tr>
-
-
-
-
-</table>
-<br>
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增"></FORM>
-</body>
-
-
-
-
-
-</html>
+				<input type="TEXT" name="question_title" class="form-control"
+					id="inputQuestionTitle3"
+					value="<%=(questionVo == null) ? "請輸入標題" : questionVo.getQuestion_title()%>" />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputQuestionDescription3"
+				class="col-sm-2 col-form-label">問題回答</label>
+			<div class="col-sm-10">
+				<input type="TEXT" name="question_description" class="form-control"
+					id="inputQuestionDescription3"
+					value="<%=(questionVo == null) ? "請輸入問題" : questionVo.getQuestion_description()%>" />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label"></label>
+			<div class="col-sm-10">
+				<input type="hidden" name="action" value="insert"> <input
+					type="submit" class="btn btn-primary" value="送出新增"> <input
+					type="button" value="返回列表" class="btn btn-primary" id="returnlist">
+				<input type="button" value="神奇小按鈕" class="btn btn-primary"
+					id="magic">
+			</div>
+		</div>
+	</form>
+</div>
+<%@include file="/back-end/backFrame/backFooter"%>
+<script>
+$("#magic").click(function(){
+	$("#inputQuestionTitle3").val("安裝攜車架有什麼該注意的事項嗎?");
+	$("#inputQuestionDescription3").val("小客車裝置攜車架,其長度不應超過後側車身外50公分(寛),不超出車後30公分,以不擋住車牌或後車燈為合格;如裝置車頂,總高不得超過2.85公尺(需向監理站申請,請見交通安全規則第38條)");
+});
+</script>

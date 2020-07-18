@@ -35,73 +35,39 @@ h4 {
 }
 </style>
 
-<style>
-table {
-	border-radius: 10px;
-	width: 1585px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-table, th, td {
-	border: 3px solid #FEDFE1;
-	border-collapse: collapse;
-}
-
-th {
-	padding: 5px;
-	text-align: center;
-	width: 50px;
-}
-
-td {
-	text-align: center;
-}
-</style>
 </head>
 
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
-	<div class="row" style="background-color: white;"></div>
+	<div class="container mt-3">
+		<!-- Page Heading/Breadcrumbs -->
+		<h1 class="mt-4 mb-3">我的補水站</h1>
+	</div>
 
-	<center>
-		<%-- 錯誤表列 --%>
-		<c:if test="${not empty errorMsgs}">
-			<font style="color: red">請修正以下錯誤:</font>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="color: red">${message}</li>
-				</c:forEach>
-			</ul>
-		</c:if>
-
-		<table style="text-align: center">
-			<tr>
-				<th>補給站編號</th>
-				<th>補給站名稱</th>
-				<th>補給站地址</th>
-				<th>經度</th>
-				<th>緯度</th>
-				<th>國家</th>
-				<th>縣市</th>
-				<th>圖片</th>
-				<th>營業時間</th>
-				<th>審核狀態</th>
-				<th>上架狀態</th>
+	<div class="container mb-5 mt-3" >
+		<div class="row">
+			<table class="table text-center table-hover" >
+				<thead>
+					<tr>
+						<th>補給站編號</th>
+						<th>補給站名稱</th>
+						<th>補給站地址</th>
+						<th>縣市</th>
+						<th>圖片</th>
+						<th>營業時間</th>
+						<th>審核狀態</th>
+						<th>上架狀態</th>
 
 			</tr>
-
-			<c:forEach var="wsVO" items="${list}">
+				</thead>
+				<tbody id="masterTbody"  style="height:188px;text-align:center;line-height:188px;">
+					<c:forEach var="wsVO" items="${list}">
 
 				<c:if test="${sessionScope.MemVO.sq_member_id == wsVO.insertBy}">
 					<tr>
 						<td>${wsVO.sqStationId}</td>
 						<td>${wsVO.stationName}</td>
 						<td>${wsVO.stationAddress}</td>
-						<td>${wsVO.longitude}</td>
-						<td>${wsVO.latitude}</td>
-						<td>${wsVO.country}</td>
 						<td>${wsVO.area}</td>
 
 						<td><img alt=""
@@ -125,7 +91,15 @@ td {
 					</tr>
 				</c:if>
 			</c:forEach>
-		</table>
+				</tbody>
+			</table>
+		</div>
+
+
+	</div>
+
+			
+
 		<%@include file="/front-end/page-file/page-footer"%>
 </body>
 </html>

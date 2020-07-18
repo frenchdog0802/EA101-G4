@@ -117,6 +117,7 @@ pageEncoding="UTF-8"%>
 				},
 				dataType : "JSON",
 				success : function(data) {
+					console.log(data);
 					handleAjaxData(data);
 
 				},
@@ -196,7 +197,7 @@ pageEncoding="UTF-8"%>
 				break;
 			}
 
-			if (count % 7 == 0) {
+			if (count % 6 == 0) {
 				tbodyStr += "</tr><tr>";
 				tbodyStr += "<th>" + area[areaCount]
 				+ "</th>";

@@ -5,6 +5,9 @@ import java.util.Date;
 public class Product_CollectionVO {
 	private String sq_member_id;
 	private String sq_product_id;
+	private String product_name;
+	private Date collection_date;
+	
 	public String getSq_member_id() {
 		return sq_member_id;
 	}
@@ -17,11 +20,16 @@ public class Product_CollectionVO {
 	public void setSq_product_id(String sq_product_id) {
 		this.sq_product_id = sq_product_id;
 	}
-	public Date getCollection_data() {
-		return collection_data;
+	public Date getCollection_date() {
+		return collection_date;
 	}
-	public void setCollection_data(Date collection_data) {
-		this.collection_data = collection_data;
+	public void setCollection_date(Date collection_date) {
+		this.collection_date = collection_date;
 	}
-	private Date collection_data;
+	public String getProduct_name() {
+		return product_name;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
 }

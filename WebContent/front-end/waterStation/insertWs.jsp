@@ -153,7 +153,6 @@ label {
 	    // 初始化地圖
 	    map = new google.maps.Map(document.getElementById('map'), {
 	    	zoom : 14,
-	    	gestureHandling: 'greedy',
 	        center: { lat : 24.969367,
 					  lng : 121.190733 }
 	    });
@@ -192,11 +191,11 @@ label {
 								'<table>'+
 									'<tr>'+
 										'<td>補給站名稱：</td>'+
-										'<td><input type="TEXT" name="stationName" size="45"/></td>'+
+										'<td><input type="TEXT" name="stationName" id="stationName" size="45"/></td>'+
 									'</tr>'+
 									'<tr>'+
 										'<td>補給站營業時間：</td>'+
-										'<td><input type="TEXT" name="businessHours" size="45"" /></td>'+
+										'<td><input type="TEXT" name="businessHours" id="businessHours" size="45"" /></td>'+
 									'</tr>'+
 									'<tr>'+
 										'<td>補給站照片：</td>'+
@@ -211,7 +210,7 @@ label {
 									'<input type="hidden" name="checkFlag" value="0">'+
 									'<input type="hidden" name="addStation" value="0">'+
 								'</table>'+					
-								'<br> <input type="hidden" name="action" value="insert"> <input	type="submit" value="送出新增">'+
+								'<br> <input type="hidden" name="action" value="insert"> <input	type="submit" onclick="return setVal()" value="送出新增">'+
 							'</FORM>'
 					);
 					
@@ -269,6 +268,19 @@ label {
 		
 
 	}
+	
+	//補水站新增欄位檢查
+	function setVal(){
+        $(document).ready(function() {	
+        	if($('#stationName').val() === '' || $('#businessHours').val() === '' || typeof $('#demo').attr("src") === "undefined"){
+                window.alert("請輸入補水站名稱、時間及站點圖片");
+                return false;
+        	}else{
+          	  
+          	  return true;
+            }
+        })
+    }
 	
 	var checkSubmitFlg = false;
 	function checkSubmit(){
@@ -339,7 +351,7 @@ label {
 			addLis(markersWs,map,infowindow,e);
 			
 			
-			}, e * 0.1);
+			}, e * 1);
 		}
 		
 		//清除補水站標點方法

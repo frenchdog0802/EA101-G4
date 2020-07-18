@@ -38,54 +38,34 @@ h4 {
 }
 </style>
 
-<style>
-table {
-	border-radius: 10px;
-	width: 1585px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-table, th, td {
-	border: 3px solid #FEDFE1;
-	border-collapse: collapse;
-}
-
-th {
-	padding: 5px;
-	text-align: center;
-	width: 50px;
-}
-
-td {
-	text-align: center;
-}
-</style>
-
 </head>
 
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
 
-	<div class="row" style="background-color: white;"></div>
+	<div class="container mt-3">
+		<!-- Page Heading/Breadcrumbs -->
+		<h1 class="mt-4 mb-3">我的路線</h1>
+	</div>
 
-
-	<center>
-
-		<table style="text-align: center">
-			<tr>
-				<th style="width: 100px">路線編號</th>
-				<th style="width: 100px">路線名稱</th>
-				<th style="width: 100px">路線總距離(公里)</th>
+	<div class="container mb-5 mt-3" >
+		<div class="row">
+			<table class="table text-center table-hover" >
+				<thead>
+					<tr>
+				<th>路線編號</th>
+				<th>路線名稱</th>
+				<th>路線總距離(公里)</th>
 				<th>路線圖片</th>
-				<th style="width: 370px">路線簡介</th>
-				<th style="width: 100px">路線細節</th>
+				<th>路線簡介</th>
+				<th>路線細節</th>
 				<th>審核狀態</th>
 				<th>上架狀態</th>
 
 			</tr>
-
+				
+				</thead>
+				<tbody id="masterTbody"  style="height:188px;text-align:center;line-height:188px;">
 			<c:forEach var="rouVO" items="${list}">
 
 				<c:if test="${sessionScope.MemVO.sq_member_id == rouVO.sqMemberId }">
@@ -114,7 +94,12 @@ td {
 					</tr>
 				</c:if>
 			</c:forEach>
-		</table>
+				</tbody>
+			</table>
+		</div>
+
+
+	</div>
 
 		<%@include file="/front-end/page-file/page-footer"%>
 </body>

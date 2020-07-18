@@ -6,11 +6,7 @@
 <%@ page import="com.actfavor.model.*"%>
 <%@ page import="com.actreport.model.*"%>
 <%@ page import="com.member.model.*"%>
-<%
-	MemVO memVO = (MemVO)session.getAttribute("MemVO");
-	String sq_member_id = memVO.getSq_member_id();
-	session.setAttribute("sq_member_id", sq_member_id);
-%>
+
 <%
 	java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
 	ActVO actVO2 = (ActVO)request.getAttribute("actVO");
@@ -54,6 +50,7 @@
 	
 	#relationimg{
 		height: 255px;
+		width:100%;
 	}
 	
 	#majorimg{

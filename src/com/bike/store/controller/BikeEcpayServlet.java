@@ -25,7 +25,7 @@ import com.bike.rent.master.model.BikeRentMasterService;
 import com.bike.rent.master.model.BikeRentMasterVO;
 import com.bike.store.model.BikeStoreVO;
 import com.bike.type.model.BikeTypeService;
-
+import com.member.model.MemVO;
 
 import ecpay.payment.integration.AllInOneService;
 import ecpay.payment.integration.domain.AioCheckOutOneTime;
@@ -48,6 +48,17 @@ public class BikeEcpayServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String action = request.getParameter("action"); // 網頁指定訊息
 		HttpSession session = request.getSession();
+		
+		if("cancel".equals(action)) {
+			session.removeAttribute("BikeStoreVO");
+			session.removeAttribute("startDate");
+			session.removeAttribute("endDate");
+			session.removeAttribute("matchBike");
+			session.removeAttribute("bookMap");
+			String url = request.getContextPath()+"/front-end/bike/bikeStoreList.jsp";
+			out.println(url);
+			return;
+		}
 
 		if ("pay".equals(action)) {
 			
@@ -56,9 +67,10 @@ public class BikeEcpayServlet extends HttpServlet {
 			jedis.auth("123456");
 			// 接收參數
 // 取得session會員編號
-			String memNo = "910001";
-			String memName = "peter";
-			String memPhone = "0987654321";
+			MemVO MemVO = (MemVO)session.getAttribute("MemVO");
+			String memNo = MemVO.getSq_member_id();
+			String memName = MemVO.getM_name();
+			String memPhone = MemVO.getCellphone();
 			// 建立商品描述
 			String startDate = (String) session.getAttribute("startDate");
 			String endDate = (String) session.getAttribute("endDate");
@@ -112,10 +124,10 @@ public class BikeEcpayServlet extends HttpServlet {
 //			設定交易訊息
 			obj.setTradeDesc("支付信用卡");
 //			設定ReturnURL 付款完成通知回傳網址 使用  ngrok.io
-			String returnURL = "https://eb6991ef1481.ngrok.io/EA101_G4/bike/BikeEcpayServlet.do";
+			String returnURL = "https://f663d4c89a43.ngrok.io/EA101_G4/bike/BikeEcpayServlet.do";
 			obj.setReturnURL(returnURL);
 //			設定ClientBackURL Client端返回合作特店系統的按鈕連結
-			String clientBackURL = "https://eb6991ef1481.ngrok.io/EA101_G4/front-end/bike/bikeStoreList.jsp?action=payFinish";
+			String clientBackURL = "https://f663d4c89a43.ngrok.io/EA101_G4/front-end/bike/bikeStoreList.jsp?action=payFinish";
 			obj.setClientBackURL(clientBackURL);
 //			設定OrderResultURL Client端回傳付款結果網址 跟ReturnURL二選一
 //			obj.setOrderResultURL(clientBackURL);

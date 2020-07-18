@@ -188,7 +188,7 @@
   
   	function changeSetImg(i){
 	  $("#stepImgFinal"+i).trigger("click");
-	  window.addEventListener('click', function() {
+	  window.addEventListener('mouseout', function() {
 	      showImg(i);
 	    });
 	  return false;
@@ -739,7 +739,7 @@ console.log(results);
 		addLisCheckbox(markersWs,map,infowindow,e);
 		
 		
-		}, e * 0.1);
+		}, e * 1);
 	}
 	
 	//清除補水站標點方法

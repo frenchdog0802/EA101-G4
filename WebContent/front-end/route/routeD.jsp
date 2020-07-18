@@ -114,7 +114,7 @@ label {
 					<c:forEach var="rouDeVO" items="${list}">
 						<tr>
 
-							<td><img alt=""
+							<td style="width: 400px"><img alt=""
 								src="<%=request.getContextPath()%>/front-end/route/step.img?SQ_SERIAL_NUMBER=${rouDeVO.sqSerialNo}"
 								style="width: 400px; height: 280px"></td>
 
@@ -280,7 +280,7 @@ console.log(positionWs[e].sqStationId);
 		    content: '補水站名稱：'+positionWs[e].label+
 		    		 '<br>'+'營業時間：'+positionWs[e].businessHours+
 		    		 '<br>'+'位於地址：'+positionWs[e].stationAddress+
-					 '<br>圖片：<img id="demo" src="<%=request.getContextPath()%>/back-end/waterStation/water.stationImage?SQ_STATION_ID='+positionWs[e].sqStationId+'"'+'style="width: 150px; height: 150px">', 
+					 '<br>圖片：<img id="demo" src="<%=request.getContextPath()%>/front-end/waterStation/water.stationImage?SQ_STATION_ID='+positionWs[e].sqStationId+'"'+'style="width: 150px; height: 150px">', 
 					 
 		    		 
 		    position: {
@@ -293,7 +293,7 @@ console.log(positionWs[e].sqStationId);
 		addLis(markersWs,map,infowindow,e);
 		
 		
-		}, e * 0.1);
+		}, e * 1);
 	}
 	
 	//清除補水站標點方法

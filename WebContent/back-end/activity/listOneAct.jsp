@@ -5,6 +5,7 @@
 <%
   ActVO actVO = (ActVO) request.getAttribute("actVO"); //ActServlet.java(Concroller), 存入req的actVO物件
 %>
+<jsp:useBean id="actjoinSvc" class="com.actjoin.model.ActJoinService"/>
 <%@include file="/back-end/backFrame/backHeader"%>
 <title>活動資料 - listOneAct.jsp</title>
 
@@ -98,7 +99,7 @@
 		<td><%=actVO.getAct_title()%></td>
 		<td><%=actVO.getMax_population()%></td>
 		<td><%=actVO.getMin_population()%></td>
-		<td><%=actVO.getPopulation()%></td>
+		<td>${actjoinSvc.getOneJoinPeople(actVO.sq_activity_id)}</td>
 		<td><%=actVO.getStart_time()%></td>
 		<td><%=actVO.getEnd_time()%></td>
 		<td><%=actVO.getAct_start_time()%></td>

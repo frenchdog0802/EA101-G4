@@ -9,32 +9,24 @@
     List<QuestionVO> list = qusSvc.getAll();
     pageContext.setAttribute("list",list);
 %>
-
-
-<html>
-<head>
+<%@include file="/back-end/backFrame/backHeader"%>
 <title>所有員工資料 - listAllQus.jsp</title>
 
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
+  table{
+    table-layout : fixed;
+}
+
+table tbody tr td,table tbody tr th{
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
 </style>
 
 <style>
   table {
-	width: 800px;
+	width: 100%;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -48,16 +40,22 @@
   }
 </style>
 
-</head>
-<body bgcolor='white'>
-
-<h4>此頁練習採用 EL 的寫法取值:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>所有員工資料 - listAllQus.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/question/select_pageQus.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
+<%@include file="/back-end/backFrame/backBody"%>
+<div class="row" style="background-color: white;">
+	<ul class="nav nav-tabs">
+		<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/tips/listAllTips.jsp">
+			<span>小叮嚀總覽</span></a>
+		</li>
+		<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/tips/addTips.jsp"><span>新增小叮嚀</span></a>
+		</li>
+		<li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/back-end/question/listAllQus.jsp">
+		<span style="padding-bottom: 8px; border-bottom: 3px blue solid;">Q&A總覽</span></a>
+		</li>
+		<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/question/addQus.jsp"><span>新增Q&A</span></a>
+		</li>
+	</ul>
+</div>
+<%@include file="/back-end/backFrame/backNav"%>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -68,21 +66,24 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
-<table>
-	<tr>
+<div class="container-fluid mt-3">
+<table class="table text-center table-bordered table-striped table-hover">
+<thead>
+	<tr class="table-info">
 		<th>問題編號</th>
 		<th>問題標題</th>
 		<th>問題回答</th>
-		
+		<th>修改</th>
+		<th>刪除</th>
 	</tr>
+	</thead>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="questionVo" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
 			<td>${questionVo.sq_question_id}</td> 
 			<td>${questionVo.question_title}</td>
-			<td>${questionVo.question_desciption}</td>
+			<td>${questionVo.question_description}</td>
 			
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/question/question.do" style="margin-bottom: 0px;">
@@ -99,7 +100,6 @@
 		</tr>
 	</c:forEach>
 </table>
-<%@ include file="page2.file" %>
-
-</body>
-</html>
+</div>
+<%@ include file="page3.file" %>
+<%@include file="/back-end/backFrame/backFooter"%>

@@ -184,7 +184,7 @@ public class WaterStationServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("wsVO", wsVO); // 含有輸入格式錯誤的wsVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/waterStation/addWs.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/waterStation/insertWs.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}

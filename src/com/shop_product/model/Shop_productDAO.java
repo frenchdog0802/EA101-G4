@@ -10,7 +10,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Emp2;
+import com.product_stock.model.*;
+
+
+import jdbc.util.CompositeQuery.CompositeQuery_shopMall;
 
 public class Shop_productDAO implements Shop_productDAO_interface{
 //	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -30,17 +33,17 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 	private static final String INSERT_STMT = "INSERT INTO SHOP_PRODUCT (sq_product_id, sq_brand_id, product_kind_name, product_name, product_price, product_pic,"
 			+ " product_detail, add_date, product_material, product_status) VALUES (SQ_PRODUCT_ID.NEXTVAL,?,?,?,?,?,?,to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'),?,0)";
 	private static final String UPDATE = "UPDATE SHOP_PRODUCT SET sq_brand_id=?, product_kind_name=?, product_name=?, product_price=?, product_pic=?,"
-			+ " product_detail=?, add_date=?, product_material=?, product_status=? WHERE sq_product_id";
+			+ " product_detail=?, add_date=?, product_material=?, product_status=? WHERE sq_product_id=?";
 	private static final String DELETE = "DELETE FROM SHOP_PRODUCT WHERE SQ_PRODUCT_ID=? ";
 	private static final String GET_ONE = "SELECT SQ_PRODUCT_ID, SQ_BRAND_ID, PRODUCT_KIND_NAME, PRODUCT_NAME,PRODUCT_PRICE, PRODUCT_PIC, PRODUCT_DETAIL, "
 			+ "ADD_DATE, PRODUCT_MATERIAL, PRODUCT_STATUS FROM SHOP_PRODUCT WHERE SQ_PRODUCT_ID=?";
 	private static final String GET_ALL = "SELECT SQ_PRODUCT_ID, SQ_BRAND_ID, PRODUCT_KIND_NAME, PRODUCT_NAME,PRODUCT_PRICE, PRODUCT_PIC, PRODUCT_DETAIL,"
 			+ "ADD_DATE, PRODUCT_MATERIAL, PRODUCT_STATUS FROM SHOP_PRODUCT ORDER BY SQ_PRODUCT_ID";
 	private static final String GET_BY_KIND = "SELECT SQ_PRODUCT_ID, SQ_BRAND_ID, PRODUCT_KIND_NAME, PRODUCT_NAME,PRODUCT_PRICE, PRODUCT_PIC, PRODUCT_DETAIL, "
-			+ "ADD_DATE, PRODUCT_MATERIAL, PRODUCT_STATUS FROM SHOP_PRODUCT WHERE PRODUCT_KIND_NAME=?";	
-			
-			
-	public void insert(Shop_productVO productVO) {
+			+ "ADD_DATE, PRODUCT_MATERIAL, PRODUCT_STATUS FROM SHOP_PRODUCT WHERE PRODUCT_KIND_NAME=?";			
+	private static final String GET_CURRENTKEY = "select sq_product_id from (select * from shop_product order by sq_product_id desc ) where rownum=1";		
+	
+	public void insert(Shop_productVO productVO, List<Product_stockVO> stockList) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -67,22 +70,36 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 			pstmt.setClob(7,clob2);
 			
 			pstmt.executeUpdate();
+			con.commit();
+			
+			Product_stockDAO stockDAO = new Product_stockDAO();
+			for(Product_stockVO vo : stockList) {
+				Product_stockVO stockVO = new Product_stockVO();
+				stockVO.setSq_product_id(vo.getSq_product_id());
+				stockVO.setProduct_model(vo.getProduct_model());
+				stockVO.setProduct_color(vo.getProduct_color());
+				stockVO.setStock_total(vo.getStock_total());
+				stockDAO.insert(stockVO, con);
+			}
+			con.commit();
+			con.setAutoCommit(true);
 			
 		}catch(SQLException se) {
-			throw new RuntimeException("Couldn't load database driver" + se.getMessage());
+			throw new RuntimeException("A database error occured."
+					+ se.getMessage());
 		}finally {
 			if(pstmt != null) {
 				try {
 					pstmt.close();
 				}catch(SQLException se) {
 					se.printStackTrace(System.err);
-				}		
+				}
 			}
 			if(con != null) {
 				try {
 					con.close();
-				}catch(Exception se){
-					se.printStackTrace(System.err);
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -344,17 +361,7 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 		}
 		return list;
 	}
-//	public static void main(String args[]) {
-//		Shop_productDAO dao = new Shop_productDAO();
-//		List<Shop_productVO> list = dao.findByPriceDown();
-//		for(Shop_productVO vo : list) {
-//			System.out.print(vo.getSq_product_id() + ",");
-//			System.out.print(vo.getSq_brand_id() + ",");
-//			System.out.print(vo.getProduct_kind_name() + ",");
-//			System.out.print(vo.getProduct_price() + ",");
-//			System.out.println();
-//		}		
-//	}
+
 
 	@Override
 	public List<Shop_productVO> getAll(Map<String, String[]> map) {
@@ -368,7 +375,7 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 		try {
 			con = ds.getConnection();
 			String finalSQL = "select * from shop_product "
-			          + jdbcUtil_CompositeQuery_Emp2.get_WhereCondition(map)
+			          + CompositeQuery_shopMall.get_WhereCondition(map)
 			          + "order by sq_product_id";
 			pstmt = con.prepareStatement(finalSQL);				
 			rs = pstmt.executeQuery();
@@ -409,5 +416,85 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public List<Shop_productVO> getSearchByText(String text) {
+		List<Shop_productVO> list = new ArrayList<Shop_productVO>();
+		Shop_productVO shop_productVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL);				
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				shop_productVO = new Shop_productVO();
+				shop_productVO.setSq_product_id(rs.getString("sq_product_id"));
+				shop_productVO.setProduct_name(rs.getString("product_name"));
+				shop_productVO.setProduct_price(rs.getInt("product_price"));
+				if(rs.getString("product_name").indexOf(text) != -1) {
+					list.add(shop_productVO);
+				}
+			}
+			pstmt.clearParameters();
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured."+se.getMessage());
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
+	}
+
+	public String getCurrentKey() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		String sq_product_id = null;
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_CURRENTKEY);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				sq_product_id= rs.getString("sq_product_id");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (con != null) {
+				try {
+					rs.close();
+					pstmt.close();
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return sq_product_id;
 	}
 }
