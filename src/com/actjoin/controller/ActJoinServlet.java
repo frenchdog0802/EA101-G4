@@ -55,10 +55,11 @@ public class ActJoinServlet extends HttpServlet {
 				if (str == null || (str.trim()).length() == 0) {
 					errorMsgs.add("請輸入活動編號");
 				}
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/joinActivity/select_actjoinpage.jsp");
+							.getRequestDispatcher("/back-end/joinActivity/listAllActJoin.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -72,7 +73,7 @@ public class ActJoinServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/joinActivity/select_actjoinpage.jsp");
+							.getRequestDispatcher("/back-end/joinActivity/listAllActJoin.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -81,13 +82,13 @@ public class ActJoinServlet extends HttpServlet {
 				ActJoinService actjoinSvc = new ActJoinService();
 				List<ActJoinVO> list = actjoinSvc.getOneActJoin(sq_activity_id);
 				
-				if (list == null) {
+				if (list.size() == 0) {
 					errorMsgs.add("查無資料");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/activity/select_page.jsp");
+							.getRequestDispatcher("/back-end/joinActivity/listAllActJoin.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -102,7 +103,7 @@ public class ActJoinServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/joinActivity/select_actjoinpage.jsp");
+						.getRequestDispatcher("/back-end/joinActivity/listAllActJoin.jsp");
 				failureView.forward(req, res);
 			}
 		}		

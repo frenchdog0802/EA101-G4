@@ -73,12 +73,10 @@
 								</td>
 								<td class="pro_del">
 									<form name="deleteForm" action="<%=request.getContextPath()%>/shopping.do" method="POST">
-										<button class="btn bg-primary">移除</button>
+										<button class="btn bg-primary" style="color:white;">移除</button>
 								    	<input type="hidden" name="action"  value="DELETE">
 								        <input type="hidden" name="del" value="<%= i %>">
 								    </form>
-									<br>
-									<button class="btn bg-primary mt-2">加入收藏</button>
 								</td>
 							</tr>
 						</table>

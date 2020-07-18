@@ -71,17 +71,16 @@
 				member_id : $("input[name=member_id]", $(this).parents(".collection")).val(),
 	  		},
 	  		success : function(){
-	  			$("div[name="+ a +"]").remove();
 	  			Swal.fire({
-	  			  title: 'Are you sure?',
-	  			  text: "You won't be able to revert this!",
+	  			  title: '確定移除收藏?',
 	  			  icon: 'warning',
 	  			  showCancelButton: true,
 	  			  confirmButtonColor: '#3085d6',
 	  			  cancelButtonColor: '#d33',
-	  			  confirmButtonText: 'Yes, delete it!'
+	  			  confirmButtonText: '確認移除!'
 	  			}).then((result) => {
 	  			  if (result.value) {
+	  				$("div[name="+ a +"]").remove();
 	  			    Swal.fire(
 	  			      'Deleted!',
 	  			      'Your file has been deleted.',
