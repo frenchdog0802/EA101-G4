@@ -183,6 +183,11 @@
 			<div class="col-sm-10">
 				<input type="TEXT" name="gp_status" size="45"
 					value="<%=actVO.getGp_status()%>" />
+					0.「成團」
+					1.「未成團」
+					2.「取消揪團」
+					3.「人數已滿」
+					4.「下架」
 			</div>
 		</div>
 
