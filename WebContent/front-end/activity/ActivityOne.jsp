@@ -173,7 +173,7 @@
 						
 						<div class="modal-body">
 			<!-- =========================================以下為輸入的內容========================================== -->
-			              <textarea name="report_reason" maxlength="65" id="textarea1" rows=5 cols=83 style="resize: none;"></textarea>
+			              <textarea name="report_reason" maxlength="65" id="textarea1"  style="resize: none;width:100%;height:125px;"></textarea>
 			<!-- =========================================以上為原輸入的內容========================================== -->
 						</div>
 						
