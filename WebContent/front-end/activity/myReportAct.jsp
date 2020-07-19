@@ -43,33 +43,50 @@
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/modern-business.css" rel="stylesheet">
 <style>
-	.mr-3 {
-		width:64px;
-		height:64px;
+.mr-3 {
+	width: 64px;
+	height: 64px;
+}
+
+.modal-footer {
+	float: left;
+	height: 100px;
+}
+
+#status0 {
+	float: left;
+	color: #EA0000;
+}
+
+#status1 {
+	float: left;
+	color: #EA0000;
+	width: 400px;
+}
+
+#status2 {
+	float: left;
+	color: #EA0000;
+	width: 400px;
+}
+
+@media screen and (min-width: 1200px) {
+	li.media {
+		width: 800px;
 	}
-	
-	li.media{
-		width:800px;
+}
+
+@media ( min-width : 768px) and (max-width:991px) {
+	li.media {
+		width: 680px;
 	}
-	.modal-footer{
-		float:left;
-		height:100px;
-	
+}
+
+@media ( min-width : 992px) and (max-width:1199px) {
+	li.media {
+		width: 680px;
 	}
-	#status0{
-		float:left;
-		color:#EA0000;
-	}
-	#status1{
-		float:left;
-		color:#EA0000;
-		width:400px;
-	}
-	#status2{
-		float:left;
-		color:#EA0000;
-		width:400px;
-	}
+}
 </style>
 </head>
 <body>

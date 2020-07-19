@@ -44,14 +44,28 @@
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/modern-business.css" rel="stylesheet">
 <style>
-	.mr-3 {
-		width:64px;
-		height:64px;
-	}
-	li.media{
-		width:800px;
-	}
+.mr-3 {
+	width: 64px;
+	height: 64px;
+}
 
+@media screen and (min-width: 1200px) {
+	li.media {
+		width: 800px;
+	}
+}
+
+@media ( min-width : 768px) and (max-width:991px) {
+	li.media {
+		width: 680px;
+	}
+}
+
+@media ( min-width : 992px) and (max-width:1199px) {
+	li.media {
+		width: 680px;
+	}
+}
 </style>
 </head>
 <body>
