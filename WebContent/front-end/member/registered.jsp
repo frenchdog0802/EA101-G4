@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 <!--    CSS幫你們引入完了  你們要額外新增在自己寫-->
-
+<script src="<%=request.getContextPath()%>/front-end/member/js/aj-address.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
     <title>註冊</title>
 </head>
@@ -15,20 +15,20 @@
     background-color: #fafafa;
 }
 </style>
-<body>
+<body onload="init_address();">
 	<%@include file="/front-end/page-file/page-nav"%>
 	
 <div class="container mt-3 rowGray" >
 		<!-- Page Heading/Breadcrumbs -->
 			<h1 class="mt-4 mb-2">
-				註冊會員
+				註冊會員<button class="btn btn-primary btn-sm btn-smart float-right">神奇小按鈕</button>
 			</h1>
 
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a
 					href="<%=request.getContextPath()%>/front-end/index/index.jsp">Home</a>
 				</li>
-				<li class="breadcrumb-item active">註冊會員</li>
+				<li class="breadcrumb-item active">註冊會員 </li>
 			</ol>
  
 	<div class="row">
@@ -103,7 +103,7 @@
 				<!--phone -->
 				<div class="form-group row">
 					<label for="cellphone" class="col-sm-2 col-form-label ">電話:</label>
-					<input type="number" name="cellphone" value="${param.cellphone}" class="col-sm-10 form-control  ${errorMsgs.phone==null?'':'is-invalid'}" >
+					<input id="cellphone" type="text" name="cellphone" value="${param.cellphone}" class="col-sm-10 form-control  ${errorMsgs.phone==null?'':'is-invalid'}" >
 					<!--errorMsg -->
 					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.phone}</div>
 				<!--phone -->
@@ -113,7 +113,11 @@
 				<!--address -->
 				<div class="form-group row">
 					<label for="address" class="col-sm-2 col-form-label ">地址:</label>
-					<input type="text" name="address" value="${param.address}" class="col-sm-10 form-control ${errorMsgs.address==null?'':'is-invalid'}" >
+					<input id="zipcode" name="zipcode" type="text" class="col-sm-1 form-control" style="width: 30px;" disabled="disabled" />
+					<select id="zone1" name="zone1" class="col-sm-2 form-control"></select>
+					<select  id="zone2" name="zone2" class="col-sm-2 form-control"></select>
+					<input type="text" id="address"  value="${param.address}" class="col-sm-5 form-control ${errorMsgs.address==null?'':'is-invalid'}" >
+					<input type="hidden" name="address" id="address-controller">
 					<!--errorMsg -->
 					<div class="invalid-feedback col-sm-10 offset-md-2">${errorMsgs.address}</div>
 				<!--address -->
@@ -149,6 +153,16 @@
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 	<script>
+	$(document).ready(function(){
+		$(".btn-smart").click(function(){
+			//神奇小按鈕
+			smart_btn();
+			 
+		})
+	})
+		
+		
+		
 	//成功回來寄發驗證信
 	<c:if test="${param.validation=='email'}">
 	Swal.fire({
@@ -194,6 +208,45 @@
 			}
 		}
 	});
+	
+	//神奇小按鈕
+	function smart_btn(){
+		//姓名
+		var m_name = "JOHN史諾";
+		//帳號
+		var account = "JOHN_SNOW";
+		//密碼
+		var password = "JOHN123";
+		//信箱
+		var m_email  = "x6815541@gmail.com";
+		//性別
+		var gender = "1";
+		//生日
+		var birthday = "1989-02-29";
+		//電話
+		var cellphone = "0987789654";
+		//地址
+		var zone1 = "桃園市";
+		var zone2 = "八德區";
+		var address = "維斯特洛309教室";
+		
+		
+		$("#m_name").val(m_name);
+		$("#account").val(account);
+		$("#password").val(password);
+		$("#m_email").val(m_email);
+		$("#gender").val(gender);
+		$("#birthday").val(birthday);
+		$("#cellphone").val(cellphone);
+		
+		$("#zone1").val(zone1);
+		$("#zone1").trigger("change");
+		$("#zone2").val(zone2);
+		$("#zone2").trigger("change");  
+		$("#address").val(address);
+		$("#address-controller").val(zone1+zone2+address);
+		
+	}
 	</script>
 
 </body>
