@@ -169,8 +169,7 @@
 								<input type="hidden" name="action" value="delete">
 							</FORM>
 						</td>
-						<td style="vertical-align: middle">0.成團<br> 1.未成團<br> 2.取消揪團<br> 3.人數已滿<br>
-							4.下架<br>
+						<td style="vertical-align: middle">0.成團<br> 1.未成團<br> 2.取消揪團<br> 3.下架<br>
 						</td>
 					</tr>
 				</c:forEach>
