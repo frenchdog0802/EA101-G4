@@ -33,4 +33,7 @@ public class Shop_orderService {
 	public String getCurrentKey() {
 		return dao.getCurrentKey();
 	}
+	public List<Shop_orderVO> getByMemberID(String sq_member_id){
+		return dao.getByMemberID(sq_member_id);
+	} 
 }

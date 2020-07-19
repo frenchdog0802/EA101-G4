@@ -47,7 +47,7 @@
     			<div class="row">
     				<div class="col-1"></div>
 					<div class="col-1" style="padding-left: 0; padding-right: 0; text-align:center;">
-						<button class="btn bg-primary mt-1" style="width:80px;" onclick="location.href='<%=request.getContextPath()%>/front-end/shopMall/shopMall.jsp'">商城</button>
+						<button class="btn bg-primary mt-1" style="width:80px; color:white;" onclick="location.href='<%=request.getContextPath()%>/front-end/shopMall/shopMall.jsp'">商城</button>
 					</div>
     				<div class="col-7 searchbtn mt-1 pl-3" style="padding-left: 0; padding-right: 0;">
 						<input type="search" id="search" placeholder="Search..." />
@@ -82,9 +82,10 @@
 	    							<td><span>尺寸 :</span></td>
 	    							<td class="second_td">
 	    								<select id="color" style="margin-left: 10px;">
-	    								<% if(colorList.size() <= 1){%>
+	    								<% if(colorList.size() == 1){%>
 	    									<c:forEach var="color" items="${colorList}">
-	    										<option value="">單一顏色</option>
+	    										<option value="單一顏色">單一顏色</option>
+	    										<option value="${color}">${color}</option>
 	    									</c:forEach>
 	    								<%}else{%>
 	    									<c:forEach var="color" items="${colorList}">
@@ -98,8 +99,10 @@
 	    							<td><span>顏色 : </span></td>
 	    							<td class="second_td">
 	    								<select id="model" style="margin-left: 10px;">
-	    								<% if(modelList.size() <= 1){%>
-	    									<option value="${model}">單一尺寸</option>
+	    								<% if(modelList.size() == 1){%>
+	    									<option value="${model}">${model}</option>
+	    								<%}else if(modelList.size() == 0){%>
+	    									<option value="單一尺寸">單一尺寸</option>
 	    								<%}else{%>
 	    									<c:forEach var="model" items="${modelList}">
 	    										<option value="${model}">${model}</option>
@@ -119,14 +122,14 @@
 	    					</table>
 	   					</div>
 	   					<div id="product_join">
-	   						<button class="btn bg-secondary addproduct mr-2" style="float:left;">加入購物車</button>
+	   						<button class="btn bg-success addproduct mr-2" style="float:left;">加入購物車</button>
 	   						<input type="hidden" name="id" value=<%=productVO.getSq_product_id()%>>
 					   		<input type="hidden" name="name" value="<%=productVO.getProduct_name()%>">
 							<input type="hidden" name="price" value="<%=productVO.getProduct_price()%>">
 							<%if(memVO != null){%>
 					    		<input type="hidden" name="member_id" value="<%=memVO.getSq_member_id()%>">
 					    	<%}%>					
-	    					<button class="btn bg-success ml-2 addCollection" style="float:left;">加入收藏</button>
+	    					<button class="btn bg-secondary ml-2 addCollection" style="float:left;">加入收藏</button>
 	    				</div>
     				</div>
     			</div>
@@ -272,6 +275,11 @@
   		        		quantity : $("#num").val(),
   		        	},
   		        	success : function(){
+  		        		Swal.fire(
+	  		        			  'Good job!',
+	  		        			  '已成功加入購物車',
+	  		        			  'success'
+	  		        			)
   		        		if($("#shopCar").css("right") != 0){
   		        			$("#shopCar").animate({right:'0px'}); 
   		        		}

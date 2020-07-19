@@ -11,5 +11,6 @@ public interface Shop_orderDAO_interface {
 	public void delete(String sq_order_id);
 	public Shop_orderVO findByPrimaryKey(String sq_order_id);
 	public List<Shop_orderVO> getAll();
+	public List<Shop_orderVO> getByMemberID(String sq_member_id);
 	public String getCurrentKey();
 }

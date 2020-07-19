@@ -31,7 +31,63 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 	public static final String DELETE = "DELETE FROM SHOP_ORDER WHERE SQ_ORDER_ID=?";
 	public static final String GET_ONE = "SELECT SQ_ORDER_ID, SQ_MEMBER_ID, SQ_STORE_ADDRESS_ID, ORDER_ADDRESS, ORDER_DATE, PAY_DEADLINE, SHOP_ORDER_PRICE, PAY_MODE, ORDER_STATUS FROM SHOP_ORDER WHERE SQ_ORDER_ID=?";
 	public static final String GET_ALL = "SELECT SQ_ORDER_ID, SQ_MEMBER_ID, SQ_STORE_ADDRESS_ID, ORDER_ADDRESS, ORDER_DATE, PAY_DEADLINE, SHOP_ORDER_PRICE, PAY_MODE, ORDER_STATUS FROM SHOP_ORDER ORDER BY SQ_ORDER_ID";
-	private static final String GET_CURRENTKEY = "select sq_order_id from (select * from shop_order order by order_date desc ) where rownum=1";
+	private static final String GET_CURRENTKEY = "select sq_order_id from (select * from shop_order order by sq_order_id desc ) where rownum=1";
+	private static final String GET_BY_MEMBER = "SELECT * FROM SHOP_ORDER WHERE SQ_MEMBER_ID=?";
+	
+	@Override
+	public List<Shop_orderVO> getByMemberID(String sq_member_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Shop_orderVO shop_orderVO = null;
+		List<Shop_orderVO> list = new ArrayList<Shop_orderVO>();
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_BY_MEMBER);	
+			pstmt.setString(1, sq_member_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				shop_orderVO = new Shop_orderVO();
+				shop_orderVO.setSq_order_id(rs.getString("sq_order_id"));
+				shop_orderVO.setOrder_address(rs.getString("order_address"));
+				shop_orderVO.setOrder_date(rs.getTimestamp("order_date"));
+				shop_orderVO.setShop_order_price(rs.getInt("shop_order_price"));
+				shop_orderVO.setPay_mode(rs.getInt("pay_mode"));
+				shop_orderVO.setOrder_status(rs.getInt("order_status"));
+				
+				list.add(shop_orderVO);
+			}
+			pstmt.clearParameters();
+		}catch(SQLException e) {
+			throw new RuntimeException("A database error occured." + e.getMessage());
+		}finally {
+			if(rs != null) {
+				try	{
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	
 	
 	public void insert(Shop_orderVO shop_orderVO) {
 		Connection con = null;
@@ -72,7 +128,7 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 		}
 	}
 	
-//	'OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0)
+//	'OD'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0)
 	@Override
 	public void insertWithDetail(Shop_orderVO orderVO, List<Shop_order_detailVO> list) {
 		Connection con = null;
@@ -379,6 +435,8 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 		}
 		return shopOrder_id;
 	}
+
+
 
 	
 	

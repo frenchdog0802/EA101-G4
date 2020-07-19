@@ -29,7 +29,6 @@ public class Shop_order_detailDAO implements Shop_order_detailDAO_interface{
 	private static final String DELETE = "DELETE FROM SHOP_ORDER_DETAIL WHERE SQ_ORDER_ID=? AND SQ_PRODUCT_ID=?";
 	private static final String GET_ONE = "SELECT SQ_ORDER_ID, SQ_PRODUCT_ID, PRODUCT_PRICE, ORDER_SUM FROM SHOP_ORDER_DETAIL WHERE SQ_ORDER_ID=?";
 	private static final String GET_ALL = "SELECT SQ_ORDER_ID, SQ_PRODUCT_ID, PRODUCT_PRICE, ORDER_SUM FROM SHOP_ORDER_DETAIL ORDER BY SQ_ORDER_ID && SQ_PRODUCT_ID";
-	
 
 	@Override
 	public void delete(String sq_order_id, String sq_product_id) {
