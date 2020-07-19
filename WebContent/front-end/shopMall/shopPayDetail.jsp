@@ -3,7 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.member.model.*"%>
 <%@ page import="java.util.*"%>
-
+<% 
+	
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,20 +18,21 @@
  	
  	<div class="container my-5">
 		<div class="container-fluid">
-				<div class="row">
+				<div class="row mb-2">
     				<div class="col-12">
-    					<div class="pt-2 pl-3 pb-3" style="background-color: #cccccc;">
+    					<div class="pt-3 pl-3 pb-4" style="background-color: #cccccc; border-radius:10px;">
 			    			<h3 class="pl-4">選擇領取地點</h3>
 			    			<hr class="ml-4" style="width: 90%; margin-bottom: 10px; margin-top: 10px;">
 							<div class="row">
-								<div class="col-6 choshop pl-5 mt-3" id="choshop">
-									<form class="pl-4">
+								<div class="col-1"></div>
+								<div class="col-4 choshop mt-3" id="choshop">
+									<form>
 										<input type="radio" name="service" id="home" value="home" class="mb-2" checked="true"> 
-										<label for="home">宅配到點</label><br>
+										<label for="home" style="font-size:150%;">宅配到點</label><br>
 										<input type="radio" name="service" id="store" value="store" class="mb-2"> 
-										<label for="store">超商取貨</label><br>
+										<label for="store" style="font-size:150%;">超商取貨</label><br>
 									</form>
-									<table class="address-zone">
+									<table class="address-zone ml-3">
 										<tr>
 											<td><span>選擇縣市 : </span></td>
 											<td class="shoptd">
@@ -63,17 +66,17 @@
 <!-- 										<button id="sConfirm" disabled="disabled">確認</button> -->
 									</div>
 								</div>
-								<div class="col-6 pt-2 pl-4">
-									<div id="map" style="height: 250px;width: 80%;"></div>
+								<div class="col-5 pt-2 pl-4" style="padding-right:0px;">
+									<div id="map" style="height: 350px;width: 100%;"></div>
 								</div>
+								<div class="col-1"></div>
 			    			</div>
 		    			</div>
     				</div>
     			</div>
-    			<hr style="margin-top: 3px; margin-bottom: 3px;">
-    			<div class="row">
+    			<div class="row mt-2">
     				<div class="col-12">
-    					<div class="pt-2 pl-3 pb-3" style="background-color: #cccccc;">
+    					<div class="pt-3 pl-3 pb-3" style="background-color: #cccccc; border-radius:10px;">
 			    			<h3 class="pl-4">收件人資訊</h3>
 			    			<hr class="ml-4" style="width: 90%; margin-bottom: 10px; margin-top: 10px;">
 			    			<div class="pl-4">
@@ -87,39 +90,42 @@
 			    			</div>
 			    			<div class="pl-4">
 			    				<FORM method="POST" action="<%=request.getContextPath()%>/shopping.do">
-				    				<table class="takedt">
-				    					<tr>
-				    						<td class="takedt_t"><span>收件人 :</span></td>
-				    						<td class="takedt_td">
-				    							<input type="text" id="tname" name="tname" value="">
-				    							<input type="hidden" id="name" value="${MemVO.m_name}">
-				    						</td>
-				    					</tr>
-				    					<tr>
-				    						<td class="takedt_t"><span>連絡電話 :</span></td>
-				    						<td class="takedt_td">
-				    							<input type="text" id="tphone" name="tphone" value="">
-				    							<input type="hidden" id="phone" value="${MemVO.cellphone}">
-				    						</td>
-				    					</tr>
-				    					<tr>
-				    						<td class="takedt_t"><span>Email :</span></td>
-				    						<td class="takedt_td">
-				    							<input type="text" id="temail" name="temail" value="">
-				    							<input type="hidden" id="email" value="${MemVO.m_email}">
-				    						</td>
-				    					</tr>
-				    					<tr>
-				    						<td class="takedt_t"><span>收件地址 :</span></td>
-				    						<td class="takedt_td">
-				    							<input type="text" id="taddress" name="taddress" value="">
-				    							<input type="hidden" id="address" value="${MemVO.address}">
-				    						</td>
-				    					</tr>
-				    				</table>			    				
-			    				<hr style="margin-top: 3px; margin-bottom: 3px;">
-					    			<div class="row">
-					    				<div class="col-12">
+				    				<div class="takedt">
+										<div>
+				    						<label for="tname" class="takedt_t">收件人 :</label>
+										    <input type="text" class="form-control ${errorMsgs.name==null?'':'is-invalid'}" id="tname" name="tname" value="${mapCus.name==null?'':mapCus.name}">
+				    						<input type="hidden" id="name" value="${MemVO.m_name}">
+				    						<div class="invalid-feedback">
+											    ${errorMsgs.name}
+											</div>
+				    					</div>
+				    					<div>
+				    						<label for="tphone" class="takedt_t">連絡電話 :</label>
+										    <input type="text" class="form-control ${errorMsgs.phone==null?'':'is-invalid'}" id="tphone" name="tphone" value="${mapCus.phone==null?'':mapCus.phone}">
+				    						<input type="hidden" id="phone" value="${MemVO.cellphone}">
+				    						<div class="invalid-feedback">
+											    ${errorMsgs.phone}
+											</div>
+				    					</div>
+										<div>
+				    						<label for="temail" class="takedt_t">Email :</label>
+										    <input type="text" class="form-control ${errorMsgs.email==null?'':'is-invalid'}" id="temail" name="temail" value="${mapCus.email==null?'':mapCus.email}">
+				    						<input type="hidden" id="email" value="${MemVO.m_email}">
+				    						<div class="invalid-feedback">
+											    ${errorMsgs.email}
+											</div>
+				    					</div>
+				    					<div>
+				    						<label for="taddress" class="takedt_t">收件地址 :</label>
+										    <input type="text" class="form-control ${errorMsgs.address==null?'':'is-invalid'}" id="taddress" name="taddress" value="${mapCus.address==null?'':mapCus.address}">
+				    						<input type="hidden" id="address" value="${MemVO.address}">
+				    						<div class="invalid-feedback">
+											    ${errorMsgs.address}
+											</div>
+				    					</div>
+				    				</div>			    				
+					    			<div class="row mt-3">
+					    				<div class="col-11">
 					    					<div class="pt-2 pl-3 pb-2" style="background-color: #cccccc;">
 					    						<div class="finalbtn">
 					    							<button class="btn bg-secondary">上一步</button>
@@ -129,6 +135,7 @@
 								    			</div>
 							    			</div>
 					    				</div>
+					    				<div class="col-1"></div>
 					    			</div>
 			    				</FORM>			    				
 		    				</div>
@@ -218,12 +225,9 @@
 				$("#tname").val($("#name").val());
 				$("#tphone").val($("#phone").val());
 				$("#temail").val($("#email").val());
-				$("#taddress").val($("#address").val());
-			}else{
-				$("#tname").val("");
-				$("#tphone").val("");
-				$("#temail").val("");
-				$("#taddress").val("");
+				if($("#taddress").val() == ""){
+					$("#taddress").val($("#address").val());					
+				}
 			}
 		});
 		$(".clean").click(function(){

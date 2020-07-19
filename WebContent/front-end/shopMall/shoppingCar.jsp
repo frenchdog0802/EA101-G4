@@ -27,7 +27,7 @@
 					</div>
     				<div class="col-7 searchbtn mt-1">
 						<input type="search" id="search" placeholder="Search..." />
-						<button type="button" class="icon"><img src="image/search.png" class="img-fluid"></button>
+						<button type="button" class="icon"><img src="<%=request.getContextPath()%>/front-end/shopMall/image/search.png" class="img-fluid"></button>
 					</div>
 					<div class="col-4 mt-2" style="padding-right: 0;">
 
@@ -47,7 +47,8 @@
 	    							<td class="detail_td">商品明細</td>
 									<td class="num_td">數量</td>
 									<td class="price_td">商品單價</td>
-									<td class="store_td">顏色/型號</td>
+									<td class="store_td">顏色</td>
+									<td class="store_td">型號</td>
 	   								<td class="change_td">修改</td>
 	   							</tr>
 	   						</tbody>
@@ -67,8 +68,13 @@
 								<td class="pro_quan"><input type="text" name="quantity" value="<%= order.getProduct_quantity()%>"></td>
 								<td class="pro_price"><%=order.getProduct_price()%></td>
 								<td class="pro_yn">
-									<% if(order.getProduct_color() != "" && order.getProduct_model() != ""){%>
-										<%=order.getProduct_color()%>/<%=order.getProduct_model() %>
+									<% if(order.getProduct_color() != ""){%>
+										<%=order.getProduct_color()%>
+									<%}%>
+								</td>
+								<td class="pro_yn">
+									<% if(order.getProduct_model() != ""){%>
+										<%=order.getProduct_model() %>
 									<%}%>
 								</td>
 								<td class="pro_del">

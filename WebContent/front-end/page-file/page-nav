@@ -107,6 +107,7 @@
                             <a href="<%=request.getContextPath()%>/front-end/route/listMyRoute.jsp" class="dropdown-item">我的路線</a>
                             <a href="<%=request.getContextPath()%>/front-end/waterStation/listMyWs.jsp" class="dropdown-item">我的補水站</a>
                             <a href="<%=request.getContextPath()%>/front-end/bike/memberOrder.jsp" class="dropdown-item">租車訂單</a>
+                            <a href="<%=request.getContextPath()%>/front-end/member/orderHistory.jsp" class="dropdown-item">商城訂單</a>
                             <a href="<%=request.getContextPath()%>/front-end/member/goodCollection.jsp" class="dropdown-item">收藏商品</a>
                         </div>
                     </li>

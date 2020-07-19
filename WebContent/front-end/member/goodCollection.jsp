@@ -25,6 +25,10 @@
 	
  	<div class="container my-5">
  		<div class="container-fluid">
+ 		<h1 class="mt-4 mb-3">
+			收藏商品
+		</h1>
+		<hr>
  			<div class="row justify-content-center">
  				<div class="col-10">
  					<div class="row collection h-100">
@@ -56,9 +60,6 @@
 <!-- 	sweetAlert已經引入   -->
 <!-- 	boostrap4已經引入   -->
 	<script>
-	$(function(){
-		$(".fun-text").text("收藏商品");  // text("")裡面自己輸入功能名稱 
-	});
 	$(".deleteCollection").click(function() {			 				
   		var a = $(this).val();		
 		console.log(a);
