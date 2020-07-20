@@ -41,7 +41,9 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 *, ::after, ::before {
     box-sizing: content-box ;
 }
-
+input{
+    box-sizing: border-box !important;
+}
 
 </style>
 <!-- Bootstrap CSS -->
