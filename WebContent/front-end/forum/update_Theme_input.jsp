@@ -31,6 +31,8 @@
 <link href="<%=request.getContextPath()%>/front-end/bootstrap-components/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/index/index.css">
 
+<script src="<%=request.getContextPath()%>/front-end/forum/ckeditor/ckeditor.js"></script>
+
 
 <!-- Custom styles for this template -->
 <link href="<%=request.getContextPath()%>/css/modern-business.css"
@@ -129,7 +131,14 @@ input[type="file"] {
 							<hr>
 
 							<div class="form-group">
-								<textarea class="form-control" height="auto" rows="16" name="theme_detial"><%=forumVO.getTheme_detial()%></textarea>
+								<textarea class="form-control" id="editor1" height="auto" rows="16" name="theme_detial"><%=forumVO.getTheme_detial()%></textarea>
+									<script>
+									CKEDITOR.replace('editor1', {
+										width : '85%',
+										language : 'zh'
+									});
+								</script>
+								
 							</div>
 							<input type="hidden" name="sq_theme_id" value="<%=forumVO.getSq_theme_id()%>">
 							<input type="hidden" name="reponse_sum" value="<%=forumVO.getReponse_sum()%>"> 
@@ -166,24 +175,24 @@ input[type="file"] {
 			<!-- Search Widget -->
 
 
-			Categories Widget
-			<div class="card my-4">
-				<div class="p-3 mb-2 bg-info text-white">樓主:${memVO.nick_name}</div>
-				<div class="card-body">
-					<div class="row">
-						<ul class="list-unstyled mb-0">
-							<img id="member_avatar"
-								src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${forumVO.sq_member_id}"
-								style="height: 100px;">
-							<div for="theme_name">會員編號：${forumVO.sq_member_id}</div>
+			
+<!-- 			<div class="card my-4"> -->
+<%-- 				<div class="p-3 mb-2 bg-info text-white">樓主:${memVO.nick_name}</div> --%>
+<!-- 				<div class="card-body"> -->
+<!-- 					<div class="row"> -->
+<!-- 						<ul class="list-unstyled mb-0"> -->
+<!-- 							<img id="member_avatar" -->
+<%-- 								src="<%=request.getContextPath()%>/member/DBReader.do?sq_member_id=${forumVO.sq_member_id}" --%>
+<!-- 								style="height: 100px;"> -->
+<%-- 							<div for="theme_name">會員編號：${forumVO.sq_member_id}</div> --%>
  							
-							<li><a href="#">Freebies</a></li>
-						</ul>
+						
+<!-- 						</ul> -->
 
 
-					</div>
-				</div>
-			</div>
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 
 		</div>
 
