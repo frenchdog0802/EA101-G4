@@ -124,10 +124,6 @@ input[type=text]:placeholder, input[type=password]:placeholder {
   					}
 		});
 
-    
-
-  
-
 
 		$(".submitbtn").click(function(){
 			var login = $("#login").val();
