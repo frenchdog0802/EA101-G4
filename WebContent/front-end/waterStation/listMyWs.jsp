@@ -71,7 +71,7 @@ h4 {
 						<td>${wsVO.area}</td>
 
 						<td><img alt=""
-							src="<%=request.getContextPath()%>/back-end/waterStation/water.stationImage?SQ_STATION_ID=${wsVO.sqStationId}"
+							src="<%=request.getContextPath()%>/front-end/waterStation/water.stationImage?SQ_STATION_ID=${wsVO.sqStationId}"
 							style="width: 150px; height: 150px"> <%--    ${memVO.mPic} 圖片記憶體位置 --%>
 						</td>
 						<td>${wsVO.businessHours}</td>
