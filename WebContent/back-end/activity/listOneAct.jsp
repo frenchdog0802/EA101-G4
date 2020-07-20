@@ -120,11 +120,10 @@
 			<input type="hidden" name="action" value="delete"></FORM>
 		</td>
 		<td>
-			<p>0.成團</p>
-			<p>1.未成團</p>
-			<p>2.取消揪團</p>
-			<p>3.人數已滿</p>
-			<p>4.下架</p>
+			0.成團<br>
+			1.未成團<br>
+			2.取消揪團<br>
+			3.下架<br>
 		</td>
 	</tr>
 </table>
