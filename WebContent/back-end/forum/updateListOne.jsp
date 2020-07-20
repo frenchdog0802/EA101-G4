@@ -35,6 +35,7 @@
 <!-- Custom styles for this template -->
 <link href="<%=request.getContextPath()%>/bootstrap-components/css/modern-business.css"
 	rel="stylesheet">
+<script src="<%=request.getContextPath()%>/front-end/forum/ckeditor/ckeditor.js"></script>
 
 <style>
 body {
@@ -133,8 +134,15 @@ input[type="file"] {
 							<hr>
 
 							<div class="form-group">
-								<textarea class="form-control" height="auto" rows="16" name="theme_detial"><%=forumVO.getTheme_detial()%></textarea>
+								<textarea class="form-control" id="editor1" height="auto" rows="16" name="theme_detial"><%=forumVO.getTheme_detial()%></textarea>
 							</div>
+							<script>
+									CKEDITOR.replace('editor1', {
+										width : '85%',
+										language : 'zh'
+									});
+								</script>
+							
 <!-- 							<label>主題編號:</label> -->
 							<input type="hidden" name="sq_theme_id" value="<%=forumVO.getSq_theme_id()%>">
 							<input type="hidden" name="reponse_sum" value="<%=forumVO.getReponse_sum()%>"> 
