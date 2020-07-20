@@ -39,8 +39,10 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 	color: #cccccc;
 }
 *, ::after, ::before {
-    box-sizing: content-box !important;
+    box-sizing: content-box ;
 }
+
+
 </style>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
