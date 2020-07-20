@@ -36,6 +36,7 @@ h4 {
 	color: blue;
 	display: inline;
 }
+
 </style>
 
 </head>
@@ -58,7 +59,7 @@ h4 {
 				<th>路線總距離(公里)</th>
 				<th>路線圖片</th>
 				<th>路線簡介</th>
-				<th>路線細節</th>
+				<th style="width: 120px;">路線細節</th>
 				<th>審核狀態</th>
 				<th>上架狀態</th>
 
@@ -70,23 +71,23 @@ h4 {
 
 				<c:if test="${sessionScope.MemVO.sq_member_id == rouVO.sqMemberId }">
 					<tr>
-						<td>${rouVO.sqRouteId}</td>
-						<td>${rouVO.routeName}</td>
-						<td>${rouVO.distance}</td>
-						<td><img alt=""
-							src="<%=request.getContextPath()%>/back-end/route/route.img?SQ_ROUTE_ID=${rouVO.sqRouteId}"
+						<td style="padding : 0px;">${rouVO.sqRouteId}</td>
+						<td style="padding : 0px; valign:center;">${rouVO.routeName}</td>
+						<td style="padding : 0px;">${rouVO.distance}</td>
+						<td style="padding : 0px;"><img alt=""
+							src="<%=request.getContextPath()%>/front-end/route/route.img?SQ_ROUTE_ID=${rouVO.sqRouteId}"
 							style="width: 200px; height: 200px"></td>
-						<td style="text-align: left">${rouVO.routeIntroduction}</td>
-						<td><a
+						<td style="text-align: left; padding : 0px; valign:center; ">${rouVO.routeIntroduction}</td>
+						<td style="padding : 0px;"><a
 							href="<%=request.getContextPath()%>/front-end/route/route.do?sqRouteId=${rouVO.sqRouteId}&routeName=${rouVO.routeName}&action=getOneRoute_For_Display">查看路線細節</a>
 						</td>
-						<td>
+						<td style="padding : 0px;">
 							<c:if test="${rouVO.checkFlag == 0}">未審核</c:if>
 							<c:if test="${rouVO.checkFlag == 1}">審核通過</c:if>
 							<c:if test="${rouVO.checkFlag == 2}">審核未通過</c:if>
 						</td>
 
-						<td>
+						<td style="padding : 0px;">
 							<c:if test="${rouVO.addRoute == 0}">未上架</c:if>
 							<c:if test="${rouVO.addRoute == 1}">已上架</c:if>
 						</td>
