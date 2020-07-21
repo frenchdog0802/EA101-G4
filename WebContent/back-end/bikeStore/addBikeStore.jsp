@@ -236,7 +236,7 @@ function initMap(store_latitute ,store_longitute){
 			//密碼
 			var phone = "0987654321";
 			//信箱
-			var store_email  = "x6815541@gmail.com";
+			var store_email  = "ea101g4@gmail.com";
 			//地址
 			var zone1 = "新北市";
 			var zone2 = "淡水區";

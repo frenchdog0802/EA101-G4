@@ -38,7 +38,7 @@ public class MemServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		HttpSession session = req.getSession();
 
-		System.out.println(action);
+		
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -191,7 +191,6 @@ public class MemServlet extends HttpServlet {
 				InputStream in = m_photor.getInputStream();
 				byte[] m_photo = null;
 				m_photo = new byte[in.available()];
-				session.setAttribute("m_photo", m_photo);
 				in.read(m_photo);
 				in.close();
 				
@@ -208,7 +207,7 @@ public class MemServlet extends HttpServlet {
 				memVO.setM_email(m_email);
 				memVO.setRegistered(registered);
 				memVO.setValidation(validation);
-				if(in.available() != 0) {
+				if(m_photor.getSize() != 0) {
 					memVO.setM_photo(m_photo);
 				}
 				

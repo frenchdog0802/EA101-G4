@@ -171,7 +171,7 @@ public class StaffServlet extends HttpServlet{
 				staffVO.setSf_status(sf_status);
 				staffVO.setSf_email(sf_email);
 				staffVO.setSf_phone(sf_phone);
-				if (in.available() != 0) {
+				if (sf_photo.getSize() != 0) {
 					staffVO.setSf_photo(sf_photo_b);
 					}
 				

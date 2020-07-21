@@ -196,7 +196,7 @@ function smart_btn(){
 	//密碼
 	var sf_phone = "0987654321";
 	//信箱
-	var sf_email  = "x6815541@gmail.com";
+	var sf_email  = "ea101g4@gmail.com";
 	//地址
 	var zone1 = "新北市";
 	var zone2 = "淡水區";

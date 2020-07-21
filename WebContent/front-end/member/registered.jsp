@@ -218,7 +218,7 @@
 		//密碼
 		var password = "JOHN123";
 		//信箱
-		var m_email  = "x6815541@gmail.com";
+		var m_email  = "ea101g4@gmail.com";
 		//性別
 		var gender = "1";
 		//生日
