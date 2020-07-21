@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.shop_product.model.Shop_productDAO;
+
 public class Product_stockDAO implements Product_stockDAO_interface{
 	private static DataSource ds = null;
 	static {
@@ -32,8 +34,9 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 		PreparedStatement pstmt = null;	
 		try {
 			pstmt = con.prepareStatement(INSERT);
-			
-			pstmt.setString(1, stockVO.getSq_product_id());
+			Shop_productDAO dao = new Shop_productDAO();
+			String sq_product_id = dao.getCurrentKey();
+			pstmt.setString(1, sq_product_id);
 			pstmt.setString(2, stockVO.getProduct_color());
 			pstmt.setString(3, stockVO.getProduct_model());
 			pstmt.setInt(4, stockVO.getStock_total());

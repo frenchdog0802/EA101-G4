@@ -505,7 +505,9 @@
 			    				 		"<div id='sample'>"+
 			    				 		"<div class='list-img'>"+
 			    				 			"<div class='list-img2'>"+
+			    				 				"<a href='<%=request.getContextPath()%>/front-end/shopMall/shopProduct.jsp?id="+data[index].id+"'>"+
 				    				 				"<img src='<%=request.getContextPath()%>/showImg4?id=" + data[index].id + "' class='img-fluid'>"+
+				    				 			"</a>"+
 			    				 			"</div>"+
 				    			 		"</div>"+
 				    			 		"<div class='listbox'>"+
@@ -554,7 +556,9 @@
 				    				 		"<div id='sample'>"+
 				    				 		"<div class='list-img'>"+
 				    				 			"<div class='list-img2' style='text-align: center;'>"+
- 				    				 				"<img src='<%=request.getContextPath()%>/showImg4?id=" + data[index].id + "' class='img-fluid'>"+
+				    				 				"<a href='<%=request.getContextPath()%>/front-end/shopMall/shopProduct.jsp?id="+data[index].id+"'>"+
+ 				    				 					"<img src='<%=request.getContextPath()%>/showImg4?id=" + data[index].id + "' class='img-fluid'>"+
+ 				    				 				"</a>"+
 				    				 			"</div>"+
 					    			 		"</div>"+
 					    			 		"<div class='listbox'>"+
@@ -605,7 +609,9 @@
   					    				 		"<div id='sample'>"+
   					    				 		"<div class='list-img'>"+
   					    				 			"<div class='list-img2' style='text-align: center;'>"+
-  	 				    				 				"<img src='<%=request.getContextPath()%>/showImg4?id=" + data[index].id + "' class='img-fluid'>"+
+  					    				 				"<a href='<%=request.getContextPath()%>/front-end/shopMall/shopProduct.jsp?id="+data[index].id+"'>"+
+  	 				    				 					"<img src='<%=request.getContextPath()%>/showImg4?id=" + data[index].id + "' class='img-fluid'>"+
+  	 				    				 				"</a>"+
   					    				 			"</div>"+
   						    			 		"</div>"+
   						    			 		"<div class='listbox'>"+
