@@ -125,6 +125,8 @@ public class ShoppingServlet extends HttpServlet{
 			}else {
 				paymode = "超商取貨";
 			}
+			String memberid = req.getParameter("member_id");
+			
 			HashMap<String, String> mapCus = new HashMap<String, String>();
 			mapCus.put("name", name);
 			mapCus.put("phone", phone);
@@ -141,6 +143,7 @@ public class ShoppingServlet extends HttpServlet{
 			}
 			
 			jedis.hset("customer", "name" , name);
+			jedis.hset("customer", "memberid" , memberid);
 			jedis.hset("customer", "phone" , phone);
 			jedis.hset("customer", "address" , address);
 			jedis.hset("customer", "email" , email);
