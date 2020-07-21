@@ -58,7 +58,6 @@
 		name="action" value="getOne_For_Display"> <input type="submit"
 		value="送出" class="btn btn-danger btn-sm">
 </FORM>
-.
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">

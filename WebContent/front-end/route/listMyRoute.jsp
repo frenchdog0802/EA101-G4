@@ -37,6 +37,8 @@ h4 {
 	display: inline;
 }
 
+
+
 </style>
 
 </head>
@@ -77,7 +79,7 @@ h4 {
 						<td style="padding : 0px;"><img alt=""
 							src="<%=request.getContextPath()%>/front-end/route/route.img?SQ_ROUTE_ID=${rouVO.sqRouteId}"
 							style="width: 200px; height: 200px"></td>
-						<td style="text-align: left; padding : 0px; valign:center; ">${rouVO.routeIntroduction}</td>
+						<td style="text-align: left; padding : 0px; valign:center; line-height: 0px; ">${rouVO.routeIntroduction}</td>
 						<td style="padding : 0px;"><a
 							href="<%=request.getContextPath()%>/front-end/route/route.do?sqRouteId=${rouVO.sqRouteId}&routeName=${rouVO.routeName}&action=getOneRoute_For_Display">查看路線細節</a>
 						</td>
