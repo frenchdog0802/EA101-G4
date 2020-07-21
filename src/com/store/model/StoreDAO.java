@@ -10,20 +10,20 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class StoreDAO implements StoreDAO_interface{
-//	String driver = "oracle.jdbc.driver.OracleDriver";
-//	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-//	String user = "EA101_G4";
-//	String password = "EA101_G4";
-	
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/EA101_G4");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String user = "EA101_G4";
+	String password = "EA101_G4";
+//	
+//	private static DataSource ds = null;
+//	static {
+//		try {
+//			Context ctx = new InitialContext();
+//			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/EA101_G4");
+//		} catch (NamingException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	public static final String INSERT = "INSERT INTO STORE_ADDRESS(SQ_STORE_ADDRESS_ID, STORE_NAME, STORE_ADDRESS_DETAIL, STORE_LONGITUDE, STORE_LATITUDE) "
 			+ "VALUES (SQ_STORE_ADDRESS_ID.NEXTVAL, ?, ?, ?, ?)";
@@ -39,7 +39,13 @@ public class StoreDAO implements StoreDAO_interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = ds.getConnection();
+			try {
+				Class.forName(driver);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			con = DriverManager.getConnection(url, user, password);
 			pstmt = con.prepareStatement(INSERT);
 			
 			pstmt.setString(1, storeVO.getStore_name());
@@ -77,8 +83,15 @@ public class StoreDAO implements StoreDAO_interface{
 		PreparedStatement  pstmt = null;
 		int[] count = null;
 		try {
-			con = ds.getConnection();
+			try {
+				Class.forName(driver);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			con = DriverManager.getConnection(url, user, password);
 			pstmt = con.prepareStatement(INSERT);
+			
 
 			// Set auto-commit to false
 			con.setAutoCommit(false);
@@ -132,7 +145,14 @@ public class StoreDAO implements StoreDAO_interface{
 		StoreVO storeVO = null;
 	
 		try {
-			con = ds.getConnection();
+			try {
+				Class.forName(driver);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			con = DriverManager.getConnection(url, user, password);
+			
 			pstmt = con.prepareStatement(GET_ONE);
 			
 			rs = pstmt.executeQuery();
@@ -181,7 +201,13 @@ public class StoreDAO implements StoreDAO_interface{
 		StoreVO storeVO = null;
 		List<StoreVO> list = new ArrayList<StoreVO>();		
 		try {
-			con = ds.getConnection();
+			try {
+				Class.forName(driver);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			con = DriverManager.getConnection(url, user, password);
 			pstmt = con.prepareStatement(GET_ALL);		
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -231,7 +257,13 @@ public class StoreDAO implements StoreDAO_interface{
 		StoreVO storeVO = null;
 		List<StoreVO> list = new ArrayList<StoreVO>();		
 		try {
-			con = ds.getConnection();
+			try {
+				Class.forName(driver);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			con = DriverManager.getConnection(url, user, password);
 			pstmt = con.prepareStatement(GET_POS);
 			pstmt.setString(1, shopName);
 			rs = pstmt.executeQuery();

@@ -78,7 +78,7 @@
 							<div id="T1" class="collapse card mx-auto w-75 mt-3">
 								<c:forEach var="tipVO" items="${tipSvc.findByTitle(1)}"
 									varStatus="e">
-											<div class="card-body ">${e.index}${tipVO.tips_description}</div>
+											<div class="card-body ">${tipVO.tips_description}</div>
 								</c:forEach>
 							</div>
 								
@@ -86,33 +86,33 @@
 							<div id="T2" class="collapse card mx-auto w-75 mt-3">
 								<c:forEach var="tipVO" items="${tipSvc.findByTitle(2)}"
 									varStatus="e">
-											<div class="card-body ">${e.index}${tipVO.tips_description}</div>
+											<div class="card-body ">${tipVO.tips_description}</div>
 								</c:forEach>
 							</div>
 
 							<div id="T3" class="collapse card mx-auto w-75 mt-3">
 								<c:forEach var="tipVO" items="${tipSvc.findByTitle(3)}"
 									varStatus="e">
-											<div class="card-body ">${e.index}${tipVO.tips_description}</div>
+											<div class="card-body ">${e.index+1} : ${tipVO.tips_description}</div>
 								</c:forEach>
 							</div>
 
 							<div id="T4" class="collapse card mx-auto w-75 mt-3">
 								<c:forEach var="tipVO" items="${tipSvc.findByTitle(4)}"
 									varStatus="e">
-											<div class="card-body ">${e.index}${tipVO.tips_description}</div>
+											<div class="card-body ">${e.index+1} : ${tipVO.tips_description}</div>
 								</c:forEach>
 							</div>
 							<div id="T6" class="collapse card mx-auto w-75 mt-3">
 								<c:forEach var="tipVO" items="${tipSvc.findByTitle(5)}"
 									varStatus="e">
-											<div class="card-body ">${e.index}${tipVO.tips_description}</div>
+											<div class="card-body ">${e.index+1} : ${tipVO.tips_description}</div>
 								</c:forEach>
 							</div>
 							<div id="T7" class="collapse card mx-auto w-75 mt-3">
 								<c:forEach var="tipVO" items="${tipSvc.findByTitle(6)}"
 									varStatus="e">
-											<div class="card-body ">${e.index}${tipVO.tips_description}</div>
+											<div class="card-body ">${e.index+1} : ${tipVO.tips_description}</div>
 								</c:forEach>
 							</div>
 						</div>

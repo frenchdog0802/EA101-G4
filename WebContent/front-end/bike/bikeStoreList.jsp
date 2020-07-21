@@ -13,7 +13,6 @@ List<BikeStoreVO> list = BikeStoreDAOService.getAll();
 pageContext.setAttribute("list", list);
 String action = request.getParameter("action");
 if("payFinish".equals(action)){
-	session.removeAttribute("BikeStoreVO");
 	session.removeAttribute("startDate");
 	session.removeAttribute("endDate");
 	session.removeAttribute("matchBike");

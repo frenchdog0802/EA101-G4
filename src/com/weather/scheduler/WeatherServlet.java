@@ -175,7 +175,7 @@ public class WeatherServlet extends HttpServlet {
 			}
 		};
 		Calendar cal = new GregorianCalendar(2020,Calendar.JULY,1,19,00,00);
-		timer.scheduleAtFixedRate(task, cal.getTime(),1000*60*60*24);
+		timer.schedule(task, cal.getTime(),1000*60*60*24);
 	}
 	
 	@Override
