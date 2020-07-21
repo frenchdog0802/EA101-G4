@@ -98,7 +98,6 @@ public class ActServlet extends HttpServlet {
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
-				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/activity/listAllAct.jsp");
 				failureView.forward(req, res);
 			}
