@@ -12,7 +12,7 @@
 	  		</div>
 			<div class="col-11 ">
 				<div class="row" style="background-color:  #4778c7;">
-					<div class="col-lg-7 col-md-6 align-self-center">
+					<div class="col-lg-8 col-md-8 align-self-center">
 						
 					</div>
 					<div class="col-lg-1 col-md-1" style="padding-left: 3px; padding-right: 3px; text-align: center;">
@@ -22,11 +22,11 @@
 							<img src="<%=request.getContextPath()%>/back-end/backFrame/image/user.png" class="img-fluid" style="margin: 0 auto;">
 						<%}%>
 					</div>
-				 	<div class="col-lg-3 col-md-3 align-self-center " style="padding-left: 0px; padding-right: 0px;  width:100%; text-align:center;">
+				 	<div class="col-lg-2 col-md-2 align-self-center " style="padding-left: 0px; padding-right: 0px;  width:100%; text-align:center;">
 				 		<%if(staffVO != null){%>
 				 			<h4 class="pt-2 ml-4" style="text-align:center; display:inline; color:white;">NAME : <%= staffVO.getSf_name() %></h4>
 				 		<%}else{%>
-				 			<h4 class="pt-2 ml-4" style="text-align:center; display:inline;">NAME : 提利昂X藍尼斯特</h4>
+				 			<h4 class="pt-2 ml-4" style="text-align:center; display:inline;"></h4>
 				 		<%}%>
 				 	</div>
 				 	<div class="col-1 align-self-center" style="padding-left: 0px; padding-right: 0px;">
