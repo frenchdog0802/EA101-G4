@@ -67,7 +67,9 @@
     	<h3>產品資料輸入</h3>
     </div>
     	<div class="row mb-3">
-    		<div class="col-2"></div>
+    		<div class="col-2">
+    		<button class="btn bg-primary" style="color:white;" id="magicbtn">神奇小按鈕</button>
+    		</div>
     		<div class="col-8">
 			<FORM method="post" action="<%=request.getContextPath()%>/shop_product.do" enctype="multipart/form-data" id="formid">
 				<table>
@@ -75,8 +77,10 @@
 						<td>產品名稱 :</td>						
 					</tr>
 					<tr style="margin-dottom:10px;">
-						<td><input type="TEXT" name="name" style="width:100%;"
-							value="<%= (productVO==null)? "" : productVO.getProduct_name()%>" /></td>
+						<td>
+							<input type="TEXT" name="name" id="name" style="width:100%;"
+							value="<%= (productVO==null)? "" : productVO.getProduct_name()%>"/>
+						</td>
 					</tr>
 					<tr>
 						<td style="color:red;">
@@ -86,7 +90,7 @@
 					<tr>
 						<td>						
 							選擇種類 :
-							<select size="1" name="kind_name">									
+							<select size="1" name="kind_name" id="kind_name">									
 								<option value="登山車">登山型自行車
 								<option value="公路車">公路型自行車
 								<option value="混和路面車">混和路面型自行車
@@ -102,18 +106,19 @@
 								<option value="外胎/內胎">外胎/內胎
 								<option value="坐墊">坐墊
 								<option value="維修保養工具">維修保養工具
+								<option value="劍">劍
 							</select>
 							&nbsp; &nbsp; 
 					<jsp:useBean id="brandSvc" scope="page" class="com.brand.model.BrandService" />											
 							選擇廠牌 :
-							<select size="1" name="brand">
+							<select size="1" name="brand" id="brand">
 								<c:forEach var="brandVO" items="${brandSvc.all}">
 									<option value="${brandVO.sq_brand_id}" ${(productVO.sq_brand_id == brandVO.sq_brand_id)? 'selected':'' } >${brandVO.brand_name}
 								</c:forEach>
 							</select>
 							&nbsp; &nbsp; 					
 							輸入價格 : 										
-							<input type="TEXT" name="price"
+							<input type="TEXT" name="price" id="price"
 							value="<%= (productVO==null)? "" : productVO.getProduct_price()%>" />
 						</td>
 					</tr>
@@ -183,8 +188,8 @@
 					</tr>
 				</table>
 				<div style="text-align: right;">
-					<input type="hidden" name="action" value="insert">
 					<input type="submit" value="送出新增" onclick="upload()" style="text-align: right;">
+					<input type="hidden" name="action" value="insert">
 				</div>
 			</FORM>
 			</div>
@@ -194,6 +199,16 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script>
+		$("#magicbtn").click(function(){
+			$("input[name=name]").val("瓦雷利亞剛劍");
+			$("#kind_name").val("劍");
+			$("#brand").val(520006);
+			$("#price").val("99");
+			$("#give").val("瓦雷利亞鋼 100%");
+			$("#give2").val("瓦雷利亞鋼是在瓦雷利亞自由堡壘時期鍛造出的一種強大金屬，若被鑄造成鐵劍後，它的刀鋒可以永遠保持鋒利，強度比一般鐵劍要強上許多，但重量卻比較輕，若以真實世界的說法，此物質近似於大馬士革鋼，但它是一個奇幻的產物，意即它擁有些許魔法元素存在，據說為對抗異鬼最佳武器。");
+			
+		});
+		
 		$("#styleAdd").click(function(){
 			let str = "<tr>"+
 						"<td class='addstyle' value='123'>"+

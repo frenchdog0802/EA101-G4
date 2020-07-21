@@ -92,13 +92,13 @@ public class Shop_productServlet extends HttpServlet {
 				if(color == null || color.length == 0) {
 					errorMsgs.put("type", "材質欄請勿空白 ");
 				}
-				String[] model = req.getParameterValues("color");
+				String[] model = req.getParameterValues("model");
 				if(model == null || model.length == 0) {
 					errorMsgs.put("type", "材質欄請勿空白 ");
 				}	
 				String[] stockNum = req.getParameterValues("stockNum");
 				if(stockNum == null || stockNum.length == 0) {
-					errorMsgs.put("type", "材質欄請勿空白 ");
+					errorMsgs.put("type", "數量欄請勿空白 ");
 				}
 				
 				if (!errorMsgs.isEmpty()) {			
