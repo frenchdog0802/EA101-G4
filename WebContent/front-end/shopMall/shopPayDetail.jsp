@@ -28,7 +28,7 @@
 								<div class="col-4 choshop mt-3" id="choshop">
 									<form>
 										<input type="radio" name="service" id="home" value="home" class="mb-2" checked="true"> 
-										<label for="home" style="font-size:150%;">宅配到點</label><br>
+										<label for="home" style="font-size:150%;">宅配到府</label><br>
 										<input type="radio" name="service" id="store" value="store" class="mb-2"> 
 										<label for="store" style="font-size:150%;">超商取貨</label><br>
 									</form>
@@ -95,6 +95,7 @@
 				    						<label for="tname" class="takedt_t">收件人 :</label>
 										    <input type="text" class="form-control ${errorMsgs.name==null?'':'is-invalid'}" id="tname" name="tname" value="${mapCus.name==null?'':mapCus.name}">
 				    						<input type="hidden" id="name" value="${MemVO.m_name}">
+				    						<input type="hidden" name="member_id" value="${MemVO.sq_member_id}">
 				    						<div class="invalid-feedback">
 											    ${errorMsgs.name}
 											</div>
@@ -171,6 +172,7 @@
 		console.log($('#paymode').val());
 		$('input[name=service]').change(function(){
 			var b = $('input[name=service]:checked').val();
+			console.log(b);
 			$('#paymode').val(b);
 		});
 		
@@ -251,14 +253,14 @@
 			c1.removeAttribute('disabled');
 			c2.removeAttribute('disabled');
 			c3.removeAttribute('disabled');
-			sConfirm.removeAttribute('disabled');
+
 			$('#taddress').attr('readonly', true);
 		}
 		if(home.checked){
 			c1.setAttribute('disabled', 'disabled');
 			c2.setAttribute('disabled', 'disabled');
 			c3.setAttribute('disabled', 'disabled');
-			sConfirm.setAttribute('disabled', 'disabled');
+
 			$('#taddress').attr('readonly', false);
 		}
 	});

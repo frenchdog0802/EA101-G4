@@ -57,9 +57,7 @@ public class ProductEcpayServlet extends HttpServlet {
 				map.put("price", vo.getProduct_price().toString());
 				map.put("sum", vo.getProduct_quantity().toString());
 				jedis.hmset("product"+i, map);
-				System.out.println(map.toString());
 				map.clear();
-				System.out.println(map.toString());
 			}			
 			jedis.close();			
 			
@@ -108,13 +106,13 @@ public class ProductEcpayServlet extends HttpServlet {
 //			設定交易訊息
 			obj.setTradeDesc("支付信用卡");
 //			設定ReturnURL 付款完成通知回傳網址 使用  ngrok.io
-			String returnURL = "https://ea101g4.tk/EA101_G4/shopMall/productEcpayServlet.do";
+			String returnURL = "http://www.ea101g4.tk/EA101_G4/shopMall/productEcpayServlet.do";
 			obj.setReturnURL(returnURL);
 //			設定ClientBackURL Client端返回合作特店系統的按鈕連結
-			String clientBackURL = "https://ea101g4.tk/EA101_G4/front-end/shopMall/shopMall.jsp";
+			String clientBackURL = "http://www.ea101g4.tk/EA101_G4/front-end/shopMall/shopMall.jsp";
 			obj.setClientBackURL(clientBackURL);
 //			設定OrderResultURL Client端回傳付款結果網址 跟ReturnURL二選一
-			String setOrderResultURL = "https://ea101g4.tk/EA101_G4/front-end/shopMall/shoppingFinal.jsp";
+			String setOrderResultURL = "http://www.ea101g4.tk/EA101_G4/front-end/shopMall/shoppingFinal.jsp";
 			obj.setOrderResultURL(setOrderResultURL);
 //			設定NeedExtraPaidInfo 是否需要額外的付款資訊 
 			obj.setNeedExtraPaidInfo("N");
@@ -136,9 +134,6 @@ public class ProductEcpayServlet extends HttpServlet {
 		String CustomField1 = request.getParameter("CustomField1");		
 		if ("returnMsg".equals(CustomField1)) {
 			System.out.println("進來了!");
-
-			// 取得session會員編號
-			String memNo = "910001";
 
 //			MerchantID 特店編號                       2000132 String MerchantID = request.getParameter("MerchantID");
 //			MerchantTradeNo 特店交易編號    RT-600001
@@ -164,7 +159,8 @@ public class ProductEcpayServlet extends HttpServlet {
 		
 		Jedis jedis = new Jedis("localhost", 6379);
 		jedis.auth("123456");
-
+		String memNo = jedis.hget("customer", "memberid");
+		System.out.println(memNo);
 		String caddress = jedis.hget("customer", "address");
 
 		// 新增到訂單

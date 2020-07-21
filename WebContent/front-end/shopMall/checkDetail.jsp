@@ -80,6 +80,7 @@
 				
 			    			<div class="mt-3 mb-2 pt-2 pl-3 pb-2" style="background-color: #cccccc;">
 			    				<div class="finalbtn" style="padding-right: 20px; text-align: right;">
+			    					<button class="btn bg-secondary" style="width:30%">上一步</button>
 			    					<button type="button" class="btn bg-secondary" data-toggle="modal" data-target="#exampleModal" style="width:30%">	確認無誤
 									</button>
 									<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

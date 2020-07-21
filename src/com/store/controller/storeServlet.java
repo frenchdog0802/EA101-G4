@@ -34,9 +34,11 @@ public class storeServlet extends HttpServlet {
 			JSONArray json = new JSONArray();
 			for(int i=0 ; i<list.size() ; i++) {
 				JSONObject jsonList = new JSONObject();
+				String storeid = list.get(i).getSq_store_address_id();
 				String str = list.get(i).getStore_address();
 				String name = list.get(i).getStore_name();
 				if(str.indexOf(storeKey) != -1) {
+					jsonList.put("storeid", storeid);
 					jsonList.put("name", name);
 					json.put(jsonList);
 				}

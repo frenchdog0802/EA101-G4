@@ -87,8 +87,8 @@
 	
 		    			<div class="pt-2 pl-3 pb-2" style="background-color: #cccccc;">
 		    				<div class="finalbtn" style="padding-right: 20px; text-align: right;">
-		    					<button class="btn bg-secondary carClear" style="width: 25%; margin-right: 10px;" onclick="location.href='http://localhost:8079/EA101_G4/front-end/shopMall/shopMall.jsp'">繼續購物</button>
-					    		<button class="btn bg-secondary carClear" style="width: 25%;" onclick="http://localhost:8079/EA101_G4/front-end/index/index.jsp">回首頁</button>
+		    					<button class="btn bg-secondary carClear" style="width: 25%; margin-right: 10px;" onclick="location.href='http://www.ea101g4.tk/EA101_G4/front-end/shopMall/shopMall.jsp'">繼續購物</button>
+					    		<button class="btn bg-secondary carClear" style="width: 25%;" onclick="location.href='http://www.ea101g4.tk/EA101_G4/front-end/index/index.jsp'">回首頁</button>
 					    	</div>
 				    	</div>
 					</div>
