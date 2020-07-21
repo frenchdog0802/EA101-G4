@@ -319,7 +319,7 @@
 						for(let index = 0 ; index < data.length ; index++) { 
 						str += 
 							"<tr>"+
-								"<td style='border-bottom:1px white solid; border-right:1px white solid;'>x"+
+								"<td style='border-bottom:1px white solid; border-right:1px white solid;'>"+
 									data[index].name
 								+"</td>"+
 								"<td style='border-bottom:1px white solid; text-align:center;'>x"+
