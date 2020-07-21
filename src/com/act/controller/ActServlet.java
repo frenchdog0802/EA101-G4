@@ -565,11 +565,11 @@ public class ActServlet extends HttpServlet {
 //				String sq_member_id = req.getParameter("sq_member_id").trim();		
 			
 
-			String act_titleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{5,50}$";
+			String act_titleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,50}$";
 			if (act_title == null || act_title.trim().length() == 0) {
 				errorMsgs.add("活動標題: 請勿空白");
 			} else if (!act_title.trim().matches(act_titleReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("活動標題: 只能是中、英文字母、數字和_ , 且長度必需在5到50之間");
+				errorMsgs.add("活動標題: 只能是中、英文字母、數字和_ , 且長度必需在1到50之間");
 			} else if (act_title.trim().matches("請填入標題")) {
 				errorMsgs.add("活動標題: 請勿空白");
 			}
