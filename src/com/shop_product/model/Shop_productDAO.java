@@ -75,7 +75,7 @@ public class Shop_productDAO implements Shop_productDAO_interface{
 			Product_stockDAO stockDAO = new Product_stockDAO();
 			for(Product_stockVO vo : stockList) {
 				Product_stockVO stockVO = new Product_stockVO();
-				stockVO.setSq_product_id(vo.getSq_product_id());
+				
 				stockVO.setProduct_model(vo.getProduct_model());
 				stockVO.setProduct_color(vo.getProduct_color());
 				stockVO.setStock_total(vo.getStock_total());
