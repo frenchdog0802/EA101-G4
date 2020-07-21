@@ -108,13 +108,13 @@ public class ProductEcpayServlet extends HttpServlet {
 //			設定交易訊息
 			obj.setTradeDesc("支付信用卡");
 //			設定ReturnURL 付款完成通知回傳網址 使用  ngrok.io
-			String returnURL = "https://5da0f326a5fe.ngrok.io/EA101_G4/shopMall/productEcpayServlet.do";
+			String returnURL = "https://ea101g4.tk/EA101_G4/shopMall/productEcpayServlet.do";
 			obj.setReturnURL(returnURL);
 //			設定ClientBackURL Client端返回合作特店系統的按鈕連結
-			String clientBackURL = "https://5da0f326a5fe.ngrok.io/EA101_G4/front-end/shopMall/shopMall.jsp";
+			String clientBackURL = "https://ea101g4.tk/EA101_G4/front-end/shopMall/shopMall.jsp";
 			obj.setClientBackURL(clientBackURL);
 //			設定OrderResultURL Client端回傳付款結果網址 跟ReturnURL二選一
-			String setOrderResultURL = "https://5da0f326a5fe.ngrok.io/EA101_G4/front-end/shopMall/shoppingFinal.jsp";
+			String setOrderResultURL = "https://ea101g4.tk/EA101_G4/front-end/shopMall/shoppingFinal.jsp";
 			obj.setOrderResultURL(setOrderResultURL);
 //			設定NeedExtraPaidInfo 是否需要額外的付款資訊 
 			obj.setNeedExtraPaidInfo("N");

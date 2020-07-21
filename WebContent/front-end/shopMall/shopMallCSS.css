@@ -30,47 +30,9 @@
 			white-space:nowrap; 
 			margin: 0;
 		}
-		div#sample{
-		 	border: 1px solid transparent;
-		 	background-color: white;
-		 	height: 110%;
-
-		}
-		div#sample:hover{ 
-		    border-color: black;
-		    position:absolute;
-		    z-index: 3;
-		    height: 125%;
-		}
 		.pdzero{
 			padding-right: 0;
 			padding-left: 0;
-		}
-		.list-img{
-			height: 160px;
-			width: 160px;
-			margin: 0 auto;
-			display:  table;	
-		}
-		.list-img2{
-			display:table-cell;
-    		vertical-align:middle;
-    		text-align:center;
-    		height:100%;	
-		}
-		.list-img img{
-			width:120%;
-			
-		}
-		.listbox{
-			text-align: center;
-			font-size: 120%;
-		    margin-top: 10px;
-		    margin-bottom: 10px;
-
-		}
-		div#sample:hover .list-img{ 
-		    width: 80%;
 		}
 		.dropdown-menu {
     		min-width: 130%;
@@ -172,13 +134,4 @@
 		.left_detail hr{
 			margin-top: 10px;
 			margin-bottom: 10px;
-		}
-		#shopCar{
-			width : 60px;
-		    position: fixed; 
-		    top: 50%; 
-		    right: -60px; 
-		    background: red;
-		    padding: 5px 5px;
-		    border-radius: 10px 0px 0px 10px;
 		}

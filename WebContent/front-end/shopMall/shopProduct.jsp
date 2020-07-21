@@ -36,6 +36,27 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <title>shop_product</title>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-end/shopMall/shopProductCss.css">
+    <style>
+    	#shopCar{
+			width : 60px;
+		    position: fixed; 
+		    top: 50%; 
+		    right: -60px; 
+		    background: #fff933;
+		    padding: 5px 5px;
+		    border-radius: 10px 0px 0px 10px;
+		}
+
+     	#carDetail{
+			width : 245px;
+		    position: fixed; 
+		    top: 57%; 
+			right: -250px;
+		    background: #f1c40f;
+		    padding: 5px 5px;
+		    border-radius: 10px 0px 0px 10px;
+		}
+    </style>
 </head>
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
@@ -100,9 +121,10 @@
 	    							<td class="second_td">
 	    								<select id="model" style="margin-left: 10px;">
 	    								<% if(modelList.size() == 1){%>
-	    									<option value="${model}">${model}</option>
-	    								<%}else if(modelList.size() == 0){%>
-	    									<option value="單一尺寸">單一尺寸</option>
+	    									<c:forEach var="model" items="${modelList}">
+	    										<option value="單一尺寸">單一尺寸</option>
+	    										<option value="${model}">${model}</option>
+	    									</c:forEach>
 	    								<%}else{%>
 	    									<c:forEach var="model" items="${modelList}">
 	    										<option value="${model}">${model}</option>
@@ -203,6 +225,22 @@
  	<div id="shopCar">
 		<a href="<%=request.getContextPath()%>/front-end/shopMall/shoppingCar.jsp"><img src="image/cart.png" class="img-fluid"></a>
 	</div>		
+	<div id="carDetail">
+		<table class="detail">
+			<%if(buylist !=  null) {%>
+				<%for(int a=0 ; a<buylist.size();a++) {%>
+				<tr>
+					<td style="border-bottom:1px white solid;border-right:1px white solid;">
+						<%=buylist.get(a).getProduct_name() %>
+					</td>
+					<td style="border-bottom:1px white solid;">
+						x<%=buylist.get(a).getProduct_quantity() %>
+					</td>
+				</tr>
+				<%}%>	
+			<%}%>
+		</table>
+	</div>
 	<%@include file="/front-end/page-file/page-footer"%>
 	<script>
 		function setTotal(){
@@ -252,10 +290,10 @@
 	  		        	},
 	  		        	success : function(){
 	  		        		Swal.fire(
-	  		        			  'Good job!',
-	  		        			  '已成功加入收藏',
-	  		        			  'success'
-	  		        			)
+	  		       			 'Good job!',
+	  		        		  '已成功加入收藏',
+	  		        		  'success'
+	  		        		)
 	  		        	}
 	  		        });
   		        <%}%>
@@ -265,6 +303,7 @@
   		        $.ajax({
   		        	type : "POST",
   		        	url  : "<%=request.getContextPath()%>/shopping.do",
+  		        	dataType: 'json',
   		        	data : {
   		        		action : "ADD",
   		        		id : $("input[name=id]").val(),
@@ -274,7 +313,22 @@
   		        		model : $("#model").val(),
   		        		quantity : $("#num").val(),
   		        	},
-  		        	success : function(){
+  		        	success : function(data){
+  		        		console.log(data);
+						let str = "";
+						for(let index = 0 ; index < data.length ; index++) { 
+						str += 
+							"<tr>"+
+								"<td style='border-bottom:1px white solid; border-right:1px white solid;'>x"+
+									data[index].name
+								+"</td>"+
+								"<td style='border-bottom:1px white solid; text-align:center;'>x"+
+									data[index].quantity
+								+"</td>"+
+							"</tr>";		
+						}
+						$(".detail").empty();
+						$(".detail").append(str);
   		        		Swal.fire(
 	  		        			  'Good job!',
 	  		        			  '已成功加入購物車',
@@ -358,6 +412,12 @@
         	localStorage.removeItem(key);
            	this.Storage.writeData();
         }
+		//右側購物清單滑入滑出
+        $("#shopCar").hover(function(){
+            $("#carDetail").stop(true, false).animate({ right: "0px" });
+        }, function() {
+            $("#carDetail").stop(true, false).animate({ right: "-250px" });
+        });
         window.onload = function(){ 
         	//右側購物車圖示
         	if(<%=size%> != 0){

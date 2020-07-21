@@ -1,10 +1,14 @@
 package com.shopping.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.shop_product.model.*;
 
@@ -17,7 +21,7 @@ public class ShoppingServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
-		
+		res.setContentType("text/html;charset=UTF-8");
 		@SuppressWarnings("unchecked")
 		List<Shop_productVO> buylist = (Vector<Shop_productVO>)session.getAttribute("shoppingcar");
 		String action = req.getParameter("action");
@@ -53,6 +57,17 @@ public class ShoppingServlet extends HttpServlet{
 					}
 				}
 				session.setAttribute("shoppingcar", buylist);
+
+				PrintWriter out = res.getWriter();
+				JSONArray json = new JSONArray();				
+				for(Shop_productVO vo: buylist){
+				JSONObject jsonList = new JSONObject();
+				jsonList.put("name", vo.getProduct_name());
+				jsonList.put("quantity", vo.getProduct_quantity());
+				json.put(jsonList);
+				}
+				out.print(json);
+							
 			}catch(Exception e) {
 				e.printStackTrace();
 				RequestDispatcher fail = req.getRequestDispatcher("/front-end/ShopMall/ShopMall.jsp");

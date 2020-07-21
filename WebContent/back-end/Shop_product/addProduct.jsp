@@ -9,7 +9,7 @@
 %>
 
 <%@ include file="/back-end/backFrame/backHeader"%>
-		<link rel="stylesheet" type="text/css" href="addBrand.css">
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-end/Shop_product/addBrand.css">
 		<title>廠牌管理</title>
 <%@ include file="/back-end/backFrame/backBody"%>
  		<div class="row" style="background-color: white;">
@@ -36,17 +36,17 @@
 						<input type="text" name="sq_product_id" id="search" placeholder="輸入產品編號 (如510001):"/>
 						<input type="hidden" name="action"	value="getOne">
 						<input type="submit" value="送出" style="position: absolute; opacity: 0;" class="icon">
-						<img src="image/search.png" class="img-fluid icon" >
+						<img src="<%=request.getContextPath()%>/back-end/Shop_product/image/search.png" class="img-fluid icon" >
 				    </FORM>
 				</div>
 				<div class="col-1 ml-3" style="padding: 0;">
               		<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Shop_product/allShop_product.jsp'" style="border: 1px black solid;">
-                    	<img src="image/list.png" class="img-fluid">
+                    	<img src="<%=request.getContextPath()%>/back-end/Shop_product/image/list.png" class="img-fluid">
                     </button>
                 </div>
                 <div class="col-1 ml-3" style="padding: 0;">
-                	<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back_end/Shop_product/addProduct.jsp'" style="border: 1px black solid;">
-                    	<img src="image/addbrand.png" class="img-fluid">
+                	<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Shop_product/addProduct.jsp'" style="border: 1px black solid;">
+                    	<img src="<%=request.getContextPath()%>/back-end/Shop_product/image/addbrand.png" class="img-fluid">
                     </button>
                 </div>
                 <div class="col-3">
@@ -66,19 +66,6 @@
     <div class="row justify-content-center mt-3">
     	<h3>產品資料輸入</h3>
     </div>
-		<div class="row">
-			<div class="col-2"></div>
-			<div class="col-6">
-				<c:if test="${not empty errorMsgs}">
-					<font style="color:red">請修正以下錯誤:</font>
-					<ul>
-						<c:forEach var="message" items="${errorMsgs}">
-							<li style="color:red; list-style-type: none;">${message}</li>
-						</c:forEach>
-					</ul>
-				</c:if>
-			</div>
-		</div>
     	<div class="row mb-3">
     		<div class="col-2"></div>
     		<div class="col-8">
@@ -89,16 +76,20 @@
 					</tr>
 					<tr style="margin-dottom:10px;">
 						<td><input type="TEXT" name="name" style="width:100%;"
-							value="<%= (productVO==null)? "Giant" : productVO.getProduct_name()%>" /></td>
+							value="<%= (productVO==null)? "" : productVO.getProduct_name()%>" /></td>
 					</tr>
-
+					<tr>
+						<td style="color:red;">
+							${errorMsgs.name}
+						</td>
+					</tr>
 					<tr>
 						<td>						
 							選擇種類 :
 							<select size="1" name="kind_name">									
-								<option value="登山型">登山型自行車
-								<option value="公路型">公路型自行車
-								<option value="混和路面型">混和路面型自行車
+								<option value="登山車">登山型自行車
+								<option value="公路車">公路型自行車
+								<option value="混和路面車">混和路面型自行車
 								<option value="騎行服">騎行服
 								<option value="外套/風衣">外套/風衣
 								<option value="雨衣/雨褲">雨衣/雨褲
@@ -140,6 +131,11 @@
 						<td>加入圖片 :</td>	
 					</tr>
 					<tr>
+						<td style="color:red;">
+							${errorMsgs.image}
+						</td>
+					</tr>
+					<tr>
 						<td><input type="FILE" name="pic" id="imgInp" accept="image/*"></td>
 					</tr>
 					<tr>
@@ -161,6 +157,11 @@
 						<td>商品材質 :</td>
 					</tr>
 					<tr>
+						<td style="color:red;">
+							${errorMsgs.material}
+						</td>
+					</tr>
+					<tr>
 						<td>
 							<input type="hidden" id="take" name="material">
 							<textarea rows="3" id="give" style="width:100%"><%=(productVO==null)? "" : productVO.getProduct_material()%></textarea>
@@ -168,6 +169,11 @@
 					</tr>
 					<tr>
 						<td>商品介紹 :</td>
+					</tr>
+					<tr>
+						<td style="color:red;">
+							${errorMsgs.detail}
+						</td>
 					</tr>
 					<tr>
 						<td>

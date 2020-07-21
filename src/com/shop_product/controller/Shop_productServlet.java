@@ -29,16 +29,17 @@ public class Shop_productServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		res.setContentType("text/html;charset=UTF-8");
 		if("insert".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
+			Map<String, String> errorMsgs = new HashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
 				String name = req.getParameter("name");
-				String nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+//				String nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]";
 				if(name == null || name.trim().length() == 0) {
-					errorMsgs.add("名稱欄請勿空白");
-				}else if(!name.trim().matches(nameReg)) {
-					errorMsgs.add("名稱欄位只能是中、英文字母、數字和_,請長度必須在2到10之間");
+					errorMsgs.put("name", "名稱欄請勿空白");
 				}
+//				}else if(!name.trim().matches(nameReg)) {
+//					errorMsgs.put("name","名稱欄位只能是中、英文字母、數字");
+//				}
 				
 				String kind_name = req.getParameter("kind_name");
 				String brand = req.getParameter("brand");
@@ -47,9 +48,9 @@ public class Shop_productServlet extends HttpServlet {
 				String pricestr = String.valueOf(price);
 				String priceReg = "^(0|[1-9][0-9]*)$";
 				if(pricestr == null || pricestr.trim().length() == 0) {
-					errorMsgs.add("價格欄請勿空白");
+					errorMsgs.put("price","價格欄請勿空白");
 				}else if(!pricestr.trim().matches(priceReg)){
-					errorMsgs.add("價格欄位請輸入數字");
+					errorMsgs.put("put","價格欄位請輸入數字");
 				}
 				
 				Part part = req.getPart("pic");
@@ -57,7 +58,7 @@ public class Shop_productServlet extends HttpServlet {
 				byte[] pic = null;
 				if(part.getSize()==0) {
 					if(session.getAttribute("pic") == null) {
-						errorMsgs.add("請上傳圖片");
+						errorMsgs.put("image","請上傳圖片");
 					}else {
 						pic = (byte[])session.getAttribute("pic");
 						in.read(pic);
@@ -71,9 +72,13 @@ public class Shop_productServlet extends HttpServlet {
 				}
 				
 				String detail = req.getParameter("detail");
-				
+				if(detail == null || detail.trim().length() == 0) {
+					errorMsgs.put("detail", "介紹欄請勿空白");
+				}
 				String material = req.getParameter("material");
-				
+				if(material == null || material.trim().length() == 0) {
+					errorMsgs.put("material", "材質欄請勿空白");
+				}
 				Shop_productVO productVO = new Shop_productVO();
 				productVO.setProduct_name(name);
 				productVO.setProduct_kind_name(kind_name);
@@ -82,7 +87,20 @@ public class Shop_productServlet extends HttpServlet {
 				productVO.setProduct_pic(pic);
 				productVO.setProduct_detail(detail);
 				productVO.setProduct_material(material);
-					
+				
+				String[] color = req.getParameterValues("color");
+				if(color == null || color.length == 0) {
+					errorMsgs.put("type", "材質欄請勿空白 ");
+				}
+				String[] model = req.getParameterValues("color");
+				if(model == null || model.length == 0) {
+					errorMsgs.put("type", "材質欄請勿空白 ");
+				}	
+				String[] stockNum = req.getParameterValues("stockNum");
+				if(stockNum == null || stockNum.length == 0) {
+					errorMsgs.put("type", "材質欄請勿空白 ");
+				}
+				
 				if (!errorMsgs.isEmpty()) {			
 					req.setAttribute("productVO", productVO); 
 					RequestDispatcher failureView = req
@@ -91,11 +109,7 @@ public class Shop_productServlet extends HttpServlet {
 					return;
 				}
 								
-				//增加商品庫存
-				String[] color = req.getParameterValues("color");
-				String[] model = req.getParameterValues("color");
-				String[] stockNum = req.getParameterValues("stockNum");
-				
+				//增加商品庫存				
 				Shop_productDAO productDAO = new Shop_productDAO();
 				String product_id = productDAO.getCurrentKey();//取得目前最大的訂單編號
 				Integer newID = Integer.parseInt(product_id)+1;
@@ -120,7 +134,6 @@ public class Shop_productServlet extends HttpServlet {
 				success.forward(req, res);
 				
 			}catch(Exception e){
-				errorMsgs.add(e.getMessage());
 				e.printStackTrace();
 				RequestDispatcher fail = req.getRequestDispatcher("/back-end/Shop_product/addProduct.jsp");
 				fail.forward(req, res);
@@ -335,6 +348,7 @@ public class Shop_productServlet extends HttpServlet {
 			}
 			out.print(json);
 		}
+		//複合查詢
 		if ("listEmps_ByCompositeQuery".equals(action)) { // 來自select_page.jsp的複合查詢請求
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -405,7 +419,6 @@ public class Shop_productServlet extends HttpServlet {
 				}
 				out.print(json);
 				
-				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMsgs.add(e.getMessage());
