@@ -278,7 +278,7 @@ public class ActServlet extends HttpServlet {
 				if (act_title == null || act_title.trim().length() == 0) {
 					errorMsgs.add("活動標題: 請勿空白");
 				} else if (!act_title.trim().matches(act_titleReg)) { // 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("活動標題: 只能是中、英文字母、數字和_ , 且長度必需在1到65之間");
+					errorMsgs.add("活動標題: 只能是中、英文字母、數字和_!?,， , 且長度必需在1到65之間");
 				} else if (act_title.trim().matches("請填入標題")) {
 					errorMsgs.add("活動標題: 請勿空白");
 				}
@@ -433,7 +433,7 @@ public class ActServlet extends HttpServlet {
 			if (act_title == null || act_title.trim().length() == 0) {
 				errorMsgs.add("活動標題: 請勿空白");
 			} else if (!act_title.trim().matches(act_titleReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("活動標題: 只能是中、英文字母、數字和_ , 且長度必需在1到65之間");
+				errorMsgs.add("活動標題: 只能是中、英文字母、數字和_!?,， , 且長度必需在1到65之間");
 			} else if (act_title.trim().matches("請填入標題")) {
 				errorMsgs.add("活動標題: 請勿空白");
 			}
@@ -569,7 +569,7 @@ public class ActServlet extends HttpServlet {
 			if (act_title == null || act_title.trim().length() == 0) {
 				errorMsgs.add("活動標題: 請勿空白");
 			} else if (!act_title.trim().matches(act_titleReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("活動標題: 只能是中、英文字母、數字和_ , 且長度必需在1到65之間");
+				errorMsgs.add("活動標題: 只能是中、英文字母、數字和_!?,， , 且長度必需在1到65之間");
 			} else if (act_title.trim().matches("請填入標題")) {
 				errorMsgs.add("活動標題: 請勿空白");
 			}
