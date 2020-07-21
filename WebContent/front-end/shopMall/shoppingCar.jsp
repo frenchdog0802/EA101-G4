@@ -65,7 +65,7 @@
 							<tr class="pro">
 								<td class="pro_pic"><img src="<%=request.getContextPath()%>/showImg4?id=<%=order.getSq_product_id()%>" class="img-fluid"></td>
 								<td class="pro_name"><%=order.getProduct_name()%></td>
-								<td class="pro_quan"><input type="text" name="quantity" value="<%= order.getProduct_quantity()%>"></td>
+								<td class="pro_quan"><%= order.getProduct_quantity()%></td>
 								<td class="pro_price"><%=order.getProduct_price()%></td>
 								<td class="pro_yn">
 									<% if(order.getProduct_color() != ""){%>
