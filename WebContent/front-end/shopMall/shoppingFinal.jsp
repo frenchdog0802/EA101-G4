@@ -38,7 +38,7 @@
 							<table class="table table-striped">
 							    <tbody>			    	
 							        <tr>
-							            <td style="width: 20%; border-right: 1px #cccccc solid;">付款人姓名</td>
+							            <td style="width: 20%; border-right: 1px #cccccc solid;">收件人姓名</td>
 							            <td style="width: 80%;"><%=name%></td>
 							        </tr>
 							        <tr>
