@@ -57,7 +57,9 @@
 					<select class="custom-select" id="selectActRoute3"
 						name="sq_route_id">
 						<c:forEach var="routeVO" items="${routeSvc.all}">
+						<c:if test="${routeVO.addRoute == 1}">
 							<option value="${routeVO.sqRouteId}">${routeVO.routeName}</option>
+						</c:if>
 						</c:forEach>
 					</select>
 					<input type="button" id="addroute" class="btn btn-primary" value="建立路線"/>
