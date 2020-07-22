@@ -171,7 +171,7 @@
           '<div class="Data-Items" style="float: left; width: 25%;">'+
           '<input id=stepImg'+i+' type="file" style="width:70px;" onclick="return changeSetImg('+i+')" onchange="showImg('+i+')" name="stepImg" size="45"/>'+
           '<img id=demo'+i+' style="width:150px; height:150px;"/>'+
-          '<textarea class="stepIntro" id=stepIntro'+i+'></textarea><br />'+
+          '<textarea class="stepIntro" id=stepIntro'+i+' style="line-height: 22px""></textarea><br />'+
           '<button type="button" onclick="setVal('+i+')">送出</button>'+
           '</div>'+
           '</div>';
