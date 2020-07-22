@@ -100,7 +100,7 @@
 	    							<td ><span class="allsecond_td"><%=productVO.getAdd_date()%></span></td>
 	    						</tr>
 	   							<tr>
-	    							<td><span>尺寸 :</span></td>
+	    							<td><span>顏色 :</span></td>
 	    							<td class="second_td">
 	    								<select id="color" style="margin-left: 10px;">
 	    								<% if(colorList.size() == 1){%>
@@ -117,7 +117,7 @@
 	    							</td>
 	    						</tr>
 	    						<tr>
-	    							<td><span>顏色 : </span></td>
+	    							<td><span>尺寸 : </span></td>
 	    							<td class="second_td">
 	    								<select id="model" style="margin-left: 10px;">
 	    								<% if(modelList.size() == 1){%>
