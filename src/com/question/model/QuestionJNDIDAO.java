@@ -1,4 +1,5 @@
 package com.question.model;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,30 +14,28 @@ import javax.sql.DataSource;
 
 public class QuestionJNDIDAO implements QuestionDAO_interface {
 
-
+	
 	private static DataSource ds = null;
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/EA101_G4");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-	}
+}
 
-	private static final String INSERT_STMT = "INSERT INTO QUESTION (SQ_QUESTION_ID,QUESTION_TITLE,QUESTION_DESCRIPTION) VALUES (QUESTION_seq.NEXTVAL, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO QUESTION (QUESTION_TITLE,QUESTION_DESCRIPTION) VALUES (?, ?)";
 	private static final String GET_ALL_STMT = "SELECT SQ_QUESTION_ID  , QUESTION_TITLE, QUESTION_DESCRIPTION  FROM QUESTION";
 	private static final String GET_ONE_STMT = "SELECT SQ_QUESTION_ID  , QUESTION_TITLE, QUESTION_DESCRIPTION  FROM QUESTION where SQ_QUESTION_ID = ?";
-
+	
 	private static final String DELETE_QUESTION = "DELETE FROM QUESTION where SQ_QUESTION_ID = ?";	
 	
 	private static final String UPDATE = "UPDATE QUESTION set QUESTION_TITLE=?, QUESTION_DESCRIPTION=? where SQ_QUESTION_ID = ?";
 
-
-
 	@Override
 	public void insert(QuestionVO questionVo) {
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -46,7 +45,7 @@ public class QuestionJNDIDAO implements QuestionDAO_interface {
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, questionVo.getQuestion_title());
-			pstmt.setString(2, questionVo.getQuestion_desciption());
+			pstmt.setString(2, questionVo.getQuestion_description());
 
 			pstmt.executeUpdate();
 
@@ -76,6 +75,7 @@ public class QuestionJNDIDAO implements QuestionDAO_interface {
 
 	@Override
 	public void update(QuestionVO questionVo) {
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -85,7 +85,7 @@ public class QuestionJNDIDAO implements QuestionDAO_interface {
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, questionVo.getQuestion_title());
-			pstmt.setString(2, questionVo.getQuestion_desciption());
+			pstmt.setString(2, questionVo.getQuestion_description());
 			pstmt.setString(3, questionVo.getSq_question_id());
 
 			pstmt.executeUpdate();
@@ -111,8 +111,9 @@ public class QuestionJNDIDAO implements QuestionDAO_interface {
 				}
 			}
 		}
-		
+
 	}
+
 
 	@Override
 	public void delete(String sq_question_id) {
@@ -127,6 +128,7 @@ public class QuestionJNDIDAO implements QuestionDAO_interface {
 			
 			con.setAutoCommit(false);
 
+		
 			pstmt = con.prepareStatement(DELETE_QUESTION);
 			pstmt.setString(1, sq_question_id);
 			pstmt.executeUpdate();
@@ -165,12 +167,13 @@ public class QuestionJNDIDAO implements QuestionDAO_interface {
 				}
 			}
 		}
+
 		
 	}
 
 	@Override
 	public QuestionVO findByPrimaryKey(String sq_question_id) {
-		
+
 		QuestionVO questionVo = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -188,9 +191,9 @@ public class QuestionJNDIDAO implements QuestionDAO_interface {
 			while (rs.next()) {
 				
 				questionVo = new QuestionVO();
-				questionVo.setSq_question_id(rs.getString("sq_question_id"));
-				questionVo.setQuestion_title(rs.getString("question_title"));
-				questionVo.setQuestion_desciption(rs.getString("question_desciption"));
+				questionVo.setSq_question_id(rs.getString("SQ_QUESTION_ID"));
+				questionVo.setQuestion_title(rs.getString("QUESTION_TITLE"));
+				questionVo.setQuestion_description(rs.getString("QUESTION_DESCRIPTION"));
 			}
 
 			// Handle any SQL errors
@@ -242,9 +245,9 @@ public class QuestionJNDIDAO implements QuestionDAO_interface {
 
 			while (rs.next()) {
 				questionVo = new QuestionVO();
-				questionVo.setSq_question_id(rs.getString("sq_question_id"));
-				questionVo.setQuestion_title(rs.getString("question_title"));
-				questionVo.setQuestion_desciption(rs.getString("question_desciption"));
+				questionVo.setSq_question_id(rs.getString("SQ_QUESTION_ID"));
+				questionVo.setQuestion_title(rs.getString("QUESTION_TITLE"));
+				questionVo.setQuestion_description(rs.getString("QUESTION_DESCRIPTION"));
 				list.add(questionVo); // Store the row in the list
 			}
 
@@ -276,5 +279,5 @@ public class QuestionJNDIDAO implements QuestionDAO_interface {
 			}
 		}
 		return list;
-	}
+}
 }

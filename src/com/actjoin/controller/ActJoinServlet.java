@@ -10,6 +10,8 @@ import com.act.model.ActService;
 import com.act.model.ActVO;
 import com.actjoin.model.ActJoinService;
 import com.actjoin.model.ActJoinVO;
+import com.member.model.MemVO;
+import com.staff.model.StaffVO;
 
 
 public class ActJoinServlet extends HttpServlet {
@@ -27,11 +29,18 @@ public class ActJoinServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		HttpSession session = req.getSession();
-		String sq_member_id = (String)session.getAttribute("sq_member_id");
-			if(sq_member_id==null) {
-				session.setAttribute("sq_member_id", "910003");
-			}
-		
+		MemVO memVO = null;
+		String sq_member_id = null;
+		try {
+			memVO = (MemVO)session.getAttribute("MemVO");
+			sq_member_id = memVO.getSq_member_id();
+			session.setAttribute("sq_member_id", sq_member_id);
+		} catch (Exception e){
+			StaffVO staffVO = (StaffVO)session.getAttribute("StaffVO");
+			sq_member_id = staffVO.getSq_staff_id();
+			session.setAttribute("sq_member_id", sq_member_id);
+		}
+
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_actjoinpage.jsp的請求
 
@@ -46,10 +55,11 @@ public class ActJoinServlet extends HttpServlet {
 				if (str == null || (str.trim()).length() == 0) {
 					errorMsgs.add("請輸入活動編號");
 				}
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/joinActivity/select_actjoinpage.jsp");
+							.getRequestDispatcher("/back-end/joinActivity/listAllActJoin.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -63,7 +73,7 @@ public class ActJoinServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/joinActivity/select_actjoinpage.jsp");
+							.getRequestDispatcher("/back-end/joinActivity/listAllActJoin.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -72,13 +82,13 @@ public class ActJoinServlet extends HttpServlet {
 				ActJoinService actjoinSvc = new ActJoinService();
 				List<ActJoinVO> list = actjoinSvc.getOneActJoin(sq_activity_id);
 				
-				if (list == null) {
+				if (list.size() == 0) {
 					errorMsgs.add("查無資料");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/activity/select_page.jsp");
+							.getRequestDispatcher("/back-end/joinActivity/listAllActJoin.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -93,12 +103,12 @@ public class ActJoinServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/joinActivity/select_actjoinpage.jsp");
+						.getRequestDispatcher("/back-end/joinActivity/listAllActJoin.jsp");
 				failureView.forward(req, res);
 			}
 		}		
 		
-		if ("delete".equals(action)) { // 來自listAllAct.jsp
+		if ("delete".equals(action)) { // 來自Actmanagement.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -114,7 +124,7 @@ public class ActJoinServlet extends HttpServlet {
 				actjoinSvc.deleteActJoin(sq_activity_id, sq_member_id);
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
 				String url = "/front-end/activity/Actmanagement.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneAct.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 Actmanagement.jsp
 				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理**********************************/
@@ -168,6 +178,35 @@ public class ActJoinServlet extends HttpServlet {
 
 			/*************************** 其他可能的錯誤處理 **********************************/
 
+		}
+		
+		if ("delete2".equals(action)) { // 來自listAllAct.jsp
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+	
+			try {
+				/***************************1.接收請求參數***************************************/
+				String sq_activity_id =req.getParameter("sq_activity_id");
+				String sq_member2_id =req.getParameter("sq_member_id");
+				/***************************2.開始刪除資料***************************************/
+				ActJoinService actjoinSvc = new ActJoinService();
+				
+				actjoinSvc.deleteActJoin(sq_activity_id, sq_member2_id);
+				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
+				String url = "/back-end/joinActivity/listAllActJoin.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listAllAct.jsp
+				successView.forward(req, res);
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				errorMsgs.add("刪除資料失敗:"+e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/back-end/joinActivity/listAllActJoin.jsp");
+				failureView.forward(req, res);
+			}
 		}
 		
 	}

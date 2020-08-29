@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.shop_product.model.*"%>
+<%@ page import="com.member.model.*" %>
 <%@ page import="java.util.*"%>
 <%
 	Shop_productService shop_productSvc = new Shop_productService();
@@ -10,12 +11,15 @@
 	
 	@SuppressWarnings("unchecked")
 	List<Shop_productVO> buylist = (List<Shop_productVO>)session.getAttribute("shoppingcar");
-	Integer size;
+	
+	
+	Integer size = 0;
 	if(buylist != null){
 		size = buylist.size();
 	}else{
 		size = 0;
 	}
+	MemVO memVO = (MemVO)session.getAttribute("MemVO");
 %>
 <!doctype html>
 <html lang="en">
@@ -28,6 +32,229 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/shopMall/shopMallCSS.css">
     <title>商城</title>
+	<style>
+    	#shopCar{
+			width : 60px;
+		    position: fixed; 
+		    top: 50%; 
+		    right: -60px; 
+		    background: #fff933;
+		    padding: 5px 5px;
+		    border-radius: 10px 0px 0px 10px;
+		}
+     	#carDetail{
+			width : 245px;
+		    position: fixed; 
+		    top: 57%; 
+			right: -250px;
+		    background: #f1c40f;
+		    padding: 5px 5px;
+		    border-radius: 10px 0px 0px 10px;
+		}
+		.list-img{
+			height: 160px;
+			width: 160px;
+			margin: 0 auto;
+			display:  table;	
+		}
+		.list-img img{
+			width:120%;				
+		}
+		.listbox{
+			text-align: center;
+			font-size: 120%;
+		    margin-top: 10px;
+		    margin-bottom: 10px;
+		}
+		.list-boxs2{
+		 	position: absolute; 
+		 	bottom:40px; 	
+		 	left:36%;
+		}
+		div#sample:hover .list-img{ 
+			height: 200px;
+			width: 200px;
+		}
+		div#sample:hover .list-boxs2{ 
+			bottom: 15px; 
+		}
+		div#sample{
+		 	border: 1px solid transparent;
+		 	background-color: white;
+		 	height: 350px;
+		}
+		div#sample:hover{ 
+		    border-color: black;
+		    position:absolute;
+		    z-index: 3;
+		    height: 100%;
+		    width: 100%;
+		}
+		@media (min-width: 1200px) and (max-width: 1500px){
+			.list-img{
+				height: 160px;
+				width: 160px;
+				display:  table;	
+			}
+			.list-img img{
+				width:150%;
+				
+			}
+			.list-boxs2{
+			 	position: absolute; 
+			 	bottom:30px; 
+			 	left:28%;
+			}
+			div#sample:hover .list-boxs2{ 
+				bottom:30px; 
+				left:32%;
+			}
+			div#sample{
+			 	border: 1px solid transparent;
+			 	background-color: white;
+			 	height: 350px;
+	
+			}
+			div#sample:hover{ 
+			    border-color: black;
+			    position:absolute;
+			    z-index: 3;
+			    height: 105%;
+			    width: 120%;
+			}
+		}
+		@media (min-width: 768px) and (max-width: 1199px){
+			.list-img{
+				height: 130px;
+				width: 130px;
+				display:  table;	
+			}
+			.list-img img{
+				width: 100%;				
+			}
+			.listbox{
+				text-align: center;
+				font-size: 100%;
+		    	margin-top: 10px;
+		    	margin-bottom: 10px;
+			}
+			.list-boxs2{
+			 	position: absolute; 
+			 	bottom:20px; 
+			 	left:25%;
+			}
+			div#sample:hover .listbox{
+				text-align: center;
+				font-size: 115%;
+		    	margin-top: 10px;
+		    	margin-bottom: 10px;
+			}
+			div#sample:hover .list-boxs2{ 
+				bottom: 18px; 
+				left: 29%;
+			}
+			div#sample{
+			 	border: 1px solid transparent;
+			 	background-color: white;
+			 	height: 300px;
+	
+			}
+			div#sample:hover{ 
+			    border-color: black;
+			    position:absolute;
+			    z-index: 3;
+				height: 350px;
+			    width: 120%;
+			}
+		}
+		@media (min-width: 576px) and (max-width: 767px){
+			.list-img{
+				height: 130px;
+				width: 130px;
+				display:  table;	
+			}
+			.list-img img{
+				width: 100%;				
+			}
+			.listbox{
+				text-align: center;
+				font-size: 100%;
+		    	margin-top: 10px;
+		    	margin-bottom: 10px;
+			}
+			.list-boxs2{
+			 	position: absolute; 
+			 	bottom:15px; 
+			 	left:26%;
+			}
+			div#sample:hover .listbox{
+				text-align: center;
+				font-size: 110%;
+		    	margin-top: 10px;
+		    	margin-bottom: 10px;
+			}
+			div#sample:hover .list-boxs2{ 
+				bottom: 6px; 
+				left: 33%;
+			}
+			div#sample{
+			 	border: 1px solid transparent;
+			 	background-color: white;
+			 	height: 290px;
+	
+			}
+			div#sample:hover{ 
+			    border-color: black;
+			    position:absolute;
+			    z-index: 3;
+				height: 300px;
+			    width: 115%;
+			}
+		}
+		@media(max-width: 575px){
+			.list-img{
+				height: 130px;
+				width: 130px;
+				display:  table;	
+			}
+			.list-img img{
+				width: 100%;				
+			}
+			.listbox{
+				text-align: center;
+				font-size: 100%;
+		    	margin-top: 10px;
+		    	margin-bottom: 10px;
+			}
+			.list-boxs2{
+			 	bottom:20px; 
+			 	left:33%;
+			}
+			div#sample:hover .list-img{ 
+				height: 130px;
+				width: 130px;
+			}
+			div#sample:hover .listbox{
+				text-align: center;
+				font-size: 100%;
+		    	margin-top: 10px;
+		    	margin-bottom: 10px;
+			}
+			div#sample:hover .list-boxs2{ 
+			 	bottom:19px; 
+			 	left:31%;
+			}
+			div#sample{	 		
+			 	background-color: white;
+			 	height: 280px;
+			}
+			div#sample:hover{ 
+			    position:relative;
+			    z-index: 3;
+				height: 280px;
+			}
+		}
+	</style>
   </head>
   <body>
   	<%@include file="/front-end/page-file/page-nav"%>
@@ -36,26 +263,24 @@
     		<div class=" col-12">
     			<div class="row">
     				<div class="col-1"></div>
-					<div class="col-1 pdzero">
-						<button class="btn"  onclick="location.href='javascript:window.location.reload()'">商城首頁
+					<div class="col-1 pdzero" style="text-align:center; padding-left:0;">
+						<button class="btn bg-primary" onclick="location.href='javascript:window.location.reload()'" style="color:white; width:100%;">全部商品
 						</button>
 					</div>
-					<div class="col-1 btn-group" style="padding-right: 0; padding-left: 0;">
-						<div class="mr-3">
-							<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-								依條件搜尋
-							</button>
-						</div>
+					<div class="col-1 btn-group" style="text-align:center; padding-right:0; padding-left:0;">
+						<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="padding-right:0; padding-left:0;">
+							依條件搜尋
+						</button>
 					</div>
-    				<div class="col-6 searchbtn" style="padding-left: 0;"> 
-						<input type="search" id="search" placeholder="Search..." />
-						<button type="button" class="icon"> <img src="image/search.png" class="img-fluid"></button>
+    				<div class="col-6 searchbtn"> 
+						<input type="search" id="search" name="searchByText" value="" placeholder="Search..." />
+						<button type="button" class="icon" id="searchBtn"> <img src="image/search.png" class="img-fluid"></button>
 					</div>
 					<div class="col-3 mt-1" style="padding-right: 0;">
-						<span>熱門搜尋: </span>
-						<span>xxx</span>
-						<span>xxx</span>
-						<span>xxx</span>
+<!-- 						<span>熱門搜尋: </span> -->
+<!-- 						<span>xxx</span> -->
+<!-- 						<span>xxx</span> -->
+<!-- 						<span>xxx</span> -->
 					</div>
     			</div>    
 <!--	複合查詢(隱藏的DIV)		-->	
@@ -76,7 +301,7 @@
 		    				</div>
 		    				<jsp:useBean id="brandService" scope="page" class="com.brand.model.BrandService" />  
 		    				<div class="col-2 pt-2 ">
-		    					<select class="form-control" id="brandSrh">
+		    					<select class="form-control srh" id="brandSrh">
 		    						<option value="" style="display: none">品牌</option>
 									<c:forEach var="brandVO" items="${brandService.all}" > 
 										<option value="${brandVO.sq_brand_id}">${brandVO.brand_name}
@@ -85,7 +310,7 @@
 		    				</div>
 		    				
 		    				<div class="col-2 pt-2">
-		    					<select class="form-control" id="priceSrh">
+		    					<select class="form-control srh" id="priceSrh">
 		    						<option value="" style="display: none">價格區間</option>
 									<option value="5000">5000&nbsp;&uarr;</option>
 									<option value="1000">1000 ~ 5000</option>
@@ -95,15 +320,27 @@
 		    				</div>
 		    				<jsp:useBean id="productService" scope="page" class="com.shop_product.model.Shop_productService" />  
 							<div class="col-2 pt-2">
-		    					<select class="form-control" id="kindSrh">
+		    					<select class="form-control srh" id="kindSrh">
 		    						<option value="" style="display: none">種類</option>
-									<c:forEach var="productVO" items="${productService.all}" > 
-										<option value="${productVO.product_kind_name}">${productVO.product_kind_name}
-									</c:forEach> 
+									<option value="登山">登山車
+									<option value="公路">公路車
+									<option value="混和路面型">混和路面型
+									<option value="騎行服">騎行服
+									<option value="外套/風衣">外套/風衣
+									<option value="雨衣/雨褲">雨衣/雨褲
+									<option value="太陽眼鏡">太陽眼鏡
+									<option value="手套/袖套">手套/袖套
+									<option value="口罩/勃圍/帽套">口罩/勃圍/帽套
+									<option value="安全帽">安全帽
+									<option value="打氣筒">打氣筒
+									<option value="水壺/水壺架">水壺/水壺架
+									<option value="外胎/內胎">外胎/內胎
+									<option value="坐墊">坐墊
+									<option value="維修保養工具">維修保養工具
 								</select>
 		    				</div>
 		    				<div class="col-1 pdzero">
-		    					<button id="conditionSrh" class="btn bg-success">搜尋</button>
+		    					<button id="srhClear" class="btn bg-success" onclick="location.href='javascript:window.location.reload()'">清除搜尋</button>
 		    				</div>
 		    				<div class="col-2 pdzero" style="background-color: white;"></div>
 		    			</div>
@@ -157,7 +394,7 @@
     				<div class="col-8">
     					<div class="row products-range product">
     						<c:forEach var="productVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-			    				<div class="col-xs-6 col-sm-4 col-md-3 pdzero productprice" data-price="${productVO.product_price}">
+			    				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 pdzero productprice collection" data-price="${productVO.product_price}">
 				    				<div id="sample">
 				    					<div class="list-img">
 				    						<div class="list-img2">
@@ -167,24 +404,25 @@
 					    					</div>
 					    				</div>
 					    				<div class="listbox">
-					    					<div class="list-boxs" style="height: 60px; text-align: center;">
+					    					<div class="list-boxs" style="text-align: center;">
 					    						<span class="mb-1">${productVO.product_name}</span>
 					    					</div>
 					    					<div class="list-boxs price">
 					   							$${productVO.product_price}元
 					   						</div>
-					   						<div class="list-boxs mt-2">
-					   							<button class="btn bg-secondary">加入收藏</button>
-<!-- 				    							<button class="btn bg-secondary addproduct">放入購物車</button> -->
-				    						</div>
+				    					</div>
+				    					<div class="list-boxs2 mt-2">
+					   							<button class="btn bg-secondary addCollection">加入收藏</button>
 				    					</div>
 				    				</div>
-<%-- 				    				<input type="hidden" name="id" value="${productVO.sq_product_id}"> --%>
-<%-- 					    			<input type="hidden" name="name" value="${productVO.product_name}"> --%>
-<%-- 									<input type="hidden" name="price" value="${productVO.product_price}"> --%>
+				    				<input type="hidden" name="product_id" value="${productVO.sq_product_id}">
+					    			<input type="hidden" name="product_name" value="${productVO.product_name}">
 			    				</div>
 		    				</c:forEach>		    				
     					</div>
+    					<%if(memVO != null){%>
+					    	<input type="hidden" name="member_id" value="<%=memVO.getSq_member_id()%>">
+					    <%}%>
     				</div>
     				<div class="col-1"></div>
     			</div>
@@ -197,35 +435,112 @@
     		</div>
     	</div>
     </div>
-    <div id="shopCar">
+ 	<div id="shopCar">
 		<a href="<%=request.getContextPath()%>/front-end/shopMall/shoppingCar.jsp"><img src="image/cart.png" class="img-fluid"></a>
+	</div>		
+
+	<div id="carDetail">
+		<table class="detail">
+			<%if(buylist != null) {%>
+				<%for(int a=0 ; a<buylist.size();a++) {%>
+				<tr>
+					<td style="border-bottom:1px white solid;">
+						<%=buylist.get(a).getProduct_name() %>
+					</td>
+					<td style="border-bottom:1px white solid;">
+						x<%=buylist.get(a).getProduct_quantity() %>
+					</td>
+				</tr>
+				<%}%>	
+			<%}%>
+		</table>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<%@include file="/front-end/page-file/page-footer"%>
 	
     <script>
+    $(document).on('click', '.addCollection', function() {
+		<%if(memVO == null){%>
+			alert("請先登入會員");
+		<%}else{%>
+	        $.ajax({
+	        	type : "POST",
+	        	url  : "<%=request.getContextPath()%>/collectionServlet.do",
+	        	data : {
+	        		action : "addCollection",
+	        		product_id : $("input[name=product_id]", $(this).parents(".collection")).val(),
+	        		product_name : $("input[name=product_name]", $(this).parents(".collection")).val(),
+					member_id : $("input[name=member_id]").val(),
+	        	},
+	        	success : function(){
+	        		Swal.fire(
+	        			  'Good job!',
+	        			  '已成功加入收藏',
+	        			  'success'
+	        			)
+	        	}
+	        });
+        <%}%>
+    });
+
   		$(document).ready(function() {
-  			$(".addproduct").click(function() {
-  		        $.ajax({
+  			//輸入文字查詢
+  			$("#searchBtn").click(function(){
+  				var text = $("input[name=searchByText]").val();
+  				$.ajax({
   		        	type : "POST",
-  		        	url  : "<%=request.getContextPath()%>/shopping.do",
+  		        	url  : "<%=request.getContextPath()%>/shop_product.do",
+  		        	dataType: 'json',
   		        	data : {
-  		        		action : "ADD",
-  		        		id : $("input[name=id]", $(this).parents(".product")).val(),
-  		        		name : $("input[name=name]", $(this).parents(".product")).val(),
-  		        		price : $("input[name=price]", $(this).parents(".product")).val(),
+  		        		action : "searchByText",
+  		        		searchText : $("input[name=searchByText]").val(),
   		        	},
-  		        	success : function(){
-  		        		if($("#shopCar").css("right") != 0){
-  		        			$("#shopCar").animate({right:'0px'}); 
-  		        		}
-  		        	}
+  		        	success : function(data) {
+							console.log(data);
+							let str = "";
+							if(data.length != 0){
+						for(let index = 0 ; index < data.length ; index++) { 
+							str += 
+			    				 "<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 pdzero productprice collection'>"+
+			    				 		"<div id='sample'>"+
+			    				 		"<div class='list-img'>"+
+			    				 			"<div class='list-img2'>"+
+			    				 				"<a href='<%=request.getContextPath()%>/front-end/shopMall/shopProduct.jsp?id="+data[index].id+"'>"+
+				    				 				"<img src='<%=request.getContextPath()%>/showImg4?id=" + data[index].id + "' class='img-fluid'>"+
+				    				 			"</a>"+
+			    				 			"</div>"+
+				    			 		"</div>"+
+				    			 		"<div class='listbox'>"+
+				    			 			"<div class='list-boxs' style='text-align: center;'>"+
+				    			 				"<span class='mb-1'>" + data[index].name + "</span>"+
+				    			 			"</div>"+
+				    			 			"<div class='list-boxs'>"+
+				    							"<span>" + data[index].price + "元</span>"+
+				    			 			"</div>"+
+				    			 			"<div class='list-boxs mt-2'>"+
+				    			 				"<button class='btn bg-secondary addCollection'>加入收藏 </button>"+
+				    			 			"</div>"+
+				    			 		"</div>"+
+				    			 	"</div>"+
+				    			 	"<input type='hidden' name='product_id' value='"+data[index].id+"'>"+
+					    			"<input type='hidden' name='product_name' value='"+data[index].name+"'>"+
+			    				 "</div>";
+							}
+						}else {
+								str += "<div class='col-12 pdzero' style='text-align: center;'>"+
+							 	"<img src='<%=request.getContextPath()%>/front-end/shopMall/image/noData.png'>"+
+								"</div>";
+						}
+						$(".product").empty();
+						$(".product").append(str);
+					}
   		        });
-  		    });
+  			});
+  			//種類查詢
   			$('.kind').click(function(){
   				$.ajax({
   					type :"POST",
-  					url  : "<%=request.getContextPath()%>/back-end/Shop_product/shop_product.do",
+  					url  : "<%=request.getContextPath()%>/shop_product.do",
   					dataType: 'json',
   					data : {
   						action : "getByKind",
@@ -237,11 +552,13 @@
   							if(data.length != 0){
 							for(let index = 0 ; index < data.length ; index++) { 
 								str += 
-				    				 "<div class='col-xs-6 col-sm-4 col-md-3 pdzero'>"+
+				    				 "<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 pdzero productprice collection'>"+
 				    				 		"<div id='sample'>"+
 				    				 		"<div class='list-img'>"+
-				    				 			"<div class='list-img2'>"+
- 				    				 				"<img src='<%=request.getContextPath()%>/showImg4?id=" + data[index].id + "' class='img-fluid'>"+
+				    				 			"<div class='list-img2' style='text-align: center;'>"+
+				    				 				"<a href='<%=request.getContextPath()%>/front-end/shopMall/shopProduct.jsp?id="+data[index].id+"'>"+
+ 				    				 					"<img src='<%=request.getContextPath()%>/showImg4?id=" + data[index].id + "' class='img-fluid'>"+
+ 				    				 				"</a>"+
 				    				 			"</div>"+
 					    			 		"</div>"+
 					    			 		"<div class='listbox'>"+
@@ -252,10 +569,12 @@
 					    							"<span>" + data[index].price + "元</span>"+
 					    			 			"</div>"+
 					    			 			"<div class='list-boxs mt-2'>"+
-					    			 				"<button class='btn bg-secondary'>加入收藏</button>"+
+					    			 				"<button class='btn bg-secondary addCollection'> 加入收藏 </button>"+
 					    			 			"</div>"+
 					    			 		"</div>"+
 					    			 	"</div>"+
+					    			 	"<input type='hidden' name='product_id' value='"+data[index].id+"'>"+
+						    			"<input type='hidden' name='product_name' value='"+data[index].name+"'>"+
 				    				 "</div>";
 								}
 							}else {
@@ -268,11 +587,11 @@
   					}
   				});
   			});
-  			$('#conditionSrh').click(function(){
-  				console.log($('#priceSrh').val());
+  			//複合查詢
+  			$('.srh').change(function(){
   				$.ajax({
   					type :"POST",
-  					url  : "<%=request.getContextPath()%>/product.do",
+  					url  : "<%=request.getContextPath()%>/shop_product.do",
   					dataType: 'json',
   					data : {
 						action : "listEmps_ByCompositeQuery",
@@ -286,11 +605,13 @@
   							if(data.length != 0){
   								for(let index = 0 ; index < data.length ; index++) { 
   									str += 
-  					    				 "<div class='col-xs-6 col-sm-4 col-md-3 pdzero'>"+
+  					    				 "<div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 pdzero productprice collection'>"+
   					    				 		"<div id='sample'>"+
   					    				 		"<div class='list-img'>"+
-  					    				 			"<div class='list-img2'>"+
-  	 				    				 				"<img src='<%=request.getContextPath()%>/showImg4?id=" + data[index].id + "' class='img-fluid'>"+
+  					    				 			"<div class='list-img2' style='text-align: center;'>"+
+  					    				 				"<a href='<%=request.getContextPath()%>/front-end/shopMall/shopProduct.jsp?id="+data[index].id+"'>"+
+  	 				    				 					"<img src='<%=request.getContextPath()%>/showImg4?id=" + data[index].id + "' class='img-fluid'>"+
+  	 				    				 				"</a>"+
   					    				 			"</div>"+
   						    			 		"</div>"+
   						    			 		"<div class='listbox'>"+
@@ -301,10 +622,12 @@
   						    							"<span>" + data[index].price + "元</span>"+
   						    			 			"</div>"+
   						    			 			"<div class='list-boxs mt-2'>"+
-  						    			 				"<button class='btn bg-secondary'>加入收藏</button>"+
+  						    			 				"<button class='btn bg-secondary addCollection'>加入收藏 </button>"+
   						    			 			"</div>"+
   						    			 		"</div>"+
   						    			 	"</div>"+
+  						    			 	"<input type='hidden' name='product_id' value='"+data[index].id+"'>"+
+  							    			"<input type='hidden' name='product_name' value='"+data[index].name+"'>"+
   					    				 "</div>";
   								}	
   							}else {
@@ -348,6 +671,14 @@
   		$(function(){
   			$(".fun-text").text("商城");  // text("")裡面自己輸入功能名稱 
   		});
+  		
+		//右側購物清單滑入滑出
+        $("#shopCar").hover(function(){
+            $("#carDetail").stop(true, false).animate({ right: "0px" });
+        }, function() {
+            $("#carDetail").stop(true, false).animate({ right: "-250px" });
+        });
+  		
   		window.onload = function(){
              if(<%=size%> != 0){
              	$("#shopCar").animate({right:'0px'});

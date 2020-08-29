@@ -56,9 +56,6 @@
 					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/listAllAct.jsp"><span>活動管理</span></a><!--在哪一個頁面就哪加active和span的style-->
 					  </li>
 					  <li class="nav-item">
-					   	<a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/addAct.jsp"><span>新增活動</span></a>
-					  </li>
-					  <li class="nav-item">
 					    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/joinActivity/listAllActJoin.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">參加會員管理</span></a>
 					  </li>
 					  <li class="nav-item">
@@ -67,27 +64,40 @@
 					</ul>
 				</div>	
 <%@include file="/back-end/backFrame/backNav"%>
-
-<table class="table1">
-	<tr>
-		<th>活動編號</th>
-		<th>會員編號</th>
-		<th>報名時間</th>
-	</tr>
-	
-	<c:forEach var="actjoinVO" items="${list}">
-	<tr>
-		<td>${actjoinVO.sq_activity_id}</td>
-		<td>${actjoinVO.sq_member_id}</td>
-		<td>${actjoinVO.join_time}</td>
-		<td>
-			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do" style="margin-bottom: 0px;">
-			<input type="submit" id="dyn_tr" value="刪除">
-			<input type="hidden" name="sq_activity_id"  value="${actjoinVO.sq_activity_id}">
-			<input type="hidden" name="sq_member_id"  value="${actjoinVO.sq_member_id}">
-			<input type="hidden" name="action" value="delete"></FORM>
-		</td>
-	</tr>
-	</c:forEach>
-</table>
+<div class="container-fluid mt-3">
+	<div class="table-responsive">
+		<table
+			class="table text-center table-bordered table-striped table-hover">
+			<thead>
+				<tr class="table-info">
+					<th>活動編號</th>
+					<th>會員編號</th>
+					<th>報名時間</th>
+					<th>刪除</th>
+				</tr>
+			</thead>
+			<tbody>
+ 				<c:forEach var="actjoinVO" items="${list}">
+					<tr>
+						<td style="vertical-align: middle">${actjoinVO.sq_activity_id}</td>
+						<td style="vertical-align: middle">${actjoinVO.sq_member_id}</td>
+						<td style="vertical-align: middle">${actjoinVO.join_time}</td>
+						<td style="vertical-align: middle">
+							<FORM METHOD="post"
+								ACTION="<%=request.getContextPath()%>/act/ActJoinServlet.do"
+								style="margin-bottom: 0px;">
+								<input type="submit" id="dyn_tr" value="刪除"
+									class="btn btn-danger btn-sm"> <input type="hidden"
+									name="sq_activity_id" value="${actjoinVO.sq_activity_id}">
+								<input type="hidden" name="sq_member_id"
+									value="${actjoinVO.sq_member_id}"> <input type="hidden"
+									name="action" value="delete">
+							</FORM>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>
 <%@include file="/back-end/backFrame/backFooter"%>

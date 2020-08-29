@@ -7,34 +7,16 @@ public class TipsService {
 	private TipsDAO_interface dao;
 
 	public TipsService() {
-		dao = new TipsJDBCDAO();
+		dao = new TipsDAO();
 	}
 
-	public TipsVO addTips(byte[] tips_picture, String tips_desciption,
-			String tips_title) {
-
-		TipsVO tipsVo = new TipsVO();
-
-		tipsVo.setTips_picture(tips_picture);
-		tipsVo.setTips_desciption(tips_desciption);
-		tipsVo.setTips_title(tips_title);
+	public void addTips(TipsVO tipsVo) {
 		dao.insert(tipsVo);
-
-		return tipsVo;
 	}
 
-	public TipsVO updateTips(String sq_tips_id, byte[] tips_picture, String tips_desciption,
-			String tips_title) {
+	public void updateTips(TipsVO tipsVo) {
 
-		TipsVO tipsVo = new TipsVO();
-
-		tipsVo.setSq_tips_id(sq_tips_id);
-		tipsVo.setTips_picture(tips_picture);
-		tipsVo.setTips_desciption(tips_desciption);
-		tipsVo.setTips_title(tips_title);
 		dao.update(tipsVo);
-
-		return tipsVo;
 	}
 
 	public void deleteTips(String sq_tips_id) {
@@ -48,4 +30,37 @@ public class TipsService {
 	public List<TipsVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public List<TipsVO> findByTitle(Integer tips_title) {
+		return dao.findByTitle(tips_title);
+	}
+	
+	public String findByTitleStr(Integer tip_title) {
+		String str = null;
+		switch(tip_title) {
+			case 1 : 
+				str = "法規資訊";
+				break;
+			case 2 : 
+				str = "自行車道規劃認識";
+				break;
+			case 3 : 
+				str = "單車裝備";
+				break;
+			case 4 : 
+				str = "行前準備";
+				break;
+			case 5 : 
+				str = "單車安全小常識";
+				break;
+			case 6 : 
+				str = "全臺單車驛站";
+				break;
+		};
+		return str;
+	}
+		
+	
+	
+
 }

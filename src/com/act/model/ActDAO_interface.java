@@ -8,6 +8,8 @@ public interface ActDAO_interface {
 	public void insert(ActVO actVO);
     public void update(ActVO actVO);//後台可以修改狀態
     public void cancel(String actid);//前台的取消活動使活動狀態改成2
+    public void joinExceed(String actid);//如果參加人數大於最低人數就改為成團
+    public void joinBelow(String actid);
     public void delete(String actid);
     public ActVO findByPrimaryKey(String actid);
     public List<ActVO> getAll();

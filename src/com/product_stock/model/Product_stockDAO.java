@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.shop_product.model.Shop_productDAO;
+
 public class Product_stockDAO implements Product_stockDAO_interface{
 	private static DataSource ds = null;
 	static {
@@ -25,41 +27,41 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 	private static final String DELETE = "DELETE FROM SHOP_PRODUCT_STOCK WHERE SQ_STOCK_ID=?";
 	private static final String GET_ONE = "SELECT SQ_STOCK_ID, SQ_PRODUCT_ID, PRODUCT_COLOR, PRODUCT_MODEL, STOCK_TOTAL FROM SHOP_PRODUCT_STOCK WHERE SQ_STOCK_ID=?";
 	private static final String GET_ALL = "SELECT SQ_STOCK_ID, SQ_PRODUCT_ID, PRODUCT_COLOR, PRODUCT_MODEL, STOCK_TOTAL FROM SHOP_PRODUCT_STOCK ORDER BY SQ_STOCK_ID";
-	private static final String GET_ONE_BYPID = "SELECT SQ_STOCK_ID, SQ_PRODUCT_ID, PRODUCT_COLOR, PRODUCT_MODEL, STOCK_TOTAL FROM SHOP_PRODUCT_STOCK WHERE SQ_PRODUCT_ID=?";
+	private static final String GET_ONE_BYID = "SELECT SQ_STOCK_ID, SQ_PRODUCT_ID, PRODUCT_COLOR, PRODUCT_MODEL, STOCK_TOTAL FROM SHOP_PRODUCT_STOCK WHERE SQ_PRODUCT_ID=?";
 
 	@Override
-	public void insert(Product_stockVO stockVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		
+	public void insert(Product_stockVO stockVO, Connection con) {
+		PreparedStatement pstmt = null;	
 		try {
-			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT);
-			
-			pstmt.setString(1, stockVO.getSq_product_id());
+			Shop_productDAO dao = new Shop_productDAO();
+			String sq_product_id = dao.getCurrentKey();
+			pstmt.setString(1, sq_product_id);
 			pstmt.setString(2, stockVO.getProduct_color());
 			pstmt.setString(3, stockVO.getProduct_model());
 			pstmt.setInt(4, stockVO.getStock_total());
 						
 			pstmt.executeUpdate();
-			pstmt.clearParameters();
 			
-		}catch(SQLException se) {
+		}catch(SQLException ce) {
+			if(con != null) {
+				try {
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-deatil");
+					con.rollback();
+				}catch(SQLException cecep) {
+					throw new RuntimeException("rollback error occured. "
+							+ cecep.getMessage());
+				}
+			}
 			throw new RuntimeException("A database error occured. "
-			+ se.getMessage());
+					+ ce.getMessage());
 		}finally {
 			if(pstmt != null) {
 				try {
 					pstmt.close();
-				} catch (SQLException se) {
+				}catch(SQLException se) {
 					se.printStackTrace(System.err);
-				}
-			}
-			if(con != null) {
-				try {
-					con.close();
-				}catch(Exception e) {
-					e.printStackTrace(System.err);
 				}
 			}
 		}		
@@ -114,7 +116,6 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 			
 			pstmt.setString(1, sq_stock_id);
 			pstmt.executeUpdate();
-			pstmt.clearParameters();
 			
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured." + se.getMessage());
@@ -248,7 +249,7 @@ public class Product_stockDAO implements Product_stockDAO_interface{
 		ResultSet rs = null;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ONE_BYPID);
+			pstmt = con.prepareStatement(GET_ONE_BYID);
 			
 			pstmt.setString(1, sq_product_id);
 			

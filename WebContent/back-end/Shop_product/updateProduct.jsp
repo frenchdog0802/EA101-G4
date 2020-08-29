@@ -9,46 +9,49 @@
 %>
 
 <%@ include file="/back-end/backFrame/backHeader"%>
-		<link rel="stylesheet" type="text/css" href="addBrand.css">
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-end/Shop_product/addBrand.css">
 		<title>廠牌管理</title>
 <%@ include file="/back-end/backFrame/backBody"%>
  		<div class="row" style="background-color: white;">
 			<ul class="nav nav-tabs">
-				 <li class="nav-item">
-				   <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">商品管理</span></a>
-				 </li>
-			  <li class="nav-item">
-			    <a class="nav-link" href="#"><span>訂單管理</span></a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" href="#"><span>廠牌管理</span></a>
-			  </li>
+				<li class="nav-item">
+					<a class="nav-link active" href="<%=request.getContextPath()%>/back-end/Shop_product/allShop_product.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">商品管理</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<%=request.getContextPath()%>/back-end/Shop_order/allOrder.jsp"><span>訂單管理</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<%=request.getContextPath()%>/back-end/BrandBack/BrandBack.jsp"><span>廠牌管理</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<%=request.getContextPath()%>/back-end/Product_stock/backProductStock.jsp"><span>庫存管理</span></a>
+				</li>
 			</ul>
 		</div>
 <%@ include file="/back-end/backFrame/backNav" %>
 <div class="container-fluid">
  	<div class="row mt-3">
             	<div class="col-3 searchbtn mt-1 ml-3">
-					<FORM METHOD="post" ACTION="shop_product.do" style="position: relative;">
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop_product.do" style="position: relative;">
 						<input type="text" name="sq_product_id" id="search" placeholder="輸入產品編號 (如510001):"/>
 						<input type="hidden" name="action"	value="getOne">
 						<input type="submit" value="送出" style="position: absolute; opacity: 0;" class="icon">
-						<img src="image/search.png" class="img-fluid icon" >
+						<img src="<%=request.getContextPath()%>/back-end/backFrame/image/search.png" class="img-fluid icon" >
 				    </FORM>
 				</div>
 				<div class="col-1 ml-3" style="padding: 0;">
-              		<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back_end/Shop_product/allShop_product.jsp'" style="border: 1px black solid;">
-                    	<img src="image/list.png" class="img-fluid">
+              		<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Shop_product/allShop_product.jsp'" style="border: 1px black solid;">
+                    	<img src="<%=request.getContextPath()%>/back-end/backFrame/image/list.png" class="img-fluid">
                     </button>
                 </div>
                 <div class="col-1 ml-3" style="padding: 0;">
-                	<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back_end/Shop_product/addProduct.jsp'" style="border: 1px black solid;">
-                    	<img src="image/addbrand.png" class="img-fluid">
+                	<button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Shop_product/addProduct.jsp'" style="border: 1px black solid;">
+                    	<img src="<%=request.getContextPath()%>/back-end/backFrame/image/addbrand.png" class="img-fluid">
                     </button>
                 </div>
                 <div class="col-3">
                 	<jsp:useBean id="shop_productService" scope="page" class="com.shop_product.model.Shop_productService" />  
-					<FORM METHOD="post" ACTION="shop_product.do" class="mt-2">
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop_product.do" class="mt-2">
 						<b>選擇產品編號:</b>
 						<select size="1" name="sq_product_id">
 							<c:forEach var="Shop_productVO" items="${shop_productService.all}" > 
@@ -79,7 +82,7 @@
     	<div class="row mb-3">
     		<div class="col-2"></div>
     		<div class="col-8">
-			<FORM method="post" action="product.do" enctype="multipart/form-data" id="formid">
+			<FORM method="post" action="<%=request.getContextPath()%>/shop_product.do" enctype="multipart/form-data" id="formid">
 				<table>
 					<tr>
 						<td>產品編號 : <%=productVO.getSq_product_id()%></td>
@@ -154,8 +157,8 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="hidden" id="take" name="detail">
-							<textarea rows="5" id="give" style="width:100%"><%= (productVO==null)? "" : productVO.getProduct_detail()%></textarea>
+							<input type="hidden" id="take2" name="detail">
+							<textarea rows="5" id="give2" style="width:100%"><%= (productVO==null)? "" : productVO.getProduct_detail()%></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -163,15 +166,16 @@
 						<jsp:useBean id="productSvc" scope="page" class="com.shop_product.model.Shop_productService" />
 							<select size="1" name="status">
 								<option value="0">未上架	
-								<option value="1">已上架
+								<option value="1" selected>已上架
 								<option value="2">缺貨中						
 							</select>
 						</td>
 					</tr>
 				</table>
 				<div style="text-align: right;">
-				<input type="hidden" name="action" value="update">
-				<input type="submit" value="送出修改" onclick="upload()" style="text-align: right;">
+					<input type="submit" value="送出修改" onclick="upload()" style="text-align: right;">
+					<input type="hidden" name="action" value="updateProduct">
+					<input type="hidden" name="productID" value="<%=productVO.getSq_product_id()%>">
 				</div>
 			</FORM>
 			</div>
@@ -183,6 +187,7 @@
 	<script>
 		function upload(){
 			document.getElementById('take').value = document.getElementById('give').value;
+			document.getElementById('take2').value = document.getElementById('give2').value;
 			document.getElementById('formid').submit();
 		}
 		function readURL(input) {

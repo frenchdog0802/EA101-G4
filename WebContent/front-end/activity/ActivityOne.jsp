@@ -5,10 +5,8 @@
 <%@ page import="com.actjoin.model.*"%>
 <%@ page import="com.actfavor.model.*"%>
 <%@ page import="com.actreport.model.*"%>
+<%@ page import="com.member.model.*"%>
 
-<%
-	String sq_member_id = (String)session.getAttribute("sq_member_id");
-%>
 <%
 	java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
 	ActVO actVO2 = (ActVO)request.getAttribute("actVO");
@@ -51,13 +49,16 @@
 	}
 	
 	#relationimg{
-		width:100%;
 		height: 255px;
+		width:100%;
 	}
 	
 	#majorimg{
 		width:100%;
 		height:472px;
+	}
+	#actrow{
+		width:100%;
 	}
 </style>
 </head>
@@ -75,7 +76,7 @@
 
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="<%=request.getContextPath()%>/front-end/activity/Activity.jsp">Home</a>
+        <a href="<%=request.getContextPath()%>/front-end/index/index.jsp">Home</a>
       </li>
       <li class="breadcrumb-item active">${actVO.act_title}</li>
     </ol>
@@ -94,7 +95,7 @@
         <h3 class="my-3">活動細節</h3>
         <ul>
           <li>活動主辦者:${memberSvc.getOneMem(actVO.sq_member_id).m_name}</li>
-          <li>活動路線:${routeSvc.getOneRoute(actVO.sq_route_id).routeName}</li>
+          <li>活動路線:<a href="<%=request.getContextPath()%>/front-end/route/route.do?sqRouteId=${actVO.sq_route_id}&routeName=${routeSvc.getOneRoute(actVO.sq_route_id).routeName}&action=getOneRoute_For_Display">${routeSvc.getOneRoute(actVO.sq_route_id).routeName}</a></li>
           <li>上限人數:${actVO.max_population}</li>
           <li>最低開團人數:${actVO.min_population}</li>
           <li>目前參加人數:${actVO.population}</li>
@@ -172,7 +173,7 @@
 						
 						<div class="modal-body">
 			<!-- =========================================以下為輸入的內容========================================== -->
-			              <textarea name="report_reason" maxlength="65" id="textarea1" rows=5 cols=83 style="resize: none;"></textarea>
+			              <textarea name="report_reason" maxlength="65" id="textarea1" onkeyup="value=value.replace(/[^\,\，\?\!\a-\z\A-\Z0-9\u4E00-\u9FA5\.]/g,'')" style="resize: none;width:100%;height:125px;"></textarea>
 			<!-- =========================================以上為原輸入的內容========================================== -->
 						</div>
 						
@@ -214,19 +215,27 @@
     <!-- /.最外層row -->
 
     <!-- Related Projects Row -->
+    <div class="relativeact">
     <h3 class="my-4">相關活動</h3>
-
-    <div class="row">
-		<c:forEach var="actVO5" items="${list2}" begin="${list2.size()-4}" end="${list2.size()-1}">
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO5.sq_activity_id}">
-          <img id="relationimg" class="img-fluid" src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO5.sq_activity_id}'" alt="">
-        </a>
-      </div>
-		</c:forEach>
-
-    </div>
-    <!-- /.row -->
+	</div>
+				<div class="row" id="actrow">
+					<c:if test="<%= list2.size()!=0%>">
+					<c:forEach var="actVO5" items="${list2}" begin="${list2.size()<4?0:list2.size()-4}"
+						end="${list2.size()-1}">
+						<div class="col-md-3 col-sm-6 mb-4">
+							<a
+								href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO5.sq_activity_id}">
+								<img id="relationimg" class="img-fluid"
+								src="<%=request.getContextPath()%>/act/DBGifReader2?SQ_ACTIVITY_ID='${actVO5.sq_activity_id}'"
+								alt="">
+							</a>
+						</div>
+					</c:forEach>
+					</c:if>
+					<c:if test="<%= list2.size()==0%>">	
+					</c:if>
+				</div>
+				<!-- /.row -->
    
       </div>
     </div>
@@ -257,7 +266,6 @@
 	        var t = this.value;
 	        tar.value = t;
 	    })
-	    
 	 	//檢舉活動驗證
 		function CheckText() {
 			if (tar.value === '' || tar.value === null || tar.value === non

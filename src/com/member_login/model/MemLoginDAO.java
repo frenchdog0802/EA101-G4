@@ -14,6 +14,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.member.model.MemVO;
+
 public class MemLoginDAO implements MemLoginDAO_interface{
 
 	private static DataSource ds = null;
@@ -30,8 +32,8 @@ public class MemLoginDAO implements MemLoginDAO_interface{
 	private static final String CONTRAST = "select * from member";
 	
 	@Override
-	public MemLoginVO findMember_account(String member_account) {
-		MemLoginVO memLoginVO  = null;
+	public MemVO findMember_account(String member_account) {
+		MemVO MemVO  = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -43,21 +45,21 @@ public class MemLoginDAO implements MemLoginDAO_interface{
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				memLoginVO  = new MemLoginVO() ;
-				memLoginVO.setMember_account(rs.getString("member_account"));
-				memLoginVO.setPassword(rs.getString("password"));
-				memLoginVO.setM_name(rs.getString("m_name"));
-				memLoginVO.setGender(rs.getInt("gender"));
-				memLoginVO.setBirthday(rs.getDate("birthday"));
-				memLoginVO.setCellphone(rs.getString("cellphone"));
-				memLoginVO.setM_email(rs.getString("m_email"));
-				memLoginVO.setValidation(rs.getInt("validation"));
-				memLoginVO.setRegistered(rs.getDate("registered"));
-				memLoginVO.setM_photo(rs.getBytes("m_photo"));
-				memLoginVO.setBack_img(rs.getBytes("back_img"));
-				memLoginVO.setNick_name(rs.getString("nick_name"));
-				memLoginVO.setAddress(rs.getString("address"));
-				memLoginVO.setSq_member_id(rs.getString("sq_member_id"));			
+				MemVO  = new MemVO() ;
+				MemVO.setMember_account(rs.getString("member_account"));
+				MemVO.setPassword(rs.getString("password"));
+				MemVO.setM_name(rs.getString("m_name"));
+				MemVO.setGender(rs.getInt("gender"));
+				MemVO.setBirthday(rs.getDate("birthday"));
+				MemVO.setCellphone(rs.getString("cellphone"));
+				MemVO.setM_email(rs.getString("m_email"));
+				MemVO.setValidation(rs.getInt("validation"));
+				MemVO.setRegistered(rs.getDate("registered"));
+				MemVO.setM_photo(rs.getBytes("m_photo"));
+				MemVO.setBack_img(rs.getBytes("back_img"));
+				MemVO.setNick_name(rs.getString("nick_name"));
+				MemVO.setAddress(rs.getString("address"));
+				MemVO.setSq_member_id(rs.getString("sq_member_id"));			
 			}
 		}catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -74,12 +76,12 @@ public class MemLoginDAO implements MemLoginDAO_interface{
 		}
 	}
 	
-	return memLoginVO;
+	return MemVO;
 	}	
 		
 	@Override
-	public List<MemLoginVO> findAll() {
-		List<MemLoginVO> members = new LinkedList<>();
+	public List<MemVO> findAll() {
+		List<MemVO> members = new LinkedList<>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -90,22 +92,22 @@ public class MemLoginDAO implements MemLoginDAO_interface{
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				MemLoginVO memLoginVO  = new MemLoginVO() ;
-				memLoginVO.setMember_account(rs.getString("member_account"));
-				memLoginVO.setPassword(rs.getString("password"));
-				memLoginVO.setM_name(rs.getString("m_name"));
-				memLoginVO.setGender(rs.getInt("gender"));
-				memLoginVO.setBirthday(rs.getDate("birthday"));
-				memLoginVO.setCellphone(rs.getString("cellphone"));
-				memLoginVO.setM_email(rs.getString("m_email"));
-				memLoginVO.setValidation(rs.getInt("validation"));
-				memLoginVO.setRegistered(rs.getDate("registered"));
-				memLoginVO.setM_photo(rs.getBytes("m_photo"));
-				memLoginVO.setBack_img(rs.getBytes("back_img"));
-				memLoginVO.setNick_name(rs.getString("nick_name"));
-				memLoginVO.setAddress(rs.getString("address"));
-				memLoginVO.setSq_member_id(rs.getString("sq_member_id"));			
-				members.add(memLoginVO);
+				MemVO MemVO  = new MemVO() ;
+				MemVO.setMember_account(rs.getString("member_account"));
+				MemVO.setPassword(rs.getString("password"));
+				MemVO.setM_name(rs.getString("m_name"));
+				MemVO.setGender(rs.getInt("gender"));
+				MemVO.setBirthday(rs.getDate("birthday"));
+				MemVO.setCellphone(rs.getString("cellphone"));
+				MemVO.setM_email(rs.getString("m_email"));
+				MemVO.setValidation(rs.getInt("validation"));
+				MemVO.setRegistered(rs.getDate("registered"));
+				MemVO.setM_photo(rs.getBytes("m_photo"));
+				MemVO.setBack_img(rs.getBytes("back_img"));
+				MemVO.setNick_name(rs.getString("nick_name"));
+				MemVO.setAddress(rs.getString("address"));
+				MemVO.setSq_member_id(rs.getString("sq_member_id"));			
+				members.add(MemVO);
 			}
 		}catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());

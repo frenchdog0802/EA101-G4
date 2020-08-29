@@ -6,6 +6,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import com.actreport.model.ActReportService;
 import com.actreport.model.ActReportVO;
+import com.member.model.MemVO;
+import com.staff.model.StaffVO;
 
 public class ActReportServlet extends HttpServlet {
 
@@ -22,10 +24,18 @@ public class ActReportServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		HttpSession session = req.getSession();
-		String sq_member_id = (String)session.getAttribute("sq_member_id");
-			if(sq_member_id==null) {
-				session.setAttribute("sq_member_id", "910003");
-			}
+		MemVO memVO = null;
+		String sq_member_id = null;
+		try {
+			memVO = (MemVO)session.getAttribute("MemVO");
+			sq_member_id = memVO.getSq_member_id();
+			session.setAttribute("sq_member_id", sq_member_id);
+		} catch (Exception e){
+			StaffVO staffVO = (StaffVO)session.getAttribute("StaffVO");
+			sq_member_id = staffVO.getSq_staff_id();
+			session.setAttribute("sq_member_id", sq_member_id);
+		}
+
 		
 		
 		if ("getOne_For_Display".equals(action)) { // 來自前台會員頁面select_page.jsp的請求
@@ -44,7 +54,7 @@ public class ActReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/reportActivity/select_ActReportpage.jsp");
+							.getRequestDispatcher("/back-end/reportActivity/listAllActReport.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -59,7 +69,7 @@ public class ActReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/reportActivity/select_ActReportpage.jsp");
+							.getRequestDispatcher("/back-end/reportActivity/listAllActReport.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -74,7 +84,7 @@ public class ActReportServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/reportActivity/select_ActReportpage.jsp");
+						.getRequestDispatcher("/back-end/reportActivity/listAllActReport.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -121,7 +131,16 @@ public class ActReportServlet extends HttpServlet {
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String sq_activityreport_id = new String(req.getParameter("sq_activityreport_id"));
+				String sq_activity_id = new String(req.getParameter("sq_activity_id"));
+				String report_reason = new String(req.getParameter("report_reason"));
 				Integer report_status = null;
+				String report_response = req.getParameter("report_response").trim();
+				String report_responseReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_,，!?)]{1,65}$";
+				if(!report_response.trim().matches(report_responseReg)) { //以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("檢舉回應: 只能是中、英文字母、數字和_,，!? , 且長度必需在1到65之間");
+	            } else if(report_response.matches("null") || report_response.trim().length() == 0) {
+	            	errorMsgs.add("檢舉回應請勿空白");
+	            }
 				String report_statusReg = "^[(0-2)]{1,1}$";
 				try {
 					report_status = new Integer(req.getParameter("report_status").trim());
@@ -135,6 +154,10 @@ public class ActReportServlet extends HttpServlet {
 
 				ActReportVO actreportVO = new ActReportVO();
 				actreportVO.setSq_activityreport_id(sq_activityreport_id);
+				actreportVO.setSq_activity_id(sq_activity_id);
+				actreportVO.setSq_member_id(sq_member_id);
+				actreportVO.setReport_reason(report_reason);
+				actreportVO.setReport_response(report_response);
 				actreportVO.setReport_status(report_status);				
 
 				// Send the use back to the form, if there were errors
@@ -148,7 +171,7 @@ public class ActReportServlet extends HttpServlet {
 				
 				/***************************2.開始修改資料*****************************************/
 				ActReportService actreportSvc = new ActReportService();
-				actreportVO = actreportSvc.updateActReport(sq_activityreport_id, report_status);
+				actreportVO = actreportSvc.updateActReport(sq_activityreport_id, report_response, report_status);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("actreportVO", actreportVO); // 資料庫update成功後,正確的的actVO物件,存入req
@@ -176,15 +199,14 @@ public class ActReportServlet extends HttpServlet {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String sq_activity_id = req.getParameter("sq_activity_id");
 				String report_reason = new String(req.getParameter("report_reason").trim());
-				String report_reasonReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,65}$";
+				String report_reasonReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_,，?!)]{1,65}$";
 				if (report_reason == null || report_reason.trim().length() == 0) {
 					errorMsgs.add("檢舉理由: 請勿空白");
 				} else if(!report_reason.trim().matches(report_reasonReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("檢舉理由: 只能是中、英文字母、數字和_ , 且長度必需在1到65之間");
+					errorMsgs.add("檢舉理由: 只能是中、英文字母、數字和_,，?! , 且長度必需在1到65之間");
 	            } else if(report_reason.trim().matches("請填入檢舉理由")) {
 	            	errorMsgs.add("檢舉理由: 請勿空白");
-	            }
-				
+	            } 
 				
 				ActReportVO actreportVO = new ActReportVO();
 				actreportVO.setSq_activity_id(sq_activity_id);

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.staff.model.StaffVO;
+
 public class StaffLoginFilter implements Filter{
 
 	private FilterConfig config;
@@ -29,10 +31,9 @@ public class StaffLoginFilter implements Filter{
 		HttpServletResponse res = (HttpServletResponse) response;
 		
 		HttpSession session = req.getSession();	// 【取得 session】
-		Object empVO = session.getAttribute("StaffLoginFilter");	// 【從 session 判斷此user是否登入過】
-		if (empVO == null) {
-			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect(req.getContextPath() + "/back-end/login/LoginStaff.jsp");
+		StaffVO StaffVO = (com.staff.model.StaffVO) session.getAttribute("StaffVO");	// 【從 session 判斷此user是否登入過】
+		if (StaffVO == null) {
+			res.sendRedirect(req.getContextPath() + "/back-end/LoginStaff.jsp");
 			return;
 		} else {
 			chain.doFilter(request, response);

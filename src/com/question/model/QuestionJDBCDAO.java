@@ -14,15 +14,15 @@ public class QuestionJDBCDAO implements QuestionDAO_interface{
 	String userid = "EA101_G4";
 	String passwd = "EA101_G4";
 
-	private static final String INSERT_STMT = "INSERT INTO QUESTION (SQ_QUESTION_ID,QUESTION_TITLE,QUESTION_DESCIPTION) VALUES (sq_QUESTION.NEXTVAL, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT SQ_QUESTION_ID  , QUESTION_TITLE, QUESTION_DESCIPTION  FROM QUESTION";
-	private static final String GET_ONE_STMT = "SELECT SQ_QUESTION_ID  , QUESTION_TITLE, QUESTION_DESCIPTION  FROM QUESTION where SQ_QUESTION_ID = ?";
+	private static final String INSERT_STMT = "INSERT INTO QUESTION (SQ_QUESTION_ID,QUESTION_TITLE,QUESTION_DESCRIPTION) VALUES (sq_QUESTION.NEXTVAL, ?, ?)";
+	private static final String GET_ALL_STMT = "SELECT SQ_QUESTION_ID  , QUESTION_TITLE, QUESTION_DESCRIPTION  FROM QUESTION";
+	private static final String GET_ONE_STMT = "SELECT SQ_QUESTION_ID  , QUESTION_TITLE, QUESTION_DESCRIPTION  FROM QUESTION where SQ_QUESTION_ID = ?";
 	
 	
-	//private static final String DELETE_EMPs = "DELETE FROM TIPS where TIPS_DESCIPTION = ?";
+	//private static final String DELETE_EMPs = "DELETE FROM TIPS where TIPS_description = ?";
 	private static final String DELETE_QUESTION = "DELETE FROM QUESTION where SQ_QUESTION_ID = ?";	
 	
-	private static final String UPDATE = "UPDATE QUESTION set QUESTION_TITLE=?, QUESTION_DESCIPTION=? where SQ_QUESTION_ID = ?";
+	private static final String UPDATE = "UPDATE QUESTION set QUESTION_TITLE=?, QUESTION_DESCRIPTION=? where SQ_QUESTION_ID = ?";
 
 	public void insert(QuestionVO questionVo) {
 
@@ -37,7 +37,7 @@ public class QuestionJDBCDAO implements QuestionDAO_interface{
 
 			
 			pstmt.setString(1, questionVo.getQuestion_title());
-			pstmt.setString(2, questionVo.getQuestion_desciption());
+			pstmt.setString(2, questionVo.getQuestion_description());
 
 			pstmt.executeUpdate();
 
@@ -83,7 +83,7 @@ public class QuestionJDBCDAO implements QuestionDAO_interface{
 
 			
 			pstmt.setString(1, questionVo.getQuestion_title());
-			pstmt.setString(2, questionVo.getQuestion_desciption());
+			pstmt.setString(2, questionVo.getQuestion_description());
 			pstmt.setString(3, questionVo.getSq_question_id());
 			
 			pstmt.executeUpdate();
@@ -184,14 +184,14 @@ public class QuestionJDBCDAO implements QuestionDAO_interface{
 //		QuestionVO questionVo1 = new QuestionVO();
 //		questionVo1.setSq_question_id("310011");
 //		questionVo1.setQuestion_title("為什麼每踏一下，車座傳來聲響?");
-//		questionVo1.setQuestion_desciption("車座可能鬆了，上緊就好。");
+//		questionVo1.setQuestion_description("車座可能鬆了，上緊就好。");
 //		dao.insert(questionVo1);
 
 
 //		QuestionVO questionVo2 = new QuestionVO();
 //		
 //		questionVo2.setQuestion_title("腳踏車在道路上如何通行？ 可以逆向嗎?2");
-//		questionVo2.setQuestion_desciption("有自行車專用道的路段，就必須在專用道內行駛；沒有專用道的時候應靠右側路邊行駛，不可以進入快車道，左轉需兩段式，當然也不可以逆向。違規罰300-600元_2");
+//		questionVo2.setQuestion_description("有自行車專用道的路段，就必須在專用道內行駛；沒有專用道的時候應靠右側路邊行駛，不可以進入快車道，左轉需兩段式，當然也不可以逆向。違規罰300-600元_2");
 //		questionVo2.setSq_question_id("310011");
 //		dao.update(questionVo2);
 
@@ -201,7 +201,7 @@ public class QuestionJDBCDAO implements QuestionDAO_interface{
 		QuestionVO questionVo3 = dao.findByPrimaryKey("310010");
 		System.out.print(questionVo3.getSq_question_id() + ",");
 		System.out.print(questionVo3.getQuestion_title() + ",");
-		System.out.println(questionVo3.getQuestion_desciption());
+		System.out.println(questionVo3.getQuestion_description());
 		System.out.println("---------------------");
 
 		// 查詢部門
@@ -210,7 +210,7 @@ public class QuestionJDBCDAO implements QuestionDAO_interface{
 //		for (QuestionVO aDept : list) {
 //			System.out.print(aDept.getSq_question_id () + ",");
 //			System.out.print(aDept.getQuestion_title() + ",");
-//			System.out.print(aDept.getQuestion_desciption());
+//			System.out.print(aDept.getQuestion_description());
 //			System.out.println();
 //			
 //		}
@@ -239,7 +239,7 @@ public class QuestionJDBCDAO implements QuestionDAO_interface{
 				questionVo = new QuestionVO();
 				questionVo.setSq_question_id(rs.getString("sq_question_id"));
 				questionVo.setQuestion_title(rs.getString("question_title"));
-				questionVo.setQuestion_desciption(rs.getString("question_desciption"));
+				questionVo.setQuestion_description(rs.getString("question_description"));
 			}
 
 			// Handle any driver errors
@@ -297,7 +297,7 @@ public class QuestionJDBCDAO implements QuestionDAO_interface{
 				questionVo = new QuestionVO();
 				questionVo.setSq_question_id(rs.getString("sq_question_id"));
 				questionVo.setQuestion_title(rs.getString("question_title"));
-				questionVo.setQuestion_desciption(rs.getString("question_desciption"));
+				questionVo.setQuestion_description(rs.getString("question_description"));
 				list.add(questionVo); // Store the row in the list
 			}
 

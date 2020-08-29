@@ -7,6 +7,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
 import com.shop_order.model.*;
+import com.shop_order_detail.model.Shop_order_detailVO;
 
 @MultipartConfig
 public class Shop_orderServlet extends HttpServlet {
@@ -18,7 +19,7 @@ public class Shop_orderServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		HttpSession session = req.getSession();
-		
+				
 		if("delete".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -27,106 +28,64 @@ public class Shop_orderServlet extends HttpServlet {
 				Shop_orderService orderSvc = new Shop_orderService();
 				orderSvc.delete(sq_order_id);
 				
-				String url = "/back_end/shop_order/allOrder.jsp";
+				String url = "/back-end/shop_order/allOrder.jsp";
 				RequestDispatcher success = req.getRequestDispatcher(url);
 				success.forward(req, res);
 			}catch(Exception e) {
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back_end/shop_order/allOrder.jsp");
+						.getRequestDispatcher("/back-end/shop_order/allOrder.jsp");
 				failureView.forward(req, res);
 			}
 		}
 		
 		if("getOne".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-			try {
-				String sq_order_id = req.getParameter("sq_order_id");
-
-				Shop_orderService orderSvc = new Shop_orderService();
-				Shop_orderVO orderVO = orderSvc.getOneOrder(sq_order_id);
-				if(orderVO == null) {
-					errorMsgs.add("查無資料");
-				}			
-				
-				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("sq_order_id", sq_order_id); 
-					RequestDispatcher fail = req
-							.getRequestDispatcher("/back_end/BrandBack/noData.jsp");
-					fail.forward(req, res);
-					return;
-				}
-				
-				req.setAttribute("orderVO", orderVO);
-				String url = "/back_end/Shop_order/getOrder.jsp";
-				RequestDispatcher success = req.getRequestDispatcher(url);
-				success.forward(req, res);
-			}catch(Exception e) {
-				errorMsgs.add("查詢失敗:"+e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back_end/Shop_order/allOrder.jsp");
-				failureView.forward(req, res);
-			}
-		}
-		
-		if ("getOneForUpdate".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-			
 			try {
 				String sq_order_id = req.getParameter("sq_order_id");				
-				Shop_orderService orderSvc = new Shop_orderService();
-				Shop_orderVO orderVO = orderSvc.getOneOrder(sq_order_id);
-				req.setAttribute("orderVO", orderVO);
-				String url = "/back_end/Shop_order/getOneOrder.jsp";
+				System.out.println(sq_order_id);
+				session.setAttribute("order_id", sq_order_id);
+				String url = "/back-end/Shop_order/updateOrder.jsp";
 				RequestDispatcher success = req.getRequestDispatcher(url);
 				success.forward(req, res);
-
-			} catch (Exception e) {
-				errorMsgs.add("查詢失敗:"+e.getMessage());
+			}catch(Exception e) {
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back_end/Shop_order/allOrder.jsp");
+						.getRequestDispatcher("/back-end/Shop_order/allOrder.jsp");
 				failureView.forward(req, res);
 			}
 		}
+	
 		if("update".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
 			try {
-				String sq_order_id = req.getParameter("sq_order_id");
-				
-				String name = req.getParameter("name");
-				
-				String phone = req.getParameter("phone");
-				
-				String address = req.getParameter("address");
-				
-				String brand_detail = req.getParameter("detail");
+				String orderID = req.getParameter("orderID");
+				String orderStatus = req.getParameter("orderStatus");
+				int status = Integer.parseInt(orderStatus);
+				String[] id = req.getParameterValues("productID"); 			
+				String[] number = req.getParameterValues("number");
+				int len = Integer.parseInt(req.getParameter("len"));
 				
 				Shop_orderVO orderVO = new Shop_orderVO();
+				orderVO.setSq_order_id(orderID);
+				orderVO.setOrder_status(status);
 				
-				
-				if (!errorMsgs.isEmpty()) {			
-					req.setAttribute("orderVO", orderVO); 
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back_end/BrandBack/update.jsp");
-					failureView.forward(req, res);
-					return;
+				List<Shop_order_detailVO> list = new ArrayList<Shop_order_detailVO>();
+				for(int i=0 ; i<len ;i++) {
+					Shop_order_detailVO vo = new Shop_order_detailVO();
+					vo.setSq_order_id(orderID);
+					vo.setSq_product_id(id[i]);
+					Integer num = Integer.parseInt(number[i]);
+					vo.setOrder_sum(num);
+					list.add(vo);
 				}
-							
-//				BrandService brandservice = new BrandService();
-//				brandservice.updateBrand(sq_brand_id, name, phone, address, pic, brand_detail);
-//				session.removeAttribute("pic");
+				Shop_orderService orderSvc = new Shop_orderService();
+				orderSvc.updateWithDetail(orderVO, list);				
 				
-				String url = "/back_end/BrandBack/BrandBack.jsp";
+				String url = "/back-end/Shop_order/allOrder.jsp";
 				RequestDispatcher success = req.getRequestDispatcher(url);
 				success.forward(req, res);
 				
 			}catch(Exception e) {
-				errorMsgs.add("修改資料失敗:" + e.getMessage());
 				RequestDispatcher fail = req
-						.getRequestDispatcher("/back_end/BrandBack/BrandBack.jsp");
+						.getRequestDispatcher("/back-end/Shop_order/updateOrder.jsp");
 				fail.forward(req, res);
 			}
 		}

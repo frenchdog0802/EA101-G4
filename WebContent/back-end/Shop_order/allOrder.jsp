@@ -12,22 +12,22 @@
  	pageContext.setAttribute("list", list);
  %>   
  <%@ include file="/back-end/backFrame/backHeader"%>
- 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/Shop_order/backOrderCss.css">
+ 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-end/Shop_order/backOrderCss.css">
     <title>訂單後台</title>
  <%@ include file="/back-end/backFrame/backBody"%>
 				<div class="row" style="background-color: white;">
 					<ul class="nav nav-tabs">
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>商品管理</span></a>
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/Shop_product/allShop_product.jsp"><span>商品管理</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">訂單管理</span></a>
+					    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/Shop_order/allOrder.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">訂單管理</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>廠牌管理</span></a>
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/BrandBack/BrandBack.jsp"><span>廠牌管理</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>庫存管理</span></a>
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/Product_stock/backProductStock.jsp"><span>庫存管理</span></a>
 					  </li>
 					</ul>
 				</div>
@@ -39,12 +39,12 @@
 							<input type="text" name="sq_brand_id" id="search" placeholder="輸入訂單編號 (如560001):"/>
 							<input type="hidden" name="action"	value="getOne">
 							<input type="submit" value="送出" style="position: absolute; opacity: 0;" class="icon">
-							<img src="<%=request.getContextPath()%>/back_end/backFrame/image/search.png" class="img-fluid icon" >
+							<img src="<%=request.getContextPath()%>/back-end/backFrame/image/search.png" class="img-fluid icon" >
 					    </FORM>
 					</div>
 					<div class="col-1 ml-3" style="padding: 0;">
-                        <button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back_end/Shop_order/allOrder.jsp'" style="border: 1px black solid;">
-                            <img src="<%=request.getContextPath()%>/back_end/backFrame/image/list.png" class="img-fluid">
+                        <button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Shop_order/allOrder.jsp'" style="border: 1px black solid;">
+                            <img src="<%=request.getContextPath()%>/back-end/backFrame/image/list.png" class="img-fluid">
                         </button>
                     </div>
                     <div class="col-3">
@@ -76,7 +76,7 @@
     									<th id="td_9"><span>付款方式</span></th>
     									<th id="td_10"><span>狀態</span></th>
     									<th id="td_lastbtn"></th>
-    									<th id="td_lastbtn"></th>
+<!--     									<th id="td_lastbtn"></th> -->
     								</tr>
     							</thead>
 <%@ include file="page1.file" %> 
@@ -89,7 +89,7 @@
 				    						<button value="${orderVO.sq_order_id}" type="button" class="btn btn-primary detail chose" data-toggle="modal" data-target="#Modal${orderVO.sq_order_id}">
                                                	 明細
                                             </button>
-                                            <div class="modal fade" id="Modal${orderVO.sq_order_id}" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">	
+                                            <div class="modal fade" id="Modal${orderVO.sq_order_id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             	<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                                 	<div class="modal-content">
                                                     	<div class="modal-header">
@@ -138,21 +138,21 @@
 				    						</c:if>
 				    					</td>
 				    					<td>
-				    						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop_order.do" style="position: relative;">
+				    						<FORM METHOD="post" ACTION="shop_order.do" style="position: relative;">
 											    <input type="submit" value="修改" style="position: absolute; opacity: 0;">
-											    <input type="image" src="<%=request.getContextPath()%>/back_end/backFrame/image/changeicon.png" alt="Submit" class="img-fluid"/>
-											    <input type="hidden" name="sq_stock_id"  value="${orderVO.sq_order_id}">
-											    <input type="hidden" name="action"	value="getOneForUpdate">
+											    <input type="image" src="<%=request.getContextPath()%>/back-end/backFrame/image/changeicon.png" alt="Submit" class="img-fluid"/>
+											    <input type="hidden" name="sq_order_id"  value="${orderVO.sq_order_id}">
+											    <input type="hidden" name="action"	value="getOne">
 											</FORM>
 				    					</td>
-				    					<td>
-										 	<FORM METHOD="post" ACTION="shop_order.do" style="position: relative;">
-										    	<input type="submit" value="下架" style="position: absolute; opacity: 0;">
-											    <input type="image" src="<%=request.getContextPath()%>/back_end/backFrame/image/delicon.png" alt="Submit" align="right" class="img-fluid"/>
-										    	<input type="hidden" name="sq_stock_id" value="${orderVO.sq_order_id}">
-										    	<input type="hidden" name="action" value="delete">
-										    </FORM>
-										</td>          
+<!-- 				    					<td> -->
+<!-- 										 	<FORM METHOD="post" ACTION="shop_order.do" style="position: relative;"> -->
+<!-- 										    	<input type="submit" value="下架" style="position: absolute; opacity: 0;"> -->
+<%-- 											    <input type="image" src="<%=request.getContextPath()%>/back-end/backFrame/image/delicon.png" alt="Submit" align="right" class="img-fluid"/> --%>
+<%-- 										    	<input type="hidden" name="sq_stock_id" value="${orderVO.sq_order_id}"> --%>
+<!-- 										    	<input type="hidden" name="action" value="delete"> -->
+<!-- 										    </FORM> -->
+<!-- 										</td>           -->
 				    				</tr>
 				    			</c:forEach>				    					
     						</table>

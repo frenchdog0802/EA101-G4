@@ -25,6 +25,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.json.JSONException;
@@ -36,6 +37,7 @@ import com.routeDetail.model.RouteDetailService;
 import com.routeDetail.model.RouteDetailVO;
 import com.waterStation.model.WaterStationService;
 import com.waterStation.model.WaterStationVO;
+import com.member.model.*;
 
 
 
@@ -48,6 +50,9 @@ public class RouteServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
+		HttpSession session = req.getSession();
+		
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		if ("selectByCondition".equals(action)) {// 來自routeM.jsp的請求
@@ -94,6 +99,8 @@ public class RouteServlet extends HttpServlet {
 		try {
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			String str = req.getParameter("sqRouteId");
+			String routeName = req.getParameter("routeName");
+			System.out.println("routeName:"+routeName);
 			String sqRouteId = null;
 			sqRouteId = new String(str);
 			System.out.println("sqRouteId:"+sqRouteId);
@@ -104,6 +111,8 @@ public class RouteServlet extends HttpServlet {
 			System.out.println("name:"+rouDeVO.get(1).getSqSerialNo());
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("rouDeVO", rouDeVO); // 資料庫取出的wsVO物件,存入req
+			req.setAttribute("routeName", routeName);
+			System.out.println("routeName:"+routeName);
 			String url = "/front-end/route/routeD.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交routeD.jsp
 			successView.forward(req, res);
@@ -161,7 +170,7 @@ public class RouteServlet extends HttpServlet {
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("rouVO", rouVO); // 資料庫update成功後,正確的的rouVO物件,存入req
-				String url = "/back-end/route/listAllRou.jsp";
+				String url = "/back-end/route/listAllRouDe.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneWs.jsp
 				successView.forward(req, res);
 
@@ -182,10 +191,15 @@ public class RouteServlet extends HttpServlet {
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-//			try { 
+			try { 
 				
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				//新增至路線主表
+				MemVO memVO = (MemVO) session.getAttribute("MemVO");
+				String sqMemberId = memVO.getSq_member_id();
+				
+//				String sqMemberId = "910003";
+				
 				String routeName = req.getParameter("routeName");
 				String routeIntroduction = req.getParameter("routeIntro");
 				String country = req.getParameterValues("country")[0];
@@ -214,6 +228,7 @@ public class RouteServlet extends HttpServlet {
 				RouteVO rouVO = new RouteVO();
 
 				rouVO.setRouteName(routeName);
+				rouVO.setSqMemberId(sqMemberId);
 				rouVO.setRouteIntroduction(routeIntroduction);
 				rouVO.setCountry(country);
 				rouVO.setStartArea(startArea);
@@ -223,7 +238,7 @@ public class RouteServlet extends HttpServlet {
 				rouVO.setAddRoute(addRoute);
 
 				RouteService RouSvc1 = new RouteService();
-				RouSvc1.insert(routeName, distance, country, startArea, endArea, routeImage, routeIntroduction,
+				RouSvc1.insert(routeName, sqMemberId, distance, country, startArea, endArea, routeImage, routeIntroduction,
 						checkFlag, addRoute);
 
 				//新增至路線細節表格
@@ -233,8 +248,8 @@ public class RouteServlet extends HttpServlet {
 				String sqRouteId = rouVO2.getSqRouteId();
 				String[] stepName = req.getParameterValues("step");
 				
-				String[] stLongitude = req.getParameterValues("lat");
-				String[] stLatitude = req.getParameterValues("lng");
+				String[] stLongitude = req.getParameterValues("lng");
+				String[] stLatitude = req.getParameterValues("lat");
 				String[] stepIntroduction = req.getParameterValues("stepIntro");
 				String[] stepImage = req.getParameterValues("stepImg");
 				
@@ -273,30 +288,20 @@ public class RouteServlet extends HttpServlet {
 				
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-
+				
 				String url = "/front-end/route/routeM.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交routeM.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
-//			} catch (Exception e) {
-//				errorMsgs.add("新增資料失敗:" + e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/route/setRouteBySelf.jsp");
-//				failureView.forward(req, res);
-//			}
-			
-			
-			
-			
+			} catch (Exception e) {
+				e.printStackTrace();
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/route/setRouteBySelf.jsp");
+				failureView.forward(req, res);
+			}
 		}
 
 		System.out.println("out of servlet");
-		
-		
-		
-
-		
-		
 	}
 	
 

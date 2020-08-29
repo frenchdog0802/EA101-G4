@@ -9,9 +9,11 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
 import com.waterStation.model.*;
+import com.member.model.*;
 
 @MultipartConfig
 public class WaterStationServlet extends HttpServlet {
+
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
@@ -19,6 +21,8 @@ public class WaterStationServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
+		HttpSession session = req.getSession();
+		
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		System.out.println("----------" + action);
@@ -86,6 +90,7 @@ public class WaterStationServlet extends HttpServlet {
 		
 
 		if ("insert".equals(action)) { // 來自addWs.jsp的請求
+			System.out.println("come to insert");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -93,6 +98,11 @@ public class WaterStationServlet extends HttpServlet {
 
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+
+				MemVO memVO = (MemVO) session.getAttribute("MemVO");
+				String insertBy = memVO.getSq_member_id();
+				
+//				String insertBy = "910002";
 
 				String stationName = req.getParameter("stationName");
 				String stationNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
@@ -128,10 +138,11 @@ public class WaterStationServlet extends HttpServlet {
 					errorMsgs.add("國家請勿空白");
 				}
 
-				String area = req.getParameter("area").trim();
-				if (area == null || area.trim().length() == 0) {
-					errorMsgs.add("縣市請勿空白");
-				}
+				String area1 = req.getParameterValues("area")[0];
+				String area2[] = area1.split("灣");
+				String area = area2[1].substring(0, 3);
+				System.out.println(area);
+				
 				Integer checkFlag = null;
 				checkFlag = new Integer(req.getParameter("checkFlag").trim());
 
@@ -168,11 +179,12 @@ public class WaterStationServlet extends HttpServlet {
 				wsVO.setBusinessHours(businessHours);
 				wsVO.setCheckFlag(checkFlag);
 				wsVO.setAddStation(addStation);
+				wsVO.setInsertBy(insertBy);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("wsVO", wsVO); // 含有輸入格式錯誤的wsVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/waterStation/addWs.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/waterStation/insertWs.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -180,11 +192,11 @@ public class WaterStationServlet extends HttpServlet {
 				/*************************** 2.開始修改資料 *****************************************/
 				WaterStationService waterStationSvc = new WaterStationService();
 				waterStationSvc.insert(stationName, stationAddress, longitude, latitude, country, area, stationImage,
-						businessHours, checkFlag, addStation);
+						businessHours, insertBy, checkFlag, addStation);
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 
-				String url = "/back-end/waterStation/listAllWs.jsp";
+				String url = "/front-end/waterStation/insertWs.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listAllWs.jsp
 				successView.forward(req, res);
 

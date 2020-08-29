@@ -38,12 +38,15 @@
 							<table class="table table-striped">
 							    <tbody>			    	
 							        <tr>
-							            <td style="width: 20%; border-right: 1px #cccccc solid;">付款人姓名</td>
+							            <td style="width: 20%; border-right: 1px #cccccc solid;">收件人姓名</td>
 							            <td style="width: 80%;"><%=name%></td>
 							        </tr>
 							        <tr>
 							            <td style="border-right: 1px #cccccc solid;">付款方式</td>
-							            <td><%= payType%></td>
+							            <td><%if(payType.equals("Credit_CreditCard")){ %>
+							            		信用卡
+							            	<%}%>
+							            </td>
 							        </tr>
 							        <tr>
 							            <td style="border-right: 1px #cccccc solid;">總金額</td>
@@ -84,8 +87,8 @@
 	
 		    			<div class="pt-2 pl-3 pb-2" style="background-color: #cccccc;">
 		    				<div class="finalbtn" style="padding-right: 20px; text-align: right;">
-		    					<button class="btn bg-secondary" style="width: 25%; margin-right: 10px;" onclick="location.href='http://localhost:8079/EA101_G4/front-end/shopMall/shopMall.jsp'">繼續購物</button>
-					    		<button class="btn bg-secondary" style="width: 25%;">回首頁</button>
+		    					<button class="btn bg-secondary carClear" style="width: 25%; margin-right: 10px;" onclick="location.href='http://www.ea101g4.tk/EA101_G4/front-end/shopMall/shopMall.jsp'">繼續購物</button>
+					    		<button class="btn bg-secondary carClear" style="width: 25%;" onclick="location.href='http://www.ea101g4.tk/EA101_G4/front-end/index/index.jsp'">回首頁</button>
 					    	</div>
 				    	</div>
 					</div>
@@ -99,9 +102,21 @@
 	<%@include file="/front-end/page-file/page-footer"%>
 
 	<script>
-	$(function(){
-		$(".fun-text").text("結帳完成");  // text("")裡面自己輸入功能名稱 
-	});
+		$(function(){
+			$(".fun-text").text("結帳完成");  // text("")裡面自己輸入功能名稱 
+		});
+		$(".carClear").click(function(){
+			$.ajax({
+				type : "POST",		  
+	        	url  : "<%=request.getContextPath()%>/shopping.do",
+	        	data : {
+	        		action : "clearCar",
+	        	},
+	        	success : function(){
+	        		console.log('clear');
+	        	}
+			});
+		});
 	</script>
 
 </body>

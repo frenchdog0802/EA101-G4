@@ -7,28 +7,28 @@ public class QuestionService {
 	private QuestionDAO_interface dao;
 
 	public QuestionService() {
-		dao = new QuestionJDBCDAO();
+		dao = new QuestionDAO();
 	}
 
-	public QuestionVO addQus(String question_title, String question_desciption) {
+	public QuestionVO addQus(String question_title, String question_description) {
 
 		QuestionVO questionVo = new QuestionVO();
 
 		questionVo.setQuestion_title(question_title);
-		questionVo.setQuestion_desciption(question_desciption);
+		questionVo.setQuestion_description(question_description);
 		
 		dao.insert(questionVo);
 
 		return questionVo;
 	}
 
-	public QuestionVO updateQus(String question_title, String question_desciption, String sq_question_id
+	public QuestionVO updateQus(String question_title, String question_description, String sq_question_id
 			) {
 
 		QuestionVO questionVo = new QuestionVO();
 
 		questionVo.setQuestion_title(question_title);
-		questionVo.setQuestion_desciption(question_desciption);
+		questionVo.setQuestion_description(question_description);
 		questionVo.setSq_question_id(sq_question_id);
 		
 		dao.update(questionVo);

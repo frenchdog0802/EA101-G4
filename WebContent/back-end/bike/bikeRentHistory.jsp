@@ -9,28 +9,37 @@
 
 <!-- --------------------------------------------------------------------------------------------->
 <!-----------backBody----------->
-<%@include file="/back-end/backFrame/backBody"%>
+<%@include file="/back-end/backFrame/masterBackBody"%>
 <!-----------backBody----------->
 <!-- --------------------------------------------------------------------------------------------->
 <!--分頁自己改-->
 <div class="row" style="background-color: white;">
 	<ul class="nav nav-tabs">
-		<li class="nav-item"><a class="nav-link active" href="#"><span
-				style="padding-bottom: 8px; border-bottom: 3px blue solid;">item1</span></a>
+		<li class="nav-item "><a class="nav-link" href="<%=request.getContextPath()%>/back-end/bike/bikeTypeListAll.jsp"><span>車種管理</span></a>
 		<!--在哪一個頁面就哪加active和span的style--></li>
-		<li class="nav-item"><a class="nav-link" href="#"><span>item2</span></a>
+		<li class="nav-item "><a class="nav-link" href="<%=request.getContextPath()%>/back-end/bike/newBikeListAll.jsp"><span>車輛管理</span></a>
 		</li>
-		<li class="nav-item"><a class="nav-link" href="#"><span>item3</span></a>
+		<li class="nav-item"><a class="nav-link active" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><span style="padding-bottom: 8px; border-bottom: 3px blue solid;">訂單管理</span></a>
+		</li>
+		<li class="nav-item"><a class="nav-link active" href="<%=request.getContextPath()%>/bike/BikeStoreServlet.do?action=bikeStoreOwner&sq_bike_store_id=${BikeStoreVO.sq_bike_store_id}" ><span>店家資訊</span></a>
 		</li>
 	</ul>
 </div>
 <!--分頁自己改-->
 <!-- --------------------------------------------------------------------------------------------->
 <!-----------backNav----------->
-<%@include file="/back-end/backFrame/backNav"%>
+<%@include file="/back-end/backFrame/masterBackNav"%>
 <!-----------backNav----------->
 <!-- --------------------------------------------------------------------------------------------->
 <div class="container-fluid mx-3">
+	<div class="row collapse" id="collapseExample">
+		<div class="col-1"></div>
+		<div class="col-6 my-1">
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeMaster.jsp'">訂單(未取車)</button>
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/MasterEx.jsp'">訂單(已取車,未還車)</button> 
+			<button class="btn bg-primary mx-2" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeRentHistory.jsp'">歷史訂單</button>
+		</div>
+	</div>
 	<div class="row mt-1">
 		<form class="form-inline">
 			<div class="form-group mx-sm-3 mb-2">

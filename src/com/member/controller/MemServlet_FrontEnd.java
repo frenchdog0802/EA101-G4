@@ -69,7 +69,7 @@ public class MemServlet_FrontEnd extends HttpServlet {
 
 				/*************************** 2.開始查詢資料 *****************************************/
 				MemService memSvc = new MemService();
-				MemVO memVO = memSvc.getOneMem(sq_member_id);
+				MemVO memVO = memSvc.findByPrimaryKey(sq_member_id);
 				if (memVO == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -106,7 +106,7 @@ public class MemServlet_FrontEnd extends HttpServlet {
 
 				/*************************** 2.開始查詢資料 ****************************************/
 				MemService memSvc = new MemService();
-				MemVO memVO = memSvc.getOneMem(sq_member_id);
+				MemVO memVO = memSvc.findByPrimaryKey(sq_member_id);
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("memVO", memVO); // 資料庫取出的memVO物件,存入req
@@ -189,7 +189,7 @@ public class MemServlet_FrontEnd extends HttpServlet {
 				if (session.getAttribute("m_photo") == null) {
 					if (in.available() == 0) {
 						MemService MemSrc = new MemService();
-						MemVO memVO = MemSrc.getOneMem(sq_member_id);
+						MemVO memVO = MemSrc.findByPrimaryKey(sq_member_id);
 						m_photo = memVO.getM_photo();
 					}else {
 						m_photo = new byte[in.available()];
@@ -208,7 +208,7 @@ public class MemServlet_FrontEnd extends HttpServlet {
 				if (session.getAttribute("back_img") == null) {
 					if (in2.available() == 0) {
 						MemService MemSrc = new MemService();
-						MemVO memVO = MemSrc.getOneMem(sq_member_id);
+						MemVO memVO = MemSrc.findByPrimaryKey(sq_member_id);
 						back_img = memVO.getBack_img();
 					} else {
 						back_img = new byte[in2.available()];

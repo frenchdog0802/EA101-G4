@@ -68,7 +68,7 @@
 					  					</tr>
 					  					<tr>
 						    				<td class="takedt_t" style="border-right: 1px #cccccc solid;"><span>配送方式</span></td>
-						    				<td class="takedt_td">未做</td>
+						    				<td class="takedt_td"><%= mapCus.get("paymode")%></td>
 						    			</tr>
 						   				<tr>
 						    				<td class="takedt_t" style="border-right: 1px #cccccc solid;"><span>收件地址</span></td>
@@ -80,6 +80,7 @@
 				
 			    			<div class="mt-3 mb-2 pt-2 pl-3 pb-2" style="background-color: #cccccc;">
 			    				<div class="finalbtn" style="padding-right: 20px; text-align: right;">
+			    					<button class="btn bg-secondary" style="width:30%">上一步</button>
 			    					<button type="button" class="btn bg-secondary" data-toggle="modal" data-target="#exampleModal" style="width:30%">	確認無誤
 									</button>
 									<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -94,7 +95,7 @@
 										    	<div class="modal-body">
 										     		<div class="finalbtn" style="text-align: center;">
 										     			<form method="POST" action="<%=request.getContextPath()%>/shopMall/productEcpayServlet.do">
-								    						<button class="btn bg-secondary mb-2" style="width: 50%;" name="action"  value="storePay">超商付款</button>
+<!-- 								    						<button class="btn bg-secondary mb-2" style="width: 50%;" name="action"  value="storePay">超商付款</button> -->
 											    			<button class="btn bg-secondary mt-2" style="width: 50%;" name="action"  value="cardPay">信用卡支付</button>
 											    		</form>
 											    	</div>

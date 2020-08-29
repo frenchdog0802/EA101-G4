@@ -15,6 +15,9 @@ public class Shop_orderService {
 	public void insertWithDetail(Shop_orderVO orderVO, List<Shop_order_detailVO> list) {
 		dao.insertWithDetail(orderVO , list); 
 	}
+	public void updateWithDetail(Shop_orderVO orderVO, List<Shop_order_detailVO> list) {
+		dao.updateWithDetail(orderVO, list);
+	}
 	public void update(Shop_orderVO sorderVO) {
 		dao.update(sorderVO);
 	}
@@ -30,4 +33,7 @@ public class Shop_orderService {
 	public String getCurrentKey() {
 		return dao.getCurrentKey();
 	}
+	public List<Shop_orderVO> getByMemberID(String sq_member_id){
+		return dao.getByMemberID(sq_member_id);
+	} 
 }

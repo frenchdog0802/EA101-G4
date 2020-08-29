@@ -11,22 +11,22 @@
  %>   
  <jsp:useBean id="productSvc" scope="page" class="com.shop_product.model.Shop_productService" />	
  <%@ include file="/back-end/backFrame/backHeader"%>
- 	<link rel="stylesheet" type="text/css" href="backProductStockCss.css">
+ 	<link rel="stylesheet" href="<%=request.getContextPath()%>/back-end/Product_stock/stockCss/backProductStockCss.css">
     <title>庫存後台</title>
  <%@ include file="/back-end/backFrame/backBody"%>
 				<div class="row" style="background-color: white;">
 					<ul class="nav nav-tabs">
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>商品管理</span></a>
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/Shop_product/allShop_product.jsp"><span>商品管理</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>訂單管理</span></a>
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/Shop_order/allOrder.jsp"><span>訂單管理</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#"><span>廠牌管理</span></a>
+					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/BrandBack/BrandBack.jsp"><span>廠牌管理</span></a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link active" href="#"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">庫存管理</span></a>
+					    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/Product_stock/backProductStock.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">庫存管理</span></a>
 					  </li>
 					</ul>
 				</div>
@@ -34,36 +34,36 @@
 			<div class="container-fluid">
 				<div class="row mt-3">
                     <div class="col-3 searchbtn mt-1 ml-3">
-						<FORM METHOD="post" ACTION="brand.do" style="position: relative;">
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/stockServlet.do" style="position: relative;">
 							<input type="text" name="sq_brand_id" id="search" placeholder="輸入員工編號 (如560001):"/>
 							<input type="hidden" name="action"	value="getOne">
 							<input type="submit" value="送出" style="position: absolute; opacity: 0;" class="icon">
-							<img src="<%=request.getContextPath()%>/back_end/backFrame/image/search.png" class="img-fluid icon" >
+							<img src="<%=request.getContextPath()%>/back-end/backFrame/image/search.png" class="img-fluid icon" >
 					    </FORM>
 					</div>
 					<div class="col-1 ml-3" style="padding: 0;">
-                        <button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back_end/BrandBack/BrandBack.jsp'" style="border: 1px black solid;">
-                            <img src="<%=request.getContextPath()%>/back_end/backFrame/image/list.png" class="img-fluid">
+                        <button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Product_stock/backProductStock.jsp'" style="border: 1px black solid;">
+                            <img src="<%=request.getContextPath()%>/back-end/backFrame/image/list.png" class="img-fluid">
                         </button>
                     </div>
                     <div class="col-1 ml-3" style="padding: 0;">
-                        <button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back_end/BrandBack/addBrand.jsp'" style="border: 1px black solid;">
-                            <img src="<%=request.getContextPath()%>/back_end/backFrame/image/addbrand.png" class="img-fluid">
+                        <button class="btn divbg" onclick="location.href='<%=request.getContextPath()%>/back-end/Product_stock/addProductStock.jsp'" style="border: 1px black solid;">
+                            <img src="<%=request.getContextPath()%>/back-end/backFrame/image/addbrand.png" class="img-fluid">
                         </button>
                     </div>
-                    <div class="col-3">
-                    	<jsp:useBean id="brandService" scope="page" class="com.brand.model.BrandService" />  
-						<FORM METHOD="post" ACTION="brand.do" class="mt-2">
-						    <b>選擇庫存編號:</b>
-						    <select size="1" name="sq_brand_id">
-							    <c:forEach var="stockVO" items="${list}" > 
-							         <option value="${stockVO.sq_stock_id}">${stockVO.sq_stock_id}
-							    </c:forEach>   
-						    </select>
-						    <input type="hidden" name="action" value="getOne">
-						    <input type="submit" value="送出">
-						</FORM>	
-                    </div>
+<!--                     <div class="col-3"> -->
+<%--                     	<jsp:useBean id="stockService" scope="page" class="com.product_stock.model.Product_stockService" />   --%>
+<%-- 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/stockServlet.do" class="mt-2"> --%>
+<!-- 						    <b>選擇庫存編號:</b> -->
+<!-- 						    <select size="1" name="sq_product_id"> -->
+<%-- 							    <c:forEach var="stockVO" items="${list}" >  --%>
+<%-- 							         <option value="${stockVO.sq_stock_id}">${stockVO.sq_stock_id} --%>
+<%-- 							    </c:forEach>    --%>
+<!-- 						    </select> -->
+<!-- 						    <input type="hidden" name="action" value="getOne"> -->
+<!-- 						    <input type="submit" value="送出"> -->
+<!-- 						</FORM>	 -->
+<!--                     </div> -->
                 </div>
 		 		<div class="row mt-3 justify-content-center">
     				<div class="col-12 divbg">
@@ -91,17 +91,17 @@
 				    					<td>${stockVO.product_model}</td>
 				    					<td>${stockVO.stock_total}</td>     
 				    					<td>
-				    						<FORM METHOD="post" ACTION="brand.do" style="position: relative;">
+				    						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/stockServlet.do" style="position: relative;">
 											    <input type="submit" value="修改" style="position: absolute; opacity: 0;">
-											    <input type="image" src="<%=request.getContextPath()%>/back_end/backFrame/image/changeicon.png" alt="Submit" align="right" class="img-fluid"/>
+											    <input type="image" src="<%=request.getContextPath()%>/back-end/backFrame/image/changeicon.png" alt="Submit" align="right" class="img-fluid"/>
 											    <input type="hidden" name="sq_stock_id"  value="${stockVO.sq_stock_id}">
 											    <input type="hidden" name="action"	value="getOneForUpdate">
 											</FORM>
 				    					</td>
 				    					<td>
-										 	<FORM METHOD="post" ACTION="brand.do" style="position: relative;">
+										 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/stockServlet.do" style="position: relative;">
 										    	<input type="submit" value="修改" style="position: absolute; opacity: 0;">
-											    <input type="image" src="<%=request.getContextPath()%>/back_end/backFrame/image/delicon.png" alt="Submit" align="right" class="img-fluid"/>
+											    <input type="image" src="<%=request.getContextPath()%>/back-end/backFrame/image/delicon.png" alt="Submit" align="right" class="img-fluid"/>
 										    	<input type="hidden" name="sq_stock_id" value="${stockVO.sq_stock_id}">
 										    	<input type="hidden" name="action" value="delete">
 										    </FORM>

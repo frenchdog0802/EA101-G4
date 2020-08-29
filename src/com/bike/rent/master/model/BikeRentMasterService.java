@@ -40,4 +40,20 @@ public class BikeRentMasterService {
 	public String getCurrentKeys() {
 		return dao.getCurrentKeys();
 	}
+	
+	public String getOd_rent_statusStr(Integer Od_rent_status) {
+		String str = null;
+		switch(Od_rent_status) {
+			case 0:
+				str="訂單成立";
+				break;
+			case 1:
+				str="訂單完成";
+				break;
+			case 2:
+				str="訂單取消";
+				break;
+		}
+		return str;
+	}
 }

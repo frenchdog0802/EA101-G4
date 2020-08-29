@@ -24,7 +24,7 @@ public class MemJDBCDAO implements MemDAO_interface {
 	private static final String DELETE = 
 			"DELETE FROM member where sq_member_id = ?";
 	private static final String UPDATE = 
-			"UPDATE member set  member_account=?, password=?, m_name=?, gender=?, birthday=?, cellphone=?, m_email=?, registered=?, m_photo=?, back_img=?, nick_name=?, address=? where sq_member_id = ?";
+			"UPDATE member set  member_account=?, password=?, m_name=?, gender=?, birthday=?, cellphone=?, m_email=?, registered=?, m_photo=?, back_img=?, nick_name=?, address=? ,validation=? where sq_member_id = ?";
 
 	@Override
 	public void insert(MemVO memVO) {
@@ -100,7 +100,8 @@ public class MemJDBCDAO implements MemDAO_interface {
 			pstmt.setBytes(10, memVO.getBack_img());
 			pstmt.setString(11, memVO.getNick_name());
 			pstmt.setString(12, memVO.getAddress());
-			pstmt.setString(13, memVO.getSq_member_id());
+			pstmt.setInt(13, memVO.getValidation());
+			pstmt.setString(14, memVO.getSq_member_id());
 
 			pstmt.executeUpdate();
 
@@ -372,5 +373,11 @@ public class MemJDBCDAO implements MemDAO_interface {
 //			System.out.println(allMem.getAddress());
 //			System.out.println();
 //		}
+	}
+
+	@Override
+	public MemVO getOneMemfromAccount(String member_account) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }

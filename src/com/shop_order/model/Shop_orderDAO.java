@@ -8,9 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.shop_order_detail.model.Shop_order_detailDAO;
-import com.shop_order_detail.model.Shop_order_detailVO;
-import com.shop_product.model.Shop_productVO;
+import com.shop_order_detail.model.*;
 
 public class Shop_orderDAO implements Shop_orderDAO_interface{
 //	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -29,11 +27,67 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 	
 	public static final String INSERT = "INSERT INTO SHOP_ORDER(SQ_ORDER_ID, SQ_MEMBER_ID, SQ_STORE_ADDRESS_ID, ORDER_ADDRESS, ORDER_DATE, PAY_DEADLINE, SHOP_ORDER_PRICE, PAY_MODE, ORDER_STATUS)"
 			+ "VALUES (?, ?, ?, ?, to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'), to_date(to_char(sysdate+7,'yyyy-mm-dd'),'yyyy-mm-dd'), ?, ?, ?)";
-	public static final String UPDATE = "UPDATE SHOP_ORDER SET SQ_MEMBER_ID=?, SQ_STORE_ADDRESS_ID=?, ORDER_ADDRESS=?, ORDER_DATE=?, PAY_DEADLINE=?, SHOP_ORDER_PRICE=?, PAY_MODE=?, ORDER_STATUS=? WHERE SQ_ORDER_ID=?";
+	public static final String UPDATE = "UPDATE SHOP_ORDER SET ORDER_STATUS=? WHERE SQ_ORDER_ID=?";
 	public static final String DELETE = "DELETE FROM SHOP_ORDER WHERE SQ_ORDER_ID=?";
 	public static final String GET_ONE = "SELECT SQ_ORDER_ID, SQ_MEMBER_ID, SQ_STORE_ADDRESS_ID, ORDER_ADDRESS, ORDER_DATE, PAY_DEADLINE, SHOP_ORDER_PRICE, PAY_MODE, ORDER_STATUS FROM SHOP_ORDER WHERE SQ_ORDER_ID=?";
 	public static final String GET_ALL = "SELECT SQ_ORDER_ID, SQ_MEMBER_ID, SQ_STORE_ADDRESS_ID, ORDER_ADDRESS, ORDER_DATE, PAY_DEADLINE, SHOP_ORDER_PRICE, PAY_MODE, ORDER_STATUS FROM SHOP_ORDER ORDER BY SQ_ORDER_ID";
-	private static final String GET_CURRENTKEY = "select sq_product_id from (select * from shop_prder order by order_date desc ) where rownum=1";
+	private static final String GET_CURRENTKEY = "select sq_order_id from (select * from shop_order order by sq_order_id desc ) where rownum=1";
+	private static final String GET_BY_MEMBER = "SELECT * FROM SHOP_ORDER WHERE SQ_MEMBER_ID=?";
+	
+	@Override
+	public List<Shop_orderVO> getByMemberID(String sq_member_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Shop_orderVO shop_orderVO = null;
+		List<Shop_orderVO> list = new ArrayList<Shop_orderVO>();
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_BY_MEMBER);	
+			pstmt.setString(1, sq_member_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				shop_orderVO = new Shop_orderVO();
+				shop_orderVO.setSq_order_id(rs.getString("sq_order_id"));
+				shop_orderVO.setOrder_address(rs.getString("order_address"));
+				shop_orderVO.setOrder_date(rs.getTimestamp("order_date"));
+				shop_orderVO.setShop_order_price(rs.getInt("shop_order_price"));
+				shop_orderVO.setPay_mode(rs.getInt("pay_mode"));
+				shop_orderVO.setOrder_status(rs.getInt("order_status"));
+				
+				list.add(shop_orderVO);
+			}
+			pstmt.clearParameters();
+		}catch(SQLException e) {
+			throw new RuntimeException("A database error occured." + e.getMessage());
+		}finally {
+			if(rs != null) {
+				try	{
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	
 	
 	public void insert(Shop_orderVO shop_orderVO) {
 		Connection con = null;
@@ -74,7 +128,7 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 		}
 	}
 	
-//	'OD-'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0)
+//	'OD'||LPAD(to_char(SQ_ORDER_ID.NEXTVAL),6,0)
 	@Override
 	public void insertWithDetail(Shop_orderVO orderVO, List<Shop_order_detailVO> list) {
 		Connection con = null;
@@ -94,13 +148,13 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 			pstmt.executeUpdate();
 
 			Shop_order_detailDAO detailDAO = new Shop_order_detailDAO();
-			Shop_order_detailVO detailVO = new Shop_order_detailVO();
 			for(Shop_order_detailVO vo : list) {
+				Shop_order_detailVO detailVO = new Shop_order_detailVO();
 				detailVO.setSq_order_id(vo.getSq_order_id());
 				detailVO.setSq_product_id(vo.getSq_product_id());
 				detailVO.setProduct_price(vo.getProduct_price());
 				detailVO.setOrder_sum(vo.getOrder_sum());
-				detailDAO.insert2(detailVO, con);
+				detailDAO.insert(detailVO, con);
 			}
 			con.commit();
 			con.setAutoCommit(true);
@@ -126,7 +180,49 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 		}
 	}
 
-	
+	@Override
+	public void updateWithDetail(Shop_orderVO orderVO, List<Shop_order_detailVO> list) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			con.setAutoCommit(false);
+			pstmt = con.prepareStatement(UPDATE);
+			
+			pstmt.setInt(1, orderVO.getOrder_status());
+			pstmt.setString(2, orderVO.getSq_order_id());
+			
+			pstmt.executeUpdate();
+			
+			Shop_order_detailService detailSvc = new Shop_order_detailService();
+			
+			for(Shop_order_detailVO vo : list) {
+				detailSvc.update(vo, con);
+			}
+			con.commit();
+			
+			
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured."
+					+ se.getMessage());
+		}finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.setAutoCommit(true);
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}	
+	}
 	
 	@Override
 	public void update(Shop_orderVO sorderVO) {
@@ -211,6 +307,7 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE);
+			pstmt.setString(1, sq_order_id);
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -338,6 +435,10 @@ public class Shop_orderDAO implements Shop_orderDAO_interface{
 		}
 		return shopOrder_id;
 	}
+
+
+
+	
 	
 //	public static void main(String args[]) {
 //		Shop_orderDAO dao = new Shop_orderDAO();

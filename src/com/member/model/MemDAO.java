@@ -35,8 +35,73 @@ public class MemDAO implements MemDAO_interface {
 	private static final String DELETE = 
 			"DELETE FROM member where sq_member_id = ?";
 	private static final String UPDATE = 
-			"UPDATE member set  member_account=?, password=?, m_name=?, gender=?, birthday=?, cellphone=?, m_email=?, registered=?, m_photo=?, back_img=?, nick_name=?, address=? where sq_member_id = ?";
+			"UPDATE member set  member_account=?, password=?, m_name=?, gender=?, birthday=?, cellphone=?, m_email=?, registered=?, m_photo=?, back_img=?, nick_name=?, address=? ,validation=? where sq_member_id = ?";
+	private static final String GET_ONE_STMT_ACCOUNT = 
+			"SELECT * FROM member where member_account = ?"; // sq_member_id?
+	
+	
+	
+	@Override
+	public MemVO getOneMemfromAccount(String member_account) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemVO memVO = null;
 
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_STMT_ACCOUNT);
+
+			pstmt.setString(1, member_account);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				memVO = new MemVO();
+
+				memVO.setSq_member_id(rs.getString("sq_member_id"));
+				memVO.setMember_account(rs.getString("member_account"));
+				memVO.setPassword(rs.getString("password"));
+				memVO.setM_name(rs.getString("m_name"));
+				memVO.setGender(rs.getInt("gender"));
+				memVO.setBirthday(rs.getDate("birthday"));
+				memVO.setCellphone(rs.getString("cellphone"));
+				memVO.setM_email(rs.getString("m_email"));
+				memVO.setValidation(rs.getInt("validation"));
+				memVO.setRegistered(rs.getDate("registered"));
+				memVO.setM_photo(rs.getBytes("m_photo"));
+				memVO.setBack_img(rs.getBytes("back_img"));
+				memVO.setNick_name(rs.getString("nick_name"));
+				memVO.setAddress(rs.getString("address"));
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memVO;
+	}
+	
 	@Override
 	public void insert(MemVO memVO) {
 
@@ -106,12 +171,11 @@ public class MemDAO implements MemDAO_interface {
 			pstmt.setBytes(10, memVO.getBack_img());
 			pstmt.setString(11, memVO.getNick_name());
 			pstmt.setString(12, memVO.getAddress());
-			pstmt.setString(13, memVO.getSq_member_id());
-
+			pstmt.setInt(13, memVO.getValidation());
+			pstmt.setString(14, memVO.getSq_member_id());
 			pstmt.executeUpdate();
-
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occurred. " + se.getMessage());
+			se.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {

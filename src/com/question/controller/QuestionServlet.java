@@ -10,6 +10,8 @@ import com.question.model.*;
 
 public class QuestionServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		doPost(req, res);
@@ -60,7 +62,7 @@ public class QuestionServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("questionVo", questionVo); // 資料庫取出的empVO物件,存入req
-				String url = "/question/listOneQus.jsp";
+				String url = "/back-end/question/listOneQus.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 				successView.forward(req, res);
 
@@ -91,7 +93,7 @@ public class QuestionServlet extends HttpServlet {
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("questionVo", questionVo);         // 資料庫取出的empVO物件,存入req
-				String url = "/question/update_qus_input.jsp";
+				String url = "/back-end/question/update_qus_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 				successView.forward(req, res);
 
@@ -123,8 +125,8 @@ public class QuestionServlet extends HttpServlet {
 				} ;
 	            
 				
-				String question_desciption = req.getParameter("question_desciption").trim();
-				if (question_desciption == null || question_desciption.trim().length() == 0) {
+				String question_description = req.getParameter("question_description").trim();
+				if (question_description == null || question_description.trim().length() == 0) {
 					errorMsgs.add("內容請勿空白");
 				}	
 			
@@ -134,7 +136,7 @@ public class QuestionServlet extends HttpServlet {
 				
 				questionVo.setSq_question_id(sq_question_id);
 				questionVo.setQuestion_title(question_title);
-				questionVo.setQuestion_desciption(question_desciption);
+				questionVo.setQuestion_description(question_description);
 				
 
 				// Send the use back to the form, if there were errors
@@ -148,11 +150,11 @@ public class QuestionServlet extends HttpServlet {
 				
 				/***************************2.開始修改資料*****************************************/
 				QuestionService qusSvc = new QuestionService();
-				questionVo = qusSvc.updateQus(question_title, question_desciption, sq_question_id);
+				questionVo = qusSvc.updateQus(question_title, question_description, sq_question_id);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("questionVo", questionVo); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/question/listOneQus.jsp";
+				String url = "/back-end/question/listOneQus.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 
@@ -180,8 +182,8 @@ public class QuestionServlet extends HttpServlet {
 					errorMsgs.add("問題標題: 請勿空白");
 				} ;
 				
-				String question_desciption = req.getParameter("question_desciption").trim();
-				if (question_desciption == null || question_desciption.trim().length() == 0) {
+				String question_description = req.getParameter("question_description").trim();
+				if (question_description == null || question_description.trim().length() == 0) {
 					errorMsgs.add("內容請勿空白");
 				}
 				
@@ -191,7 +193,7 @@ public class QuestionServlet extends HttpServlet {
 				
 				
 				questionVo.setQuestion_title(question_title);
-				questionVo.setQuestion_desciption(question_desciption);
+				questionVo.setQuestion_description(question_description);
 				
 				
 				// Send the use back to the form, if there were errors
@@ -205,10 +207,10 @@ public class QuestionServlet extends HttpServlet {
 				
 				/***************************2.開始新增資料***************************************/
 				QuestionService qusSvc = new QuestionService();
-				questionVo = qusSvc.addQus(question_title, question_desciption);
+				questionVo = qusSvc.addQus(question_title, question_description);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/question/listAllQus.jsp";
+				String url = "/back-end/question/listAllQus.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
 				
@@ -238,7 +240,7 @@ public class QuestionServlet extends HttpServlet {
 				qusSvc.deleteQus(sq_question_id);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/question/listAllQus.jsp";
+				String url = "/back-end/question/listAllQus.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				

@@ -81,3 +81,5 @@ body {
 .sidebarYellow-2{
   background-color: #fff000;
 }
+
+footer#footer-main>.container>.row>.col-sm-3>ul.list-unstyle>li.mt-3>a:focus{color:white};

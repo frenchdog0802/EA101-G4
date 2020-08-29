@@ -109,6 +109,7 @@ hr {
 	border-color: #D1E9E9;
 	margin: 70px auto;
 	background-color: #ECFFFF;
+	font-size:24px;
 }
 
 .search {
@@ -140,8 +141,8 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 //起始畫面，selectAll
-	function appendCard(routeName, startArea, sqRouteId, routeIntroduction){
-		var routeIntroductionSplit = routeIntroduction.substring(0,80);
+	function appendCard(routeName, startArea, distance, sqRouteId, routeIntroduction){
+		var routeIntroductionSplit = routeIntroduction.substring(0,70);
 		var containerAll = document.getElementById('card-container');
 		//生成div
 		var div = document.createElement('div');
@@ -160,11 +161,15 @@ $(document).ready(function(){
 					<span>位於縣市：</span>
 					<span class="startArea">`+startArea+`</span>
 				</div>
+				<div class = "inner">
+					<span>總距離(公里)：</span>
+					<span class="distance">`+distance+`</span>
+				</div>
  				
 				<div class = "inner">
 					<span>路線簡介：</span>
 					<span class="routeIntroduction">`+routeIntroductionSplit+`</span>
-					<a href="<%=request.getContextPath()%>/front-end/route/route.do?sqRouteId=`+sqRouteId+`&action=getOneRoute_For_Display">...詳細介紹</a>
+					<a href="<%=request.getContextPath()%>/front-end/route/route.do?sqRouteId=`+sqRouteId+`&routeName=`+routeName+`&action=getOneRoute_For_Display">...詳細介紹</a>
 				</div>
 			</div>
 		`;
@@ -179,18 +184,18 @@ $(document).ready(function(){
 
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
-	<h2>PAPAGO推薦路線</h2>
+	<h2 style="	margin-top:20px">PAPAGO推薦路線</h2>
 	<hr>
 	<div class="container">
 		<form method="post"
 			action="<%=request.getContextPath()%>/front-end/route/route.do">
 			<div
 				class="row rounded justify-content-center align-items-center areaKm">
-				<div class="col-md-1 text-center align-items-center">
+				<div class="col-md-2 text-center align-items-center">
 					<img alt="Cinque Terre" class="text-center" height="50"
-						src="images/point.png" width="50">起點
+						src="images/point.png" width="50"><br>起點
 				</div>
-				<div class="col-md-5">
+				<div class="col-md-10">
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" name="selArea"
 							id="inlineCheckbox1" type="checkbox" value="台北市"> <label
@@ -272,33 +277,7 @@ $(document).ready(function(){
 							class="form-check-label" for="inlineCheckbox16">台東縣</label>
 					</div>
 				</div>
-				<div class="col-md-1 text-center">
-					<img alt="Cinque Terre" class="text-center" height="50"
-						src="images/%E8%B7%AF%E7%B7%9A%E8%A6%8F%E5%8A%83%E5%8E%BB%E8%83%8C.png"
-						width="50">公里數
-				</div>
-				<div class="col-md-5 align-items-center">
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" name="5公里以下" id="inlineCheckbox17"
-							type="checkbox" value="5"> <label
-							class="form-check-label" for="inlineCheckbox17">5公里以下</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" name="5~10公里"
-							id="inlineCheckbox18" type="checkbox" value="5-10"> <label
-							class="form-check-label" for="inlineCheckbox18">5~10公里</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" name="15~20公里"
-							id="inlineCheckbox19" type="checkbox" value="19"> <label
-							class="form-check-label" for="inlineCheckbox19">15~20公里</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" name="20公里以上"
-							id="inlineCheckbox20" type="checkbox" value="20"> <label
-							class="form-check-label" for="inlineCheckbox20">20公里以上</label>
-					</div>
-				</div>
+				
 				<div class="row">
 					<button class="btn btn-primary rounded-pill search" type="button"
 						id="generate">
@@ -310,6 +289,10 @@ $(document).ready(function(){
              <input type="submit" class="btn btn-info rounded-pill" value="搜尋"> -->
 					<input type="hidden" name="action" value="selectByCondition">
 				</div>
+			</div>
+			<div class="row justify-content-end">
+				<a href='<%=request.getContextPath()%>/front-end/route/setRouteBySelf.jsp' class="btn btn-info" role="button">自訂路線</a>
+				
 			</div>
 			<div >
 				<div class="row" id="card-container"></div>
@@ -324,13 +307,14 @@ $(document).ready(function(){
 	<%-- 		<c:forEach var="routeVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
 	<c:forEach var="routeVO" items="${list}">
 		<script type="text/javascript">
-				appendCard(`${routeVO.routeName}`, `${routeVO.startArea}`, `${routeVO.sqRouteId}`,
+			if(${routeVO.addRoute} === 1){
+				appendCard(`${routeVO.routeName}`, `${routeVO.startArea}`, `${routeVO.distance}`, `${routeVO.sqRouteId}`,
 						`${routeVO.routeIntroduction}`);
 				
 				document.getElementById('${routeVO.sqRouteId}').src = 
 					"<%=request.getContextPath() %>/front-end/route/route.img?SQ_ROUTE_ID=${routeVO.sqRouteId}";
-				
-			</script>
+			}	
+		</script>
 
 	</c:forEach>
 
@@ -358,22 +342,26 @@ $(document).ready(function(){
 							//將文字轉成JSON
 							var obj = JSON.parse(xhr.responseText);
 							//取得各項參數
+							console.log(obj);
 // 							console.log(Object.keys(obj.rouVO).length);
-							var routeName, startArea, sqRouteId, routeIntroduction;
+							var routeName, startArea, sqRouteId, routeIntroduction, addRoute;
 							for(i=0; i<Object.keys(obj.rouVO).length; i++){
 								if(obj && obj.rouVO && obj.rouVO[i]) {
 									var res = obj.rouVO[i];
 									routeName = res.routeName;
 									startArea = res.startArea;
+									distance = res.distance;
 									sqRouteId = res.sqRouteId;
+									addRoute = res.addRoute;
 									console.log(sqRouteId);
 									routeIntroduction = res.routeIntroduction;
 									//在Card-container上新增元素
-									appendCard(routeName, startArea, sqRouteId, routeIntroduction);
-									document.getElementById(sqRouteId).src = 
-										"<%=request.getContextPath() %>/front-end/route/route.img?SQ_ROUTE_ID="+sqRouteId;
-									
-									
+									if(addRoute === 1){
+										appendCard(routeName, startArea, distance, sqRouteId, routeIntroduction);
+										document.getElementById(sqRouteId).src = 
+											"<%=request.getContextPath() %>/front-end/route/route.img?SQ_ROUTE_ID="+sqRouteId;
+										
+									}
 								}else {
 									alert('AJAX Error! Status Code: ' + xhr.status);
 								}			

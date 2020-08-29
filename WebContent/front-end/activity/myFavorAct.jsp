@@ -3,9 +3,12 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.act.model.*"%>
 <%@ page import="com.actfavor.model.*"%>
+<%@ page import="com.member.model.*"%>
 <jsp:useBean id="actreportSvc" class="com.actreport.model.ActReportService"/>
 <%
-	String sq_member_id = (String)session.getAttribute("sq_member_id");
+	MemVO memVO = (MemVO)session.getAttribute("MemVO");
+	String sq_member_id = memVO.getSq_member_id();
+	session.setAttribute("sq_member_id", sq_member_id);
 	if(sq_member_id==null) {
 		session.setAttribute("sq_member_id", "910003");
 	}
@@ -37,15 +40,28 @@
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/modern-business.css" rel="stylesheet">
 <style>
-	.mr-3 {
-		width:64px;
-		height:64px;
+.mr-3 {
+	width: 64px;
+	height: 64px;
+}
+
+@media screen and (min-width: 1200px) {
+	li.media {
+		width: 800px;
 	}
-	
-	li.media{
-		width:800px;
+}
+
+@media ( min-width : 768px) and (max-width:991px) {
+	li.media {
+		width: 680px;
 	}
-	
+}
+
+@media ( min-width : 992px) and (max-width:1199px) {
+	li.media {
+		width: 680px;
+	}
+}
 </style>
 </head>
 <body>
@@ -109,6 +125,11 @@
 								</li>
 							</ul>
 						</c:forEach>
+							<c:if test="${list2.size() == 0}">
+								<div class="media-body">
+									<h1>您還沒加入收藏唷!!</h1>
+								</div>
+							</c:if>
 					</div>
 
 					<!-- Pagination -->

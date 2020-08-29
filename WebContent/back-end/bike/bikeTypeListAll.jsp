@@ -5,7 +5,17 @@
 
 <jsp:useBean id="BikeTypeVO" class="com.bike.type.model.BikeTypeVO"
 	scope="request" />
-
+<%
+	List<BikeTypeVO> list;
+	if (BikeTypeVO.getSq_bike_type_id() != null) {
+		list = Arrays.asList(BikeTypeVO);
+		pageContext.setAttribute("list", list);
+	} else {
+		BikeTypeService bikeDao = new BikeTypeService();
+		list = bikeDao.getAll();
+		pageContext.setAttribute("list", list);
+	}
+%>
 <!-----------backHeader----------->
 <%@include file="/back-end/backFrame/backHeader"%>
 <!-----------backHeader----------->
@@ -13,6 +23,10 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/bootstrap-components/css/bootstrap.min.css">
 <style>
+font-good {
+	font-size: 16px !important;
+}
+
 @media ( min-width :1000px) {
 	.mydescription {
 		word-break: break-all;
@@ -31,69 +45,74 @@
 
 <!-- --------------------------------------------------------------------------------------------->
 <!-----------backBody----------->
-<%@include file="/back-end/backFrame/backBody"%>
+<%@include file="/back-end/backFrame/masterBackBody"%>
 <!-----------backBody----------->
 <!-- --------------------------------------------------------------------------------------------->
 <!--分頁自己改-->
 <div class="row " style="background-color: white;">
 	<ul class="nav nav-tabs ">
-		<li class="nav-item "><a class="nav-link active " href="#"><span
-				style="padding-bottom: 8px; border-bottom: 3px blue solid;">item1</span></a>
-		<!--在哪一個頁面就哪加active和span的style--></li>
-		<li class="nav-item"><a class="nav-link" href="#"><span>item2</span></a>
-		</li>
-		<li class="nav-item"><a class="nav-link" href="#"><span>item3</span></a>
-		</li>
-		<li class="nav-item mt-1">
-			<form class="form-inline"
-				ACTION="<%=request.getContextPath()%>/bike/BikeTypeServlet.do">
-				<div class="form-group mx-sm-3 ">
-					<label for="inputbike_type_id" class="sr-only">請輸入車種編號</label> <input
-						type="text" class="form-control" id="inputbike_type_id"
-						name="sq_bike_type_id" placeholder="請輸入車種編號">
-				</div>
-				<input type="hidden" name="action" value="getOne_For_Display">
-				<input type="submit" class="btn btn-primary  " value="查詢"></input>
-				<a
-					href="<%=request.getContextPath()%>/back-end/bikeType/addBikeType.jsp"
-					class="btn btn-success  mx-3">新增</a>
-			</form>
+		<li class="nav-item "><a class="nav-link active"
+			href="<%=request.getContextPath()%>/back-end/bike/bikeTypeListAll.jsp">
+				<span style="padding-bottom: 8px; border-bottom: 3px blue solid;">車種管理</span>
+		</a></li>
+		<li class="nav-item "><a class="nav-link"
+			href="<%=request.getContextPath()%>/back-end/bike/newBikeListAll.jsp">
+				<span>車輛管理</span>
+		</a></li>
+		<li class="nav-item"><a class="nav-link" data-toggle="collapse"
+			href="#collapseExample" role="button" aria-expanded="false"
+			aria-controls="collapseExample"> <span>訂單管理</span>
+		</a></li>
+		<li class="nav-item"><a class="nav-link active"
+			href="<%=request.getContextPath()%>/bike/BikeStoreServlet.do?action=bikeStoreOwner&sq_bike_store_id=${BikeStoreVO.sq_bike_store_id}"><span>店家資訊</span></a>
 		</li>
 	</ul>
 </div>
 <!--分頁自己改-->
 <!-- --------------------------------------------------------------------------------------------->
 <!-----------backNav----------->
-<%@include file="/back-end/backFrame/backNav"%>
+<%@include file="/back-end/backFrame/masterBackNav"%>
 <!-----------backNav----------->
 <!-- --------------------------------------------------------------------------------------------->
 <!-- 自由發揮處 -->
-<%
-	List<BikeTypeVO> list;
-	if (BikeTypeVO.getSq_bike_type_id() != null) {
-		list = Arrays.asList(BikeTypeVO);
-		pageContext.setAttribute("list", list);
-	} else {
-		BikeTypeService bikeDao = new BikeTypeService();
-		list = bikeDao.getAll();
-		pageContext.setAttribute("list", list);
-	}
-%>
 
-
-
-
-<div class="container-fluid mt-1">
+<div class="container-fluid">
+	<div class="row collapse" id="collapseExample">
+		<div class="col-1"></div>
+		<div class="col-6 my-1">
+			<button class="btn bg-primary mx-2"
+				onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeMaster.jsp'">訂單(未取車)</button>
+			<button class="btn bg-primary mx-2"
+				onclick="location.href='<%=request.getContextPath()%>/back-end/bike/MasterEx.jsp'">訂單(已取車,未還車)</button>
+			<button class="btn bg-primary mx-2"
+				onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeRentHistory.jsp'">歷史訂單</button>
+		</div>
+	</div>
+	<form class="form-inline"
+		ACTION="<%=request.getContextPath()%>/bike/BikeTypeServlet.do">
+		<div class="form-group mx-sm-3 mt-3 ">
+			<label for="inputbike_type_id" class="sr-only">請輸入車種編號</label> <input
+				type="text" class="form-control" id="inputbike_type_id"
+				name="sq_bike_type_id" placeholder="請輸入車種編號">
+		</div>
+		<input type="hidden" name="action" value="getOne_For_Display">
+		<input type="submit" class="btn btn-primary mt-3 " value="查詢"></input> <a
+			href="<%=request.getContextPath()%>/back-end/bike/addBikeType.jsp"
+			class="btn btn-success mt-3  mx-3">新增</a>
+	</form>
+</div>
+<div class="container-fluid mt-3">
 	<div class="table-responsive">
 		<table
-			class="table text-center table-bordered table-striped table-hover">
-			<thead class="thead-dark">
+			class="table text-center table-bordered table-striped table-hover h6">
+			<thead class="thead-dark font-good">
 				<tr>
 					<th scope="col">圖片</th>
-					<th scope="col">車種名稱</th>
+					<th scope="col">名稱</th>
 					<th scope="col">車種標題</th>
 					<th scope="col">車種敘述</th>
 					<th scope="col">價格/天</th>
+					<th scope="col">價格/時</th>
 					<th scope="col">修改</th>
 				</tr>
 			</thead>
@@ -104,11 +123,12 @@
 					<tr>
 						<td><img
 							src="<%=request.getContextPath()%>/photo/DBReader.do?sq_bike_type_id=${bikeVO.sq_bike_type_id}"
-							height="50%"></td>
+							height=100 width=100></td>
 						<td class="align-middle">${bikeVO.bike_type_name}</td>
 						<td class="align-middle">${bikeVO.bike_title}</td>
 						<td class="mydescription align-middle">${bikeVO.bike_description}</td>
-						<%-- 						<td class="align-middle">${bikeVO.price}</td> --%>
+						<td class="align-middle">${bikeVO.bike_daily_price}</td>
+						<td class="align-middle">${bikeVO.bike_hourly_price}</td>
 						<td class="align-middle">
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/bike/BikeTypeServlet.do"

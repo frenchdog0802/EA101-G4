@@ -59,9 +59,6 @@
 					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/listAllAct.jsp"><span>活動管理</span></a><!--在哪一個頁面就哪加active和span的style-->
 					  </li>
 					  <li class="nav-item">
-					   	<a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/addAct.jsp"><span>新增活動</span></a>
-					  </li>
-					  <li class="nav-item">
 					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/joinActivity/listAllActJoin.jsp"><span>參加會員管理</span></a>
 					  </li>
 					  <li class="nav-item">
@@ -82,7 +79,8 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-
+<div class="row">
+		<div class="col">
 	<form METHOD="post"
 		ACTION="<%=request.getContextPath()%>/act/ActReportServlet.do"
 		name="form1">
@@ -96,33 +94,44 @@
 		<jsp:useBean id="actreportSvc" scope="page"
 			class="com.actreport.model.ActReportService" />
 		<div class="form-group row">
-			<label for="inputActivityId3" class="col-sm-2 col-form-label">活動編號<font
-				color=red><b>*</b></font></label>
+			<label for="inputActivityId3" class="col-sm-2 col-form-label">活動編號</label>
 			<div class="col-sm-10">
+				<input type="hidden" name="sq_activity_id" size="45" value="<%=actreportVO.getSq_activity_id()%>" />
 				<%=actreportVO.getSq_activity_id()%>
 			</div>
 		</div>
 		<!-- 	----此欄是會員編號,但不論前台或後台都不給改(因為已經綁定主揪者的會員編號) -->
 		<div class="form-group row">
-			<label for="inputMemberId3" class="col-sm-2 col-form-label">會員編號<font
-				color=red><b>*</b></font></label>
+			<label for="inputMemberId3" class="col-sm-2 col-form-label">會員編號</label>
 			<div class="col-sm-10">
+			<input type="hidden" name="sq_member_id" size="45" value="<%=actreportVO.getSq_member_id()%>" />
 				<%=actreportVO.getSq_member_id()%>
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="inputReportReason3" class="col-sm-2 col-form-label">檢舉原因<font
+			<label for="inputReportReason3" class="col-sm-2 col-form-label">檢舉原因</label>
+			<div class="col-sm-10">
+				<input type="hidden" name="report_reason" size="45" value="<%=actreportVO.getReport_reason()%>" />
+				<%=actreportVO.getReport_reason()%>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputReportResponse3" class="col-sm-2 col-form-label">檢舉回應<font
 				color=red><b>*</b></font></label>
 			<div class="col-sm-10">
-				<%=actreportVO.getReport_reason()%>
+				<input type="TEXT" name="report_response" class="col-sm-10 form-control"
+					value="<%=(actreportVO.getReport_response()==null) ? "" : actreportVO.getReport_response()%>" />
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="inputReportStatusReason3" class="col-sm-2 col-form-label">檢舉狀態<font
 				color=red><b>*</b></font></label>
 			<div class="col-sm-10">
-				<input type="TEXT" name="report_status"
-					value="<%=actreportVO.getReport_status()%>" />
+				<input type="TEXT" name="report_status" id="report_status" class="col-sm-10 form-control"
+value="<%=actreportVO.getReport_status()%>" />
+					0.「檢舉未處理」
+					1.「檢舉成功」
+					2.「檢舉失敗」
 			</div>
 		</div>
 
@@ -137,5 +146,7 @@
 			</div>
 		</div>
 	</form>
+		</div>
+	</div>
 </div>
 <%@include file="/back-end/backFrame/backFooter"%>

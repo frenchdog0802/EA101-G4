@@ -42,7 +42,7 @@
 
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a
-					href="<%=request.getContextPath()%>/front-end/activity/Activity.jsp">Home</a>
+					href="<%=request.getContextPath()%>/front-end/index/index.jsp">Home</a>
 				</li>
 				<li class="breadcrumb-item active">活動列表</li>
 			</ol>
@@ -51,23 +51,24 @@
 				<!-- Sidebar Column -->
 				<div class="col-lg-3 mb-4">
 					<div class="list-group">
-						<a href="index.html" class="list-group-item active">Home</a> 
-						<a href="about.html" class="list-group-item">About</a> 
-						<a href="services.html" class="list-group-item">Services</a> 
-						<a href="contact.html" class="list-group-item">Contact</a> 
-						<a href="portfolio-1-col.html" class="list-group-item">1 Column Portfolio</a>
-						<a href="portfolio-2-col.html" class="list-group-item">2 Column Portfolio</a>
-						<a href="portfolio-3-col.html" class="list-group-item">3 Column Portfolio</a>
-						<a href="portfolio-4-col.html" class="list-group-item">4 Column Portfolio</a>
-						<a href="portfolio-item.html" class="list-group-item">Single Portfolio Item</a>
-						<a href="blog-home-1.html" class="list-group-item">Blog Home 1</a>
-						<a href="blog-home-2.html" class="list-group-item">Blog Home 2</a>
-						<a href="blog-post.html" class="list-group-item">Blog Post</a>
-						<a href="full-width.html" class="list-group-item">Full Width Page</a>
-						<a href="sidebar.html" class="list-group-item">Sidebar Page</a>
-						<a href="faq.html" class="list-group-item">FAQ</a>
-						<a href="404.html" class="list-group-item">404</a>
-						<a href="pricing.html" class="list-group-item">Pricing Table</a>
+						<a href="<%=request.getContextPath()%>/front-end/activity/Activity.jsp" class="list-group-item active">全部活動</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=基隆市" class="list-group-item">基隆市</a> 
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=台北市" class="list-group-item">台北市</a> 
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=新北市" class="list-group-item">新北市</a> 
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=桃園市" class="list-group-item">桃園市</a> 
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=新竹縣" class="list-group-item">新竹縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=苗栗縣" class="list-group-item">苗栗縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=台中市" class="list-group-item">台中市</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=彰化縣" class="list-group-item">彰化縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=南投縣" class="list-group-item">南投縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=雲林縣" class="list-group-item">雲林縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=嘉義縣" class="list-group-item">嘉義縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=台南市" class="list-group-item">台南市</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=高雄市" class="list-group-item">高雄市</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=屏東縣" class="list-group-item">屏東縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=宜蘭縣" class="list-group-item">宜蘭縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=花蓮縣" class="list-group-item">花蓮縣</a>
+						<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontArea_For_Display&area=台東縣" class="list-group-item">台東縣</a>
 					</div>
 				</div>
 				<!-- Content Column -->

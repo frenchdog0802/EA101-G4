@@ -25,7 +25,22 @@
 </head>
 <body>
 	<%@include file="/front-end/page-file/page-nav"%>
+	
+	<div class="container mt-3">
+		<!-- Page Heading/Breadcrumbs -->
+		<h1 class="mt-4 mb-3">
+			確認訂單  
+		</h1>
 
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a
+				href="<%=request.getContextPath()%>/front-end/bike/memberOrder.jsp">Home</a>
+			</li>
+			<li class="breadcrumb-item active">預約租車</li>
+			<li class="breadcrumb-item active">車種選擇</li>
+			<li class="breadcrumb-item ">確認訂單</li>
+		</ol>
+	</div>
 	<div class="container my-5">
 		<form method="POST" action="<%=request.getContextPath()%>/bike/BikeEcpayServlet.do">
 			<div class="row ">
@@ -114,8 +129,7 @@
 			<div class="container mt-3">
 				<div class="row text-center">
 					<div class="col">
-						<input type="submit" class="btn btn-danger btn-lg"
-							value="修改資訊(還未做功能)">
+						<button type="button" class="btn btn-danger btn-lg btn-cancel">取消訂單</button>
 					</div>
 					<div class="col">
 						<input type="hidden" name="action" value="pay">
@@ -144,8 +158,27 @@
 			var endDateStr = endDate.split(" ");//["2020-08-15", "13:00"]
 			$(".endDate").text(endDateStr[0]);
 			$(".endTime").text(getDayOfWeek(endDate) + " " + endDateStr[1]);
+			
+			
+			
+			//取消訂單
+			$(".btn-cancel").click(function(){
+				console.log("aa");
+				$.ajax({
+					url:"<%=request.getContextPath()%>/bike/BikeEcpayServlet.do",
+					type:"POST",
+					data:{
+						action:"cancel"
+					},
+					success:function(data){
+						window.location.href=data;
+					}
+				})
+			})
 
 		});
+		
+	
 
 		function getDayOfWeek(dateStr) {
 			var dayOfWeek = "";

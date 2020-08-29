@@ -9,13 +9,41 @@ public class BikeStoreVO implements Serializable {
 	};
 	private String sq_bike_store_id;
 	private String bike_store_name;
-	private String location;
+	private String store_account;
 	private String phone;
+	private String store_email;
+	private String location;
 	private String store_opentime;
 	private Double store_longitute;
 	private Double store_latitute;
 	private Integer store_status;
-	private Date create_time;
+	private String store_password;
+	private byte[] store_photo;
+	
+	
+	public String getStore_email() {
+		return store_email;
+	}
+
+	public void setStore_email(String store_email) {
+		this.store_email = store_email;
+	}
+
+	public String getStore_account() {
+		return store_account;
+	}
+
+	public void setStore_account(String store_account) {
+		this.store_account = store_account;
+	}
+
+	public String getStore_password() {
+		return store_password;
+	}
+
+	public void setStore_password(String store_password) {
+		this.store_password = store_password;
+	}
 	private String area;
 
 	public String getArea() {
@@ -90,12 +118,14 @@ public class BikeStoreVO implements Serializable {
 		this.store_status = store_status;
 	}
 
-	public Date getCreate_time() {
-		return create_time;
+	public byte[] getStore_photo() {
+		return store_photo;
 	}
 
-	public void setCreate_time(Date create_time) {
-		this.create_time = create_time;
+	public void setStore_photo(byte[] store_photo) {
+		this.store_photo = store_photo;
 	}
+
+
 
 }

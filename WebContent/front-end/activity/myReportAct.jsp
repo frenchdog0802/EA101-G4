@@ -3,8 +3,11 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.act.model.*"%>
 <%@ page import="com.actreport.model.*"%>
+<%@ page import="com.member.model.*"%>
 <%
-	String sq_member_id = (String)session.getAttribute("sq_member_id");
+	MemVO memVO = (MemVO)session.getAttribute("MemVO");
+	String sq_member_id = memVO.getSq_member_id();
+	session.setAttribute("sq_member_id", sq_member_id);
 	if(sq_member_id==null) {
 		session.setAttribute("sq_member_id", "910003");
 	}
@@ -13,19 +16,18 @@
     List<ActVO> listact = actSvc.getAll();
     List<ActReportVO> listreport = actreportSvc.getOneActReportForMember(sq_member_id);
     List<ActVO> list2 = new LinkedList<ActVO>();
+    List<ActReportVO> list3 = new LinkedList<ActReportVO>();
     ActReportVO actreportVO2 = new ActReportVO();
     for(ActVO actVO:listact){
     	for(ActReportVO actreportVO:listreport){
     		if(actVO.getSq_activity_id().contains(actreportVO.getSq_activity_id()) && sq_member_id.contains(actreportVO.getSq_member_id())){
     			list2.add(actVO);
-    			actreportVO2.setSq_activity_id(actreportVO.getSq_activity_id());
-    			actreportVO2.setReport_reason(actreportVO.getReport_reason());
-    			actreportVO2.setSq_member_id(sq_member_id);
-    			request.setAttribute("actreportVO2", actreportVO2);
+    			list3.add(actreportVO);
     		}
     	}
     }
     pageContext.setAttribute("list2",list2);
+    pageContext.setAttribute("list3", list3);
 %>
 
 
@@ -41,15 +43,50 @@
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/modern-business.css" rel="stylesheet">
 <style>
-	.mr-3 {
-		width:64px;
-		height:64px;
+.mr-3 {
+	width: 64px;
+	height: 64px;
+}
+
+.modal-footer {
+	float: left;
+	height: 100px;
+}
+
+#status0 {
+	float: left;
+	color: #EA0000;
+}
+
+#status1 {
+	float: left;
+	color: #EA0000;
+	width: 400px;
+}
+
+#status2 {
+	float: left;
+	color: #EA0000;
+	width: 400px;
+}
+
+@media screen and (min-width: 1200px) {
+	li.media {
+		width: 800px;
 	}
-	
-	li.media{
-		width:800px;
+}
+
+@media ( min-width : 768px) and (max-width:991px) {
+	li.media {
+		width: 680px;
 	}
-	
+}
+
+@media ( min-width : 992px) and (max-width:1199px) {
+	li.media {
+		width: 680px;
+	}
+}
 </style>
 </head>
 <body>
@@ -86,9 +123,9 @@
 
 					<div class="row">
 						<%@ include file="page1.file"%>
-
+						<jsp:useBean id="actreportSvc2" class="com.actreport.model.ActReportService"/>
 						<c:forEach var="actVO" items="${list2}" begin="<%=pageIndex%>"
-							end="<%=pageIndex+rowsPerPage-1%>">
+							end="<%=pageIndex+rowsPerPage-1%>" varStatus="vs">
 							<ul class="list-unstyled">
 								<li class="media">
 									<a href="<%=request.getContextPath()%>/act/ActServlet.do?action=getFrontOne_For_Display&sq_activity_id=${actVO.sq_activity_id}">
@@ -100,38 +137,59 @@
 												${actVO.act_title}
 											</a>
 										</h5>
-										 
-										${actVO.act_description}
-										<div style="padding-left:1px">
-											<button id="actreport" class="btn btn-primary" onclick="showModal()">查看檢舉</button>
+										<p class="description">${actVO.act_description}</p>
+										<div class="form-inline">
+										<button type="button" id="viewDetailButton${vs.index}" class="btn btn-primary" data-toggle="modal" data-target="#myModal${vs.index}">查看檢舉</button>
+										</div>
+										<div class="modal fade" id="myModal${vs.index}" tabindex="-1"
+											role="dialog" aria-labelledby="myModalLabel">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h4 class="modal-title" id="myModalLabel">檢舉內容</h4>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<c:forEach var="actreportVO2" items="${list3}" varStatus="vs">
+															<c:if test="${actVO.sq_activity_id.contains(actreportVO2.sq_activity_id)}">
+																<p>${actreportVO2.report_reason}</p>
+															</c:if>
+														</c:forEach>
+													</div>
+													<div class="modal-footer" style="position:relative">
+														<c:forEach var="actreportVO2" items="${list3}" varStatus="vs">
+															<c:choose>
+															<c:when test="${actVO.sq_activity_id.contains(actreportVO2.sq_activity_id) && actreportVO2.report_status == 0}">
+																<div id="status0" style="position:absolute;left:0;top:0">檢舉狀態:尚未處理</div>
+															</c:when>
+															<c:when test="${actVO.sq_activity_id.contains(actreportVO2.sq_activity_id) && actreportVO2.report_status == 1}">
+																<div id="status1" style="position:absolute;left:0;top:0">檢舉狀態:檢舉成功</div>
+																<div id="status1" style="position:absolute;left:0;top:25%">官方回覆:${actreportVO2.report_response}</div>
+															</c:when>
+															<c:when test="${actVO.sq_activity_id.contains(actreportVO2.sq_activity_id) && actreportVO2.report_status == 2}">
+																<div id="status2" style="position:absolute;left:0;top:0">檢舉狀態:檢舉失敗</div>
+																<div id="status2" style="position:absolute;left:0;top:25%">官方回覆:${actreportVO2.report_response}</div>
+															</c:when>
+															</c:choose>
+														</c:forEach>
+														<button type="button" class="btn btn-default"
+															data-dismiss="modal" style="position:absolute;bottom:0;">Close</button>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</li>
 							</ul>
 						</c:forEach>
+							<c:if test="${list2.size() ==0 }">
+								<h1>您沒有檢舉過活動唷!!</h1>
+							</c:if>
 					</div>
-					
-			<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-							
-						<div class="modal-header">
-							<h2 class="modal-title" id="myModalLabel">查看檢舉</h2>
-			                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			            </div>
-						
-						<div class="modal-body">
-			<!-- =========================================以下為輸入的內容========================================== -->
-			              <textarea name="report_reason" maxlength="65" id="textarea1" rows=5 cols=83 style="resize: none;" disabled></textarea>
-			<!-- =========================================以上為原輸入的內容========================================== -->
-						</div>
-						
-						<div class="modal-footer">
-			                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			            </div>
-					</div>
-				</div>
-			</div>
+			
 
 					<!-- Pagination -->
 					<ul class="pagination justify-content-center">

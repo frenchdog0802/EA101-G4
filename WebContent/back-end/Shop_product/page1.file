@@ -31,5 +31,3 @@
          }
     } 
 %>
-
-<b>符合查詢條件如下所示:共<font color=red><%=rowNumber%></font>筆</b>

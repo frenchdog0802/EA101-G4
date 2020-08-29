@@ -52,6 +52,26 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String action = request.getParameter("action");
+		
+		if("findBookList".equals(action)) {
+			LinkedHashMap<String, Integer> bookMap  = (LinkedHashMap<String, Integer>)session.getAttribute("bookMap");
+			
+			LinkedHashMap<String, Integer> returnMap = new LinkedHashMap<>();
+			
+			//寫到這裡要轉成中文
+			try {
+			BikeTypeService BikeTypeSvc = new BikeTypeService();
+			for (Map.Entry<String, Integer> entry : bookMap.entrySet()) {    
+				    String bikeTypeName = BikeTypeSvc.findByPrimaryKey(entry.getKey()).getBike_type_name() ;
+				    Integer quantity = entry.getValue();
+				    returnMap.put(bikeTypeName ,quantity );
+				  }    
+			}catch(Exception ce) {
+				System.out.println("暫時沒資料");
+			}
+			JSONObject resobj = new JSONObject(returnMap);
+			out.println(resobj);
+		}
 
 		if ("searchDate".equals(action)) {
 			String startDate = request.getParameter("startDate");
@@ -89,6 +109,16 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 			List<BikeStoreVO> BikeStorelist = BikeStoreSvc.getAll();
 			for (BikeStoreVO BikeStoreVO : BikeStorelist) {
 				if (area.equals(BikeStoreVO.getArea())) {
+					BikeStoreAreaModel bsa = new BikeStoreAreaModel();
+					bsa.setBike_store_name(BikeStoreVO.getBike_store_name());
+					bsa.setLocation(BikeStoreVO.getLocation());
+					bsa.setPhone(BikeStoreVO.getPhone());
+					bsa.setStore_opentime(BikeStoreVO.getStore_opentime());
+					// 找出空車
+					bsa.setEmpty_bike(bikeSvc.findStoreBikeEmpty(BikeStoreVO.getSq_bike_store_id()));
+					BikeStoreReturnList.add(bsa);
+				}
+				if("全臺".equals(area)) {
 					BikeStoreAreaModel bsa = new BikeStoreAreaModel();
 					bsa.setBike_store_name(BikeStoreVO.getBike_store_name());
 					bsa.setLocation(BikeStoreVO.getLocation());
@@ -211,7 +241,6 @@ public class BikeStoreAjaxServlet extends HttpServlet {
 			}
 			bookMap.put(selectBikeType ,parseIntQuantity );
 			session.setAttribute("bookMap", bookMap);
-
 		}
 
 		// 結帳前確認

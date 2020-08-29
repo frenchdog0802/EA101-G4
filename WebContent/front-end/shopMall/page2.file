@@ -21,7 +21,7 @@
 						<%}%>
 					<%}%>  	    					
 	  				<%if (pageNumber>1) {%>
-	  				<p class="dropsty">跳轉至 :</p>
+	  				<p class="dropsty" style="padding-top:7px;">跳轉至 :</p>
 					    <FORM METHOD="post" ACTION="<%=request.getRequestURI()%>">   
 					       <select size="1" name="whichPage" class="mt-1 ml-2">
 					         <%for (int i=1; i<=pageNumber; i++){%>

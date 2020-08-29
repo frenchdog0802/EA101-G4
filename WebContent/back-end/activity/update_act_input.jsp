@@ -45,7 +45,7 @@
   th, td {
     padding: 1px;
   }
-  textarea#textarea1 {
+  textarea#inputTextArea3 {
   resize: none;
   }
 </style>
@@ -54,9 +54,6 @@
 					<ul class="nav nav-tabs">
 					  <li class="nav-item">
 					    <a class="nav-link active" href="<%=request.getContextPath()%>/back-end/activity/listAllAct.jsp"><span style="padding-bottom:8px; border-bottom: 3px blue solid;">活動管理</span></a><!--在哪一個頁面就哪加active和span的style-->
-					  </li>
-					  <li class="nav-item">
-					   	<a class="nav-link" href="<%=request.getContextPath()%>/back-end/activity/addAct.jsp"><span>新增活動</span></a>
 					  </li>
 					  <li class="nav-item">
 					    <a class="nav-link" href="<%=request.getContextPath()%>/back-end/joinActivity/listAllActJoin.jsp"><span>參加會員管理</span></a>
@@ -79,7 +76,8 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-
+<div class="row">
+		<div class="col">
 	<form METHOD="post"
 		ACTION="<%=request.getContextPath()%>/act/ActServlet.do" name="form1"
 		enctype="multipart/form-data">
@@ -97,7 +95,7 @@
 				<select class="custom-select" id="selectActRoute3"
 					name="sq_route_id">
 					<c:forEach var="routeVO" items="${routeSvc.all}">
-						<option value="${routeVO.sqRouteId}" ${(actVO.sq_route_id==routeVO.sqRouteId)?'selected':'' }>${routeVO.sqRouteId}</option>
+						<option value="${routeVO.sqRouteId}" ${(actVO.sq_route_id==routeVO.sqRouteId)?'selected':'' }>${routeVO.routeName}</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -109,35 +107,35 @@
 		<div class="form-group row">
 			<label for="inputActivityTitle3" class="col-sm-2 col-form-label">活動標題</label>
 			<div class="col-sm-10">
-				<input type="TEXT" name="act_title" size="45"
+				<input type="TEXT" name="act_title"  class="form-control"
 					value="<%=actVO.getAct_title()%>" />
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="inputMaxPopulation3" class="col-sm-2 col-form-label">上限人數</label>
 			<div class="col-sm-10">
-				<input type="TEXT" name="max_population" size="3"
+				<input type="TEXT" name="max_population"  class="form-control"
 					value="<%=actVO.getMax_population()%>" />
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="inputMinPopulation3" class="col-sm-2 col-form-label">最低人數</label>
 			<div class="col-sm-10">
-				<input type="TEXT" name="min_population" size="3"
+				<input type="TEXT" name="min_population"  class="form-control"
 					value="<%=actVO.getMin_population()%>" />
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="inputStartTime3" class="col-sm-2 col-form-label">報名起始時間</label>
 			<div class="col-sm-10">
-				<input name="start_time" id="start_time" type="text"
+				<input name="start_time" id="start_time" type="text" class="form-control"
 					value="<%=actVO.getStart_time()%>" onchange="function1()" />
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="inputEndTime3" class="col-sm-2 col-form-label">報名結束時間</label>
 			<div class="col-sm-10">
-				<input name="end_time" id="end_time" type="text"
+				<input name="end_time" id="end_time" type="text" class="form-control"
 					value="<%=actVO.getEnd_time()%>" onchange="function2()"
 					readonly="readonly" />
 			</div>
@@ -145,7 +143,7 @@
 		<div class="form-group row">
 			<label for="inputActStartTime3" class="col-sm-2 col-form-label">活動開始時間</label>
 			<div class="col-sm-10">
-				<input name="act_start_time" id="act_start_time" type="text"
+				<input name="act_start_time" id="act_start_time" type="text" class="form-control"
 					value="<%=actVO.getAct_start_time()%>" onchange="function3()"
 					readonly="readonly" />
 			</div>
@@ -153,14 +151,14 @@
 		<div class="form-group row">
 			<label for="inputActEndTime3" class="col-sm-2 col-form-label">活動結束時間</label>
 			<div class="col-sm-10">
-				<input name="act_end_time" id="act_end_time" type="text"
+				<input name="act_end_time" id="act_end_time" type="text" class="form-control"
 					value="<%=actVO.getAct_end_time()%>" readonly="readonly" />
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="inputTextArea3" class="col-sm-2 col-form-label">活動說明</label>
 			<div class="col-sm-10">
-				<textarea name="act_description" id="textarea1" rows=10 cols=47><%=actVO.getAct_description()%></textarea>
+				<textarea name="act_description" id="inputTextArea3" rows=10 cols=47 class="form-control"><%=actVO.getAct_description()%></textarea>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -174,7 +172,7 @@
 		<div class="form-group row">
 			<label for="exampleFormControlFile1" class="col-sm-2 col-form-label">活動圖片</label>
 			<div class="col-sm-10">
-				<input type="FILE" name="act_picture" accept=".jpg,.png,.jpeg"
+				<input type="FILE" name="act_picture" accept=".jpg,.png,.jpeg" class="form-control-file" id="exampleFormControlFile1"
 					onchange="loadImageFile(event)"> <input type="hidden"
 					name="act_picture" size="45"
 					value="<%=(actVO == null) ? "" : actVO.getAct_picture()%>" /> <img
@@ -184,8 +182,13 @@
 		<div class="form-group row">
 			<label for="inputGp_Status3" class="col-sm-2 col-form-label">成團狀態</label>
 			<div class="col-sm-10">
-				<input type="TEXT" name="gp_status" size="45"
+				<input type="TEXT" name="gp_status" class="col-sm-10 form-control"
 					value="<%=actVO.getGp_status()%>" />
+					0.「成團」
+					1.「未成團」
+					2.「取消揪團」
+					3.「人數已滿」
+					4.「下架」
 			</div>
 		</div>
 
@@ -201,6 +204,8 @@
 			</div>
 		</div>
 	</form>
+	</div>
+	</div>
 </div>
 <%@include file="/back-end/backFrame/backFooter"%>
 

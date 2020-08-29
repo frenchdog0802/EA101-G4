@@ -73,7 +73,6 @@
 		}
 		#product_name{
 			padding-left: 10px;
-			border: 1px solid black;
 			font-size: 25px;
 		}
 		.product_img{
@@ -85,7 +84,6 @@
 		}
 		#product_cus{	
 			float: left;
-			width: 60%;
 			margin-left: 20px;
 		}
 		#product_cus td{
@@ -94,13 +92,10 @@
 		}
 		#product_join{
 			float: left;
-			width: 30%;
-			margin-right: 10px;
-			padding-left: 5px;
-			padding-right: 5px;
+			width: 80%;
 			text-align: center;
 			margin-top: 20px;
-			border: 1px black solid;
+			display: flex;
 		}
 		#product_join button{
 			width: 100%;
@@ -118,7 +113,7 @@
 		#product_infor1{
 			width: 35%;
 			float: left;
-			border-right: 1px black solid
+/* 			border-right: 1px black solid */
 		}
 		#product_infor2{
 			width: 65%;
@@ -126,7 +121,7 @@
 			padding-left: 20px;
 		}
 		.cus_message{ 
-			border: 1px black solid; 
+/* 			border: 1px black solid;  */
 			padding: 10px; 
 		}
 		.slider {
@@ -145,12 +140,3 @@
 	    .slick-prev:before .slick-next:before {
 	      color: black;
 	    }
-	    #shopCar{
-			width : 60px;
-		    position: fixed; 
-		    top: 50%; 
-		    right: -60px; 
-		    background: red;
-		    padding: 5px 5px;
-		    border-radius: 10px 0px 0px 10px;
-		}

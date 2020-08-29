@@ -1,0 +1,40 @@
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+ </head>
+   <body>
+   	<div class="container-fluid"> 
+	  	<div class="row" style="background-color: #2f323b;">
+	  		<div class="col-1 home"	style="padding-left:0px; padding-right:0px">
+	  			<button class="btn btn-block homebtn" onclick="location.href='<%=request.getContextPath()%>/back-end/bike/bikeMaster.jsp'">
+					<img src="<%=request.getContextPath()%>/back-end/backFrame/image/house1.png" class="img-fluid" style="width: 80%;">
+				</button>
+	  		</div>
+			<div class="col-11 ">
+				<div class="row" style="background-color:  #4778c7;">
+					<div class="col-lg-7 col-md-8 align-self-center">
+						
+					</div>
+					<div class="col-lg-1 col-md-1" style="padding-left: 3px; padding-right: 3px; text-align: center;">
+						<%if(bikeStoreVO != null){%>
+							<img src="<%=request.getContextPath()%>/bike/BikeStoreDBReader.do?sq_bike_store_id=<%=bikeStoreVO.getSq_bike_store_id()%>" class="img-fluid" style="margin: 0 auto;  border-radius: 50%; width:70%;">
+						<%}else{%>
+							<img src="<%=request.getContextPath()%>/back-end/backFrame/image/user.png" class="img-fluid" style="margin: 0 auto;">
+						<%}%>
+					</div>
+				 	<div class="col-lg-3 col-md-3 align-self-center " style="padding-left: 0px; padding-right: 0px;  width:100%;">
+				 		<%if(bikeStoreVO != null){%>
+				 			<h4 class="pt-2 ml-2" style="text-align:center; display:inline; color:white;">NAME : <%= bikeStoreVO.getBike_store_name() %></h4>
+				 		<%}else{%>
+				 			<h4 class="pt-2 ml-4" style="text-align:center; display:inline;"></h4>
+				 		<%}%>
+				 	</div>
+				 	<div class="col-1 align-self-center" style="padding-left: 0px; padding-right: 0px;">
+					 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/login/stafflogin.do">
+					 		<%if(bikeStoreVO != null){%>
+					 			<button class="btn bg-primary" style="width: 80%;" id="logout">登出</button>
+					 			<input type="hidden" name="action" value="logout">
+					 		<%}%>
+					 	</FORM>	
+				 	</div>
+				</div>

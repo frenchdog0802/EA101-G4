@@ -48,7 +48,7 @@ public class BikeTypeServlet extends HttpServlet {
 			}
 
 			if (errorMsgs.size() != 0) {
-				RequestDispatcher errorView = request.getRequestDispatcher("/back-end/bikeType/bikeTypeListAll.jsp");
+				RequestDispatcher errorView = request.getRequestDispatcher("/back-end/bike/bikeTypeListAll.jsp");
 				errorView.forward(request, response);
 				return;
 			}
@@ -56,7 +56,7 @@ public class BikeTypeServlet extends HttpServlet {
 			BikeTypeService BikeTypeService = new BikeTypeService();
 			BikeTypeVO BikeTypeVO = BikeTypeService.findByPrimaryKey(sq_bike_type_id);
 			request.setAttribute("BikeTypeVO", BikeTypeVO);
-			RequestDispatcher successView = request.getRequestDispatcher("/back-end/bikeType/bikeTypeListAll.jsp");
+			RequestDispatcher successView = request.getRequestDispatcher("/back-end/bike/bikeTypeListAll.jsp");
 			successView.forward(request, response);
 		}
 
@@ -129,7 +129,7 @@ public class BikeTypeServlet extends HttpServlet {
 						session.setAttribute("bike_photo_array", bike_photo_array);
 					}
 					request.setAttribute("BikeTypeVO", bikeVOInsert);
-					RequestDispatcher failView = request.getRequestDispatcher("/back-end/bikeType/addBikeType.jsp");
+					RequestDispatcher failView = request.getRequestDispatcher("/back-end/bike/addBikeType.jsp");
 					failView.forward(request, response);
 					return;
 				}
@@ -139,13 +139,13 @@ public class BikeTypeServlet extends HttpServlet {
 				BikeTypeService.insert(bikeVOInsert);
 				session.removeAttribute("bike_photo_array");
 				// forward
-				RequestDispatcher successView = request.getRequestDispatcher("/back-end/bikeType/bikeTypeListAll.jsp");
+				RequestDispatcher successView = request.getRequestDispatcher("/back-end/bike/bikeTypeListAll.jsp");
 				successView.forward(request, response);
 
 				// other error
 			} catch (Exception ce) {
 				errorMsgs.put("otherMsgs", ce.getMessage());
-				RequestDispatcher failView = request.getRequestDispatcher("/back-end/bikeType/addBikeType.jsp");
+				RequestDispatcher failView = request.getRequestDispatcher("/back-end/bike/addBikeType.jsp");
 				failView.forward(request, response);
 			}
 		}
@@ -157,7 +157,7 @@ public class BikeTypeServlet extends HttpServlet {
 			BikeTypeVO BikeTypeVO = BikeTypeService.findByPrimaryKey(sq_bike_type_id);
 			request.setAttribute("BikeTypeVO", BikeTypeVO);
 			// forward
-			RequestDispatcher forwardView = request.getRequestDispatcher("/back-end/bikeType/getOneForUpdate.jsp");
+			RequestDispatcher forwardView = request.getRequestDispatcher("/back-end/bike/getOneForUpdate.jsp");
 			forwardView.forward(request, response);
 		}
 
@@ -173,7 +173,8 @@ public class BikeTypeServlet extends HttpServlet {
 				String bike_title = request.getParameter("bike_title");
 				String bike_description = request.getParameter("bike_description");
 				Part bike_photo = request.getPart("bike_photo");
-				String req_price = request.getParameter("price");
+				String bike_hourly_priceStr = request.getParameter("bike_hourly_price");
+				String bike_daily_priceStr = request.getParameter("bike_daily_price");
 
 				// bike_type_name
 				String NameReg = "^[(\u4e00-\u9fa5)(\\w)]{2,6}$";
@@ -183,33 +184,41 @@ public class BikeTypeServlet extends HttpServlet {
 				;
 
 				// price
-				Integer price = null;
+				
+				Integer bike_hourly_price = null;
+				Integer bike_daily_price = null;
+
 				try {
-					price = Integer.parseInt(req_price);
+					bike_hourly_price = Integer.parseInt(bike_hourly_priceStr);
 				} catch (NumberFormatException nfe) {
-					errorMsgs.put("price", "請輸入正確金額");
-				}
-				;
+					errorMsgs.put("bike_hourly_price", "請輸入正確金額");
+				};
+				try {
+					bike_daily_price = Integer.parseInt(bike_daily_priceStr);
+				} catch (NumberFormatException nfe) {
+					errorMsgs.put("bike_daily_price", "請輸入正確金額");
+				};
+				
 
 				// set updateVO
-				BikeTypeVO bikeVOUpdate = new BikeTypeVO();
+				
 				BikeTypeService BikeTypeService = new BikeTypeService();
+				BikeTypeVO bikeVOUpdate = BikeTypeService.findByPrimaryKey(sq_bike_type_id);
 				bikeVOUpdate.setSq_bike_type_id(sq_bike_type_id);
 				bikeVOUpdate.setBike_type_name(bike_type_name);
 				bikeVOUpdate.setBike_title(bike_title);
 				bikeVOUpdate.setBike_description(bike_description);
-				if (bike_photo.getSize() == 0) {
-					bikeVOUpdate.setBike_photo(BikeTypeService.findByPrimaryKey(sq_bike_type_id).getBike_photo());
-				} else {
+				bikeVOUpdate.setBike_daily_price(bike_daily_price);
+				bikeVOUpdate.setBike_hourly_price(bike_hourly_price);
+				if (bike_photo.getSize() != 0) {
 					bikeVOUpdate.setBike_photo(inputStreamToByteArr(bike_photo.getInputStream()));
 				}
 
-//				bikeVOUpdate.setPrice(price);
-//				bike_hourly_price
+
 				// send error
 				if (errorMsgs.size() != 0) {
 					request.setAttribute("BikeTypeVO", bikeVOUpdate);
-					RequestDispatcher failView = request.getRequestDispatcher("/back-end/bikeType/getOneForUpdate.jsp");
+					RequestDispatcher failView = request.getRequestDispatcher("/back-end/bike/getOneForUpdate.jsp");
 					failView.forward(request, response);
 					return;
 				}
@@ -218,13 +227,13 @@ public class BikeTypeServlet extends HttpServlet {
 				// update STMT
 				BikeTypeService.update(bikeVOUpdate);
 				// forward
-				RequestDispatcher successView = request.getRequestDispatcher("/back-end/bikeType/bikeTypeListAll.jsp");
+				RequestDispatcher successView = request.getRequestDispatcher("/back-end/bike/bikeTypeListAll.jsp");
 				successView.forward(request, response);
 
 				// other error
 			} catch (Exception ce) {
 				errorMsgs.put("otherMsgs", ce.getMessage());
-				RequestDispatcher failView = request.getRequestDispatcher("/back-end/bikeType/addBikeType.jsp");
+				RequestDispatcher failView = request.getRequestDispatcher("/back-end/bike/getOneForUpdate.jsp");
 				failView.forward(request, response);
 			}
 		}

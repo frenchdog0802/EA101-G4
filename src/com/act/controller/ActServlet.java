@@ -12,6 +12,10 @@ import com.actjoin.model.ActJoinService;
 import com.actjoin.model.ActJoinVO;
 import com.actreport.model.ActReportService;
 import com.actreport.model.ActReportVO;
+import com.member.model.MemVO;
+import com.route.model.RouteService;
+import com.route.model.RouteVO;
+import com.staff.model.StaffVO;
 
 @MultipartConfig
 public class ActServlet extends HttpServlet {
@@ -27,10 +31,9 @@ public class ActServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		HttpSession session = req.getSession();
-		String sq_member_id = (String)session.getAttribute("sq_member_id");
-			if(sq_member_id==null) {
-				session.setAttribute("sq_member_id", "910003");
-			}
+		MemVO memVO = null;
+		String sq_member_id = null;
+		
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -38,7 +41,9 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			StaffVO staffVO = (StaffVO)session.getAttribute("StaffVO");
+			sq_member_id = staffVO.getSq_staff_id();
+			session.setAttribute("sq_member_id", sq_member_id);
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String str = req.getParameter("sq_activity_id");
@@ -47,7 +52,7 @@ public class ActServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/activity/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/activity/listAllAct.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -60,7 +65,7 @@ public class ActServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/activity/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/activity/listAllAct.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -80,7 +85,7 @@ public class ActServlet extends HttpServlet {
 				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/activity/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/activity/listAllAct.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -93,19 +98,27 @@ public class ActServlet extends HttpServlet {
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
-				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/activity/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/activity/listAllAct.jsp");
 				failureView.forward(req, res);
 			}
 		}
 		
-		if ("getFrontOne_For_Display".equals(action)) { //來自前台Activity.jsp的請求
+		if ("getFrontOne_For_Display".equals(action)) { //來自前台Activity.jsp的請求，用於顯示ActivityOne.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			try{
+				memVO = (MemVO)session.getAttribute("MemVO");
+				sq_member_id = memVO.getSq_member_id();
+				session.setAttribute("sq_member_id", sq_member_id);
+			}catch(Exception e) {
+				session.setAttribute("location", req.getContextPath() +"/act/ActServlet.do?"+req.getQueryString());
+				res.sendRedirect(req.getContextPath() +"/front-end/index/LoginMember.jsp");
+				return;
+			}
+			
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String str = req.getParameter("sq_activity_id");
@@ -115,9 +128,15 @@ public class ActServlet extends HttpServlet {
 				/*************************** 2.開始查詢資料 *****************************************/
 				ActService actSvc = new ActService();
 				ActVO actVO = actSvc.getOneAct(sq_activity_id);
-				ActJoinService actjoinSvc = new ActJoinService();
-				int i = actjoinSvc.getOneJoinPeople(sq_activity_id); //查詢參加人數秀在ActivityOne.jsp
+				ActJoinService actjoinSvc = new ActJoinService();//查詢參加人數秀在ActivityOne.jsp
+				int i = actjoinSvc.getOneJoinPeople(sq_activity_id); 
 				actVO.setPopulation(i);
+				
+				if(i >= actVO.getMin_population()) {     //當參加人數大於等於最低人數，狀態改為成團
+					actSvc.joinExceedAct(sq_activity_id);
+				} else {
+					actSvc.joinBelowAct(sq_activity_id); //當參加人數小於最低人數，狀態改為未成團
+				}                                        //其實設立監聽器去做改變，效率會比較好
 				
 				ActJoinVO actjoinVO = new ActJoinVO();	//判斷是否參加過活動
 				List<ActJoinVO> list = actjoinSvc.getAll(); 
@@ -165,6 +184,47 @@ public class ActServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		if ("getFrontArea_For_Display".equals(action)) { //來自前台Activity.jsp的請求，用於顯示Activity.jsp不同地區
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				String area = req.getParameter("area");
+				
+				/*************************** 2.開始查詢資料 *****************************************/
+				RouteService routeSvc = new RouteService();
+				List<RouteVO> listroute = routeSvc.getAll();
+				ActService actSvc = new ActService();
+				ActReportService actreportSvc = new ActReportService();
+				List<ActVO> listact = actSvc.getAll();
+				List<ActVO> listresult = new LinkedList<ActVO>();
+				for(RouteVO routeVO : listroute) {
+					for(ActVO actVO2 : listact) {
+						if(area.contains(routeVO.getStartArea()) && routeVO.getSqRouteId().contains(actVO2.getSq_route_id())
+								&& actreportSvc.getOneActReportStatus(actVO2.getSq_activity_id()) != 1
+								&& (actVO2.getGp_status()==0 || actVO2.getGp_status()==1)) {
+							listresult.add(actVO2);
+						}
+					}
+				}
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("listresult", listresult);// 資料庫取出的actVO物件,存入req
+				String url = "/front-end/activity/ActivityArea.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/activity/ActivityOne.jsp");
+				failureView.forward(req, res);
+			}
+		}
 
 		if ("getOne_For_Update".equals(action)) { // 來自listAllAct.jsp的請求
 
@@ -172,7 +232,9 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			StaffVO staffVO = (StaffVO)session.getAttribute("StaffVO");
+			sq_member_id = staffVO.getSq_staff_id();
+			session.setAttribute("sq_member_id", sq_member_id);
 			try {
 				/*************************** 1.接收請求參數 ****************************************/
 				String sq_activity_id = new String(req.getParameter("sq_activity_id"));
@@ -201,7 +263,9 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			StaffVO staffVO = (StaffVO)session.getAttribute("StaffVO");
+			sq_member_id = staffVO.getSq_staff_id();
+			session.setAttribute("sq_member_id", sq_member_id);
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String sq_activity_id = req.getParameter("sq_activity_id").trim();
@@ -209,11 +273,11 @@ public class ActServlet extends HttpServlet {
 				String sq_member_idoriginal = req.getParameter("sq_member_id").trim();
 				
 				String act_title = new String(req.getParameter("act_title").trim());
-				String act_titleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{5,50}$";
+				String act_titleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_!?,，)]{1,65}$";
 				if (act_title == null || act_title.trim().length() == 0) {
 					errorMsgs.add("活動標題: 請勿空白");
 				} else if (!act_title.trim().matches(act_titleReg)) { // 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("活動標題: 只能是中、英文字母、數字和_ , 且長度必需在5到50之間");
+					errorMsgs.add("活動標題: 只能是中、英文字母、數字和_!?,， , 且長度必需在1到65之間");
 				} else if (act_title.trim().matches("請填入標題")) {
 					errorMsgs.add("活動標題: 請勿空白");
 				}
@@ -232,6 +296,10 @@ public class ActServlet extends HttpServlet {
 				} catch (NumberFormatException e) {
 					min_population = 1;
 					errorMsgs.add("最低人數請填數字.");
+				}
+				
+				if(min_population > max_population) {
+					errorMsgs.add("最低人數不得超過上限人數");
 				}
 
 				java.sql.Date start_time = null;
@@ -351,18 +419,20 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			memVO = (MemVO)session.getAttribute("MemVO");
+			sq_member_id = memVO.getSq_member_id();
+			session.setAttribute("sq_member_id", sq_member_id);
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			String act_title = new String(req.getParameter("act_title").trim());
 			String sq_route_id = req.getParameter("sq_route_id").trim();
 //				String sq_member_id = req.getParameter("sq_member_id").trim();		
 			
 
-			String act_titleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{5,50}$";
+			String act_titleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_!?,，)]{1,65}$";
 			if (act_title == null || act_title.trim().length() == 0) {
 				errorMsgs.add("活動標題: 請勿空白");
 			} else if (!act_title.trim().matches(act_titleReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("活動標題: 只能是中、英文字母、數字和_ , 且長度必需在5到50之間");
+				errorMsgs.add("活動標題: 只能是中、英文字母、數字和_!?,， , 且長度必需在1到65之間");
 			} else if (act_title.trim().matches("請填入標題")) {
 				errorMsgs.add("活動標題: 請勿空白");
 			}
@@ -381,6 +451,10 @@ public class ActServlet extends HttpServlet {
 			} catch (NumberFormatException e) {
 				min_population = 1;
 				errorMsgs.add("下限人數請填數字.");
+			}
+			
+			if(min_population > max_population) {
+				errorMsgs.add("最低人數不得超過上限人數");
 			}
 
 			java.sql.Date start_time = null;
@@ -481,18 +555,20 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			memVO = (MemVO)session.getAttribute("MemVO");
+			sq_member_id = memVO.getSq_member_id();
+			session.setAttribute("sq_member_id", sq_member_id);
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			String act_title = new String(req.getParameter("act_title").trim());
 			String sq_route_id = req.getParameter("sq_route_id").trim();
 //				String sq_member_id = req.getParameter("sq_member_id").trim();		
 			
 
-			String act_titleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{5,50}$";
+			String act_titleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_!?,，)]{1,65}$";
 			if (act_title == null || act_title.trim().length() == 0) {
 				errorMsgs.add("活動標題: 請勿空白");
 			} else if (!act_title.trim().matches(act_titleReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("活動標題: 只能是中、英文字母、數字和_ , 且長度必需在5到50之間");
+				errorMsgs.add("活動標題: 只能是中、英文字母、數字和_!?,， , 且長度必需在1到65之間");
 			} else if (act_title.trim().matches("請填入標題")) {
 				errorMsgs.add("活動標題: 請勿空白");
 			}
@@ -611,7 +687,9 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			memVO = (MemVO)session.getAttribute("MemVO");
+			sq_member_id = memVO.getSq_member_id();
+			session.setAttribute("sq_member_id", sq_member_id);
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
 				String sq_activity_id = req.getParameter("sq_activity_id");
@@ -639,7 +717,9 @@ public class ActServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			StaffVO staffVO = (StaffVO)session.getAttribute("StaffVO");
+			sq_member_id = staffVO.getSq_staff_id();
+			session.setAttribute("sq_member_id", sq_member_id);
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
 				String sq_activity_id = req.getParameter("sq_activity_id");
